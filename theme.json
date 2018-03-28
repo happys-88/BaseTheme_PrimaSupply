@@ -6,13 +6,10 @@
     "isDesktop": true,
     "isMobile": false,
     "isTablet": false,
-    "name": "MyFirstTheme_Happy",
+    "name": "Prima Base Theme",
     "allowProduction": true,
-    "baseTheme": "https://github.com/mozu/core-theme.git",
-    "baseThemeVersion": {
-      "commit": "e96f883b177bf948d09bdd608837d0f9fcba2438",
-      "version": "9.6.0"
-    }
+    "baseTheme": "https://github.com/mozu/core-theme.git"
+    
   },
   "editors": [
     {
