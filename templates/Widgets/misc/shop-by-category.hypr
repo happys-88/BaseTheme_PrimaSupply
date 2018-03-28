@@ -1,0 +1,26 @@
+
+<div class="mz-shop-by-category">
+	<h2>Shop By Category</h2>
+		<ul class="mz-shop-by-categorylist">
+		{% for getCategoryId in model.config.shopByCategory %}
+			{% for categoryObject in categories.all %}
+				{% if categoryObject.categoryId == getCategoryId %}
+					
+						{% for catImage in categoryObject.content.categoryImages %}
+				   			<li class="mz-shop-by-categorylist-item">
+							    <a href="{{ categoryObject.url }}" target="_blank">
+							    	<img src="{{ catImage.imageUrl }}" alt="{{ catImage.altText }}">
+							     	<div class="mz-categorylisting-info">
+							     		<h3>{{ categoryObject.content.name }}</h3>
+							     	</div>
+							    </a>
+				   			</li>
+				  		{% endfor %}	
+			  		
+				{% endif %}
+			{% endfor %}	
+		{% endfor %}
+	</ul>
+		
+</div>  
+

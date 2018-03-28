@@ -1,0 +1,48 @@
+
+/**** Custom Changes ****/
+html, body{
+	height: 100%;
+	min-height: 100%;
+}
+body{
+  background: #fff;
+}
+
+@media screen and (min-width: 1500px){
+	.container{
+		width: 1410px;  
+	}
+}
+
+.mz-l-pagecontent{
+	background: #fff;
+}
+
+.mz-button{
+	background: #FF6633;
+	padding: 12px;
+	font-size: 16px;
+	color: #fff;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-top: 10px;
+	border: 2px solid transparent; 
+	border-radius: none;
+	&:hover{
+		background: #fff;
+		color: #FF6633;
+		border-color: #FF6633;	 
+	}
+	&[disabled]{
+		background: #ddd;
+		&:hover{
+			background:#ddd;
+			color: #fff;
+			border-color: transparent; 
+		}
+	}
+}
+
+#mz-drop-zone-category-page-top .mz-cms-content{
+	height: 300px !important;
+}

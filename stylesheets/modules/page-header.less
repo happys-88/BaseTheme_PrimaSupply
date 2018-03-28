@@ -1,0 +1,81 @@
+﻿@headerHeight: 154px;
+@headerBaseline: 66px;
+@searchBoxHeight: 34px; 
+@utilityNavHeight: @headerBaseline - (@gutter / 2) - @searchBoxHeight;
+
+.mz-pageheader {
+    height: 154px;
+    &.mz-pageheader-hasbanner {
+        background: #eee url('{{themeSettings.bannerImage}}') {{ themeSettings.bannerImageRepeat }};
+    }
+    /*padding: @gutter/2 @gutter 0;*/
+    padding: 0;
+
+    .container{
+        position: relative;
+    }
+
+    .mz-notification-bar{
+        float: left;
+        width: 100%;
+        background: #89c0d9;
+        text-align: left; 
+        padding: 6px @gutter;
+        margin-bottom: 22px;
+        p{
+            font-size: 16px;
+            margin: 0;
+            color: #fff; 
+        }
+    }
+
+    .mz-storebranding {
+        float: left;
+        width: 250px;
+        .tagline{
+            float: left;
+            font-size: 14px;
+            color: #666; 
+            margin-top: 10px;
+        }
+    }
+
+    &.mz-pageheader-hasbanner .mz-storebranding {
+        text-indent: -9999px;
+    }
+
+    .mz-utilitynav {
+        position: absolute;
+        right: 25px;
+        top: 60px;
+    }
+
+    .mz-searchbox {
+        position: absolute;
+        left: 280px;
+        bottom: 15px;
+    }
+
+
+    @media only screen {
+        @media (max-width: 768px) {
+            height: auto;
+            .mz-storebranding, .mz-searchbox, .mz-utilitynav {
+                position: relative;
+                margin-bottom: 10px;
+                clear: both;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+
+            .mz-searchbox-expands .mz-searchbox-input {
+                width: auto;
+                &:focus {
+                    width: auto;
+                }
+            }
+        }
+    }
+} 

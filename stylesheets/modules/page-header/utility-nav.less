@@ -1,0 +1,37 @@
+﻿.mz-utilitynav { 
+    color: @textColor;
+    font-size: @fontSizeSmall; 
+
+    .mz-utilitynav-item {
+        float: left;
+        margin: 0;
+        padding: 0 10px;
+        text-align: right;
+
+        &:last-child {
+            padding-right: 0;
+            text-align: right;
+        }
+    }
+
+    .mz-utilitynav-link { 
+        .permalink(@textColor);
+    }
+    .mz-utilitynav-link-cart{
+        display: block;
+        background: url("../resources/images/cart-icon.svg") left top no-repeat;
+        background-size: 50%;
+        height: 40px;
+        padding-left: 40px;
+        .mz-cartmonitor{
+            display: block;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            border: 1px solid #333;
+            border-radius: 50%;
+            text-align: center;
+        }
+    }
+
+}

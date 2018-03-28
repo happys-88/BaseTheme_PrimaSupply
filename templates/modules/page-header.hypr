@@ -1,0 +1,27 @@
+﻿<header class="mz-pageheader{% if themeSettings.bannerImageEnabled %} mz-pageheader-hasbanner {% endif %}">
+    
+        <div class="mz-notification-bar">
+        	<div class="container"> 
+            <p><strong>Save 10%</strong> on select  table &amp; bar sinks Code: SAVEONSTAINLESS</p>	 
+        </div>
+        </div>
+    
+    <div class="container"> 
+        {% block store-branding %}
+            {% include "modules/page-header/store-branding" %}
+        {% endblock store-branding %}
+
+        {% block header-top %}
+        	{% include "modules/page-header/header-top" %}
+        {% endblock header-top %} 
+
+        {% block utility-nav %}
+            {% include "modules/page-header/utility-nav" %}
+        {% endblock utility-nav %}
+        
+        {% block search-box %}
+            {% include "modules/page-header/search-box" %}
+        {% endblock search-box %}
+    </div>
+    
+</header> 

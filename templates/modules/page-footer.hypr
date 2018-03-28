@@ -1,0 +1,40 @@
+﻿<footer class="mz-pagefooter">
+    <div class="container">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<div class="col-md-3">
+                    <div class="mz-advantage">
+                        <a href="#">
+    				        {% dropzone "footer-dropzone-1" scope="site" %}  
+                        </a>
+                    </div>
+    			</div>
+    			<div class="col-md-3">
+    				{% dropzone "footer-dropzone-2" scope="site" %}
+    			</div>
+    			<div class="col-md-3">
+    				{% dropzone "footer-dropzone-3" scope="site" %}
+                    {% block payment-options %}
+                        {% include "modules/page-footer/payment-options" %}
+                    {% endblock payment-options %}
+    			</div>
+    			<div class="col-md-3">
+                    {% block newsletter %}
+                        {% include "modules/page-footer/newsletter" %}
+                    {% endblock newsletter %}
+                    {% block social-bar %}
+    				    {% include "modules/page-footer/social-bar" %}
+                    {% endblock social-bar %}
+    				<div class="mz-policy">
+    					{% dropzone "footer-dropzone-4" scope="site" %}
+    				</div>
+    				<div class="mz-pagefooter-copyright" id="copyright">
+				        <span class="mz-pagefooter-copyrighttext">
+				            {{ labels.copyRight }} {% now Y %} {{ siteContext.generalSettings.websiteName }}.
+				        </span>
+				    </div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</footer>

@@ -1,0 +1,34 @@
+<div class="shop-by-brand">
+	{% for categoryObject in categories.all %}
+		{% if categoryObject.content.name == "Shop By Brand" %}
+			<h2><a href="{{ categoryObject.url }}">Shop Brands We Love</a></h2>
+		{% endif %}
+	{% endfor %}
+
+	<ul class="shop-by-brand-list">
+		{% for getBrandCategoryId in model.config.shopByBrand %}
+			{% for categoryObject in categories.all %}
+				{% if categoryObject.content.name == "Shop By Brand" %}
+					{% for brandSubCat in categoryObject.childrenCategories %}
+						{% if brandSubCat.categoryId == getBrandCategoryId %}
+							<li class="col-xs-12 col-sm-3 col-md-2"> 
+								<div class="brand-logo">
+									{% for brandLogoImage in brandSubCat.content.categoryImages %}
+						   			    <a href="{{ brandSubCat.url }}">
+									    	<img src="{{ brandLogoImage.imageUrl }}" alt="{{ brandLogoImage.altText }}">  
+										</a>
+						   			{% endfor %}	
+								</div>
+								{% comment %}
+								<div class="brand-name">
+									<a href="{{ brandSubCat.url }}" target="_blank">{{ brandSubCat.content.name }}</a>	
+								</div>
+								{% endcomment %}
+							</li>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+	</ul>	
+</div>

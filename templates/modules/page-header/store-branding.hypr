@@ -1,0 +1,3 @@
+﻿ <h1 class="mz-storebranding" id="store-branding">
+    <a href="{{siteContext.siteSubdirectory}}/" title="{{ siteContext.generalSettings.websiteName }}"><img src="/../resources/images/prima-supply-logo.png" alt="logo"></a>
+</h1>
