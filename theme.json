@@ -1,15 +1,19 @@
 {
   "about": {
-    "author": "Happy Masih",
+    "author": "Happy",
     "defaultLanguage": "en-US",
     "extends": null,
     "isDesktop": true,
     "isMobile": false,
     "isTablet": false,
-    "name": "Prima Base Theme",
+    "name": "BaseTheme_PrimaSupply",
     "allowProduction": true,
-    "baseTheme": "https://github.com/mozu/core-theme.git"
-    
+    "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
+    "baseThemeVersion": {
+      "commit": "HEAD",
+      "version": "HEAD"
+    },
+    "baseThemeChannel": "stable"
   },
   "editors": [
     {
@@ -1230,6 +1234,5 @@
         "*"
       ]
     }
-
   ]
 }
