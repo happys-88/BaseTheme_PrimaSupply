@@ -27,6 +27,32 @@
 
 </div>
 
+<script type="text/javascript">
+(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+</script>
+<div class="yotpo yotpo-main-widget col-xs-12 col-md-6"
+    data-product-id="7364"
+    data-price="20.0"
+    data-currency="USD"
+    data-name="Sharp R-21LVF - 1000W Medium-Duty Microwave w/ Touchpad"
+    data-url="https://primasupply.com/equipment/sharp/r-21lvf"
+    data-image-url="https://static.primasupply.com/styles/main_product/light-duty-microwaves/sharp-r-21lvf-microwave.jpg"
+    data-description="In a hurry? Check out these key benefits">
+</div>
+
+<div class="yotpo yotpo-main-widget col-xs-12 col-md-6"
+    data-product-id="7364"
+    data-price="20.0"
+    data-currency="USD"
+    data-name="Sharp R-21LVF - 1000W Medium-Duty Microwave w/ Touchpad"
+    data-url="https://primasupply.com/equipment/sharp/r-21lvf"
+    data-image-url="https://static.primasupply.com/styles/main_product/light-duty-microwaves/sharp-r-21lvf-microwave.jpg"
+    data-description="In a hurry? Check out these key benefits" data-mode ="questions" data-yotpo-element-id="2">
+</div>
+
+
+</div>
+
 {% dropzone "productDropzone" scope="page" %}
 
 {% endblock body-content %}

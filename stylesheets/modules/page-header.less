@@ -8,36 +8,43 @@
     &.mz-pageheader-hasbanner {
         background: #eee url('{{themeSettings.bannerImage}}') {{ themeSettings.bannerImageRepeat }};
     }
-    /*padding: @gutter/2 @gutter 0;*/
     padding: 0;
 
     .container{
         position: relative;
     }
 
-    .mz-notification-bar{
+    .mz-header-top{
         float: left;
         width: 100%;
-        background: #89c0d9;
+        background: #00adce;
         text-align: left; 
-        padding: 6px @gutter;
-        margin-bottom: 22px;
+        padding: 6px 0;
+        margin-bottom: 20px;
+        font-size: 16px;
         p{
-            font-size: 16px;
-            margin: 0;
+            margin: 0 0 0 -15px;
             color: #fff; 
         }
+        .live-chat{
+            display: inline-block;
+            margin-right: 45px; 
+        }
+        .phone-no{
+            display: inline-block;
+            a{
+                color: #fff;
+            }
+        }
+    }
+    .mz-header-bottom{
+        float: left;
+        width: 100%;
     }
 
     .mz-storebranding {
         float: left;
-        width: 250px;
-        .tagline{
-            float: left;
-            font-size: 14px;
-            color: #666; 
-            margin-top: 10px;
-        }
+        margin-right: 75px; 
     }
 
     &.mz-pageheader-hasbanner .mz-storebranding {
@@ -45,15 +52,13 @@
     }
 
     .mz-utilitynav {
-        position: absolute;
-        right: 25px;
-        top: 60px;
+        float: right;
+        margin-top: 12px;
     }
 
     .mz-searchbox {
-        position: absolute;
-        left: 280px;
-        bottom: 15px;
+        float: left;
+        margin-top: 15px;
     }
 
 

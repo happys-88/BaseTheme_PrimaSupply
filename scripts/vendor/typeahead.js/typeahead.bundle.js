@@ -729,7 +729,7 @@
             wrapper: '<span class="twitter-typeahead"></span>',
             dropdown: '<span class="tt-dropdown-menu"></span>',
             dataset: '<div class="tt-dataset-%CLASS%"></div>',
-            suggestions: '<span class="tt-suggestions"><p>Top Matches</p></span>',
+            suggestions: '<span class="tt-suggestions"><p class="mz-heading"></p></span>',
             suggestion: '<div class="tt-suggestion"></div>'
         };
     }();
@@ -1520,9 +1520,9 @@
                 this.dropdown.open();
             },
             _onBlurred: function onBlurred() {
-                this.isActivated = false;
-                this.dropdown.empty();
-                this.dropdown.close();
+                // this.isActivated = false;
+                // this.dropdown.empty();
+                // this.dropdown.close();
             },
             _onEnterKeyed: function onEnterKeyed(type, $e) {
                 var cursorDatum, topSuggestionDatum;

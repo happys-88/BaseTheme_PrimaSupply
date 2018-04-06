@@ -13,5 +13,5 @@
 <span class="mz-productimages-noimage">[{{ labels.noImages}}]</span>
 {% endif %}
 
-{% require_script "elevate-zoom" %} 
+
 

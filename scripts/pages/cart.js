@@ -1,4 +1,13 @@
-define(['modules/backbone-mozu', 'underscore', 'modules/jquery-mozu', 'modules/models-cart', 'modules/cart-monitor', 'hyprlivecontext', 'hyprlive', 'modules/preserve-element-through-render'], function (Backbone, _, $, CartModels, CartMonitor, HyprLiveContext, Hypr, preserveElement) {
+define([
+    'modules/backbone-mozu',
+    'underscore',
+    'modules/jquery-mozu',
+    'modules/models-cart',
+    'modules/cart-monitor',
+    'hyprlivecontext',
+    'hyprlive',
+    'modules/preserve-element-through-render'
+], function (Backbone, _, $, CartModels, CartMonitor, HyprLiveContext, Hypr, preserveElement) {
     var CartView = Backbone.MozuView.extend({
         templateName: "modules/cart/cart-table",
         initialize: function () {

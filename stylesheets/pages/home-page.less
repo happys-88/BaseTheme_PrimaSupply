@@ -1,6 +1,9 @@
 .mz-homepage{
 	.mz-l-pagecontent{
 		padding: 0;
+		&.container{
+			width: 100%;
+		}
 	}
 	.mz-breadcrumbs{
 		display: none;
@@ -8,38 +11,21 @@
 	.mz-cms-row{
 		max-width: 100%; 
 	}
+	.home-heading1{
+		text-align: center;
+		margin: @gutter 0 @gutter*2;
+	}
 
 } 
-.shop-by-brand{
-	.shop-by-brand-list{
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		.brand-logo{
-			width: 100%;
-			display: table;
-		    text-align: center;
-		    min-height: 90px;
-		    a{
-		    	display: table-cell;
-		    	vertical-align: middle;
-		    	img{
-		    		max-width: 100%;
-		    	}
-		    }
-		}
-		.brand-name{
-			font-size: 20px;
-			color: #f63;
-			text-align: center;
-			margin: 10px 0;
-		}
-	}
-}
 
 .dropzone-trending-products{
+	margin-bottom: @gutter*2;
+	display: none;
 	.mz-drop-zone{
 		border: 2px solid #ddd;
 		border-radius: 5px;
 	}
+}
+.mz-promo-banner{
+	margin-bottom: @dropzoneMargin;
 }

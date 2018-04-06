@@ -1,5 +1,4 @@
-{% set_var userAuth='' %}
-{% with model|get_product_attribute("tenant~show-price") as showPriceAttr %}
+{% with model|get_product_attribute("tenant~show-price") as showPriceAttr %} 
     {% if showPriceAttr.attributeDetail.name %} 
         
         {% if showPriceAttr.values|first|prop("value") == 'view-on-cart' %} 
@@ -9,7 +8,6 @@
             {% if user.isAuthenticated %}
                 {% include "modules/product/price-stack" %}
             {% else %}
-                {% set_var userAuth=true %}
                 <del class="mz-productlisting-hide-price">$XXX.XX</del> <br>
                 <a href="/user/login" data-mz-action="login" data-placement="bottom" class="mz-utilitynav-link">
                     {{ labels.viewOnLogin }}

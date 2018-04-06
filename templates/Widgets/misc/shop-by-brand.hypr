@@ -1,14 +1,9 @@
 <div class="shop-by-brand">
-	{% for categoryObject in categories.all %}
-		{% if categoryObject.content.name == "Shop By Brand" %}
-			<h2><a href="{{ categoryObject.url }}">Shop Brands We Love</a></h2>
-		{% endif %}
-	{% endfor %}
-
+	<h2 class="heading-2"><span>{{labels.shopByBrandHeading}}</span></h2>   
 	<ul class="shop-by-brand-list">
 		{% for getBrandCategoryId in model.config.shopByBrand %}
 			{% for categoryObject in categories.all %}
-				{% if categoryObject.content.name == "Shop By Brand" %}
+				{% if categoryObject.content.name == "Brands" %} 
 					{% for brandSubCat in categoryObject.childrenCategories %}
 						{% if brandSubCat.categoryId == getBrandCategoryId %}
 							<li class="col-xs-12 col-sm-3 col-md-2"> 
@@ -19,16 +14,12 @@
 										</a>
 						   			{% endfor %}	
 								</div>
-								{% comment %}
-								<div class="brand-name">
-									<a href="{{ brandSubCat.url }}" target="_blank">{{ brandSubCat.content.name }}</a>	
-								</div>
-								{% endcomment %}
 							</li>
 						{% endif %}
 					{% endfor %}
 				{% endif %}
 			{% endfor %}
 		{% endfor %}
-	</ul>	
+	</ul>
+	<a class="shop-all-brands" href="#">{{labels.shopAllBrands}}</a>	
 </div>

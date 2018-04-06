@@ -91,9 +91,15 @@
 
         product.on('addedtocart', function (cartitem) {
             if (cartitem && cartitem.prop('id')) {
-                product.isLoading(true);
+                //product.isLoading(true);
                 CartMonitor.addToCount(product.get('quantity'));
-                window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/cart";
+                $('html,body').animate({
+                    scrollTop: $('header').offset().top
+                }, 1000);
+                CartMonitor.update('showGlobalCart');
+                product.set('quantity', 1);
+
+                /*window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/cart";*/ 
             } else {
                 product.trigger("error", { message: Hypr.getLabel('unexpectedError') });
             }

@@ -13,8 +13,7 @@ require([
 
         // Add To Cart Button functionality in Category Page
         $(".addToCart").click(function(event){
-        	alert("Button Clicked");
-			var $thisElem = $(event.currentTarget);
+        	var $thisElem = $(event.currentTarget);
                 //prodOptions = $("[data-option='"+ $thisElem.data("productcode") +"']").val();
 			Api.request("POST", "/api/commerce/carts/current/items", {
 				product: {

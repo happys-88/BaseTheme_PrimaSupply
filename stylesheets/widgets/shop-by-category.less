@@ -2,40 +2,59 @@
 	float: left;
 	width: 100%;
 	
-	h2{
-		font-size: 34px;
-		color: #042b48;
-		text-align: left;
-		margin: 0 0 15px; 
-	}
 	.mz-shop-by-categorylist{
 		float: left;
 		width: 100%;
 		padding: 0;
 		list-style: none;
+		@grayBoxHeight: 200px;
 		.mz-shop-by-categorylist-item{
 			float: left;
-			width: 23%; 
-			margin: 0 1% 70px;
-			border: 1px solid #ccc;
-			background: #eef7f6; 
-			position: relative;
+			width: 15%; 
+			margin: 0 1% @gutter+5;
+			border: 8px solid #f3f3f3;
+			min-height: @grayBoxHeight;
+			text-align: center;
+			padding: 5px;
+			&:first-child{
+				width: 31%;
+				margin-left: 0;
+				min-height: @grayBoxHeight*2;
+				.mz-category-image{
+					min-height: 358px;
+					img{
+						max-width: 100%; 
+						width: auto;
+					}
+				}
+				
+			}
+			a{
+				display: block;	
+			}
 			img{
 				width: 100%;
 				height: auto;
+				max-width: 125px;
+				display: inline-block;
+				position: absolute;
+			    left: 50%; 
+			    top: 50%;
+			    transform: translate(-50%, -50%); 
+			}
+			.mz-category-image{
+				min-height: 125px;
+				position: relative;
+				
 			}
 			.mz-categorylisting-info{ 
-				padding: 15px;
-				position: absolute;
-			    bottom: -27px;
-			    width: 90%;
-			    text-align: center;
-			    background: #d7d7d7;
-			    margin-left: 5%;
 				h3{
-					font-size: 22px;
-					color: #555;
-					margin:0;
+					font-size: @fontSize;
+					color: @baseBlueColor;
+					line-height: @fontSize+2;
+					margin: 10px 0 0;
+					width: 115px;
+					display: inline-block; 
 				}
 			}
 		}	

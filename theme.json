@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "2123eaf6fee91b790fbd6ed1dc694bb9a8692e7b"
+      "commit": "4d92f6895a5ba6bb8fe35f6a6e5c5212dac310ef"
     },
     "baseThemeChannel": "stable"
   },
@@ -1210,7 +1210,7 @@
           "xtype": "mz-input-categorymulti"
         }
       ],
-      "icon": "/resources/admin/widgets/01_photo_text.png",
+      "icon": "/resources/admin/widgets/29_shop_by_category.png",
       "id": "shop-by-category",
       "validPageTypes": [
         "*"
@@ -1230,8 +1230,343 @@
       "icon": "/resources/admin/widgets/01_photo_text.png",
       "id": "shop-by-brand",
       "validPageTypes": [
-        "*"
+       "*"
+      ]
+    },
+    {
+  "id": "slider",
+  "displayName": "Home Slider",
+  "displayTemplate": "catalog/slider",
+  "editViewFields": [
+    {
+      "xtype": "panel",
+      "title": "First Slide",
+      "items": [
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Title",
+          "name": "slideTitleOne",
+          "xtype": "mz-input-text"
+        },
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Short Description",
+          "name": "slideShortDescOne",
+          "xtype": "mz-input-text"
+        },
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Link/Url",
+          "name": "slideLinkOne",
+          "xtype": "mz-input-text"
+        },
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Image",
+          "name": "slideImageOne",
+          "xtype": "mz-input-image"
+        },
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Button Ttile",
+          "name": "slideButtonOne",
+          "xtype": "mz-input-text"
+        }
+      ]
+    },
+    {
+      "xtype": "panel",
+      "title": "Second Slide",
+      "items": [
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Title",
+          "name": "slideTitleTwo",
+          "xtype": "mz-input-text"
+        },
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Short Description",
+          "name": "slideShortDescTwo",
+          "xtype": "mz-input-text"
+        },
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Link/Url",
+          "name": "slideLinkTwo",
+          "xtype": "mz-input-text"
+        },
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Button Ttile",
+          "name": "slideButtonTwo",
+          "xtype": "mz-input-text"
+        },
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Image",
+          "name": "slideImageTwo",
+          "xtype": "mz-input-image"
+        }
+      ]
+    },
+    {
+      "xtype": "panel",
+      "title": "Third Slider",
+      "items": [
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Title",
+          "name": "slideTitleThree",
+          "xtype": "mz-input-text"
+        },
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Short Description",
+          "name": "slideShortDescThree",
+          "xtype": "mz-input-text"
+        },
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Link/Url",
+          "name": "slideLinkThree",
+          "xtype": "mz-input-text"
+        },
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Image",
+          "name": "slideImageThree",
+          "xtype": "mz-input-image"
+        },
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Button Ttile",
+          "name": "slideButtonThree",
+          "xtype": "mz-input-text"
+        }
       ]
     }
+  ],
+    "icon": "/resources/admin/widgets/28_deal_of_the_day.png", 
+    "validPageTypes": [
+      "*"
+    ]
+  },
+  {
+        "id": "shopNowWidget",
+        "displayName": "Shop Now Widget",
+        "displayTemplate": "misc/shop-now-widget", 
+        "editViewFields": [
+         
+            {
+              "anchor": "50%",
+              "fieldLabel": "Add Image for Hot Deals",
+              "name": "slideImageOne",
+              "xtype": "mz-input-image"
+            },
+            {
+              "anchor": "50%",
+              "fieldLabel": "Add First Title",
+              "name": "TitleOne",
+              "xtype": "mz-input-text"
+            },
+            {
+              "anchor": "50%",
+              "fieldLabel": "Add Second Title",
+              "name": "TitleTwo",
+              "xtype": "mz-input-text"
+            },
+            {
+              "anchor": "50%",
+              "fieldLabel": "Add Third Title",
+              "name": "TitleThree",
+              "xtype": "mz-input-text"
+            },
+            {
+              "anchor": "50%",
+              "fieldLabel": "Button Text Value",
+              "name": "ButtonTextValue",
+              "xtype": "mz-input-text"
+            },
+            {
+              "anchor": "50%",
+              "fieldLabel": "Add Link",
+              "name": "shopNowWidgetUrl",
+              "xtype": "mz-input-text"
+            }
+         
+        ],
+        "icon": "/resources/admin/widgets/28_deal_of_the_day.png",  
+        "validPageTypes": [
+          "*"
+        ]
+      },
+      {
+        "id": "hotdealBanner",
+        "displayName": "Hot Deals Banner",
+        "displayTemplate": "misc/hot-deal-banner",
+        "editViewFields": [
+          {
+            "anchor": "50%",
+            "fieldLabel": "Add Banner Title",
+            "name": "BannerTitle",
+            "xtype": "mz-input-text"
+          },
+          {
+            "anchor": "50%",
+            "fieldLabel": "Add Banner Description1 ",
+            "name": "DescTitleOne",
+            "xtype": "mz-input-text"
+          },
+          {
+            "anchor": "50%",
+            "fieldLabel": "Add Banner Description2 ",
+            "name": "DescTitleTwo",
+            "xtype": "mz-input-text"
+          },
+          {
+            "anchor": "50%",
+            "fieldLabel": "Add Banner Description3 ",
+            "name": "DescTitleThree",
+            "xtype": "mz-input-text"
+          }
+            
+          
+        ],
+        "icon": "/resources/admin/widgets/28_deal_of_the_day.png", 
+        "validPageTypes": [
+          "*"
+        ]
+      },
+      {
+        "id": "Brandhospitality",
+        "displayName": "Serving the finest in hospitality",
+        "displayTemplate": "misc/hospitality",
+        "title": "Serving The Finest In Hospitality", 
+        "collapsed": false,
+          "editViewFields":[
+                   {
+                     "anchor": "100%",
+                     "xtype": "mz-input-text",
+                     "name": "input1",
+                     "fieldLabel": "input1"
+                     
+                   },
+                   {
+                    "anchor": "100%",
+                    "fieldLabel": "Add Image for hospitality",
+                    "name": "HospitalityImageOne",
+                    "xtype": "mz-input-image"
+                  },
+                  {
+                    "anchor": "100%",
+                    "xtype": "mz-input-text",
+                    "name": "input2",
+                    "fieldLabel": "input2",
+                    "showIf": "HospitalityImageOne"
+                    
+                  },
+                   {
+                     "anchor": "100%",
+                     "fieldLabel": "Add Image for hospitality",
+                     "name": "HospitalityImageTwo",
+                     "xtype": "mz-input-image",
+                     "showIf": "HospitalityImageOne"
+                   },
+                   {
+                    "anchor": "100%",
+                    "xtype": "mz-input-text",
+                    "name": "input3",
+                    "fieldLabel": "input3",
+                    "showIf": "HospitalityImageTwo"
+                    
+                  },
+                   
+                  {
+                    "anchor": "100%",
+                    "fieldLabel": "Add Image for hospitality",
+                    "name": "HospitalityImageThree",
+                    "xtype": "mz-input-image",
+                    "showIf": "HospitalityImageTwo"
+                  },
+                  {
+                    "anchor": "100%",
+                    "xtype": "mz-input-text",
+                    "name": "input4",
+                    "fieldLabel": "input4",
+                    "showIf": "HospitalityImageThree"
+                    
+                  },
+                  
+                  {
+                    "anchor": "100%",
+                    "fieldLabel": "Add Image for hospitality",
+                    "name": "HospitalityImageFour",
+                    "xtype": "mz-input-image",
+                    "showIf": "HospitalityImageThree"
+                  },
+                  {
+                    "anchor": "100%",
+                    "xtype": "mz-input-text",
+                    "name": "input5",
+                    "fieldLabel": "input5",
+                    "showIf": "HospitalityImageFour"
+                    
+                  },
+                  {
+                    "anchor": "100%",
+                    "fieldLabel": "Add Image for hospitality",
+                    "name": "HospitalityImageFive",
+                    "xtype": "mz-input-image",
+                    "showIf": "HospitalityImageFour"
+                  },
+                  {
+                    "anchor": "100%",
+                    "xtype": "mz-input-text",
+                    "name": "input6",
+                    "fieldLabel": "input6",
+                    "showIf": "HospitalityImageFive"
+                    
+                  },
+                  {
+                    "anchor": "100%",
+                    "fieldLabel": "Add Image for hospitality",
+                    "name": "HospitalityImageSix",
+                    "xtype": "mz-input-image",
+                    "showIf": "HospitalityImageFive"
+                  }
+               
+                  
+           ],
+          "icon": "/resources/admin/widgets/28_deal_of_the_day.png", 
+          "validPageTypes": [
+            "*"
+          ]
+        },
+        {
+        "displayName": "Promo Banner",
+        "displayTemplate": "misc/home-promo-banner",
+        "editViewFields": [
+          {
+             "anchor": "100%",
+             "xtype": "mz-input-text",
+             "name": "promoUrl",
+             "fieldLabel": "Enter url for Promo Banner"
+             
+           },
+           {
+            "anchor": "100%",
+            "fieldLabel": "Add Promo Image",
+            "name": "promoImage",
+            "xtype": "mz-input-image"
+          }
+        ],
+        "icon": "/resources/admin/widgets/01_photo_text.png",
+        "id": "promo-banner",
+        "validPageTypes": [
+          "*"
+        ]
+      }
+
   ]
 }

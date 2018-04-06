@@ -1,10 +1,10 @@
  
 {
 
-  "dateFormat"                            : "F j, Y",
+  "dateFormat"                            : "F j, Y",  
 
   "logOut"                                : "Log Out",
-  "logIn"                                 : "Log In",
+  "logIn"                                 : "Login",
   "logIn2"                                : "Sign in to your account",
   "guestCheckoutLink"                     : "Continue As Guest",
   "anonOrderNumberMissing"                : "The order number you provided was not found. Please validate the order number and try again or contact customer service.",
@@ -19,7 +19,7 @@
   "billingPostalCode"                     : "Billing Zip Code",
   "billingPhoneNumber"                    : "Billing Phone Number",
   "viewCart"                              : "View Cart",
-  "search"                                : "Enter Keyword or SKU",
+  "search"                                : "Search", 
   "of"                                    : "of",
   "or"                                    : "or",
   "from"                                  : "from",
@@ -481,6 +481,10 @@
 
   "viewOnCart"                            : "See low price in cart",
   "viewOnLogin"                           : "Login for low price",
-  "quickView"                             : "Quick View"
+  "quickView"                             : "Quick View",
+  "shopByBrandHeading": "Shop Brands We Love",
+  "shopByCategoryHeading": "Shop By Category",
+  "shopAllBrands":  "Shop All Brands",
+  "saveCart" : "Save Cart"    
 
 }  

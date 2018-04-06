@@ -183,6 +183,7 @@
                 }
             ]
         },
+
         {
             "xtype": "panel",
             "title": "Paging",
@@ -241,6 +242,58 @@
                     "allowDecimal": false,
                     "minValue": 4,
                     "allowBlank": false
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Global Cart",
+            "collapsed": false,
+            "items": [
+                /*{
+                    "fieldLabel": "Pick an image for Basket",
+                    "xtype": "mz-input-image",
+                    "name": "globalCartEmptyBasketFooter"
+                },*/
+                {
+                    "fieldLabel": "Basket kicker link",
+                    "xtype": "mz-input-text",
+                    "name": "globalCartEmptyBasketKickerLink"
+                },
+                {
+                    "fieldLabel": "Enable Up sells",
+                    "xtype": "mz-input-checkbox",
+                    "name": "globalCartRelatedProducts"
+                },
+                {
+                    "fieldLabel": "Maximum number of Up sells products",
+                    "xtype": "mz-input-number",
+                    "name": "globalCartRelatedProductsSize"
+                },
+                {
+                    "fieldLabel": "Enable Save Cart",
+                    "xtype": "mz-input-checkbox",
+                    "name": "globalCartEnableSaveCart"
+                },
+                {
+                    "fieldLabel": "Maximum number of items to show in global Cart",
+                    "xtype": "mz-input-number",
+                    "name": "globalCartMaxItemCount"
+                },
+                {
+                    "fieldLabel": "Max width of global Cart item image",
+                    "xtype": "mz-input-number",
+                    "name": "globalCartItemImageMaxWidth"
+                },
+                {
+                    "fieldLabel": "Hide popover for empty global cart",
+                    "xtype": "mz-input-checkbox",
+                    "name": "globalCartHidePopover"
+                },
+                {
+                    "fieldLabel": "Show Subtotal",
+                    "xtype": "mz-input-checkbox",
+                    "name": "globalCartShowSubtotal"
                 }
             ]
         }

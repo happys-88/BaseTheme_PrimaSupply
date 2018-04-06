@@ -18,6 +18,13 @@
 {% include "modules/product/price-show-stack" %}
 </div>
 
+{% comment %} ---------- YotPo Rating ---------- {% endcomment %}
+<script type="text/javascript">
+    (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+</script>
+<div class="yotpo bottomLine" data-product-id="7364" data-url="https://primasupply.com/equipment/sharp/r-21lvf"></div>
+{% comment %} ---------- YotPo Rating ---------- {% endcomment %}
+
 <dl class="mz-productcodes mz-propertylist mz-pagetitle-note mz-l-stack-section">
   <dt class="mz-productcodes-productcode-label">{{ labels.productCode }}</dt>
   <dd class="mz-productcodes-productcode" itemprop="sku">{{ model.variationProductCode|default(model.productCode) }}</dd>

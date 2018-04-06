@@ -6,21 +6,26 @@
 
 {% block body-content %}
 	
-    {% dropzone "home-page-banner" scope="template" %}
-    <h1 class="text-center">Restaurant Supplies for the... H1 statement</h1>
+    {% dropzone "home-slider" scope="page" %}
 
-    {% dropzone "shop-by-brand" scope="page" %}
-    
-    <div class="dropzone-shop-by-category">
-    	{% dropzone "shop-by-category" scope="page" %}
-	</div>
+    <div class="container">
+        <h1 class="home-heading1">Restaurant Supplies for the... H1 statement</h1>
 
-    <div class="dropzone-trending-products">
-    	<h2>Trending Products</h2>
-    	{% dropzone "trending-products" scope="page" %}  
+        {% dropzone "shop-by-brand" scope="page" %}
+        
+        {% dropzone "shop-by-category" scope="page" %}
+        
+        <div class="mz-dropzone-featured-products">
+            <h2>Featured Products</h2>
+            {% dropzone "trending-products" scope="page" %}  
+        </div>
+        
+        {% dropzone "customer-logos" scope="page" %}
+        
+        {% dropzone "shop-now-widget" scope="page" %}    
+        
     </div>
-
-    {% dropzone "home-bottom" scope="page" %}
+    
     
 {% endblock body-content %}
 

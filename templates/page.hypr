@@ -75,6 +75,8 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/bootstrap/bootstrap.min.css" %}" title="default" />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900">
+            <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/slider/bxslider.css" %}" title="default" />
             <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/storefront.less" %}" title="default" />
         {% endblock stylesheets %}
         
@@ -111,9 +113,9 @@
             {% block site-nav %}
                 {% include "modules/site-nav" %}
             {% endblock site-nav %} 
-    
-            <div role="main" id="page-content" class="mz-l-pagecontent container">
-                
+            
+
+            <div role="main" id="page-content" class="mz-l-pagecontent container">   
                 {% block breadcrumbs %}
                     {% if themeSettings.showBreadcrumbs %}
                         {% include "modules/breadcrumbs" %}
@@ -129,7 +131,7 @@
                 {% endblock body-below-content %}
                 
             </div>
-
+                        
             {% block page-footer %}
                 {% include "modules/page-footer" %}
             {% endblock page-footer %}

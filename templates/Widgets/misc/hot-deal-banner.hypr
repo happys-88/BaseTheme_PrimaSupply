@@ -1,0 +1,9 @@
+<div class="hotdeals-banner">
+    <h2>{{model.config.BannerTitle}}</h2>
+    <ul class="hot-deals-banner-text">
+        <li class="title-one">{{model.config.DescTitleOne}}</li>
+        <li class="title-two">&bull; {{model.config.DescTitleTwo}}</li> 
+        <li class="title-three">&bull; {{model.config.DescTitleThree}} &#x25BA;</li>
+    </ul>
+</div>
+    

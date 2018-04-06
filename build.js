@@ -6,8 +6,12 @@
         hyprlivecontext: "empty:",
         underscore: "vendor/underscore/underscore",
         backbone: "vendor/backbone/backbone",
+        bootstrap:"vendor/bootstrap/js/bootstrap.min",
         blockui: "vendor/jquery.blockUI/jquery.blockUI.min",
-        elevateZoom: "vendor/jquery-elevatezoom/jquery.elevatezoom.min"
+        elevateZoom: "vendor/jquery-elevatezoom/jquery.elevatezoom.min",
+        bxslider: "vendor/jquery-bxslider/jquery.bxslider.min"
+        
+
     },
     dir: "compiled/scripts/",
     locale: "en-us",
@@ -40,7 +44,8 @@
                 'modules/views-paging',
                 'modules/views-productlists',
                 "modules/views-productimages",
-                "modules/block-ui" 
+                "modules/block-ui",
+                "modules/page-header/global-cart"   
             ],
             exclude: ['jquery'],
         },

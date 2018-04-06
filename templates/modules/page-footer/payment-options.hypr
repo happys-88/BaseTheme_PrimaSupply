@@ -1,8 +1,5 @@
 ﻿<div class="mz-payment-options">
     <h4>{{ labels.paymentOptions}}</h4>
-    <i class="fa fa-cc-visa fa-3x"></i>
-    <i class="fa fa-cc-mastercard fa-3x"></i>
-    <i class="fa fa-cc-amex fa-3x"></i>
-    <i class="fa fa-cc-paypal fa-3x"></i>
+    <img src="/../resources/images/footer-images/payment-options.png" alt="payment-options">
     <p>{{ labels.paymenOptionsDesc }}</p>
 </div>

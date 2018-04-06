@@ -4,33 +4,42 @@
 
     .mz-utilitynav-item {
         float: left;
-        margin: 0;
-        padding: 0 10px;
+        margin-left: @gutter+10;
         text-align: right;
+        position: relative; 
 
         &:last-child {
-            padding-right: 0;
             text-align: right;
         }
     }
 
     .mz-utilitynav-link { 
-        .permalink(@textColor);
+        color: @baseBlueColor;
+        text-align: center;
+        .fa{
+            display: block;
+            font-size: 35px;
+            color: @baseBlueColor;
+        }
+        &:hover{
+            text-decoration: none;
+        }
     }
     .mz-utilitynav-link-cart{
         display: block;
-        background: url("../resources/images/cart-icon.svg") left top no-repeat;
-        background-size: 50%;
         height: 40px;
-        padding-left: 40px;
         .mz-cartmonitor{
             display: block;
-            width: 30px;
-            height: 30px;
+            background: @cartColor;
+            color: #fff;
+            width: 28px;
+            height: 28px;
             font-size: 20px;
-            border: 1px solid #333;
             border-radius: 50%;
             text-align: center;
+            position: absolute;
+            right: -14px;
+            top: -14px
         }
     }
 
