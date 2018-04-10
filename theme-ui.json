@@ -146,6 +146,7 @@
                     "allowBlank": false,
                     "forceSelection": true,
                     "store": [
+                        "Lato",
                         "Source Sans Pro",
                         "Open Sans",
                         "Raleway",

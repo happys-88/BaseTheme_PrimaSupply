@@ -15,10 +15,7 @@
         
         {% dropzone "shop-by-category" scope="page" %}
         
-        <div class="mz-dropzone-featured-products">
-            <h2>Featured Products</h2>
-            {% dropzone "trending-products" scope="page" %}  
-        </div>
+        {% dropzone "featured-products" scope="page" %}   
         
         {% dropzone "customer-logos" scope="page" %}
         

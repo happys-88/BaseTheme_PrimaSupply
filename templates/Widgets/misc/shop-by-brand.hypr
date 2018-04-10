@@ -6,7 +6,7 @@
 				{% if categoryObject.content.name == "Brands" %} 
 					{% for brandSubCat in categoryObject.childrenCategories %}
 						{% if brandSubCat.categoryId == getBrandCategoryId %}
-							<li class="col-xs-12 col-sm-3 col-md-2"> 
+							<li class="col-xs-6 col-sm-3 col-md-2"> 
 								<div class="brand-logo">
 									{% for brandLogoImage in brandSubCat.content.categoryImages %}
 						   			    <a href="{{ brandSubCat.url }}">
@@ -21,5 +21,7 @@
 			{% endfor %}
 		{% endfor %}
 	</ul>
-	<a class="shop-all-brands" href="#">{{labels.shopAllBrands}}</a>	
+	<div class="shop-all-brands">
+		<a href="#">{{labels.shopAllBrands}}</a>	
+	</div>
 </div>

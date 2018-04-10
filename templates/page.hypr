@@ -83,14 +83,15 @@
         {% block head-tag-scripts %}
             <script src="{% make_url "cdn" "/scripts/vendor/modernizr.min.js" %}"></script>
             {% include "modules/web-fonts-loader" %}
+            
         {% endblock head-tag-scripts %}
+        
         {% cms_resources %}
         
+        {% header_content %}
 
-        {%header_content%}
-    
-
-
+        {% require_script "custom" %}
+        
     </head>
     {% endblock head-tag %}
     
@@ -113,7 +114,6 @@
             {% block site-nav %}
                 {% include "modules/site-nav" %}
             {% endblock site-nav %} 
-            
 
             <div role="main" id="page-content" class="mz-l-pagecontent container">   
                 {% block breadcrumbs %}
@@ -144,6 +144,7 @@
 
         {% visitor_tracking_pixel %}
 
+        
     </body>
     {% endblock body-tag %}
 

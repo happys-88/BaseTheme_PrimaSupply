@@ -484,7 +484,11 @@
   "quickView"                             : "Quick View",
   "shopByBrandHeading": "Shop Brands We Love",
   "shopByCategoryHeading": "Shop By Category",
+  "servingTheFinest": "Serving the finest in hospitality",
   "shopAllBrands":  "Shop All Brands",
-  "saveCart" : "Save Cart"    
+  "saveCart" : "Save Cart",
+  "cartPriceEach":  "Price Each",
+  "cartPrice":  "Price",
+  "continueShopping":  "Continue Shopping"  
 
 }  

@@ -1,5 +1,6 @@
 ﻿.mz-pagefooter {
     background: #415265;
+    font-family: 'Lato', sans-serif;
     .mz-footer-top {
         padding-top: 25px;
         padding-bottom: 28px;
@@ -35,11 +36,7 @@
                 }
             }
         }
-        [class*='mz-cms-col-'] {
-            .mz-cms-content {
-                padding: 0;
-            }
-        }
+
         .mz-footer-logo-section {
             max-width: 320px;
             margin: 0 auto;
@@ -52,6 +49,9 @@
             ul {
                 li {
                     margin-bottom: 30px;
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
                 }
            }
         }
@@ -153,7 +153,9 @@
                 }
             }
         }
-        address, p {
+        address,
+        address a,
+        p {
             color: #fff;
             font-size: 15px;
             margin-bottom: 0;
