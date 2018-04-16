@@ -14,6 +14,16 @@
                     "xtype": "mz-input-checkbox",
                     "name": "enablePartialCaching",
                     "fieldLabel": "Enable partial caching using the Hypr {% partial_cache %} tag"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "showBreadcrumbs",
+                    "fieldLabel": "Enable Breadcrumb"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "categoryEntityName",
+                    "fieldLabel": "Category Entity Name"   
                 }
             ]
         },
@@ -198,11 +208,8 @@
                     "allowBlank": false,
                     "forceSelection": true,
                     "store": [
-                        15,
-                        25,
-                        50,
-                        100,
-                        500
+                        10,
+                        20
                     ]
                 },
                 {
@@ -243,6 +250,13 @@
                     "allowDecimal": false,
                     "minValue": 4,
                     "allowBlank": false
+                },
+                {
+                    "fieldLabel": "Category Column Breaking Character",
+                    "xtype": "mz-input-text",
+                    "name": "columnBreaker",
+                    "allowBlank": false,
+                    "maxLength": 1
                 }
             ]
         },

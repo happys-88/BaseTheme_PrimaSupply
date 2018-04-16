@@ -1,7 +1,7 @@
 {
   "about": {
     "author": "Happy",
-    "defaultLanguage": "en-US", 
+    "defaultLanguage": "en-US",
     "extends": null,
     "isDesktop": true,
     "isMobile": true,
@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "58059affc2a01d32407205bcbb97951dce0fa8af"
+      "commit": "cdbcf5cc257eb570f157e703dd6122406381fbfc"
     },
     "baseThemeChannel": "stable"
   },
@@ -413,10 +413,8 @@
     "maxTopLevelNavItems": 8,
     "maxTopLevelNavLabelLength": 20,
     "pageSizeOptions": [
-      15,
-      25,
-      50,
-      100
+      10,
+      20
     ],
     "preselectCountryCode": "US",
     "productImagesContainerWidth": 350,
@@ -440,6 +438,7 @@
     "showProductDetailUPC": true,
     "textColor": "#444444",
     "categoryEntityName": "categoryAttributes@ng",
+    "columnBreaker": "~",
     "usStates": [
       {
         "abbreviation": "AL",
@@ -1549,6 +1548,29 @@
       ],
       "icon": "/resources/admin/widgets/01_photo_text.png",
       "id": "promo-banner",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "id": "categoryBanner",
+      "displayName": "Category Banner",
+      "displayTemplate": "cms/category-banner",
+      "editViewFields": [
+        {
+          "xtype": "panel",
+          "title": "First Slide",
+          "items": [
+            {
+              "anchor": "50%",
+              "fieldLabel": "Add Image",
+              "name": "categoryBanner",
+              "xtype": "mz-input-image"
+            }
+          ]
+        }
+      ],
+      "icon": "/resources/admin/widgets/28_deal_of_the_day.png", 
       "validPageTypes": [
         "*"
       ]

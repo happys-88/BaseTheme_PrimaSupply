@@ -12,7 +12,7 @@ require([
         });
 
         // Add To Cart Button functionality in Category Page
-        $(".addToCart").click(function(event){
+        $(".add-to-cart").click(function(event){
         	var $thisElem = $(event.currentTarget);
                 //prodOptions = $("[data-option='"+ $thisElem.data("productcode") +"']").val();
 			Api.request("POST", "/api/commerce/carts/current/items", {

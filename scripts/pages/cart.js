@@ -12,7 +12,7 @@ define([
         templateName: "modules/cart/cart-table",
         initialize: function () {
             var me = this;
-
+           
             //setup coupon code text box enter.
             this.listenTo(this.model, 'change:couponCode', this.onEnterCouponCode, this);
             this.codeEntered = !!this.model.get('couponCode');
@@ -33,21 +33,31 @@ define([
                 window.onVisaCheckoutReady = initVisaCheckout;
                 require([pageContext.visaCheckoutJavaScriptSdkUrl], initVisaCheckout);
             }
+            
+           
+          
         },
         render: function() {
+          
             preserveElement(this, ['.v-button'], function() {
                 Backbone.MozuView.prototype.render.call(this);
             });
         },
+
         updateQuantity: _.debounce(function (e) {
             var $qField = $(e.currentTarget),
                 newQuantity = parseInt($qField.val(), 10),
                 id = $qField.data('mz-cart-item'),
                 item = this.model.get("items").get(id);
+                console.log("item data:"+JSON.stringify(item));
+            
 
+                //CartMonitor.update();
+                this._isSyncing = true;
             if (item && !isNaN(newQuantity)) {
                 item.set('quantity', newQuantity);
                 item.saveQuantity();
+                
             }
         },400),
         onQuantityUpdateFailed: function(model, oldQuantity) {
@@ -64,11 +74,13 @@ define([
                 // 65954
                 // Prevents removal of test product while in editmode
                 // on the cart template
+               
                 return false;
             }
             var $removeButton = $(e.currentTarget),
                 id = $removeButton.data('mz-cart-item');
             this.model.removeItem(id);
+            this.render();
             return false;
         },
         empty: function() {
@@ -121,6 +133,7 @@ define([
             subtotal = model.get('subtotal');
             delay = 0;
 
+
             if (!window.V) {
                 //console.warn( 'visa checkout has not been initilized properly');
                 return false;
@@ -165,7 +178,7 @@ define([
     }
     /* end visa checkout */
 
-    $(document).ready(function() {
+    
         var cartModel = CartModels.Cart.fromCurrent(),
             cartViews = {
 
@@ -174,8 +187,10 @@ define([
                     model: cartModel,
                     messagesEl: $('[data-mz-message-bar]')
                 })
+                
 
             };
+           
 
         cartModel.on('ordercreated', function (order) {
             cartModel.isLoading(true);
@@ -183,12 +198,14 @@ define([
         });
 
         cartModel.on('sync', function() {
+            
             CartMonitor.setCount(cartModel.count());
         });
 
         window.cartView = cartViews;
-
+        
         CartMonitor.setCount(cartModel.count());
-    });
+              
+        return CartView;
 
 });

@@ -3,12 +3,12 @@
         <div class="container">
         	<div class="row">
         		<div class="col-md-12">
-        			<div class="col-md-4">
+        			<div class="col-xs-12 col-md-3">
                        {% block footer-logo %}
                             {% include "modules/page-footer/footer-logo" %}
                         {% endblock footer-logo %}
         			</div>
-                    <div class="col-md-4">
+                    <div class="col-xs-12 col-md-5">
             			<div class="col-md-6">
             				{% dropzone "footer-dropzone-2" scope="site" %}
             			</div>
@@ -19,7 +19,7 @@
                             {% endblock payment-options %}
             			</div>
                     </div>
-        			<div class="col-md-4">
+        			<div class="col-xs-12 col-md-4"> 
                         {% block newsletter %}
                             {% include "modules/page-footer/newsletter" %}
                         {% endblock newsletter %}

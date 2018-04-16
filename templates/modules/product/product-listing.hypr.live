@@ -60,7 +60,7 @@
        
         
         {% if userAuth != true %}
-            <button class="mz-button addToCart {% if not model.purchasableState.isPurchasable %} is-disabled {% endif %}" data-productcode="{{model.productCode}}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} > {{ labels.addToCart }} </button>  
+            <button class="mz-button add-to-cart {% if not model.purchasableState.isPurchasable %} is-disabled {% endif %}" data-productcode="{{model.productCode}}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} > {{ labels.addToCart }} </button>  
         {% endif %}   
         
  
@@ -75,35 +75,16 @@
 
         {% if model.inventoryInfo.onlineStockAvailable < 10 and model.inventoryInfo.onlineStockAvailable > 0 %}
             <span class="items-inStock">{{ labels.itemInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}</span>
+        {% endif %}
 
-        {% endif %} 
+        {% with model|get_product_attribute("tenant~new-arrival") as newArrival %}
+          {% if newArrival.values|first|prop("value") == true %}
+              <spna class="mz-new-arrival-tag">New</span>
+          {% endif %} 
+        {% endwith %} 
 
             
     </div> 
-    
-    {% comment %}
-    <button class="mz-button qvButton" data-productcode="{{model.productCode}}">Quick View</button>
-    {% endcomment %}
-
-    <button class="mz-button qvButton" type="button" data-toggle="modal" data-target="{{ model.productCode }}" data-mz-product-data="{% json_attribute model %}">
-        <span>{{ labels.quickView }}</span> 
-    </button>  
 
 </div>
-
-
-
-{% comment %}
-<div id="quickViewModal">
-    {% include "modules/product/product-quick-view" %}
-</div>
-<div class="quickviewSlider">
-    {% block quickview-slider %}
-        {% include "modules/product/product-quick-view" %}            
-    {% endblock quickview-slider %}
-</div>
-{% require_script "modules/quickview" %}
-{% endcomment %}
-
-
 

@@ -118,8 +118,8 @@
   "trackingNumber"                        : "Tracking Number",
   "previousPage"                          : "Previous Page",
   "nextPage"                              : "Next Page",
-  "pageStatePlural"                       : "Showing {0} - {1} of {2}",
-  "pageStateSingular"                     : "Showing 1 of 1",
+  "pageStatePlural"                       : "View All ({2})",
+  "pageStateSingular"                     : "View All ({2})",
   "show"                                  : "Show",
   "resultsPerPage"                        : "results per page",
   "sortBy"                                : "Sort by",
@@ -406,7 +406,7 @@
   "digitalCreditNotYetActive"             : "This code does not become active until {0}.",
   "digitalCreditExpired"                  : "This code expired on {0}.",
 
-  "clearAllFilters"                       : "Clear All Filters",
+  "clearAllFilters"                       : "Clear All",
 
   "productImagePlaceholder"               : "[no image]",
   "packageWeight"                         : "Package Weight",
@@ -489,6 +489,8 @@
   "saveCart" : "Save Cart",
   "cartPriceEach":  "Price Each",
   "cartPrice":  "Price",
-  "continueShopping":  "Continue Shopping"  
+  "continueShopping":  "Continue Shopping",
+  "refineBy"          : "Refine by:" ,
+  "shoppingCart"      : "Shopping Cart" 
 
 }  

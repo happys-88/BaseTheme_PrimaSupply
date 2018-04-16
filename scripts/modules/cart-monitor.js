@@ -21,6 +21,7 @@ define([
             },
             setCount: function(count) {
                 this.$el.text(count);
+                this.update(true);
             },
             addToCount: function(count) {
                 this.update(true);
@@ -35,7 +36,7 @@ define([
                     $document.ready(function() {
                         CartMonitor.setCount(summary.data.totalQuantity);
                         CartMonitor.setAmount(summary.data.total);
-                        GlobalCart.update(showGlobalCart);
+                        //GlobalCart.update(showGlobalCart);
                     });
                 });
 

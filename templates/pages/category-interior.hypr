@@ -1,5 +1,4 @@
 
-<h1 class="mz-pagetitle">{{ model.content.pageTitle|safe }}</h1>
 {% dropzone "category-page-top" scope="page" %}
 
 {% partial_cache model.categoryId pageContext.Sorting pageContext.Pagination pageContext.query.sortBy %}

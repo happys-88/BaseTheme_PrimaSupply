@@ -1,7 +1,7 @@
 ﻿{% if not model.hasPreviousPage %}
-<span class="mz-pagenumbers-prev is-disabled">{{ labels.previousPage }}</span>
+<span class="mz-pagenumbers-prev is-disabled"><i class="fa fa-angle-left"></i></span>
 {% else %}
-<a class="mz-pagenumbers-prev" href="{% make_url "paging" model with page="previous" %}" rel="previous" data-mz-action="previous">{{ labels.previousPage }}</a>
+<a class="mz-pagenumbers-prev" href="{% make_url "paging" model with page="previous" %}" rel="previous" data-mz-action="previous"><i class="fa fa-angle-left"></i></a>
 {% endif %}
 {% if model.currentPage == 1 %}
 <span class="mz-pagenumbers-number is-current" data-mz-page-num="1">1</span>
@@ -29,7 +29,7 @@
 {% endif %}
 {% endif %}
 {% if not model.hasNextPage %}
-<span class="mz-pagenumbers-next is-disabled">{{ labels.nextPage }}</span>
+<span class="mz-pagenumbers-next is-disabled"><i class="fa fa-angle-right"></i></span>
 {% else %}
-<a class="mz-pagenumbers-next" href="{% make_url "paging" model with page="next" %}" rel="next" data-mz-action="next">{{ labels.nextPage }}</a>
+<a class="mz-pagenumbers-next" href="{% make_url "paging" model with page="next" %}" rel="next" data-mz-action="next"><i class="fa fa-angle-right"></i></a>
 {% endif %}

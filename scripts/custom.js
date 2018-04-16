@@ -2,14 +2,45 @@ define([
 	"modules/jquery-mozu"
 ], function( $) {
 	$(document).ready(function(){ 
+
+		if ($(this).scrollTop() > 500) { 
+	        $("#scroll-to-top").show();
+	    }
+		// Sticky Nav Header
+		$(window).scroll(function() {    
+		    var scroll = $(window).scrollTop();
+
+		    if (scroll >= 1) {
+		        $("body").addClass("header-fixed");
+		        $(".mz-sticky-header").addClass("fixed");
+		        
+		    } else {
+		        $(".mz-sticky-header").removeClass("fixed"); 
+		        $("body").removeClass("header-fixed"); 
+		        $("#back-to-top").fadeOut();
+		    }
+
+		    if (scroll >= 500) {
+		    	$("#back-to-top").fadeIn();
+		    } else{
+		    	$("#back-to-top").fadeOut();
+		    }
+
+		});
+
+		$("#back-to-top").click(function(){
+	        $("body").animate({
+	            scrollTop: 0
+	        }, 600);
+	    });
 		
 		var navHeight = $(".mz-sitenav").outerHeight();
 		//alert(navHeight); 
 		$(".mz-sitenav-sub-container").css('top', navHeight);
-		
+	
 
 		var getWindowWidth = $(window).width();
-		console.log(getWindowWidth);
+		//console.log(getWindowWidth);
 		if(getWindowWidth <=767 ){
 			$('.mz-sitenav-item .mz-sitenav-link').click(function(event){
 				event.preventDefault();
@@ -35,6 +66,8 @@ define([
 				$("#mz-sitenav-container").addClass("collapse");
 			}
 		});
+
+		$(".mz-sitenav-item .mz-sitenav-link").css('height', navHeight); 
 
 	});
 }); 
