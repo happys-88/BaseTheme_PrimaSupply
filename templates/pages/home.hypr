@@ -1,0 +1,33 @@
+﻿{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %} - {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-homepage {% endblock body-tag-classes %}
+
+{% block body-content %}
+	
+    {% dropzone "home-slider" scope="page" %}
+
+    <div class="container">
+        <h1 class="home-heading1">Restaurant Supplies for the... H1 statement</h1>
+
+        {% dropzone "shop-by-brand" scope="page" %}
+        
+        {% dropzone "shop-by-category" scope="page" %}
+        
+        {% dropzone "featured-products" scope="page" %}   
+        
+        {% dropzone "customer-logos" scope="page" %}
+        
+        {% dropzone "shop-now-widget" scope="page" %}    
+        
+    </div>
+    
+    
+{% endblock body-content %}
+
+{% block body-below-content %}
+
+{% endblock body-below-content %} 
+
+

@@ -1,0 +1,50 @@
+﻿.mz-utilitynav { 
+    color: @textColor;
+    font-size: @fontSizeSmall; 
+
+    .mz-utilitynav-item {
+        float: left;
+        margin-left: @gutter+10;
+        text-align: right;
+        position: relative; 
+
+        &:last-child {
+            text-align: right;
+        }
+        &.live-chat{
+            display: none;
+        }
+    }
+
+    .mz-utilitynav-link { 
+        color: @baseBlueColor;
+        text-align: center;
+        font-weight: bold;
+        .fa{
+            display: block;
+            font-size: 35px;
+            color: @baseBlueColor;
+        }
+        &:hover{
+            text-decoration: none;
+        }
+    }
+    .mz-utilitynav-link-cart{
+        display: block;
+        height: 40px;
+        .mz-cartmonitor{
+            display: block;
+            background: @cartColor;
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            font-size: 20px;
+            border-radius: 50%;
+            text-align: center;
+            position: absolute;
+            right: -14px;
+            top: -14px
+        }
+    }
+
+}
