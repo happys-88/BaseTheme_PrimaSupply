@@ -1,16 +1,21 @@
 {
   "about": {
+
     "author": "ashishSteg",
+
+    "author": "Happy",
     "defaultLanguage": "en-US",
     "extends": null,
     "isDesktop": true,
     "isMobile": true,
     "isTablet": true,
+
     "name": "PrimaSupply_AK",
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
       "commit": "194a1a65deb96e9c117b1cf679f29bd01fe29846"
+  
     },
     "baseThemeChannel": "stable"
   },
@@ -1570,7 +1575,9 @@
           ]
         }
       ],
+
       "icon": "/resources/admin/widgets/28_deal_of_the_day.png",
+
       "validPageTypes": [
         "*"
       ]
