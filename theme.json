@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "cdbcf5cc257eb570f157e703dd6122406381fbfc"
+      "commit": "1f3a40b5cf8dcd7c840a373be1ed2a73a92e6f2a"
     },
     "baseThemeChannel": "stable"
   },
@@ -1570,7 +1570,7 @@
           ]
         }
       ],
-      "icon": "/resources/admin/widgets/28_deal_of_the_day.png", 
+      "icon": "/resources/admin/widgets/28_deal_of_the_day.png",
       "validPageTypes": [
         "*"
       ]
