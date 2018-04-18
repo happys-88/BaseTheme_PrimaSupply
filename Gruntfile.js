@@ -129,7 +129,7 @@ module.exports = function (grunt) {
             },
             'sync': {
                 'files': [
-                    'scripts/**/*.js',
+                'scripts/**/*.js',
                     'admin/**/*',
                     'resources/**/*',
                     'packageconfig.xml',
@@ -140,6 +140,7 @@ module.exports = function (grunt) {
                     '!*.orig',
                     '!.inherited'
                 ],
+
                 'tasks': [
                     'mozutheme:quickcompile',
                     'newer:mozusync:upload'
