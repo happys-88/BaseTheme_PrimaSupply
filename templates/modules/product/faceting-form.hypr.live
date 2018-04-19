@@ -48,6 +48,7 @@
     <div class="mz-l-sidebaritem">
         <h4>{{ facet.label }}</h4>
         <ul class="mz-facetingform-facet mz-facetingform-facet-hierarchy {{ facet.label|slugify }} clearfix">
+            <button class="mz-button mz-facetingform-clearFacet" id="{{ facet.field }}" data-mz-facet-clear="facetClear" data-mz-facet="{{ facet.field }}" data-mz-url="">{{ labels.clear }}</button>
             {% for fval in facet.values %}
                     <li {% if fval.isApplied %}class="checked"{% endif %}>
                         <input type="checkbox" id="{{facet.field|slugify }}_{{ fval.value|slugify }}" class="mz-facetingform-value" {% if fval.isApplied %}checked="checked"{% endif %} data-mz-facet="{{ facet.field }}" data-mz-facet-value="{{ fval.value }}" data-mz-url="{% make_url "facet" fval %}">
