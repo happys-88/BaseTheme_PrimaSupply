@@ -7,17 +7,13 @@
         <div class="mz-l-container">
           
             <form method="post" action="{{ siteContext.secureHost }}{{siteContext.siteSubdirectory}}/cart/checkout" id="cartform">
-
-
              <div class="mz-carttable-header col-xs-12"> 
                 <div class="mz-carttable-header-product col-md-6 text-left">{{ labels.shoppingCart }}</div>
                 <div class="mz-carttable-header-qty col-md-2 col-sm-2 text-center">{{ labels.qty }}</div>
-                <div class="mz-carttable-header-price-each col-md-2 col-sm-2 text-right no-padding">Price Each</div> 
-                <div class="mz-carttable-header-price col-md-2 col-sm-2 text-right">Price</div>
-             
+                <div class="mz-carttable-header-price-each col-md-2 col-sm-2 text-right no-padding">{{ labels.cartPriceEach }}</div> 
+                <div class="mz-carttable-header-price col-md-2 col-sm-2 text-right">{{ labels.cartPrice }}</div>
             </div>
   
-
             <div class="mz-carttable-{% if Model.IsEmpty %} isempty {% else %}items{% endif %} col-xs-12"> 
                 {% if not model.isEmpty %}
                 {% for item in model.items %}

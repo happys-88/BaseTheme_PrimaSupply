@@ -38,6 +38,7 @@ define([
           
         },
         render: function() {
+            CartMonitor.update();
           
             preserveElement(this, ['.v-button'], function() {
                 Backbone.MozuView.prototype.render.call(this);

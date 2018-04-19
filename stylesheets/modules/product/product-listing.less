@@ -1,6 +1,7 @@
 ﻿.mz-productlisting {
     .mz-productlisting-image{
         text-align: center; 
+        min-height: 160px;
     }
     .mz-productlisting-info {
         margin-top: 5px;
@@ -22,6 +23,8 @@
     .mz-productlisting-title {
         font-size: @fontSizeLarge;
         text-decoration: none;
+        display: inline-block;
+        min-height: 56px;
     }
     .mz-productlisting-shortdesc {
         margin: @gutter/4 @gutter/2 @gutter/4 0;
@@ -106,25 +109,42 @@
             }
         }
         button {
-            &.add-to-cart {
+            &.add-to-cart { 
                 background: #d15f2a;
                 color: #fff;
                 border: none;
                 border-radius: 0;
-                font-weight: 400;
+                font-weight: 500;
                 padding: 10px 20px;
-                text-transform: capitalize;
+                text-transform: uppercase;
                 font-size: 14px;
-                width: 147px;
-                margin: 0 auto;
                 position: absolute;
                 right: 0;
                 bottom: 30px;
                 left: 0;
+                width: 150px;
+                margin: 0 auto;
                 &.is-disabled {
                     opacity: 0.5;
                 }
             }
+            
+        }
+        .login-for-lowprice{  
+            background: #00adce;
+            color: #fff;
+            border: none;
+            border-radius: 0;
+            font-weight: 500;
+            padding: 10px 5px;
+            text-transform: uppercase;
+            font-size: 14px;
+            position: absolute; 
+            right: 0;
+            bottom: 30px;
+            left: 0;
+            width: 150px; 
+            margin: 0 auto;
         }
     }
 }

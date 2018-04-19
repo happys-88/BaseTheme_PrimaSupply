@@ -21,7 +21,7 @@ define([
             },
             setCount: function(count) {
                 this.$el.text(count);
-                this.update(true);
+                //this.update(true);
             },
             addToCount: function(count) {
                 this.update(true);

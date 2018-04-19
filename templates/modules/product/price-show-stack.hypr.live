@@ -2,16 +2,15 @@
     {% if showPriceAttr.attributeDetail.name %} 
         
         {% if showPriceAttr.values|first|prop("value") == 'view-on-cart' %} 
-            <del  class="mz-productlisting-hide-price">$XXX.XX</del> <br> {{ labels.viewOnCart }}
+            <del class="mz-productlisting-hide-price">$XXX.XX</del>
+            <span class="orange-text">{{ labels.viewOnCart }}</span>
         {% endif %}
         {% if showPriceAttr.values|first|prop("value") == 'view-on-login' %} 
             {% if user.isAuthenticated %}
                 {% include "modules/product/price-stack" %}
             {% else %}
-                <del class="mz-productlisting-hide-price">$XXX.XX</del> <br>
-                <a href="/user/login" data-mz-action="login" data-placement="bottom" class="mz-utilitynav-link">
-                    {{ labels.viewOnLogin }}
-                </a>
+                <a class="mz-button login-for-lowprice" href="/user/login" data-mz-action="login" data-placement="bottom" data-productcode="{{model.productCode}}">{{ labels.viewOnLogin }}</a> 
+
             {% endif %}
         {% endif %}
         {% if showPriceAttr.values|first|prop("value") == 'view' %} 

@@ -58,17 +58,29 @@
         {% endif %}
         {% endblock product-extrainfo %}
        
-        
-        {% if userAuth != true %}
-            <button class="mz-button add-to-cart {% if not model.purchasableState.isPurchasable %} is-disabled {% endif %}" data-productcode="{{model.productCode}}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} > {{ labels.addToCart }} </button>  
-        {% endif %}   
+        {% with model|get_product_attribute("tenant~show-price") as showPriceAttr %}
+         {% if showPriceAttr.values|first|prop("value") == 'view-on-login' %}
+          {% if user.isAuthenticated %}
+            
+               <button class="mz-button add-to-cart {% if not model.purchasableState.isPurchasable %} is-disabled {% endif %}" data-productcode="{{model.productCode}}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} > {{ labels.addToCart }} </button>
+            
+          {% endif %} 
+          {% else %}
+            
+               <button class="mz-button add-to-cart {% if not model.purchasableState.isPurchasable %} is-disabled {% endif %}" data-productcode="{{model.productCode}}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} > {{ labels.addToCart }} </button>
+            
+        {% endif %} 
+      {% endwith %}
         
  
         {% if not model.purchasableState.isPurchasable %}
             <p class="mz-product-notpurchasable">
+                {{ labels.outOfStock }} 
+                {% comment %}
                 {% for message in model.purchasableState.messages %}
                     <span>{{ message.message }}</span>
                 {% endfor %}
+                {% endcomment %}
             </p>
         
         {% endif %}  

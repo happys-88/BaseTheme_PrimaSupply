@@ -2,7 +2,7 @@
 {% extends "page" %} 
 
 {% block title-tag-content %}
-	{% firstof pageContext.metaTitle|safe model.name|safe %}  - {% parent %}
+	{% firstof pageContext.metaTitle|safe model.name|replace(themeSettings.columnBreaker, "")|safe %}  - {% parent %}
 {% endblock title-tag-content %}
 
 {% block body-tag-classes %}mz-category{% endblock body-tag-classes %}

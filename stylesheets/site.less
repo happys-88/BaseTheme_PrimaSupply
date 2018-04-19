@@ -167,11 +167,10 @@ img[data-mztp]{
 	            display: none;
 	        }
 	        
+	        
         }          
        	&:hover {
-       		/*.top-arrow{
-       			display: block;  
-       		}*/
+       		
        		.mz-sitenav-sub-container{
         		display: block;  
         	}
@@ -189,6 +188,13 @@ img[data-mztp]{
         		.seperator{
         			display: none;
         		}	
+        	}
+        }
+        &.has-dropdown{
+        	&:hover{
+        		.top-arrow{
+       				display: block;
+       			}	
         	}
         }
        
@@ -212,12 +218,22 @@ img[data-mztp]{
         background: @textColorWhite;
         z-index: 99;
         display: none;
-
+   		/*&.calculating{
+   			display: block;
+   		}*/
         
-        
+        &.menu-right {
+            left: auto;
+            right: 0;
+            &:before {
+                left: auto;
+                right: 15%;
+            }
+        }
         .heading-3{
 			float: left;
 		}
+		
 		        
         .mz-sitenav-item{ 
         	float: left;
@@ -505,6 +521,10 @@ img[data-mztp]{
 		}
 
 	}
+}
+.orange-text{
+	display: block;
+	color: @linkColor;
 }
 
 

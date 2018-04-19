@@ -2,7 +2,35 @@ define([
 	"modules/jquery-mozu"
 ], function( $) {
 	$(document).ready(function(){ 
+		// Check if sitenav-item has dropdown
+		$(".mz-sitenav-list .mz-sitenav-item").each(function(){
+            if($(this).find("div.mz-sitenav-sub-container").length !== 0){
+                $(this).addClass("has-dropdown"); 
+            }
+        }); 
+		
+		// Global Navigation - Calculate the position of dropdown
+		function calculatingSubPosition() {
+            $(".mz-sitenav-sub-container").each(function() {
+	            var currentElemnt = $(this),
+	            	currentDropWidth = currentElemnt.outerWidth(),
+	                rightReference = $("#store-branding").offset().left + $(".mz-header-bottom .container").outerWidth(),
+	                currentParentOffset = currentElemnt.parents(".mz-sitenav-item").offset().left, 
+	                leftOrigin = $(".mz-sitenav-list").offset().left;
+	                
+	                console.log(leftOrigin); 
+	                //console.log(currentDropWidth + "--" + currentParentOffset);   
+	              
+	            if (currentParentOffset + currentDropWidth >= rightReference) {
+	                currentElemnt.addClass("menu-right");
+	            } else {
+	                currentElemnt.removeClass("menu-right"); 
+	            }
+	        });
+        }
 
+        calculatingSubPosition();
+		
 		if ($(this).scrollTop() > 500) { 
 	        $("#scroll-to-top").show();
 	    }
@@ -28,6 +56,7 @@ define([
 
 		});
 
+		// Back To Top
 		$("#back-to-top").click(function(){
 	        $("body").animate({
 	            scrollTop: 0
@@ -38,7 +67,7 @@ define([
 		//alert(navHeight); 
 		$(".mz-sitenav-sub-container").css('top', navHeight);
 	
-
+		// Mobile Navigation
 		var getWindowWidth = $(window).width();
 		//console.log(getWindowWidth);
 		if(getWindowWidth <=767 ){
@@ -65,6 +94,9 @@ define([
 			}else{
 				$("#mz-sitenav-container").addClass("collapse");
 			}
+
+			// Global Nav Dropdown function
+			calculatingSubPosition();
 		});
 
 		$(".mz-sitenav-item .mz-sitenav-link").css('height', navHeight); 

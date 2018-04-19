@@ -119,7 +119,7 @@
   "previousPage"                          : "Previous Page",
   "nextPage"                              : "Next Page",
   "pageStatePlural"                       : "View All ({2})",
-  "pageStateSingular"                     : "View All ({2})",
+  "pageStateSingular"                     : "View All (1)",
   "show"                                  : "Show",
   "resultsPerPage"                        : "results per page",
   "sortBy"                                : "Sort by",
@@ -480,7 +480,7 @@
   "join"                                  : "Join",
 
   "viewOnCart"                            : "See low price in cart",
-  "viewOnLogin"                           : "Login for low price",
+  "viewOnLogin"                           : "Login for price",
   "quickView"                             : "Quick View",
   "shopByBrandHeading": "Shop Brands We Love",
   "shopByCategoryHeading": "Shop By Category",

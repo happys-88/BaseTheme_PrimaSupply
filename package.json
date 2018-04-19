@@ -1,12 +1,10 @@
 {
-
   "name": "basetheme_primasupply",
   "author": {
     "name": "Happy",
     "email": "hmasih@stegtechnologies.com"
   },
   "description": "BaseTheme_PrimaSupply",
-
   "version": "0.1.0",
   "scripts": {
     "clean": "rm -rf compiled",
