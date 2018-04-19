@@ -8,8 +8,9 @@ define([
     'underscore',
     'modules/url-dispatcher',
     'modules/intent-emitter',
-    'modules/get-partial-view'
-], function(Backbone, _, UrlDispatcher, IntentEmitter, getPartialView) {
+    'modules/get-partial-view',
+    'modules/facet-clear'
+], function(Backbone, _, UrlDispatcher, IntentEmitter, getPartialView, makeClearUrl) {
 
     function factory(conf) {
 
@@ -37,7 +38,19 @@ define([
             if (elm.tagName.toLowerCase() === "select") {
                 elm = elm.options[elm.selectedIndex];
             }
-            url = elm.getAttribute('data-mz-url') || elm.getAttribute('href') || '';
+
+            /**
+             * Custom code applied for the facet clear functionality
+             */
+            if(elm.getAttribute('data-mz-facet-clear')) {
+                var pathName = _$body.context.location.pathname;
+                var searchName = _$body.context.location.search;
+                url = pathName+searchName;
+                url = makeClearUrl(url, elm.id);
+            } else {
+                url = elm.getAttribute('data-mz-url') || elm.getAttribute('href') || '';    
+            }
+            
             if (url && url[0] != "/") {
                 var parser = document.createElement('a');
                 parser.href = url;
@@ -53,6 +66,9 @@ define([
                 'click [data-mz-pagenumbers] a',
                 'click a[data-mz-facet-value]',
                 'click [data-mz-action="clearFacets"]',
+                'click button[data-mz-facet]',
+                'click button[data-mz-facet-clear=facetClear]',
+                'click label[data-mz-facet-value]',
                 'change input[data-mz-facet-value]',
                 'change [data-mz-value="pageSize"]',
                 'change [data-mz-value="sortBy"]'

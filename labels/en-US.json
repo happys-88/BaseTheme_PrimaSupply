@@ -148,7 +148,7 @@
   "noResults"                             : "No Results",
   "noResultsText"                         : "We're sorry! No results were found matching your query.",
   "searchResultsSummary"                  : "Your search for \"{0}\" within {1} returned {2} results. <a href=\"#\" data-mz-action=\"expandSearch\">Repeat this search across all categories.</a>",
-
+  "foundSearchResults"                    : "We found {0} results for \"{1}\" ",
   "cart"                                  : "Cart",
   "itemTotal"                             : "Item Total",
   "cartEmpty"                             : "You have no items in your cart.",

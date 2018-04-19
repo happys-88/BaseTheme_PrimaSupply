@@ -38,6 +38,7 @@
                 'modules/models-product',
                 'modules/quickview',
                 'modules/scroll-nav',
+                'modules/facet-clear.js',
                 'modules/search-autocomplete',
                 'modules/views-collections',
                 'modules/views-messages',

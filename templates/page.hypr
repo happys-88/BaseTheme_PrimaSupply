@@ -37,6 +37,11 @@
 
     {% block head-tag %}
     <head>
+       {% block promoted-products %}
+           {% require_script "pages/promoted-products" %}
+
+        {% endblock promoted-products %}
+
 
         {% include "modules/json-required-for-hyprlive" %}
 
