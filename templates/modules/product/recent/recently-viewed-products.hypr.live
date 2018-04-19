@@ -1,0 +1,6 @@
+<div class="clearfix"></div> 
+<div id="rvi-container" >
+
+	{% if themeSettings.rviHeading!="" %}<div id="recent-viewed-prdt"><span>Recently Viewed</span></div>{% endif %}
+	<div class="rvi-loading"></div>
+</div>

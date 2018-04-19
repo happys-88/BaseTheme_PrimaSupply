@@ -1,4 +1,4 @@
-﻿require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "modules/cart-monitor", "modules/models-product", "modules/views-productimages",  "hyprlivecontext"], function ($, _, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, HyprLiveContext) {
+﻿require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "modules/cart-monitor", "modules/models-product", "modules/views-productimages","modules/product/recently-viewed-products",  "hyprlivecontext"], function ($, _, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, RVIModel,HyprLiveContext) {
 
     var ProductView = Backbone.MozuView.extend({
         templateName: 'modules/product/product-detail',
@@ -84,7 +84,9 @@
             });
         }
     });
-
+	RVIModel.renderRVI('#rvi-container');
+	
+	
     $(document).ready(function () {
 
         var product = ProductModels.Product.fromCurrent();
