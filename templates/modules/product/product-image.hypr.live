@@ -1,11 +1,10 @@
 {% if productImage %}
-    <img  
-        {% if productMaxWidth %}
+    <img {% if productMaxWidth %}
             src="{% make_url "image" productImage with maxWidth=productMaxWidth %}"
         {% else %}
             src="{% make_url "image" productImage with maxWidth=themeSettings.productCarouselImageWidth %}"
         {% endif %}
-        {%if isMainImage=="true" %}
+        {% if isMainImage=="true" %}
             class="mz-productimages-mainimage" data-mz-productimage-main id="zoom" itemprop="image"
             {% if productZoomWidth %}
                 data-zoom-image="{% make_url "image" productImage with maxWidth=productZoomWidth %}"
