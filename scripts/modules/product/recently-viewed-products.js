@@ -25,7 +25,6 @@ define([
             className: 'mz-recentproductlist-item',
             templateName: 'modules/product/recent/recent-products',
             initialize: function() {
-                alert("Hello");
                 var self = this;
                 self.listenTo(self.model, 'change', self.render);
             },
