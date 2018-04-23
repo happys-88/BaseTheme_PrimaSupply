@@ -1,6 +1,11 @@
 <div class="clearfix"></div> 
 <div id="rvi-container" >
-
-	{% if themeSettings.rviHeading!="" %}<div id="recent-viewed-prdt"><span>Recently Viewed</span></div>{% endif %}
+	{% if themeSettings.rviHeading!="" %}
+		<div id="recent-viewed-prdt"><span>Recently Viewed</span></div>
+	{% endif %}
 	<div class="rvi-loading"></div>
 </div>
+
+{% require_script "modules/product/recently-viewed-products" %} 
+{% require_script "pages/product" %}
+
