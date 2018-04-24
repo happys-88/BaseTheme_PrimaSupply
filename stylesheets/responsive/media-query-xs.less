@@ -232,13 +232,19 @@
 	.mz-pagefooter {
         .mz-footer-top {
             position: relative;
+            padding-top: 29px;
             padding-bottom: 6px;
             text-align: center;
+            .col-md-12,
+            .col-md-4,
+            .col-xs-12 {
+            	position: static;
+            }
             ul {
                 margin-bottom: 0;
             }
             .mz-footer-logo-section {
-                padding-top: 4px;
+                padding-top: 0;
                 .mz-footer-logo {
                     img {
                         max-width: 85px;
@@ -247,48 +253,41 @@
                 ul {
                     li {
                         margin-bottom: 25px;
+                        text-align: left;
                         img {
                             max-height: 30px;
                         }
                     }
                 }
             }
-            .col-md-4 {
-                position: static;
-                &:nth-child(1) {
-                    padding: 0;
-                    text-align: left;
-                    .col-xs-5 {
-                        padding: 0;
-                    }
+            .col-xs-12 {
+                &:nth-of-type(2) {
+                    margin-top: 254px;
                 }
-                &:nth-child(2) {
-                    margin-top: 233px;
-                    padding: 0;
-                    .col-md-6 {
-                        h4 {
-                            margin-top: 28px;
-                        }
-                    }
+                &:nth-of-type(3) {
+                    margin-top: 37px;
                 }
-                .mz-newsletter {
-                    border-top: 1px solid #808b98;
-                    padding: 0 15px;
-                    position: absolute;
-                    top: 166px;
-                    right: 0;
-                    left: 0;
-                    text-align: left;
-                    h4 {
-                        padding-top: 25px;
-                    }
+            }
+            .mz-payment-options {
+			    margin-top: 36px;
+			}
+            .mz-newsletter {
+                border-top: 1px solid #808b98;
+                padding: 0 15px;
+                position: absolute;
+                top: 192px;
+                right: 0;
+                left: 0;
+                text-align: left;
+                h4 {
+                    padding-top: 25px;
                 }
-                .mz-social-icon {
-                    position: absolute;
-                    top: 290px;
-                    right: 0;
-                    left: 0;
-                }
+            }
+            .mz-social-icon {
+                position: absolute;
+                top: 316px;
+                right: 0;
+                left: 0;
             }
             .mz-policy {
                 margin-top: 13px;
@@ -314,5 +313,112 @@
             padding: 15px 0 30px;
         }
     }
+
+    /**** Directory Page ****/
+    .mz-category {
+    	#page-content {
+		    padding: 25px 0;
+		}
+		.mz-l-paginatedlist {
+			margin-top: 0;
+			.mz-pagetitle {
+				font-size: 18px;
+				margin-top: 11px;
+				margin-bottom: 0;
+				padding-right: 15px;
+				padding-bottom: 16px;
+				padding-left: 15px;
+			}
+			.mz-l-sidebar {
+				margin-top: 0;
+				padding: 0;
+				h2 {
+					font-size: 16px;
+					font-weight: 700;
+					margin: 0;
+				    padding: 15px;
+				}
+				.mz-faceting-section {
+					display: none;
+					padding-right: 15px;
+					padding-left: 15px;
+					&.mz-faceting-section-open {
+						display: block;
+						border-bottom: 1px solid #e0e0e0;
+					}
+				}
+				.mz-facetingform {
+					.mz-clear-all {
+				    	border-bottom: 1px solid #e0e0e0;
+					    padding: 0 15px 15px;
+					}
+				}
+			}
+			.mz-l-tiles {
+			    margin-top: 18px;
+			}
+			.mz-l-paginatedlist-header {
+			    margin-bottom: 0;
+			    padding-top: 0;
+			    .mz-sortby {
+				    border-bottom: 1px solid #e0e0e0;
+				    padding: 11px 15px;
+				    .mz-pagingcontrols-pagesort-label {
+						select {
+						    margin-bottom: 0;
+						}
+					}
+				}
+			}
+			.mz-productlist-tiled {
+				.mz-productlist-item {
+					&.col-xs-6 {
+					    width: 50%;
+					}
+					button {
+						&.add-to-cart {
+						    width: calc(~'100% - 30px');
+						    max-width: 320px;
+						}
+					}
+				}
+			}
+			.mz-l-paginatedlist-footer {
+			    min-height: 156px;
+			    margin-top: 1px;
+			    position: relative;
+			    .mz-pagenumbers,
+			    .mz-pagingcontrols {
+			    	float: none;
+					width: 100%;
+					text-align: center;
+			    }
+			    .mz-pagenumbers {
+					margin-left: 0;
+					position: absolute;
+					bottom: 0px;
+					.mz-pagenumbers-prev.is-current, 
+					.mz-pagenumbers-next.is-current, 
+					.mz-pagenumbers-number.is-current,
+					.mz-pagenumbers-prev, 
+					.mz-pagenumbers-next, 
+					.mz-pagenumbers-number {
+					    padding: 14.9px 20.44px;
+					}
+				}
+				.mz-pagingcontrols {
+					margin-top: 35px;
+					padding-right: 0;
+					.mz-pagingcontrols-pagestate-label {
+					    margin-left: 0;
+					}
+				}
+			}
+		}
+	}
+	.mz-breadcrumbs {
+		line-height: 12px;
+	    padding: 0 15px;
+	}
 	
 }

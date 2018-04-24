@@ -11,46 +11,63 @@
 {% preload_json model "product" %}
 
 <div itemscope itemtype="http://schema.org/Product" class="mz-l-container">
-
-	<h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName }}</h1>
-	
-    <div data-mz-productimages class="mz-productimages mz-l-sidebar">
-        {% include "modules/product/product-images" %}
-    </div>
-
-    <div class="mz-productdetail-wrap">
-        {% include "modules/common/message-bar" %}
-        <div id="product-detail" class="mz-productdetail mz-l-stack">
-            {% include "modules/product/product-detail" %}
+    <div class="row">
+        <div data-mz-productimages class="col-md-6 mz-productimages mz-l-sidebar">
+            {% include "modules/product/product-images" %}
+        </div>
+        <div class="col-md-6 mz-productdetail-wrap">
+            {% include "modules/common/message-bar" %}
+            <div id="product-detail" class="mz-productdetail mz-l-stack">
+                {% include "modules/product/product-detail" %}
+            </div>
+        </div>
+        <div class="mz-product-prop">
+            {% include "modules/product/product-properties" %} 
         </div>
     </div>
-
 </div>
 
 <script type="text/javascript">
 (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
 </script>
-<div class="yotpo yotpo-main-widget col-xs-12 col-md-6"
-    data-product-id="7364"
-    data-price="20.0"
-    data-currency="USD"
-    data-name="Sharp R-21LVF - 1000W Medium-Duty Microwave w/ Touchpad"
-    data-url="https://primasupply.com/equipment/sharp/r-21lvf"
-    data-image-url="https://static.primasupply.com/styles/main_product/light-duty-microwaves/sharp-r-21lvf-microwave.jpg"
-    data-description="In a hurry? Check out these key benefits">
-</div>
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Reviews</a></li>  
+    <li><a href="#tab2" data-toggle="tab">Questions</a></li>
+  </ul>
 
-<div class="yotpo yotpo-main-widget col-xs-12 col-md-6"
-    data-product-id="7364"
-    data-price="20.0"
-    data-currency="USD"
-    data-name="Sharp R-21LVF - 1000W Medium-Duty Microwave w/ Touchpad"
-    data-url="https://primasupply.com/equipment/sharp/r-21lvf"
-    data-image-url="https://static.primasupply.com/styles/main_product/light-duty-microwaves/sharp-r-21lvf-microwave.jpg"
-    data-description="In a hurry? Check out these key benefits" data-mode ="questions" data-yotpo-element-id="2">
-</div>
-
-
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+      <div class="panel panel-default">
+        <div id="collapseOne" class="panel-collapse">
+            <div class="yotpo yotpo-main-widget col-xs-12 col-md-6"
+                data-product-id="7364"
+                data-price="20.0"
+                data-currency="USD"
+                data-name="Sharp R-21LVF - 1000W Medium-Duty Microwave w/ Touchpad"
+                data-url="https://primasupply.com/equipment/sharp/r-21lvf"
+                data-image-url="https://static.primasupply.com/styles/main_product/light-duty-microwaves/sharp-r-21lvf-microwave.jpg"
+                data-description="In a hurry? Check out these key benefits">
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="tab2">
+      <div class="panel panel-default">
+        <div id="collapseTwo" class="panel-collapse">
+            <div class="yotpo yotpo-main-widget col-xs-12 col-md-6"
+                data-product-id="7364"
+                data-price="20.0"
+                data-currency="USD"
+                data-name="Sharp R-21LVF - 1000W Medium-Duty Microwave w/ Touchpad"
+                data-url="https://primasupply.com/equipment/sharp/r-21lvf"
+                data-image-url="https://static.primasupply.com/styles/main_product/light-duty-microwaves/sharp-r-21lvf-microwave.jpg"
+                data-description="In a hurry? Check out these key benefits" data-mode ="questions" data-yotpo-element-id="2">
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% dropzone "productDropzone" scope="page" %}

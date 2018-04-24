@@ -2,6 +2,7 @@ define([
 	"modules/jquery-mozu"
 ], function( $) {
 	$(document).ready(function(){ 
+
 		// Check if sitenav-item has dropdown
 		$(".mz-sitenav-list .mz-sitenav-item").each(function(){
             if($(this).find("div.mz-sitenav-sub-container").length !== 0){
@@ -18,7 +19,7 @@ define([
 	                currentParentOffset = currentElemnt.parents(".mz-sitenav-item").offset().left, 
 	                leftOrigin = $(".mz-sitenav-list").offset().left;
 	                
-	                console.log(leftOrigin); 
+	                //console.log(leftOrigin); 
 	                //console.log(currentDropWidth + "--" + currentParentOffset);   
 	              
 	            if (currentParentOffset + currentDropWidth >= rightReference) {
@@ -62,6 +63,13 @@ define([
 	            scrollTop: 0
 	        }, 600);
 	    });
+
+		// Refine By Toggle in Mobile
+
+	    $(".mz-facets-dropdown").click(function(){
+			$(this).toggleClass("mz-facets-dropdown-open");
+		    $(".mz-faceting-section").toggleClass("mz-faceting-section-open");
+		});
 		
 		var navHeight = $(".mz-sitenav").outerHeight();
 		//alert(navHeight); 

@@ -1,30 +1,4 @@
-
-
-{% if model.content.productShortDescription and themeSettings.showProductDetailShortDesc %}
-<div class="mz-productdetail-shortdesc mz-l-stack-section">
-  <h4 class="mz-l-stack-sectiontitle">{{ labels.shortDesc }}</h4>
-  <span itemscope="description">{{ model.content.productShortDescription|safe }}</span>
-</div>
-{% endif %}
-
-{% if model.options and model.options.length > 0 %}
-<div class="mz-productdetail-options mz-l-stack-section">
-  <h4 class="mz-l-stack-sectiontitle">{{ labels.options }}</h4>
-  {% include "modules/product/product-options" %}
-</div>
-{% endif %}
-    
-<div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section">
-  <h4 class="mz-l-stack-sectiontitle">{{ labels.price }}</h4>
-{% include "modules/product/price-show-stack" %}
-</div>
-
-{% comment %} ---------- YotPo Rating ---------- {% endcomment %}
-<script type="text/javascript">
-    (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
-</script>
-<div class="yotpo bottomLine" data-product-id="7364" data-url="https://primasupply.com/equipment/sharp/r-21lvf"></div>
-{% comment %} ---------- YotPo Rating ---------- {% endcomment %}
+<h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName }}</h1>
 
 <dl class="mz-productcodes mz-propertylist mz-pagetitle-note mz-l-stack-section">
   <dt class="mz-productcodes-productcode-label">{{ labels.productCode }}</dt>
@@ -39,60 +13,112 @@
   {% endif %}
 </dl>
 
-<section class="mz-l-stack-section mz-productdetail-conversion">
-<div class="mz-productdetail-conversion-controls">
-  <span class="mz-qty-label">{{ labels.qty }}</span>
-  <input class="mz-productdetail-qty" type="number" value="1" min="1" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-value="quantity" />
-  <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
-</div>
-  <div class="mz-productdetail-conversion-buttons">
-  
-   {% with model|get_product_attribute("tenant~show-price") as showPriceAttr %}
-         {% if showPriceAttr.values|first|prop("value") == 'view-on-login' %}
-          {% if user.isAuthenticated %}
-            <div class="mz-productdetail-conversion-buttons">
-               <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart" >
-                {{ labels.addToCart }}
-              </button>
-            </div>
-          {% endif %} 
-          {% else %}
-            <div class="mz-productdetail-conversion-buttons">
-               <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart" >
-                  {{ labels.addToCart }}
-                </button>
-            </div>
-        {% endif %} 
-      {% endwith %}
-
-  {% if siteContext.generalSettings.isWishlistCreationEnabled and not user.isAnonymous %}
-  <button id="add-to-wishlist" {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable %} disabled="disabled" {% else %} {% if model.inventoryInfo.outOfStockBehavior == 'HideProduct' and not model.inventoryInfo.onlineStockAvailable %} disabled="disabled" {% endif %} {% endif %} class="mz-productdetail-addtowishlist mz-button {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" data-mz-action="addToWishlist">
-      {{ labels.addToWishlist }}
-  </button>
-  {% endif %}
-
-  {% if siteContext.supportsInStorePickup %}
-  <form class="mz-instorepickup" method="POST" data-mz-localstoresform action="/location/product">
-    <button type="submit" {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable or not model.supportsInStorePickup %} disabled="disabled" {% endif %} class="mz-button mz-instorepickuplink-button {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable or not model.supportsInStorePickup %}is-disabled{% endif %}" data-mz-action="checkLocalStores">{{ labels.checkLocalStores }}</button>
-    <input type="hidden" data-mz-localstoresform-input name="item" value="{% json_attribute model %}" />
-  </form>
-  {% endif %}
+<div class="mz-price-rating-section clearfix">
+  <div class="col-md-6">
+    <div class="row">
+      <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section">
+        {% include "modules/product/price-show-stack" %}
+      </div>
+    </div>
   </div>
+  <div class="col-md-6">
+    <div class="row">
+      {% comment %} ---------- YotPo Rating ---------- {% endcomment %}
+      <script type="text/javascript">
+          (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+      </script>
+      <div class="yotpo bottomLine" data-product-id="7364" data-url="https://primasupply.com/equipment/sharp/r-21lvf"></div>
+      {% comment %} ---------- YotPo Rating ---------- {% endcomment %}
+    </div>
+  </div>
+</div>
 
-  {% if not model.purchasableState.isPurchasable %}
-  <p class="mz-productdetail-notpurchasable">
-    {{ labels.notPurchasable }}:
-    {% for message in model.purchasableState.messages %}
-    <span>{{ message.message }}</span>
+<div class="mz-stock-availability">
+  <div class="mz-stock">
+    {% if model.inventoryInfo.onlineStockAvailable > 0 %}
+      <p>{{ labels.inStock }}</p>
+    {% else %}
+      <p>{{ labels.outOfStock }}</p>
+    {% endif %}
+  </div>
+  <div class="mz-availability">
+    {% for availability in model|get_product_attribute_values("tenant~availability") %}
+      <p>({{ availability }})</p>
     {% endfor %}
-  </p>
-  {% endif %}
+  </div>
+</div>
+
+{% if model.content.productShortDescription and themeSettings.showProductDetailShortDesc %}
+<div class="mz-productdetail-shortdesc mz-l-stack-section">
+  <h4 class="mz-l-stack-sectiontitle">{{ labels.shortDesc }}</h4>
+  <span itemscope="description">{{ model.content.productShortDescription|safe }}</span>
+</div>
+{% endif %}
+
+<section class="mz-l-stack-section mz-productdetail-conversion">
+  <div class="col-md-2">
+    <div class="mz-productdetail-conversion-controls">
+      <input class="mz-productdetail-qty" type="number" value="1" min="1" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-value="quantity" />
+      <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="mz-productdetail-conversion-buttons">
+      {% if userAuth != true %}
+        <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart" >
+            {{ labels.addToCart }}
+        </button>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-md-4"> 
+    <div class="mz-productdetail-conversion-buttons text-center">
+      {% if siteContext.generalSettings.isWishlistCreationEnabled and not user.isAnonymous %}
+      <button id="add-to-wishlist" {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable %} disabled="disabled" {% else %} {% if model.inventoryInfo.outOfStockBehavior == 'HideProduct' and not model.inventoryInfo.onlineStockAvailable %} disabled="disabled" {% endif %} {% endif %} class="mz-productdetail-addtowishlist {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" data-mz-action="addToWishlist">
+          {{ labels.addToWishlist }}
+      </button>
+      {% endif %}
+    </div>
+  </div>
+  {% comment %}
+  <div class="col-md-4"> 
+    <div class="mz-productdetail-conversion-buttons">
+      {% if siteContext.supportsInStorePickup %}
+      <form class="mz-instorepickup" method="POST" data-mz-localstoresform action="/location/product">
+        <button type="submit" {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable or not model.supportsInStorePickup %} disabled="disabled" {% endif %} class="mz-button mz-instorepickuplink-button {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable or not model.supportsInStorePickup %}is-disabled{% endif %}" data-mz-action="checkLocalStores">{{ labels.checkLocalStores }}</button>
+        <input type="hidden" data-mz-localstoresform-input name="item" value="{% json_attribute model %}" />
+      </form>
+      {% endif %}
+    </div>
+  </div>
+  {% endcomment %}
 </section>
 
+<div class="mz-certificated-section">
+  <img src="../../resources/images/certificated.jpg" alt="certificated">
+</div>
+
+<div class="mz-options-section">
+  <div class="mz-details-section-title">{{ labels.options }}</div>
+    <div class="col-md-8">
+      {% if model.options and model.options.length > 0 %}
+      <div class="mz-productdetail-options mz-l-stack-section">
+        {% include "modules/product/product-options" %}
+      </div>
+    {% endif %}  
+  </div> 
+  <div class="col-md-4 mz-warranty">
+    <p>Warranty: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <p>Warranty: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+  </div>
+</div>
+
+{% comment %}
 <div class="mz-productdetail-fulldesc mz-l-stack-section">
   <h4 class="mz-l-stack-sectiontitle">{{ labels.fullDesc }}</h4>
   {{ model.content.productFullDescription|safe }}
 </div>
+{% endcomment %}
 
 {% if model.productUsage == 'Bundle' %}
 <div class="mz-productdetail-bundleitems mz-l-stack-section">
@@ -107,22 +133,6 @@
     {{ prod.content.productShortDescription|safe }}
     </dd>
   {% endfor %}
-  </dl>
-</div>
-{% endif %}
-
-{% if model.properties and themeSettings.showProductDetailProperties %}
-<div class="mz-productdetail-properties mz-l-stack-section">
-  <h4 class="mz-l-stack-sectiontitle">{{ labels.properties }}</h4>
-  <dl class="mz-propertylist mz-propertylist-justified">
-    {% for property in model.properties %}
-    {% if property.values and not property.isHidden %}
-    <dt>{{property.attributeDetail.name}}</dt>
-    {% for v in property.values %}
-    <dd>{% if v.stringValue %}{{v.stringValue}}{% else %}{{v.value}}{% endif %}</dd>
-    {% endfor %}
-    {% endif %}
-    {% endfor %}
   </dl>
 </div>
 {% endif %}
@@ -153,9 +163,6 @@
 
     </dl>
 </div>
-
-
-
 {% endif %}
 
 {% if themeSettings.showProductDetailMeasurements and model.bundledProducts %}

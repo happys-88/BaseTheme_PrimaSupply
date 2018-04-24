@@ -8,8 +8,8 @@
         backbone: "vendor/backbone/backbone",
         bootstrap:"vendor/bootstrap/js/bootstrap.min",
         blockui: "vendor/jquery.blockUI/jquery.blockUI.min",
-        elevateZoom: "vendor/jquery-elevatezoom/jquery.elevatezoom.min",
-        bxslider: "vendor/jquery-bxslider/jquery.bxslider.min"
+        elevatezoom:"vendor/elevate-zoom/elevateZoom",
+        bxslider: "vendor/jquery-bxslider/jquery.bxslider.min" 
         
 
     },

@@ -15,8 +15,7 @@ require([
         $(".add-to-cart").click(function(event){
 
         	var $thisElem = $(event.currentTarget);
-        	alert($thisElem.data("productcode")); 
-                //prodOptions = $("[data-option='"+ $thisElem.data("productcode") +"']").val();
+        	//prodOptions = $("[data-option='"+ $thisElem.data("productcode") +"']").val();
 			Api.request("POST", "/api/commerce/carts/current/items", {
 				product: {
 					productCode: $thisElem.data("productcode")

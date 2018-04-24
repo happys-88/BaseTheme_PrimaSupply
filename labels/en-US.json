@@ -412,7 +412,7 @@
   "packageWeight"                         : "Package Weight",
 
   "shortDesc"                             : "Summary",
-  "options"                               : "Options",
+  "options"                               : "Choose Options",
   "addToCart"                             : "Add To Cart",
   "notPurchasable"                        : "Not Purchasable",
   "addToWishlist"                         : "Add To Wishlist",
@@ -491,6 +491,8 @@
   "cartPrice":  "Price",
   "continueShopping":  "Continue Shopping",
   "refineBy"          : "Refine by:" ,
-  "shoppingCart"      : "Shopping Cart" 
-
+  "shoppingCart"      : "Shopping Cart",
+  "backToTop"         :  "Back to top",
+  "inStock"           : "In Stock"
+ 
 }  
