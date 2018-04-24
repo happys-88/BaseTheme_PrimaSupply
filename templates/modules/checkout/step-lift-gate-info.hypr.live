@@ -1,0 +1,40 @@
+<div class="mz-checkoutattributes-section mz-checkoutattributes-attributes">
+  
+    {% for attribute in model %}
+     {% if attribute.attributeCode == 'lift-gate' or attribute.attributeCode == 'freight-shipment' %}
+      <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows mz-checkoutform">
+        {% if attribute.inputType === "YesNo" %}
+          {% if attribute.valueType !== "AdminEntered" %}
+            <label class="inline" for="checkout-attribute-{{ attribute.attributeFQN }}">
+            {{ attribute.content.value }}
+              {% if attribute.isRequired %}
+                <span class="is-required"> *</span>
+              {% endif %}
+            </label>
+            <div>
+            <input id="checkout-attribute-{{ attribute.attribute.FQN }}" type="radio" name="checkout-attribute-{{ attribute.attributeFQN }}" value="true"
+                data-mz-attribute="{{ attribute.attributeFQN }}" data-mz-value="orderAttribute-{{attribute.attributeFQN}}" {% if attribute.attributeCode == 'lift-gate' %} data-mz-lift-gate-option {% else %} data-mz-freight-shipment {% endif %} {% if liftGateVal === 'true' %}checked="checked"{% endif %} /> 
+                {% if attribute.attributeCode == 'lift-gate' %}
+                    {{ labels.liftGateAddY }} {{ liftGatePrice|currency }}
+                {% else %}
+                  {{ labels.freightShipmentY }}
+                {% endif %}
+
+            </div>
+            <div>
+              <input id="checkout-attribute-{{ attribute.attribute.FQN }}" type="radio" name="checkout-attribute-{{ attribute.attributeFQN }}" value="false"
+                data-mz-attribute="{{ attribute.attributeFQN }}" data-mz-value="orderAttribute-{{attribute.attributeFQN}}" {% if attribute.attributeCode == 'lift-gate' %} data-mz-lift-gate-option {% else %} data-mz-freight-shipment {% endif %} {% if liftGateVal === '' %}checked="checked"{% endif %} /> 
+                {% if attribute.attributeCode == 'lift-gate' %}
+                    {{ labels.liftGateAddN }}
+                {% else %}
+                  {{ labels.freightShipmentN }}
+                {% endif %}
+            </div>
+            <span class="mz-validationmessage" data-mz-validationmessage-for="orderAttribute-{{attribute.attributeFQN}}"></span>
+          {% endif %}
+        {% endif %}
+      </div>
+     {% endif %}
+    {% endfor %}
+ 
+</div>

@@ -237,6 +237,34 @@
                     // because the order data will impact the shipping costs.
                     me.updateShippingMethod(me.get('shippingMethodCode'), true);
                 });
+                var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
+                if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
+                    this.set('orderAttributes', storefrontOrderAttributes);
+                }
+                this.set('liftGateTotal','');
+                var liftGateProducts = [];
+                var items = require.mozuData('checkout').items;
+                var i = 0;
+                var j = 0;
+                i = parseInt(i,10);
+                j = parseInt(j,10);
+                for(var index in items){
+                    var item = items[index];
+                    var properties = item.product.properties;
+                    
+                    for(var propindex in properties){
+                        var property = properties[propindex];
+                        if(property.name === 'lift-gate-delivery' && property.values[0].value === true ){
+                            this.set('liftGateProduct',true);
+                            this.set('liftGatePrice', HyprLiveContext.locals.themeSettings.liftGatePrice);
+                            liftGateProducts[i] = item;
+                            i++;
+                            break;
+                        }
+                    }
+                    
+                }
+                this.set('liftGateProducts',liftGateProducts);
             },
             relations: {
                 fulfillmentContact: FulfillmentContact
@@ -288,6 +316,32 @@
                     this.applyShipping(resetMessage);
                 }
             },
+            updateLiftGateOption: function (liftGateVal) {
+                var order = this.getOrder(),
+                    process = [function() {
+                        return order.update({
+                            ipAddress: order.get('ipAddress'),
+                            shopperNotes: order.get('shopperNotes').toJSON()
+                        });
+                    }];
+                this.set('liftGateVal',liftGateVal);
+                if(liftGateVal == 'true'){
+                    this.set('liftGateTotal',HyprLiveContext.locals.themeSettings.liftGatePrice);
+                } else {
+                    this.set('liftGateTotal','');
+                }
+                var updateAttrs = [];
+                updateAttrs.push({
+                    'fullyQualifiedName': 'tenant~lift-gate',
+                    'values': [ liftGateVal ]
+                });
+                if(updateAttrs.length > 0){
+                    order.apiUpdateAttributes(updateAttrs);
+                }
+            },
+            updateFreightShipment: function (freightShipmentVal) {
+                this.set('freightShipmentVal',freightShipmentVal);
+            },
             applyShipping: function(resetMessage) {
                 if (this.validate()) return false;
                 var me = this;
@@ -318,7 +372,38 @@
                 this.parent.get('billingInfo').calculateStepStatus();
             }
         }),
+        TbybInfo = CheckoutStep.extend({
+            initialize: function () {
+                console.log("Model TBYB Step :: "+JSON.stringify(this));
+            },
+            calculateStepStatus: function () {
+                console.log("calculateStepStatus TBYB: "+JSON.stringify(this));
 
+                // If there's no shipping address yet, go blank.
+               /* if (this.get('FullFillmentInfo').stepStatus() !== 'complete') {
+                    return this.stepStatus('new');
+                }*/
+
+                // Incomplete status for shipping is basically only used to show the Shipping Method's Next button,
+                // which does nothing but show the Payment Info step.
+                // console.log("Shipping step status : "+billingInfo.stepStatus());
+                /*var billingInfo = this.parent.get('billingInfo');
+                if (!billingInfo || billingInfo.stepStatus() === 'new') return this.stepStatus('incomplete');*/
+
+                // Payment Info step has been initialized. Complete status hides the Shipping Method's Next button.
+                //return this.stepStatus('complete');
+            },
+            updateTbyb: function (tbybVal) {
+                
+            },
+            stepStatus: function(){
+                console.log("Step Status TBYB ");
+            },
+            next: function () {
+                this.stepStatus('complete');
+                this.parent.get('billingInfo').calculateStepStatus();
+            }
+        }),
         BillingInfo = CheckoutStep.extend({
             mozuType: 'payment',
             validation: {
@@ -1273,6 +1358,7 @@
             relations: {
                 fulfillmentInfo: FulfillmentInfo,
                 billingInfo: BillingInfo,
+                tbybInfo: TbybInfo,
                 shopperNotes: ShopperNotes,
                 customer: CustomerModels.Customer
             },
@@ -1294,7 +1380,8 @@
                         fulfillmentInfo = self.get('fulfillmentInfo'),
                         fulfillmentContact = fulfillmentInfo.get('fulfillmentContact'),
                         billingInfo = self.get('billingInfo'),
-                        steps = [fulfillmentInfo, fulfillmentContact, billingInfo],
+                        tbybInfo = self.get('fulfillmentInfo'),
+                        steps = [fulfillmentInfo, fulfillmentContact,tbybInfo, billingInfo],
                         paymentWorkflow = latestPayment && latestPayment.paymentWorkflow,
                         visaCheckoutPayment = activePayments && _.findWhere(activePayments, { paymentWorkflow: 'VisaCheckout' }),
                         allStepsComplete = function () {
@@ -1719,11 +1806,21 @@
                         });
                     }];
 
+                var liftGateVal = this.get('fulfillmentInfo').get('liftGateVal');
+                var freightShipmentVal = this.get('fulfillmentInfo').get('freightShipmentVal');
+
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     var updateAttrs = [];
                     storefrontOrderAttributes.forEach(function(attr){
-                        var attrVal = order.get('orderAttribute-' + attr.attributeFQN);
+                        var attrVal;
+                        if(attr.attributeFQN === 'tenant~lift-gate'){
+                            attrVal = liftGateVal;
+                        } else if(attr.attributeFQN === 'tenant~freight-shipment'){
+                            attrVal = freightShipmentVal;
+                        } else {
+                            attrVal = order.get('orderAttribute-' + attr.attributeFQN);
+                        }
                         if(attrVal) {
                             updateAttrs.push({
                                 'fullyQualifiedName': attr.attributeFQN,
@@ -1821,6 +1918,7 @@
                 _.each([
                        'fulfillmentInfo.fulfillmentContact',
                        'fulfillmentInfo',
+                       'tbybInfo',
                        'billingInfo'
                 ], function(name) {
                     cb.call(me.get(name));
