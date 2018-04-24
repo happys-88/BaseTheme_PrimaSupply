@@ -1,7 +1,6 @@
 define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "modules/cart-monitor", "modules/views-productimages",  "hyprlivecontext","modules/views-collections","modules/models-product", "modules/models-price", "modules/api"], 
 function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext, CollectionViewFactory, ProductModel, ProductPrice, api) {
 
-	// Instagram Gallery Load More
 	$(document).ready(function(){ 
     
 	    var singleImgContainer = $(".yotpo-single-image-container");
@@ -18,16 +17,14 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
 	      });
 	  });
 
-
    
+				var getProductCode = $("#customProductCode").val();
+				
 
-//yotpo-review template
-
-
-			   var reviewUrl="https://api.yotpo.com/v1/widget/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/products/7364/reviews";
+			   var reviewUrl="https://api.yotpo.com/v1/widget/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/products/"+getProductCode+"/reviews";
 
 				 $.get(reviewUrl, function(data, status){
-			         console.log("Data Review: " + JSON.stringify(data) + "\nStatus: " + status);
+	
 
 				  	var ProductReviewView = Backbone.MozuView.extend({  
 									
