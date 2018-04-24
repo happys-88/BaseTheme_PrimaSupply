@@ -61,7 +61,9 @@
         <div class="mz-formstep mz-checkoutform-shippingmethod" id="step-shipping-method" {% if not model.requiresFulfillmentInfo %}style="display:none"{% endif %}>
             {% include "modules/checkout/step-shipping-method" %}
         </div>
-
+        <div class="mz-formstep mz-checkoutform-tbybinfo" id="step-tbyb">
+            {% include "modules/checkout/step-tbyb" %}
+        </div>
         <div class="mz-formstep mz-checkoutform-paymentinfo" id="step-payment-info">
             {% include "modules/checkout/step-payment-info" %}
         </div>

@@ -1,5 +1,49 @@
 <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName }}</h1>
 
+{% if model.content.productShortDescription and themeSettings.showProductDetailShortDesc %}
+<div class="mz-productdetail-shortdesc mz-l-stack-section">
+  <h4 class="mz-l-stack-sectiontitle">{{ labels.shortDesc }}</h4>
+  <span itemscope="description">{{ model.content.productShortDescription|safe }}</span>
+</div>
+{% endif %}
+
+{% if model.options and model.options.length > 0 %}
+<div class="mz-productdetail-options mz-l-stack-section">
+  <h4 class="mz-l-stack-sectiontitle">{{ labels.options }}</h4>
+  {% include "modules/product/product-options" %}
+</div>
+{% endif %}
+    
+<div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section">
+  <h4 class="mz-l-stack-sectiontitle">{{ labels.price }}</h4>
+{% include "modules/product/price-show-stack" %}
+</div>
+
+{% comment %} ---------- YotPo Rating ---------- 
+
+
+{% endcomment %}
+
+{% block star-rating %}
+  <div class="yotpo bottomLine" data-product-id="{{model.productCode}}"></div>
+  <div id="product-star-rating"></div>
+{% endblock star-rating %}
+
+{% block question-answer %}
+    <div class='yotpo QABottomLine'
+        data-appkey='4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD'
+       data-product-id='{{ model.productCode }}'></div>
+{% endblock question-answer %}
+
+<style>
+.yotpo-bottomline.pull-left.star-clickable .text-m {
+margin-left: 17px;
+}
+</style>
+
+
+{% comment %} ---------- YotPo Rating ---------- {% endcomment %}
+
 <dl class="mz-productcodes mz-propertylist mz-pagetitle-note mz-l-stack-section">
   <dt class="mz-productcodes-productcode-label">{{ labels.productCode }}</dt>
   <dd class="mz-productcodes-productcode" itemprop="sku">{{ model.variationProductCode|default(model.productCode) }}</dd>

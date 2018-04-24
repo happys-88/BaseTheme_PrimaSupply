@@ -99,13 +99,45 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             'availableShippingMethods'
         ],
         additionalEvents: {
-            "change [data-mz-shipping-method]": "updateShippingMethod"
+            "change [data-mz-shipping-method]": "updateShippingMethod",
+            "change [data-mz-lift-gate-option]": "updateLiftGateOption",
+            "change [data-mz-freight-shipment]": "updateFreightShipment"
         },
         updateShippingMethod: function (e) {
             this.model.updateShippingMethod(this.$('[data-mz-shipping-method]:checked').val());
+        },
+        updateLiftGateOption: function (e) {
+            this.model.updateLiftGateOption(this.$('[data-mz-lift-gate-option]:checked').val());
+            var liftGateShow = this.$('[data-mz-lift-gate-option]:checked').val();
+            this.$('[data-mz-shipping-method]:not(:checked)').attr('checked', true).trigger('change');
+            var self = this;
+            setTimeout(function(){
+             self.$('[data-mz-shipping-method]:not(:checked)').attr('checked', true).trigger('change'); 
+             setTimeout(function(){
+                    if(liftGateShow == 'true'){
+                        $('.lift-gate-msg').show();
+                    } else {
+                        $('.lift-gate-msg').hide();
+                    }
+                }, 2000);
+            }, 2000);
+            
+            console.log(liftGateShow);
+            
+        },
+        updateFreightShipment: function (e) {
+            this.model.updateFreightShipment(this.$('[data-mz-freight-shipment]:checked').val());
         }
     });
-
+    var TbybInfoView = CheckoutStepView.extend({
+        templateName: 'modules/checkout/step-tbyb',
+        additionalEvents: {
+            "change [data-mz-tbyb]": "updateTbyb"
+        },
+        updateTbyb: function (e) {
+            this.model.updateTbyb(this.$('[data-mz-tbyb]:checked').val());
+        }
+    });
     var poCustomFields = function() {
         
         var fieldDefs = [];
@@ -511,6 +543,10 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
                     shippingInfo: new ShippingInfoView({
                         el: $('#step-shipping-method'),
                         model: checkoutModel.get('fulfillmentInfo')
+                    }),
+                    tbybInfo: new TbybInfoView({
+                        el: $('#step-tbyb'),
+                        model: checkoutModel.get('tbybInfo')
                     }),
                     paymentInfo: new BillingInfoView({
                         el: $('#step-payment-info'),

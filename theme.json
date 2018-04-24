@@ -440,6 +440,7 @@
     "textColor": "#444444",
     "categoryEntityName": "categoryAttributes@ng",
     "columnBreaker": "~",
+    "liftGatePrice":59.0,
     "usStates": [
       {
         "abbreviation": "AL",
