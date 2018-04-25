@@ -152,6 +152,8 @@
                 {% block body-below-content %}
                     {% dropzone "body-bottom" scope="template" %}
                 {% endblock body-below-content %}
+
+                {% block brand-gateway %}{% endblock brand-gateway %} 
                 
             </div>
                         

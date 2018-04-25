@@ -1,49 +1,5 @@
 <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName }}</h1>
 
-{% if model.content.productShortDescription and themeSettings.showProductDetailShortDesc %}
-<div class="mz-productdetail-shortdesc mz-l-stack-section">
-  <h4 class="mz-l-stack-sectiontitle">{{ labels.shortDesc }}</h4>
-  <span itemscope="description">{{ model.content.productShortDescription|safe }}</span>
-</div>
-{% endif %}
-
-{% if model.options and model.options.length > 0 %}
-<div class="mz-productdetail-options mz-l-stack-section">
-  <h4 class="mz-l-stack-sectiontitle">{{ labels.options }}</h4>
-  {% include "modules/product/product-options" %}
-</div>
-{% endif %}
-    
-<div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section">
-  <h4 class="mz-l-stack-sectiontitle">{{ labels.price }}</h4>
-{% include "modules/product/price-show-stack" %}
-</div>
-
-{% comment %} ---------- YotPo Rating ---------- 
-
-
-{% endcomment %}
-
-{% block star-rating %}
-  <div class="yotpo bottomLine" data-product-id="{{model.productCode}}"></div>
-  <div id="product-star-rating"></div>
-{% endblock star-rating %}
-
-{% block question-answer %}
-    <div class='yotpo QABottomLine'
-        data-appkey='4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD'
-       data-product-id='{{ model.productCode }}'></div>
-{% endblock question-answer %}
-
-<style>
-.yotpo-bottomline.pull-left.star-clickable .text-m {
-margin-left: 17px;
-}
-</style>
-
-
-{% comment %} ---------- YotPo Rating ---------- {% endcomment %}
-
 <dl class="mz-productcodes mz-propertylist mz-pagetitle-note mz-l-stack-section">
   <dt class="mz-productcodes-productcode-label">{{ labels.productCode }}</dt>
   <dd class="mz-productcodes-productcode" itemprop="sku">{{ model.variationProductCode|default(model.productCode) }}</dd>
@@ -67,12 +23,23 @@ margin-left: 17px;
   </div>
   <div class="col-md-6">
     <div class="row">
-      {% comment %} ---------- YotPo Rating ---------- {% endcomment %}
+      <!-- Yotpo Rating -->
       <script type="text/javascript">
           (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
       </script>
       <div class="yotpo bottomLine" data-product-id="7364" data-url="https://primasupply.com/equipment/sharp/r-21lvf"></div>
-      {% comment %} ---------- YotPo Rating ---------- {% endcomment %}
+
+      {% block star-rating %}
+        <div class="yotpo bottomLine" data-product-id="{{model.productCode}}"></div>
+        <div id="product-star-rating"></div>
+      {% endblock star-rating %}
+
+      {% block question-answer %}
+          <div class='yotpo QABottomLine'
+              data-appkey='4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD'
+             data-product-id='{{ model.productCode }}'></div>
+      {% endblock question-answer %}
+      <!-- Yotpo Rating -->
     </div>
   </div>
 </div>
@@ -91,13 +58,6 @@ margin-left: 17px;
     {% endfor %}
   </div>
 </div>
-
-{% if model.content.productShortDescription and themeSettings.showProductDetailShortDesc %}
-<div class="mz-productdetail-shortdesc mz-l-stack-section">
-  <h4 class="mz-l-stack-sectiontitle">{{ labels.shortDesc }}</h4>
-  <span itemscope="description">{{ model.content.productShortDescription|safe }}</span>
-</div>
-{% endif %}
 
 <section class="mz-l-stack-section mz-productdetail-conversion">
   <div class="col-md-2">
@@ -143,7 +103,7 @@ margin-left: 17px;
 </div>
 
 <div class="mz-options-section">
-  <div class="mz-details-section-title">{{ labels.options }}</div>
+  <h4 class="mz-l-stack-sectiontitle">{{ labels.options }}</h4>
     <div class="col-md-8">
       {% if model.options and model.options.length > 0 %}
       <div class="mz-productdetail-options mz-l-stack-section">
@@ -157,12 +117,17 @@ margin-left: 17px;
   </div>
 </div>
 
-{% comment %}
+{% if model.content.productShortDescription and themeSettings.showProductDetailShortDesc %}
+<div class="mz-productdetail-shortdesc mz-l-stack-section">
+  <h4 class="mz-l-stack-sectiontitle">{{ labels.shortDesc }}</h4>
+  <span itemscope="description">{{ model.content.productShortDescription|safe }}</span>
+</div>
+{% endif %}
+
 <div class="mz-productdetail-fulldesc mz-l-stack-section">
   <h4 class="mz-l-stack-sectiontitle">{{ labels.fullDesc }}</h4>
   {{ model.content.productFullDescription|safe }}
 </div>
-{% endcomment %}
 
 {% if model.productUsage == 'Bundle' %}
 <div class="mz-productdetail-bundleitems mz-l-stack-section">
@@ -183,36 +148,31 @@ margin-left: 17px;
 
 {% if model.measurements and themeSettings.showProductDetailMeasurements and not model.bundledProducts %}
 <div class="mz-productdetail-measurements mz-l-stack-section">
-    <h4 class="mz-l-stack-sectiontitle">{{ labels.measurements }}</h4>
-    <dl class="mz-propertylist mz-propertylist-justified">
-      <dt>{{ labels.weight }}</dt>
-      <dd itemprop="weight" itemscope itemtype="http://schema.org/QuantitativeValue">
+  <h4 class="mz-l-stack-sectiontitle">{{ labels.measurements }}</h4>
+  <dl class="mz-propertylist mz-propertylist-justified">
+    <dt>{{ labels.weight }}</dt>
+    <dd itemprop="weight" itemscope itemtype="http://schema.org/QuantitativeValue">
         <span itemprop="value">{{ model.measurements.packageWeight.value }}</span> <span itemprop="unitCode">{{ model.measurements.packageWeight.unit }}</span>
     </dd>
-    
     <dt>{{ labels.length }}</dt>
       <dd itemprop="length" itemscope itemtype="http://schema.org/QuantitativeValue">
         <span itemprop="value">{{ model.measurements.packageLength.value }}</span> <span itemprop="unitCode">{{ model.measurements.packageLength.unit }}</span>
     </dd>
-    
     <dt>{{ labels.width }}</dt>
       <dd itemprop="width" itemscope itemtype="http://schema.org/QuantitativeValue">
         <span itemprop="value">{{ model.measurements.packageWidth.value }}</span> <span itemprop="unitCode">{{ model.measurements.packageWidth.unit }}</span>
     </dd>
-    
     <dt>{{ labels.height }}</dt>
       <dd itemprop="height" itemscope itemtype="http://schema.org/QuantitativeValue">
         <span itemprop="value">{{ model.measurements.packageHeight.value }}</span> <span itemprop="unitCode">{{ model.measurements.packageHeight.unit }}</span>
     </dd>
-
-    </dl>
+  </dl>
 </div>
 {% endif %}
 
 {% if themeSettings.showProductDetailMeasurements and model.bundledProducts %}
 <div class="mz-productdetail-measurements mz-l-stack-section">
   <h4 class="mz-l-stack-sectiontitle">{{ labels.measurements }}</h4>
-  
   {% for product in model.bundledProducts %}
     {% if product.measurements %}
     <div class="mz-productbundle-measurements-product">
@@ -220,33 +180,26 @@ margin-left: 17px;
       <span> x {{ product.quantity }}</span>
     </div>
     <dl class="mz-propertylist mz-propertylist-justified mz-propertylist-inline">
-        <dt>{{ labels.weight }}</dt>
-        <dd itemprop="weight" itemscope itemtype="http://schema.org/QuantitativeValue">
-          <span itemprop="value">{{ product.measurements.packageWeight.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageWeight.unit }}</span>
-    </dd>
-
-        <dt>{{ labels.length }}</dt>
-        <dd itemprop="length" itemscope itemtype="http://schema.org/QuantitativeValue">
-          <span itemprop="value">{{ product.measurements.packageLength.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageLength.unit }}</span>
-    </dd>
-
-        <dt>{{ labels.width }}</dt>
-        <dd itemprop="width" itemscope itemtype="http://schema.org/QuantitativeValue">
-          <span itemprop="value">{{ product.measurements.packageWidth.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageWidth.unit }}</span>
-    </dd>
-
-        <dt>{{ labels.height }}</dt>
-        <dd itemprop="height" itemscope itemtype="http://schema.org/QuantitativeValue">
-          <span itemprop="value">{{ product.measurements.packageHeight.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageHeight.unit }}</span>
-    </dd>
-
-      </dl>
+      <dt>{{ labels.weight }}</dt>
+      <dd itemprop="weight" itemscope itemtype="http://schema.org/QuantitativeValue">
+        <span itemprop="value">{{ product.measurements.packageWeight.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageWeight.unit }}</span>
+      </dd>
+      <dt>{{ labels.length }}</dt>
+      <dd itemprop="length" itemscope itemtype="http://schema.org/QuantitativeValue">
+        <span itemprop="value">{{ product.measurements.packageLength.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageLength.unit }}</span>
+      </dd>
+      <dt>{{ labels.width }}</dt>
+      <dd itemprop="width" itemscope itemtype="http://schema.org/QuantitativeValue">
+        <span itemprop="value">{{ product.measurements.packageWidth.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageWidth.unit }}</span>
+      </dd>
+      <dt>{{ labels.height }}</dt>
+      <dd itemprop="height" itemscope itemtype="http://schema.org/QuantitativeValue">
+        <span itemprop="value">{{ product.measurements.packageHeight.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageHeight.unit }}</span>
+      </dd>
+    </dl>
     {% endif %}
   {% endfor %}
 </div>
 {% endif %} 
 
 {% include "modules/product/recent/recently-viewed-products" %}
-
-
-

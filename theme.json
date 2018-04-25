@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "ee13c2cc16702d73675bf3966c8efb60f87ad8bf"
+      "commit": "cd02cde9da30f112632c6867940e51214925036f"
     },
     "baseThemeChannel": "stable"
   },
@@ -202,6 +202,15 @@
           ]
         }
       ]
+    },
+    {
+      "documentType": "web_page",
+      "editor": "landing-page",
+      "entityType": "webpage",
+      "id": "Brands",
+      "template": "brand-gateway",
+      "title": "Brands Gateway",
+      "userCreatable": true
     },
     {
       "entityType": "siteTemplate",
@@ -440,7 +449,7 @@
     "textColor": "#444444",
     "categoryEntityName": "categoryAttributes@ng",
     "columnBreaker": "~",
-    "liftGatePrice":59.0,
+    "liftGatePrice": 59,
     "usStates": [
       {
         "abbreviation": "AL",

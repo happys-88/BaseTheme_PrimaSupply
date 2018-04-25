@@ -436,6 +436,9 @@ img[data-mztp]{
 					.mz-button {
 					    display: none;
 					}
+					.mz-product-notpurchasable, .items-inStock {
+				       position: static;
+				    }
 					.mz-product-notpurchasable {
 					    color: #d15f2a;
 					    font-size: 13px;
@@ -448,6 +451,7 @@ img[data-mztp]{
 				}
 			}
 			.mz-pricestack {
+				position: static; 
 				.mz-price {
 				    font-size: 20px;
 				    color: #9a9fa8;
@@ -541,6 +545,22 @@ img[data-mztp]{
 		}
 	}
 } 
+
+#product-rating{
+	float: left !important;
+	width: 100% !important;
+	text-align: center !important;
+	.pull-left{
+		float: none !important;
+		display: inline-block !important;
+	}
+	.yotpo{
+		text-align: center !important;
+	}
+	br{
+		display: none !important;
+	}
+}
 
 
 

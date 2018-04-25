@@ -109,5 +109,15 @@ define([
 
 		$(".mz-sitenav-item .mz-sitenav-link").css('height', navHeight); 
 
+		// Brand Gateway 
+		$(".brand-letter a").on('click', function(e){
+		    var id = $(this).attr("name");
+		    var position = $(id).position();
+		    $('body,html').animate({
+		    	scrollTop : position.top                       
+		    }, 500);
+		    
+		  });
+
 	});
 }); 

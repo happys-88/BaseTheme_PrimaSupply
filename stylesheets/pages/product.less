@@ -25,16 +25,18 @@
         border-bottom: 1px solid #e0e0e0;
         margin-bottom: 27px;
     }
-    .mz-options-section {
-        .mz-details-section-title {
-            font-size: 14px;
+    h4 {
+        &.mz-l-stack-sectiontitle {
             color: #495363;
+            font-size: 14px;
             font-weight: bold;
             border-bottom: 1px solid #e0e0e0;
             margin-bottom: 12px;
             line-height: 30px;
             text-transform: uppercase;
         }
+    }
+    .mz-options-section {
         .col-md-8 {
             padding-left: 0;
             select {
@@ -71,7 +73,6 @@ button{
         }
     }
 }
-
 button {
     &#add-to-cart {
         border-radius: 0;
@@ -79,6 +80,10 @@ button {
         margin-top: 0;
         width: 100%;
         height: 40px;
+        &.is-disabled {
+            background: #d15f2a;
+            border: 1px solid transparent;
+            opacity: 0.5;
+        }
     }
 }
-

@@ -498,6 +498,8 @@
   "freightShipmentN"                       :"I don't understand. Please have someone contact me after I place my order.",
   "liftGateMsg"                            :"Liftgate Service Added",
   "TBYBMsg"                                :"TRY IT BEFORE YOU BUY IT!",
-  "labelOversized"                         :"Oversized Shipping"
+  "labelOversized"                         :"Oversized Shipping",
+  "reviews"           :   "reviews",
+  "questions"         :   "questions"
 
 }  

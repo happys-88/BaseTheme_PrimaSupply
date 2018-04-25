@@ -11,20 +11,21 @@
     <div class="container">
         <h1 class="home-heading1">Restaurant Supplies for the... H1 statement</h1>
 
-        <h2>Pictures Gallery</h2>
-<div class="yotpo yotpo-pictures-gallery"
-    data-layout="full_page"
-    data-layout-scroll="0"
-    data-spacing="0"
-    data-source="instagram"
-    data-title="0"
-    data-hover-color="#ffffff"
-    data-hover-opacity="0.8"
-    data-hover-icon="true"
-    data-cta-text="Shop Now"
-    data-cta-color="#ff7a00">
-      
-</div> 
+        <div class="yotpo-gallery hidden"> 
+            <h2>Pictures Gallery</h2>
+            <div class="yotpo yotpo-pictures-gallery"
+                data-layout="full_page"
+                data-layout-scroll="0"
+                data-spacing="0"
+                data-source="instagram"
+                data-title="0"
+                data-hover-color="#ffffff"
+                data-hover-opacity="0.8"
+                data-hover-icon="true"
+                data-cta-text="Shop Now"
+                data-cta-color="#ff7a00">
+            </div>
+        </div> 
 
         {% dropzone "shop-by-brand" scope="page" %}
         
@@ -35,9 +36,6 @@
         {% dropzone "customer-logos" scope="page" %}
         
         {% dropzone "shop-now-widget" scope="page" %}    
-        
-    
-
         
     </div>
     
