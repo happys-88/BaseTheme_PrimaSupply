@@ -10,7 +10,6 @@
             data-price="{{ model.price.price }}"
             data-currency="USD"
             data-name="{{ model.content.productName }}"
-
             data-url="{{ model.url }}"
             data-image-url="{{ model.mainImage.imageUrl }}"
             data-description="{{ model.content.productFullDescription }}"
@@ -26,15 +25,9 @@
             data-price="{{ model.price.price }}"
             data-currency="USD"
             data-name="{{ model.content.productName }}"
-
             data-url="{{ model.url }}"
             data-image-url="{{ model.mainImage.imageUrl }}"
             data-description="{{ model.content.productFullDescription }}" 
-
-            data-url="https://primasupply.com/equipment/sharp/r-21lvf"
-            data-image-url="https://static.primasupply.com/styles/main_product/light-duty-microwaves/sharp-r-21lvf-microwave.jpg"
-            data-description="In a hurry? Check out these key benefits" 
-
             data-mode ="questions" 
             data-yotpo-element-id="2">
         </div>
