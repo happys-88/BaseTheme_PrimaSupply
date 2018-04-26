@@ -23,7 +23,6 @@
 	            {% endfor %} 
 	        {% endif %}
 	        {% if pageContext.isDesktop %}
-	        	{% set_var testFloat=123.456 %}
 	        	{% for image in model.content.productImages %}   
 	        		{% if forloop.counter|mod(10)==1 %}
 	        			<div>    

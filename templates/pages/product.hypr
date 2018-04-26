@@ -65,7 +65,11 @@
 
 <input type="hidden" id="customProductCode" value="{{ model.productCode }}" />
 
-{% require_script "pages/yotpo_review" %}
+{% require_script "pages/yotpo-review" %}
+
+{% block recently-viewed %}
+    {% include "modules/product/recent/recently-viewed-products" %}
+{% endblock recently-viewed %}
 
 {% endblock body-content %}
 

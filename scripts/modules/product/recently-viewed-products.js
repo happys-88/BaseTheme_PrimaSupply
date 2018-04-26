@@ -119,15 +119,12 @@ define([
                                 $(container + ' .recently-viewed-list').bxSlider({
                                     minSlides: 2,
                                     maxSlides: 7,
-                                    slideWidth: 160,
+                                    slideWidth: 333,
                                     slideMargin: 15,
-                                    nextText:'<i class="fa fa-angle-right" aria-hidden="true"></i>',
-                                    prevText: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
                                     responsive: true,
                                     pager: false,
-                                    speed: 0,
-                                    infiniteLoop: false,
-                                    hideControlOnEnd: true
+                                    speed: 1000,
+                                    infiniteLoop: false
                                 });
                             }
                         }

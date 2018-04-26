@@ -34,9 +34,7 @@ require([
 			var currentProduct = $(this);
 
 			var getProductCode = $(this).find(".mz-productlisting").data("mz-product");
-			console.log(getProductCode); 
-
-    	    var ratingURL = "https://api.yotpo.com/products/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/"+getProductCode+"/bottomline";
+			var ratingURL = "https://api.yotpo.com/products/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/"+getProductCode+"/bottomline";
     	 
 	    	  $.get(ratingURL, function(data, status){
 
@@ -51,8 +49,7 @@ require([
 			  })
 			  .fail(function() {
 			  //  alert( "error" );
-
-			       $(currentProduct).find("#product-rating").html('<div class="yotpo bottomline"><div class="yotpo-bottomline pull-left  star-clickable"><span class="yotpo-stars"><span class="yotpo-icon yotpo-icon-empty-star pull-left"></span><span class="yotpo-icon yotpo-icon-empty-star pull-left"></span><span class="yotpo-icon yotpo-icon-empty-star pull-left"></span><span class="yotpo-icon yotpo-icon-empty-star pull-left"></span><span class="yotpo-icon yotpo-icon-empty-star pull-left"></span> </span><div class="yotpo-clr"></div> </div></div><br>'); 
+			    $(currentProduct).find("#product-rating").html('<div class="yotpo bottomline"><div class="yotpo-bottomline pull-left star-clickable"><span class="yotpo-stars"><span class="yotpo-icon yotpo-icon-empty-star pull-left"></span><span class="yotpo-icon yotpo-icon-empty-star pull-left"></span><span class="yotpo-icon yotpo-icon-empty-star pull-left"></span><span class="yotpo-icon yotpo-icon-empty-star pull-left"></span><span class="yotpo-icon yotpo-icon-empty-star pull-left"></span> </span><div class="yotpo-clr"></div> </div></div><br>'); 
 			  });
 		});
 		

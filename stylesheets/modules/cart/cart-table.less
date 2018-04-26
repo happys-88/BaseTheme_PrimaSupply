@@ -68,11 +68,16 @@
         
     }
     .mz-carttable-total-row{
-        font-size: 20px;
-        font-weight: bold;
-        padding: 18px 15px;
+        padding: 10px 15px;
         border-top: 1px solid #dbdbda;
-        border-bottom: 1px solid #dbdbda;         
+        border-bottom: 1px solid #dbdbda; 
+        .mz-heading, .merchandise-subtotal, .mz-carttable-total-wrap{
+            font-weight: bold;  
+        }   
+        .mz-heading{
+            display: block;
+            margin-bottom: 15px;
+        }     
     }
 
     .mz-cart-buttons{
@@ -145,6 +150,14 @@
                 margin-left: @gutter; 
             }
         }
+    }
+    .mz-right-col{
+        float: right;
+        width: 80px;
+        margin-left: 10px;
+    }
+    .mz-discount-row{
+        color: @linkColor;
     }
 }
 

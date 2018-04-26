@@ -1,0 +1,12 @@
+<div class="mz-carttable-total-wrap">
+  <span class="mz-left-col">{{ labels.orderTotal }}:</span>
+  <span class="mz-right-col">{{ model.discountedTotal|currency }}</span>
+</div>
+<div class="mz-discount-row">
+  <span class="mz-left-col">{{ labels.estimatedTax }}:</span>
+  <span class="mz-right-col">$X.XX</span>
+</div>
+<div class="mz-discount-row">
+  <span class="mz-left-col">{{ labels.estimatedShipping }}:</span>
+  <span class="mz-right-col">$X.XX</span>
+</div>

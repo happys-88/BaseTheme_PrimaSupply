@@ -1,0 +1,28 @@
+<span class="mz-heading">{{ labels.estimateYourTaxShipping }}</span> 
+  <div class="mz-l-formfieldgroup-row">
+    <div class="mz-l-formfieldgroup-cell">
+        <label for="shippingTo">Shipping To</label>
+    </div>
+    <div class="mz-l-formfieldgroup-cell">
+      <select id="shippingTo">
+        <option selected="selected">Select State</option> 
+        {% for state in themeSettings.usStates %}
+          <option value="{{ state.abbreviation }}">{{ state.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div> 
+  <div class="mz-l-formfieldgroup-row">
+    <div class="mz-l-formfieldgroup-cell">
+        <label for="shippingTo">Shipping Method</label>
+    </div>
+    <div class="mz-l-formfieldgroup-cell">
+      <select id="shippingTo">
+        <option selected="selected">Select Shipping Method</option> 
+        <option value="Standard">Standard</option>
+        <option value="Shipping Method 1">Shipping Method 1</option>
+        <option value="Shipping Method 2">Shipping Method 2</option>
+        <option value="Shipping Method 3">Shipping Method 3</option>
+      </select>
+    </div>
+</div> 

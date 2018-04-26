@@ -6,14 +6,27 @@
 		.mz-notification-bar{
 			display: none;	
 		}
-		.mz-storebranding {
-	    	width: 139px;
-	    	img{
-	    		width: 100%;
-	    		height: auto;
-	    	}
-	    }
-
+		.mz-header-bottom{
+			.mz-storebranding {
+				width: 139px;
+				.mz-logo{
+					width: 100%;
+					height: 40px;
+				} 
+		    	img{
+		    		width: 100%;
+		    		height: auto;
+		    	}
+		    }	
+		}
+		.mz-searchbox{
+			position: static;
+			width: 100%;
+			.mz-searchbox-field{
+				width: 100%;
+			}
+		}
+		
 	    .mz-searchbox-expands .mz-searchbox-input {
 	        width: auto;
 	        &:focus {
@@ -35,7 +48,7 @@
 
 	.mz-mobile-nav{
 		float: left;
-		margin: 6px 15px 0 0;
+		margin: 1px 15px 0 0;
 		.mz-hamburger-icon{
 			display: block;
 			border: 0;

@@ -112,83 +112,37 @@
   {% endif %}
 </div>
 
-<div class="mz-carttable-total-main-container col-xs-12 text-right">
+<div class="mz-carttable-total-main-container col-xs-12">
+  {% comment %}
   <div class="mz-carttable-shipping-row pull-right">
     <div class="col-xs-12">
       <em class="mz-auxiliary-text pull-right">{{ labels.taxAtCheckout }}</em>
     </div>
-   
   </div>
-
+  {% endcomment %} 
 
   <div class="mz-carttable-total-row row">
       <div class="col-sm-4 col-xs-12 mz-carttable-checkout-couponcode" id="coupon-code-field" >
-        <div class="mz-l-formfieldgroup-cell">
-          <label for="coupon-code">{{ labels.couponCode }}: </label>
-        </div>
-        <div class="mz-l-formfieldgroup-cell">
-            <input type="text" id="coupon-code" name="coupon-code" value="{{ model.couponCode }}" data-mz-value="couponCode">
-            <button class="mz-button mz-button-large" data-mz-action="addCoupon" {% if not model.couponCode %} disabled="disabled" {% endif %}>{{ labels.apply }}</button>
-        </div> 
+        {% include "modules/cart/apply-coupon-code" %}
       </div>
       <div class="col-sm-8 col-xs-12 text-right">
-        <div class="merchandise-subtotal">
-          <span class="mz-left-col">{{ labels.subtotal }}</span>
-          <span class="mz-right-col mz-carttable-total"><strong>{{ model.discountedSubtotal|currency }}</strong></span>
-        </div>
-        <div class="order-level-discount">
-          
-        </div>
+        {% include "modules/cart/cart-merchandise-total" %}   
       </div>
           
   </div>
 
-  {% for discount in model.orderDiscounts %}
-    {% if not discount.excluded %}
-      <div class="mz-discount-row">
-        <span class="mz-left-col">{{ discount.discount.name }}</span>
-        <span class="mz-right-col">{{ discount.impact|currency }}</span>
-      </div>
-    {% endif %}
-  {% endfor %}
-
-
-  <div class="mz-carttable-total-row row"> 
-    <div class="mz-carttable-total-wrap col-xs-12">
-    <div class="col-xs-7 col-sm-9 text-right"> {{ labels.orderTotal }}</div>
-    <div id="mz-carttable-total" class="mz-carttable-total col-xs-5 col-sm-3 pull-right">
-      <strong>{{ model.discountedTotal|currency }}</strong>
+  <div class="mz-carttable-total-row row">
+    <div class="col-sm-4 col-xs-12 estimated-tax-shipping">
+      {% include "modules/cart/estimate-tax-shipping" %}    
     </div>
+
+    <div class="col-sm-8 col-xs-12 text-right">
+      {% include "modules/cart/cart-total" %}
     </div>
-    <div></div> 
   </div>
+
   <div class="mz-carttable-checkout-row row">
-    <div class="col-xs-12">
-     
-      
-     
-      
-      <div class="col-sm-8 col-xs-12 mz-cart-buttons">
-        <button class="mz-button mz-button-large continue-btn">{{ labels.continueShopping }}</button>
-        {% if not user.isAnonymous %} 
-          <button class="mz-button mz-button-large">{{ labels.saveCart }}</button> 
-        {% endif %}
-        <button id="cart-checkout" class="mz-button mz-button-large"  {% if model.isEmpty %} disabled="disabled" {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button>
-        
-      </div>
-
-      {% if siteContext.checkoutSettings.visaCheckout.isEnabled %}
-        <div>
-          <p>or checkout with</p>
-          <img alt="Visa Checkout" class="v-button" role="button"
-            src="{{pageContext.visaCheckoutButtonUrl}}"/>       
-        </div>
-      {% endif %}
-    </div>
-    <div>
-      {% include "modules/cart/coupon-detail" %}
-    </div>
-    <div></div>
+    {% include "modules/cart/cart-buttons" %}
   </div>
 
   <div class="col-sm-6 col-xs-12 text-left"> 

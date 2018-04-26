@@ -208,8 +208,8 @@
                     "allowBlank": false,
                     "forceSelection": true,
                     "store": [
-                        10,
-                        20
+                        32,
+                        64
                     ]
                 },
                 {
@@ -309,6 +309,33 @@
                     "fieldLabel": "Show Subtotal",
                     "xtype": "mz-input-checkbox",
                     "name": "globalCartShowSubtotal"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Recently Viewed",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Enable Recently Viewed",
+                    "xtype": "mz-input-checkbox",
+                    "name": "rviEnable"
+                },
+                {
+                    "fieldLabel": "Heading",
+                    "xtype": "mz-input-text",
+                    "name": "rviHeading"
+                },
+                {
+                    "fieldLabel": "Max Number of Products",
+                    "xtype": "mz-input-number",
+                    "name": "rviNumberCookie"
+                },
+                {
+                    "fieldLabel": "Number of Days",
+                    "xtype": "mz-input-number",
+                    "name": "rviExpirationDuration"
                 }
             ]
         }

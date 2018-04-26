@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "cd02cde9da30f112632c6867940e51214925036f"
+      "commit": "0c61782e6d799530353f2caf2f0bc6d06496eb49"
     },
     "baseThemeChannel": "stable"
   },
@@ -416,7 +416,7 @@
     "listProductCode": true,
     "listProductShortDesc": true,
     "listVolumePricing": false,
-    "listProductThumbSize": 160,
+    "listProductThumbSize": 160, 
     "maxProductImageThumbnailSize": 100,
     "productImagesContainerWidth": 500,
     "productImagesZoomContainerWidth": 800,
@@ -424,8 +424,8 @@
     "maxTopLevelNavItems": 8,
     "maxTopLevelNavLabelLength": 20,
     "pageSizeOptions": [
-      10,
-      20
+      32,
+      64
     ],
     "preselectCountryCode": "US",
     "requireCheckoutAgreeToTerms": true,
@@ -450,6 +450,10 @@
     "categoryEntityName": "categoryAttributes@ng",
     "columnBreaker": "~",
     "liftGatePrice": 59,
+    "rviEnable": true,
+    "rviHeading": "Recently Viewed",
+    "rviNumberCookie": 10,
+    "rviExpirationDuration": 21, 
     "usStates": [
       {
         "abbreviation": "AL",
