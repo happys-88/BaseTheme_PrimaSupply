@@ -1,0 +1,23 @@
+{% with model|get_product_attribute("tenant~show-price") as showPriceAttr %} 
+    {% if showPriceAttr.attributeDetail.name %} 
+        
+        {% if showPriceAttr.values|first|prop("value") == 'view-on-cart' %} 
+            <del class="mz-productlisting-hide-price">$XXX.XX</del>
+            <span class="orange-text">{{ labels.viewOnCart }}</span>
+        {% endif %}
+        {% if showPriceAttr.values|first|prop("value") == 'view-on-login' %} 
+            {% if user.isAuthenticated %}
+                {% include "modules/product/price-stack" %}
+            {% else %}
+                <a class="mz-button login-for-lowprice" href="/user/login" data-mz-action="login" data-placement="bottom" data-productcode="{{model.productCode}}">{{ labels.viewOnLogin }}</a> 
+
+            {% endif %}
+        {% endif %}
+        {% if showPriceAttr.values|first|prop("value") == 'view' %} 
+            {% include "modules/product/price-stack" %}
+        {% endif %}
+        {% else %}
+            {% include "modules/product/price-stack" %}
+    {% endif %}
+    
+{% endwith %}

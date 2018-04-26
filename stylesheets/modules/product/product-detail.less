@@ -1,0 +1,41 @@
+﻿.mz-productdetail { 
+    overflow: auto;
+    .mz-productdetail-qty {
+        width: 100%;
+        height: 40px;
+        margin-bottom: 0;
+        border: 1px solid #d4d4d4;
+    }
+    .mz-price {
+        color: #495363;
+        font-size: 30px;
+        line-height: 24px;
+    }
+    .mz-price-msrp {
+        display: block;
+        font-size: @fontSizeSmall;
+        color: lighten(@textColor, 15%);
+        .mz-price {
+            font-size: @fontSizeSmall;
+        }
+    }
+    .mz-productdetail-notpurchasable {
+        font-size: @fontSizeSmall;
+        margin: 5px 0;
+        color: #999;
+    }
+    .mz-productdetail-conversion {
+        .clearfix();
+        margin-top: 10px;
+        .col-md-2 {
+            padding-left: 0;
+        }
+    }
+    .mz-productbundle-measurements-product {
+        clear: both;
+    }
+
+    .mz-productbundle-measurements-productname {
+        font-weight: bold;
+    }
+}

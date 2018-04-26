@@ -1,0 +1,47 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.content.productName %}  - {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-product {% endblock body-tag-classes %}
+
+{% block body-content %}
+
+{% require_script "pages/product" %}
+
+{% preload_json model "product" %}
+
+<div itemscope itemtype="http://schema.org/Product" class="mz-l-container">
+    <div class="row">
+        <div data-mz-productimages class="col-md-6 mz-productimages mz-l-sidebar">
+            {% include "modules/product/product-images" %}
+        </div>
+        <div class="col-md-6 mz-productdetail-wrap">
+            {% include "modules/common/message-bar" %}
+            <div id="product-detail" class="mz-productdetail mz-l-stack">
+                {% include "modules/product/product-detail" %}
+            </div>
+        </div>
+        <div class="mz-product-prop">
+            {% include "modules/product/product-properties" %} 
+        </div>
+    </div>
+</div>
+
+{% block yotpo-reviews-questions %}
+    {% include "modules/product/yotpo-review-and-qa" %}
+{% endblock yotpo-reviews-questions %}
+
+{% dropzone "productDropzone" scope="page" %}
+
+<input type="hidden" id="customProductCode" value="{{ model.productCode }}" />
+
+{% require_script "pages/yotpo-review" %}
+
+{% block recently-viewed %}
+    {% include "modules/product/recent/recently-viewed-products" %}
+{% endblock recently-viewed %}
+
+{% endblock body-content %}
+
+
+ 
