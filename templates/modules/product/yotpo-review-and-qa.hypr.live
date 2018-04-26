@@ -10,12 +10,12 @@
             data-price="{{ model.price.price }}"
             data-currency="USD"
             data-name="{{ model.content.productName }}"
-            data-url="https://primasupply.com/equipment/sharp/r-21lvf"
-            data-image-url="https://static.primasupply.com/styles/main_product/light-duty-microwaves/sharp-r-21lvf-microwave.jpg"
-            data-description="In a hurry? Check out these key benefits"
+            data-url="{{ model.url }}"
+            data-image-url="{{ model.mainImage.imageUrl }}"
+            data-description="{{ model.content.productFullDescription }}"
             data-yotpo-element-id="1">
-         
-            <div class="custom-yotpo-review"></div>
+
+            <div class="custom-yotpo-review"></div> 
         </div>
     </div>
     <div class="tab-pane" id="tab2">
@@ -24,12 +24,12 @@
             data-price="{{ model.price.price }}"
             data-currency="USD"
             data-name="{{ model.content.productName }}"
-            data-url="https://primasupply.com/equipment/sharp/r-21lvf"
-            data-image-url="https://static.primasupply.com/styles/main_product/light-duty-microwaves/sharp-r-21lvf-microwave.jpg"
-            data-description="In a hurry? Check out these key benefits" 
+            data-url="{{ model.url }}"
+            data-image-url="{{ model.mainImage.imageUrl }}"
+            data-description="{{ model.content.productFullDescription }}" 
             data-mode ="questions" 
             data-yotpo-element-id="2">
         </div>
     </div>
   </div>
-</div> 
+</div>
