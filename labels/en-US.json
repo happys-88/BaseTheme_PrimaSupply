@@ -499,7 +499,8 @@
   "liftGateMsg"                            :"Liftgate Service Added",
   "TBYBMsg"                                :"TRY IT BEFORE YOU BUY IT!",
   "labelOversized"                         :"Oversized Shipping",
-  "reviews"           :   "reviews",
-  "questions"         :   "questions"
+  "reviews"                                :   "reviews",
+  "questions"                              :   "questions",
+  "liveChat"                               :"Live Chat"
 
 }  
