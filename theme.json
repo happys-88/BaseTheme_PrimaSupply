@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "0c61782e6d799530353f2caf2f0bc6d06496eb49"
+      "commit": "54f80edf45b7741e84078df6e12ebf1a10c76d6a"
     },
     "baseThemeChannel": "stable"
   },
@@ -416,7 +416,7 @@
     "listProductCode": true,
     "listProductShortDesc": true,
     "listVolumePricing": false,
-    "listProductThumbSize": 160, 
+    "listProductThumbSize": 160,
     "maxProductImageThumbnailSize": 100,
     "productImagesContainerWidth": 500,
     "productImagesZoomContainerWidth": 800,
@@ -447,21 +447,21 @@
     "showProductDetailShortDesc": true,
     "showProductDetailUPC": true,
     "textColor": "#444444",
-    "yotpoApiKey":"4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD",
-    "yotpoBaseUrl":"https://api.yotpo.com/v1/widget",
-    "products":"products",
-    "reviews":"reviews",
-    "bottomline":"bottomline",
-    "yotpoBottomlineBaseUrl":"https://api.yotpo.com/products",
-    "yotpoQuestionBaseUrl":"https://api.yotpo.com/products",
-    "questions":"questions",
+    "yotpoApiKey": "4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD",
+    "yotpoBaseUrl": "https://api.yotpo.com/v1/widget",
+    "products": "products",
+    "reviews": "reviews",
+    "bottomline": "bottomline",
+    "yotpoBottomlineBaseUrl": "https://api.yotpo.com/products",
+    "yotpoQuestionBaseUrl": "https://api.yotpo.com/products",
+    "questions": "questions",
     "categoryEntityName": "categoryAttributes@ng",
     "columnBreaker": "~",
     "liftGatePrice": 59,
     "rviEnable": true,
     "rviHeading": "Recently Viewed",
     "rviNumberCookie": 10,
-    "rviExpirationDuration": 21, 
+    "rviExpirationDuration": 21,
     "usStates": [
       {
         "abbreviation": "AL",

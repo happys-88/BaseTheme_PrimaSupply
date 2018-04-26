@@ -27,32 +27,10 @@
     </div>
 </div>
 
-<div class="yotpo yotpo-main-widget"
-    data-product-id="{{ model.productCode }}"
-    data-price="{{ model.price.price }}"
-    data-currency="USD"
-    data-name="{{ model.content.productName }}"
-    data-url="{{ model.url }}"
-    data-image-url="{{ model.mainImage.imageUrl }}"
-    data-description="{{ model.content.productFullDescription }}"
-    data-yotpo-element-id="1">
+{% block yotpo-reviews-questions %}
+    {% include "modules/product/yotpo-review-and-qa" %}
+{% endblock yotpo-reviews-questions %}
 
-    <div class="custom-yotpo-review"></div> 
-
- </div>
-
-<div class="yotpo yotpo-main-widget"
-    data-product-id="{{ model.productCode }}"
-    data-price="{{ model.price.price }}"
-    data-currency="USD"
-    data-name="{{ model.content.productName }}"
-    data-url="{{ model.url }}"
-    data-image-url="{{ model.mainImage.imageUrl }}"
-    data-description="{{ model.content.productFullDescription }}" 
-    data-mode ="questions" 
-    data-yotpo-element-id="2">
-
-</div>
 {% dropzone "productDropzone" scope="page" %}
 
 <input type="hidden" id="customProductCode" value="{{ model.productCode }}" />
