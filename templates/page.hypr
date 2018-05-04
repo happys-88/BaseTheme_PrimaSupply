@@ -161,7 +161,7 @@
               (function() {
                 var se = document.createElement('script'); se.type = 'text/javascript'; se.async = true;
                 // se.src = '//storage.googleapis.com/code.snapengage.com/js/0149caf3-0127-4183-9b3f-2905f1fd79e8.js';
-                se.src = '//storage.googleapis.com/code.snapengage.com/js/d93fa82a-6087-44f8-bd79-3df50a1c3130.js';
+                se.src = '//storage.googleapis.com/code.snapengage.com/js/{{themeSettings.snapengaeWidgetId}}.js';
                 var done = false;
                 se.onload = se.onreadystatechange = function() {
                   if (!done&&(!this.readyState||this.readyState==='loaded'||this.readyState==='complete')) {
