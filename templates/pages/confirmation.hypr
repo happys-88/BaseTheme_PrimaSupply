@@ -8,6 +8,22 @@
 
 {% preload_json model "order" %}
 
+{% set_var siteId=model.siteId %}
+{% set_var email=model.fulfillmentinfo.fulfillmentContact.email %}
+{% set_var name=model.fulfillmentinfo.fulfillmentContact.firstName %}
+{% if model.fulfillmentinfo.fulfillmentContact.address.countryCode == "US" %}
+    {% set_var country="United States" %}
+{% else %}
+    {% set_var country="" %}
+{% endif %}
+{% set_var state=model.fulfillmentinfo.fulfillmentContact.address.stateOrProvince %}
+{% set_var orderid=model.orderNumber %}
+
+
+{% block shopper-approved-script %}      
+ <script type="text/javascript"> var sa_values = { "site":{{siteId}}, "token":"8c74b", 'orderid':"{{orderid}}", 'name':"{{name}}", 'email':"{{email}}", 'country':"{{country}}", 'state':"{{state}}" }; function saLoadScript(src) { var js = window.document.createElement("script"); js.src = src; js.type = "text/javascript"; document.getElementsByTagName("head")[0].appendChild(js); } var d = new Date(); if (d.getTime() - 172800000 > 1477399567000) saLoadScript("//www.shopperapproved.com/thankyou/rate/{{siteId}}.js"); else saLoadScript("//direct.shopperapproved.com/thankyou/rate/{{siteId}}.js?d=" + d.getTime()); </script>
+{% endblock shopper-approved-script %}     
+
 <div class="mz-l-container">
     <h1 class="mz-pagetitle">{{ labels.orderConfirmation }} </h1>
 
@@ -116,6 +132,8 @@
 	{% endif %}
 
 {% endblock trailing-scripts %}
+
+
 
 		
 		

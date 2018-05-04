@@ -37,61 +37,6 @@
 
     {% block head-tag %}
     <head>
-        {% comment %} {% endcomment %}
-        
-       {% block yotpo-main-script %}
-            
-             <script type="text/javascript">
-                (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
-            </script>
-
-            <script type="text/javascript">
-              (function() {
-                var se = document.createElement('script'); se.type = 'text/javascript'; se.async = true;
-                se.src = '//storage.googleapis.com/code.snapengage.com/js/0149caf3-0127-4183-9b3f-2905f1fd79e8.js';
-                var done = false;
-                se.onload = se.onreadystatechange = function() {
-                  if (!done&&(!this.readyState||this.readyState==='loaded'||this.readyState==='complete')) {
-                    done = true;
-                    /* Place your SnapEngage JS API code below */
-                    /* SnapEngage.allowChatSound(true); Example JS API: Enable sounds for Visitors. */
-                    SnapEngage.getAgentStatusAsync(function (online) {
-                      var buttonImageSrc;
-                      if (online) {
-                        // IMPORTANT: Replace the link below with your own link to an ONLINE button image!
-                        buttonImageSrc = 'https://help.snapengage.com/wp-content/blogs.dir/2/files/2017/01/chat-with-us.png';
-                      } else {
-                        // IMPORTANT: Replace the link below with your own link to an OFFLINE button image!
-                        buttonImageSrc = 'https://help.snapengage.com/wp-content/blogs.dir/2/files/2017/01/leave-a-message.gif';
-                      }
-             
-                      if (document.getElementById('my-inline-button')) {
-                        document.getElementById('my-inline-button').src = buttonImageSrc;
-             
-                        // OPTIONAL: Hide the floatingbutton on pages where you are using an inline button
-                        SnapEngage.hideButton();
-                      }
-                    });
-
-
-                    
-                  }
-                };
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(se, s);
-              })();
-            </script>
-            
-       {% endblock yotpo-main-script %}
-
-       
-         
-
-
-       {% block promoted-products %}
-           {% require_script "pages/promoted-products" %}
-
-        {% endblock promoted-products %}
-
 
         {% include "modules/json-required-for-hyprlive" %}
 
@@ -209,7 +154,46 @@
 
         {% visitor_tracking_pixel %}
 
+
+        {% block yotpo-main-script %}
+            
+             <script type="text/javascript">
+              (function() {
+                var se = document.createElement('script'); se.type = 'text/javascript'; se.async = true;
+                // se.src = '//storage.googleapis.com/code.snapengage.com/js/0149caf3-0127-4183-9b3f-2905f1fd79e8.js';
+                se.src = '//storage.googleapis.com/code.snapengage.com/js/d93fa82a-6087-44f8-bd79-3df50a1c3130.js';
+                var done = false;
+                se.onload = se.onreadystatechange = function() {
+                  if (!done&&(!this.readyState||this.readyState==='loaded'||this.readyState==='complete')) {
+                    done = true;
+                    /* Place your SnapEngage JS API code below */
+                    /* SnapEngage.allowChatSound(true); Example JS API: Enable sounds for Visitors. */
+                    SnapEngage.getAgentStatusAsync(function (online) {
+                      var buttonImageSrc;
+                      if (online) {
+                        // IMPORTANT: Replace the link below with your own link to an ONLINE button image!
+                        buttonImageSrc = 'https://help.snapengage.com/wp-content/blogs.dir/2/files/2017/01/chat-with-us.png';
+                      } else {
+                        // IMPORTANT: Replace the link below with your own link to an OFFLINE button image!
+                        buttonImageSrc = 'https://help.snapengage.com/wp-content/blogs.dir/2/files/2017/01/leave-a-message.gif';
+                      }
+             
+                      if (document.getElementById('my-inline-button')) {
+                        document.getElementById('my-inline-button').src = buttonImageSrc;
+             
+                        // OPTIONAL: Hide the floatingbutton on pages where you are using an inline button
+                        SnapEngage.hideButton();
+                      }
+                    });
+
+
         
+                  }
+                };
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(se, s);
+              })();
+            </script>
+       {% endblock yotpo-main-script %}
     </body>
     {% endblock body-tag %}
 
