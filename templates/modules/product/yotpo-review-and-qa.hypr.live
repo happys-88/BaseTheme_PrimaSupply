@@ -1,0 +1,37 @@
+<div class="yotpo-review-ques-ansr">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">{{ labels.reviews }}</a></li>  
+    <li><a href="#tab2" data-toggle="tab">{{ labels.questions }}</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+        <div class="yotpo yotpo-main-widget col-xs-12 col-md-6"
+            data-product-id="{{ model.productCode }}"
+            data-price="{{ model.price.price }}"
+            data-currency="USD"
+            data-name="{{ model.content.productName }}"
+            data-url="{{ model.url }}"
+            data-image-url="{{ model.mainImage.imageUrl }}"
+            data-description="{{ model.content.productFullDescription }}"
+            data-yotpo-element-id="1">
+
+            <div class="custom-yotpo-review"></div> 
+
+        </div>
+    </div>
+    <div class="tab-pane" id="tab2">
+        <div class="yotpo yotpo-main-widget col-xs-12 col-md-6"
+            data-product-id="{{ model.productCode }}"
+            data-price="{{ model.price.price }}"
+            data-currency="USD"
+            data-name="{{ model.content.productName }}"
+            data-url="{{ model.url }}"
+            data-image-url="{{ model.mainImage.imageUrl }}"
+            data-description="{{ model.content.productFullDescription }}" 
+            data-mode ="questions" 
+            data-yotpo-element-id="2">
+        </div>
+    </div>
+  </div>
+</div>
+
