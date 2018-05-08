@@ -135,7 +135,8 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             "change [data-mz-tbyb]": "updateTbyb"
         },
         updateTbyb: function (e) {
-            this.model.updateTbyb(this.$('[data-mz-tbyb]:checked').val());
+            this.model.updateTbyb(e);
+            // this.initStepView();
         }
     });
     var poCustomFields = function() {
