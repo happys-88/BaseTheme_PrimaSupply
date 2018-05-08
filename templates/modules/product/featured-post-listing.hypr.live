@@ -1,0 +1,32 @@
+
+<div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
+    <div class="mz-productlisting-image"> 
+        {% block product-image %}
+        <a href="{% make_url "product" model %}">
+            {% if model.mainImage.imageUrl %} 
+                <img src="{% make_url "image" model.mainImage with max=themeSettings.featuredPostImageSize as_parameter %}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% endif %} />
+            {% else %}
+                <span class="mz-productlisting-imageplaceholder"><span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
+            {% endif %}
+        </a>
+        {% endblock product-image %}
+    </div>
+    <div class="mz-productlisting-info">
+        {% for getCategory in model.categories %}
+            <h3>{{ getCategory.content.name }}</h3> 
+        {% endfor %}
+          
+        <h4><a class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName}}</a></h4>
+        <span class="post-date">{{ model.createDate|date("M jS, Y" }}</span> 
+        <span class="author-name">, Written by Lee Sill</span>
+    </div> 
+    <div class="mz-product-social-sharing">
+        <span class="share-count">504 shares</span> 
+        <a class="addthis_button_youtube"><i class="fa fa-youtube"></i></a>
+        <a class="addthis_button_twitter"><i class="fa fa-twitter"></i></a>
+        <a class="addthis_button_facebook"><i class="fa fa-facebook"></i></a>
+        <a class="addthis_button_linkedin"><i class="fa fa-linkedin-square"></i></a> 
+    </div>
+
+</div>  
+

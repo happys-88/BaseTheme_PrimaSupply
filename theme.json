@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "54f80edf45b7741e84078df6e12ebf1a10c76d6a"
+      "commit": "d098b2a62120a4d75f26d698b12ec8158eec672c"
     },
     "baseThemeChannel": "stable"
   },
@@ -202,6 +202,20 @@
           ]
         }
       ]
+    },
+    {
+      "entityType": "category",
+      "id": "learning-center",
+      "template": "modules/learning-center/landing-page",  
+      "title": "Learning Center Landing Page",
+      "userCreatable": false
+    },
+    {
+      "entityType": "category",
+      "id": "learning-center-gateway",
+      "template": "modules/learning-center/gateway-page",   
+      "title": "Learning Center Gateway Page", 
+      "userCreatable": false
     },
     {
       "documentType": "web_page",
@@ -417,6 +431,7 @@
     "listProductShortDesc": true,
     "listVolumePricing": false,
     "listProductThumbSize": 160,
+    "featuredPostImageSize": 1048,
     "maxProductImageThumbnailSize": 100,
     "productImagesContainerWidth": 500,
     "productImagesZoomContainerWidth": 800,
@@ -1594,6 +1609,63 @@
         }
       ],
       "icon": "/resources/admin/widgets/28_deal_of_the_day.png",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "displayName": "Learning Center Banner With Title",
+      "displayTemplate": "misc/learning-center-banner",
+      "editViewFields": [
+        {
+          "anchor": "100%",
+          "xtype": "mz-input-text",
+          "name": "blogName",
+          "fieldLabel": "Enter Blog Name"
+        },
+        {
+          "anchor": "100%",
+          "fieldLabel": "Add Banner Image",
+          "name": "lcBannerImage",
+          "xtype": "mz-input-image"
+        }
+      ],
+      "icon": "/resources/admin/widgets/01_photo_text.png",
+      "id": "learning-center-banner",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "displayName": "Featured Categories",
+      "displayTemplate": "misc/featured-categories",
+      "editViewFields": [
+        {
+          "anchor": "100%",
+          "fieldLabel": "Choose Featured Categories",
+          "name": "featuredCategories",
+          "xtype": "mz-input-categorymulti"
+        }
+      ],
+      "icon": "/resources/admin/widgets/29_shop_by_category.png",
+      "id": "featured-categories",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "displayName": "Featured Posts",
+      "displayTemplate": "misc/featured-posts",
+      "editViewFields": [
+        {
+          "anchor": "100%",
+          "fieldLabel": "Choose Featured Posts",
+          "name": "productCodes",
+          "xtype": "mz-input-productmulti" 
+        }
+      ],
+      "icon": "/resources/admin/widgets/03_heading_p.png",
+      "id": "featured-posts", 
       "validPageTypes": [
         "*"
       ]

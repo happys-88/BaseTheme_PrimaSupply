@@ -17,6 +17,9 @@
         </div>
         <div class="col-md-6 mz-productdetail-wrap">
             {% include "modules/common/message-bar" %}
+            <div class="mz-product-social-sharing hide">
+                {% dropzone "social-sharing" scope="template" %}     
+            </div>
             <div id="product-detail" class="mz-productdetail mz-l-stack">
                 {% include "modules/product/product-detail" %}
             </div>
@@ -37,11 +40,22 @@
 
 {% require_script "pages/yotpo-review" %}
 
+{% block you-may-also-like %}
+    <div id="product-crosssells"></div>
+{% endblock you-may-also-like %}
+
 {% block recently-viewed %}
     {% include "modules/product/recent/recently-viewed-products" %}
 {% endblock recently-viewed %}
 
 {% endblock body-content %}
+{% block body-below-content %}
+    {% dropzone "body-bottom" scope="page" %}   
+{% endblock body-below-content %}
+
+{% require_script "modules/product/product-crosssells" %}
+
+
 
 
  

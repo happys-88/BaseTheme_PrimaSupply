@@ -13,7 +13,7 @@
 							    		<img src="{{ catImage.imageUrl }}" alt="{{ catImage.altText }}">
 							    	</div>
 							     	<div class="mz-categorylisting-info">
-							     		<h3>{{ categoryObject.content.name }}</h3>
+							     		<h3>{{ categoryObject.content.name|safe }}</h3>
 							     	</div>
 							    </a>
 				   			</li>

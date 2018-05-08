@@ -9,6 +9,13 @@ define([
                 $(this).addClass("has-dropdown"); 
             }
         }); 
+
+        // Check if sitenav-item has dropdown - Learning Center
+		$(".mz-sitenav-lc .mz-sitenav-item").each(function(){
+            if($(this).find(".mz-sitenav-sub-sub").length !== 0){
+                $(this).addClass("has-dropdown"); 
+            }
+        }); 
 		
 		// Global Navigation - Calculate the position of dropdown
 		function calculatingSubPosition() {
@@ -32,7 +39,7 @@ define([
 
         calculatingSubPosition();
 		
-		if ($(this).scrollTop() > 500) { 
+		if ($(this).scrollTop() > 200) { 
 	        $("#scroll-to-top").show();
 	    }
 		// Sticky Nav Header
@@ -49,7 +56,7 @@ define([
 		        $("#back-to-top").fadeOut();
 		    }
 
-		    if (scroll >= 500) {
+		    if (scroll >= 200) {
 		    	$("#back-to-top").fadeIn();
 		    } else{
 		    	$("#back-to-top").fadeOut();
