@@ -369,39 +369,311 @@
             },
             next: function () {
                 this.stepStatus('complete');
+                                
+                // To show the TBYB step when tbyb line item exist
+                if(this.parent.get('tbybInfo').tbybItemExist()) {
+                    // console.log("Set Tbyb incomplete");
+                    // this.parent.get('tbybInfo').calculateStepStatus();
+                    this.parent.get('tbybInfo').stepStatus('incomplete');
+                } else {
+                    this.parent.get('tbybInfo').stepStatus('invalid');
                 this.parent.get('billingInfo').calculateStepStatus();
             }
         }),
-        TbybInfo = CheckoutStep.extend({
-            initialize: function () {
-                console.log("Model TBYB Step :: "+JSON.stringify(this));
+TbybInfo = CheckoutStep.extend({
+            initialize: function () {                
+                // this.set("tbyb", "TRUE");
+                // console.log("Model TBYB Step :: ");
+                var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
+                if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
+                    this.set('orderAttributes', storefrontOrderAttributes);
+                }
+                
+                var tbybProducts = [];
+                var items = require.mozuData('checkout').items;
+                var j = 0;
+                j = parseInt(j,10);
+                var hasTybyItem = false;
+                for(var index in items){
+                    var item = items[index];
+                    var properties = item.product.properties;
+                    
+                   for(var propindextwo in properties){
+                        var propertytwo = properties[propindextwo];
+                        if(propertytwo.name === 'TBYB' && propertytwo.values[0].value === true ){
+                            hasTybyItem = true;
+                            this.set('tbybProduct',true);
+                            tbybProducts[j] = item;
+                            j++;
+                            break;
+                        }
+                    }
+                }
+                // console.log("TBYB Products : "+JSON.stringify(tbybProducts));
+                this.set('tbybProducts',tbybProducts);
+               
+            },
+            helpers: ['requireOrderModel', 'tbybSelectedProd','checktbybProductExist'],
+            requireOrderModel: function() {
+                // console.log("requireOrderModel O");
+                var items = this.getOrder().get('items');
+                var selectedTbybExists = false;
+                // var selectedTbybItem = this.tbybSelectedProd();
+                var prodVals = [];
+                for(var index in items){
+                    var item = items[index];
+                    var properties = item.product.properties;
+                    
+                    for(var propindex in properties){
+                        var propertytwo = properties[propindex];
+                        if(propertytwo.name === 'TBYB' && propertytwo.values[0].value === true ){
+                            var itemOptions = item.product.options;
+                            var optionsVals = '';
+                            var prodFullName = item.product.name;
+                            if(itemOptions.length > 0) {                                
+                                for(var optionindex in itemOptions){
+                                    var option = itemOptions[optionindex];
+                                    optionsVals = optionsVals.concat(option.value);
+                                    if(optionindex < itemOptions.length-1) {
+                                        optionsVals = optionsVals.concat(",");
+                                    }  
+                                }
+                               
+                                prodFullName = prodFullName+"("+optionsVals+")";
+                            }
+                            
+                            prodVals.push({prodName:item.product.name, prodFullName:prodFullName, prodCode: item.product.productCode, varCode:item.product.variationProductCode});
+                            break;
+                        }
+                    }
+                }
+               
+                return prodVals;
             },
             calculateStepStatus: function () {
-                console.log("calculateStepStatus TBYB: "+JSON.stringify(this));
+                // console.log("calculateStepStatus TBYB: "+this.parent.get('billingInfo').stepStatus());
+                if(this.tbybItemExist()) {
+                    var fulfillmentStepComplete = this.parent.get('fulfillmentInfo').stepStatus() === 'complete';
+                    var billingStepComplete = this.parent.get('billingInfo').stepStatus() === 'complete';
+                    var thisStepComplete = this.checkTbybSelected();
+                    
+                    // console.log("SLECTE : "+this.getTbybSelected());
+                    if(fulfillmentStepComplete && thisStepComplete) {
+                        if(this.getTbybSelected() === 'NONE') {
+                            // console.log("SET Incomplete");
+                            return this.stepStatus('incomplete');
+                        } else {
+                            this.parent.get('billingInfo').stepStatus('incomplete');
+                            return this.stepStatus('complete');
+                        }
 
-                // If there's no shipping address yet, go blank.
-               /* if (this.get('FullFillmentInfo').stepStatus() !== 'complete') {
-                    return this.stepStatus('new');
-                }*/
-
-                // Incomplete status for shipping is basically only used to show the Shipping Method's Next button,
-                // which does nothing but show the Payment Info step.
-                // console.log("Shipping step status : "+billingInfo.stepStatus());
-                /*var billingInfo = this.parent.get('billingInfo');
-                if (!billingInfo || billingInfo.stepStatus() === 'new') return this.stepStatus('incomplete');*/
-
-                // Payment Info step has been initialized. Complete status hides the Shipping Method's Next button.
-                //return this.stepStatus('complete');
+                    } else if(fulfillmentStepComplete && !thisStepComplete) {
+                        return this.stepStatus('incomplete');
+                    } else if(!fulfillmentStepComplete) {
+                        return this.stepStatus('new');
+                    }                  
+                } else {
+                    return this.stepStatus('invalid');
+                }
+                // return this.stepStatus('incomplete');
             },
-            updateTbyb: function (tbybVal) {
+            checktbybProductExist: function(){
+                // console.log("LOGGG : "+JSON.stringify(this.get('tbybProducts').length));
+                if(this.get('tbybProducts').length > 0) {
+                    return "true";
+                } else {
+                    // console.log("Calling setTbybEmpty from else");
+                    this.setTbybEmpty();
+                    return "false";
+                }
+                 
+            },
+            setTbybEmpty: _.once(function() {
+                alert("setTbybEmpty Once");
+                var order = this.getOrder();
+                // console.log(order);
+                var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
+                if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
+                    var updateAttrs = [];
+                    storefrontOrderAttributes.forEach(function(attr){
+                        // tenant~trybeforebuy
+                        // console.log("ATTR : "+ attr.attributeFQN);
+
+                        var attrVal;
+                        if(attr.attributeFQN === 'tenant~trybeforebuy'){
+                            attrVal = "NONE";
+                            // updateAttrs.push({'tenant~trybeforebuy': attrVal});
+                            updateAttrs.push({
+                                'fullyQualifiedName': attr.attributeFQN,
+                                'values': [ attrVal ]
+                            });
+                        }                    
+                    });
+                    // console.log("updateAttrs : "+JSON.stringify(updateAttrs));
+                    // order.set('updateAttr',updateAttrs);
+                    order.apiUpdateAttributes(updateAttrs);
+                    
+                    // console.log("ORDER FINAL : "+JSON.stringify(order));
+                    // this.tbybSelectedProd();   
+                }
+                // order.update();
+            }),
+            tbybSelectedProd: function(){
+                // console.log("tbybSelectedProd called");
+                // console.log("this . : "+JSON.stringify(this.parent.get('tbybInfo')));
+                if(this.checkTbybSelected()){
+                    // console.log("SLECTED : "+this.getTbybSelected());
+                    return this.getTbybSelected();
+                } else {
+                    return "NONE";
+                }
+            },
+            setTybySelected: function(prodCode) {
+                // console.log("Set Code : "+prodCode);
+                var order = this.getOrder();
+                var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
+                if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
+                    var updateAttrs = [];
+                    storefrontOrderAttributes.forEach(function(attr){
+                        // tenant~trybeforebuy
+                        // console.log("ATTR : "+ attr.attributeFQN);
+
+                        var attrVal;
+                        if(attr.attributeFQN === 'tenant~trybeforebuy'){
+                            attrVal = prodCode;
+                            // updateAttrs.push({'tenant~trybeforebuy': attrVal});
+                            updateAttrs.push({
+                                'fullyQualifiedName': attr.attributeFQN,
+                                'values': [ attrVal ]
+                            });
+                        }                    
+                    });
+                    // console.log("updateAttrs : "+JSON.stringify(updateAttrs));
+                    // order.set('updateAttr',updateAttrs);
+                    order.apiUpdateAttributes(updateAttrs);
+                    // console.log("ORDER FINAL : "+JSON.stringify(order));
+                    // this.tbybSelectedProd();   
+                }
+                this.isLoading(true);
+                // order.update();
+            },
+            getTbybSelected: function() {
+                //console.log("getTbybSelected");
+                var order = this.getOrder();
+                var tbybProducts = this.get('tbybProducts');
+                var attribs = order.get('attributes');
+                var selectedTbybExists = false;
+                // console.log("getTbybSelected Called : "+JSON.stringify(attribs));
+                var code = 'NONE';
+                _.each(attribs, function(obj){
+                    
+                  if(obj.fullyQualifiedName === 'tenant~trybeforebuy') {
+                    // console.log("PROD VALUE : "+obj.values[0]);
+                    // Check if the TBYB attribute code is present in the line items or not
+                    for(var prodindex in tbybProducts ){
+                        var itemVal = tbybProducts[prodindex].product.productCode;
+                        var itemVarVal = tbybProducts[prodindex].product.variationProductCode;
+                        var itemCode = '';
+                        if(typeof itemVarVal !== 'undefined') {
+                            itemCode = itemVarVal;
+                        } else {
+                            itemCode = itemVal;    
+                        }
+                        /*
+                        console.log("itemCode : "+itemCode);*/
+                        if(itemCode === obj.values[0]) {
+                            selectedTbybExists = true;
+                        }                    
+                    }
+
+                    // If selected Tbyb order attribute doesn't exist in line items then set code = NONE
+                    if(selectedTbybExists){
+                        // console.log("Product Exists : "+ obj.values[0]);
+                        code  = obj.values[0];
+                    } else {
+                        // console.log("TBYB Product doesn't Exists");
+                        code = "NONE";
+                    }
+                  }  
+                });
+                // console.log("OKK : "+code);
+                this.setTybySelected(code);
+                this.isLoading(false);
+                return code;
                 
             },
-            stepStatus: function(){
-                console.log("Step Status TBYB ");
+            checkTbybSelected: function() {
+                // console.log("checkTbybSelected");
+                var order = this.getOrder();
+                var attribs = order.get('attributes');
+                // console.log("checkTbybSelected Called : "+JSON.stringify(attribs));
+                var isSelected = false;
+                _.each(attribs, function(obj){
+                  if(obj.fullyQualifiedName === 'tenant~trybeforebuy') {
+                    isSelected  = true;
+                  }  
+                });
+                // console.log("IS Slected : "+isSelected);
+                return isSelected;
+            },
+            tbybItemExist: function() {
+                var tbprd = [];
+                tbprd = this.get("tbybProducts");
+                // console.log("PRODUCTS : "+JSON.stringify(tbprd));
+                var count = false;
+                if(tbprd !== '' || typeof tbprd !== 'undefined') {
+                    _.each(tbprd, function(obj){
+                      if(typeof obj.id !== 'undefined') {
+                        count = true;
+                      }                       
+                    });
+                }
+                 // console.log("Length 22 : "+count);
+                
+                 return count;      
+            },
+            updateTbyb: function(e) {
+                // console.log("updateTbyb step : ");
+                $(".tbyb").prop('checked', false);
+                var elm = e.target;
+                var code = elm.getAttribute('data-mz-tbyb-code');
+                this.set("tbyb", "TRUE");
+                
+                // console.log("THIS VALUE : "+JSON.stringify(this.getOrder()));
+                var order = this.getOrder();
+                
+                $('input[value='+code+']').prop("checked","checked");
+                // alert("Code : "+code);
+                var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
+                if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
+                    var updateAttrs = [];
+                    storefrontOrderAttributes.forEach(function(attr){
+                        // tenant~trybeforebuy
+                        // console.log("ATTR : "+ attr.attributeFQN);
+
+                        var attrVal;
+                        if(attr.attributeFQN === 'tenant~trybeforebuy'){
+                            attrVal = code;
+                            // updateAttrs.push({'tenant~trybeforebuy': attrVal});
+                            updateAttrs.push({
+                                'fullyQualifiedName': attr.attributeFQN,
+                                'values': [ attrVal ]
+                            });
+                        }                    
+                    });
+                    // console.log("updateAttrs : "+JSON.stringify(updateAttrs));
+                    // order.set('updateAttr',updateAttrs);
+                    order.apiUpdateAttributes(updateAttrs);
+                    // console.log("ORDER FINAL : "+JSON.stringify(order));
+                    // this.tbybSelectedProd();   
+                }
+                this.isLoading(true);
+                order.update();
+                
             },
             next: function () {
                 this.stepStatus('complete');
-                this.parent.get('billingInfo').calculateStepStatus();
+                this.parent.get('billingInfo').stepStatus('incomplete');
             }
         }),
         BillingInfo = CheckoutStep.extend({
@@ -1818,7 +2090,18 @@
                             attrVal = liftGateVal;
                         } else if(attr.attributeFQN === 'tenant~freight-shipment'){
                             attrVal = freightShipmentVal;
-                        } else {
+                        } else if(attr.attributeFQN === 'tenant~trybeforebuy') {
+                                var attribs = order.get('attributes');
+                                var code = '';
+                                _.each(attribs, function(obj){
+                                  if(obj.fullyQualifiedName === 'tenant~trybeforebuy') {
+                                    code  = obj.values[0];
+                                  }  
+                                });
+                                attrVal = code;
+                                
+                                
+                        } else {                            
                             attrVal = order.get('orderAttribute-' + attr.attributeFQN);
                         }
                         if(attrVal) {

@@ -184,10 +184,7 @@
                         // OPTIONAL: Hide the floatingbutton on pages where you are using an inline button
                         SnapEngage.hideButton();
                       }
-                    });
-
-
-        
+                    });        
                   }
                 };
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(se, s);
