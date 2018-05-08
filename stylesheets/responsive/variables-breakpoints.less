@@ -3,13 +3,17 @@
 @mz-xs-minwidth: 480px;
 @mz-sm-minwidth: 768px;
 @mz-md-minwidth: 992px;
-@mz-lg-minwidth: 1400px;
+@mz-lg-minwidth: 1200px;
+@mz-xl-minwidth: 1500px;
 
 @mz-xs-maxwidth: (@mz-sm-minwidth - 1);
 @mz-sm-maxwidth: (@mz-md-minwidth - 1);
 @mz-md-maxwidth: (@mz-lg-minwidth - 1);
+@mz-lg-maxwidth: (@mz-xl-minwidth - 1);
 
 @mz-xs-media-query: ~"screen and (max-width: @{mz-xs-maxwidth})";
 @mz-sm-media-query: ~"screen and (min-width: 641px) and (max-width: @{mz-sm-maxwidth})";
 @mz-md-media-query: ~"screen and (min-width: @{mz-md-minwidth}) and (max-width: @{mz-md-maxwidth})";
+/*@mz-lg-media-query: ~"screen and (min-width: @{mz-lg-minwidth}) and (max-width: @{mz-lg-maxwidth})";*/
 @mz-lg-media-query: ~"screen and (min-width: @{mz-lg-minwidth})"; 
+@mz-xl-media-query: ~"screen and (min-width: @{mz-xl-minwidth})"; 

@@ -1,0 +1,17 @@
+{% if model.items %}
+<div class="mz-product-cross-sells">
+  <h2 class="heading-2"><span>You May Also Like</span></h2>   
+  
+    <div class="slider" id="crossSellSlider">            
+      {% for image in model.items %}                      
+        <li>    
+          <a data-mz-productimage-thumb="{{ image.sequence }}">            
+            <img src="{{ image.content.productImages[0].imageUrl }}" {% if image.altText %}alt="{{ image.altText }}"{% endif %} height="150" width="150"  />
+          </a> 
+       </li>      
+      {% endfor %} 
+    </div>
+  
+</div>
+{% endif %}
+

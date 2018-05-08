@@ -1,7 +1,14 @@
 
 /**** Site Changes for large screens ****/
-@media @mz-lg-media-query{  
-	@expandedSearchWidth: 750px;
+@media @mz-lg-media-query{ 
+	.mz-sitenav{
+		.mz-sitenav-item{
+			.mz-sitenav-link{
+				padding: 8px 15px;  
+			} 	
+		}
+	}  
+	@expandedSearchWidth: 750px; 
 	.mz-searchbox {
 		.mz-searchbox-input{
 			width: @expandedSearchWidth;
@@ -10,4 +17,5 @@
 			width: @expandedSearchWidth + 2;	
 		}
 	}
+
 } 

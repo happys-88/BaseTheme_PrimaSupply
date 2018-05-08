@@ -24,7 +24,7 @@
 <div class="row">
     {% if pageContext.isDesktop %}
         {% if model.facets %}
-        <div class="col-md-2">
+        <div class="col-sm-2">
             <div data-mz-facets class="mz-l-sidebar">
                 {% dropzone "sidebar-above-facets" scope="template" %}
                 {% include "modules/product/faceting-form" %}
@@ -34,7 +34,7 @@
         {% endif %}
     {% endif %}
 
-    <div class="col-md-10">
+    <div class="col-sm-10">
         <div class="mz-l-paginatedlist">
             <div class="mz-l-paginatedlist-header">
                 <h1 class="mz-pagetitle">{{ navigation.currentNode.name|upper }}</h1>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 {% if pageContext.isDesktop %}
-                <div class="col-sm-6 col-md-offset-2">
+                <div class="col-sm-8">
                     <div class="row">
                         <div data-mz-pagenumbers class="mz-pagenumbers">
                             {% include "modules/common/page-numbers" %}

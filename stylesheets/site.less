@@ -11,6 +11,8 @@ body{
 
 ul, ol{
 	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 img{
 	height: auto;
@@ -27,6 +29,9 @@ img{
 .no-padding{
 	padding: 0;
 }
+.no-padding-left{
+	padding-left: 0;
+}
 
 @media screen and (min-width: 1500px){
 	.container{
@@ -38,6 +43,7 @@ img{
 	background: @textColorWhite;
 	margin-bottom: @gutter*2;
 	padding: @gutter 15px; 
+	overflow: visible; 
 }
 
 .mz-cms-content{
@@ -562,5 +568,45 @@ img[data-mztp]{
 	}
 }
 
+/**** bxslider ****/
+.bx-wrapper{
+	padding: 0 @gutter*2; 
+	.bx-prev{
+		left: 10px;
+	}
+	.bx-next{
+		right: 10px;
+	}
+}
 
+#mz-home-slider{
+	.bx-wrapper{
+		padding: 0;
+	}	
+}
 
+/**** Social Sharing ****/
+.mz-product-social-sharing{
+	.share-count{
+		display: block;
+		margin-bottom: 5px; 
+	} 
+	a{
+		display: inline-block;
+		font-size: 18px;
+		color: @learningCenterTextColor;
+		margin-right: 15px;
+	}
+}
+
+/**** Learning Center ****/
+#mz-drop-zone-blog-name{
+	.mz-content-widget-wrap{
+		text-align: center;
+		padding: @gutter*2 @gutter;
+		border: 1px solid #ddd; 
+		h2{
+			margin: 0;
+		}
+	}
+}

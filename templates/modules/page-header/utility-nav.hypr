@@ -9,12 +9,9 @@
         {% require_script "modules/login-links" %}
 
         <li class="mz-utilitynav-item live-chat">
-            <a href="javascript:void(0);" class="mz-utilitynav-link"><i class="fa fa-comments"></i>Live Chat</a>    
+            <a href="javascript:void(0);" class="mz-utilitynav-link" onclick="SnapEngage.startLink();"><i class="fa fa-comments"></i>{{ labels.liveChat }}</a>    
         </li>
-        <li class="mz-utilitynav-item">
-            <a href="#" onclick="SnapEngage.startLink();">{{ labels.liveChat }}</a>
-        </li>
-
+        
         {% if not user.isAnonymous %}
             <li class="mz-utilitynav-item">
                 <div id="mz-logged-in-notice">

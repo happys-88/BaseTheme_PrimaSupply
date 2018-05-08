@@ -1,0 +1,11 @@
+<div class="mz-sidebar-content-widget">
+	{% dropzone "featured-products" scope="page" %}	
+</div>
+<div class="mz-sidebar-content-widget mz-popular-articles">
+	<h2 class="heading-2"><span>Popular Articles</span></h2> 
+	<ul>
+		<li><a href="javascript:void(0);">A Beginners Guide to Pour Over Coffee Brewing</a></li>
+		<li><a href="javascript:void(0);">Video Vault: Baratza Forte Comparisons and Tutorials</a></li>
+		<li><a href="javascript:void(0);">Popular Article #3</a></li>
+	</ul>
+</div>

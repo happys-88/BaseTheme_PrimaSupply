@@ -130,7 +130,7 @@
                 {% endblock body-content %}
                 
                 {% block body-below-content %}
-                    {% dropzone "body-bottom" scope="template" %}
+                    {% dropzone "body-bottom" scope="page" %} 
                 {% endblock body-below-content %}
 
                 {% block brand-gateway %}{% endblock brand-gateway %} 
@@ -156,7 +156,9 @@
 
 
         {% block yotpo-main-script %}
-            
+            <script type="text/javascript">
+                (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+            </script>
              <script type="text/javascript">
               (function() {
                 var se = document.createElement('script'); se.type = 'text/javascript'; se.async = true;
