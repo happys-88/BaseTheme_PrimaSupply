@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "d098b2a62120a4d75f26d698b12ec8158eec672c"
+      "commit": "a19b568c2c30e9f648b2c68153bb98181277de96"
     },
     "baseThemeChannel": "stable"
   },
@@ -206,15 +206,15 @@
     {
       "entityType": "category",
       "id": "learning-center",
-      "template": "modules/learning-center/landing-page",  
+      "template": "modules/learning-center/landing-page",
       "title": "Learning Center Landing Page",
       "userCreatable": false
     },
     {
       "entityType": "category",
       "id": "learning-center-gateway",
-      "template": "modules/learning-center/gateway-page",   
-      "title": "Learning Center Gateway Page", 
+      "template": "modules/learning-center/gateway-page",
+      "title": "Learning Center Gateway Page",
       "userCreatable": false
     },
     {
@@ -477,7 +477,7 @@
     "rviHeading": "Recently Viewed",
     "rviNumberCookie": 10,
     "rviExpirationDuration": 21,
-	  "snapengaeWidgetId":"d93fa82a-6087-44f8-bd79-3df50a1c3130",
+    "snapengaeWidgetId": "d93fa82a-6087-44f8-bd79-3df50a1c3130",
     "usStates": [
       {
         "abbreviation": "AL",
@@ -1662,11 +1662,11 @@
           "anchor": "100%",
           "fieldLabel": "Choose Featured Posts",
           "name": "productCodes",
-          "xtype": "mz-input-productmulti" 
+          "xtype": "mz-input-productmulti"
         }
       ],
       "icon": "/resources/admin/widgets/03_heading_p.png",
-      "id": "featured-posts", 
+      "id": "featured-posts",
       "validPageTypes": [
         "*"
       ]

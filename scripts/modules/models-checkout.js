@@ -19,12 +19,14 @@
             // reference in .getOrder to exist;
             initStep: function () {
                 var me = this;
+                // console.log("initStep : "+JSON.stringify(this));
                 this.next = (function(next) {
                     return _.debounce(function() {
                         if (!me.isLoading()) next.call(me);
                     }, 750, true);
                 })(this.next);
                 var order = me.getOrder();
+                // console.log("CheckoutStep initstep before calculateStepStatus : "+JSON.stringify(order));
                 me.calculateStepStatus();
                 me.listenTo(order, 'error', function () {
                     if (me.isLoading()) {
@@ -39,10 +41,13 @@
                         me.apiModel.prop('orderId', order.id);
                     }
                 });
+
             },
             calculateStepStatus: function () {
                 // override this!
+                console.log("this.stepStatus() : "+this.stepStatus());
                 var newStepStatus = this.isValid(!this.stepStatus()) ? 'complete' : 'invalid';
+                // console.log("CheckoutStep calculateStepStatus : "+newStepStatus);
                 return this.stepStatus(newStepStatus);
             },
             getOrder: function () {
@@ -50,6 +55,7 @@
             },
             stepStatus: function (newStatus) {
                 if (arguments.length > 0) {
+                    // console.log("Arguments : "+JSON.stringify(arguments)+ " ::: "+newStatus);
                     this._stepStatus = newStatus;
                     this.trigger('stepstatuschange', newStatus);
                 }
@@ -89,7 +95,10 @@
                 return contacts && contacts.length > 0 && contacts;
             },
             initialize: function () {
+               
                 var self = this;
+                 // console.log("FulfillmentContact Step :"+JSON.stringify(self));
+                // console.log("model FullfillmentContact initialize "+JSON.stringify(this));
                 this.on('change:contactId', function (model, newContactId) {
                     if (!newContactId || newContactId === 'new') {
                         model.get('address').clear();
@@ -101,8 +110,10 @@
                         model.set(model.getOrder().get('customer').get('contacts').get(newContactId).toJSON(), {silent: true});
                     }
                 });
+
             },
             calculateStepStatus: function () {
+                console.log("FulfillmentContact step status : "+this);
                 if (!this.requiresFulfillmentInfo() && this.requiresDigitalFulfillmentContact()) {
                     this.validation = this.digitalOnlyValidation;
                 }
@@ -147,6 +158,7 @@
                 });
             },
             next: function () {
+                console.log("FullfillmentContact Next");
                 if (!this.requiresFulfillmentInfo() && this.requiresDigitalFulfillmentContact()) {
                     return this.nextDigitalOnly();
                 }
@@ -226,7 +238,10 @@
 
         FulfillmentInfo = CheckoutStep.extend({
             initialize: function () {
+                console.log("FulfillmentInfo Step");
+                // console.log("model FullFillmentInfo : "+JSON.stringify(this));
                 var me = this;
+                // console.log("FullFillmentInfo : "+JSON.stringify(me));
                 this.on('change:availableShippingMethods', function (me, value) {
                     me.updateShippingMethod(me.get('shippingMethodCode'), true);
                 });
@@ -237,11 +252,14 @@
                     // because the order data will impact the shipping costs.
                     me.updateShippingMethod(me.get('shippingMethodCode'), true);
                 });
-                var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
+
+                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     this.set('orderAttributes', storefrontOrderAttributes);
                 }
                 this.set('liftGateTotal','');
+                this.set('liftGateVal','false');
+                this.set('freightShipmentVal','false');
                 var liftGateProducts = [];
                 var items = require.mozuData('checkout').items;
                 var i = 0;
@@ -287,7 +305,7 @@
                 this.updateShippingMethod();
             },
             calculateStepStatus: function () {
-                // If no shipping required, we're done.
+                // console.log("FulfillmentInfo calculateStepStatus : "+JSON.stringify(this));
                 if (!this.requiresFulfillmentInfo()) return this.stepStatus('complete');
 
                 // If there's no shipping address yet, go blank.
@@ -302,12 +320,13 @@
 
                 // Payment Info step has been initialized. Complete status hides the Shipping Method's Next button.
                 return this.stepStatus('complete');
+                
             },
             updateShippingMethod: function (code, resetMessage) {
                 var available = this.get('availableShippingMethods'),
                     newMethod = _.findWhere(available, { shippingMethodCode: code }),
                     lowestValue = _.min(available, function(ob) { return ob.price; }); // Returns Infinity if no items in collection.
-
+                    // console.log("Avaialble Shipping method : "+newMethod);
                 if (!newMethod && available && available.length && lowestValue) {
                     newMethod = lowestValue;
                 }
@@ -343,6 +362,7 @@
                 this.set('freightShipmentVal',freightShipmentVal);
             },
             applyShipping: function(resetMessage) {
+                // console.log("Apply Shipping");
                 if (this.validate()) return false;
                 var me = this;
                 this.isLoading(true);
@@ -366,24 +386,36 @@
                             }
                         });
                 }
+                /*var total = order.get('total');
+                console.log(total);*/
+                /*var liftGateTotal = order.get('fulfillmentInfo').get('liftGateTotal');
+                console.log(liftGateTotal);
+                if(liftGateTotal !== ''){
+                    liftGateTotal = parseFloat(liftGateTotal);
+                    total = parseFloat(total);
+                    order.set('totall',liftGateTotal+total);
+                }*/
             },
             next: function () {
+                // console.log("Fullfillment Info next"+JSON.stringify(this));
                 this.stepStatus('complete');
                                 
                 // To show the TBYB step when tbyb line item exist
+                console.log("tbybItemExist : "+this.parent.get('tbybInfo').tbybItemExist());
                 if(this.parent.get('tbybInfo').tbybItemExist()) {
-                    // console.log("Set Tbyb incomplete");
+                    console.log("Set Tbyb incomplete");
                     // this.parent.get('tbybInfo').calculateStepStatus();
                     this.parent.get('tbybInfo').stepStatus('incomplete');
                 } else {
                     this.parent.get('tbybInfo').stepStatus('invalid');
-                this.parent.get('billingInfo').calculateStepStatus();
+                    this.parent.get('billingInfo').calculateStepStatus();
+                }
             }
         }),
-TbybInfo = CheckoutStep.extend({
+        TbybInfo = CheckoutStep.extend({
             initialize: function () {                
                 // this.set("tbyb", "TRUE");
-                // console.log("Model TBYB Step :: ");
+                console.log("Model TBYB Step :: ");
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     this.set('orderAttributes', storefrontOrderAttributes);
@@ -415,7 +447,7 @@ TbybInfo = CheckoutStep.extend({
             },
             helpers: ['requireOrderModel', 'tbybSelectedProd','checktbybProductExist'],
             requireOrderModel: function() {
-                // console.log("requireOrderModel O");
+                console.log("requireOrderModel O");
                 var items = this.getOrder().get('items');
                 var selectedTbybExists = false;
                 // var selectedTbybItem = this.tbybSelectedProd();
@@ -451,16 +483,17 @@ TbybInfo = CheckoutStep.extend({
                 return prodVals;
             },
             calculateStepStatus: function () {
-                // console.log("calculateStepStatus TBYB: "+this.parent.get('billingInfo').stepStatus());
+                console.log("calculateStepStatus TBYB: "+this.parent.get('billingInfo').stepStatus());
                 if(this.tbybItemExist()) {
                     var fulfillmentStepComplete = this.parent.get('fulfillmentInfo').stepStatus() === 'complete';
                     var billingStepComplete = this.parent.get('billingInfo').stepStatus() === 'complete';
+                    console.log("Calling checkTbybSelected");
                     var thisStepComplete = this.checkTbybSelected();
                     
-                    // console.log("SLECTE : "+this.getTbybSelected());
+                    console.log("SLECTE : "+this.getTbybSelected());
                     if(fulfillmentStepComplete && thisStepComplete) {
                         if(this.getTbybSelected() === 'NONE') {
-                            // console.log("SET Incomplete");
+                            console.log("SET Incomplete");
                             return this.stepStatus('incomplete');
                         } else {
                             this.parent.get('billingInfo').stepStatus('incomplete');
@@ -478,20 +511,21 @@ TbybInfo = CheckoutStep.extend({
                 // return this.stepStatus('incomplete');
             },
             checktbybProductExist: function(){
-                // console.log("LOGGG : "+JSON.stringify(this.get('tbybProducts').length));
+                console.log("LOGGG : "+JSON.stringify(this.get('tbybProducts').length));
                 if(this.get('tbybProducts').length > 0) {
+                    console.log("FROM INNER PROD : "+this.getTbybSelected());
                     return "true";
                 } else {
-                    // console.log("Calling setTbybEmpty from else");
+                    console.log("Calling setTbybEmpty from else");
                     this.setTbybEmpty();
                     return "false";
                 }
                  
             },
             setTbybEmpty: _.once(function() {
-                alert("setTbybEmpty Once");
+                console.log("setTbybEmpty Once");
                 var order = this.getOrder();
-                // console.log(order);
+                console.log(order);
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     var updateAttrs = [];
@@ -513,7 +547,7 @@ TbybInfo = CheckoutStep.extend({
                     // order.set('updateAttr',updateAttrs);
                     order.apiUpdateAttributes(updateAttrs);
                     
-                    // console.log("ORDER FINAL : "+JSON.stringify(order));
+                    console.log("ORDER FINAL : "+JSON.stringify(order));
                     // this.tbybSelectedProd();   
                 }
                 // order.update();
@@ -522,14 +556,14 @@ TbybInfo = CheckoutStep.extend({
                 // console.log("tbybSelectedProd called");
                 // console.log("this . : "+JSON.stringify(this.parent.get('tbybInfo')));
                 if(this.checkTbybSelected()){
-                    // console.log("SLECTED : "+this.getTbybSelected());
+                    console.log("SLECTED : "+this.getTbybSelected());
                     return this.getTbybSelected();
                 } else {
                     return "NONE";
                 }
             },
             setTybySelected: function(prodCode) {
-                // console.log("Set Code : "+prodCode);
+                console.log("Set Code : "+prodCode);
                 var order = this.getOrder();
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
@@ -558,7 +592,7 @@ TbybInfo = CheckoutStep.extend({
                 // order.update();
             },
             getTbybSelected: function() {
-                //console.log("getTbybSelected");
+                console.log("getTbybSelected");
                 var order = this.getOrder();
                 var tbybProducts = this.get('tbybProducts');
                 var attribs = order.get('attributes');
@@ -566,9 +600,9 @@ TbybInfo = CheckoutStep.extend({
                 // console.log("getTbybSelected Called : "+JSON.stringify(attribs));
                 var code = 'NONE';
                 _.each(attribs, function(obj){
-                    
+                   console.log("attrib : "+JSON.stringify(obj));
                   if(obj.fullyQualifiedName === 'tenant~trybeforebuy') {
-                    // console.log("PROD VALUE : "+obj.values[0]);
+                    console.log("PROD VALUE : "+obj.values[0]);
                     // Check if the TBYB attribute code is present in the line items or not
                     for(var prodindex in tbybProducts ){
                         var itemVal = tbybProducts[prodindex].product.productCode;
@@ -596,14 +630,14 @@ TbybInfo = CheckoutStep.extend({
                     }
                   }  
                 });
-                // console.log("OKK : "+code);
+                console.log("OKK : "+code);
                 this.setTybySelected(code);
                 this.isLoading(false);
                 return code;
                 
             },
             checkTbybSelected: function() {
-                // console.log("checkTbybSelected");
+                console.log("checkTbybSelected");
                 var order = this.getOrder();
                 var attribs = order.get('attributes');
                 // console.log("checkTbybSelected Called : "+JSON.stringify(attribs));
@@ -613,7 +647,7 @@ TbybInfo = CheckoutStep.extend({
                     isSelected  = true;
                   }  
                 });
-                // console.log("IS Slected : "+isSelected);
+                console.log("IS Slected : "+isSelected);
                 return isSelected;
             },
             tbybItemExist: function() {
@@ -628,12 +662,12 @@ TbybInfo = CheckoutStep.extend({
                       }                       
                     });
                 }
-                 // console.log("Length 22 : "+count);
+                 console.log("Length 22 : "+count);
                 
                  return count;      
             },
             updateTbyb: function(e) {
-                // console.log("updateTbyb step : ");
+                console.log("updateTbyb step : ");
                 $(".tbyb").prop('checked', false);
                 var elm = e.target;
                 var code = elm.getAttribute('data-mz-tbyb-code');
@@ -1344,8 +1378,9 @@ TbybInfo = CheckoutStep.extend({
                     currentPurchaseOrder.set('paymentTerm', foundTerm, {silent: true});
             },
             initialize: function () {
+                console.log("Billing Step");
                 var me = this;
-
+                // console.log("Billing Info : "+JSON.stringify(me));
                 _.defer(function () {
                     //set purchaseOrder defaults here.
                     me.setPurchaseOrderInfo();
@@ -1424,6 +1459,7 @@ TbybInfo = CheckoutStep.extend({
                 if (!fulfillmentComplete) return this.stepStatus('new');
 
                 if (thereAreActivePayments && (balanceNotPositive || (this.get('paymentType') === 'PaypalExpress' && window.location.href.indexOf('PaypalExpress=complete') !== -1))) return this.stepStatus('complete');
+                console.log("StepSTAUS : "+this.stepStatus());
                 return this.stepStatus('incomplete');
 
             },
@@ -1474,7 +1510,7 @@ TbybInfo = CheckoutStep.extend({
                 return !_.isEqual(normalizedSavedPaymentInfo, normalizedLiveBillingInfo);
             },
             submit: function () {
-                
+                console.log("Biling SUbmit : ");
                 var order = this.getOrder();
                 // just can't sync these emails right
                 order.syncBillingAndCustomerEmail();
@@ -1561,6 +1597,7 @@ TbybInfo = CheckoutStep.extend({
             },
 
             markComplete: function () {
+                // alert("mark complete");
                 this.stepStatus('complete');
                 this.isLoading(false);
                 var order = this.getOrder();
@@ -1641,20 +1678,20 @@ TbybInfo = CheckoutStep.extend({
                 amountRemainingForPayment: Backbone.MozuModel.DataTypes.Float
             },
             initialize: function (data) {
-
+                console.log("model CheckoutPage initialize : ");
                 var self = this,
                     user = require.mozuData('user');
 
                 _.defer(function() {
-
                     var latestPayment = self.apiModel.getCurrentPayment(),
                         activePayments = self.apiModel.getActivePayments(),
                         fulfillmentInfo = self.get('fulfillmentInfo'),
                         fulfillmentContact = fulfillmentInfo.get('fulfillmentContact'),
                         billingInfo = self.get('billingInfo'),
-                        tbybInfo = self.get('fulfillmentInfo'),
-                        steps = [fulfillmentInfo, fulfillmentContact,tbybInfo, billingInfo],
-                        paymentWorkflow = latestPayment && latestPayment.paymentWorkflow,
+                        tbybInfo = self.get('tbybInfo'),
+                        steps = [fulfillmentInfo, fulfillmentContact, tbybInfo, billingInfo];
+                        console.log("STEP 4 : "+tbybInfo);
+                        var paymentWorkflow = latestPayment && latestPayment.paymentWorkflow,
                         visaCheckoutPayment = activePayments && _.findWhere(activePayments, { paymentWorkflow: 'VisaCheckout' }),
                         allStepsComplete = function () {
                             return _.reduce(steps, function(m, i) { return m + i.stepStatus(); }, '') === 'completecompletecomplete';
@@ -1682,11 +1719,11 @@ TbybInfo = CheckoutStep.extend({
                         });
                         billingInfo.trigger('stepstatuschange'); // trigger a rerender
                     }
-
                     self.isReady(isReady);
-
+                    console.log("STEPS Length : "+steps.length);
                     _.each(steps, function(step) {
                         self.listenTo(step, 'stepstatuschange', function() {
+                            // console.log("STEPS : "+JSON.stringify(_.pick(step, _(Object.keys(step)).first())));
                             _.defer(function() {
                                 self.isReady(allStepsComplete());
                             });
@@ -1721,6 +1758,7 @@ TbybInfo = CheckoutStep.extend({
             },
 
             applyAttributes: function() {
+                // console.log("Apply Attributes");
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     this.set('orderAttributes', storefrontOrderAttributes);
@@ -2077,17 +2115,18 @@ TbybInfo = CheckoutStep.extend({
                             shopperNotes: order.get('shopperNotes').toJSON()
                         });
                     }];
-
+                    // console.log("ORDER : "+JSON.stringify(order));
                 var liftGateVal = this.get('fulfillmentInfo').get('liftGateVal');
                 var freightShipmentVal = this.get('fulfillmentInfo').get('freightShipmentVal');
-
+                var tbybVal = this.get('tenant~trybeforebuy');
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     var updateAttrs = [];
                     storefrontOrderAttributes.forEach(function(attr){
+                        console.log("ATTRIBUTE : "+JSON.stringify(attr));
                         var attrVal;
                         if(attr.attributeFQN === 'tenant~lift-gate'){
-                            attrVal = liftGateVal;
+                            attrVal = liftGateVal;                            
                         } else if(attr.attributeFQN === 'tenant~freight-shipment'){
                             attrVal = freightShipmentVal;
                         } else if(attr.attributeFQN === 'tenant~trybeforebuy') {
@@ -2099,7 +2138,7 @@ TbybInfo = CheckoutStep.extend({
                                   }  
                                 });
                                 attrVal = code;
-                                
+                                console.log("TRBYT : "+JSON.stringify(attrVal));
                                 
                         } else {                            
                             attrVal = order.get('orderAttribute-' + attr.attributeFQN);
@@ -2180,6 +2219,7 @@ TbybInfo = CheckoutStep.extend({
                 process.push(/*this.finalPaymentReconcile, */this.apiCheckout);
                 
                 api.steps(process).then(this.onCheckoutSuccess, this.onCheckoutError);
+                
 
             },
             update: function() {
@@ -2204,6 +2244,7 @@ TbybInfo = CheckoutStep.extend({
                        'tbybInfo',
                        'billingInfo'
                 ], function(name) {
+                    console.log("Name : "+name);
                     cb.call(me.get(name));
                 });
             },
