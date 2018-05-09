@@ -1,0 +1,62 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.content.productName %}  - {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-learning-center mz-blog-article {% endblock body-tag-classes %}
+
+{% block body-content %}
+
+{% require_script "pages/product" %}
+
+{% preload_json model "product" %}
+
+{% dropzone "blog-name" scope="page" %} 
+
+<div class="mz-sitenav-lcenter">
+    {% include "modules/learning-center/lc-site-nav" %} 
+</div>
+{% if themeSettings.showBreadcrumbs %}
+    <div class="lc-breadcrumbs">
+        {% include "modules/breadcrumbs" %} 
+    </div>
+{% endif %}  
+
+<div itemscope itemtype="http://schema.org/Product" class="mz-l-container mz-blog-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                
+                <div class="mz-product-social-sharing hide">
+                    {% dropzone "social-sharing" scope="template" %}      
+                </div>
+                <h1 class="mz-blog-title" itemprop="name">{{ model.content.productName }}</h1>
+                <div class="mz-blog-mainimage">
+                    {% include "modules/learning-center/blog-article-mainimage" %}     
+                </div>
+
+                <div class="mz-blog-metadata"> 
+                    <span class="blog-date">{{ model.createDate|date("M jS, Y" }}</span> 
+                    <span class="author-name">Written by Lee Sill</span>
+                </div>
+
+                <div class="mz-blog-content-detail">
+                    {% include "modules/learning-center/blog-article-detail" %}    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock body-content %}
+
+{% block body-below-content %}
+    {% dropzone "body-bottom" scope="page" %}   
+{% endblock body-below-content %} 
+
+
+
+
+
+
+ 

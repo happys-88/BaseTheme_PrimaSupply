@@ -1,0 +1,17 @@
+
+{% comment %}
+{% if model.content.productShortDescription and themeSettings.showProductDetailShortDesc %}
+  <div class="mz-productdetail-shortdesc mz-l-stack-section">
+    <span itemscope="description">{{ model.content.productShortDescription|safe }}</span>
+  </div>
+{% endif %}
+{% endcomment %}
+
+<div class="mz-productdetail-fulldesc mz-l-stack-section">
+  {{ model.content.productFullDescription|safe }} 
+</div>
+
+<div class="featured-products">
+  {% dropzone "featured-products" scope="page" %}   
+</div>
+

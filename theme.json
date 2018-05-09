@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "a19b568c2c30e9f648b2c68153bb98181277de96"
+      "commit": "6db2208eab02cc022c7eb08eb13737f55d00086f"
     },
     "baseThemeChannel": "stable"
   },
@@ -207,15 +207,30 @@
       "entityType": "category",
       "id": "learning-center",
       "template": "modules/learning-center/landing-page",
-      "title": "Learning Center Landing Page",
+      "title": "Learning Center LandingPage", 
       "userCreatable": false
     },
     {
       "entityType": "category",
       "id": "learning-center-gateway",
       "template": "modules/learning-center/gateway-page",
-      "title": "Learning Center Gateway Page",
+      "title": "Learning Center GatewayPage", 
       "userCreatable": false
+    },
+    {
+      "entityType": "category",
+      "id": "learning-center-directory",
+      "template": "modules/learning-center/directory-page", 
+      "title": "Learning Center DirectoryPage", 
+      "userCreatable": false
+    },
+    {
+      "entityType": "product",
+      "id": "blog-article",
+      "template": "modules/learning-center/blog-article",
+      "title": "Blog Article",
+      "userCreatable": false,
+      "customEditor": "productContent@mozu" 
     },
     {
       "documentType": "web_page",
@@ -432,6 +447,7 @@
     "listVolumePricing": false,
     "listProductThumbSize": 160,
     "featuredPostImageSize": 1048,
+    "blogContentImageSize": 325, 
     "maxProductImageThumbnailSize": 100,
     "productImagesContainerWidth": 500,
     "productImagesZoomContainerWidth": 800,
@@ -835,6 +851,12 @@
       "displayName": "Featured Products",
       "displayTemplate": "catalog/featuredproducts",
       "editViewFields": [
+        {
+          "anchor": "100%",
+          "fieldLabel": "Title",
+          "name": "title",
+          "xtype": "mz-input-text"
+        }, 
         {
           "anchor": "100%",
           "fieldLabel": "Products",

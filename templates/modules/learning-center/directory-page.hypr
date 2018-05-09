@@ -1,0 +1,34 @@
+
+{% extends "page" %} 
+
+{% block title-tag-content %}
+	{% firstof pageContext.metaTitle|safe model.name|replace(themeSettings.columnBreaker, "")|safe %}  - {% parent %}
+{% endblock title-tag-content %}
+
+{% block body-tag-classes %}mz-learning-center directory-page{% endblock body-tag-classes %} 
+
+{% block body-content %}
+
+	{% require_script "pages/category" %}
+	
+	{% dropzone "blog-name" scope="page" %} 
+
+	<div data-mz-category="{{model.categoryId}}" class="mz-l-container">
+	    <div class="mz-sitenav-lcenter">
+			{% include "modules/learning-center/lc-site-nav" %}	
+		</div>
+		{% if themeSettings.showBreadcrumbs %}
+	    	<div class="lc-breadcrumbs">
+	        	{% include "modules/breadcrumbs" %}
+	    	</div>
+	    {% endif %}
+
+	    <div class="mz-content-section">
+	       	<div class="col-xs-12">
+				{% include "modules/learning-center/directory-interior" %}	  
+			</div>    
+		</div>
+	    
+	</div>
+
+{% endblock body-content %} 
