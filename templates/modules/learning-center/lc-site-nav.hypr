@@ -48,7 +48,7 @@
       </ul>
 
       <div class="learning-center-search">
-        <form id="searchbox" class="mz-searchbox" action="{% make_url "search" %}">
+        <form id="searchbox-learning-center" class="mz-searchbox" action="{% make_url "search" %}">
           <div class="mz-searchbox-field">
               <input placeholder="{{ labels.searchLearningCenter }}" type="search" class="mz-searchbox-input" autocomplete="off" name="query" data-mz-role="searchquery" />
               <button class="mz-searchbox-button" type="submit"><i class="fa fa-search"></i></button>

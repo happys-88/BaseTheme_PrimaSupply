@@ -20,7 +20,8 @@ define([
                 this.$amountEl.text(localAmount);
             },
             setCount: function(count) {
-                this.$el.text(count);
+                $(".mz-cartmonitor").text(count); 
+                //this.$el.text(count);
                 //this.update(true);
             },
             addToCount: function(count) {

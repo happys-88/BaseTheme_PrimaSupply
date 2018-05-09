@@ -35,30 +35,67 @@
         {% endif %}
     {% endblock clear-facets %}
 
-    <div class="mz-faceting-section">
+    <div class="mz-faceting-section" id="lcBlogFacets">
+        {% comment %}
         {% for facet in model.facets %}
-          {% if facet.values and facet.facetType == "Hierarchy" %}
+          {% if facet.values and facet.facetType == "Hierarchy" %} 
             {% if facet.values.length == 1 %}        
-              {% include "modules/product/hierarchy-facets" with facet=facet facetValues=facet.values|first|prop("childrenFacetValues") %}
+              {% include "modules/product/learning-center/blog-hierarchy-facets" with facet=facet facetValues=facet.values|first|prop("childrenFacetValues") %}
             {% else %}
-              {% include "modules/product/hierarchy-facets" with facet=facet facetValues=facet.values %}
+              {% include "modules/product/learning-center/blog-hierarchy-facets" with facet=facet facetValues=facet.values %}
             {% endif %}
           {% endif %}
         {% endfor %}
+        {% endcomment %} 
+
         {% for facet in model.facets %}
-            {% if facet.values and facet.facetType != "Hierarchy" %}
-                <div class="mz-l-sidebaritem">
+            {% if facet.values and facet.facetType != "Hierarchy" %} 
+                <div class="mz-facet-row">
                     <h4>{{ facet.label }}</h4>
                     <ul class="mz-facetingform-facet mz-facetingform-facet-hierarchy {{ facet.label|slugify }} clearfix">
                         {% for fval in facet.values %}
-                                <li {% if fval.isApplied %}class="checked"{% endif %}>
-                                    <input type="checkbox" id="{{facet.field|slugify }}_{{ fval.value|slugify }}" class="mz-facetingform-value" {% if fval.isApplied %}checked="checked"{% endif %} data-mz-facet="{{ facet.field }}" data-mz-facet-value="{{ fval.value }}" data-mz-url="{% make_url "facet" fval %}">
-                                    <label class="mz-facetingform-valuelabel" for="{{facet.field|slugify }}_{{ fval.value|slugify }}" {% if facet.label == 'Color' %}style="background: {{ fval.value }}"{% endif %} >{{ fval.label }}</label>
-                                </li>
+                            <li {% if fval.isApplied %}class="checked"{% endif %}>
+                                <input type="checkbox" id="{{facet.field|slugify }}_{{ fval.value|slugify }}" class="mz-facetingform-value" {% if fval.isApplied %}checked="checked"{% endif %} data-mz-facet="{{ facet.field }}" data-mz-facet-value="{{ fval.value }}" data-mz-url="{% make_url "facet" fval %}">
+                                <label class="mz-facetingform-valuelabel" for="{{facet.field|slugify }}_{{ fval.value|slugify }}" {% if facet.label == 'Color' %}style="background: {{ fval.value }}"{% endif %} >{{ fval.label }}</label>
+                            </li>
                         {% endfor %}
-                    </ul>
+                    </ul> 
                 </div>
             {% endif %}
         {% endfor %}
+
+        <!-- Dummy Code -->
+        <div class="mz-facet-row">
+            <h4>Authors <i class="fa fa-angle-down"></i></h4>
+            <ul class="mz-facetingform-facet mz-facetdropdown"> 
+                <li>
+                    <input type="checkbox" id="author_1" class="mz-facetingform-value">
+                    <label class="mz-facetingform-valuelabel" for="author_1">Author Name 1</label> 
+                </li>
+                <li>
+                    <input type="checkbox" id="author_2" class="mz-facetingform-value">
+                    <label class="mz-facetingform-valuelabel" for="author_2">Author Name 2</label> 
+                </li> 
+                <li>
+                    <input type="checkbox" id="author_3" class="mz-facetingform-value">
+                    <label class="mz-facetingform-valuelabel" for="author_3">Author Name 3</label> 
+                </li> 
+                <li>
+                    <input type="checkbox" id="author_4" class="mz-facetingform-value">
+                    <label class="mz-facetingform-valuelabel" for="author_4">Author Name 4</label> 
+                </li> 
+                <li>
+                    <input type="checkbox" id="author_5" class="mz-facetingform-value">
+                    <label class="mz-facetingform-valuelabel" for="author_5">Author Name 5</label> 
+                </li> 
+                <li>
+                    <input type="checkbox" id="author_6" class="mz-facetingform-value">
+                    <label class="mz-facetingform-valuelabel" for="author_6">Author Name 6</label>  
+                </li>  
+                
+            </ul> 
+
+        </div>  
+
     </div>
 </section>

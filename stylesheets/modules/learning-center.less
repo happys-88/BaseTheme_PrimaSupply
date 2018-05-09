@@ -453,6 +453,64 @@
 }
 
 /**** Blog Listing Page - Directory ****/
+.mz-learning-center{
+	.mz-l-sidebar{
+		.mz-facetingform{
+			float: left;
+			width: 100%;
+			h2{
+				float: left;
+				font-size: 16px;
+			    line-height: 20px;
+			    padding: 0;
+			    border: none;
+			    margin: 0 15px 0 0;
+			}	
+			.mz-faceting-section{
+				float: left;
+				width: auto;
+				.mz-facet-row{
+					position: relative; 
+					h4{
+						line-height: 20px;
+						margin: 0;
+						&:after{
+							display: none;
+						}
+					}
+					.mz-facetdropdown{
+						display: block; 
+						min-width: 300px; 
+					    max-width: 540px;
+					    padding: 15px; 
+					    position: absolute;
+					    left: 0;
+					    top: 20px;  
+					    background: #ebebeb;
+					    border: 1px solid #ddd; 
+					    z-index: 9;
+					    opacity: 0;  
+					    &:before{
+							content: "";
+				            position: absolute;
+				            left: 25px;
+				            top: -10px; 
+				            border-left: 10px solid transparent;
+				            border-bottom: 10px solid #ebebeb;
+				            border-right: 10px solid transparent; 
+				        } 
+					    li{
+					    	float: left;
+					    	width: 50%;
+					    }
+					}
+				}
+			}
+		}
+		
+	}	
+}
+
 .mz-blog-listing{
 	.mz-productlist-item{
 		.mz-productlisting-image{
