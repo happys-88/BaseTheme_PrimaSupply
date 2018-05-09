@@ -1,0 +1,36 @@
+
+<nav class="mz-scrollnav" id="account-nav">
+    <ul class="mz-scrollnav-list nav">
+            <li class="mz-scrollnav-item active">
+                    <a class="mz-scrollnav-link"  href="/customer-service">
+                       Customer Service
+                    </a>
+                </li>
+        <li class="mz-scrollnav-item">
+            <a class="mz-scrollnav-link"  href="/track-my-order">
+               Track my order
+            </a>
+        </li>
+       
+        <li class="mz-scrollnav-item">
+            <a class="mz-scrollnav-link"  href="/shipping-info">
+               Shipping info
+            </a>
+        </li>
+        <li class="mz-scrollnav-item">
+            <a class="mz-scrollnav-link"  href="/return-exchange">
+                Return & Exchange
+            </a>
+        </li>
+        <li class="mz-scrollnav-item">
+            <a class="mz-scrollnav-link"  href="/price-match-request">
+               Price match Request
+            </a>
+        </li>
+        <li class="mz-scrollnav-item">
+            <a class="mz-scrollnav-link"  href="/contact-us">
+                Contact Us
+            </a>
+        </li>
+    </ul>
+</nav>

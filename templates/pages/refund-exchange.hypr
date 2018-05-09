@@ -1,0 +1,9 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  - {% parent %}{% endblock title-tag-content %}
+{% block body-tag-classes %} Customer-service {% endblock body-tag-classes %}
+
+{% block refund-exchange %}
+
+
+{% endblock refund-exchange %}

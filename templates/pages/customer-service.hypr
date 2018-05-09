@@ -1,0 +1,27 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  - {% parent %}{% endblock title-tag-content %}
+{% block body-tag-classes %} customer-service {% endblock body-tag-classes %}
+
+{% block customer-service %}
+<div class="row">
+    <div class="col-sm-3">     
+        <div class="mz-l-sidebar mz-myaccount-nav">
+                {% include "modules/customer-service/service-nav" with navtarget="body" %}
+        </div>
+    </div>
+    <div class="col-sm-9 ">
+        <div id="customer-service" class="">
+            <div class="col-12 mz-dropzone-empty">{% dropzone "service-dropzone" scope="page" %} service-dropzone</div>   
+            <div class="row">
+                <div class="col-sm-4 mz-dropzone-empty">{% dropzone "track-my-order" scope="page" %} track-my order</div>
+                <div class="col-sm-4 mz-dropzone-empty">{% dropzone "contact-Us" scope="page" %} Contact us</div>
+                <div class="col-sm-4 mz-dropzone-empty">{% dropzone "return-exchange" scope="page" %}  Return Exchange </div>
+            </div>
+        </div>
+       
+        
+    </div>
+  </div>
+
+{% endblock customer-service %} 
