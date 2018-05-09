@@ -33,11 +33,6 @@
         </li>
         {% endif %}
         <li class="mz-scrollnav-item">
-            <a class="mz-scrollnav-link" data-toggle="tab" href="#returnhistory">
-                {{ labels.returns }}
-            </a>
-        </li>
-        <li class="mz-scrollnav-item">
             <a class="mz-scrollnav-link" data-toggle="tab" href="#{{ labels.digitalCreditsAnchor }}">
                 {{ labels.digitalCredit }}
             </a>

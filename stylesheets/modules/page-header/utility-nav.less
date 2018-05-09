@@ -49,7 +49,7 @@
 
 }
 
-//EditedBy: Ashish 
+//Login Popup EditedBy: Ashish 
 .mz-login-model {
     .modal-content {
         border-radius: 0;
@@ -169,12 +169,12 @@
 .mz-myaccount-panels {
     h3 {
         &.mz-l-stack-sectiontitle {
-                border-bottom: 1px solid #e0e0e0;
-                font-size: 22px;
-                font-weight: 700;
-                line-height: 40px;
-                margin: 0;
-                text-transform: uppercase;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 40px;
+            margin: 0 0 30px;
+            text-transform: uppercase;
             a {
                 color: #d15f2a;
                 float: right;
@@ -200,6 +200,16 @@
             }
         }
     }
+    .mz-accountsettings {
+        .mz-accountsettings-section {
+            min-height: 28px;
+            line-height: 12px;
+            padding-top: 0;
+        }
+       .mz-accountsettings-displayname {
+            font-weight: 700;
+        }
+    }
     .control-label {
         line-height: 35px;
         margin-bottom: 0;
@@ -210,33 +220,6 @@
         label {
             line-height: 35px;
             margin-bottom: 0;
-        }
-    }
-    .mz-button {
-        border-radius: 0;
-        &.mz-accountsettings-editdone,
-        &.mz-accountsettings-passworddone,
-        &.mz-contact-save {
-            float: right;
-            line-height: 10px;
-            width: 70%;  
-        }
-        &.mz-accountsettings-editcancel,
-        &.mz-accountsettings-passwordcancel,
-        &.mz-contact-cancel {
-            background: #fff;
-            border-color: #fff;
-            border-left: 0;
-            color: #666;
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 10px;
-            padding-right: 0;
-            padding-left: 0;
-            text-decoration: underline;
-            &:hover {
-                text-decoration: none;
-            }
         }
     }
     .form-control {
@@ -264,6 +247,9 @@
             margin: 0 0 30px 0;
             padding: 0 15px;
         }
+        .mz-accountaddressbook-empty {
+            line-height: 12px;
+        }
     }
     .mz-recent-order-product {
         float: left;
@@ -274,13 +260,43 @@
                 padding-top: 0;
             }
         }
-        h3 {
-            &.mz-l-stack-sectiontitle {
-                background: #495363;
-                color: #fff;
-                padding: 0px 15px;
-                font-size: 17px;
-                margin-bottom: -1px;
+    }
+    .mz-orderlisting {
+        .mz-l-stack-section {
+            margin-bottom: 0;
+        }
+        .mz-orderlisting-heading {
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+    }
+    .mz-button {
+        border-radius: 0;
+        &.mz-accountsettings-editdone,
+        &.mz-accountsettings-passworddone,
+        &.mz-contact-save {
+            float: right;
+            line-height: 10px;
+            width: 70%;  
+        }
+        &.mz-accountsettings-passwordedit {
+            margin-top: 0;
+        }
+        &.mz-accountsettings-editcancel,
+        &.mz-accountsettings-passwordcancel,
+        &.mz-contact-cancel {
+            background: #fff;
+            border-color: #fff;
+            border-left: 0;
+            color: #666;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 10px;
+            padding-right: 0;
+            padding-left: 0;
+            text-decoration: underline;
+            &:hover {
+                text-decoration: none;
             }
         }
     }
@@ -303,4 +319,7 @@
 .mz-order-history-dropzone {
     background: #ccc;
     height: 300px;
+}
+.fixed {
+    position: static!important;
 }
