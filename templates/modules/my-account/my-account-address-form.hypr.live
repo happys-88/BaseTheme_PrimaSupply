@@ -2,35 +2,52 @@
 {% block address-form %}
     {% set addresscontext="editingContact." %}
     {% if model.isShippingContact %}
-    {% set countries=pageContext.shippingCountries %}
+        {% set countries=pageContext.shippingCountries %}
     {% endif %}
     <li class="mz-accountaddressbook-contact mz-accountaddressbook-form">
     {% parent %}
-<div class="mz-contacttypes">
-        <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows mz-contacttype">
-            <label>
-                <input type="checkbox" data-mz-value="editingContact.isBillingContact" value="true" {% if model.isBillingContact %} checked="checked" {% endif %}> {{ labels.billingContact }}
-            </label>
-            {% if model.isBillingContact %}
-            <label class="mz-contacttype-isprimary">
-                <input type="checkbox" data-mz-value="editingContact.isPrimaryBillingContact" value="true" {% if model.isPrimaryBillingContact %} checked="checked" {% endif %}> {{ labels.primary }}
-            </label>
-            {% endif %}
+        <div class="mz-contacttypes">
+            <div class="form-group col-xs-12">
+                <label class="control-label col-sm-4"></label>
+                <div class="col-sm-8">  
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" data-mz-value="editingContact.isBillingContact" value="true" {% if model.isBillingContact %} checked="checked" {% endif %}> {{ labels.billingContact }}
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        {% if model.isBillingContact %}
+                            <label class="mz-contacttype-isprimary">
+                                <input type="checkbox" data-mz-value="editingContact.isPrimaryBillingContact" value="true" {% if model.isPrimaryBillingContact %} checked="checked" {% endif %}> {{ labels.primary }}
+                            </label>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <label class="control-label col-sm-4"></label>
+                <div class="col-sm-8">  
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" data-mz-value="editingContact.isShippingContact" value="true" {% if model.isShippingContact %} checked="checked" {% endif %}> {{ labels.shippingContact }}
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        {% if model.isShippingContact %}
+                            <label class="mz-contacttype-isprimary">
+                                <input type="checkbox" data-mz-value="editingContact.isPrimaryShippingContact" value="true" {% if model.isPrimaryShippingContact %} checked="checked" {% endif %}> {{ labels.primary }}
+                            </label>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows mz-contacttype">
-            <label>
-                <input type="checkbox" data-mz-value="editingContact.isShippingContact" value="true" {% if model.isShippingContact %} checked="checked" {% endif %}> {{ labels.shippingContact }}
-            </label>
-            {% if model.isShippingContact %}
-            <label class="mz-contacttype-isprimary">
-                <input type="checkbox" data-mz-value="editingContact.isPrimaryShippingContact" value="true" {% if model.isPrimaryShippingContact %} checked="checked" {% endif %}> {{ labels.primary }}
-            </label>
-            {% endif %}
+        <div class="form-group col-xs-12">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-8">
+                <button class="mz-button mz-contact-cancel" data-mz-action="cancelEditContact">{{ labels.cancel }}</button>
+                <button class="mz-button mz-contact-save" data-mz-action="finishEditContact">{{ labels.save }}</button>
+            </div>
         </div>
-    </div>
-    <div class="mz-contact-actions">
-        <button class="mz-button mz-contact-save" data-mz-action="finishEditContact">{{ labels.save }}</button>
-        <button class="mz-button mz-contact-cancel" data-mz-action="cancelEditContact">{{ labels.cancel }}</button>
-    </div>
     </li>
 {% endblock address-form %}

@@ -1,29 +1,96 @@
 ﻿<h3 class="mz-l-stack-sectiontitle">{{ labels.accountSettings }}{% if not editing %}<a href class="mz-link-edit-accountsettings" data-mz-action="startEdit">{{ labels.edit }}</a>{% endif %}</h3>
-<div class="mz-accountsettings-section mz-accountsettings-name {% if editing %} is-editing {% endif %}">
-  <span class="mz-accountsettings-label mz-account-settings-label-name">{{ labels.firstName }} / {{ labels.lastName }}</span>
-  {% if editing %}
-  <input class="mz-accountsettings-firstname" type="text" placeholder="{{ labels.firstName }}" data-mz-value="firstName" value="{{ model.firstName }}" />
-  <input class="mz-accountsettings-lastname" type="text" placeholder="{{ labels.lastName }}" data-mz-value="lastName" value="{{ model.lastName }}" />
-  <span class="mz-validationmessage" data-mz-validationmessage-for="firstName"></span>
-  <span class="mz-validationmessage" data-mz-validationmessage-for="lastName"></span>
-  {% else %}
-  <div class="mz-accountsettings-displayname" id="account-settings-name">{{ model.firstName }} {{ model.lastName }}</div>
-  {% endif %}
-</div>
-<div class="mz-accountsettings-section mz-accountsettings-email">
-  <span class="mz-accountsettings-label mz-account-settings-label-email">{{ labels.emailAddress }}</span>
-  {% if editing %}
-  <input class="mz-accountsettings-email" type="email" placeholder="{{ labels.emailAddress }}" data-mz-value="emailAddress" value="{{ model.emailAddress }}" />
-  <span class="mz-validationmessage" data-mz-validationmessage-for="emailAddress"></span>
-  {% else %}
-  <div class="mz-accountsettings-displayemail">{{ model.emailAddress|default(model.userName) }}</div>
-  {% endif %}
-</div>
-<div class="mz-accountsettings-section mz-accountsettings-acceptsmarketing">
-  <input type="checkbox" id="account-acceptsmarketing" data-mz-value="acceptsMarketing" {% if model.acceptsMarketing %}checked="checked"{% endif %} {% if not editing %}disabled="disabled"{% endif %} />
-  <label for="account-acceptsmarketing">{{ labels.accountOptIn }}</label>
-</div>
+{% if model.firstName %}
+    <div class="mz-accountsettings-section mz-accountsettings-name {% if editing %} is-editing {% endif %}">
+        {% if editing %}
+            <div class="form-group col-xs-12">
+                <label class="control-label col-sm-2">{{ labels.firstName }}</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="{{ labels.firstName }}" data-mz-value="firstName" value="{{ model.firstName }}" />
+                    <span class="mz-validationmessage" data-mz-validationmessage-for="firstName"></span>
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <label class="control-label col-sm-2">{{ labels.lastName }}</label>
+                <div class="col-sm-4">          
+                    <input type="text" class="form-control" placeholder="{{ labels.lastName }}" data-mz-value="lastName" value="{{ model.lastName }}" />
+                    <span class="mz-validationmessage" data-mz-validationmessage-for="lastName"></span>
+                </div>
+            </div>
+        {% else %}
+            <div class="mz-accountsettings-displayname" id="account-settings-name">{{ model.firstName }} {{ model.lastName }}</div>
+        {% endif %}
+    </div>
+    <div class="mz-accountsettings-section mz-accountsettings-email">
+        {% if editing %}
+            <div class="form-group col-xs-12">
+                <label class="control-label col-sm-2">{{ labels.emailAddress }}</label>
+                <div class="col-sm-4">
+                    <input type="email" class="form-control" placeholder="{{ labels.emailAddress }}" data-mz-value="emailAddress" value="{{ model.emailAddress }}" />
+                    <span class="mz-validationmessage" data-mz-validationmessage-for="emailAddress"></span>
+                </div>
+            </div>
+        {% else %}
+            <div class="mz-accountsettings-displayemail">{{ model.emailAddress|default(model.userName) }}</div>
+        {% endif %}
+    </div>
+    {% comment %}
+    <div class="mz-accountsettings-section mz-accountsettings-acceptsmarketing">
+        <input type="checkbox" id="account-acceptsmarketing" data-mz-value="acceptsMarketing" {% if model.acceptsMarketing %}checked="checked"{% endif %} {% if not editing %}disabled="disabled"{% endif %} />
+        <label for="account-acceptsmarketing">{{ labels.accountOptIn }}</label>
+    </div>
+    {% endcomment %}
+{% else %}
+    <div class="mz-accountsettings-section mz-accountsettings-name {% if editing %} is-editing {% endif %}">
+        <div class="form-group col-xs-12">
+            <label class="control-label col-sm-2">{{ labels.firstName }}</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" placeholder="{{ labels.firstName }}" data-mz-value="firstName" value="{{ model.firstName }}" />
+                <span class="mz-validationmessage" data-mz-validationmessage-for="firstName"></span>
+            </div>
+        </div>
+        <div class="form-group col-xs-12">
+            <label class="control-label col-sm-2">{{ labels.lastName }}</label>
+            <div class="col-sm-4">          
+                <input type="text" class="form-control" placeholder="{{ labels.lastName }}" data-mz-value="lastName" value="{{ model.lastName }}" />
+                <span class="mz-validationmessage" data-mz-validationmessage-for="lastName"></span>
+            </div>
+        </div>
+        <div class="form-group col-xs-12">
+            <label class="control-label col-sm-2">{{ labels.emailAddress }}</label>
+            <div class="col-sm-4">
+                <input type="email" class="form-control" placeholder="{{ labels.emailAddress }}" data-mz-value="emailAddress" value="{{ model.emailAddress }}" />
+                <span class="mz-validationmessage" data-mz-validationmessage-for="emailAddress"></span>
+            </div>
+        </div>
+        <!-- Checkbox Static-->
+        <div class="form-group col-xs-12">
+            <label class="control-label col-sm-2"></label>
+            <div class="col-sm-4">  
+                <p>{{ labels.signUpEmailMsg }}</p>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">{{ labels.primaDeals }}</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">{{ labels.primaDigest }}</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">{{ labels.primaLearningCenter }}</label>
+                </div>
+            </div>
+        </div>
+        <!-- /Checkbox Static-->
+    
+        <div class="mz-accountsettings-displayname" id="account-settings-name">{{ model.firstName }} {{ model.lastName }}</div>
+    </div>
+    {% comment %}
+    <div class="mz-accountsettings-section mz-accountsettings-acceptsmarketing">
+        <input type="checkbox" id="account-acceptsmarketing" data-mz-value="acceptsMarketing" {% if model.acceptsMarketing %}checked="checked"{% endif %} {% if not editing %}disabled="disabled"{% endif %} />
+        <label for="account-acceptsmarketing">{{ labels.accountOptIn }}</label>
+    </div>
+    {% endcomment %}
+{% endif %}
 
+{% comment %}
 <div class="mz-accountsettings-section mz-accountsettings-attributes">
   {% for attribute in model.attributes %}
     <div class="mz-accountsettings-attribute mz-accountsettings-attribute-{{ attribute.inputType|lower }}">
@@ -84,8 +151,14 @@
     </div>
   {% endfor %}
 </div>
+{% endcomment %}
 
-{% if editing %}
-<button class="mz-button mz-button-small mz-accountsettings-editdone" data-mz-action="finishEdit">{{ labels.save }}</button>
-<button class="mz-button mz-button-small mz-accountsettings-editdone" data-mz-action="cancelEdit">{{ labels.cancel }}</button>
+{% if not model.firstName or editing %}
+    <div class="form-group col-xs-12">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+            <button class="mz-button mz-button-small mz-accountsettings-editcancel" data-mz-action="cancelEdit">{{ labels.cancel }}</button>
+            <button class="mz-button mz-button-small mz-accountsettings-editdone" data-mz-action="finishEdit">{{ labels.save }}</button>
+        </div>
+    </div>
 {% endif %}

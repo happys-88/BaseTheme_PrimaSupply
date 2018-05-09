@@ -44,13 +44,42 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         startEdit: function(event) {
             event.preventDefault();
             this.editing = true;
+            //Start Edited By:- Ashish
+            // if ($("#account-settings-name").text() !== "" && this.beforeEditModel) {
+            //     this.model.set("firstName", this.beforeEditModel.firstName);
+            //     this.model.set("lastName", this.beforeEditModel.lastName);
+            //     this.model.set("emailAddress", this.beforeEditModel.emailAddress);
+            // }
+            // this.beforeEditModel = {
+            //     firstName: this.model.get('firstName'),
+            //     lastName: this.model.get('lastName'),
+            //     emailAddress: this.model.get('emailAddress')
+            // };
+            //End Edited By:- Ashish
             this.render();
         },
         cancelEdit: function() {
+            var self = this;
             this.editing = false;
-            this.afterEdit();
+            //Start Edited By:- Ashish
+            // this.model.set("firstName", this.beforeEditModel.firstName);
+            // this.model.set("lastName", this.beforeEditModel.lastName);
+            // this.model.set("emailAddress", this.beforeEditModel.emailAddress);
+            // self.render();
+            //End Edited By:- Ashish
         },
         finishEdit: function() {
+            var self = this;
+
+            this.doModelAction('apiUpdate').then(function() {
+                self.editing = false;
+            }).otherwise(function() {
+                self.editing = true;
+            }).ensure(function() {
+                self.afterEdit();
+            });
+        },
+        myEdit: function() {
             var self = this;
 
             this.doModelAction('apiUpdate').then(function() {
@@ -650,7 +679,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
 
         var accountModel = window.accountModel = CustomerModels.EditableCustomer.fromCurrent();
 
-        var $accountSettingsEl = $('#account-settings'),
+        var $accountSettingsEl = $('.account-settings'),
             $passwordEl = $('#password-section'),
             $orderHistoryEl = $('#account-orderhistory'),
             $returnHistoryEl = $('#account-returnhistory'),
