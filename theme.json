@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "6db2208eab02cc022c7eb08eb13737f55d00086f"
+      "commit": "1504c2d4080c2cced4958d973117cd95666b4305"
     },
     "baseThemeChannel": "stable"
   },
@@ -207,21 +207,21 @@
       "entityType": "category",
       "id": "learning-center",
       "template": "modules/learning-center/landing-page",
-      "title": "Learning Center LandingPage", 
+      "title": "Learning Center LandingPage",
       "userCreatable": false
     },
     {
       "entityType": "category",
       "id": "learning-center-gateway",
       "template": "modules/learning-center/gateway-page",
-      "title": "Learning Center GatewayPage", 
+      "title": "Learning Center GatewayPage",
       "userCreatable": false
     },
     {
       "entityType": "category",
       "id": "learning-center-directory",
-      "template": "modules/learning-center/directory-page", 
-      "title": "Learning Center DirectoryPage", 
+      "template": "modules/learning-center/directory-page",
+      "title": "Learning Center DirectoryPage",
       "userCreatable": false
     },
     {
@@ -230,7 +230,7 @@
       "template": "modules/learning-center/blog-article",
       "title": "Blog Article",
       "userCreatable": false,
-      "customEditor": "productContent@mozu" 
+      "customEditor": "productContent@mozu"
     },
     {
       "documentType": "web_page",
@@ -239,6 +239,51 @@
       "id": "Brands",
       "template": "brand-gateway",
       "title": "Brands Gateway",
+      "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "editor": "landing-page",
+      "entityType": "webpage",
+      "id": "Customer-Service",
+      "template": "customer-service",
+      "title": "Customer Service",
+      "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "editor": "landing-page",
+      "entityType": "webpage",
+      "id": "ShippingInfo",
+      "template": "shipping-info",
+      "title": "Shipping Info",
+      "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "editor": "landing-page",
+      "entityType": "webpage",
+      "id": "Track-my-order",
+      "template": "track-my-order",
+      "title": "Track My Order",
+      "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "editor": "landing-page",
+      "entityType": "webpage",
+      "id": "Refund-exchange",
+      "template": "refund-exchange",
+      "title": "Refund & exchange",
+      "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "editor": "landing-page",
+      "entityType": "webpage",
+      "id": "Contact-Us",
+      "template": "contact-us",
+      "title": "Contact Us",
       "userCreatable": true
     },
     {
@@ -447,7 +492,7 @@
     "listVolumePricing": false,
     "listProductThumbSize": 160,
     "featuredPostImageSize": 1048,
-    "blogContentImageSize": 325, 
+    "blogContentImageSize": 325,
     "maxProductImageThumbnailSize": 100,
     "productImagesContainerWidth": 500,
     "productImagesZoomContainerWidth": 800,
@@ -856,7 +901,7 @@
           "fieldLabel": "Title",
           "name": "title",
           "xtype": "mz-input-text"
-        }, 
+        },
         {
           "anchor": "100%",
           "fieldLabel": "Products",
