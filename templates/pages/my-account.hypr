@@ -7,7 +7,6 @@
     {% preload_json model "customer" %}
 
     <div class="mz-l-container">
-        <h1 class="mz-pagetitle">{{ labels.yourAccount }}</h1>
         <div class="col-xs-12 col-sm-3 col-md-2">
             <div class="mz-l-sidebar mz-myaccount-nav">
                 {% include "modules/my-account/my-account-nav" with navtarget="body" %}
@@ -57,11 +56,6 @@
                         {% include "modules/my-account/my-account-wishlist" with model=model.wishlist %}
                     </div>
                     {% endif %}
-                </div>
-                <div id="returnhistory" class="tab-pane fade">
-                    <div class="mz-l-stack-section mz-accountreturnhistory" id="account-returnhistory">
-                        {% include "modules/my-account/my-account-returnhistory" with model=model.returnHistory %}
-                    </div>
                 </div>
                 <div id="{{ labels.digitalCreditsAnchor }}" class="tab-pane fade">
                     <div class="mz-l-stack-section mz-accountstorecredit" id="account-storecredit">
