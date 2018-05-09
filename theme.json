@@ -242,6 +242,51 @@
       "userCreatable": true
     },
     {
+      "documentType": "web_page",
+      "editor": "landing-page",
+      "entityType": "webpage",
+      "id": "Customer-Service",
+      "template": "customer-service",
+      "title": "Customer Service",
+      "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "editor": "landing-page",
+      "entityType": "webpage",
+      "id": "ShippingInfo",
+      "template": "shipping-info",
+      "title": "Shipping Info",
+      "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "editor": "landing-page",
+      "entityType": "webpage",
+      "id": "Track-my-order",
+      "template": "track-my-order",
+      "title": "Track My Order",
+      "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "editor": "landing-page",
+      "entityType": "webpage",
+      "id": "Refund-exchange",
+      "template": "refund-exchange",
+      "title": "Refund & exchange",
+      "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "editor": "landing-page",
+      "entityType": "webpage",
+      "id": "Contact-Us",
+      "template": "contact-us",
+      "title": "Contact Us",
+      "userCreatable": true
+    },
+    {
       "entityType": "siteTemplate",
       "id": "site_page",
       "template": "page",

@@ -133,7 +133,8 @@
                     {% dropzone "body-bottom" scope="page" %} 
                 {% endblock body-below-content %}
 
-                {% block brand-gateway %}{% endblock brand-gateway %} 
+                {% block brand-gateway %}{% endblock brand-gateway %}
+                {% block customer-service %}{% endblock customer-service %} 
                 
             </div>
                         
