@@ -6,8 +6,8 @@
 <div class="mz-itemlisting-price">{{ labels.price }}: {{ model.product.price.price|currency }}</div>
 {% endblock %}
 {% block item-listing-actions %}
-    <a class="mz-itemlisting-action" href="javascript:;" data-mz-action="addItemToCart" data-mz-item-id="{{ model.id }}">{{ labels.addToCart }}</a>
-    <a class="mz-itemlisting-action" href="javascript:;" data-mz-action="beginRemoveItem" data-mz-item-id="{{ model.id }}">{{ labels.removeFromWishlist }}</a>
+    <a class="mz-button mz-itemlisting-action" href="javascript:;" data-mz-action="addItemToCart" data-mz-item-id="{{ model.id }}">{{ labels.addToCart }}</a>
+    <a class="mz-itemlisting-action" href="javascript:;" data-mz-action="beginRemoveItem" data-mz-item-id="{{ model.id }}"><i class="fa fa-times-circle"></i> {{ labels.removeFromWishlist }}</a>
 {% endblock item-listing-actions %}
 {% block item-listing-extras %}
 {% if model.id %}

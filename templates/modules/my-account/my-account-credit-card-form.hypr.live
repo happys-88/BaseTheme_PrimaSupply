@@ -10,11 +10,11 @@
             </div>
         </div>
         {% if model.hasSavedContacts %}
-        <div class="mz-l-formfieldgroup-row mz-creditcard-billingaddresses">
-            <div class="mz-l-formfieldgroup-cell">
-                <label>{{ labels.selectBillingAddress }} <span class="is-required">*</span></label>
+        <div class="mz-creditcard-billingaddresses">
+            <div class="form-group col-sm-12">
+                <label class="text-left">{{ labels.selectBillingAddress }} <span class="is-required">*</span></label>
             </div>
-            <div class="mz-l-formfieldgroup-cell">
+            <div class="">
                 {% include "modules/my-account/my-account-contact-selector" %}
     			<span class="mz-validationmessage" data-mz-validationmessage-for="{{ cardcontext }}contactId"></span>
             </div>
@@ -31,9 +31,9 @@
         {% endif %}
         </div>
         <div class="form-group">
-            <div class="col-sm-8 col-md-offset-4">
+            <div class="col-sm-8 col-sm-offset-4">
                 <div class="mz-creditcard-actions">
-                    <button class="mz-creditcard-cancel" data-mz-action="cancelEditCard">{{ labels.cancel }}</button>
+                    <button class="mz-button mz-creditcard-cancel" data-mz-action="cancelEditCard">{{ labels.cancel }}</button>
                     <button class="mz-button mz-creditcard-save" data-mz-action="finishEditCard">{{ labels.save }}</button>
                 </div>
             </div>

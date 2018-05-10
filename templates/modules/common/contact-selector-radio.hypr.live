@@ -1,11 +1,11 @@
 ﻿<div class="mz-contactselector {% block module-classes %}{% endblock module-classes %}">
     {% block contact-selector %}
     {% for contact in model.contacts %}
-    <label class="mz-contactselector-contact">
-        <span class="mz-contactselector-inputwrapper">
+    <label class="col-sm-4 mz-contactselector-contact">
+        <span class="col-sm-2 mz-contactselector-inputwrapper 11">
             <input type="radio" data-mz-value="{{ contactcontext }}contactId" name="contactId" value="{{ contact.id }}" {% if model.contactId == contact.id %} checked="checked" {% endif %}>
         </span>
-        <span class="mz-contactselector-summarywrapper">
+        <span class="col-sm-10 mz-contactselector-summarywrapper">
             <div class="mz-addresssummary">
                 {% include "modules/common/address-summary" with model=contact %}
             </div>
@@ -14,9 +14,11 @@
   {% endfor %}
   {% if model.contactId == "new" %}
   <div class="mz-contactselector-contact mz-contactselector-new">
-        <span class="mz-contactselector-inputwrapper">
+        {% comment %}
+        <span class="mz-contactselector-inputwrapper 22">
             <input type="radio" data-mz-value="{{ contactcontext }}contactId" name="contactId" value="new" data-mz-enternewcontact checked="checked">
         </span>
+        {% endcomment %}
         <span class="mz-contactselector-summarywrapper">
             {% block enter-new-form %}
             {% include "modules/common/address-form" with model=editingContact %}
@@ -24,11 +26,11 @@
         </span>
     </div>
     {% else %}
-    <label class="mz-contactselector-contact mz-contactselector-new">
-        <span class="mz-contactselector-inputwrapper">
+    <label class="col-sm-4 mz-contactselector-contact mz-contactselector-new">
+        <span class="col-sm-2 mz-contactselector-inputwrapper 33">
             <input type="radio" data-mz-value="{{ contactcontext }}contactId" name="contactId" value="new" data-mz-enternewcontact>
         </span>
-        <span class="mz-contactselector-summarywrapper">
+        <span class="col-sm-10 mz-contactselector-summarywrapper">
             <div class="mz-addresssummary">
                 <span>{{ labels.enterNewAddress }}</span>
             </div>
