@@ -23,7 +23,7 @@
 {% endif %}
 <div class="row"> 
     <div class="col-xs-12"> 
-        <div class="mz-l-paginatedlist">
+        <div class="mz-l-paginatedlist"> 
         <div class="mz-l-paginatedlist-header">
             <h1 class="mz-pagetitle">{{ navigation.currentNode.name|safe }}</h1> 
             
@@ -38,11 +38,11 @@
                 <div data-mz-pagenumbers class="mz-pagenumbers">
                     {% include "modules/common/page-numbers" %}
                 </div>
-                <!--
+                
                 <div data-mz-pagingcontrols class="mz-pagingcontrols">
                     {% include "modules/common/blog-paging-controls" %} 
                 </div>   
-                --> 
+                
             </div> 
             
         </div>
