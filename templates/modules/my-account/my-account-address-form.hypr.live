@@ -7,7 +7,7 @@
     <li class="mz-accountaddressbook-contact mz-accountaddressbook-form">
     {% parent %}
         <div class="mz-contacttypes">
-            <div class="form-group col-xs-12">
+            <div class="form-group">
                 <label class="control-label col-sm-4"></label>
                 <div class="col-sm-8">  
                     <div class="checkbox">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group col-xs-12">
+            <div class="form-group">
                 <label class="control-label col-sm-4"></label>
                 <div class="col-sm-8">  
                     <div class="checkbox">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group col-xs-12">
+        <div class="form-group">
             <div class="col-sm-4"></div>
             <div class="col-sm-8">
                 <button class="mz-button mz-contact-cancel" data-mz-action="cancelEditContact">{{ labels.cancel }}</button>

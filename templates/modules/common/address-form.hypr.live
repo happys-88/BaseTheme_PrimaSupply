@@ -1,5 +1,5 @@
 ﻿{% block address-form %}
-    <div class="mz-l-formfieldgroup-row mz-addressform-firstname">
+    <div class="form-group mz-l-formfieldgroup-row mz-addressform-firstname">
         <div class="col-sm-4 mz-l-formfieldgroup-cell mz-formgroup-align mz-label">
             <label class="text-label" for="{{ addresscontext }}_{{ labels.firstName }}">{{ labels.firstName }}<span class="is-required"> *</span>:</label>
         </div>
@@ -8,7 +8,7 @@
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}firstName"></span>
         </div>
     </div>
-    <div class="mz-l-formfieldgroup-row mz-addressform-lastname">
+    <div class="form-group mz-l-formfieldgroup-row mz-addressform-lastname">
         <div class="col-sm-4 mz-l-formfieldgroup-cell mz-formgroup-align mz-label">
             <label class="text-label" for="{{ addresscontext }}_{{ labels.lastName }}">{{ labels.lastName }}<span class="is-required"> *</span>:</label>
         </div>
@@ -17,7 +17,7 @@
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}lastNameOrSurname"></span>
         </div>
     </div>
-    <div class="mz-l-formfieldgroup-row mz-addressform-address1">
+    <div class="form-group mz-l-formfieldgroup-row mz-addressform-address1">
         <div class="col-sm-4 mz-l-formfieldgroup-cell mz-formgroup-align mz-label">
             <label class="text-label" for="{{ addresscontext }}_{{ labels.address }}">{{ labels.address }}<span class="is-required"> *</span>:</label>
         </div>
@@ -26,14 +26,13 @@
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}address.address1"></span>
         </div>
     </div>
-    <div class="col-sm-8 col-sm-offset-4 mz-l-formfieldgroup-row mz-addressform-address2">
-        <div class="mz-l-formfieldgcol-sm-8 roup-cell mz-formgroup-align"></div>
-        <div class="mz-l-formfieldgroup-cell mz-formgroup-align">
+    <div class="form-group col-sm-offset-4 mz-l-formfieldgroup-row mz-addressform-address2">
+        <div class="col-sm-8 mz-l-formfieldgroup-cell mz-formgroup-align">
             <input class="form-control" aria-label="address-line-2" type="text" class="text-input" name="address-line-2" data-mz-value="{{ addresscontext }}address.address2" value="{{ model.address.address2 }}" maxlength="{{ themeSettings.addressLength}}">
             <span class="mz-validationmessage"></span>
         </div>
     </div>
-    <div class="mz-l-formfieldgroup-row mz-addressform-country">
+    <div class="form-group mz-l-formfieldgroup-row mz-addressform-country">
         <div class="col-sm-4 mz-l-formfieldgroup-cell mz-formgroup-align mz-label">
             <label class="text-label" for="{{ addresscontext }}_{{ labels.country }}">{{ labels.country }}<span class="is-required"> *</span>:</label>
         </div>
@@ -53,7 +52,7 @@
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}address.countryCode"></span>
         </div>
     </div>
-    <div class="mz-l-formfieldgroup-row mz-addressform-city">
+    <div class="form-group mz-l-formfieldgroup-row mz-addressform-city">
         <div class="col-sm-4 mz-l-formfieldgroup-cell mz-formgroup-align mz-label">
             <label class="text-label" for="{{ addresscontext }}_{{ labels.city }}">{{ labels.city }}<span class="is-required"> *</span>:</label>
         </div>
@@ -66,7 +65,7 @@
             <label class="text-label" for="{{ addresscontext }}_{{ labels.postalCode }}">{{ labels.postalCode }}</label><input class="form-control" type="text" aria-label="{{labels.postalCode}}" name="zip" data-mz-value="{{ addresscontext }}address.postalOrZipCode" value="{{ model.address.postalOrZipCode }}" />
         </div>
     </div>
-    <div class="mz-l-formfieldgroup-row mz-addressform-state" {% if model.address.countryCode == "US" %} style="display: none"{% endif %}>
+    <div class="form-group mz-l-formfieldgroup-row mz-addressform-state" {% if model.address.countryCode == "US" %} style="display: none"{% endif %}>
         <div class="col-sm-4 mz-l-formfieldgroup-cell mz-formgroup-align mz-label">
             <label class="text-label" for="{{ addresscontext }}_{{ labels.stateOrProvince }}">{{ labels.stateOrProvince }}<span class="is-required"> *</span>:</label>
         </div>
@@ -75,7 +74,7 @@
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}address.stateOrProvince"></span>
         </div>
     </div>
-    <div class="mz-l-formfieldgroup-row mz-addressform-state" {% if model.address.countryCode != "US" %}style="display: none"{% endif %}>
+    <div class="form-group mz-l-formfieldgroup-row mz-addressform-state" {% if model.address.countryCode != "US" %}style="display: none"{% endif %}>
         <div class="col-sm-4 mz-l-formfieldgroup-cell mz-formgroup-align mz-label">
             <label class="text-label" for="{{ addresscontext }}_{{ labels.state }}">{{ labels.state }}<span class="is-required"> *</span>:</label>
         </div>
@@ -99,7 +98,7 @@
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}address.stateOrProvince"></span>
         </div>
     </div>
-    <div class="mz-l-formfieldgroup-row mz-addressform-zip">
+    <div class="form-group mz-l-formfieldgroup-row mz-addressform-zip">
         <div class="col-sm-4 mz-l-formfieldgroup-cell mz-formgroup-align mz-label">
             <label class="text-label" for="{{ addresscontext }}_{{ labels.postalCode }}">{{ labels.postalCode }}<span class="is-required"> *</span>:</label>
         </div>
@@ -108,7 +107,7 @@
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}address.postalOrZipCode"></span>
         </div>
     </div>
-    <div {% if model.address.CountryCode != "UK" %}style="display: none"{% endif %} class="mz-l-formfieldgroup-row mz-addressform-postaltown">
+    <div {% if model.address.CountryCode != "UK" %}style="display: none"{% endif %} class="form-group mz-l-formfieldgroup-row mz-addressform-postaltown">
         <div class="col-sm-4 mz-l-formfieldgroup-cell mz-formgroup-align mz-label">
             <label class="text-label" for="{{ addresscontext }}_{{ labels.postalTown }}">{{ labels.postalTown }}</label>
         </div>
@@ -117,7 +116,7 @@
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}address.postalOrZipCode"></span>
         </div>
     </div>
-    <div class="mz-l-formfieldgroup-row mz-addressform-phone">
+    <div class="form-group mz-l-formfieldgroup-row mz-addressform-phone">
         <div class="col-sm-4 mz-l-formfieldgroup-cell mz-formgroup-align mz-label">
             <label class="text-label" for="{{ addresscontext }}_{{ labels.phone }}">{{ labels.phone }}<span class="is-required"> *</span>:</label>
         </div>
@@ -126,7 +125,7 @@
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}phoneNumbers.home"></span>
         </div>
     </div>
-    <div class="mz-l-formfieldgroup-row mz-addressform-addresstype">
+    <div class="form-group mz-l-formfieldgroup-row mz-addressform-addresstype">
         <div class="col-sm-4 mz-l-formfieldgroup-cell mz-formgroup-align mz-label">
             <label class="text-label" for="{{ addresscontext }}_{{ labels.addressType }}">{{ labels.addressType }}<span class="is-required"> *</span>:</label>
         </div>

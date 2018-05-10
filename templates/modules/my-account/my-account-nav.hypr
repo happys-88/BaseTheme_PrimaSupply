@@ -32,11 +32,6 @@
             </a>
         </li>
         {% endif %}
-        <li class="mz-scrollnav-item">
-            <a class="mz-scrollnav-link" data-toggle="tab" href="#{{ labels.digitalCreditsAnchor }}">
-                {{ labels.digitalCredit }}
-            </a>
-        </li>
     </ul>
 </nav>
 {% require_script "modules/scroll-nav" %}

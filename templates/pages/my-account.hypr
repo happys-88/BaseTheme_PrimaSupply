@@ -1,4 +1,4 @@
-﻿{% extends "page" %}
+{% extends "page" %}
 
 {% block title-tag-content %}{% firstof pageContext.metaTitle labels.yourAccount %} - {% parent %}{% endblock title-tag-content %}
 {% block body-tag-classes %} mz-myaccount {% endblock body-tag-classes %}
@@ -56,11 +56,6 @@
                         {% include "modules/my-account/my-account-wishlist" with model=model.wishlist %}
                     </div>
                     {% endif %}
-                </div>
-                <div id="{{ labels.digitalCreditsAnchor }}" class="tab-pane fade">
-                    <div class="mz-l-stack-section mz-accountstorecredit" id="account-storecredit">
-                        {% include "modules/my-account/my-account-storecredit" %}
-                    </div>
                 </div>
 
                 {% include "modules/my-account/my-account-print-window" %}

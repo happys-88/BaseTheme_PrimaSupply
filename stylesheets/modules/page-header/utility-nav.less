@@ -135,32 +135,35 @@
     }
 }
 #mz-logged-in-notice {
-    #my-account-content {
-        display: none;
-    }
-    .popover {
+    .dropdown-menu {
         border: 1px solid #415265;
+        width: 240px;
         border-radius: 0;
-        width: 200px;
+        border-top: 20px solid #415265;
+        margin-top: 10px;
         padding: 0;
-        .popover-content {
-            border-top: 20px solid #415265;
-            position: relative;
-            top: -1px;
-            padding: 15px;
-        }
-        &.bottom {
-            .arrow {
-                top: -11px!important;
-                &:after {
-                    border-bottom-color: #415265;
-                }
-            }
+        position: absolute;
+        left: -82px;
+        &:after {
+            content: "";
+            border: 10px solid transparent;
+            border-bottom: 10px solid #415265;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: -40px;
+            right: 0;
+            left: 0;
+            margin: auto;
         }
     }
     .my-account-details {
         h4 {
+            border-top: 1px solid #e0e0e0;
             font-size: 14px;
+            margin: 0;
+            padding: 12px 15px;
+            text-transform: uppercase;
         }
     }
 }
@@ -188,6 +191,11 @@
                 }
             }
         }
+    }
+    .form-group {
+        float: left;
+        width: 100%;
+        margin-bottom: 15px;
     }
     #account-settings  {
         h3 {
@@ -234,6 +242,15 @@
                 margin: 0;
                 padding: 0;
             }
+            .mz-accountaddressbook-contactdetails {
+                &.mz-addresssummary {
+                    span {
+                        &:nth-child(1) {
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
         }
     }
     .mz-l-stack-section {
@@ -261,20 +278,42 @@
             }
         }
     }
-    .mz-orderlisting {
-        .mz-l-stack-section {
-            margin-bottom: 0;
+    .mz-orderhistory-section {
+        .mz-orderhistory-section {
+            .mz-l-paginatedlist-list {
+                margin-bottom: 50px;
+            }
         }
-        .mz-orderlisting-heading {
-            font-size: 20px;
-            text-transform: uppercase;
+        .mz-orderlisting {
+            .mz-l-stack-section {
+                margin-bottom: 0;
+            }
+            .mz-orderlisting-heading {
+                font-size: 20px;
+                text-transform: uppercase;
+            }
+            .mz-orderlisting-attribute {
+                margin-bottom: 0;
+                span {
+                    float: left;
+                    margin-right: 8px;
+                }
+            }
+            .mz-orderlisting-nonShipped {
+                .mz-itemlisting {
+                    .mz-itemlisting-title {
+                        color: #495363;
+                    }
+                }
+            }
         }
     }
     .mz-button {
         border-radius: 0;
         &.mz-accountsettings-editdone,
         &.mz-accountsettings-passworddone,
-        &.mz-contact-save {
+        &.mz-contact-save,
+        &.mz-creditcard-save {
             float: right;
             line-height: 10px;
             width: 70%;  
@@ -284,7 +323,8 @@
         }
         &.mz-accountsettings-editcancel,
         &.mz-accountsettings-passwordcancel,
-        &.mz-contact-cancel {
+        &.mz-contact-cancel,
+        &.mz-creditcard-cancel {
             background: #fff;
             border-color: #fff;
             border-left: 0;
@@ -300,6 +340,22 @@
             }
         }
     }
+
+    //Should be work on this
+    .mz-accountpaymentmethods .mz-accountpaymentmethods-form {
+        margin: 0;
+        width: 50%;
+    }
+    .mz-l-formfieldgroup input[type="text"], 
+    .mz-l-formfieldgroup input[type="password"], 
+    .mz-l-formfieldgroup input[type="tel"], 
+    .mz-l-formfieldgroup input[type="email"], 
+    .mz-l-formfieldgroup select {
+        width: 100%;
+    }
+    .mz-myaccount-panels .mz-l-formfieldgroup {
+        display: block;
+    } 
 }
 
 //Notice
@@ -319,6 +375,7 @@
 .mz-order-history-dropzone {
     background: #ccc;
     height: 300px;
+    margin-top: 15px;
 }
 .fixed {
     position: static!important;

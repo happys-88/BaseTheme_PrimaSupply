@@ -1,6 +1,5 @@
 ﻿<nav class="mz-utilitynav">
     <ul class="mz-utilitynav-list">
-        
         {% comment %}
         The below require_script tag does not render anything in the place it's actually inserted; it instead adds the script to a list of scripts  which are then included at the end of the page by RequireJS.
         Use require_script to load AMD modules that are wrapped in define() or require() function calls.
@@ -15,79 +14,67 @@
         {% if not user.isAnonymous %}
             <li class="mz-utilitynav-item">
                 <div id="mz-logged-in-notice">
-                    Welcome, <a href="javascript:void(0);" data-mz-action="my-account" class="mz-utilitynav-link" id="my-account" role="button" data-trigger="click" data-toggle="popover" tabindex="0" data-content="" >{{user.firstName|default(user.emailAddress)}}</a>
-                
-                    <div id="my-account-content">
+                    {{ labels.welcome }}, 
+                    <a href="javascript:void(0);" data-toggle="dropdown" data-mz-action="my-account" class="mz-utilitynav-link" id="my-account">
+                        {% if user.firstName %}
+                            {{user.firstName|default(user.emailAddress)}}
+                        {% else %}
+                            {{user.email|default(user.emailAddress)}}
+                        {% endif %}
+                    </a>
+                    <!-- My Account Dropdown -->
+                    <div class="dropdown-menu">
                         <div class="my-account-details">
                             <a href="/myaccount#settings">
                                 <h4>{{ labels.accountSettings }}</h4>
-                                <p>{{ labels.accountSettingsInfo }}</p>
                             </a> 
                         </div>
                         {% if siteContext.generalSettings.isWishlistCreationEnabled %}
                             <div class="my-account-details">
                                 <a href="/myaccount#wishlist">
-                                    <h4>{{ labels.wishLists }}</h4>
-                                    <p>{{ labels.wishListsInfo }}</p>
+                                    <h4>{{ labels.accountMyWishlist }}</h4>
                                 </a>
                             </div>
                         {% endif %}
                         <div class="my-account-details">
                             <a href="/myaccount#orderhistory">
                                 <h4>{{ labels.orderHistory }}</h4>
-                                <p>{{ labels.orderHistoryInfo }}</p>
-                            </a>
-                        </div>
-                        <div class="my-account-details">
-                            <a href="/myaccount#returnhistory">
-                                <h4>{{ labels.returns }}</h4>
-                                <p>{{ themeSettings.returnsInfo }} </p>
                             </a>
                         </div>
                         <div class="my-account-details">
                             <a href="/myaccount#paymentmethods">
                                 <h4>{{ labels.paymentMethods }}</h4>
-                                <p>{{ themeSettings.paymentsMethodInfo }} </p>
                             </a>
                         </div>
                         <div class="my-account-details">
                             <a href="/myaccount#addressbook">
                                 <h4>{{ labels.addressBook }}</h4>
-                                <p>{{ labels.addressBookInfo }}</p>
-                            </a>
-                        </div>
-                        <div class="my-account-details">
-                            <a href="/myaccount#{{ labels.digitalCreditsAnchor }}">
-                                <h4>{{ labels.digitalCredit }}</h4>
-                                <p>{{ themeSettings.giftCardsInfo }} </p>
                             </a>
                         </div>
                         <div class="my-account-details">
                             <a href="/logout">
                                 <h4>{{ labels.logOut }}</h4>
-                                <p>{{ labels.logOutInfo }}</p>
                             </a>
                         </div>
                     </div>
+                    <!--/ My Account Dropdown -->
                 </div> 
             </li>
         {% else %}
             <li class="mz-utilitynav-item">
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal" data-mz-action="login" class="mz-utilitynav-link"><i class="fa fa-user"></i>{{ labels.logIn }}</a>
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal" class="mz-utilitynav-link"><i class="fa fa-user"></i>{{ labels.logIn }}</a>
             </li>
         {% endif %}
 
         {% block global-cart-container %}
             {% include "modules/page-header/global-cart-container" %} 
         {% endblock global-cart-container %}
-        
     </ul>
 </nav>
 
-<!-- Modal -->
+<!-- Login Modal -->
 <div class="modal fade mz-login-model" id="myModal" role="dialog">
     <div class="modal-dialog">
-    <!-- Modal content-->
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
             <div class="modal-body clearfix">
@@ -160,6 +147,7 @@
         </div>
     </div>
 </div>
+<!--/ Login Modal -->
 {% require_script "modules/page-header/global-cart" %}
 {% require_script "modules/cart-monitor" %}
  
