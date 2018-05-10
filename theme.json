@@ -220,7 +220,7 @@
     {
       "entityType": "category",
       "id": "learning-center-directory",
-      "template": "modules/learning-center/directory-page",
+      "template": "modules/learning-center/category-lc",  
       "title": "Learning Center DirectoryPage",
       "userCreatable": false
     },
@@ -503,6 +503,12 @@
       32,
       64
     ],
+    "pageSizeOptionsDirectoryLC": [
+      9,
+      15 
+    ], 
+    "viewAllPageSizeDirectoryLC": 12,
+    "defaultPageSizeDirectoryLC": 9,    
     "preselectCountryCode": "US",
     "requireCheckoutAgreeToTerms": true,
     "suggestPriorSearchTerms": true,

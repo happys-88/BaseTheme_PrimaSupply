@@ -226,6 +226,31 @@
                     "name": "defaultSort",
                     "allowBlank": true      ,
                     "allowOnlyWhitespace":true           
+                },
+                {
+                    "fieldLabel": "Page size options for Directory Page (Learning Center)",
+                    "xtype": "mz-input-selectmulti",
+                    "name": "pageSizeOptionsDirectoryLC", 
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        9,
+                        15 
+                    ]
+                },
+                {
+                    "fieldLabel": "Default items per page for Directory Page (Learning Center)",
+                    "xtype": "mz-input-dropdown",
+                    "name": "defaultPageSizeDirectoryLC", 
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "storeFrom": "pageSizeOptionsDirectoryLC"
+                },
+                {
+                    "fieldLabel": "View All Page Size for Directory Page (Learning Center)", 
+                    "xtype": "mz-input-number",
+                    "name": "viewAllPageSizeDirectoryLC" 
+                    
                 }
             ]
         },

@@ -20,11 +20,39 @@
             text-transform: uppercase;
         }
     }
-    .mz-certificated-section {
-        padding: 28px 0;
+    .mz-brand-certifications { 
+        float: left;
+        width: 100%; 
+        padding: @gutter 0;
         border-bottom: 1px solid #e0e0e0;
-        margin-bottom: 27px;
-    }
+        margin-bottom: @gutter;
+        ul{
+            li{
+                float: left;
+                padding: 0 @gutter+10;
+                border-right: 1px solid #e0e0e0;
+                min-height: 45px; 
+                &.product-brand{ 
+                    width: 200px;
+                }
+                &.product-certifications{
+                    width: auto;
+                    span{
+                        display: inline-block;
+                        margin: 0 6px;
+                        img{
+                            width: 45px;
+                            height: auto;
+                        }
+                    }
+                }
+                &.service-tooltips{ 
+                    float: left;
+                    border: none; 
+                } 
+            }
+        }
+    } 
     h4 {
         &.mz-l-stack-sectiontitle {
             color: #495363;

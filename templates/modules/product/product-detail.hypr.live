@@ -98,8 +98,8 @@
   {% endcomment %}
 </section>
 
-<div class="mz-certificated-section">
-  <img src="../../resources/images/certificated.jpg" alt="certificated">
+<div class="mz-brand-certifications">
+  {% include "modules/product/product-certifications" %}   
 </div>
 
 <div class="mz-options-section">

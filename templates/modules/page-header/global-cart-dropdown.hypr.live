@@ -86,8 +86,11 @@
                  
                   {% endif %}
                 </div>
-                
-                <div class="mz-item-discount">
+               
+                 <div class="mz-carttable-total-row col-xs-12 text-right">
+                  
+                  <!-- Discounts -->
+                  <div class="mz-item-discount">
                   {% for discount in model.orderDiscounts %}
                     {% if not discount.excluded %}
                       <div class="mz-carttable-total-row">
@@ -101,8 +104,8 @@
                     {% endif %}
                   {% endfor %}
                 </div>
-                 
-                <div class="mz-carttable-total-row col-xs-12 text-right">
+                <!-- Discounts -->
+
                   <div class="mz-carttable-total-wrap col-xs-12">
                     {{ labels.subtotal }}:
                       <span id="mz-carttable-total" class="mz-carttable-total">

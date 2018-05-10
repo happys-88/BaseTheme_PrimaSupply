@@ -24,10 +24,8 @@
 	    {% endif %}
 
 	    <div class="mz-content-section">
-	       	<div class="col-xs-12">
-				{% include "modules/learning-center/directory-interior" %}	  
-			</div>    
-		</div>
+	       	{% include "modules/learning-center/category-interior-lc" %}	       
+		</div> 
 	    
 	</div>
 

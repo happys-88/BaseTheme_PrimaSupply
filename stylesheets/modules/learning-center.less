@@ -454,7 +454,26 @@
 
 /**** Blog Listing Page - Directory ****/
 .mz-learning-center{
+	.mz-l-paginatedlist{
+		margin: 0;
+		.mz-pagetitle{
+			font-size: 24px;
+			line-height: 28px;
+			color: @learningCenterTextColor;
+			font-weight: bold;
+			margin: 0 0 15px;  
+			border: none;
+			text-transform: capitalize;  
+			padding: 0;	
+		}	
+	}
 	.mz-l-sidebar{
+		float: left;
+		width: 100%;
+		margin: 0 0 15px;   
+		padding: 10px 0;
+		border-top: 1px solid #ddd;
+		border-bottom: 1px solid #ddd;  
 		.mz-facetingform{
 			float: left;
 			width: 100%;
@@ -464,18 +483,24 @@
 			    line-height: 20px;
 			    padding: 0;
 			    border: none;
-			    margin: 0 15px 0 0;
+			    margin: 5px 15px 0 0; 
 			}	
 			.mz-faceting-section{
 				float: left;
 				width: auto;
 				.mz-facet-row{
 					position: relative; 
-					h4{
+					.mz-facet-title{ 
 						line-height: 20px;
 						margin: 0;
+						padding: 5px 10px; 
+						cursor: pointer;
+						text-transform: capitalize; 
 						&:after{
 							display: none;
+						}
+						.fa{
+							margin-left: 4px; 
 						}
 					}
 					.mz-facetdropdown{
@@ -485,10 +510,10 @@
 					    padding: 15px; 
 					    position: absolute;
 					    left: 0;
-					    top: 20px;  
+					    top: 32px;   
 					    background: #ebebeb;
 					    border: 1px solid #ddd; 
-					    z-index: 9;
+					    z-index: -9;
 					    opacity: 0;  
 					    &:before{
 							content: "";
@@ -503,6 +528,27 @@
 					    	float: left;
 					    	width: 50%;
 					    }
+					    .mz-facetingform-value{
+					    	display: inline-block;
+					    	position: relative;
+					    	top: 3px;
+					    	margin: 0 5px 0 0;  
+					    }
+					}
+					&.active{
+						.mz-facet-title{
+							background: #666;
+							color: #fff;
+							.fa-angle-down{
+								&:before{
+									content: "\f106"; 
+								}
+							}
+						} 
+						.mz-facetdropdown{ 
+							opacity: 1; 
+							z-index: 9;  
+						}
 					}
 				}
 			}

@@ -66,7 +66,7 @@
 
         <!-- Dummy Code -->
         <div class="mz-facet-row">
-            <h4>Authors <i class="fa fa-angle-down"></i></h4>
+            <h4 class="mz-facet-title">Authors <i class="fa fa-angle-down"></i></h4> 
             <ul class="mz-facetingform-facet mz-facetdropdown"> 
                 <li>
                     <input type="checkbox" id="author_1" class="mz-facetingform-value">

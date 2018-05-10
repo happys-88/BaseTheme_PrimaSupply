@@ -124,7 +124,23 @@ define([
 		    	scrollTop : position.top                       
 		    }, 500);
 		    
-		  });
+		});
+
+		// Blog Facets
+		$("#lcBlogFacets .mz-facet-row").each(function(){
+			$(".mz-facet-title").click(function(){ 
+				$(this).parent(".mz-facet-row").toggleClass("active");   
+			});
+
+			// Hide facet dropdown when clicks outside 
+			$(document).mouseup(function (e){
+			  var currentFacetRow = $(".mz-facet-row"); 
+			  if (!currentFacetRow.is(e.target) && currentFacetRow.has(e.target).length === 0) {
+			    currentFacetRow.removeClass("active");  
+			  }
+			}); 
+		});
+
 
 	});
 }); 
