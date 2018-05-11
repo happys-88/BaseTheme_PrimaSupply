@@ -401,9 +401,9 @@
                 this.stepStatus('complete');
                                 
                 // To show the TBYB step when tbyb line item exist
-                console.log("tbybItemExist : "+this.parent.get('tbybInfo').tbybItemExist());
+                
                 if(this.parent.get('tbybInfo').tbybItemExist()) {
-                    console.log("Set Tbyb incomplete");
+                    // console.log("Set Tbyb incomplete");
                     // this.parent.get('tbybInfo').calculateStepStatus();
                     this.parent.get('tbybInfo').stepStatus('incomplete');
                 } else {
@@ -447,7 +447,7 @@
             },
             helpers: ['requireOrderModel', 'tbybSelectedProd','checktbybProductExist'],
             requireOrderModel: function() {
-                console.log("requireOrderModel O");
+                // console.log("requireOrderModel O");
                 var items = this.getOrder().get('items');
                 var selectedTbybExists = false;
                 // var selectedTbybItem = this.tbybSelectedProd();
@@ -483,17 +483,17 @@
                 return prodVals;
             },
             calculateStepStatus: function () {
-                console.log("calculateStepStatus TBYB: "+this.parent.get('billingInfo').stepStatus());
+                // console.log("calculateStepStatus TBYB: "+this.parent.get('billingInfo').stepStatus());
                 if(this.tbybItemExist()) {
                     var fulfillmentStepComplete = this.parent.get('fulfillmentInfo').stepStatus() === 'complete';
                     var billingStepComplete = this.parent.get('billingInfo').stepStatus() === 'complete';
-                    console.log("Calling checkTbybSelected");
+                    
                     var thisStepComplete = this.checkTbybSelected();
                     
-                    console.log("SLECTE : "+this.getTbybSelected());
+                    
                     if(fulfillmentStepComplete && thisStepComplete) {
                         if(this.getTbybSelected() === 'NONE') {
-                            console.log("SET Incomplete");
+                            // console.log("SET Incomplete");
                             return this.stepStatus('incomplete');
                         } else {
                             this.parent.get('billingInfo').stepStatus('incomplete');
@@ -511,21 +511,21 @@
                 // return this.stepStatus('incomplete');
             },
             checktbybProductExist: function(){
-                console.log("LOGGG : "+JSON.stringify(this.get('tbybProducts').length));
+                // console.log("LOGGG : "+JSON.stringify(this.get('tbybProducts').length));
                 if(this.get('tbybProducts').length > 0) {
-                    console.log("FROM INNER PROD : "+this.getTbybSelected());
+                    // console.log("FROM INNER PROD : "+this.getTbybSelected());
                     return "true";
                 } else {
-                    console.log("Calling setTbybEmpty from else");
+                    // console.log("Calling setTbybEmpty from else");
                     this.setTbybEmpty();
                     return "false";
                 }
                  
             },
             setTbybEmpty: _.once(function() {
-                console.log("setTbybEmpty Once");
+                // console.log("setTbybEmpty Once");
                 var order = this.getOrder();
-                console.log(order);
+                // console.log(order);
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     var updateAttrs = [];
@@ -547,7 +547,7 @@
                     // order.set('updateAttr',updateAttrs);
                     order.apiUpdateAttributes(updateAttrs);
                     
-                    console.log("ORDER FINAL : "+JSON.stringify(order));
+                    // console.log("ORDER FINAL : "+JSON.stringify(order));
                     // this.tbybSelectedProd();   
                 }
                 // order.update();
@@ -556,14 +556,14 @@
                 // console.log("tbybSelectedProd called");
                 // console.log("this . : "+JSON.stringify(this.parent.get('tbybInfo')));
                 if(this.checkTbybSelected()){
-                    console.log("SLECTED : "+this.getTbybSelected());
+                    // console.log("SLECTED : "+this.getTbybSelected());
                     return this.getTbybSelected();
                 } else {
                     return "NONE";
                 }
             },
             setTybySelected: function(prodCode) {
-                console.log("Set Code : "+prodCode);
+                // console.log("Set Code : "+prodCode);
                 var order = this.getOrder();
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
@@ -592,7 +592,7 @@
                 // order.update();
             },
             getTbybSelected: function() {
-                console.log("getTbybSelected");
+                // console.log("getTbybSelected");
                 var order = this.getOrder();
                 var tbybProducts = this.get('tbybProducts');
                 var attribs = order.get('attributes');
@@ -600,9 +600,9 @@
                 // console.log("getTbybSelected Called : "+JSON.stringify(attribs));
                 var code = 'NONE';
                 _.each(attribs, function(obj){
-                   console.log("attrib : "+JSON.stringify(obj));
+                   // console.log("attrib : "+JSON.stringify(obj));
                   if(obj.fullyQualifiedName === 'tenant~trybeforebuy') {
-                    console.log("PROD VALUE : "+obj.values[0]);
+                    // console.log("PROD VALUE : "+obj.values[0]);
                     // Check if the TBYB attribute code is present in the line items or not
                     for(var prodindex in tbybProducts ){
                         var itemVal = tbybProducts[prodindex].product.productCode;
@@ -637,7 +637,7 @@
                 
             },
             checkTbybSelected: function() {
-                console.log("checkTbybSelected");
+                // console.log("checkTbybSelected");
                 var order = this.getOrder();
                 var attribs = order.get('attributes');
                 // console.log("checkTbybSelected Called : "+JSON.stringify(attribs));
@@ -647,7 +647,7 @@
                     isSelected  = true;
                   }  
                 });
-                console.log("IS Slected : "+isSelected);
+                // console.log("IS Slected : "+isSelected);
                 return isSelected;
             },
             tbybItemExist: function() {
@@ -1380,6 +1380,7 @@
             initialize: function () {
                 console.log("Billing Step");
                 var me = this;
+                $('#mailBillingForm').hide();
                 // console.log("Billing Info : "+JSON.stringify(me));
                 _.defer(function () {
                     //set purchaseOrder defaults here.
@@ -1431,6 +1432,15 @@
                 me.get('check').selected = newPaymentType === 'Check';
                 me.get('card').selected = newPaymentType === 'CreditCard';
                 me.get('purchaseOrder').selected = newPaymentType === 'PurchaseOrder';
+                if(newPaymentType === 'Check') {
+                    console.log("Set isSameBillingShippingAddress to true");
+
+                    me.set('isSameBillingShippingAddress', true);
+                    /*_.defer(function (){
+                        $('#mailBillingForm').hide();
+                    });*/
+
+                }
                 if(newPaymentType === 'PurchaseOrder') {
                     me.setPurchaseOrderBillingInfo();
                 }
@@ -1525,8 +1535,15 @@
                     this.get('card').set('isVisaCheckout', currentPayment.paymentWorkflow.toLowerCase() === 'visacheckout');
                 }
 
+                var radioVal = $('input[name=paymentType]:checked').val();                
+                console.log("radioVal : "+radioVal);
+                /*if(radioVal) {
+                    $('#paymentType-check-0').prop('checked', true);
+                }*/
                 var val = this.validate();
-
+                console.log("Validation : "+JSON.stringify(val));
+                // console.log("HAS Item : "+_.has(val, "check.nameOnCheck"));
+                if(radioVal !== 'Check') {
                 if (this.nonStoreCreditTotal() > 0 && val) {
                     // display errors:
                     var error = {"items":[]};
@@ -1542,6 +1559,7 @@
                         order.onCheckoutError(error);
                     }
                     return false;
+                }
                 }
 
                 var card = this.get('card');
@@ -2175,10 +2193,14 @@
                 this.setFulfillmentContactEmail();
 
                 // skip payment validation, if there are no payments, but run the attributes and accept terms validation.
+                var radioVal = $('input[name=paymentType]:checked').val();                
+                if(radioVal !== 'Check') {
                 if ((nonStoreCreditTotal > 0 && this.validate()) || this.validateReviewCheckoutFields()) {
                     this.isSubmitting = false;
                     return false;
                 } 
+                }
+                
 
                 this.isLoading(true);
 

@@ -80,8 +80,12 @@
             </div>
         </div>
         {% if model.paymentType == "Check" %}
-        {% include "modules/checkout/checking-account-form" %}
-        <div class="mz-l-stack-section">
+            <div>
+                {{ labels.checkByMailLabel }} <br>
+                {{ labels.checkByMailAddress|safe }} 
+            </div>
+       <!--  {% include "modules/checkout/checking-account-form" %} -->
+        <div class="mz-l-stack-section" id="mailBillingForm" >
             <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
             {% include "modules/checkout/billing-address-selector" %}
         </div>
