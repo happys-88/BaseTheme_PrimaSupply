@@ -41,9 +41,9 @@
                 
                 <div data-mz-pagingcontrols class="mz-pagingcontrols">
                     {% include "modules/common/blog-paging-controls" %} 
-                </div>   
-                
-            </div> 
+                </div>
+                                
+            </div>  
             
         </div>
 
@@ -55,6 +55,9 @@
             <div data-mz-pagenumbers class="mz-pagenumbers">
                 {% include "modules/common/page-numbers" %}
             </div>
+            <div data-mz-pagingcontrols class="mz-pagingcontrols">
+                {% include "modules/common/blog-paging-controls" %} 
+            </div> 
         </div>
         </div>
     </div>

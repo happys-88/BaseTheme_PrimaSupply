@@ -1,22 +1,25 @@
 <ul>
-    <li class="product-brand">
-      {% for property in model.properties %}
-        {% if property.attributeFQN == "tenant~field_pre_brands" %}   
-          {% for propValue in property.values %}
-            <span class="brand-name"><strong>Brand:</strong> {{ propValue.stringValue|safe}}</span>   
-          {% endfor %}
-        {% endif %}
-      {% endfor %} 
+    
+  {% for property in model.properties %}
+    {% if property.attributeFQN == "tenant~field_pre_brands" %}   
+      <li class="product-brand">
+        {% for propValue in property.values %}
+          <span class="brand-name"><strong>Brand:</strong> {{ propValue.stringValue|safe}}</span>   
+        {% endfor %}
     </li>
-    <li class="product-certifications">
-      {% for property in model.properties %}
-        {% if property.attributeFQN == "tenant~field_certifications" %}  
-          {% for propValue in property.values %}
-            <span><img src="/resources/images/product-certification-images/{{ propValue.value }}"></span>  
-          {% endfor %}
-        {% endif %}
-      {% endfor %} 
-    </li>
+    {% endif %}
+  {% endfor %} 
+    
+  {% for property in model.properties %}
+    {% if property.attributeFQN == "tenant~field_certifications" %}  
+      <li class="product-certifications">
+        {% for propValue in property.values %}
+          <span><img src="/resources/images/product-certification-images/{{ propValue.value }}"></span>  
+        {% endfor %}
+      </li>  
+    {% endif %}
+  {% endfor %} 
+
     <li class="service-tooltips">
       
     </li> 

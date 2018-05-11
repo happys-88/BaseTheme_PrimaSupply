@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "1504c2d4080c2cced4958d973117cd95666b4305"
+      "commit": "bc75bfbcc36b1ad1e59b0ce1beba01776c591c71"
     },
     "baseThemeChannel": "stable"
   },
@@ -220,7 +220,7 @@
     {
       "entityType": "category",
       "id": "learning-center-directory",
-      "template": "modules/learning-center/category-lc",  
+      "template": "modules/learning-center/category-lc",
       "title": "Learning Center DirectoryPage",
       "userCreatable": false
     },
@@ -505,10 +505,10 @@
     ],
     "pageSizeOptionsDirectoryLC": [
       9,
-      15 
-    ], 
+      15
+    ],
     "viewAllPageSizeDirectoryLC": 12,
-    "defaultPageSizeDirectoryLC": 9,    
+    "defaultPageSizeDirectoryLC": 9,
     "preselectCountryCode": "US",
     "requireCheckoutAgreeToTerms": true,
     "suggestPriorSearchTerms": true,
