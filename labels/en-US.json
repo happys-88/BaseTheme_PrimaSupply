@@ -526,5 +526,6 @@
   "SecurityMsg"                            :   "Your connection to this website is secure",
   "recentOrder"                            :   "Recent orders",
   "myInformation"                          :   "My Information",
-  "welcome"                                :   "Welcome"
+  "welcome"                                :   "Welcome",
+  "items"                                  :   "items"
 }
