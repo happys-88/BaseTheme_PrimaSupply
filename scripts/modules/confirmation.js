@@ -42,16 +42,8 @@ require(["modules/jquery-mozu", "underscore", 'modules/api', "hyprlive", "module
                 //var user = api.createSync('user', payload);
                 // this.setLoading(true);
                 return api.action('customer', 'createStorefront', payload).then(function () {
-                    /*if (self.redirectTemplate) {
-                        window.location.pathname = self.redirectTemplate;
-                    }
-                    else {*/
-                    	console.log("Account Created");
-                    	$('#createAccountSignUp').hide();
-                    	$('#accountCreatedSignUp').show();
-                        // window.location.reload();
-
-                    // }
+                    $('#createAccountSignUp').hide();
+                    $('#accountCreatedSignUp').show();
                 }, self.displayApiMessage);
             }
         } 
