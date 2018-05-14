@@ -1,4 +1,4 @@
-define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "hyprlivecontext", "modules/api", "modules/models-product", "pages/cart", "modules/models-cart", "pages/product", "bxslider"], function ($, _, Hypr, Backbone, HyprLiveContext, api, ProductModel, cart, cartModel, product, bxslider) {
+/*define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "hyprlivecontext", "modules/api", "modules/models-product", "pages/cart", "modules/models-cart", "pages/product", "bxslider"], function ($, _, Hypr, Backbone, HyprLiveContext, api, ProductModel, cart, cartModel, product, bxslider) {
     console.log("quick");
     $(document).on('click', '.mz-quick-view', function (event) {
 
@@ -168,4 +168,4 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
 
     });
 
-});
+});*/

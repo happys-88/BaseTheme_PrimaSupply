@@ -432,7 +432,7 @@
                     
                    for(var propindextwo in properties){
                         var propertytwo = properties[propindextwo];
-                        if(propertytwo.name === 'TBYB' && propertytwo.values[0].value === true ){
+                        if(propertytwo.name === 'Try Before You Buy' && propertytwo.values[0].value === true ){
                             hasTybyItem = true;
                             this.set('tbybProduct',true);
                             tbybProducts[j] = item;
@@ -458,7 +458,7 @@
                     
                     for(var propindex in properties){
                         var propertytwo = properties[propindex];
-                        if(propertytwo.name === 'TBYB' && propertytwo.values[0].value === true ){
+                        if(propertytwo.name === 'Try Before You Buy' && propertytwo.values[0].value === true ){
                             var itemOptions = item.product.options;
                             var optionsVals = '';
                             var prodFullName = item.product.name;
