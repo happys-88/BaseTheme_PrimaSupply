@@ -7,3 +7,4 @@
     </ul>
     {% endif %}
 </div>
+<div class="modal fade" id="quickViewModal" tabindex="-1" role="dialog" aria-labelledby="qucikview"></div>
