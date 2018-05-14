@@ -1,6 +1,7 @@
 ﻿    <h3 class="mz-formstep-header mz-checkoutform-header">
         {{ labels.reviewOrder }}
     </h3>
+    {% dump user %}
     <div class="mz-formstep-body mz-checkoutform">
         {% if model.isReady %}
             <p class="mz-formstep-desc">{{ labels.reviewOrderText }}</p>
@@ -24,8 +25,8 @@
                     <input type="checkbox" name="create-new-account" data-mz-value="createAccount" {% if model.createAccount %} checked="checked"{% endif %} > {{ labels.createAccount }}
                 </label>
             </div>
-
-                {% if model.createAccount %}
+              
+                <!-- {% if model.createAccount %} -->
                 <div class="mz-l-formfieldgroup mz-create-account-fields mz-checkoutform mz-checkoutform-active">
                     <div class="mz-l-formfieldgroup-row">
                       <div class="mz-l-formfieldgroup-cell">
@@ -55,7 +56,7 @@
                        </div>
                     </div>
                 </div>
-                {% endif %}
+                <!-- {% endif %} -->
             {% endif %}
 
             <div class="mz-formstep-next">

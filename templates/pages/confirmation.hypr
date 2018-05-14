@@ -31,7 +31,7 @@
 
     <p>{{ labels.yourOrderNumber|string_format(model.orderNumber)|safe }}</p>
 
-    <div class="mz-l-stack">
+    <div class="mz-l-stack col-md-6">
         {% if model.hasDirectShip %}
         <div class="mz-l-stack-section">
             <h4 class="mz-l-stack-sectiontitle">{{ labels.shippingInformation }}</h4>
@@ -121,11 +121,18 @@
             {% endif %}
         </div>
     </div>
+
+{% if not user or user.isAnonymous %}
+    <div class="col-md-6" id="guestUserSignUp"></div>    
+{% endif %}
+
 </div><!-- #order-confirmation -->
+
 
 {% endblock body-content %}
 
 {% block trailing-scripts %}
+    {% require_script "modules/confirmation" %} 
 	{% parent %}
 	{% if siteContext.generalSettings.isGoogleAnalyticsEnabled and siteContext.generalSettings.isGoogleAnalyticsEcommerceEnabled %}
 	{% include "modules/analytics/google-analytics-ecommerce-tracking-code" %}

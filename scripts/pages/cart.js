@@ -6,10 +6,19 @@ define([
     'modules/cart-monitor',
     'hyprlivecontext',
     'hyprlive',
-    'modules/preserve-element-through-render'
-], function (Backbone, _, $, CartModels, CartMonitor, HyprLiveContext, Hypr, preserveElement) {
+    'modules/preserve-element-through-render',
+    'modules/models-checkout', 
+    'modules/api'
+], function (Backbone, _, $, CartModels, CartMonitor, HyprLiveContext, Hypr, preserveElement, CheckoutModels, api) {
     var CartView = Backbone.MozuView.extend({
         templateName: "modules/cart/cart-table",
+        additionalEvents: {
+                /*"change [data-mz-value=usShipping]":"populateShipping",
+                "change [data-mz-value=usStates]":"populateShipping"*/
+                "change [data-mz-value=usShipping]":"populateDropDowns",
+                "change [data-mz-value=usStates]":"populateDropDowns"
+
+        },
         initialize: function () {
             var me = this;
            
@@ -33,18 +42,202 @@ define([
                 window.onVisaCheckoutReady = initVisaCheckout;
                 require([pageContext.visaCheckoutJavaScriptSdkUrl], initVisaCheckout);
             }
-            
-           
-          
+            this.listenTo(this.model, 'sync', this.render);
+
+            var Ships = localStorage.getItem("shippingData");
+            var ratesParse = JSON.parse(Ships);
+            this.model.set("shippingDetail", ratesParse);
+            // console.log("SHippingDetail : "+JSON.stringify(this.model));
+            if(localStorage.getItem('selectedShipping') && localStorage.getItem('selectedState')) {
+               this.model.set({'selectedShipping': localStorage.getItem('selectedShipping')});
+               this.model.set({'selectedState': localStorage.getItem('selectedState')}) ;
+            }          
         },
+        beforeRender: _.once(function() {
+            console.log("B4 Render : "+JSON.stringify(this.model));
+            var cart = this.model;
+            var productCode = this.model.get("items").models[0].get('product').get('productCode');
+            var shipping = localStorage.getItem("selectedShipping");
+            console.log("Shipping storage : "+shipping);
+            if(typeof shipping === 'undefined' || shipping === null) {
+                var url = "https://t25050-s37999.sandbox.mozu.com/api/commerce/catalog/storefront/shipping/request-rates";
+                api.request("POST", url, {
+                    originAddress: {
+                        cityOrTown: 'California',
+                        isValidated: true,
+                        countryCode: 'US',
+                        postalOrZipCode: '94945',
+                        stateOrProvince: 'CA'
+                    },
+                    items: [
+                          {
+                            itemId: 8472,
+                            quantity: 1,
+                            shipsByItself: true,
+                            unitMeasurements: {
+                                girth: 2.3,
+                                height: {
+                                   unit: 'in',
+                                   value: 50.0
+                                },
+                                length: {
+                                   unit: 'in',
+                                   value: 12.0
+                                },
+                                weight: {
+                                   unit: 'oz',
+                                   value: 12.0
+                                },
+                                width: {
+                                   unit: 'in',
+                                   value: 12.0
+                                }
+                             }
+                        }
+                    ],
+                    destinationAddress: {
+                          cityOrTown: 'Florida',
+                          countryCode: 'US',
+                          isValidated: true,
+                          postalOrZipCode: "32007",
+                          stateOrProvince: "FL"
+                    }
+                    
+                }).then(function (response){
+                   console.log("RESPONSE : "+JSON.stringify(response.rates[0]));
+                   _.defer(function() {
+                        var shippingRates = response.rates[0].shippingRates;
+                    localStorage.setItem("shippingData", JSON.stringify(shippingRates));
+                    var Ships = localStorage.getItem("shippingData");
+                    var ratesParse = JSON.parse(Ships);
+                    cart.set("shippingDetail", ratesParse);
+
+                    
+                    console.log("Mode : "+cart.selectedShipping);
+                    var shipping = cart.selectedShipping;
+                    if(typeof shipping !== 'undefined') {
+                        var shippingDetailObj = cart.get("shippingDetail");
+                        var selectedShipping = cart.get("selectedShipping");
+                        var selectedMethod = _.find(shippingDetailObj, function(obj) {
+                          if(obj.content.name === selectedShipping){ 
+                              return obj;
+                            }
+                        });
+
+                        var selectedMethodAmount = selectedMethod.amount;
+                        // var cart = this.model;
+                        // var tot = cart.get('shippingTotal');
+                        cart.set({'shippingTotal': selectedMethodAmount});
+                        var tot = cart.get('shippingTotal');
+                        var total = cart.get('discountedTotal');
+                        // console.log("tot : "+tot + ": "+total);
+                        var newTotal = Number(tot)+Number(total);
+                        // console.log("TOTAL :  ::  "+newTotal);
+                        cart.set({'total':newTotal});
+                        alert("Call Render");
+                    }
+                    
+                   });
+                   
+                });
+            } else {
+                // this.render();
+                console.log("ELSE");
+                var shippingDetailObj = this.model.get("shippingDetail");
+                var selectedShipping = this.model.get("selectedShipping");
+                var selectedMethod = _.find(shippingDetailObj, function(obj) {
+                  if(obj.content.name === selectedShipping){ 
+                      return obj;
+                    }
+                });
+                var selectedMethodAmount = selectedMethod.amount;
+                cart = this.model;
+                // var tot = cart.get('shippingTotal');
+                cart.set({'shippingTotal': selectedMethodAmount});
+                var tot = cart.get('shippingTotal');
+                var total = cart.get('discountedTotal');
+                // console.log("tot : "+tot + ": "+total);
+                var newTotal = Number(tot)+Number(total);
+                // console.log("TOTAL :  ::  "+newTotal);
+                cart.set({'total':newTotal});
+                
+            }
+        }),
         render: function() {
+            console.log("render");
+            this.beforeRender();            
             CartMonitor.update();
           
             preserveElement(this, ['.v-button'], function() {
                 Backbone.MozuView.prototype.render.call(this);
             });
         },
+        getShippingMethodsDetail: function() {
+           /* console.log("DATA");
+            var responseData = '';*/
+        },
+        populateDropDowns: function() {
+            console.log("populateDropDowns : ");
+            var cart = this.model;
+            var stateSel = $('#usStates :selected').val();
+            var shippingSel = $('#shippingOption :selected').val();
+            console.log("Seleyed : "+shippingSel);
+            if(typeof shippingSel === 'undefined') {
+                var shippingDetailObj = cart.get("shippingDetail");
+                var defaultShippingMethod = shippingDetailObj[0].content.name;
+                
+                console.log("detail : "+JSON.stringify(shippingDetailObj[0].amount));
+                localStorage.setItem('selectedState',stateSel);    
+                localStorage.setItem('selectedShipping',defaultShippingMethod);
+            } else {
+                localStorage.setItem('selectedState',stateSel);    
+                localStorage.setItem('selectedShipping',shippingSel);
+            }
 
+            if(localStorage.getItem('selectedShipping') || localStorage.getItem('selectedState')) {
+               this.model.set({'selectedShipping': localStorage.getItem('selectedShipping')});
+               this.model.set({'selectedState': localStorage.getItem('selectedState')}) ;
+            }
+            this.populateShipping();
+            // console.log("CART : "+JSON.stringify(this.model));
+            
+            // this.render();
+
+        },
+       populateShipping: function(){
+                console.log("Populate Shipping"+JSON.stringify(this.model));
+                var stateSel = $('#usStates :selected').val();
+                var shippingSel = $('#shippingOption :selected').val();
+                var shippingAmount = $('#shippingOption :selected').attr("price");
+                if(typeof shippingSel === 'undefined') {
+                    var shippingDetailObj = this.model.get("shippingDetail");
+                    var selectedShipping = this.model.get("selectedShipping");
+                    var selectedMethod = _.find(shippingDetailObj, function(obj) {
+                      if(obj.content.name === selectedShipping){ 
+                          shippingAmount = obj.amount;
+
+                        }
+                    });
+                }
+                console.log("Shipping Selected : "+shippingAmount);
+                // var elm = e.target;
+                // var cartModel = CartModels.Cart.fromCurrent();
+                var cart = this.model;
+                var tax = 15;
+                
+                var tot = cart.get('shippingTotal');
+                cart.set({'shippingTotal': shippingAmount});
+                tot = cart.get('shippingTotal');
+                var total = cart.get('discountedTotal');
+                var newTotal = Number(tot)+Number(total);
+                console.log("TOTAL :  ::  "+newTotal);
+                cart.set({'total':newTotal});
+                this.render();
+                              
+                this.render();
+                
+                
+        },     
         updateQuantity: _.debounce(function (e) {
             var $qField = $(e.currentTarget),
                 newQuantity = parseInt($qField.val(), 10),
@@ -179,7 +372,9 @@ define([
     }
     /* end visa checkout */
 
-    
+    $(document).ready(function() {
+        /*var checkoutData = CheckoutModels.CheckoutPage;
+        alert("CHECKOUT DATA : "+JSON.stringify(checkoutData));*/
         var cartModel = CartModels.Cart.fromCurrent(),
             cartViews = {
 
@@ -208,5 +403,5 @@ define([
         CartMonitor.setCount(cartModel.count());
               
         return CartView;
-
+        });
 });

@@ -492,6 +492,8 @@
   "continueShopping"                       :   "Continue Shopping",
   "refineBy"                               :   "Refine by:" ,
   "shoppingCart"                           :   "Shopping Cart",
+
+  // Checkout Labels
   "liftGateAddY"                           :   "Add Lift Gate Delivery",
   "liftGateAddN"                           :   "I certify I can remove these items from truck",
   "freightShipmentY"                       :   "I understand how to inspect freight shipment",
@@ -502,17 +504,29 @@
   "tbybContent"                            :   "Congratulations! Products from your order qualify for our Try Before You Buy beta program. Any product you select below will be sent to you completely free of charge for 14 days from the date of shipment!*",
   "tbybCondition"                          :   "*Participation in the program is subject to approval. Please read the program details for more information",
   "labelOversized"                         :   "Oversized Shipping",
-  "reviews"                                :   "reviews",
-  "questions"                              :   "questions",
-  "merchandiseSubtotal"                    :   "Merchandise Subtotal",
+  "saveMyInfo"                             :   "Save My Information",
+  "checkByMailAddress"                     :   "Prima Supply <br> 4603 Poplar Level Rd<br> Louisville, KY 40213",
+  "checkByMailLabel"                       :   "Checks should be made out to: ",
+  "setUpAccountHeader"                     :   "Care to Set Up A Quick Account?",
+  "confirmationAccountSetupMessage"        :   "Want to remember your infromation the next time you stop with us?<br>Complete the information below, and the click <b>Save My Information</b>",
+  "minimumChars"                           :   "(Minimum 8 characters + numbers)",
+
+  // Cart Page Labels
   "oversizedShippingCharge"                :   "Oversized Shipping Charge",
   "estimatedTax"                           :   "Estimated Tax",
   "estimatedShipping"                      :   "Estimated Shipping",
   "estimateYourTaxShipping"                :   "Estimate your tax and shipping",
+  "merchandiseSubtotal"                    :   "Merchandise Subtotal",
+
+// YotPo Reviews
+  "reviews"                                :   "reviews",
+  "questions"                              :   "questions",
+  "productrating"                          :   "Product Ratings",
+    
   "backToTop"                              :   "Back to top",
   "inStock"                                :   "In Stock",
   "liveChat"                               :   "Live Chat",
-  "searchLearningCenter"                   :   "Search Learning Center",
+  "searchLearningCenter"                   :   "Search Learning Center",  
 
   //For LogIn Popup and My account
   "reEnterPassword"                        :   "Re-enter password",
@@ -528,4 +542,5 @@
   "myInformation"                          :   "My Information",
   "welcome"                                :   "Welcome",
   "items"                                  :   "items"
+  
 }
