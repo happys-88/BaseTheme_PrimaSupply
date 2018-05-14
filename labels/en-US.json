@@ -541,6 +541,8 @@
   "recentOrder"                            :   "Recent orders",
   "myInformation"                          :   "My Information",
   "welcome"                                :   "Welcome",
-  "items"                                  :   "items"
-  
+  "items"                                  :   "items",
+
+  //QuickView
+  "fullProductDetails"                     :   "Full product details"
 }
