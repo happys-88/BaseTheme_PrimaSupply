@@ -1,7 +1,6 @@
 ﻿    <h3 class="mz-formstep-header mz-checkoutform-header">
         {{ labels.reviewOrder }}
     </h3>
-    {% dump user %}
     <div class="mz-formstep-body mz-checkoutform">
         {% if model.isReady %}
             <p class="mz-formstep-desc">{{ labels.reviewOrderText }}</p>

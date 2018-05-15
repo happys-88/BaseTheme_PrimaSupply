@@ -54,13 +54,13 @@ define([
             }          
         },
         beforeRender: _.once(function() {
-            console.log("B4 Render : "+JSON.stringify(this.model));
+            // console.log("B4 Render : "+JSON.stringify(this.model));
             var cart = this.model;
             var productCode = this.model.get("items").models[0].get('product').get('productCode');
             var shipping = localStorage.getItem("selectedShipping");
-            console.log("Shipping storage : "+shipping);
+            // console.log("Shipping storage : "+shipping);
             if(typeof shipping === 'undefined' || shipping === null) {
-                var url = "https://t25050-s37999.sandbox.mozu.com/api/commerce/catalog/storefront/shipping/request-rates";
+                var url = "api/commerce/catalog/storefront/shipping/request-rates";
                 api.request("POST", url, {
                     originAddress: {
                         cityOrTown: 'California',
@@ -71,7 +71,7 @@ define([
                     },
                     items: [
                           {
-                            itemId: 8472,
+                            itemId: productCode,
                             quantity: 1,
                             shipsByItself: true,
                             unitMeasurements: {
@@ -113,7 +113,7 @@ define([
                     cart.set("shippingDetail", ratesParse);
 
                     
-                    console.log("Mode : "+cart.selectedShipping);
+                    // console.log("Mode : "+cart.selectedShipping);
                     var shipping = cart.selectedShipping;
                     if(typeof shipping !== 'undefined') {
                         var shippingDetailObj = cart.get("shippingDetail");
@@ -142,7 +142,7 @@ define([
                 });
             } else {
                 // this.render();
-                console.log("ELSE");
+                // console.log("ELSE");
                 var shippingDetailObj = this.model.get("shippingDetail");
                 var selectedShipping = this.model.get("selectedShipping");
                 var selectedMethod = _.find(shippingDetailObj, function(obj) {
@@ -164,7 +164,7 @@ define([
             }
         }),
         render: function() {
-            console.log("render");
+            // console.log("render");
             this.beforeRender();            
             CartMonitor.update();
           
@@ -177,16 +177,16 @@ define([
             var responseData = '';*/
         },
         populateDropDowns: function() {
-            console.log("populateDropDowns : ");
+            // console.log("populateDropDowns : ");
             var cart = this.model;
             var stateSel = $('#usStates :selected').val();
             var shippingSel = $('#shippingOption :selected').val();
-            console.log("Seleyed : "+shippingSel);
+            // console.log("Seleyed : "+shippingSel);
             if(typeof shippingSel === 'undefined') {
                 var shippingDetailObj = cart.get("shippingDetail");
                 var defaultShippingMethod = shippingDetailObj[0].content.name;
                 
-                console.log("detail : "+JSON.stringify(shippingDetailObj[0].amount));
+                // console.log("detail : "+JSON.stringify(shippingDetailObj[0].amount));
                 localStorage.setItem('selectedState',stateSel);    
                 localStorage.setItem('selectedShipping',defaultShippingMethod);
             } else {
@@ -205,7 +205,7 @@ define([
 
         },
        populateShipping: function(){
-                console.log("Populate Shipping"+JSON.stringify(this.model));
+                // console.log("Populate Shipping"+JSON.stringify(this.model));
                 var stateSel = $('#usStates :selected').val();
                 var shippingSel = $('#shippingOption :selected').val();
                 var shippingAmount = $('#shippingOption :selected').attr("price");
@@ -219,7 +219,7 @@ define([
                         }
                     });
                 }
-                console.log("Shipping Selected : "+shippingAmount);
+                // console.log("Shipping Selected : "+shippingAmount);
                 // var elm = e.target;
                 // var cartModel = CartModels.Cart.fromCurrent();
                 var cart = this.model;
@@ -230,7 +230,7 @@ define([
                 tot = cart.get('shippingTotal');
                 var total = cart.get('discountedTotal');
                 var newTotal = Number(tot)+Number(total);
-                console.log("TOTAL :  ::  "+newTotal);
+                // console.log("TOTAL :  ::  "+newTotal);
                 cart.set({'total':newTotal});
                 this.render();
                               
@@ -243,7 +243,7 @@ define([
                 newQuantity = parseInt($qField.val(), 10),
                 id = $qField.data('mz-cart-item'),
                 item = this.model.get("items").get(id);
-                console.log("item data:"+JSON.stringify(item));
+                // console.log("item data:"+JSON.stringify(item));
             
 
                 //CartMonitor.update();

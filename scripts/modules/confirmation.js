@@ -15,8 +15,14 @@ require(["modules/jquery-mozu", "underscore", 'modules/api', "hyprlive", "module
 	        },
 	        displayMessage: function (msg) {
 	            // this.setLoading(false);
-	            $('#errorMessageSignUp').html('<span class="mz-validationmessage">' + msg + '</span>');
+                $('#errorMessageSignUp').html('<span class="mz-validationmessage">' + msg + '</span>');
 	        },
+            displayApiMessage: function (xhr) {
+                if(typeof xhr.message !== 'undefined' && xhr.message !== '') {
+                    var errorMsg = xhr.message;
+                    $('#errorMessageSignUp').html('<span class="mz-validationmessage">' + errorMsg + '</span>');
+                }
+            },
 			signup: function () {
             var self = this,
                 email = $('#emailAddressSignup').val(),
@@ -53,8 +59,7 @@ require(["modules/jquery-mozu", "underscore", 'modules/api', "hyprlive", "module
 		var orderData = require.mozuData('order');
 		var orderModel = Backbone.Model.extend(); 
 		var order = new orderModel(orderData);
-		console.log("ORDER DTA : "+JSON.stringify(orderData));
-		
+				
 		var view = new SignupGuest({
 			model: order,
 			el: $('#guestUserSignUp')
