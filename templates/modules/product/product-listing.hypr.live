@@ -1,6 +1,4 @@
-﻿{% require_script "scripts/pages/product" %}
-
-<div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
+﻿<div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
     
     <div class="mz-productlisting-image">
         {% block product-image %}
@@ -82,3 +80,4 @@
     </div>
 </div>
 
+{% require_script "modules/quickview" %}
