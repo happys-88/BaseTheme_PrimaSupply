@@ -21,6 +21,6 @@
   {% endfor %} 
 
   <li class="service-tooltips">  
-    {% include "modules/product/product-service-tooltips" %} 
+    {% include "modules/product/tooltips" %}      
   </li> 
 </ul>
