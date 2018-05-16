@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "c72052d257562ff7dab157d53d730d5e124147fb"
+      "commit": "1504c2d4080c2cced4958d973117cd95666b4305"
     },
     "baseThemeChannel": "stable"
   },
@@ -205,6 +205,13 @@
     },
     {
       "entityType": "category",
+      "id": "category-gateway",
+      "template": "category-gateway", 
+      "title": "Category Gateway", 
+      "userCreatable": false
+    },
+    {
+      "entityType": "category",
       "id": "learning-center",
       "template": "modules/learning-center/landing-page",
       "title": "Learning Center LandingPage",
@@ -284,6 +291,24 @@
       "id": "Contact-Us",
       "template": "contact-us",
       "title": "Contact Us",
+      "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "editor": "landing-page",
+      "entityType": "webpage",
+      "id": "price-request",
+      "template": "price-match-request", 
+      "title": "Price Match Request", 
+      "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "editor": "landing-page",
+      "entityType": "webpage",
+      "id": "return-exchange",
+      "template": "return-exchange",
+      "title": "Return & Exchange",
       "userCreatable": true
     },
     {

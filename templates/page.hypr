@@ -135,6 +135,7 @@
 
                 {% block brand-gateway %}{% endblock brand-gateway %}
                 {% block customer-service %}{% endblock customer-service %} 
+                {% block category-gateway %}{% endblock category-gateway %} 
                 
             </div>
                         
