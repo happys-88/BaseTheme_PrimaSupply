@@ -1,4 +1,5 @@
-﻿  <ul class="mz-orderlist">
+﻿  
+  <ul class="mz-orderlist">
     {% for order in model.items %}
     <li data-mz-order-id="{{order.id}}" data-mz-order-history-listing>
     	<div data-order-message-bar class="order-message-bar"></div>

@@ -634,6 +634,7 @@ img[data-mztp]{
 	}
 }
 
+/**** Category Gateway ****/
 .category-gateway{ 
     p{
         font-size: 16px;
@@ -657,4 +658,47 @@ img[data-mztp]{
         width: auto;
         margin: 8px auto; 
     }
+}
+
+
+/**** Tooltips ****/
+.mz-productdetail{
+	overflow: inherit; 
+}
+.mz-tooltip{
+	position: relative;
+	.mz-tooltip-text{
+		width: 200px; 
+		padding: 10px;  
+		background: #fff;
+		border: 1px solid #ddd;
+		position: absolute;
+		left: -23px;  
+		top: 42px;  
+		z-index: 9; 
+		display: none;
+		&:before{
+			content: "";
+            position: absolute;
+            left: 30px; 
+            top: -10px; 
+            border-left: 10px solid transparent;
+            border-bottom: 10px solid #ddd; 
+            border-right: 10px solid transparent;
+        }
+        &:after{ 
+			content: "";
+            position: absolute;
+            left: 31px; 
+            top: -9px;  
+            border-left: 9px solid transparent; 
+            border-bottom: 9px solid @textColorWhite;
+            border-right: 9px solid transparent; 
+        }  
+	}
+	&:hover{
+		.mz-tooltip-text{
+			display: block; 
+		}
+	}
 }

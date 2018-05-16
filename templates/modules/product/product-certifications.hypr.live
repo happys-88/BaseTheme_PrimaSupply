@@ -20,7 +20,7 @@
     {% endif %}
   {% endfor %} 
 
-    <li class="service-tooltips">
-      
-    </li> 
+  <li class="service-tooltips">  
+    {% include "modules/product/product-service-tooltips" %} 
+  </li> 
 </ul>

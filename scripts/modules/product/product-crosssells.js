@@ -8,6 +8,8 @@ define([
 	"modules/models-product"
 ], function ($, _, Backbone, Hypr, bxslider, api, ProductModel) {
 
+	console.log("aa gya"); 
+
 	var productCrossSellView = Backbone.MozuView.extend({
 	    templateName: 'modules/product/product-crosssells',
 	    productCarousel: function () {

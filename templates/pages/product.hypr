@@ -6,7 +6,7 @@
 
 {% block body-content %}
 
-{% require_script "pages/product" %}
+{% require_script "pages/product" %} 
 
 {% preload_json model "product" %}
 
@@ -53,7 +53,7 @@
     {% dropzone "body-bottom" scope="page" %}   
 {% endblock body-below-content %}
 
-{% require_script "modules/product/product-crosssells" %}
+
 
 
 

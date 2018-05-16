@@ -4,7 +4,7 @@
 {% block body-tag-classes %} mz-myaccount {% endblock body-tag-classes %}
 {% block body-content %}
     {% require_script "pages/myaccount" %}
-    {% preload_json model "customer" %} 
+    {% preload_json model "customer" %}  
 
     <div class="mz-l-container">
         <div class="col-xs-12 col-sm-3 col-md-2">
@@ -13,6 +13,8 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-9 col-md-10">
+            <button class="mz-button" id="mz-print-content-confirmation">Print</button>    
+
             <div id="accordion" class="tab-content mz-myaccount-panels">
                 <div id="account-messages">
                     {% include "modules/common/message-bar" with model=model.messages %}
