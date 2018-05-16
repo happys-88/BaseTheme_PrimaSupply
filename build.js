@@ -9,9 +9,7 @@
         bootstrap:"vendor/bootstrap/js/bootstrap.min",
         blockui: "vendor/jquery.blockUI/jquery.blockUI.min",
         elevatezoom:"vendor/elevate-zoom/elevateZoom",
-        bxslider: "vendor/jquery-bxslider/jquery.bxslider.min" 
-        
-
+        bxslider: "vendor/jquery-bxslider/jquery.bxslider.min"
     },
     dir: "compiled/scripts/",
     locale: "en-us",
@@ -35,8 +33,7 @@
                 'modules/models-documents',
                 'modules/models-faceting',
                 'modules/models-messages',
-                'modules/models-product',
-                'modules/quickview',
+                'modules/models-product',             
                 'modules/scroll-nav',
                 'modules/facet-clear.js',
                 'modules/search-autocomplete',
@@ -46,7 +43,8 @@
                 'modules/views-productlists',
                 "modules/views-productimages",
                 "modules/block-ui",
-                "modules/page-header/global-cart"   
+                "modules/page-header/global-cart",
+                "modules/quickview"
             ],
             exclude: ['jquery'],
         },
