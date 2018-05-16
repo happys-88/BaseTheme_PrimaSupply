@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "1504c2d4080c2cced4958d973117cd95666b4305" 
+      "commit": "cc80293092b2ee1744fb03b37c6ed9999ae71ea8"
     },
     "baseThemeChannel": "stable"
   },
@@ -206,8 +206,8 @@
     {
       "entityType": "category",
       "id": "category-gateway",
-      "template": "category-gateway", 
-      "title": "Category Gateway", 
+      "template": "category-gateway",
+      "title": "Category Gateway",
       "userCreatable": false
     },
     {
@@ -298,8 +298,8 @@
       "editor": "landing-page",
       "entityType": "webpage",
       "id": "price-request",
-      "template": "price-match-request", 
-      "title": "Price Match Request", 
+      "template": "price-match-request",
+      "title": "Price Match Request",
       "userCreatable": true
     },
     {
@@ -528,18 +528,18 @@
       32,
       64
     ],
-    "viewAllPageSize": 48,  
+    "viewAllPageSize": 48,
     "pageSizeOptionsDirectoryLC": [
       9,
       15
     ],
-    "pageSizeOptionsOrderHistory": [ 
+    "pageSizeOptionsOrderHistory": [
       5,
-      10 
+      10
     ],
     "viewAllPageSizeDirectoryLC": 12,
     "defaultPageSizeDirectoryLC": 9,
-    "defaultPageSizeOrderHistory": 5,  
+    "defaultPageSizeOrderHistory": 5,
     "preselectCountryCode": "US",
     "requireCheckoutAgreeToTerms": true,
     "suggestPriorSearchTerms": true,
