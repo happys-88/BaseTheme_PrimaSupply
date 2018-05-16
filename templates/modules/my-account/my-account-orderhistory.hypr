@@ -1,4 +1,5 @@
-﻿{% if showPaging %}
+﻿
+{% if showPaging %}  
     <h3 class="mz-l-stack-sectiontitle">{{ labels.orderHistory }}</h3>
 {% else %}
     <h3 class="mz-l-stack-sectiontitle">{{ labels.order }}</h3>
@@ -12,14 +13,16 @@
             <div data-mz-pagenumbers class="mz-pagenumbers">
                 {% include "modules/common/page-numbers" %}
             </div>
+            
             <div data-mz-pagingcontrols class="mz-pagingcontrols">
-                {% include "modules/common/paging-controls" %}
-            </div>
+                {% include "modules/common/order-history-paging-controls" %}  
+            </div> 
+            
         {% endif %}
     {% else %}
         {{ labels.accountNoOrders }}
         <div class="mz-order-history-dropzone">
-            {% dropzone "order-history" scope="page" %}
+            {% dropzone "order-history" scope="page" %} 
         </div>
     {% endif %}
 </div>

@@ -165,7 +165,7 @@ define([
         }),
         render: function() {
             // console.log("render");
-            this.beforeRender();            
+            this.beforeRender();              
             CartMonitor.update();
           
             preserveElement(this, ['.v-button'], function() {
@@ -401,7 +401,8 @@ define([
         window.cartView = cartViews;
         
         CartMonitor.setCount(cartModel.count());
-              
-        return CartView;
-        });
+    });
+
+    return CartView;
+    
 });

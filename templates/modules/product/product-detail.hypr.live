@@ -47,7 +47,7 @@
 <div class="mz-stock-availability">
   <div class="mz-stock">
     {% if model.inventoryInfo.onlineStockAvailable > 0 %}
-      <p>{{ labels.inStock }}</p>
+      <p>{{ labels.inStock }} {{model.inventoryInfo.onlineStockAvailable}}</p>
     {% else %}
       <p>{{ labels.outOfStock }}</p>
     {% endif %}
@@ -103,14 +103,14 @@
 </div>
 
 <div class="mz-options-section">
-  <div class="col-md-8">
-    {% if model.options and model.options.length > 0 %}
-      <h4 class="mz-l-stack-sectiontitle">{{ labels.options }}</h4>
+  {% if model.options and model.options.length > 0 %}
+    <h4 class="mz-l-stack-sectiontitle">{{ labels.options }}</h4>
+    <div class="col-md-8">
       <div class="mz-productdetail-options mz-l-stack-section">
         {% include "modules/product/product-options" %}
       </div>
-    {% endif %}  
-  </div> 
+    </div> 
+  {% endif %} 
   <div class="col-md-4 mz-warranty">
     <p>Warranty: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     <p>Warranty: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>

@@ -501,6 +501,55 @@
     }
 }
 
+
+//Login and SignUp Page
+.mz-login-page {
+    width: 350px;
+    .mz-pagetitle {
+        font-size: 22px;
+        margin: 10px 0;
+        text-transform: uppercase;
+    }
+    p {
+        color: #666;
+    }
+    .mz-l-formfieldgroup {
+        display: block;
+        .input-group {
+            margin-bottom: 10px;
+        }
+        .input-group-addon {
+            padding: 10px 15px;
+            font-size: 12px;
+            line-height: 10px;
+            border-radius: 0;
+        }
+        input[type="password"],
+        input[type="email"] {
+            border: 1px solid #d4d4d4;
+            margin-bottom: 0px;
+            width: 100%;
+            height: 36px;
+        }
+    }
+    .mz-forgot {
+        color: #00adce;
+        text-decoration: underline;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    .mz-popover-message {
+        margin-top: 10px;
+    }
+    button {
+        &.mz-button {
+            border-radius: 0;
+            width: 100%;
+            padding: 8px 0;
+        }
+    }
+}
 //Notice
 @media (min-width: 768px) {
     .modal-dialog {
