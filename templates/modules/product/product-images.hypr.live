@@ -11,26 +11,26 @@
         <div class="bxslider" id="product-detail-slider"> 
             {% if pageContext.isMobile %}
                 {% for image in model.content.productImages %}                 
-                 	{% if forloop.counter|mod(3)==1 %}
+                 	{% if image.sequence|mod(3)==1 %}
 	                 	<div>     
 	                {% endif %}  
 	                    <a class="mz-productimages-thumb" data-mz-productimage-thumb="{{ image.sequence }}" href="{% make_url "image" image %}">
 	                        <img class="mz-productimages-thumbimage"  src="{% make_url "image" image with max=themeSettings.maxProductImageThumbnailSize as_parameters %}" {% if image.altText %}alt="{{ image.altText }}"{% endif %} data-zoom-image="{% make_url "image" image with max=themeSettings.productImagesZoomContainerWidth as_parameters %}" />
 	                    </a>
-	                    {% if forloop.counter|mod(3)==0  or forloop.last %}
+	                    {% if image.sequence|mod(3)==0  or forloop.last %}
 	                	</div>     
 	             	{% endif %} 
 	            {% endfor %} 
 	        {% endif %}
 	        {% if pageContext.isDesktop %}
 	        	{% for image in model.content.productImages %}   
-	        		{% if forloop.counter|mod(10)==1 %}
+	        		{% if image.sequence|mod(10)==1 %}
 	        			<div>    
 		        		{% endif %}  
 		  				<a class="mz-productimages-thumb" data-mz-productimage-thumb="{{ image.sequence }}" href="{% make_url "image" image %}">
 		               		<img class="mz-productimages-thumbimage"  src="{% make_url "image" image with max=themeSettings.maxProductImageThumbnailSize as_parameters %}" {% if image.altText %}alt="{{ image.altText }}"{% endif %} data-zoom-image="{% make_url "image" image with  max=themeSettings.productImagesZoomContainerWidth as_parameters %}" />
 		       			</a>
-		       			{% if forloop.counter|mod(10)==0  or forloop.last %}
+		       			{% if image.sequence|mod(10)==0  or forloop.last %}
 		   				</div>     
 		           	{% endif %} 
 	        	{% endfor %} 
