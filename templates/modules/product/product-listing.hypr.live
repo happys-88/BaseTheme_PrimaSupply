@@ -1,5 +1,4 @@
-﻿{% require_script "scripts/pages/product" %}
-
+﻿ 
 <div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
     
     <div class="mz-productlisting-image">
@@ -24,7 +23,7 @@
 
         {% block product-code %}
             {% if themeSettings.listProductCode %}
-                <div class="mz-productlisting-productcode">{{model.productCode}}</div>
+                <div class="mz-productlisting-productcode">{{model.productCode}}</div> 
             {% endif %}
             {% comment %} Custom code by category.js {% endcomment %}
             <div id="product-rating"></div>

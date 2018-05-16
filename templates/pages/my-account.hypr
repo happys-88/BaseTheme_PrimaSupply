@@ -4,7 +4,7 @@
 {% block body-tag-classes %} mz-myaccount {% endblock body-tag-classes %}
 {% block body-content %}
     {% require_script "pages/myaccount" %}
-    {% preload_json model "customer" %}
+    {% preload_json model "customer" %} 
 
     <div class="mz-l-container">
         <div class="col-xs-12 col-sm-3 col-md-2">

@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "c72052d257562ff7dab157d53d730d5e124147fb"
+      "commit": "cc80293092b2ee1744fb03b37c6ed9999ae71ea8"
     },
     "baseThemeChannel": "stable"
   },
@@ -503,12 +503,18 @@
       32,
       64
     ],
+    "viewAllPageSize": 48,  
     "pageSizeOptionsDirectoryLC": [
       9,
       15
     ],
+    "pageSizeOptionsOrderHistory": [ 
+      5,
+      10 
+    ],
     "viewAllPageSizeDirectoryLC": 12,
     "defaultPageSizeDirectoryLC": 9,
+    "defaultPageSizeOrderHistory": 5,  
     "preselectCountryCode": "US",
     "requireCheckoutAgreeToTerms": true,
     "suggestPriorSearchTerms": true,
