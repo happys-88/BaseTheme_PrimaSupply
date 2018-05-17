@@ -1,82 +1,81 @@
-
 {% extends "page" %}
+
 {% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  - {% parent %}{% endblock title-tag-content %}
 {% block body-tag-classes %} contact-us {% endblock body-tag-classes %}
+
 {% block breadcrumbs %}
-{% include "modules/customer-service-breadcumb" %}
+    {% include "modules/customer-service-breadcumb" %}
 {% endblock breadcrumbs %}
-{% block customer-service %}
-<div class="row">
-    <div class="col-sm-3">     
+
+{% block body-content %}
+<div class="mz-customer-service-page">
+    <div class="col-xs-12 col-sm-3 col-md-2">     
         <div class="mz-l-sidebar mz-myaccount-nav">
-                {% include "modules/customer-service/service-nav" with navtarget="body" %}
+            {% include "modules/customer-service/service-nav" %}
         </div>
     </div>
-    <div class="col-sm-9 tab-content">
-         
- <div class="mz-l-column col-md-6">
-        <h1 class="mz-pagetitle">Contact Us</h1>
-        <form method="post" class="mz-loginform mz-loginform-page" name="mz-anonymousorder">
-            <input type="hidden" name="order-returnUrl" value="{{ model.returnUrl }}"/>
-            <div class="mz-l-formfieldgroup">
-                <div class="mz-l-formfieldgroup-row">
-                    <div class="mz-l-formfieldgroup-cell">
-                        <label for="FirstName">First Name</label>
-                    </div>
-                    <div class="mz-l-formfieldgroup-cell">
-                        <input name="FirstName" value="" type="text" />
-                    </div>
-                </div>
-                <div class="mz-l-formfieldgroup-row">
-                        <div class="mz-l-formfieldgroup-cell">
-                            <label for="LastName">Last Name</label>
-                        </div>
-                        <div class="mz-l-formfieldgroup-cell">
-                            <input name="LastName" value="" type="text"  />
-                        </div>
-                </div>
-                <div class="mz-l-formfieldgroup-row">
-                        <div class="mz-l-formfieldgroup-cell">
-                            <label for="Email">Email</label>
-                        </div>
-                        <div class="mz-l-formfieldgroup-cell">
-                            <input name="email" value="" type="email" required />
-                        </div>
-                </div>
-                <div class="mz-l-formfieldgroup-row">
-                    <div class="mz-l-formfieldgroup-cell">
-                        <label for="Subject">Subject</label>
-                    </div>
-                    <div class="mz-l-formfieldgroup-cell">
-                        <select>
-                            <option value="zipCode">option1</option>
-                            <option value="phoneNumber">option2</option>
-                           <option value="email">option3</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="mz-l-formfieldgroup-row">
-                        <div class="mz-l-formfieldgroup-cell">
-                            <label for="textarea">Message</label>
-                        </div>
-                        <textarea class="mz-l-formfieldgroup-cell" rows="4" cols="50"></textarea> 
-                </div>
-                <div class="mz-l-formfieldgroup-row">
-                    <div class="mz-l-formfieldgroup-cell"></div>
-                    <div class="mz-l-formfieldgroup-cell">
-                        <button class="mz-button mz-button-large mz-login-button" data-mz-action="anonymousorder-submit">Send</button>
-                        <div class="mz-l-formfieldgroup-cell">
-                            <section data-mz-role="popover-message" class="mz-popover-message"></section>
-                        </div>
+    <div class="col-xs-12 col-sm-9 col-md-10">
+        <h3 class="mz-l-stack-sectiontitle">{{ labels.contactUs }}</h3>
+        <div class="row">
+            <div class="col-sm-6 col-xs-12">
+                <div class="row">
+                    <div class="mz-contact-form">
+                        <form method="" name="">
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12" for="{{ labels.firstName }}">{{ labels.firstName }}</label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="text" class="form-control" id="{{ labels.firstName }}" name="" value="">
+                                    <span class="mz-validationmessage"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12" for="{{ labels.lastName }}">{{ labels.lastName }}</label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="text" class="form-control" id="{{ labels.lastName }}" name="" value="">
+                                    <span class="mz-validationmessage"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12" for="{{ labels.email }}">{{ labels.email }}<span class="is-required"> *</span></label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="email" class="form-control" id="{{ labels.email }}" name="" value="">
+                                    <span class="mz-validationmessage"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12" for="{{ labels.subject }}">{{ labels.subject }}<span class="is-required"> *</span></label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <select class="form-control" id="{{ labels.subject }}">
+                                        <option value="">Coffee shop equipment list with price</option>
+                                        <option value="">Coffee shop equipment list with price</option>
+                                        <option value="">Coffee shop equipment list with price</option>
+                                        <option value="">Coffee shop equipment list with price</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12" for="{{ labels.message }}">{{ labels.message }}<span class="is-required"> *</span></label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <textarea class="form-control" id="{{ labels.message }}" name="" value=""></textarea>
+                                    <span class="mz-validationmessage"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-8 col-sm-offset-4 col-xs-12">
+                                    <input type="reset" value="{{ labels.reset }}"/>
+                                    <button class="mz-button">{{ labels.submit }}</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </form>
+            <div class="col-sm-6 col-xs-12">
+                <div class="mz-dropzone-empty">
+                    {% dropzone "contact" scope="page" %} Contant US
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-6  mz-dropzone-empty"> {% dropzone "contact" scope="page" %} </div>
-       
-        
-    </div>
-  </div>
-
-{% endblock customer-service %}
+</div>
+{% endblock body-content %}

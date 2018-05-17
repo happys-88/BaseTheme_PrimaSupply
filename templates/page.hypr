@@ -132,14 +132,12 @@
                     {% dropzone "body" scope="page" %}
                 {% endblock body-content %}
                 
+                {% block brand-gateway %}{% endblock brand-gateway %}
+                {% block category-gateway %}{% endblock category-gateway %}
+
                 {% block body-below-content %}
                     {% dropzone "body-bottom" scope="page" %} 
                 {% endblock body-below-content %}
-
-                {% block brand-gateway %}{% endblock brand-gateway %}
-                {% block customer-service %}{% endblock customer-service %} 
-                {% block category-gateway %}{% endblock category-gateway %} 
-                
             </div>
                         
             {% block page-footer %}
