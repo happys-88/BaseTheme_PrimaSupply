@@ -15,8 +15,8 @@
             <h3 class="mz-l-stack-sectiontitle">{{ labels.customerService }}</h3>
             <div class="mz-dropzone-empty">
                 {% dropzone "service-dropzone" scope="page" %} Service Dropzone
-            </div>   
-            <div class="row">
+            </div>
+            <div class="row">  
                 <div class="col-sm-4 mz-dropzone-empty">
                     {% dropzone "track-my-order" scope="page" %} Track My Order
                 </div>
