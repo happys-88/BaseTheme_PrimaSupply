@@ -747,4 +747,32 @@
 }
 
 
-
+/**** Instagram Feeds ****/
+.mz-sidebar{
+	.mz-sidebar-content-widget{
+		.yotpo-gallery{
+			text-align: center;
+			h2{
+				text-align: left; 
+			}
+		}
+		.yotpo-pictures-gallery{
+			max-height: 345px !important; 
+			overflow: hidden !important;
+			margin: 0 !important;
+			.yotpo-pictures-gallery-header-wrapper{
+				margin: 0 !important; 
+			} 
+			.yotpo-single-image-container{
+				width: calc(~"50% - 5px") !important;     
+				margin: 0 10px 10px 0 !important;  
+				&:nth-child(even){
+					margin: 0 0 10px 0 !important;  
+				}
+			}
+			.yotpo-default-button{
+				display: none !important;  
+			}
+		}
+	}
+}

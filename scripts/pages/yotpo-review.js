@@ -10,7 +10,8 @@ define(["modules/jquery-mozu",
 	"modules/api"], 
 function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext, CollectionViewFactory, ProductModel, ProductPrice, api) {
 
-	$(document).ready(function(){ 
+	$(document).ready(function(){
+		console.log("loading..");   
 	    var singleImgContainer = $(".yotpo-single-image-container");
 	    var size_li = $(singleImgContainer).size();
 	    var galleryThumbnails = 8;
@@ -19,8 +20,19 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
 	    $('.yotpo-load-more-button').click(function () {
 	    	$(".yotpo-single-image-container").removeClass("hidden-thumbnails");
 	   	});
+
+	   	// Instagram Feed for learning center 
+	   	var galleryThumbnailsLC = 4; 
+	   	$(".yotpo-single-image-container").addClass("hidden-thumbnails");
+	    $('.yotpo-single-image-container:lt('+galleryThumbnailsLC+')').removeClass("hidden-thumbnails"); 
+	    //$('.yotpo-single-image-container:lt('+galleryThumbnailsLC+'):not()').remove();     
+
 	});
-				
+
+	
+
+   
+    // Get product ratings using Yotpo				 
 	var getProductCode = $("#customProductCode").val();
 	var yotpoApiKey = HyprLiveContext.locals.themeSettings.yotpoApiKey;
 	var yotpoBaseUrl = HyprLiveContext.locals.themeSettings.yotpoBaseUrl;
