@@ -1,10 +1,10 @@
 {% extends "page" %}
 
 {% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  - {% parent %}{% endblock title-tag-content %}
-{% block body-tag-classes %} shipping-info {% endblock body-tag-classes %}
+{% block body-tag-classes %} refund-exchange{% endblock body-tag-classes %}
 
 {% block breadcrumbs %}
-{% include "modules/customer-service-breadcumb" %}
+    {% include "modules/customer-service-breadcumb" %}
 {% endblock breadcrumbs %}
 
 {% block body-content %}
@@ -15,9 +15,9 @@
         </div>
     </div>
     <div class="col-xs-12 col-sm-9 col-md-10">
-        <h3 class="mz-l-stack-sectiontitle">{{ labels.shippingInfo }}</h3>
+        <h3 class="mz-l-stack-sectiontitle">{{ labels.returnAndExchange }}</h3>
         <div class="mz-dropzone-empty">
-        	{% dropzone "shipping" scope="page" %} Shipping info
+            {% dropzone "returnAndExchange" scope="page" %} Return &amp; Exchange
         </div>
     </div>
 </div>
