@@ -1541,8 +1541,8 @@
                     $('#paymentType-check-0').prop('checked', true);
                 }*/
                 var val = this.validate();
-                console.log("Validation : "+JSON.stringify(val));
-                // console.log("HAS Item : "+_.has(val, "check.nameOnCheck"));
+               /* console.log("Validation : "+JSON.stringify(val));
+                console.log("HAS Item : "+_.has(val, "check.nameOnCheck"));*/
                 if(radioVal !== 'Check') {
                 if (this.nonStoreCreditTotal() > 0 && val) {
                     // display errors:
@@ -1560,8 +1560,30 @@
                     }
                     return false;
                 }
+                } else {
+                    if(_.has(val, "billingContact.email")) {
+                       if (this.nonStoreCreditTotal() > 0 && val) {
+                            // display errors:
+                            var errorMail = {"items":[]};
+                            for (var keyemail in val) {
+                                if (val.hasOwnProperty(keyemail)) {
+                                    console.log("KEY : "+keyemail);
+                                    if(keyemail === 'billingContact.email') {
+                                        console.log("Inside KEy cehck");
+                                        var errorItemEmail = {};
+                                        errorItemEmail.name = keyemail;
+                                        errorItemEmail.message = keyemail.substring(0, ".") + val[keyemail];
+                                        errorMail.items.push(errorItemEmail);
+                                    }
                 }
-
+                            }
+                            if (errorMail.items.length > 0) {
+                                order.onCheckoutError(errorMail);
+                            }
+                            return false;
+                        } 
+                    }
+                }        
                 var card = this.get('card');
                 if(this.get('paymentType').toLowerCase() === "purchaseorder") {
                     this.get('purchaseOrder').inflateCustomFields();
@@ -1909,7 +1931,7 @@
 
                 if (!errorHandled) order.messages.reset(error.items);
                 order.isSubmitting = false;
-                throw error;
+                // throw error;
             },
             addNewCustomer: function () {
                 var self = this,
@@ -2199,6 +2221,12 @@
                     this.isSubmitting = false;
                     return false;
                 } 
+                } else {
+                    // console.log("ELSE : "+nonStoreCreditTotal +" : "+this.validateReviewCheckoutFields());
+                    if ((nonStoreCreditTotal > 0 && _.has(this.validate(), "agreeToTerms"))) {
+                       this.isSubmitting = false;
+                        return false;
+                    } 
                 }
                 
 
