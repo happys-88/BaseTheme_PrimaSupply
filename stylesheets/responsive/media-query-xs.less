@@ -6,6 +6,11 @@
 		.mz-notification-bar{
 			display: none;	
 		}
+		.mz-header-top{
+			.live-chat{
+				float: left;  
+			}
+		}
 		.mz-header-bottom{
 			.mz-storebranding {
 				width: 139px;
@@ -86,49 +91,78 @@
 		display: none;
 		position: absolute;
 		top: 111px;
-		z-index: 99999;
+		z-index: 999999; 
 	}
 	#mz-sitenav-container.collapse.in{
 		display: block;
 	}
 	.mz-sitenav{
-		.mz-sitenav-item{
-			float: left;
-			width: 100%;
-			text-align: left;
-			position: relative;
-			max-width: 100%;
-			border-bottom: 1px solid #fff;
-			.mz-sitenav-link{
-				padding: 10px 15px;
-				z-index: 999;
-				&:visited{
-					color: #fff;
+		.panel-group{
+			.panel{
+				border-radius: 0px;
+				float: left;
+				width: 100%;
+				background-color: @textColor; 
+				text-align: left;
+				position: relative;
+				max-width: 100%;
+				border-bottom: 1px solid #fff; 
+				.panel-heading{
+					float: left;
+					width: 100%;
+					padding: 0;
+					.panel-title{
+						a{
+							padding: 10px 15px;
+							color: #fff; 
+							display: block;  
+							.glyphicon{ 
+								font-size: 14px;
+								color: #fff;
+								position: absolute;
+								right: 15px;
+								top: 12px;
+								font-weight: normal;  
+								&:before{
+									content: "\002b"; 
+								}
+							}
+							&.collapsed{ 
+								.glyphicon{
+									&:before{  
+										content: "\2212";  
+									}	
+								}
+							} 
+							&:visited, &:hover, &:focus{ 
+								text-decoration: none;  
+							}     
+						}
+						
+					}  
 				}
-				&.active + .glyphicon{
-					&:before{
-						content: "\2212";
+				.panel-collapse{
+					float: left;
+					width: 100%; 
+				}
+				.mz-sitenav-sub-container{
+					display: none;
+					position: static;   
+				}
+				.mz-sitenav-item{
+					max-width: 100%;
+					text-align: left; 
+					.mz-sitenav-link {
+						display: block;
+						height: auto !important; 
 					}
-				}	
-				
-			}
-			.glyphicon{
-				font-size: 24px;
-				color: #fff;
-				position: absolute;
-				right: 15px;
-				top: 5px;
-				font-weight: bold;
-				&:before{
-					content: "\002b";
 				}
 			}
-			.mz-sitenav-sub-container{
-				display: none;
-				position: static; 
+			.panel+.panel{
+				margin: 0;  
 			}
-			
 		}
+		
 	}
 
 	.mz-close-nav{

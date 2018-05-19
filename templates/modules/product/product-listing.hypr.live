@@ -1,7 +1,4 @@
-﻿
-{% require_script "scripts/pages/product" %}
-
-<div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
+﻿<div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
     
     <div class="mz-productlisting-image">
         {% block product-image %}
@@ -21,54 +18,44 @@
         {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
             <p class="mz-productlisting-shortdesc">{{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
         {% endif %}
-
         {% endcomment %}  
 
         {% block product-code %}
             {% if themeSettings.listProductCode %}
-            <div class="mz-productlisting-productcode">{{model.productCode}}</div>
+                <div class="mz-productlisting-productcode">{{model.productCode}}</div> 
             {% endif %}
-
-           {% comment %} Custom code by category.js {% endcomment %}
-        <div id="product-rating"></div>
+            {% comment %} Custom code by category.js {% endcomment %}
+            <div id="product-rating"></div>
         {% endblock product-code %}
-
-            
-
 
         {% include "modules/product/price-show-stack" %}
 
         {% block product-extrainfo %}
-        {% if dealOfTheDay %}
-          {% if dealOfTheDay.savings %}
-            {% if model.price.discount.impact %}
-              <p class="mz-productlisting-savings">You save: {{ model.price.discount.impact|currency }}</p>
+            {% if dealOfTheDay %}
+                {% if dealOfTheDay.savings %}
+                    {% if model.price.discount.impact %}
+                        <p class="mz-productlisting-savings">You save: {{ model.price.discount.impact|currency }}</p>
+                    {% endif %}
+                {% endif %}
+                {% if dealOfTheDay.expirationDate %}
+                    {% if model.price.discount.discount.expirationDate %}
+                        <p class="mz-productlisting-expirationdate">Expires: {{ model.price.discount.discount.expirationDate|date("F j, Y") }}</p>
+                    {% endif %}
+                {% endif %}
             {% endif %}
-          {% endif %}
-          {% if dealOfTheDay.expirationDate %}
-            {% if model.price.discount.discount.expirationDate %}
-              <p class="mz-productlisting-expirationdate">Expires: {{ model.price.discount.discount.expirationDate|date("F j, Y") }}</p>
-            {% endif %}
-          {% endif %}
-        {% endif %}
         {% endblock product-extrainfo %}
        
         {% with model|get_product_attribute("tenant~show-price") as showPriceAttr %}
-         {% if showPriceAttr.values|first|prop("value") == 'view-on-login' %}
-          {% if user.isAuthenticated %}
-            
-               <button class="mz-button add-to-cart {% if not model.purchasableState.isPurchasable %} is-disabled {% endif %}" data-productcode="{{model.productCode}}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} > {{ labels.addToCart }} </button>
-              
-            
-          {% endif %} 
-          {% else %}
-            
-               <button class="mz-button add-to-cart {% if not model.purchasableState.isPurchasable %} is-disabled {% endif %}" data-productcode="{{model.productCode}}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} > {{ labels.addToCart }} </button>
-            
-        {% endif %} 
+            {% if showPriceAttr.values|first|prop("value") == 'view-on-login' %}
+                {% if user.isAuthenticated %}
+                    <button class="mz-button add-to-cart {% if not model.purchasableState.isPurchasable %} is-disabled {% endif %}" data-productcode="{{model.productCode}}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} > {{ labels.addToCart }} </button>
+                {% endif %} 
+            {% else %}
+                <button class="mz-button add-to-cart {% if not model.purchasableState.isPurchasable %} is-disabled {% endif %}" data-productcode="{{model.productCode}}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} > {{ labels.addToCart }} </button>
+            {% endif %} 
+        {% endwith %}
 
-      {% endwith %}
-         <button class="mz-quick-view" data-mz-productcode="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">Quick Shop</button>
+        <button class="mz-quick-view" data-mz-productcode="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button>
  
         {% if not model.purchasableState.isPurchasable %}
             <p class="mz-product-notpurchasable">
@@ -79,7 +66,6 @@
                 {% endfor %}
                 {% endcomment %}
             </p>
-        
         {% endif %}  
 
         {% if model.inventoryInfo.onlineStockAvailable < 10 and model.inventoryInfo.onlineStockAvailable > 0 %}
@@ -87,13 +73,11 @@
         {% endif %}
 
         {% with model|get_product_attribute("tenant~new-arrival") as newArrival %}
-          {% if newArrival.values|first|prop("value") == true %}
-              <spna class="mz-new-arrival-tag">New</span>
-          {% endif %} 
-        {% endwith %} 
-
-            
-    </div> 
-
+            {% if newArrival.values|first|prop("value") == true %}
+                <spna class="mz-new-arrival-tag">{{ labels.new }}</span>
+            {% endif %} 
+        {% endwith %}   
+    </div>
 </div>
 
+{% require_script "modules/quickview" %}

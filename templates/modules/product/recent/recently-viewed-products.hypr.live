@@ -13,3 +13,4 @@
 {% endif %}
 {% require_script "modules/product/recently-viewed-products" %} 
 {% require_script "pages/product" %}
+{% require_script "modules/product/product-crosssells" %}  

@@ -15,14 +15,6 @@
 	    {% include "pages/category-interior" %}
 	</div>
 
-	<div class="quickViewModal">
-		{% block quickview-slider %}
-	    	{% include "modules/product/product-quick-view" %}            
-		{% endblock quickview-slider %}
-	</div>
-
-	{% require_script "modules/quickview" %}
-
 {% endblock body-content %}
 
 

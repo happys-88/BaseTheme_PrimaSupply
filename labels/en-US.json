@@ -492,6 +492,8 @@
   "continueShopping"                       :   "Continue Shopping",
   "refineBy"                               :   "Refine by:" ,
   "shoppingCart"                           :   "Shopping Cart",
+  "quickShop"                              :   "Quick Shop",
+  "new"                                    :   "New",
 
   // Checkout Labels
   "liftGateAddY"                           :   "Add Lift Gate Delivery",
@@ -544,5 +546,16 @@
   "items"                                  :   "items",
 
   //QuickView
-  "fullProductDetails"                     :   "Full product details"
+  "fullProductDetails"                     :   "Full product details",
+
+  //Customer services
+  "customerService"                        :   "Customer Service",
+  "trackMyOrder"                           :   "Track My Order",
+  "trackMyOrderMsg"                        :   "Orders placed as a guest or single order lookup",
+  "shippingInfo"                           :   "shipping Info",
+  "returnAndExchange"                      :   "Return & Exchange",
+  "contactUs"                              :   "Contact Us",
+  "subject"                                :   "Subject",
+  "message"                                :   "Message",
+  "reset"                                  :    "Reset"
 }

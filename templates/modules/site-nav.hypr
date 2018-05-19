@@ -1,8 +1,6 @@
-﻿<nav class="mz-sitenav" id="mz-sitenav-container">
+﻿<nav class="mz-sitenav" id="mz-sitenav-container"> 
     <div class="container">
-      <div class="mz-close-nav visible-xs">                        
-            <button data-toggle="collapse" data-target="#mz-sitenav-container" aria-expanded="false"><span></span></button>  
-        </div>
+      
       <ul class="mz-sitenav-list" 
           data-mz-contextify='.mz-sitenav-link[href="{{ navigation.currentNode.url }}"]'
           data-mz-contextify-attr='class'
@@ -23,8 +21,7 @@
                 </a>
 
                 {% if link.items %}
-                  <span class="glyphicon glyphicon-plus-minus" aria-hidden="true"></span>
-                  <div class="mz-sitenav-sub-container">
+                  <div class="mz-sitenav-sub-container"> 
                     
                     {% comment %} Top Categories {% endcomment %}
                       <div class="mz-sitenav-top-categories">

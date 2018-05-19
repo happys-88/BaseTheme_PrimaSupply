@@ -81,7 +81,7 @@
 
                 <!-- Add to cart button -->
                 <div class="mz-add-buttons">
-                    <button class="addtocart mz-productdetail-addtocart mz-button mz-button-medium  {% if not model.inventoryInfo.onlineStockAvailable %} is-disabled {% endif %}"
+                    <button class="addtocart mz-productdetail-addtocart mz-button mz-button-medium {% if not model.inventoryInfo.onlineStockAvailable %} is-disabled {% endif %}" {% if not model.inventoryInfo.onlineStockAvailable %} disabled="disabled" {% endif %}
                         data-mz-productcode="{{model.variationProductCode|default(model.productCode) }}">
                         {{ labels.addToCart }}
                     </button>

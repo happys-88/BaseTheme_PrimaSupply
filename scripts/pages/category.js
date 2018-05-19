@@ -3,9 +3,8 @@ require([
 	"modules/views-collections",
 	"modules/api", 
 	"modules/models-product",
-	"modules/quickview",
     "hyprlivecontext"
-], function( $, CollectionViewFactory, Api, ProductModel, Quickview, HyprLiveContext) {
+], function( $, CollectionViewFactory, Api, ProductModel, HyprLiveContext) {
     $(document).ready(function() {
         window.facetingViews = CollectionViewFactory.createFacetedCollectionViews({
             $body: $('[data-mz-category]'),
@@ -13,21 +12,21 @@ require([
         });
 
         // Add To Cart Button functionality in Category Page
-        $(".add-to-cart").click(function(event){
+        // $(".add-to-cart").click(function(event){
 
-        	var $thisElem = $(event.currentTarget);
-			Api.request("POST", "/api/commerce/carts/current/items", {
-				product: {
-					productCode: $thisElem.data("productcode")
-					//options: [prodOptions]
-					//options: []
-				},
-				quantity: 1,
-				fulfillmentMethod: "ship"
-			}).then(function(){
-		 		window.location = "/cart";
-			});
-		});
+        // 	var $thisElem = $(event.currentTarget);
+		// 	Api.request("POST", "/api/commerce/carts/current/items", {
+		// 		product: {
+		// 			productCode: $thisElem.data("productcode")
+		// 			//options: [prodOptions]
+		// 			//options: []
+		// 		},
+		// 		quantity: 1,
+		// 		fulfillmentMethod: "ship"
+		// 	}).then(function(){
+		//  		window.location = "/cart";
+		// 	});
+		// });
 
 		// Custom Yotpo Rating
 		var yotpoApiKey = HyprLiveContext.locals.themeSettings.yotpoApiKey;

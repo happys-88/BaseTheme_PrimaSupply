@@ -1,15 +1,22 @@
-/*define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "hyprlivecontext", "modules/api", "modules/models-product", "pages/cart", "modules/models-cart", "pages/product", "bxslider"], function ($, _, Hypr, Backbone, HyprLiveContext, api, ProductModel, cart, cartModel, product, bxslider) {
-    console.log("quick");
+    define([
+        'modules/jquery-mozu',
+        'underscore',
+        'modules/api',
+        'modules/backbone-mozu',
+        'hyprlivecontext',
+        'modules/models-product',
+        'bxslider'
+    ], function($, _, api, Backbone, HyprLiveContext, ProductModels, bxslider) {
+    console.log("quicknew");
     $(document).on('click', '.mz-quick-view', function (event) {
-
-        var $thisElem = $(event.currentTarget);
-        var prdCode = $thisElem.attr("data-mz-productcode");
+        var $Elem = $(event.currentTarget);
+        var prdCode = $Elem.attr("data-mz-productcode");
         api.request("GET", "/api/commerce/catalog/storefront/products/" + prdCode).then(function (body) {
-            var PersonView = Backbone.MozuView.extend({
-                templateName: 'modules/product/product-quickview',
+            var quickviewv = Backbone.MozuView.extend({
+                templateName: 'modules/product/quickview',
                 additionalEvents: {
                     'click .addtocart': 'AddToCart',
-                    'click .mz-productoptions-option': "colorswatch",
+                    "click [data-mz-product-option='tenant~color']": "colorswatch",
                     "change [data-mz-value='quantity']": "onQuantityChange",
                     "change .mz-productoptions-option": "onOptionChange",
                     "click [data-mz-qty-minus]": "quantityMinus",
@@ -17,14 +24,16 @@
                     "click .bx-controls-direction a":"clickOnNextOrprevious"
 
                 },
-
-                render: function () {
-                    Backbone.MozuView.prototype.render.call(this);
-
-                    this.corousel();
-
+                initialize: function() {
+                    var self = this;
+                    self.listenTo(self.model, 'change:dataurl', self.render);
                 },
-
+                render: function () {
+                   
+                    Backbone.MozuView.prototype.render.call(this);
+                    this.corousel();
+                    return this;
+                },
                 corousel: function () {
                     $('#quick-slider').bxSlider({
                         minSlides: 1,
@@ -41,8 +50,6 @@
                     }
                 }, 500),
                 onOptionChange: function (e) {
-
-
                     this.render();
                     return this.configure($(e.currentTarget));
 
@@ -117,9 +124,7 @@
                             $('[data-mz-validationmessage-for="quantity"]').text("*Only " + product.attributes.inventoryInfo.onlineStockAvailable + " left in stock.");
                     }
                 },
-
                 AddToCart: function (event) {
-
                     this.model.addToCart();
                 },
                 colorswatch: function (event) {
@@ -136,15 +141,13 @@
                     product.set({
                         "dataurl": imagefilepath
                     });
-                  
-
                 },
                 clickOnNextOrprevious: function(){
                     //var newpath= imagefilepath + '?_mzcb=undefined';
-                     $("[src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1024px-No_image_3x4.svg.png']").parent().remove();
+                     $('[src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1024px-No_image_3x4.svg.png"]').parent().remove();
                      var len=$(".bx-pager-item").length;
                      console.log(len);
-                    $(".bx-pager-item").eq(len).remove();
+                    $(".bx-pager-item").eq(2).remove();
                     //$("[src=newpath]").eq(1).remove();
                     //console.log($("[src=newpath]").length);
                      //$('div.foo3').eq(1).remove();
@@ -152,13 +155,13 @@
                  }
             });
 
-            var product = ProductModel.Product.fromCurrent();
+            var product = new ProductModels.Product();
             product.set(body);
-            var todoView = new PersonView({
+            var Quickviewv = new quickviewv({
                 model: product,
                 el: $('#quickViewModal')
             });
-            todoView.render();
+            Quickviewv.render();
             $('#quickViewModal').on('hidden.bs.modal', function (e) {
                 $(".destroy").remove();
 
@@ -168,4 +171,4 @@
 
     });
 
-});*/
+});

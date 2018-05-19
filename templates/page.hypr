@@ -92,6 +92,9 @@
 
         <!-- Script for custom JS changes -->
         {% require_script "custom" %}
+
+        <!-- Order Confirmation & Print Order JS --> 
+        {% require_script "print-order" %}
         
     </head>
     {% endblock head-tag %}
@@ -113,9 +116,17 @@
                     {% include "modules/page-header" %}
                 {% endblock page-header %}
 
-                {% block site-nav %}
-                    {% include "modules/site-nav" %}
-                {% endblock site-nav %} 
+                {% if pageContext.isDesktop or pageContext.isTablet %}
+                    {% block site-nav %}
+                        {% include "modules/site-nav" %}
+                    {% endblock site-nav %}  
+                {% endif %}
+                
+                {% if pageContext.isMobile %}  
+                    {% block mobile-nav %}
+                        {% include "modules/mobile-nav" %}   
+                    {% endblock mobile-nav %}       
+                {% endif %}
             </div>
 
             <div role="main" id="page-content" class="mz-l-pagecontent container">    
@@ -129,19 +140,19 @@
                     {% dropzone "body" scope="page" %}
                 {% endblock body-content %}
                 
+                {% block brand-gateway %}{% endblock brand-gateway %}
+                {% block category-gateway %}{% endblock category-gateway %}
+
                 {% block body-below-content %}
                     {% dropzone "body-bottom" scope="page" %} 
                 {% endblock body-below-content %}
-
-                {% block brand-gateway %}{% endblock brand-gateway %}
-                {% block customer-service %}{% endblock customer-service %} 
-                
             </div>
                         
             {% block page-footer %}
                 {% include "modules/page-footer" %}
             {% endblock page-footer %}
 
+            {% include "modules/page-header/login-signup-modal" %}
         </div>
 
         {% block back-to-top %}
@@ -158,7 +169,7 @@
 
         {% block yotpo-main-script %}
             <script type="text/javascript">
-                (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+                (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/OlkNvoLh5f5XgW1NdooEsafbEGVnWuH8oYr90j13/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})(); 
             </script>
              <script type="text/javascript">
               (function() {

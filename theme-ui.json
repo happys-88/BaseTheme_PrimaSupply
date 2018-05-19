@@ -251,7 +251,26 @@
                     "xtype": "mz-input-number",
                     "name": "viewAllPageSizeDirectoryLC" 
                     
-                }
+                },
+                {
+                    "fieldLabel": "Page size options for Order History(My Account)",
+                    "xtype": "mz-input-selectmulti",
+                    "name": "pageSizeOptionsOrderHistory", 
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        5,
+                        10  
+                    ]
+                },
+                {
+                    "fieldLabel": "Default items per page for Order History(My Account)",
+                    "xtype": "mz-input-dropdown",
+                    "name": "defaultPageSizeOrderHistory", 
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "storeFrom": "pageSizeOptionsOrderHistory"  
+                }  
             ]
         },
         {
