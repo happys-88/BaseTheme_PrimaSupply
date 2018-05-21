@@ -408,7 +408,7 @@
 
   "clearAllFilters"                       : "Clear All",
 
-  "productImagePlaceholder"               : "[no image]",
+  "productImagePlaceholder"               : "No Image",  
   "packageWeight"                         : "Package Weight",
 
   "shortDesc"                             : "Summary",

@@ -11,8 +11,7 @@
   {% if siteContext.checkoutSettings.visaCheckout.isEnabled %}
     <div>
       <p>or checkout with</p>
-      <img alt="Visa Checkout" class="v-button" role="button"
-        src="{{pageContext.visaCheckoutButtonUrl}}"/>       
+      <img alt="Visa Checkout" class="v-button" role="button" src="{{pageContext.visaCheckoutButtonUrl}}"/>        
     </div>
   {% endif %}
 </div>

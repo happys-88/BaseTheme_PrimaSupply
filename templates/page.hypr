@@ -94,7 +94,7 @@
         {% require_script "custom" %}
 
         <!-- Order Confirmation & Print Order JS --> 
-        {% require_script "print-order" %}
+        {% require_script "print-order" %} 
         
     </head>
     {% endblock head-tag %}
@@ -118,8 +118,8 @@
 
                 {% if pageContext.isDesktop or pageContext.isTablet %}
                     {% block site-nav %}
-                        {% include "modules/site-nav" %}
-                    {% endblock site-nav %}  
+                        {% include "modules/site-nav" %}  
+                    {% endblock site-nav %}   
                 {% endif %}
                 
                 {% if pageContext.isMobile %}  
@@ -152,7 +152,8 @@
                 {% include "modules/page-footer" %}
             {% endblock page-footer %}
 
-            {% include "modules/page-header/login-signup-modal" %}
+            {% include "modules/page-header/login-signup-modal" %} 
+            
         </div>
 
         {% block back-to-top %}

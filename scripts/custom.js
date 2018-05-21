@@ -114,13 +114,10 @@ define([
 			}); 
 		});
 
-		//
-		$("#mz-sitenav-container .panel").each(function(){ 
-			$(this).find(".panel-heading").click(function(){ 
-				//alert("clicked");   
-				$(this).toggleClass("active");   
-			}); 
-		});
+		/*$(".mz-table-cart .mz-carttable-items").find(".mz-carttable-item").each(function(){ 
+			var getCartItemHeight = $(this).outerHeight(); 
+			console.log(getCartItemHeight);   
+		});*/ 
 
 
 	});

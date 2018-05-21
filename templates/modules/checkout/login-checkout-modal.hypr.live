@@ -1,0 +1,56 @@
+<div class="modal fade mz-login-checkout-model" id="loginCheckoutPopup" role="dialog">
+    <div class="modal-dialog"> 
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            <div class="modal-body clearfix">
+                <div class="col-xs-12">
+                    {% include "modules/common/message-bar" with model=model.messages %}
+                    <h3 class="mz-pagetitle">{{ labels.signInCheckout }}</h3>
+                    <p>{{ labels.signInCheckoutMsg }}</p>
+                    <form method="post" class="mz-loginform mz-loginform-page" name="mz-loginform">
+                       <input type="hidden" name="returnUrl" value="{{ model.returnUrl }}" />
+                       <div class="mz-l-formfieldgroup">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input name="email" value="{{model.email|default:user.email}}" type="email" data-mz-login-email placeholder="{{ labels.logInInput }}" />
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input name="password"  type="password" data-mz-login-password placeholder="{{ labels.password }}" />
+                            </div>
+                            <div class="input-group">
+                                <a href="/user/forgotpassword" class="mz-forgot" data-mz-action="launchforgotpassword">{{ labels.forgotPasswordLink }}</a>
+                            </div>
+                            <div class="clearfix">
+                                <button type="button" class="mz-close" data-dismiss="modal">{{ labels.cancel }}</button>
+                                <button class="mz-button mz-button-large mz-login-button" data-mz-action="loginpage-submit">{{ labels.signInCheckout }}</button>
+                            </div>
+
+                            <section data-mz-role="popover-message" class="mz-popover-message"></section>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-12 mz-guest-checkout">
+                    <h3 class="mz-pagetitle">{{ labels.newToPrimaSupply }}</h3>
+                    <p>{{ labels.newToPrimaSupplyMsg }}</p>
+                    <form method="post" action="{{ siteContext.secureHost }}{{siteContext.siteSubdirectory}}/cart/checkout" id="cartform">
+                       <div class="mz-l-formfieldgroup">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input type="email" name="" placeholder="{{ labels.emailAddress }}" />
+                            </div>
+                            <div class="clearfix">
+                                <button type="button" class="mz-close" data-dismiss="modal">{{ labels.cancel }}</button>
+                                <button type="button" class="mz-button mz-button-large" data-mz-action="proceedToCheckout">{{ labels.guestCheckoutLink }}</button> 
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p class="text-center"><i class="fa fa-lock"></i>{{ labels.SecurityMsg }}</p>
+            </div>
+        </div>
+    </div>
+</div>
