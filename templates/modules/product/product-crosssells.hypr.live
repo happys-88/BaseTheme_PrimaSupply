@@ -10,7 +10,7 @@
                 </a> 
             </div>
             <div class="mz-product-details">
-                <a href="{% make_url "product" crosssell.productCode %}" class="mz-productlisting-title">{{ crosssell.content.productName }}</a>
+                <a href="{% make_url "product" crosssell.productCode %}" class="mz-productlisting-title">{{ crosssell.content.productName }}</br><span> {{crosssell.variationProductCode|default(crosssell.productCode)}}</span></a>
                 <div class="mz-product-rating">
                     <img src="../../resources/images/product-rating.jpg" alt="product-rating">
                 </div>
