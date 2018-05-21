@@ -233,8 +233,6 @@ define([
                 // console.log("TOTAL :  ::  "+newTotal);
                 cart.set({'total':newTotal});
                 this.render();
-                              
-                this.render();
                 
                 
         },     
@@ -372,22 +370,18 @@ define([
     }
     /* end visa checkout */
 
-    $(document).ready(function() {
         /*var checkoutData = CheckoutModels.CheckoutPage;
         alert("CHECKOUT DATA : "+JSON.stringify(checkoutData));*/
-        var cartModel = CartModels.Cart.fromCurrent(),
-            cartViews = {
+        var cartModel = CartModels.Cart.fromCurrent();
+        
+            var cartViews = {
 
                 cartView: new CartView({
                     el: $('#cart'),
                     model: cartModel,
                     messagesEl: $('[data-mz-message-bar]')
                 })
-                
-
             };
-           
-
         cartModel.on('ordercreated', function (order) {
             cartModel.isLoading(true);
             window.location = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + '/checkout/' + order.prop('id');
@@ -401,7 +395,15 @@ define([
         window.cartView = cartViews;
         
         CartMonitor.setCount(cartModel.count());
-    });
+        if(window.location.pathname=="/cart"){
+           
+                var length=cartModel.attributes.changeMessages.length;
+                var productcode=cartModel.attributes.changeMessages[length-1].metadata[0].productCode;
+                var id='#'+productcode;
+                //var clonee=$(id).clone();
+               // $(id).remove();
+                $(id).prependTo(".mz-carttable-items");
+        }
 
     return CartView;
     

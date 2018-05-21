@@ -1,4 +1,3 @@
-
 define([
 	'modules/jquery-mozu',
 	'underscore',
@@ -10,10 +9,11 @@ define([
 	"pages/cart",
 	 "modules/models-cart"
 ], function ($, _, Backbone, Hypr, bxslider, api, ProductModel, cart, cartModel) {
-	var productCrossSellView = Backbone.MozuView.extend({
-	    templateName: 'modules/product/product-crosssells',  
+	console.log("upsell");
+	var productUpSellView = Backbone.MozuView.extend({
+	    templateName: 'modules/product/product-upsell',  
 	    productCarousel: function () {
-	        $('#crossSellSlider').bxSlider({ 
+	        $('#UpSellSlider').bxSlider({ 
 		        minSlides: 4,
                 maxSlides: 12,
                 moveSlides: 1,
@@ -34,47 +34,52 @@ define([
 	 var sell = require.mozuData("productCrossSell");
 	 var cartModels = cartModel.Cart.fromCurrent();
 	 var indexcartnewproduct;
-	 var prodCodeCrossSell = [];
+	 var newaddedproductcode= sell.changeMessages[sell.changeMessages.length-1].metadata[0].productCode;
+	 $.each(sell.items, function( index, value ) {
+			if(value.product.productCode==newaddedproductcode){
+				indexcartnewproduct=index;
+			}
+	 });
+	 var prodCodeUpSell = [];
 	 var variantion=[];
- 	$.each(sell.properties, function( index, value ) {
-    	if(value.attributeFQN == "tenant~product-crosssell"){
+ 	$.each(sell.items[indexcartnewproduct].product.properties, function( index, value ) {
+    	if(value.attributeFQN == "tenant~product-upsell"){
 	        $.each(value.values, function( index, value ){
-				prodCodeCrossSell.push(value.value);
-				variantion.push(value.value.slice(0,value.value.lastIndexOf("-")));         
+
+				prodCodeUpSell.push(value.value);
+				variantion.push(value.value.slice(0,value.value.lastIndexOf("-")));
+	              
 	        });
         }
 	   });
-	   if(prodCodeCrossSell.length>0){
-				var Crosssellurl = "";
-				var CrosssellgenerateURL = "";
+	   if(prodCodeUpSell.length>0){
+				var Upsellurl = "";
+				var upselgenerateURL = "";
 				var items=[];
 				var product = ProductModel.Product.fromCurrent();
-				$.each(prodCodeCrossSell, function( index, value ) {
-					Crosssellurl = "productCode eq "+ "'" + value + "'"+ " or ";
-					CrosssellgenerateURL= CrosssellgenerateURL + Crosssellurl;
+				$.each(prodCodeUpSell, function( index, value ) {
+					Upsellurl = "productCode eq "+ "'" + value + "'"+ " or ";
+					upselgenerateURL= upselgenerateURL + Upsellurl;
 					api.request("GET", "/api/commerce/catalog/storefront/products/"+variantion[index]+"?"+"variationProductCode="+value ).then(function(body){
 						items.push(body); 
 					});
 				});
-				CrosssellgenerateURL = CrosssellgenerateURL.slice(0, -3);
-				var upsellUrl= "/api/commerce/catalog/storefront/products/?filter=(" + CrosssellgenerateURL + ")";
+				upselgenerateURL = upselgenerateURL.slice(0, -3);
+				var upsellUrl= "/api/commerce/catalog/storefront/products/?filter=(" + upselgenerateURL + ")";
 				api.request("GET", upsellUrl ).then(function(body){
 					$.each(body.items, function( index, value ) {
 						items.push(value);
 					});					
 					product.set("items",items);
-				var crosssellview = new productCrossSellView({
+				var Upsellview = new productUpSellView({
 					model:product,
-					el: $('#product-crosssells')
+					el: $('#upsell')
 				});
 				
-				crosssellview.render();
-				crosssellview.productCarousel();
+				Upsellview.render();
+				Upsellview.productCarousel();
 			});
 	   }
   
 	
 });
-
-
-
