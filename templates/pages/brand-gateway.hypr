@@ -7,7 +7,7 @@
   {% dropzone "Merchandise-drop-zone" scope="page" %}
   {% dropzone "featured-brands" scope="page" %}
 
-<h1>All Brands</h1>
+<span>All Brands</span>
 {% for brands in categories.all %}
   {% if brands.content.name == "Brands" %}
     <ul class="col-md-12 brand-header">
@@ -15,15 +15,15 @@
         {% with subbrands.name|first as firstLetter %}
           {% if forloop.counter0==0 %}
             {% if firstLetter=="0" or  firstLetter=="1" or firstLetter=="2" or firstLetter=="3" or firstLetter=="4" or firstLetter=="5" or firstLetter=="6" or firstLetter=="7" or firstLetter=="8" or firstLetter=="9"  %}
-              <li class="brand-letter"><h1><a href="javascript:void(0);" name="#{{firstLetter}}">0-9</a></h1> </li>
+              <li class="brand-letter"><span><a href="javascript:void(0);" name="#{{firstLetter}}">0-9</a></span> </li>
             {% else %}
-              <li class="brand-letter"><h1><a href="javascript:void(0);" name="#{{firstLetter}}">{{ firstLetter|upper }}</a></h1> </li>
+              <li class="brand-letter"><span><a href="javascript:void(0);" name="#{{firstLetter}}">{{ firstLetter|upper }}</a></span> </li>
             {% endif %}
           {% else %}
             {% if firstLetter!=subbrand %}
               {% if firstLetter=="0" or  firstLetter=="1" or firstLetter=="2" or firstLetter=="3" or firstLetter=="4" or firstLetter=="5" or firstLetter=="6" or firstLetter=="7" or firstLetter=="8" or firstLetter=="9"  %}
             {% else %}
-              <li class="brand-letter"><h1><a href="javascript:void(0);" name="#{{firstLetter}}">{{ firstLetter|upper }}</a></h1> </li>
+              <li class="brand-letter"><span><a href="javascript:void(0);" name="#{{firstLetter}}">{{ firstLetter|upper }}</a></span> </li>
             {% endif %}
             {% endif %}
           {% endif %}
@@ -55,13 +55,13 @@
         {% if firstLetter=="0" or  firstLetter=="1" or firstLetter=="2" or firstLetter=="3" or firstLetter=="4" or firstLetter=="5" or firstLetter=="6" or firstLetter=="7" or firstLetter=="8" or firstLetter=="9"  %}
           <div class="brand-letter clearfix">
             <div class="col-sm-6">
-              <h1><a name="{{ firstLetter }}">0-9</a></h1>
+              <span><a name="{{ firstLetter }}">0-9</a></span>
             </div>
           </div>
        {% else %}
        <div class="brand-letter clearfix">
             <div class="col-sm-6">
-                 <h1><a name="{{ firstLetter }}">{{ firstLetter|upper }}</a></h1>
+                 <span><a name="{{ firstLetter }}">{{ firstLetter|upper }}</a></span>
              </div>
         </div>
         {% endif %}
@@ -71,7 +71,7 @@
        {% if firstLetter!=subbrand %}
        <div class="brand-letter clearfix">
            <div class="col-sm-6">
-                <h1><a name="{{ firstLetter }}">{{ firstLetter|upper }}</a></h1>
+                <span><a name="{{ firstLetter }}">{{ firstLetter|upper }}</a></span>
             </div>
             
        </div>   

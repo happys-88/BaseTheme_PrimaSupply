@@ -35,11 +35,15 @@ define([
 	 var cartModels = cartModel.Cart.fromCurrent();
 	 var indexcartnewproduct;
 	 var newaddedproductcode= sell.changeMessages[sell.changeMessages.length-1].metadata[0].productCode;
-	 $.each(sell.items, function( index, value ) {
+	 
+	 if(sell.isEmpty!==true){
+		$.each(sell.items, function( index, value ) {
 			if(value.product.productCode==newaddedproductcode){
 				indexcartnewproduct=index;
+				alert(indexcartnewproduct);
 			}
 	 });
+	 
 	 var prodCodeUpSell = [];
 	 var variantion=[];
  	$.each(sell.items[indexcartnewproduct].product.properties, function( index, value ) {
@@ -80,6 +84,8 @@ define([
 				Upsellview.productCarousel();
 			});
 	   }
+	 }
+	
   
 	
 });

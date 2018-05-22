@@ -101,7 +101,7 @@
                 
                 //CartMonitor.update('showGlobalCart');
                 product.set('quantity', 1);
-
+                $("#global-cart").show();
                 window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/cart"; 
             } else {
                 product.trigger("error", { message: Hypr.getLabel('unexpectedError') });

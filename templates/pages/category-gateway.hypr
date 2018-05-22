@@ -4,37 +4,35 @@
 {% block body-tag-classes %} category-gateway {% endblock body-tag-classes %} 
 
 {% block category-gateway %}
-
 <h1 class="heading-2"><span>{{ navigation.currentNode.name|upper }}</span></h1>
-
 <div class="row">
     <div class="col-sm-6">
-        <div class=" mz-dropzone-empty">{% dropzone "m9" scope="page" %} Category Description</div> 
+        {% dropzone "m9" scope="page" %}
     </div>
     <div class="col-sm-6">  
-        <div class=" mz-dropzone-empty">{% dropzone "m8" scope="page" %} Category description </div>
+        {% dropzone "m8" scope="page" %}
     </div>
-</div>
-               
+</div>        
 <div class="row">
-    <div class="col-sm-6">
-        <h1 class="heading-2"><span>Ice Bins and dispemsers</span></h1>   
+    <div class="col-sm-6 ">
+        <h2 class="heading-2"><span>Ice Bins and dispemsers</span></h2>   
         <p>{{model.content.description|safe}}</p>
         <div class="">
             <button class="mz-button sub-category">Shop Ice Bins and dispemsers</button>
         </div>
-        <div class="row">
+        <div class="mz-category-images row">
             {% for image in model.childrenCategories %} 
                 {% if forloop.counter0 < 4 and image.content.categoryImages.0.imageUrl %}
-                <div class="col-sm-3">
+                <div class="col-sm-3 col-xs-6">
                     <div class="mz-sub-category">    
-                        <img src="{{image.content.categoryImages.0.imageUrl}}" alt="" height=100 width=100 >
+                        <img src="{{image.content.categoryImages.0.imageUrl}}" alt="" height="100" width="100" >
+                        <span>{{image.content.name}}</span>
                     </div>
                 </div>
                 {% endif %}
             {% endfor %}
         </div>
-</div>
+    </div>
     <div class="col-sm-6"> 
         <div class=" mz-dropzone-empty">{% dropzone "m1" scope="page" %} Merchandise zone</div>
     </div>

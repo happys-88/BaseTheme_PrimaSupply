@@ -165,7 +165,11 @@ define([
         }),
         render: function() {
             // console.log("render");
-            this.beforeRender();              
+            if(this.model.get("items").length!==0){
+                this.beforeRender(); 
+            }
+                
+                        
             CartMonitor.update();
           
             preserveElement(this, ['.v-button'], function() {
@@ -398,11 +402,12 @@ define([
         if(window.location.pathname=="/cart"){
            
                 var length=cartModel.attributes.changeMessages.length;
-                var productcode=cartModel.attributes.changeMessages[length-1].metadata[0].productCode;
-                var id='#'+productcode;
-                //var clonee=$(id).clone();
-               // $(id).remove();
-                $(id).prependTo(".mz-carttable-items");
+                if(length>0){
+                    var productcode=cartModel.attributes.changeMessages[length-1].metadata[0].productCode;
+                    var id='#'+productcode;
+                    $(id).prependTo(".mz-carttable-items");
+                }
+              
         }
 
     return CartView;
