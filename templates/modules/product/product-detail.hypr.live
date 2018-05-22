@@ -170,6 +170,13 @@
 </div>
 {% endif %}
 
+<div class="prev-next">
+  <li>
+      <a  id="prev-url">{{ labels.previousPage }}</a>
+      <a  id="next-url">{{ labels.nextPage }}</a>
+  </li>
+</div>
+
 {% if themeSettings.showProductDetailMeasurements and model.bundledProducts %}
 <div class="mz-productdetail-measurements mz-l-stack-section">
   <h4 class="mz-l-stack-sectiontitle">{{ labels.measurements }}</h4>

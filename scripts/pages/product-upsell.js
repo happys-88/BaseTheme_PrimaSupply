@@ -9,7 +9,6 @@ define([
 	"pages/cart",
 	 "modules/models-cart"
 ], function ($, _, Backbone, Hypr, bxslider, api, ProductModel, cart, cartModel) {
-	console.log("upsell");
 	var productUpSellView = Backbone.MozuView.extend({
 	    templateName: 'modules/product/product-upsell',  
 	    productCarousel: function () {
@@ -40,7 +39,6 @@ define([
 		$.each(sell.items, function( index, value ) {
 			if(value.product.productCode==newaddedproductcode){
 				indexcartnewproduct=index;
-				alert(indexcartnewproduct);
 			}
 	 });
 	 

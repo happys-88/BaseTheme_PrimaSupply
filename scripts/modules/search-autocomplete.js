@@ -1,5 +1,5 @@
-﻿define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>jQuery', 'hyprlive', 'modules/api',
-      'hyprlivecontext'], function($, Hypr, api,
+﻿define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>jQuery', 'underscore',  'hyprlive', 'modules/api',
+      'hyprlivecontext'], function($, _, Hypr, api,
         HyprLiveContext) {
 
     // bundled typeahead saves a lot of space but exports bloodhound to the root object, let's lose it
@@ -32,10 +32,41 @@
                         break;
                     }
                 }
+                /*if($('#learningCenter').is(':focus')) {
+                    console.log("Learning OK center focus");
+                }else{
+                    console.log("Global center focus");
+                }*/
+                
+
+                if($('#learningCenter').is(':focus') && name==='Pages') {
+                    var valArray = filterCatsArray();
+                    var result = _.filter(thisGroup.suggestions, function(someThing) {
+                        return valArray.indexOf(someThing.suggestion.categories[0].categoryId) >= 0;
+                    });
+                    return result;
+                } else if($('#globalSearch').is(':focus') && name==='Pages') {
+                    var valArrayGlobal = filterCatsArray();
+                    var resultGlobal = _.filter(thisGroup.suggestions, function(someThing) {
+                        return valArrayGlobal.indexOf(someThing.suggestion.categories[0].categoryId) == -1;
+                    });
+                    return resultGlobal;
+                }            
                 return thisGroup.suggestions;
             };
         },
-
+        filterCatsArray= function(){
+            var categories = HyprLiveContext.locals.themeSettings.searchSuggestionFilter;
+            console.log("Hyper Vals : "+categories);
+             var arrayCats = categories.split(',');          
+            var categoryArray = [];
+            for(var i = 0; i < arrayCats.length; i++) {
+                if(arrayCats[i] !== '') {
+                    categoryArray.push(Number(arrayCats[i]));
+                }
+            }
+            return categoryArray;
+        },
         makeTemplateFn = function(name) {
             var tpt = Hypr.getTemplate(name);
             return function(obj) {
