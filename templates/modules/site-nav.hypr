@@ -105,3 +105,8 @@
       </ul>
     </div>
 </nav>
+{% comment %}
+{% block search-box-lc %}
+    {% include "modules/page-header/search-box-lc" %}
+{% endblock search-box-lc %}
+{% endcomment %}
