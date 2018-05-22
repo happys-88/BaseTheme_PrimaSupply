@@ -332,6 +332,7 @@ img[data-mztp]{
 			}
 		}
 		.mz-category-image{
+			font-size: 14px;  
 			margin-bottom: 12px; 
 		}
 
@@ -347,6 +348,25 @@ img[data-mztp]{
 	}
 }
 
+/**** No Image Placeholder ****/ 
+.noimage-placeholder{
+	display: inline-block;
+	width: 160px;
+	height: 160px;
+	background: #ddd;
+	position: relative; 
+	.noimage-text{ 
+		font-size: 24px; 
+	    color: #999;
+	    text-transform: uppercase;
+	    width: 100%;
+	    position: absolute;
+	    left: 0;
+	    top: 50%;
+	    transform: translate(0, -50%);
+	    font-weight: bold;
+	} 
+}
 
 /**** Sticky Header ****/
 .fixed{ 

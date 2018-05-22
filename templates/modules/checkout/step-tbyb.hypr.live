@@ -1,33 +1,38 @@
-	{% if model.checktbybProductExist=="true" %}
+{% if model.checktbybProductExist=="true" %}
 	<h3 class="mz-formstep-header mz-checkoutform-header">
         {{ labels.tbybHeader }}
         <a href="javascript:;" class="mz-formstep-edit" data-mz-action="edit">{{ labels.change }}</a>
     </h3>
 
-    <div class="mz-formstep-body mz-checkoutform mz-formstep-next" id="tybyRadio">  
-       <div class="mz-msg-img"></div>
-       <div class="mz-tbyb-msg">{{ labels.tbybContent }} </div><br>
-	   {% for prods in model.requireOrderModel %}
+    <div class="mz-formstep-body mz-checkoutform mz-formstep-next" id="tybyRadio">
+    	<div class="row">
+	       	<div class="col-sm-2 mz-msg-img">
+	       		<img src="../../resources/images/email.png" alt="email">
+	       	</div>
+	       	<div class="col-sm-10 mz-tbyb-msg">
+	       		<p>{{ labels.tbybContent|safe }}</p>
+	       	</div>
+	    </div>
+	   	{% for prods in model.requireOrderModel %}
 	   		{% with prods.varCode as variationCode %}
-	   		{% with prods.prodCode as pcode %}
+		   		{% with prods.prodCode as pcode %}
+		   			{% if variationCode !== '' %}
+		   				<label class="clearfix">
+		   					<input class="tbyb" id="tbybAttr" type="radio" value="{{variationCode}}" data-mz-tbyb data-mz-tyby-name="{{prods.prodName}}" data-mz-tbyb-code="{{variationCode}}" {% if model.tbybSelectedProd !== 'NONE' && model.tbybSelectedProd === variationCode %}checked="checked"{% endif %} />{{ prods.prodFullName}}
+		   				</label>
+		   			{% else %}
+		   				<label class="clearfix">
+		   					<input class="tbyb" id="tbybAttr" type="radio" value="{{pcode}}" data-mz-tbyb data-mz-tyby-name="{{prods.prodName}}" data-mz-tbyb-code="{{pcode}}" {% if model.tbybSelectedProd !== 'NONE' && model.tbybSelectedProd === pcode %}checked="checked"{% endif %} />{{ prods.prodFullName }}
+		   				</label>
+		   			{% endif %}
+		   		{% endwith %}
+	   		{% endwith %}
+	    {% endfor %}
 
-	   			{% if variationCode !== '' %}
-	   				<input class="tbyb" id="tbybAttr" type="radio" value="{{variationCode}}" data-mz-tbyb data-mz-tyby-name="{{prods.prodName}}" data-mz-tbyb-code="{{variationCode}}" {% if model.tbybSelectedProd !== 'NONE' && model.tbybSelectedProd === variationCode %}checked="checked"{% endif %}  /> 
-	              {{ prods.prodFullName}}
-	   			{% else %}
-	   				<input class="tbyb" id="tbybAttr" type="radio" value="{{pcode}}" data-mz-tbyb data-mz-tyby-name="{{prods.prodName}}" data-mz-tbyb-code="{{pcode}}" {% if model.tbybSelectedProd !== 'NONE' && model.tbybSelectedProd === pcode %}checked="checked"{% endif %}  /> 
-	   				{{ prods.prodFullName }}
-	   			{% endif %}
-	   			
-	   		 
-	   		{% endwith %}
-	   		{% endwith %}
-	    {% endfor %}  
-	    <br>
-	    <div class="tbyb-condition" style="font-size: 10px;">
-	    	{{ labels.tbybCondition }}
+	    <div class="tbyb-condition">
+	    	<p>{{ labels.tbybCondition }}</p>
 	    </div>     
-          
+      
         <div class="mz-formstep-next">
             <button type="button" class="mz-button" data-mz-action="next">{{ labels.next }}</button>
         </div>
@@ -37,5 +42,4 @@
 	    	Selected Product : {{model.tbybSelectedProd}}
 	    </div>
     {% endif %}
-    {% endif %}
-    
+{% endif %}

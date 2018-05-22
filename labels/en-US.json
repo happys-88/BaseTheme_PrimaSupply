@@ -408,7 +408,7 @@
 
   "clearAllFilters"                       : "Clear All",
 
-  "productImagePlaceholder"               : "[no image]",
+  "productImagePlaceholder"               : "No Image",  
   "packageWeight"                         : "Package Weight",
 
   "shortDesc"                             : "Summary",
@@ -557,5 +557,19 @@
   "contactUs"                              :   "Contact Us",
   "subject"                                :   "Subject",
   "message"                                :   "Message",
-  "reset"                                  :    "Reset"
+  "reset"                                  :    "Reset",
+
+  //Checkout
+  "signInCheckout"                         :   "sign in & checkout",
+  "signInCheckoutMsg"                      :   "Welcome Back! Sign in for quickest checkout.",
+  "newToPrimaSupply"                       :   "new to prima supply?",
+  "newToPrimaSupplyMsg"                    :   "You can start an account with us after your order.",
+  "needLightGate"                          :   "Need lightgate delivery?",
+  "needLightGateMsg1"                      :   "Add Lift Gate Delivery",
+  "needLightGateMsg2"                      :   "I certify I can remove these items from truck",
+  "freightShipment"                        :   "Know How To Inspect Your Freight Shipment?",
+  "freightShipmentMsg1"                    :   "I understand how to inspect freight shipment",
+  "freightShipmentMsg2"                    :   "I don't understand. Please have someone contact me after I place my order.",
+  "payPalBillingInfo"                      :   "paypal",
+  "creditCardInformation"                  :   "credit card information"
 }

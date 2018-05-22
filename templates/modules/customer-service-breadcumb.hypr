@@ -1,4 +1,4 @@
-<div class="mz-breadcrumbs">
+<div class="mz-breadcrumbs mz-service-breadcrumbs">
     {% if navigation.breadcrumbs %}
         <a href="{{siteContext.siteSubdirectory}}/" class="mz-breadcrumb-link">Home</a> <span class="mz-breadcrumb-separator">&#47;</span>
         <a href="{{siteContext.siteSubdirectory}}/customer-service" class="mz-breadcrumb-link">{{ labels.customerService }}</a> <span class="mz-breadcrumb-separator">&#47;</span> 

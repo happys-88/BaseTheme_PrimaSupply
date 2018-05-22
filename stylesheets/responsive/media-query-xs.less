@@ -94,9 +94,13 @@
 	#mz-sitenav-container.collapse.in {
 		display: block;
 	}
-	.mz-sitenav {
-		.panel-group {
-			.panel {
+	.mz-sitenav{
+		.panel-group{
+			margin: 0;
+			.panel-body{
+				padding: 0; 
+			}
+			.panel{
 				border-radius: 0px;
 				float: left;
 				width: 100%;
@@ -104,61 +108,100 @@
 				text-align: left;
 				position: relative;
 				max-width: 100%;
-				border-bottom: 1px solid #fff;
-				.panel-heading {
+				border: none;
+				box-shadow: none;   
+				border-bottom: 1px solid @mobileNavBorderBtm; 
+				.panel-heading{
 					float: left;
 					width: 100%;
 					padding: 0;
-					.panel-title {
-						a {
-							padding: 10px 15px;
-							color: #fff;
-							display: block;
-							.glyphicon {
+					.panel-title{
+						a{
+							padding: 11px 15px;  
+							color: #fff; 
+							display: block;  
+							&:visited, &:hover, &:focus{ 
+								text-decoration: none;  
+							}
+							.glyphicon{  
 								font-size: 14px;
 								color: #fff;
 								position: absolute;
 								right: 15px;
 								top: 12px;
-								font-weight: normal;
-								&:before {
-									content: "\002b";
-								}
+								font-weight: normal;  
+								
 							}
-							&.collapsed {
-								.glyphicon {
-									&:before {
-										content: "\2212";
+							&[class="collapsed"]{
+								.glyphicon{
+									&:before{
+										content: "\002b";  
 									}
 								}
 							}
-							&:visited,
-							&:hover,
-							&:focus {
-								text-decoration: none;
-							}
+							&[class=""]{   
+								.glyphicon{
+									&:before{  
+										content: "\2212";   
+									}	
+								}
+							}       
 						}
+						
 					}
+					 
 				}
 				.panel-collapse {
 					float: left;
 					width: 100%;
+					background: @mobileNavSubMenuBg;
+					&.in{ 
+						.panel{
+							background: @mobileNavSubMenuBg;   
+							.panel-heading{
+								.panel-title{
+									a{
+										font-size: 14px; 
+										color: @textColor; 
+										.glyphicon{
+											color: @textColor; 	
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 				.mz-sitenav-sub-container {
 					display: none;
 					position: static;
 				}
-				.mz-sitenav-item {
+				.mz-sitenav-item{
+					width: 100%; 
 					max-width: 100%;
 					text-align: left;
 					.mz-sitenav-link {
 						display: block;
-						height: auto !important;
+						height: auto !important; 
+						padding: 11px 15px; 
 					}
 				}
 			}
 			.panel+.panel {
 				margin: 0;
+			}
+
+			/**** sub sub nav ****/
+			.mz-sitenav-sub-sub{
+				background: #fff;
+				.mz-sitenav-item{
+					.mz-sitenav-link {
+						color: @textColor;
+						.glyphicon{
+							color: @textColor;   	
+						} 	
+					}	
+				} 
 			}
 		}
 	}
@@ -450,8 +493,8 @@
 				.mz-pagingcontrols {
 					margin-top: 35px;
 					padding-right: 0;
-					.mz-pagingcontrols-pagestate-label {
-						margin-left: 0;
+					.mz-pagingcontrols-pagestate-label { 
+					    margin-left: 0;
 					}
 				}
 			}
