@@ -2,8 +2,8 @@
 {% if pageContext.isDesktop %}  
   <label class="mz-pagingcontrols-pagesize-label">
     <span data-mz-value="pageSize">
-      {% for size in themeSettings.pageSizeOptionsOrderHistory %}   
-        <a data-mz-url="{% make_url "paging" model with pageSize=size page=1 %}" {% if model.pageSize == size %}class="selected"{% endif %} value="{{ size }}" data-mz-action="updatePageSize">{{ size }}</a>  
+      {% for size in themeSettings.pageSizeOptionsOrderHistory %}    
+        <a data-mz-url="{% make_url "paging" model with pageSize=size page=1 %}" {% if model.pageSize == size %}class="selected"{% endif %} value="{{ size }}">{{ size }}</a>   
       {% endfor %} 
     </span>
   </label>
