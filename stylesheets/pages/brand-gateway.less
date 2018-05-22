@@ -18,10 +18,15 @@
     }
    }
 }
-.brands a {
-    font-size: 20px;
-    line-height: 50px;
-    color: black;
+.brands  {
+    padding-top:15px;
+    padding-bottom: 15px;
+    a{
+        font-size: 16px;
+        line-height: 1.1em;
+        color: black;
+    }
+    
 }
 .start{
     .brand-letter{
@@ -30,9 +35,19 @@
         h1{
             margin: 0;
             a{
-                color: #f3f0f1;
                 line-height: 26px;
+              
             }
-        }   
+        }  
+        span{
+            a{
+                color: #fff;
+                &:hover,&:focus, &:active{
+                    color: #fff;
+                    text-decoration: none;
+                }
+            }
+        } 
      }
 }
+

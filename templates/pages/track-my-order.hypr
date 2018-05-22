@@ -13,7 +13,7 @@
         <h3 class="mz-l-stack-sectiontitle">{{ labels.trackMyOrder }}</h3>
         <p>{{ labels.trackMyOrderMsg }}</p>
         <div class="row">
-            <div class="col-sm-6 col-xs-12 mz-track-order-form">
+            <div class="col-md-6 col-sm-8 mz-track-order-form">
                 <div class="row">
                     <form method="post" class="mz-loginform mz-loginform-page" name="mz-anonymousorder">
                         <input type="hidden" name="order-returnUrl" value="{{ model.returnUrl }}"/>
