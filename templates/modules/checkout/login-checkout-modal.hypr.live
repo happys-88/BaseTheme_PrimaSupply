@@ -7,7 +7,7 @@
                     {% include "modules/common/message-bar" with model=model.messages %}
                     <h3 class="mz-pagetitle">{{ labels.signInCheckout }}</h3>
                     <p>{{ labels.signInCheckoutMsg }}</p>
-                    <form method="post" class="mz-loginform mz-loginform-page" name="mz-loginform">
+                    <form method="post" class="mz-loginform mz-loginform-page" name="mz-loginform" action="">
                        <input type="hidden" name="returnUrl" value="{{ model.returnUrl }}" />
                        <div class="mz-l-formfieldgroup">
                             <div class="input-group">
@@ -30,22 +30,8 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-xs-12 mz-guest-checkout">
-                    <h3 class="mz-pagetitle">{{ labels.newToPrimaSupply }}</h3>
-                    <p>{{ labels.newToPrimaSupplyMsg }}</p>
-                    <form method="post" action="{{ siteContext.secureHost }}{{siteContext.siteSubdirectory}}/cart/checkout" id="cartform">
-                       <div class="mz-l-formfieldgroup">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input type="email" name="" placeholder="{{ labels.emailAddress }}" />
-                            </div>
-                            <div class="clearfix">
-                                <button type="button" class="mz-close" data-dismiss="modal">{{ labels.cancel }}</button>
-                                <button type="button" class="mz-button mz-button-large" data-mz-action="proceedToCheckout">{{ labels.guestCheckoutLink }}</button> 
-
-                            </div>
-                        </div>
-                    </form>
+                <div class="col-xs-12 mz-guest-checkout" id="guestForm">
+                    
                 </div>
             </div>
             <div class="modal-footer">
@@ -54,3 +40,5 @@
         </div>
     </div>
 </div>
+
+{% require_script "modules/guest-checkout" %}

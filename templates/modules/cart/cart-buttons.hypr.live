@@ -1,17 +1,20 @@
 <div class="col-xs-12">
-  <div class="col-sm-8 col-xs-12 mz-cart-buttons">
-    <button class="mz-button mz-button-large continue-btn">{{ labels.continueShopping }}</button>
-    {% if not user.isAnonymous %} 
-      <button class="mz-button mz-button-large">{{ labels.saveCart }}</button> 
-    {% endif %}
-    <button id="cart-checkout" class="mz-button mz-button-large"  {% if model.isEmpty %} disabled="disabled" {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button>
-    
-  </div>
+    <div class="col-sm-8 col-xs-12 mz-cart-buttons">
+        <button class="mz-button mz-button-large continue-btn">{{ labels.continueShopping }}</button>
+        {% if not user.isAnonymous %} 
+            <button class="mz-button mz-button-large">{{ labels.saveCart }}</button> 
+        {% endif %}
 
-  {% if siteContext.checkoutSettings.visaCheckout.isEnabled %}
-    <div>
-      <p>or checkout with</p>
-      <img alt="Visa Checkout" class="v-button" role="button" src="{{pageContext.visaCheckoutButtonUrl}}"/>        
+        {% if user.isAnonymous %}
+            <button id="cart-guest-checkout" type="button" class="mz-button mz-button-large"  data-toggle="modal" data-target="#loginCheckoutPopup">{{ labels.proceedToCheckout }}</button>
+        {% else %}
+           <button id="cart-checkout"  class="mz-button mz-button-large"  {% if model.isEmpty %} disabled="disabled" {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button>
+        {% endif %}  
     </div>
-  {% endif %}
+    {% if siteContext.checkoutSettings.visaCheckout.isEnabled %}
+        <div>
+            <p>or checkout with</p>
+            <img src="{{pageContext.visaCheckoutButtonUrl}}" alt="Visa Checkout" class="v-button" role="button"/>       
+        </div>
+    {% endif %}
 </div>

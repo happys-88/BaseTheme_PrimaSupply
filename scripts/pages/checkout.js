@@ -244,6 +244,12 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
                 this.visaCheckoutInitialized = true;
             }
             $('#mailBillingForm').hide();
+            console.log("hhhhh : "+localStorage.getItem('guestEmail'));
+            if(localStorage.getItem('guestEmail')) {
+                $('#billing-email').val(localStorage.getItem('guestEmail'));
+            } else {
+                $('#billing-email').val('');
+            }
         },
         updateAcceptsMarketing: function(e) {
             this.model.getOrder().set('acceptsMarketing', $(e.currentTarget).prop('checked'));
