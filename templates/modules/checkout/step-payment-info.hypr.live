@@ -138,27 +138,22 @@
 
         {% endif %}
 
-        <div class="mz-l-stack-section mz-formfieldgroup-row mz-paymentselector-separator mz-checkoutform">
-            <div class="mz-l-formfieldgroup">
-                <div class="mz-l-formfieldgroup-row">
-                    <div class="mz-l-formfieldgroup-cell">
-                        <label for="billing-email">
-                            {{ labels.billingContact }}<span class="is-required"> *</span>:
-                        </label>
-                    </div>
-                    <div class="mz-l-formfieldgroup-cell">
-                        <input type="text" id="billing-email" name="billing-email" data-mz-value="billingContact.email" value="{{ model.billingContact.email }}"/>
-                        <span class="mz-validationmessage" data-mz-validationmessage-for="billingContact.email"></span>
-                    </div>
+        <div class="mz-l-stack-section mz-paymentselector-separator mz-checkoutform">
+            <div class="form-group clearfix">
+                <div class="col-sm-4">
+                    <label for="billing-email">
+                        {{ labels.billingContact }}<span class="is-required"> *</span>:
+                    </label>
                 </div>
-                <div class="mz-l-formfieldgroup-row">
-                    <div class="mz-l-formfieldgroup-cell"></div>
-                    <div class="mz-l-formfieldgroup-cell">
-                        <label class="mz-inline">
-                            <input type="checkbox" name="special-offers" {% if model.acceptsMarketing %}checked="checked" {% endif %}data-mz-value="acceptsMarketing" class="mz-checkout-optin" /> {{ labels.optIn|string_format(siteContext.generalSettings.websiteName) }}
-                        </label>
-                    </div>
+                <div class="col-sm-8">
+                    <input type="text" id="billing-email" name="billing-email" data-mz-value="billingContact.email" value="{{ model.billingContact.email }}"/>
+                    <span class="mz-validationmessage" data-mz-validationmessage-for="billingContact.email"></span>
                 </div>
+            </div>
+            <div class="col-sm-8 col-sm-offset-4 mz-special-offers">
+                <label>
+                    <input type="checkbox" name="special-offers" {% if model.acceptsMarketing %}checked="checked" {% endif %}data-mz-value="acceptsMarketing" class="mz-checkout-optin" /> {{ labels.optIn|string_format(siteContext.generalSettings.websiteName) }}
+                </label>
             </div>
         </div>
 
