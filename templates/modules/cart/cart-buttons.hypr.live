@@ -4,8 +4,13 @@
     {% if not user.isAnonymous %} 
       <button class="mz-button mz-button-large">{{ labels.saveCart }}</button> 
     {% endif %}
-    <button id="cart-checkout" class="mz-button mz-button-large"  {% if model.isEmpty %} disabled="disabled" {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button>
     
+    {% if user.isAnonymous %}
+       <button id="cart-guest-checkout" type="button" class="mz-button mz-button-large"  data-toggle="modal" data-target="#loginCheckoutPopup">{{ labels.proceedToCheckout }}</button>
+    {% else %}
+       <button id="cart-checkout"  class="mz-button mz-button-large"  {% if model.isEmpty %} disabled="disabled" {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button>
+    {% endif %}  
+
   </div>
 
   {% if siteContext.checkoutSettings.visaCheckout.isEnabled %}

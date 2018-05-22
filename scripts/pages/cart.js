@@ -54,7 +54,7 @@ define([
             }          
         },
         beforeRender: _.once(function() {
-            // console.log("B4 Render : "+JSON.stringify(this.model));
+            // alert("B4 Render : ");
             var cart = this.model;
             var productCode = this.model.get("items").models[0].get('product').get('productCode');
             var shipping = localStorage.getItem("selectedShipping");
@@ -232,11 +232,7 @@ define([
                 var newTotal = Number(tot)+Number(total);
                 // console.log("TOTAL :  ::  "+newTotal);
                 cart.set({'total':newTotal});
-                this.render();
-                              
-                this.render();
-                
-                
+                this.render();                
         },     
         updateQuantity: _.debounce(function (e) {
             var $qField = $(e.currentTarget),
@@ -283,8 +279,9 @@ define([
             });
         },
         proceedToCheckout: function () {
+            alert("checout proceeed");
             //commenting  for ssl for now...
-            //this.model.toOrder();
+            // this.model.toOrder();
             // return false;
             this.model.isLoading(true);
             // the rest is done through a regular HTTP POST

@@ -1378,10 +1378,8 @@
                     currentPurchaseOrder.set('paymentTerm', foundTerm, {silent: true});
             },
             initialize: function () {
-                console.log("Billing Step");
                 var me = this;
-                $('#mailBillingForm').hide();
-                // console.log("Billing Info : "+JSON.stringify(me));
+                // $('#mailBillingForm').hide();                
                 _.defer(function () {
                     //set purchaseOrder defaults here.
                     me.setPurchaseOrderInfo();
@@ -1544,22 +1542,22 @@
                /* console.log("Validation : "+JSON.stringify(val));
                 console.log("HAS Item : "+_.has(val, "check.nameOnCheck"));*/
                 if(radioVal !== 'Check') {
-                if (this.nonStoreCreditTotal() > 0 && val) {
-                    // display errors:
-                    var error = {"items":[]};
-                    for (var key in val) {
-                        if (val.hasOwnProperty(key)) {
-                            var errorItem = {};
-                            errorItem.name = key;
-                            errorItem.message = key.substring(0, ".") + val[key];
-                            error.items.push(errorItem);
+                    if (this.nonStoreCreditTotal() > 0 && val) {
+                        // display errors:
+                        var error = {"items":[]};
+                        for (var key in val) {
+                            if (val.hasOwnProperty(key)) {
+                                var errorItem = {};
+                                errorItem.name = key;
+                                errorItem.message = key.substring(0, ".") + val[key];
+                                error.items.push(errorItem);
+                            }
                         }
+                        if (error.items.length > 0) {
+                            order.onCheckoutError(error);
+                        }
+                        return false;
                     }
-                    if (error.items.length > 0) {
-                        order.onCheckoutError(error);
-                    }
-                    return false;
-                }
                 } else {
                     if(_.has(val, "billingContact.email")) {
                        if (this.nonStoreCreditTotal() > 0 && val) {
@@ -1575,7 +1573,7 @@
                                         errorItemEmail.message = keyemail.substring(0, ".") + val[keyemail];
                                         errorMail.items.push(errorItemEmail);
                                     }
-                }
+                                }
                             }
                             if (errorMail.items.length > 0) {
                                 order.onCheckoutError(errorMail);
@@ -1583,7 +1581,7 @@
                             return false;
                         } 
                     }
-                }        
+                }   
                 var card = this.get('card');
                 if(this.get('paymentType').toLowerCase() === "purchaseorder") {
                     this.get('purchaseOrder').inflateCustomFields();
@@ -1598,6 +1596,7 @@
                 } else {
                     this.markComplete();
                 }
+                
             },
             applyPayment: function () {
                 var self = this, order = this.getOrder();
@@ -1637,7 +1636,6 @@
             },
 
             markComplete: function () {
-                // alert("mark complete");
                 this.stepStatus('complete');
                 this.isLoading(false);
                 var order = this.getOrder();
@@ -2102,9 +2100,11 @@
             syncBillingAndCustomerEmail: function () {
                 var billingEmail = this.get('billingInfo.billingContact.email'),
                     customerEmail = this.get('emailAddress') || require.mozuData('user').email;
+                
                 if (!customerEmail) {
-                    this.set('emailAddress', billingEmail);
+                   this.set('emailAddress', billingEmail);
                 }
+                console.log("Billing email storage : "+billingEmail);
                 if (!billingEmail) {
                     this.set('billingInfo.billingContact.email', customerEmail);
                 }
@@ -2229,7 +2229,7 @@
                     } 
                 }
                 
-
+                
                 this.isLoading(true);
 
                 if (isSavingNewCustomer) {
@@ -2267,7 +2267,8 @@
                 }
                
                 process.push(/*this.finalPaymentReconcile, */this.apiCheckout);
-                
+                console.log("removing Item");
+                localStorage.removeItem('guestEmail');
                 api.steps(process).then(this.onCheckoutSuccess, this.onCheckoutError);
                 
 
