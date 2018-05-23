@@ -53,19 +53,19 @@ define([
 		    } else {
 		        $(".mz-sticky-header").removeClass("fixed"); 
 		        $("body").removeClass("header-fixed"); 
-		        $("#back-to-top").fadeOut();
+		        $(".mz-back-to-top-btn").fadeOut();
 		    }
 
 		    if (scroll >= 200) {
-		    	$("#back-to-top").fadeIn();
+		    	$(".mz-back-to-top-btn").fadeIn();
 		    } else{
-		    	$("#back-to-top").fadeOut();
+		    	$(".mz-back-to-top-btn").fadeOut();
 		    }
 
 		});
 
 		// Back To Top
-		$("#back-to-top").click(function(){
+		$(".mz-back-to-top-btn").click(function(){
 	        $("body").animate({
 	            scrollTop: 0
 	        }, 600);

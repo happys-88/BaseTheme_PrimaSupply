@@ -311,6 +311,209 @@
 			}
 		}
 	}
+	
+	/**** Directory Page ****/
+	.mz-category {
+		.mz-l-sidebar {
+			margin-top: 0;
+			padding: 0;
+			h2 {
+				font-size: 16px;
+				font-weight: 700;
+				margin: 0;
+				padding: 15px;
+				&.mz-facets-dropdown {
+					&:after {
+					    display: block;
+					}
+				}
+			}
+			.mz-faceting-section {
+				display: none;
+				padding-right: 15px;
+				padding-left: 15px;
+				&.mz-faceting-section-open {
+					display: block;
+					border-bottom: 1px solid #e0e0e0;
+				}
+			}
+			.mz-facetingform {
+				background: #fff;
+				position: absolute;
+			    top: 107px;
+			    right: 0;
+			    left: 0;
+				z-index: 1;
+				.mz-clear-all {
+					border-bottom: 1px solid #e0e0e0;
+					padding: 0 15px 15px;
+				}
+			}
+		}
+		.col-sm-9 {
+			&.col-lg-10  {
+				padding-right: 0;
+				padding-left: 0;
+			}
+		}
+		.mz-l-paginatedlist {
+			margin-top: 0;
+			.mz-pagetitle {
+				font-size: 18px;
+				margin-top: 11px;
+				margin-bottom: 0;
+				padding-right: 15px;
+				padding-bottom: 16px;
+				padding-left: 15px;
+			}
+			.mz-l-tiles {
+				margin-top: 18px;
+			}
+			.mz-l-paginatedlist-header {
+				margin-bottom: 0;
+				padding-top: 0;
+				.mz-sortby {
+					border-bottom: 1px solid #e0e0e0;
+					padding: 11px 15px;
+					.mz-pagingcontrols-pagesort-label {
+						select {
+							margin-bottom: 0;
+						}
+					}
+				}
+				.mz-pagenumbers,
+				.mz-pagingcontrols {
+				    display: none;
+				}
+			}
+			.mz-l-paginatedlist-list {
+			    margin-top: 48px;
+			}
+			.mz-productlisting-image {
+				img {
+				    max-width: 150px;
+				    max-height: 150px;
+				}
+			}
+			.mz-facets-active {
+			    margin-top: 100px;
+			}
+			.mz-productlist-tiled {
+				.mz-productlist-item {
+					&.col-xs-6 {
+						width: 50%;
+					}
+					button {
+						&.add-to-cart {
+							width: calc(~'100% - 30px');
+							max-width: 320px;
+						}
+					}
+					&:hover {
+						button {
+							&.mz-quick-view {
+							    display: none;
+							}
+						}
+					}
+				}
+			}
+			.mz-l-paginatedlist-footer {
+				min-height: 156px;
+				margin-top: 1px;
+				position: relative;
+		        .mz-back-to-top {
+		            display: block;
+		        }
+				.mz-pagenumbers,
+				.mz-pagingcontrols {
+					float: none;
+					width: 100%;
+					text-align: center;
+				}
+				.mz-pagenumbers {
+					margin-left: 0;
+					position: absolute;
+					bottom: 0px;
+					.mz-pagenumbers-prev.is-current,
+					.mz-pagenumbers-next.is-current,
+					.mz-pagenumbers-number.is-current,
+					.mz-pagenumbers-prev,
+					.mz-pagenumbers-next,
+					.mz-pagenumbers-number {
+						padding: 14.9px 20.44px;
+					}
+				}
+				.mz-pagingcontrols {
+					margin-top: 35px;
+					padding-right: 0;
+					.mz-pagingcontrols-pagesize-label {
+					    display: none;
+					}
+					.mz-pagingcontrols-pagestate-label { 
+					    margin-left: 0;
+					}
+				}
+			}
+		}
+		#mz-drop-zone-body-bottom {
+		    margin-top: 0;
+		}
+	}
+	//Breadcrumbs
+	.mz-breadcrumbs {
+		line-height: 12px;
+		padding: 0 15px;
+	}
+	.mz-breadcrumbs {
+		.mz-service-breadcrumbs {
+			line-height: 10px;
+			padding: 0;
+		}
+	}
+	//Brand Gateway
+	.Brands {
+		.mz-breadcrumbs {
+			line-height: 0;
+			padding: 0;
+			margin-bottom: 10px;
+		}
+		.brand-header {
+			padding-right: 0;
+			padding-left: 0;
+			.brand-letter {
+				a {
+					font-size: 15px;
+				}
+			}
+		}
+		.start {
+			.brands {
+				a {
+					font-size: 15px;
+				}
+			}
+		}
+	}
+	//Customer services
+	.mz-scrollnav {
+		.mz-scrollnav-list {
+			li {
+				&.mz-scrollnav-item {
+					margin: 0;
+					border-bottom: 1px solid #e0e0e0;
+				}
+			}
+		}
+	}
+	.track-my-order,
+	.contact-us {
+		.mz-customer-service-page {
+			label {
+				text-align: left;
+			}
+		}
+	}
 	/**** Footer ****/
 	.mz-pagefooter {
 		.mz-footer-top {
@@ -394,159 +597,6 @@
 		}
 		.mz-footer-bottom {
 			padding: 15px 0 30px;
-		}
-	}
-	/**** Directory Page ****/
-	.mz-category {
-		#page-content {
-			padding: 25px 0;
-		}
-		.mz-l-paginatedlist {
-			margin-top: 0;
-			.mz-pagetitle {
-				font-size: 18px;
-				margin-top: 11px;
-				margin-bottom: 0;
-				padding-right: 15px;
-				padding-bottom: 16px;
-				padding-left: 15px;
-			}
-			.mz-l-sidebar {
-				margin-top: 0;
-				padding: 0;
-				h2 {
-					font-size: 16px;
-					font-weight: 700;
-					margin: 0;
-					padding: 15px;
-				}
-				.mz-faceting-section {
-					display: none;
-					padding-right: 15px;
-					padding-left: 15px;
-					&.mz-faceting-section-open {
-						display: block;
-						border-bottom: 1px solid #e0e0e0;
-					}
-				}
-				.mz-facetingform {
-					.mz-clear-all {
-						border-bottom: 1px solid #e0e0e0;
-						padding: 0 15px 15px;
-					}
-				}
-			}
-			.mz-l-tiles {
-				margin-top: 18px;
-			}
-			.mz-l-paginatedlist-header {
-				margin-bottom: 0;
-				padding-top: 0;
-				.mz-sortby {
-					border-bottom: 1px solid #e0e0e0;
-					padding: 11px 15px;
-					.mz-pagingcontrols-pagesort-label {
-						select {
-							margin-bottom: 0;
-						}
-					}
-				}
-			}
-			.mz-productlist-tiled {
-				.mz-productlist-item {
-					&.col-xs-6 {
-						width: 50%;
-					}
-					button {
-						&.add-to-cart {
-							width: calc(~'100% - 30px');
-							max-width: 320px;
-						}
-					}
-				}
-			}
-			.mz-l-paginatedlist-footer {
-				min-height: 156px;
-				margin-top: 1px;
-				position: relative;
-				.mz-pagenumbers,
-				.mz-pagingcontrols {
-					float: none;
-					width: 100%;
-					text-align: center;
-				}
-				.mz-pagenumbers {
-					margin-left: 0;
-					position: absolute;
-					bottom: 0px;
-					.mz-pagenumbers-prev.is-current,
-					.mz-pagenumbers-next.is-current,
-					.mz-pagenumbers-number.is-current,
-					.mz-pagenumbers-prev,
-					.mz-pagenumbers-next,
-					.mz-pagenumbers-number {
-						padding: 14.9px 20.44px;
-					}
-				}
-				.mz-pagingcontrols {
-					margin-top: 35px;
-					padding-right: 0;
-					.mz-pagingcontrols-pagestate-label {
-						margin-left: 0;
-					}
-				}
-			}
-		}
-	}
-	.mz-breadcrumbs {
-		line-height: 12px;
-		padding: 0 15px;
-	}
-	.mz-breadcrumbs {
-		.mz-service-breadcrumbs {
-			line-height: 10px;
-			padding: 0;
-		}
-	}
-	.Brands {
-		.mz-breadcrumbs {
-			line-height: 0;
-			padding: 0;
-			margin-bottom: 10px;
-		}
-		.brand-header {
-			padding-right: 0;
-			padding-left: 0;
-			.brand-letter {
-				a {
-					font-size: 15px;
-				}
-			}
-		}
-		.start {
-			.brands {
-				a {
-					font-size: 15px;
-				}
-			}
-		}
-	}
-	.track-my-order,
-	.contact-us {
-		.mz-customer-service-page {
-			label {
-				text-align: left;
-			}
-		}
-	}
-	.mz-scrollnav {
-		.mz-scrollnav-list {
-			li {
-				&.mz-scrollnav-item {
-					margin: 0;
-					border-bottom: 1px solid #e0e0e0;
-				}
-			}
 		}
 	}
 }

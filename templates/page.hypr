@@ -157,7 +157,7 @@
         </div>
 
         {% block back-to-top %}
-            <div id="back-to-top"><i class="fa fa-chevron-up"></i></div>
+            <div class="mz-back-to-top-btn" id="back-to-top"><i class="fa fa-chevron-up"></i></div>
         {% endblock back-to-top %}
 
 
