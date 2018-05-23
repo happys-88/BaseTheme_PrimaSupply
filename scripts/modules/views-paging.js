@@ -44,20 +44,23 @@ define(['modules/jquery-mozu', 'underscore', 'modules/backbone-mozu'], function(
         templateName: 'modules/common/page-numbers',
         previous: function(e) {
             e.preventDefault();
+            scrollToTop(); 
             return this.model.previousPage();
         },
         next: function(e) {
             e.preventDefault();
+            scrollToTop();
             return this.model.nextPage();
         },
         page: function(e) {
             e.preventDefault();
+            scrollToTop();     
             return this.model.setPage(parseInt($(e.currentTarget).data('mz-page-num'), 10) || 1);
         }
     });
 
     var scrollToTop = function() {
-        $('body').ScrollTo({ duration: 200 });
+        $('body').ScrollTo({ duration: 500 }); 
     };
 
     var TopScrollingPageNumbersView = PageNumbersView.extend({
@@ -67,7 +70,7 @@ define(['modules/jquery-mozu', 'underscore', 'modules/backbone-mozu'], function(
         next: function() {
             return PageNumbersView.prototype.next.apply(this, arguments).then(scrollToTop);
         },
-        page: function() {
+        page: function() { 
             return PageNumbersView.prototype.page.apply(this, arguments).then(scrollToTop);
         }
     });

@@ -35,14 +35,12 @@ img{
 
 .container{
 	width: 100%;
-	max-width: 1440px;    
+	max-width: 1440px;      
 }
-
-
 
 .mz-l-pagecontent{
 	background: @textColorWhite;
-	margin-bottom: @gutter*2;
+	margin-bottom: @gutter; 
 	padding: @gutter 15px; 
 	overflow: visible; 
 }
@@ -729,6 +727,30 @@ img[data-mztp]{
 				font-size: 16px;
 				color: #999;
 			}
+		}
+	}
+}
+
+
+/**** Bordered Pagination ****/
+.mz-l-paginatedlist{ 
+	.mz-pagenumbers{
+		&.with-border{
+			border: 1px solid @defaultBorderColor;
+			border-radius: 5px; 
+			.mz-pagenumbers-prev,
+			.mz-pagenumbers-next,
+			.mz-pagenumbers-number{
+				float: left; 
+				padding: 5px 15px;
+				border-left: 1px solid @defaultBorderColor;  
+				&.is-current{
+					padding: 5px 15px;
+				}  
+			}
+			.mz-pagenumbers-prev{
+				border: none; 
+			} 
 		}
 	}
 }

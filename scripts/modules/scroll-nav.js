@@ -10,7 +10,7 @@
                     }, 500);
                 $this.on('click', 'a', function (e) {
                     e.preventDefault();
-                    $(this.getAttribute('href')).ScrollTo({ axis: 'y', offsetTop: gutterWidth });
+                    $(this.getAttribute('href')).ScrollTo({ axis: 'y', offsetTop: 0 }); 
                 }).affix({
                     offset: {
                         top: $this.offset().top - gutterWidth,
@@ -25,7 +25,8 @@
                     id = "scrollnav-" + new Date().getTime();
                     $this.attr('id', id);
                 }
-                $nav.scrollspy({ target: '#' + id, offset: gutterWidth*1.2 });
+                //$nav.scrollspy({ target: '#' + id, offset: gutterWidth*1.2 });
+                $nav.scrollspy({ target: '#' + id, offset: 0 });  
             });
         });
     }

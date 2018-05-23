@@ -708,7 +708,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                 model: orderHistory
             }),
             orderHistoryPagingControls: new PagingViews.PagingControls({
-                templateName: 'modules/my-account/order-history-paging-controls',
+                templateName: 'modules/common/order-history-paging-controls',  
                 el: $orderHistoryEl.find('[data-mz-pagingcontrols]'),
                 model: orderHistory
             }),
@@ -721,7 +721,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                 model: returnHistory
             }),
             returnHistoryPagingControls: new PagingViews.PagingControls({
-                templateName: 'modules/my-account/order-history-paging-controls',
+                templateName: 'modules/common/order-history-paging-controls', 
                 el: $returnHistoryEl.find('[data-mz-pagingcontrols]'),
                 model: returnHistory
             }),

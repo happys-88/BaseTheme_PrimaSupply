@@ -38,6 +38,13 @@ define([
         }
 
         calculatingSubPosition();
+
+        // Declaration of scrollToTop function 
+        function scrollToTop(){
+        	$("body, html").animate({ 
+	            scrollTop: 0
+	        }, 600); 
+        }
 		
 		if ($(this).scrollTop() > 200) { 
 	        $("#scroll-to-top").show();
@@ -59,16 +66,14 @@ define([
 		    if (scroll >= 200) {
 		    	$(".mz-back-to-top-btn").fadeIn();
 		    } else{
-		    	$(".mz-back-to-top-btn").fadeOut();
+		    	$(".mz-back-to-top-btn").fadeOut(); 
 		    }
 
 		});
 
 		// Back To Top
 		$(".mz-back-to-top-btn").click(function(){
-	        $("body").animate({
-	            scrollTop: 0
-	        }, 600);
+	        scrollToTop(); 
 	    });
 
 		// Refine By Toggle in Mobile
@@ -118,7 +123,6 @@ define([
 			var getCartItemHeight = $(this).outerHeight(); 
 			console.log(getCartItemHeight);   
 		});*/ 
-
 
 	});
 }); 

@@ -11,19 +11,7 @@
             <a href="javascript:void(0);" class="mz-utilitynav-link" onclick="SnapEngage.startLink();"><i class="fa fa-comments"></i>Live Chat</a>    
         </li>
 
-         <!-- For cart page -->
-            {% if not user.isAnonymous %}
-               <li class="mz-utilitynav-item">
-                   <button id="cart-checkout" class="mz-button mz-button-large" data-mz-action="proceedToCheckout">Checkout</button>
-               </li>
-            {% else %}
-               <li class="mz-utilitynav-item">
-                   <a href="javascript:void(0);" data-toggle="modal" data-target="#loginCheckoutPopup">Cart-user not login</a>
-               </li>
-            {% endif %}
-        <!--/ For cart page -->
-
-        {% if not user.isAnonymous %}
+        {% if not user.isAnonymous %} 
             <li class="mz-utilitynav-item">
                 <div id="mz-logged-in-notice">
                     {{ labels.welcome }}, 
