@@ -94,13 +94,13 @@
 	#mz-sitenav-container.collapse.in {
 		display: block;
 	}
-	.mz-sitenav{
-		.panel-group{
+	.mz-sitenav {
+		.panel-group {
 			margin: 0;
-			.panel-body{
-				padding: 0; 
+			.panel-body {
+				padding: 0;
 			}
-			.panel{
+			.panel {
 				border-radius: 0px;
 				float: left;
 				width: 100%;
@@ -109,62 +109,61 @@
 				position: relative;
 				max-width: 100%;
 				border: none;
-				box-shadow: none;   
-				border-bottom: 1px solid @mobileNavBorderBtm; 
-				.panel-heading{
+				box-shadow: none;
+				border-bottom: 1px solid @mobileNavBorderBtm;
+				.panel-heading {
 					float: left;
 					width: 100%;
 					padding: 0;
-					.panel-title{
-						a{
-							padding: 11px 15px;  
-							color: #fff; 
-							display: block;  
-							&:visited, &:hover, &:focus{ 
-								text-decoration: none;  
+					.panel-title {
+						a {
+							padding: 11px 15px;
+							color: #fff;
+							display: block;
+							&:visited,
+							&:hover,
+							&:focus {
+								text-decoration: none;
 							}
-							.glyphicon{  
+							.glyphicon {
 								font-size: 14px;
 								color: #fff;
 								position: absolute;
 								right: 15px;
 								top: 12px;
-								font-weight: normal;  
-								
+								font-weight: normal;
 							}
-							&[class="collapsed"]{
-								.glyphicon{
-									&:before{
-										content: "\002b";  
+							&[class="collapsed"] {
+								.glyphicon {
+									&:before {
+										content: "\002b";
 									}
 								}
 							}
-							&[class=""]{   
-								.glyphicon{
-									&:before{  
-										content: "\2212";   
-									}	
+							&[class=""] {
+								.glyphicon {
+									&:before {
+										content: "\2212";
+									}
 								}
-							}       
+							}
 						}
-						
 					}
-					 
 				}
 				.panel-collapse {
 					float: left;
 					width: 100%;
 					background: @mobileNavSubMenuBg;
-					&.in{ 
-						.panel{
-							background: @mobileNavSubMenuBg;   
-							.panel-heading{
-								.panel-title{
-									a{
-										font-size: 14px; 
-										color: @textColor; 
-										.glyphicon{
-											color: @textColor; 	
+					&.in {
+						.panel {
+							background: @mobileNavSubMenuBg;
+							.panel-heading {
+								.panel-title {
+									a {
+										font-size: 14px;
+										color: @textColor;
+										.glyphicon {
+											color: @textColor;
 										}
 									}
 								}
@@ -176,32 +175,31 @@
 					display: none;
 					position: static;
 				}
-				.mz-sitenav-item{
-					width: 100%; 
+				.mz-sitenav-item {
+					width: 100%;
 					max-width: 100%;
 					text-align: left;
 					.mz-sitenav-link {
 						display: block;
-						height: auto !important; 
-						padding: 11px 15px; 
+						height: auto !important;
+						padding: 11px 15px;
 					}
 				}
 			}
 			.panel+.panel {
 				margin: 0;
 			}
-
 			/**** sub sub nav ****/
-			.mz-sitenav-sub-sub{
+			.mz-sitenav-sub-sub {
 				background: #fff;
-				.mz-sitenav-item{
+				.mz-sitenav-item {
 					.mz-sitenav-link {
 						color: @textColor;
-						.glyphicon{
-							color: @textColor;   	
-						} 	
-					}	
-				} 
+						.glyphicon {
+							color: @textColor;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -493,8 +491,8 @@
 				.mz-pagingcontrols {
 					margin-top: 35px;
 					padding-right: 0;
-					.mz-pagingcontrols-pagestate-label { 
-					    margin-left: 0;
+					.mz-pagingcontrols-pagestate-label {
+						margin-left: 0;
 					}
 				}
 			}
@@ -504,22 +502,21 @@
 		line-height: 12px;
 		padding: 0 15px;
 	}
-	.mz-breadcrumbs  {
+	.mz-breadcrumbs {
 		.mz-service-breadcrumbs {
 			line-height: 10px;
 			padding: 0;
-			
 		}
 	}
 	.Brands {
-		.mz-breadcrumbs{
+		.mz-breadcrumbs {
 			line-height: 0;
 			padding: 0;
 			margin-bottom: 10px;
 		}
 		.brand-header {
 			padding-right: 0;
-            padding-left: 0;
+			padding-left: 0;
 			.brand-letter {
 				a {
 					font-size: 15px;
@@ -534,32 +531,22 @@
 			}
 		}
 	}
-	.track-my-order {
-		.mz-customer-service-page {
-			.mz-track-order-form {
-				label {
-					text-align: left;
-				}
-			}
-		}
-	}
+	.track-my-order,
 	.contact-us {
 		.mz-customer-service-page {
-			.mz-contact-form {
-				label {
-					text-align: left;
-				}
+			label {
+				text-align: left;
 			}
 		}
 	}
-	.mz-scrollnav{
-			.mz-scrollnav-list{	
-					li{
-						&.mz-scrollnav-item{
-								margin: 0;
-								border-bottom: 1px solid #e0e0e0;
-						}
+	.mz-scrollnav {
+		.mz-scrollnav-list {
+			li {
+				&.mz-scrollnav-item {
+					margin: 0;
+					border-bottom: 1px solid #e0e0e0;
 				}
+			}
 		}
 	}
 }

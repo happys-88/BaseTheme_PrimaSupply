@@ -23,7 +23,7 @@
         <div class="mz-category-images row">
             {% for image in model.childrenCategories %} 
                 {% if forloop.counter0 < 4 and image.content.categoryImages.0.imageUrl %}
-                <div class="col-sm-3 col-xs-6">
+                <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="mz-sub-category">    
                         <img src="{{image.content.categoryImages.0.imageUrl}}" alt="" height="100" width="100" >
                         <span>{{image.content.name}}</span>
