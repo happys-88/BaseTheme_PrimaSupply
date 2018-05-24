@@ -1,33 +1,61 @@
-    <h3 class="mz-formstep-header mz-checkoutform-header">
-        {{ labels.shippingMethod }}
-    </h3>
-    <div class="mz-formstep-body mz-checkoutform">
-        {% if model.requiresFulfillmentInfo %}
-            {% if model.availableShippingMethods.length %}
-                {% for method in model.availableShippingMethods %}
-                    <div>
-                        <label>
-                            <input type="radio" name="shippingMethod"
-                                   value="{{ method.shippingMethodCode }}" data-mz-value="shippingMethodCode" data-mz-shipping-method
-                                   {% if model.shippingMethodCode == method.shippingMethodCode %} checked="checked" {% endif %}>
-                            {{ method.shippingMethodName }} {{ method.price|currency }}
-                        </label>
-                    </div>
-                {% endfor %}
-                <span class="mz-validationmessage" data-mz-validationmessage-for="shippingMethodCode"></span>
-            {% else %}
-                <p>{{ labels.noShippingMethods }}</p>
-            {% endif %}
+<h3 class="mz-formstep-header mz-checkoutform-header">{{ labels.shippingMethod }}</h3>
+<div class="mz-formstep-body mz-checkoutform">
+    {% if model.requiresFulfillmentInfo %}
+        {% if model.availableShippingMethods.length %}
+            {% for method in model.availableShippingMethods %}
+                <div>
+                    <label>
+                        <input type="radio" name="shippingMethod"
+                               value="{{ method.shippingMethodCode }}" data-mz-value="shippingMethodCode" data-mz-shipping-method
+                               {% if model.shippingMethodCode == method.shippingMethodCode %} checked="checked" {% endif %}>
+                        {{ method.shippingMethodName }} {{ method.price|currency }}
+                    </label>
+                </div>
+            {% endfor %}
+            <span class="mz-validationmessage" data-mz-validationmessage-for="shippingMethodCode"></span>
         {% else %}
-            {{ labels.noFulfillmentInfoRequired }}
+            <p>{{ labels.noShippingMethods }}</p>
         {% endif %}
-        {% if model.liftGateProduct == true %}
-            {% include "modules/checkout/step-lift-gate-info" with model=model.orderAttributes
-            liftGatePrice=model.liftGatePrice 
-            liftGateVal=model.liftGateVal
-            items=model.liftGateProducts %}
-        {% endif %}
-        <div class="mz-formstep-next">
-            <button type="button" class="mz-button" data-mz-action="next">{{ labels.next }}</button>
+    {% else %}
+        {{ labels.noFulfillmentInfoRequired }}
+    {% endif %}
+    {% if model.liftGateProduct == true %}
+        {% include "modules/checkout/step-lift-gate-info" with model=model.orderAttributes
+        liftGatePrice=model.liftGatePrice 
+        liftGateVal=model.liftGateVal
+        items=model.liftGateProducts %}
+    {% endif %}
+    <div class="mz-formstep-next">
+        <button type="button" class="mz-button" data-mz-action="next">{{ labels.next }}</button>
+    </div>
+</div>
+<div class="mz-lightgate-section clearfix">
+    <div class="col-xs-12">
+        <h3>{{ labels.needLightGate }}</h3>
+        <div class="col-xs-4">
+            <iframe src="https://www.youtube.com/embed/d2yeBTBSRWc"></iframe>
+        </div>
+        <div class="col-xs-8">
+            <label>
+                <input type="radio" name="" value="">{{ labels.needLightGateMsg1 }} $59.00
+            </label>
+            <label>
+                <input type="radio" name="" value="">{{ labels.needLightGateMsg2 }}
+            </label>
         </div>
     </div>
+    <div class="col-xs-12">
+        <h3>{{ labels.freightShipment }}</h3>
+        <div class="col-xs-4">
+            <iframe src="https://www.youtube.com/embed/JYa-7j0tSwk"></iframe>
+        </div>
+        <div class="col-xs-8">
+            <label>
+                <input type="radio" name="" value="">{{ labels.freightShipmentMsg1 }}
+            </label>
+            <label>
+                <input type="radio" name="" value="">{{ labels.freightShipmentMsg2 }}
+            </label>
+        </div>
+    </div>
+</div>

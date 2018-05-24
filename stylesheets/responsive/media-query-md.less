@@ -1,6 +1,6 @@
-
 /**** Site Changes for small screens ****/
 @media @mz-md-media-query{
+	//Navigation
 	.mz-sitenav {
 		.mz-sitenav-item{
 			.mz-sitenav-link{
@@ -8,10 +8,18 @@
 			}	
 		}
 	}
-
-	#back-to-top{
-		bottom: 42px;
+	//Directory Page
+	.mz-category {
+		.mz-l-paginatedlist {
+			.mz-l-paginatedlist-header {
+				.mz-sortby {
+				    text-align: right;
+				    margin-bottom: 10px;
+				}
+			}
+		}
 	}
+	//Footer
 	.mz-pagefooter{
 		.mz-footer-top{
 			.mz-policy{
@@ -22,6 +30,9 @@
 				margin-top: 5px;
 			}		
 		}
-	} 
-	
+	}
+	//Back to top
+	#back-to-top{
+		bottom: 42px;
+	}
 }

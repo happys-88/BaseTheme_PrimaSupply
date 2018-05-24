@@ -9,11 +9,12 @@
           {% partial_cache %}
 
           {% for link in navigation.tree %}
-            {% if not link.isHidden and not link.isEmpty and link.nodeType != "page" %}
+
+            {% if not link.isHidden and not link.isEmpty and link.nodeType != "page" and forloop.counter0 <= themeSettings.maxTopLevelNavItems %}   
             <li class="mz-sitenav-item">
               
                 <a class="mz-sitenav-link main-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{link.url}}">
-                  <span class="mz-sitenav-link-iiner">
+                  <span class="mz-sitenav-link-iiner"> 
                     {{link.name|replace("_", " ")|replace(themeSettings.columnBreaker, "")|safe}}
                     <span class="seperator"></span><span class="top-arrow"></span>  
                   </span>
@@ -29,22 +30,30 @@
                           <h3 class="heading-3">Top Categories</h3>  
                         </div>
                           
-                        <ul class="mz-sitenav-sub">
+                        <ul class="mz-sitenav-sub"> 
                           {% for getTopCategory in link.items %}
                             {% if not getTopCategory.isHidden and not getTopCategory.isEmpty and forloop.counter0 < 5 %}
                               {% for categoryObject in categories.all %}
                                 {% if categoryObject.categoryId == getTopCategory.originalId %}
-                                  {% for catImage in categoryObject.content.categoryImages %}
-                                      <li class="mz-sitenav-item">
-                                        <div class="mz-category-image">
-                                          <a href="{{ categoryObject.url }}"><img src="{{ catImage.imageUrl }}" alt="{{ catImage.altText }}"></a>
-                                        </div>
-                                        <div class="mz-category-name">
-                                          <a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{ categoryObject.url }}">{{ categoryObject.content.name|replace("_", " ")|replace(themeSettings.columnBreaker, "")|safe }}</a>
-                                        </div>
-                                        
-                                      </li>
-                                  {% endfor %}  
+                                  <li class="mz-sitenav-item">
+                                    <div class="mz-category-image">
+                                      {% if categoryObject.content.categoryImages.length>0 %}
+                                        {% for catImage in categoryObject.content.categoryImages %} 
+                                          <a href="{{ categoryObject.url }}"> 
+                                            <img src="{{ catImage.imageUrl }}" alt="{{ catImage.altText }}">
+                                          </a> 
+                                        {% endfor %}
+                                      {% else %} 
+                                        <a href="{{ categoryObject.url }}">
+                                          <span class="noimage-placeholder"><span class="noimage-text">{{ labels.productImagePlaceholder }}</span></span>
+                                        </a> 
+                                      {% endif %}  
+                                      
+                                    </div>  
+                                    <div class="mz-category-name">
+                                      <a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{ categoryObject.url }}">{{ categoryObject.content.name|replace("_", " ")|replace(themeSettings.columnBreaker, "")|safe }}</a>
+                                    </div>
+                                  </li>
                                 {% endif %}
                               {% endfor %}
 
@@ -98,6 +107,9 @@
     </div>
 </nav>
 
+{% comment %}
 {% block search-box-lc %}
     {% include "modules/page-header/search-box-lc" %}
 {% endblock search-box-lc %}
+{% endcomment %}
+

@@ -1,4 +1,5 @@
-<h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName }}</h1>
+
+<h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName }}</h1> 
 
 <dl class="mz-productcodes mz-propertylist mz-pagetitle-note mz-l-stack-section">
   <dt class="mz-productcodes-productcode-label">{{ labels.productCode }}</dt>
@@ -169,6 +170,13 @@
   </dl>
 </div>
 {% endif %}
+
+<div class="prev-next">
+  <li>
+      <a  id="prev-url">{{ labels.previousPage }}</a>
+      <a  id="next-url">{{ labels.nextPage }}</a>
+  </li>
+</div>
 
 {% if themeSettings.showProductDetailMeasurements and model.bundledProducts %}
 <div class="mz-productdetail-measurements mz-l-stack-section">

@@ -11,7 +11,7 @@
             <a href="javascript:void(0);" class="mz-utilitynav-link" onclick="SnapEngage.startLink();"><i class="fa fa-comments"></i>Live Chat</a>    
         </li>
 
-        {% if not user.isAnonymous %}
+        {% if not user.isAnonymous %} 
             <li class="mz-utilitynav-item">
                 <div id="mz-logged-in-notice">
                     {{ labels.welcome }}, 

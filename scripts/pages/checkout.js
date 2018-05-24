@@ -57,10 +57,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
         },
         render: function() {
             var pageContext = require.mozuData('checkout');
-
             var attribs = this.model.attributes.attributes;
-
-            console.log("EREV : "+JSON.stringify(attribs));
             // $('.tbyb-msg').hide();
             _.each(attribs, function(obj){
                    // console.log("attrib : "+JSON.stringify(obj));
@@ -71,7 +68,6 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
                     $(elementId).show(); 
                 }  
             });
-            console.log("RENDER");
         },
         editCart: function () {
             window.location =  (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/cart";
@@ -161,7 +157,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
            var elm = e.target;
            var code = elm.getAttribute('data-mz-tbyb-code');
            var tbybId = '#tbyb_'+code;
-           console.log("tbybId : "+tbybId);
+           // console.log("tbybId : "+tbybId);
            // $('.tbyb-msg').hide();
            $(tbybId).show();    
            $('.tbyb-msg').not(tbybId).hide();       
@@ -274,7 +270,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
                 this.visaCheckoutInitialized = true;
             }
             $('#mailBillingForm').hide();
-            console.log("SESSION STORAGE : "+sessionStorage.getItem('guestEmail'));
+            // console.log("SESSION STORAGE : "+sessionStorage.getItem('guestEmail'));
             if(sessionStorage.getItem('guestEmail')) {
                 $('#billing-email').val(sessionStorage.getItem('guestEmail'));
                 $('#billing-email').focus();

@@ -1,0 +1,282 @@
+@media (min-width: 768px) {
+	.mz-login-checkout-model {
+		.modal-dialog {
+		    width: 400px;
+		}
+	}
+}
+
+.mz-login-checkout-model {
+    .modal-content {
+        border-radius: 0;
+        button {
+            &.close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                z-index: 1;
+            }
+        }
+    }
+    .modal-body {
+        .mz-guest-checkout {
+			border-top: 1px solid #e0e0e0;
+			margin-top: 11px;
+			padding-top: 10px;
+        }
+        .mz-pagetitle {
+            font-size: 22px;
+            margin: 10px 0;
+            text-transform: uppercase;
+        }
+        p {
+            color: #666;
+        }
+        .mz-l-formfieldgroup {
+            display: block;
+            .input-group {
+                margin-bottom: 15px;
+            }
+            .input-group-addon {
+                padding: 10px 15px;
+                font-size: 12px;
+                line-height: 10px;
+                border-radius: 0;
+            }
+            input[type="text"], 
+            input[type="password"],
+            input[type="email"] {
+                border: 1px solid #d4d4d4;
+                margin-bottom: 0px;
+                width: 100%;
+                height: 36px;
+            }
+        }
+        button {
+            &.mz-button {
+                border-radius: 0;
+                float: right;
+                width: 70%;
+                padding: 8px 0;
+            }
+            &.mz-close {
+	        	background: #fff;
+	        	border: none;
+			    color: #666;
+			    line-height: 39px;
+			    margin-top: 10px;
+			    padding: 0;
+			    text-decoration: underline;
+			    text-transform: uppercase;
+			    &:hover {
+			    	text-decoration: none;
+			    }
+			}
+        }
+        .mz-forgot {
+            color: #00adce;
+            text-decoration: underline;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        .mz-popover-message {
+            margin-top: 10px;
+        }
+    }
+    .modal-footer {
+        p {
+            margin: 6px 0;
+            i {
+                margin-right: 6px;
+            }
+        }
+    }
+}
+
+.mz-checkoutform {
+	&.mz-checkout-section {
+		padding-left: 0;
+	}
+	.form-group {
+		margin-bottom: 15px;
+		float: left;
+		width: 100%;
+		select {
+	        width: 100%;
+	    }
+	}
+	input[type="text"], 
+    input[type="password"],
+    input[type="email"], 
+    input[type="tel"],
+    select {
+        border: 1px solid #d4d4d4;
+        border-radius: 0;
+        margin-bottom: 0;
+        width: 100%;
+        height: 36px;
+    }
+	h4 {
+		border-bottom: 1px solid #495363;
+	    font-weight: 700;
+	    padding-bottom: 0;
+	    line-height: 30px;
+	    margin-top: 15px;
+	    margin-bottom: 25px;
+	}
+	.mz-formstep-header {
+		&.mz-checkoutform-header {
+		    background-color: #495363;
+		    font-weight: 500;
+		}
+	}
+	.mz-checkoutform-active {
+		background: #fff;
+	}
+	.mz-checkoutform-shipping {
+		label {
+			display: block;
+			line-height: 36px;
+			margin-bottom: 0;
+			text-align: right;
+		}
+	}
+	.mz-same-shipping-address {
+		label {
+			color: #495363;
+			margin-bottom: 0;
+			text-transform: capitalize;
+		}
+	}
+	.mz-paymentselector-option {
+		.col-sm-4 {
+			text-align: right;
+		    label {
+				color: #495363;
+				line-height: 36px;
+				margin-bottom: 0;
+				text-transform: capitalize;
+			}
+		}
+	}
+	.mz-payment-credit-card-savepayment-row {
+		label {
+			color: #495363;
+			margin-bottom: 0;
+			text-transform: capitalize;
+		}
+	}
+	.mz-payment-credit-card-securitycode-row {
+		input[type="tel"] {
+			margin: 0;
+		}
+	}
+	.mz-payment-option {
+		label {
+		    color: #495363;
+		    margin-bottom: 0;
+		    text-transform: capitalize;
+		}
+	}
+	.mz-prima-address {
+		margin-top: 20px;
+		address {
+			color: #495363;
+			font-size: 16px;
+		    font-style: italic;
+		    text-transform: none;
+		}
+	}
+	.mz-l-formfieldgroup-address {
+		.col-sm-4 {
+			&.mz-label {
+			    text-align: right;
+			    label {
+				    color: #495363;
+				    line-height: 35px;
+				    text-transform: capitalize;
+				}
+			}
+		}
+	}
+	.mz-paymentselector-separator {
+		label {
+			display: block;
+			color: #495363;
+			line-height: 36px;
+			margin-bottom: 0;
+			text-align: right;
+			text-transform: capitalize;
+		}
+		.mz-special-offers {
+			label {
+				line-height: 1.4;
+				padding-left: 20px;
+				position: relative;
+			    text-align: left;
+			    input[type="checkbox"] {
+			    	position: absolute;
+			    	left: 0;
+			    }
+			}
+		}
+		.mz-checkout-digitalcredit {
+			.mz-button {
+			    display: block;
+			    line-height: 9px;
+			    margin-top: 0;
+			    width: 100%;
+			}
+		}
+	}
+	.mz-lightgate-section {
+		margin-top: 10px;
+		h3 {
+		    font-size: 16px;
+		    font-weight: 700;
+		    padding-left: 15px;
+		    text-transform: capitalize;
+		}
+		iframe {
+			width: 100%;
+			height: 100px;
+		}
+		input[type="radio"] {
+			margin-top: 3px;
+			position: absolute;
+			left: 0;
+		}
+		label {
+			display: block;
+		    margin-top: 15px;
+			margin-bottom: 0;
+			padding-left: 20px;
+			position: relative;
+		}
+	}
+	.mz-checkoutform-tbyb {
+		input[type="radio"] {
+			margin-top: 3px;
+			position: absolute;
+			left: 0;
+		}
+		label {
+			display: block;
+		    margin-top: 20px;
+			margin-bottom: 0;
+			padding-left: 20px;
+			position: relative;
+		}
+		.mz-tbyb-msg {
+			p {
+				margin: 0;
+			}
+		}
+		.tbyb-condition {
+			p {
+			    font-size: 10px;
+			}
+		}
+	}
+}

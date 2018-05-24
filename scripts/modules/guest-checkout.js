@@ -1,4 +1,3 @@
-
 require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", 'hyprlivecontext'], function ($, _, Hypr, Backbone, HyprLiveContext) {
 	var model;
 	var SignUpModel = Backbone.Model.extend({
@@ -29,17 +28,15 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
 			 Backbone.Validation.bind(this);
 		},
 		checkoutAsGuest: function(){
-			console.log("CheckoutAsGuest");
+			 // var data = this.$el.serializeObject();
 			var me = this;
 			var email = $('#guestEmail').val();
 			var pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
    			if(pattern.test(email)) {
-   				console.log("Session Storage : "+email);
+   				// console.log("Session Storage : "+email);
    				var url = HyprLiveContext.locals.pageContext.url + '/checkout';
    				sessionStorage.setItem("guestEmail", email);
-   				console.log("sessionStorage : "+JSON.stringify(sessionStorage));
-   				// console.log("url : "+url);
-	   			window.location = url;
+   	   			window.location = url;
    			} else {
    				$('#guestEmailError').removeClass('hide');
    			}

@@ -669,15 +669,12 @@
                  return count;      
             },
             updateTbyb: function(e) {
-                console.log("updateTbyb step : ");
                 $(".tbyb").prop('checked', false);
                 var elm = e.target;
                 var code = elm.getAttribute('data-mz-tbyb-code');
                 this.set("tbyb", "TRUE");
                 
-                console.log("THIS VALUE : "+code);
                 var order = this.getOrder();
-                this.set('tbybProd', code);
                 $('input[value='+code+']').prop("checked","checked");
                 // alert("Code : "+code);
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
@@ -1521,11 +1518,9 @@
             },
             submit: function () {
                 console.log("Biling SUbmit : ");
-                console.log("Billing Submit email : "+$('#billing-email').val());
                 var order = this.getOrder();
                 // just can't sync these emails right
                 order.syncBillingAndCustomerEmail();
-                console.log("ORDER DATA : "+JSON.stringify(order));
                 // This needs to be ahead of validation so we can check if visa checkout is being used.
                 var currentPayment = order.apiModel.getCurrentPayment();
 
@@ -1545,7 +1540,6 @@
                 /*console.log("Validation : "+JSON.stringify(val));
                 console.log("HAS Item : "+_.has(val, "check.nameOnCheck"));*/
                 if(radioVal !== 'Check') {
-                    console.log("IF cond");
                     if (this.nonStoreCreditTotal() > 0 && val) {
                         // display errors:
                         var error = {"items":[]};
@@ -1563,7 +1557,6 @@
                         return false;
                     }
                 } else {
-                    console.log("ELSE cond : ");
                     if(_.has(val, "billingContact.email")) {
                        if (this.nonStoreCreditTotal() > 0 && val) {
                             // display errors:
@@ -1587,7 +1580,6 @@
                         } 
                     }
                 }   
-
                 var card = this.get('card');
                 if(this.get('paymentType').toLowerCase() === "purchaseorder") {
                     this.get('purchaseOrder').inflateCustomFields();
@@ -1607,17 +1599,12 @@
             applyPayment: function () {
                 var self = this, order = this.getOrder();
                 this.syncApiModel();
-                console.log("this.nonStoreCreditTotal() : "+this.nonStoreCreditTotal());
                 if (this.nonStoreCreditTotal() > 0) {
                     return order.apiAddPayment().then(function() {
-                        console.log("payment : ");
                         var payment = order.apiModel.getCurrentPayment();
-                        console.log("payment : "+JSON.stringify(payment));
                         var modelCard, modelCvv;
                         var activePayments = order.apiModel.getActivePayments();
                         var creditCardPayment = activePayments && _.findWhere(activePayments, { paymentType: 'CreditCard' });
-                        
-                        console.log("creditCardPayment : "+creditCardPayment+" && self.get('card') : "+self.get('card'));
                         //Clear card if no credit card payments exists
                         if (!creditCardPayment && self.get('card')) {
                             self.get('card').clear();
@@ -1642,13 +1629,11 @@
                         }
                     });
                 } else {
-                    console.log("markComplete");
                     this.markComplete();
                 }
             },
 
             markComplete: function () {
-                console.log("COMPLETE MARK STEP");
                 this.stepStatus('complete');
                 this.isLoading(false);
                 var order = this.getOrder();
@@ -2111,15 +2096,12 @@
                 }
             },
             syncBillingAndCustomerEmail: function () {
-                console.log("THIS : ");
-                var billingEmail = this.get('billingInfo.billingContact.email'),
+               var billingEmail = this.get('billingInfo.billingContact.email'),
                     customerEmail = this.get('emailAddress') || require.mozuData('user').email;
-                console.log("syncBillingAndCustomerEmail : "+billingEmail+" : "+customerEmail);
-                console.log(" DATA : "+JSON.stringify(this));
                 if (!customerEmail) {
                    this.set('emailAddress', billingEmail);
                 }
-                console.log("Billing email storage : "+billingEmail);
+                // console.log("Billing email storage : "+billingEmail);
                 if (!billingEmail) {
                     this.set('billingInfo.billingContact.email', customerEmail);
                 }
@@ -2244,7 +2226,7 @@
                     } 
                 }
                 
-
+                
                 this.isLoading(true);
 
                 if (isSavingNewCustomer) {

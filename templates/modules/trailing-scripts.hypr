@@ -3,12 +3,12 @@
 <script src="{{siteContext.cdnPrefix}}/js/require-{% if debugMode %}debug{% else %}min{% endif %}.js"></script>
 <script type="text/javascript">
     require.config({
-      cdnPrefix: "{{ siteContext.cdnPrefix }}",
+      cdnPrefix: "{{ siteContext.cdnPrefix }}", 
       cacheKey: "{{ siteContext.hashString }}",
       urlArgs: "theme={{siteContext.themeId}}&cacheKey={{ siteContext.hashString }}",
       baseUrl: "{{ siteContext.cdnPrefix }}{% if not debugMode %}/compiled{% endif %}/scripts",
       paths: {
-        jquery: "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery{% if not debugMode %}.min{% endif %}",
+        jquery: "vendor/jquery/jquery", 
 		    underscore: "vendor/underscore/underscore",
 		    backbone: "vendor/backbone/backbone",
         bootstrap:"vendor/bootstrap/js/bootstrap.min",

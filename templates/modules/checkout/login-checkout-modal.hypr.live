@@ -1,5 +1,5 @@
 <div class="modal fade mz-login-checkout-model" id="loginCheckoutPopup" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog"> 
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
             <div class="modal-body clearfix">

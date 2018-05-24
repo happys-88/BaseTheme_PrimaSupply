@@ -5,8 +5,10 @@
         'modules/backbone-mozu',
         'hyprlivecontext',
         'modules/models-product',
-        'bxslider'
-    ], function($, _, api, Backbone, HyprLiveContext, ProductModels, bxslider) {
+        'bxslider',
+        "pages/cart",
+        "modules/models-cart"
+    ], function($, _, api, Backbone, HyprLiveContext, ProductModels, bxslider, cart, cartModel) {
     console.log("quicknew");
     $(document).on('click', '.mz-quick-view', function (event) {
         var $Elem = $(event.currentTarget);
@@ -25,11 +27,14 @@
 
                 },
                 initialize: function() {
+                    console.log("initialze call");
                     var self = this;
-                    self.listenTo(self.model, 'change:dataurl', self.render);
+                   // this.model.on("change:dataurl",self.render);
+                    //listenToOnce
+                   //self.listenToOnce(self.model, 'change:dataurl', self.render);
                 },
                 render: function () {
-                   
+                   console.log("render call");
                     Backbone.MozuView.prototype.render.call(this);
                     this.corousel();
                     return this;
@@ -104,8 +109,9 @@
                 },
                 quantityPlus: function () {
                     var option = this.model.get('options');
-                    console.log(option.get('value'));
-                    var _qtyObj = $('[data-mz-validationmessage-for="quantity"]'),
+                    if(option != "undefined" ){
+                        console.log(option.get('value'));
+                        var _qtyObj = $('[data-mz-validationmessage-for="quantity"]'),
                         _qtyCountObj = $('.mz-productdetail-qty');
                     _qtyObj.text('');
                     var value = parseInt(_qtyCountObj.val(), 10);
@@ -123,12 +129,19 @@
                         if (product.attributes.inventoryInfo.onlineStockAvailable > 0)
                             $('[data-mz-validationmessage-for="quantity"]').text("*Only " + product.attributes.inventoryInfo.onlineStockAvailable + " left in stock.");
                     }
+
+                    }else{
+                        console.log("selectyour  option first");
+                        
+                    }
+                   
+                    
                 },
                 AddToCart: function (event) {
                     this.model.addToCart();
                 },
                 colorswatch: function (event) {
-                    this.render();
+                    //this.render();
                     var $thisElem = $(event.currentTarget);
                     event.stopImmediatePropagation();
                     var colorValue = $thisElem.val();
@@ -145,8 +158,6 @@
                 clickOnNextOrprevious: function(){
                     //var newpath= imagefilepath + '?_mzcb=undefined';
                      $('[src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1024px-No_image_3x4.svg.png"]').parent().remove();
-                     var len=$(".bx-pager-item").length;
-                     console.log(len);
                     $(".bx-pager-item").eq(2).remove();
                     //$("[src=newpath]").eq(1).remove();
                     //console.log($("[src=newpath]").length);

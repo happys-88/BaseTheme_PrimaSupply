@@ -7,8 +7,10 @@
 </div>
 <div class="mz-carttable-{% if Model.IsEmpty %} isempty {% else %}items{% endif %} col-xs-12">
   {% if not model.isEmpty %}
+  
     {% for item in model.items %}
-      <div class="mz-carttable-item row">
+    
+      <div class="mz-carttable-item row" id="{{ item.product.productCode }}">
         <div class="mz-carttable-item-product col-sm-6 col-xs-12"> 
           <div class="mz-carttable-item-product-image"> 
            {% with item.product|get_product_attribute("tenant~color") as colorAttr %}  

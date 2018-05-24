@@ -1,4 +1,4 @@
-﻿<form id="searchbox" class="mz-searchbox{% if themeSettings.useSearchAutocomplete %} mz-searchbox-expands{% endif %}" action="{% make_url "search" %}">
+﻿﻿<form id="searchbox" class="mz-searchbox{% if themeSettings.useSearchAutocomplete %} mz-searchbox-expands{% endif %}" action="{% make_url "search" %}">
     <div class="mz-searchbox-field">
         <input placeholder="{{ labels.search }}" id="globalSearch" type="search" class="mz-searchbox-input" autocomplete="off" name="query" data-mz-role="searchquery" />
         <button class="mz-searchbox-button" type="submit"><i class="fa fa-search"></i></button>
@@ -8,5 +8,4 @@
     {% if themeSettings.useSearchAutocomplete %}
         {% require_script "modules/search-autocomplete" %} 
     {% endif %}
-
 </form>

@@ -43,7 +43,6 @@ define([
                 require([pageContext.visaCheckoutJavaScriptSdkUrl], initVisaCheckout);
             }
             this.listenTo(this.model, 'sync', this.render);
-            console.log("Guest EMAIL : "+sessionStorage.getItem('guestEmail'));
             var Ships = localStorage.getItem("shippingData");
             var ratesParse = JSON.parse(Ships);
             this.model.set("shippingDetail", ratesParse);
@@ -54,8 +53,7 @@ define([
             }          
         },
         beforeRender: _.once(function() {
-            // alert("B4 Render : ");
-            var cart = this.model;
+           var cart = this.model;
             var productCode = this.model.get("items").models[0].get('product').get('productCode');
             var shipping = localStorage.getItem("selectedShipping");
             // console.log("Shipping storage : "+shipping);
@@ -134,7 +132,6 @@ define([
                         var newTotal = Number(tot)+Number(total);
                         // console.log("TOTAL :  ::  "+newTotal);
                         cart.set({'total':newTotal});
-                        alert("Call Render");
                     }
                     
                    });
@@ -165,7 +162,11 @@ define([
         }),
         render: function() {
             // console.log("render");
-            this.beforeRender();              
+            if(this.model.get("items").length!==0){
+                this.beforeRender(); 
+            }
+                
+                        
             CartMonitor.update();
           
             preserveElement(this, ['.v-button'], function() {
@@ -232,7 +233,9 @@ define([
                 var newTotal = Number(tot)+Number(total);
                 // console.log("TOTAL :  ::  "+newTotal);
                 cart.set({'total':newTotal});
-                this.render();                
+                this.render();
+                
+                
         },     
         updateQuantity: _.debounce(function (e) {
             var $qField = $(e.currentTarget),
@@ -279,7 +282,6 @@ define([
             });
         },
         proceedToCheckout: function () {
-            alert("checout proceeed");
             //commenting  for ssl for now...
             // this.model.toOrder();
             // return false;
@@ -369,22 +371,18 @@ define([
     }
     /* end visa checkout */
 
-    $(document).ready(function() {
         /*var checkoutData = CheckoutModels.CheckoutPage;
         alert("CHECKOUT DATA : "+JSON.stringify(checkoutData));*/
-        var cartModel = CartModels.Cart.fromCurrent(),
-            cartViews = {
+        var cartModel = CartModels.Cart.fromCurrent();
+        
+            var cartViews = {
 
                 cartView: new CartView({
                     el: $('#cart'),
                     model: cartModel,
                     messagesEl: $('[data-mz-message-bar]')
                 })
-                
-
             };
-           
-
         cartModel.on('ordercreated', function (order) {
             cartModel.isLoading(true);
             window.location = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + '/checkout/' + order.prop('id');
@@ -398,7 +396,16 @@ define([
         window.cartView = cartViews;
         
         CartMonitor.setCount(cartModel.count());
-    });
+        if(window.location.pathname=="/cart"){
+           
+                var length=cartModel.attributes.changeMessages.length;
+                if(length>0){
+                    var productcode=cartModel.attributes.changeMessages[length-1].metadata[0].productCode;
+                    var id='#'+productcode;
+                    $(id).prependTo(".mz-carttable-items");
+                }
+              
+        }
 
     return CartView;
     

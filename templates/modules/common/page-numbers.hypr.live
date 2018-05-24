@@ -1,5 +1,5 @@
 ﻿
-{% if not model.hasPreviousPage %}
+{% if not model.hasPreviousPage %} 
 	<span class="mz-pagenumbers-prev is-disabled"><i class="fa fa-angle-left"></i></span>
 {% else %}
 	<a class="mz-pagenumbers-prev" href="{% make_url "paging" model with page="previous" %}" rel="previous" data-mz-action="previous"><i class="fa fa-angle-left"></i></a>

@@ -1,6 +1,5 @@
 <div class="mz-create-account-fields mz-checkoutform mz-checkoutform-active">
     <div id="accountCreatedSignUp" style="display: none;">Account Created !!</div>
-
     <div id="createAccountSignUp">
         <h3>{{ labels.setUpAccountHeader}}</h3>
         <p>{{ labels.confirmationAccountSetupMessage|safe }}</p>

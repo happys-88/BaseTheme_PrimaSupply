@@ -13,5 +13,5 @@
         </div>
     </div>
 </form>
+{% require_script "modules/guest-checkout" %}
 
- {% require_script "modules/guest-checkout" %}
