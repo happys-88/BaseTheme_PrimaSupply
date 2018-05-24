@@ -128,11 +128,12 @@
                                             if(!flag2){
                                                 nxtUrl = "http://"+hostname+"/"+seoFriendlyUrl+"/p/"+productCode+"";
                                                 flag2 = true;
+                                                return false;
                                             } 
                                         }
                                     }
                                });
-                            console.log("hello "+preUrl);
+                            // console.log("hello "+preUrl);
                             if(!_.isUndefined(preUrl)){
                             $("#prev-url").attr("href", preUrl);
                            }
