@@ -52,9 +52,27 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
         templateName: 'modules/checkout/checkout-order-summary',
 
         initialize: function () {
-            this.listenTo(this.model.get('billingInfo'), 'orderPayment', this.onOrderCreditChanged, this);
+           this.listenTo(this.model.get('billingInfo'), 'orderPayment', this.onOrderCreditChanged, this);
+           
         },
+        render: function() {
+            var pageContext = require.mozuData('checkout');
 
+            var attribs = this.model.attributes.attributes;
+
+            console.log("EREV : "+JSON.stringify(attribs));
+            // $('.tbyb-msg').hide();
+            _.each(attribs, function(obj){
+                   // console.log("attrib : "+JSON.stringify(obj));
+                if(obj.fullyQualifiedName === 'tenant~trybeforebuy') {
+                    // Check if the TBYB attribute code is present in the line items or not
+                    var elementId = "#tbyb_"+obj.values[0];
+                    console.log("elementId : "+elementId);
+                    $(elementId).show(); 
+                }  
+            });
+            console.log("RENDER");
+        },
         editCart: function () {
             window.location =  (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/cart";
         },
@@ -134,10 +152,21 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
         additionalEvents: {
             "change [data-mz-tbyb]": "updateTbyb"
         },
+        initialize: function() {
+
+            // console.log("Model : "+JSON.stringify(this.model));
+        },
         updateTbyb: function (e) {
-            this.model.updateTbyb(e);
-            // this.initStepView();
+           this.model.updateTbyb(e);
+           var elm = e.target;
+           var code = elm.getAttribute('data-mz-tbyb-code');
+           var tbybId = '#tbyb_'+code;
+           console.log("tbybId : "+tbybId);
+           // $('.tbyb-msg').hide();
+           $(tbybId).show();    
+           $('.tbyb-msg').not(tbybId).hide();       
         }
+
     });
     var poCustomFields = function() {
         
@@ -219,6 +248,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
                 this.render();
             }, this);
             this.codeEntered = !!this.model.get('digitalCreditCode');
+
         },
         resetPaymentData: function (e) {
             if (e.target !== $('[data-mz-saved-credit-card]')[0]) {
@@ -244,10 +274,10 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
                 this.visaCheckoutInitialized = true;
             }
             $('#mailBillingForm').hide();
-            if(localStorage.getItem('guestEmail')) {
-                $('#billing-email').val(localStorage.getItem('guestEmail'));
-            } else {
-                $('#billing-email').val('');
+            console.log("SESSION STORAGE : "+sessionStorage.getItem('guestEmail'));
+            if(sessionStorage.getItem('guestEmail')) {
+                $('#billing-email').val(sessionStorage.getItem('guestEmail'));
+                $('#billing-email').focus();
             }
         },
         updateAcceptsMarketing: function(e) {
@@ -480,6 +510,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
         ],
         initialize: function () {
             var me = this;
+            console.log(this.model);
             this.$el.on('keypress', 'input', function (e) {
                 if (e.which === 13) {
                     me.handleEnterKey();
@@ -492,8 +523,8 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             this.model.on('userexists', function (user) {
                 me.$('[data-mz-validationmessage-for="emailAddress"]').html(Hypr.getLabel("customerAlreadyExists", user, encodeURIComponent(window.location.pathname)));
             });
+            console.log("INIT");
         },
-
         submit: function () {
             var self = this;
             _.defer(function () {
@@ -592,6 +623,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
 
         var $reviewPanel = $('#step-review');
         checkoutModel.on('change:isReady',function (model, isReady) {
+            alert("isReady : "+isReady);
             if (isReady) {
                 setTimeout(function () { window.scrollTo(0, $reviewPanel.offset().top); }, 750);
             }

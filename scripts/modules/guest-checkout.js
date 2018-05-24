@@ -29,15 +29,15 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
 			 Backbone.Validation.bind(this);
 		},
 		checkoutAsGuest: function(){
-			 // var data = this.$el.serializeObject();
+			console.log("CheckoutAsGuest");
 			var me = this;
 			var email = $('#guestEmail').val();
 			var pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
    			if(pattern.test(email)) {
    				console.log("Session Storage : "+email);
    				var url = HyprLiveContext.locals.pageContext.url + '/checkout';
-   				localStorage.setItem("guestEmail", email);
-   				console.log("sessionStorage : "+JSON.stringify(localStorage));
+   				sessionStorage.setItem("guestEmail", email);
+   				console.log("sessionStorage : "+JSON.stringify(sessionStorage));
    				// console.log("url : "+url);
 	   			window.location = url;
    			} else {

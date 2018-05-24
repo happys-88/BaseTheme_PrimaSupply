@@ -7,8 +7,9 @@
                 <th class="mz-ordersummary-header-total">{{ labels.total }}</th>
             </tr>
         </thead>
+
         {% for item in model.items %}
-            <tbody class="mz-ordersummary-lineitems">
+           <tbody class="mz-ordersummary-lineitems">
               <tr class="mz-ordersummary-line mz-ordersummary-line-item {% if item.discountTotal > 0 %}is-discounted{% endif %}">
                     <td class="mz-ordersummary-item-product">
                       {{ item.product.name }}
@@ -28,6 +29,7 @@
                     <td>{% include "modules/common/item-total" %}
                     </td>
                 </tr>
+                
                 {% for property in item.product.properties %}
                   {% if property.name == 'lift-gate-delivery' %}
                     {% for v in property.values %}
@@ -36,13 +38,35 @@
                       {% endif %}
                     {% endfor %}
                   {% endif %}
-                  {% if property.name == 'TBYB' %}
+
+                  {% if property.name == 'Try Before You Buy' %}
                     {% for v in property.values %}
                       {% if v.stringValue == true or v.value == true %}
-                       <tr> <td class="tbyb-msg" style="display: none;">{{ labels.TBYBMsg }}</td> </tr>
+                        {% for attribute in model.attributes %}
+                          {% if attribute.fullyQualifiedName == 'tenant~trybeforebuy' %}
+                           {% with item.product.variationProductCode|default(item.product.productCode) as prodCode %}
+                              
+                            {% endwith %}
+                          {% endif%}
+                        {% endfor %}                        
                       {% endif %}
                     {% endfor %}
                   {% endif %}
+
+                  
+
+                  {% if property.name == 'Try Before You Buy' %}
+                  {% for v in property.values %}
+                      {% if v.stringValue == true or v.value == true %}
+                        {% with item.product.variationProductCode|default(item.product.productCode) as prodCode %}
+                          <tr> <td class="tbyb-msg" id="tbyb_{{ item.product.variationProductCode|default(item.product.productCode) }}_{{item.id}}" style="display: none;">
+                            {{ labels.tbybMsg }}</td> 
+                          </tr>
+                        {% endwith %}                     
+                      {% endif %}
+                    {% endfor %}
+                 {% endif %}
+
               {% endfor %}
             </tbody>
         {% endfor %}

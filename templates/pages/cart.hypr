@@ -45,5 +45,4 @@
 	</div>
 
 </div>
-{% include "modules/checkout/login-checkout-modal" %}
 {% endblock body-content %}

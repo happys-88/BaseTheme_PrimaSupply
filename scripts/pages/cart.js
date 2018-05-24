@@ -43,7 +43,7 @@ define([
                 require([pageContext.visaCheckoutJavaScriptSdkUrl], initVisaCheckout);
             }
             this.listenTo(this.model, 'sync', this.render);
-
+            console.log("Guest EMAIL : "+sessionStorage.getItem('guestEmail'));
             var Ships = localStorage.getItem("shippingData");
             var ratesParse = JSON.parse(Ships);
             this.model.set("shippingDetail", ratesParse);

@@ -97,3 +97,7 @@
       </ul>
     </div>
 </nav>
+
+{% block search-box-lc %}
+    {% include "modules/page-header/search-box-lc" %}
+{% endblock search-box-lc %}

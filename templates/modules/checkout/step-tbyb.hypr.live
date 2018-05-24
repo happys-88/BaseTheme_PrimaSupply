@@ -3,24 +3,18 @@
         {{ labels.tbybHeader }}
         <a href="javascript:;" class="mz-formstep-edit" data-mz-action="edit">{{ labels.change }}</a>
     </h3>
-
+  
     <div class="mz-formstep-body mz-checkoutform mz-formstep-next" id="tybyRadio">  
        <div class="mz-msg-img"></div>
        <div class="mz-tbyb-msg">{{ labels.tbybContent }} </div><br>
 	   {% for prods in model.requireOrderModel %}
-	   		{% with prods.varCode as variationCode %}
-	   		{% with prods.prodCode as pcode %}
-
-	   			{% if variationCode !== '' %}
-	   				<input class="tbyb" id="tbybAttr" type="radio" value="{{variationCode}}" data-mz-tbyb data-mz-tyby-name="{{prods.prodName}}" data-mz-tbyb-code="{{variationCode}}" {% if model.tbybSelectedProd !== 'NONE' && model.tbybSelectedProd === variationCode %}checked="checked"{% endif %}  /> 
-	              {{ prods.prodFullName}}
-	   			{% else %}
-	   				<input class="tbyb" id="tbybAttr" type="radio" value="{{pcode}}" data-mz-tbyb data-mz-tyby-name="{{prods.prodName}}" data-mz-tbyb-code="{{pcode}}" {% if model.tbybSelectedProd !== 'NONE' && model.tbybSelectedProd === pcode %}checked="checked"{% endif %}  /> 
-	   				{{ prods.prodFullName }}
-	   			{% endif %}
-	   			
-	   		 
-	   		{% endwith %}
+	   		{% with prods.varCode|default(prods.prodCode) as pCode %}
+		   		{% with prods.prodId as pId %}
+			   		{% with prods.selCode as selectionCode %}
+			   			<input class="tbyb" type="radio" value="{{pCode}}_{{pId}}" data-mz-tbyb data-mz-tyby-name="{{prods.prodName}}" data-mz-tbyb-code="{{pCode}}_{{pId}}" {% if model.tbybSelectedProd !== 'NONE' && model.tbybSelectedProd === selectionCode %}checked="checked"{% endif %}  /> 
+			              {{ prods.prodFullName}}
+			        {% endwith %}
+		   		{% endwith %}
 	   		{% endwith %}
 	    {% endfor %}  
 	    <br>
