@@ -8,6 +8,7 @@
         'bxslider',
         "pages/cart",
         "modules/models-cart"
+
     ], function($, _, api, Backbone, HyprLiveContext, ProductModels, bxslider, cart, cartModel) {
     console.log("quicknew");
     $(document).on('click', '.mz-quick-view', function (event) {

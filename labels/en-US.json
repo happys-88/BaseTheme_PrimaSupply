@@ -571,5 +571,8 @@
   "freightShipmentMsg1"                    :   "I understand how to inspect freight shipment",
   "freightShipmentMsg2"                    :   "I don't understand. Please have someone contact me after I place my order.",
   "payPalBillingInfo"                      :   "paypal",
-  "creditCardInformation"                  :   "credit card information"
+  "creditCardInformation"                  :   "credit card information",
+  "shipsFromPrima"                         :   "Ships from PRIMA",
+  "shipsFromDistributor"                   :   "Ships from Distributor",
+  "liftGateServiceAdded"                   :   "*Liftgate Service Added"
 }

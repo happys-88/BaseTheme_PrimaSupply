@@ -25,6 +25,7 @@
                 'modules/api',
                 'modules/backbone-mozu',
                 'modules/cart-monitor',
+                "modules/page-header/global-cart",
                 'modules/contextify',
                 'modules/jquery-mozu',
                 'modules/login-links',
@@ -43,7 +44,6 @@
                 'modules/views-productlists',
                 "modules/views-productimages",
                 "modules/block-ui",
-                "modules/page-header/global-cart",
                 "modules/quickview"
             ],
             exclude: ['jquery'],

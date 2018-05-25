@@ -37,7 +37,7 @@
             zoomImage.elevateZoom(zoomConfig);
           },
           corousel: function () {
-            $('#product-detail-slider').bxSlider({ 
+            $('.bxslider').bxSlider({ 
                 minSlides: 1,
                 maxSlides: 1,
                 //slideWidth: 600,

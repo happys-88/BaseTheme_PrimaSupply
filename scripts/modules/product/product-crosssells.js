@@ -13,12 +13,28 @@ define([
 	var productCrossSellView = Backbone.MozuView.extend({
 	    templateName: 'modules/product/product-crosssells',  
 	    productCarousel: function () {
+			var minSlides;
+		    var maxSlides;
+			var slideWidth;
+			var  slideMargin;
+			var windowWidth=$( window ).width();
+			if(windowWidth<767){
+				 minSlides=2;
+				 maxSlides=2;
+				 slideMargin= 10;
+				 slideWidth= 333;
+			}else{
+				 minSlides=4;
+				 maxSlides=12;
+				slideWidth= 333;
+				slideMargin=15;
+			}
 	        $('#crossSellSlider').bxSlider({ 
-		        minSlides: 4,
-                maxSlides: 12,
+		        minSlides: minSlides,
+                maxSlides: maxSlides,
                 moveSlides: 1,
-                slideWidth: 333,
-                slideMargin: 15,
+                slideWidth: slideWidth,
+                slideMargin: slideMargin,
                 responsive: true,
                 pager: false,
                 speed: 1000,
@@ -52,7 +68,7 @@ define([
 				$.each(prodCodeCrossSell, function( index, value ) {
 					Crosssellurl = "productCode eq "+ "'" + value + "'"+ " or ";
 					CrosssellgenerateURL= CrosssellgenerateURL + Crosssellurl;
-					api.request("GET", "/api/commerce/catalog/storefront/products/"+variantion[index]+"?"+"variationProductCode="+value ).then(function(body){
+				api.request("GET", "/api/commerce/catalog/storefront/products/"+variantion[index]+"?"+"variationProductCode="+value ).then(function(body){
 						items.push(body); 
 					});
 				});
