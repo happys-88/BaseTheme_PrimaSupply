@@ -113,7 +113,7 @@
 
             },
             calculateStepStatus: function () {
-                console.log("FulfillmentContact step status : "+this);
+                // console.log("FulfillmentContact step status : "+this);
                 if (!this.requiresFulfillmentInfo() && this.requiresDigitalFulfillmentContact()) {
                     this.validation = this.digitalOnlyValidation;
                 }
@@ -157,6 +157,10 @@
                     return order.get('billingInfo').calculateStepStatus();
                 });
             },
+            edit: function () {
+                console.log("Edit called");
+                this.stepStatus('incomplete');
+            },
             next: function () {
                 console.log("FullfillmentContact Next");
                 if (!this.requiresFulfillmentInfo() && this.requiresDigitalFulfillmentContact()) {
@@ -192,6 +196,7 @@
                         parent.isLoading(false);
                         me.calculateStepStatus();
                         parent.calculateStepStatus();
+                        console.log("PARENT : "+JSON.stringify(parent));
                     });                  
                 };
 

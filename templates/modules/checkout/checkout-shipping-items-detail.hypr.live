@@ -35,7 +35,7 @@
     	{% for itemArray in model.modelItems %}
     		
     		{% if itemArray.primaShip.length > 0 %}
-    			<h6> Ships from PRIMA </h6>
+    			<h6> {{ labels.shipsFromPrima }} </h6>
     			{% for item in itemArray.primaShip %}
     				<div class="col-xs-6">
     				{{ item.product.name }}
@@ -45,11 +45,16 @@
 	                </div>	    	
 	                <div class="col-xs-6">
 	                	{% for property in item.product.properties %}
+	                		{% if property.name === 'Availability' %}
+	                			{% for v in property.values %}
+	                				{{v.value}}
+			                    {% endfor %}
+	                		{% endif %}
 	                		{% if property.name === 'Free liftgate' %}
 	                			{% for v in property.values %}
 			                        {% if v.stringValue === true or v.value === true %}
-				                      	{% if itemArray.liftGate  === true %}
-					                			*LiftGate Service Added
+				                      	{% if itemArray.liftGate === true %}
+					                			{{ labels.liftGateServiceAdded }}
 					                	{% endif %}
 			                        {% endif %}
 			                    {% endfor %}
@@ -60,7 +65,7 @@
     		{% endif %}
 
     		{% if itemArray.distShip.length > 0 %}
-    			<h6> Ships from Distributor </h6>
+    			<h6> {{ labels.shipsFromDistributor }} </h6>
     			{% for item in itemArray.distShip %}
 					<div class="col-xs-6">
 						{{ item.product.name }}
@@ -75,7 +80,7 @@
 	                				String valiue : {{ v.stringValue }}
 			                        {% if v.stringValue === true or v.value === true %}
 				                      	{% if itemArray.liftGate  === true %}
-					                			*LiftGate Service Added
+					                			{{ labels.liftGateServiceAdded }}
 					                	{% endif %} 
 			                        {% endif %}
 			                    {% endfor %}
