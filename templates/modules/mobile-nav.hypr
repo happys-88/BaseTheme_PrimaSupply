@@ -1,7 +1,7 @@
-<nav class="mz-sitenav visible-xs collapse in" id="mz-sitenav-container">    
+<nav class="mz-sitenav collapse" id="mz-mobilenav-container">      
     <div class="container">
       <div class="mz-close-nav hidden">                         
-        <button data-toggle="collapse" data-target="#mz-sitenav-container" aria-expanded="false"><span></span></button>  
+        <button data-toggle="collapse" data-target="#mz-mobilenav-container" aria-expanded="false"><span></span></button>  
       </div>
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         {% partial_cache %}
@@ -75,4 +75,4 @@
         {% endpartial_cache %}
       </div>
     </div>
-</nav>
+</nav> 
