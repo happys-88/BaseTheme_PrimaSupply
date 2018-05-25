@@ -22,6 +22,6 @@
 		{% endfor %}
 	</ul>
 	<div class="shop-all-brands">
-		<a href="#">{{labels.shopAllBrands}}</a>	
+		<a href="/brands">{{labels.shopAllBrands}}</a>  	
 	</div>
 </div>

@@ -97,15 +97,13 @@
     RVIModel.renderRVI('#rvi-container');
 
     $(document).ready(function () {
+
         var product = ProductModels.Product.fromCurrent();
         var currentProductCode = product.attributes.productCode;
         $.each(product.attributes.categories, function( index, value ) {
             var currentCategoryCode = value.categoryId;
             $.each(product.attributes.properties, function( index, value ) {
-                if(value.attributeFQN=="tenant~product-number-sequence"){
-                    $.each(value.values, function( index, productNumberSequenceValue ) {
-                        console.log(productNumberSequenceValue.value);
-                        var currentProductSequenceValue = productNumberSequenceValue.value;
+                
                         var preUrl;
                         var hostname = window.location.hostname;
                         var flag1 = false;
@@ -135,6 +133,7 @@
                                         }
                                     }
                                });
+                            // console.log("hello "+preUrl);
                             if(!_.isUndefined(preUrl)){
                             $("#prev-url").attr("href", preUrl);
                            }
@@ -143,10 +142,8 @@
                             }
                         });
                     });
-                }
-            });
-        });
-                    
+                });
+
         product.on('addedtocart', function (cartitem) {
             if (cartitem && cartitem.prop('id')) {
                 //product.isLoading(true);
@@ -157,7 +154,7 @@
                 
                 //CartMonitor.update('showGlobalCart');
                 product.set('quantity', 1);
-
+                $("#global-cart").show();
                 window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/cart"; 
             } else {
                 product.trigger("error", { message: Hypr.getLabel('unexpectedError') });

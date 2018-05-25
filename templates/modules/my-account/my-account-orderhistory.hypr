@@ -10,14 +10,15 @@
             {% include "modules/my-account/order-history-list" %}
         </div>
         {% if showPaging %}
-            <div data-mz-pagenumbers class="mz-pagenumbers">
+            <div data-mz-pagenumbers class="mz-pagenumbers with-border">
                 {% include "modules/common/page-numbers" %}
             </div>
             
             <div data-mz-pagingcontrols class="mz-pagingcontrols">
-                {% include "modules/common/order-history-paging-controls" %}  
-            </div> 
+                {% include "modules/common/order-history-paging-controls" %}         
+            </div>  
             
+
         {% endif %}
     {% else %}
         {{ labels.accountNoOrders }}

@@ -3,7 +3,7 @@
         {{ labels.orderSummary }}
         <a href="{{siteContext.siteSubdirectory}}/cart" class="mz-formstep-edit" data-mz-action="editCart">{{ labels.change }}</a>
     </h3>
-
+    
     <div class="mz-formstep-body">
         {% include "modules/common/order-summary" %}
     </div><!-- #order-summary -->

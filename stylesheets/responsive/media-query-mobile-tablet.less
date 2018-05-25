@@ -1,0 +1,201 @@
+
+/**** Mobile and Tablet Common changes ****/
+
+@media @mz-mobile-tablet-common-media-query { 
+	.mz-mobile-nav {
+		display: block; 
+		float: left;
+		margin: 1px 15px 0 0;
+		.mz-hamburger-icon {
+			display: block;
+			border: 0;
+			padding: 0;
+			position: relative;
+			cursor: pointer;
+			background: none;
+			font-size: 14px;
+			text-align: center;
+			font-weight: bold;
+			span {
+				display: block;
+				width: 22px;
+				background: #495363;
+				height: 3px;
+				margin: 8px 0 12px 6px;
+				&:before,
+				&:after {
+					position: absolute;
+					content: " ";
+					background: #495363;
+					width: 22px;
+					height: 3px;
+					top: 0;
+					left: 6px;
+				}
+				&:after {
+					top: 17px;
+				}
+			}
+		}
+	}
+	/**** Mobile Navigation ****/
+	#mz-mobilenav-container {
+		display: none;
+		position: absolute;
+		top: 111px;
+		z-index: 999999;
+	}
+	#mz-mobilenav-container.collapse.in { 
+		display: block;
+	}
+	.mz-sitenav {
+		.panel-group {
+			margin: 0;
+			.panel-body {
+				padding: 0;
+			}
+			.panel {
+				border-radius: 0px;
+				float: left;
+				width: 100%;
+				background-color: @textColor;
+				text-align: left;
+				position: relative;
+				max-width: 100%;
+				border: none;
+				box-shadow: none;
+				border-bottom: 1px solid @mobileNavBorderBtm;
+				.panel-heading {
+					float: left;
+					width: 100%;
+					padding: 0;
+					.panel-title {
+						a {
+							padding: 11px 15px;
+							color: #fff;
+							display: block;
+							&:visited,
+							&:hover,
+							&:focus {
+								text-decoration: none;
+							}
+							.glyphicon {
+								font-size: 14px;
+								color: #fff;
+								position: absolute;
+								right: 15px;
+								top: 12px;
+								font-weight: normal;
+							}
+							&[class="collapsed"] {
+								.glyphicon {
+									&:before {
+										content: "\002b";
+									}
+								}
+							}
+							&[class=""] {
+								.glyphicon {
+									&:before {
+										content: "\2212";
+									}
+								}
+							}
+						}
+					}
+				}
+				.panel-collapse {
+					float: left;
+					width: 100%;
+					background: @mobileNavSubMenuBg;
+					&.in {
+						.panel {
+							background: @mobileNavSubMenuBg;
+							.panel-heading {
+								.panel-title {
+									a {
+										font-size: 14px;
+										color: @textColor;
+										.glyphicon {
+											color: @textColor;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				.mz-sitenav-sub-container {
+					display: none;
+					position: static;
+				}
+				.mz-sitenav-item {
+					width: 100%;
+					max-width: 100%;
+					text-align: left;
+					.mz-sitenav-link {
+						display: block;
+						height: auto !important;
+						padding: 11px 15px;
+					}
+				}
+			}
+			.panel+.panel {
+				margin: 0;
+			}
+			/**** sub sub nav ****/
+			.mz-sitenav-sub-sub {
+				background: #fff;
+				.mz-sitenav-item {
+					.mz-sitenav-link {
+						color: @textColor;
+						.glyphicon {
+							color: @textColor;
+						}
+					}
+				}
+			}
+		}
+	}
+	.mz-close-nav {
+		background: #495363;
+		position: absolute;
+		left: 0;
+		top: -54px;
+		button {
+			display: block;
+			width: 54px;
+			height: 54px;
+			border: 0;
+			padding: 0;
+			position: relative;
+			cursor: pointer;
+			background: none;
+			text-align: center;
+			span {
+				display: inline-block;
+				width: 30px;
+				height: 30px;
+				&:before,
+				&:after {
+					position: absolute;
+					content: " ";
+					background: #fff;
+					width: 3px;
+					height: 30px;
+					left: 24px;
+					transform: rotate(45deg);
+					-moz-transform: rotate(45deg);
+					-webkit-transform: rotate(45deg);
+				}
+				&:after {
+					transform: rotate(-45deg);
+					-moz-transform: rotate(-45deg);
+					-webkit-transform: rotate(-45deg);
+				}
+			}
+		}
+	}
+	/**** Mobile Navigation Ends  ****/
+
+}

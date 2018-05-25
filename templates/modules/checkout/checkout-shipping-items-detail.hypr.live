@@ -1,0 +1,101 @@
+<div class="summary-detail">
+    <div class="col-xs-6">
+        <div class="mz-formstep-summary mz-addresssummary mz-checkoutform">
+            {% if model.fulfillmentContact %}
+                {% with model.fulfillmentContact as dataModel %}
+                    <span>{{ dataModel.firstName }} {{ dataModel.lastNameOrSurname }}</span>
+                    <span>{{ dataModel.address.address1 }}</span>
+                    {% if dataModel.address.address2 %}
+                        <span>{{ dataModel.address.address2 }}</span>
+                    {% endif %}
+                    {% if dataModel.address.address3 %}
+                        <span>{{ dataModel.address.address3 }}</span>
+                    {% endif %}
+                    <span>{{ dataModel.address.cityOrTown }}, {{ dataModel.address.stateOrProvince }} {{ dataModel.address.postalOrZipCode }}</span>
+                    <span>{{ dataModel.address.countryCode }}</span>
+                    {% if dataModel.phoneNumbers.home %}
+                        <span>{{ dataModel.phoneNumbers.home }}</span>
+                    {% endif %}
+                {% endwith %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-xs-6">
+        {% if model.shippingMethodCode %}
+            <h6> Shipping Options </h6>
+            <span> {{ model.shippingMethodName }} </span>
+        {% endif %}
+
+    </div>
+
+    <div class="col-xs-8">
+    <p class="mz-productdetail-notpurchasable">
+
+    	{% for itemArray in model.modelItems %}
+    		
+    		{% if itemArray.primaShip.length > 0 %}
+    			<h6> {{ labels.shipsFromPrima }} </h6>
+    			{% for item in itemArray.primaShip %}
+    				<div class="col-xs-6">
+    				{{ item.product.name }}
+	                {% for optionlist in item.product.options %}
+	                    <div>{{ optionlist.name }}: {{ optionlist.value }}</div>
+	                {% endfor %}		
+	                </div>	    	
+	                <div class="col-xs-6">
+	                	{% for property in item.product.properties %}
+	                		{% if property.name === 'Availability' %}
+	                			{% for v in property.values %}
+	                				{{v.value}}
+			                    {% endfor %}
+	                		{% endif %}
+	                		{% if property.name === 'Free liftgate' %}
+	                			{% for v in property.values %}
+			                        {% if v.stringValue === true or v.value === true %}
+				                      	{% if itemArray.liftGate === true %}
+					                			{{ labels.liftGateServiceAdded }}
+					                	{% endif %}
+			                        {% endif %}
+			                    {% endfor %}
+			                {% endif %}	
+		                {% endfor %}
+	                </div>
+    			{% endfor %}
+    		{% endif %}
+
+    		{% if itemArray.distShip.length > 0 %}
+    			<h6> {{ labels.shipsFromDistributor }} </h6>
+    			{% for item in itemArray.distShip %}
+					<div class="col-xs-6">
+						{{ item.product.name }}
+		                {% for optionlist in item.product.options %}
+		                    <div>{{ optionlist.name }}: {{ optionlist.value }}</div>
+		                {% endfor %}
+	            	</div>
+	                <div class="col-xs-6">
+	                	{% for property in item.product.properties %}
+	                		{% if property.name === 'Free liftgate' %}
+	                			{% for v in property.values %}
+	                				String valiue : {{ v.stringValue }}
+			                        {% if v.stringValue === true or v.value === true %}
+				                      	{% if itemArray.liftGate  === true %}
+					                			{{ labels.liftGateServiceAdded }}
+					                	{% endif %} 
+			                        {% endif %}
+			                    {% endfor %}
+			                {% endif %}	
+		                {% endfor %}
+	                </div>
+    			{% endfor %}
+    		{% endif %}
+
+    	{% endfor %}
+    
+
+  </p>
+
+
+    </div>
+
+</div>

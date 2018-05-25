@@ -45,7 +45,7 @@
             },
             calculateStepStatus: function () {
                 // override this!
-                console.log("this.stepStatus() : "+this.stepStatus());
+                // console.log("this.stepStatus() : "+this.stepStatus());
                 var newStepStatus = this.isValid(!this.stepStatus()) ? 'complete' : 'invalid';
                 // console.log("CheckoutStep calculateStepStatus : "+newStepStatus);
                 return this.stepStatus(newStepStatus);
@@ -113,7 +113,7 @@
 
             },
             calculateStepStatus: function () {
-                console.log("FulfillmentContact step status : "+this);
+                // console.log("FulfillmentContact step status : "+this);
                 if (!this.requiresFulfillmentInfo() && this.requiresDigitalFulfillmentContact()) {
                     this.validation = this.digitalOnlyValidation;
                 }
@@ -157,6 +157,10 @@
                     return order.get('billingInfo').calculateStepStatus();
                 });
             },
+            edit: function () {
+                console.log("Edit called");
+                this.stepStatus('incomplete');
+            },
             next: function () {
                 console.log("FullfillmentContact Next");
                 if (!this.requiresFulfillmentInfo() && this.requiresDigitalFulfillmentContact()) {
@@ -192,6 +196,7 @@
                         parent.isLoading(false);
                         me.calculateStepStatus();
                         parent.calculateStepStatus();
+                        console.log("PARENT : "+JSON.stringify(parent));
                     });                  
                 };
 
@@ -272,7 +277,7 @@
                     
                     for(var propindex in properties){
                         var property = properties[propindex];
-                        if(property.name === 'lift-gate-delivery' && property.values[0].value === true ){
+                        if(property.name === 'Free liftgate' && property.values[0].value === true ){
                             this.set('liftGateProduct',true);
                             this.set('liftGatePrice', HyprLiveContext.locals.themeSettings.liftGatePrice);
                             liftGateProducts[i] = item;
@@ -292,6 +297,38 @@
                     required: true,
                     msg: Hypr.getLabel('chooseShippingMethod')
                 }
+            },
+            helpers: ['modelItems'],
+            modelItems: function() {
+                var items = this.getOrder().get('items');
+                
+                var lineItems = [];
+                var primaShipProds = [];
+                var distributorShipProds = [];
+                _.each(items, function(item) {
+                    _.each(item.product.properties, function(property){
+                        if (property.attributeFQN === 'tenant~field_display_oos1') {
+                            if (property.values[0].value === 0) {
+                                distributorShipProds.push(item);
+                            } else if(property.values[0].value !== 0 ){
+                                primaShipProds.push(item);
+                            }
+                        } 
+                    });
+                });
+
+                var order = this.getOrder();
+                var liftGateSelected = false;
+                _.each(order.attributes.attributes, function(attributes) {
+                    if (attributes.fullyQualifiedName === 'tenant~lift-gate') {
+                        if (attributes.values[0] === 'True') {
+                            liftGateSelected = true; 
+                        } 
+                    } 
+                });
+                lineItems.push({primaShip:primaShipProds, distShip:distributorShipProds, liftGate: liftGateSelected});
+                // console.log("ITEM : "+JSON.stringify(distributorShipProds));
+                return lineItems;
             },
             refreshShippingMethods: function (methods) {
                 this.set({
@@ -415,7 +452,7 @@
         TbybInfo = CheckoutStep.extend({
             initialize: function () {                
                 // this.set("tbyb", "TRUE");
-                console.log("Model TBYB Step :: ");
+                // console.log("Model TBYB Step :: ");
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     this.set('orderAttributes', storefrontOrderAttributes);
@@ -474,7 +511,9 @@
                                 prodFullName = prodFullName+"("+optionsVals+")";
                             }
                             
-                            prodVals.push({prodName:item.product.name, prodFullName:prodFullName, prodCode: item.product.productCode, varCode:item.product.variationProductCode});
+                            var pCode = item.product.variationProductCode ? item.product.variationProductCode : item.product.productCode;
+                            var selectionCode = pCode+"_"+item.id;
+                            prodVals.push({prodName:item.product.name, prodFullName:prodFullName, prodCode: item.product.productCode, varCode:item.product.variationProductCode, prodId:item.id, selCode: selectionCode});
                             break;
                         }
                     }
@@ -582,39 +621,30 @@
                             });
                         }                    
                     });
-                    // console.log("updateAttrs : "+JSON.stringify(updateAttrs));
-                    // order.set('updateAttr',updateAttrs);
                     order.apiUpdateAttributes(updateAttrs);
-                    // console.log("ORDER FINAL : "+JSON.stringify(order));
-                    // this.tbybSelectedProd();   
+                     
                 }
                 this.isLoading(true);
                 // order.update();
             },
             getTbybSelected: function() {
-                // console.log("getTbybSelected");
                 var order = this.getOrder();
                 var tbybProducts = this.get('tbybProducts');
                 var attribs = order.get('attributes');
                 var selectedTbybExists = false;
-                // console.log("getTbybSelected Called : "+JSON.stringify(attribs));
                 var code = 'NONE';
                 _.each(attribs, function(obj){
-                   // console.log("attrib : "+JSON.stringify(obj));
                   if(obj.fullyQualifiedName === 'tenant~trybeforebuy') {
-                    // console.log("PROD VALUE : "+obj.values[0]);
                     // Check if the TBYB attribute code is present in the line items or not
                     for(var prodindex in tbybProducts ){
                         var itemVal = tbybProducts[prodindex].product.productCode;
                         var itemVarVal = tbybProducts[prodindex].product.variationProductCode;
                         var itemCode = '';
                         if(typeof itemVarVal !== 'undefined') {
-                            itemCode = itemVarVal;
+                            itemCode = itemVarVal+"_"+tbybProducts[prodindex].id;
                         } else {
-                            itemCode = itemVal;    
+                            itemCode = itemVal+"_"+tbybProducts[prodindex].id;    
                         }
-                        /*
-                        console.log("itemCode : "+itemCode);*/
                         if(itemCode === obj.values[0]) {
                             selectedTbybExists = true;
                         }                    
@@ -622,38 +652,31 @@
 
                     // If selected Tbyb order attribute doesn't exist in line items then set code = NONE
                     if(selectedTbybExists){
-                        // console.log("Product Exists : "+ obj.values[0]);
                         code  = obj.values[0];
                     } else {
-                        // console.log("TBYB Product doesn't Exists");
                         code = "NONE";
                     }
                   }  
                 });
-                console.log("OKK : "+code);
                 this.setTybySelected(code);
                 this.isLoading(false);
                 return code;
                 
             },
             checkTbybSelected: function() {
-                // console.log("checkTbybSelected");
                 var order = this.getOrder();
                 var attribs = order.get('attributes');
-                // console.log("checkTbybSelected Called : "+JSON.stringify(attribs));
                 var isSelected = false;
                 _.each(attribs, function(obj){
                   if(obj.fullyQualifiedName === 'tenant~trybeforebuy') {
                     isSelected  = true;
                   }  
                 });
-                // console.log("IS Slected : "+isSelected);
                 return isSelected;
             },
             tbybItemExist: function() {
                 var tbprd = [];
                 tbprd = this.get("tbybProducts");
-                // console.log("PRODUCTS : "+JSON.stringify(tbprd));
                 var count = false;
                 if(tbprd !== '' || typeof tbprd !== 'undefined') {
                     _.each(tbprd, function(obj){
@@ -661,45 +684,31 @@
                         count = true;
                       }                       
                     });
-                }
-                 console.log("Length 22 : "+count);
-                
-                 return count;      
+                }                
+                return count;      
             },
             updateTbyb: function(e) {
-                console.log("updateTbyb step : ");
                 $(".tbyb").prop('checked', false);
                 var elm = e.target;
                 var code = elm.getAttribute('data-mz-tbyb-code');
                 this.set("tbyb", "TRUE");
                 
-                // console.log("THIS VALUE : "+JSON.stringify(this.getOrder()));
                 var order = this.getOrder();
-                
                 $('input[value='+code+']').prop("checked","checked");
-                // alert("Code : "+code);
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     var updateAttrs = [];
                     storefrontOrderAttributes.forEach(function(attr){
-                        // tenant~trybeforebuy
-                        // console.log("ATTR : "+ attr.attributeFQN);
-
                         var attrVal;
                         if(attr.attributeFQN === 'tenant~trybeforebuy'){
                             attrVal = code;
-                            // updateAttrs.push({'tenant~trybeforebuy': attrVal});
                             updateAttrs.push({
                                 'fullyQualifiedName': attr.attributeFQN,
                                 'values': [ attrVal ]
                             });
                         }                    
                     });
-                    // console.log("updateAttrs : "+JSON.stringify(updateAttrs));
-                    // order.set('updateAttr',updateAttrs);
                     order.apiUpdateAttributes(updateAttrs);
-                    // console.log("ORDER FINAL : "+JSON.stringify(order));
-                    // this.tbybSelectedProd();   
                 }
                 this.isLoading(true);
                 order.update();
@@ -1378,10 +1387,8 @@
                     currentPurchaseOrder.set('paymentTerm', foundTerm, {silent: true});
             },
             initialize: function () {
-                console.log("Billing Step");
                 var me = this;
-                $('#mailBillingForm').hide();
-                // console.log("Billing Info : "+JSON.stringify(me));
+                // $('#mailBillingForm').hide();                
                 _.defer(function () {
                     //set purchaseOrder defaults here.
                     me.setPurchaseOrderInfo();
@@ -1433,13 +1440,7 @@
                 me.get('card').selected = newPaymentType === 'CreditCard';
                 me.get('purchaseOrder').selected = newPaymentType === 'PurchaseOrder';
                 if(newPaymentType === 'Check') {
-                    console.log("Set isSameBillingShippingAddress to true");
-
                     me.set('isSameBillingShippingAddress', true);
-                    /*_.defer(function (){
-                        $('#mailBillingForm').hide();
-                    });*/
-
                 }
                 if(newPaymentType === 'PurchaseOrder') {
                     me.setPurchaseOrderBillingInfo();
@@ -1469,7 +1470,6 @@
                 if (!fulfillmentComplete) return this.stepStatus('new');
 
                 if (thereAreActivePayments && (balanceNotPositive || (this.get('paymentType') === 'PaypalExpress' && window.location.href.indexOf('PaypalExpress=complete') !== -1))) return this.stepStatus('complete');
-                console.log("StepSTAUS : "+this.stepStatus());
                 return this.stepStatus('incomplete');
 
             },
@@ -1520,11 +1520,9 @@
                 return !_.isEqual(normalizedSavedPaymentInfo, normalizedLiveBillingInfo);
             },
             submit: function () {
-                console.log("Biling SUbmit : ");
                 var order = this.getOrder();
                 // just can't sync these emails right
                 order.syncBillingAndCustomerEmail();
-
                 // This needs to be ahead of validation so we can check if visa checkout is being used.
                 var currentPayment = order.apiModel.getCurrentPayment();
 
@@ -1536,30 +1534,25 @@
                 }
 
                 var radioVal = $('input[name=paymentType]:checked').val();                
-                console.log("radioVal : "+radioVal);
-                /*if(radioVal) {
-                    $('#paymentType-check-0').prop('checked', true);
-                }*/
                 var val = this.validate();
-               /* console.log("Validation : "+JSON.stringify(val));
-                console.log("HAS Item : "+_.has(val, "check.nameOnCheck"));*/
+                
                 if(radioVal !== 'Check') {
-                if (this.nonStoreCreditTotal() > 0 && val) {
-                    // display errors:
-                    var error = {"items":[]};
-                    for (var key in val) {
-                        if (val.hasOwnProperty(key)) {
-                            var errorItem = {};
-                            errorItem.name = key;
-                            errorItem.message = key.substring(0, ".") + val[key];
-                            error.items.push(errorItem);
+                    if (this.nonStoreCreditTotal() > 0 && val) {
+                        // display errors:
+                        var error = {"items":[]};
+                        for (var key in val) {
+                            if (val.hasOwnProperty(key)) {
+                                var errorItem = {};
+                                errorItem.name = key;
+                                errorItem.message = key.substring(0, ".") + val[key];
+                                error.items.push(errorItem);
+                            }
                         }
+                        if (error.items.length > 0) {
+                            order.onCheckoutError(error);
+                        }
+                        return false;
                     }
-                    if (error.items.length > 0) {
-                        order.onCheckoutError(error);
-                    }
-                    return false;
-                }
                 } else {
                     if(_.has(val, "billingContact.email")) {
                        if (this.nonStoreCreditTotal() > 0 && val) {
@@ -1567,15 +1560,13 @@
                             var errorMail = {"items":[]};
                             for (var keyemail in val) {
                                 if (val.hasOwnProperty(keyemail)) {
-                                    console.log("KEY : "+keyemail);
                                     if(keyemail === 'billingContact.email') {
-                                        console.log("Inside KEy cehck");
                                         var errorItemEmail = {};
                                         errorItemEmail.name = keyemail;
                                         errorItemEmail.message = keyemail.substring(0, ".") + val[keyemail];
                                         errorMail.items.push(errorItemEmail);
                                     }
-                }
+                                }
                             }
                             if (errorMail.items.length > 0) {
                                 order.onCheckoutError(errorMail);
@@ -1583,7 +1574,7 @@
                             return false;
                         } 
                     }
-                }        
+                }   
                 var card = this.get('card');
                 if(this.get('paymentType').toLowerCase() === "purchaseorder") {
                     this.get('purchaseOrder').inflateCustomFields();
@@ -1596,8 +1587,9 @@
                 } else if (card.get('cvv') && card.get('paymentServiceCardId')) {
                     return card.apiSave().then(this.markComplete, order.onCheckoutError);
                 } else {
-                    this.markComplete();
+                   this.markComplete();
                 }
+                
             },
             applyPayment: function () {
                 var self = this, order = this.getOrder();
@@ -1637,7 +1629,6 @@
             },
 
             markComplete: function () {
-                // alert("mark complete");
                 this.stepStatus('complete');
                 this.isLoading(false);
                 var order = this.getOrder();
@@ -1718,7 +1709,6 @@
                 amountRemainingForPayment: Backbone.MozuModel.DataTypes.Float
             },
             initialize: function (data) {
-                console.log("model CheckoutPage initialize : ");
                 var self = this,
                     user = require.mozuData('user');
 
@@ -1730,7 +1720,6 @@
                         billingInfo = self.get('billingInfo'),
                         tbybInfo = self.get('tbybInfo'),
                         steps = [fulfillmentInfo, fulfillmentContact, tbybInfo, billingInfo];
-                        console.log("STEP 4 : "+tbybInfo);
                         var paymentWorkflow = latestPayment && latestPayment.paymentWorkflow,
                         visaCheckoutPayment = activePayments && _.findWhere(activePayments, { paymentWorkflow: 'VisaCheckout' }),
                         allStepsComplete = function () {
@@ -1760,10 +1749,8 @@
                         billingInfo.trigger('stepstatuschange'); // trigger a rerender
                     }
                     self.isReady(isReady);
-                    console.log("STEPS Length : "+steps.length);
                     _.each(steps, function(step) {
                         self.listenTo(step, 'stepstatuschange', function() {
-                            // console.log("STEPS : "+JSON.stringify(_.pick(step, _(Object.keys(step)).first())));
                             _.defer(function() {
                                 self.isReady(allStepsComplete());
                             });
@@ -1798,7 +1785,6 @@
             },
 
             applyAttributes: function() {
-                // console.log("Apply Attributes");
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     this.set('orderAttributes', storefrontOrderAttributes);
@@ -2100,11 +2086,12 @@
                 }
             },
             syncBillingAndCustomerEmail: function () {
-                var billingEmail = this.get('billingInfo.billingContact.email'),
+               var billingEmail = this.get('billingInfo.billingContact.email'),
                     customerEmail = this.get('emailAddress') || require.mozuData('user').email;
                 if (!customerEmail) {
-                    this.set('emailAddress', billingEmail);
+                   this.set('emailAddress', billingEmail);
                 }
+                // console.log("Billing email storage : "+billingEmail);
                 if (!billingEmail) {
                     this.set('billingInfo.billingContact.email', customerEmail);
                 }
@@ -2163,7 +2150,6 @@
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     var updateAttrs = [];
                     storefrontOrderAttributes.forEach(function(attr){
-                        console.log("ATTRIBUTE : "+JSON.stringify(attr));
                         var attrVal;
                         if(attr.attributeFQN === 'tenant~lift-gate'){
                             attrVal = liftGateVal;                            
@@ -2178,7 +2164,6 @@
                                   }  
                                 });
                                 attrVal = code;
-                                console.log("TRBYT : "+JSON.stringify(attrVal));
                                 
                         } else {                            
                             attrVal = order.get('orderAttribute-' + attr.attributeFQN);
@@ -2229,7 +2214,7 @@
                     } 
                 }
                 
-
+                
                 this.isLoading(true);
 
                 if (isSavingNewCustomer) {
@@ -2267,7 +2252,7 @@
                 }
                
                 process.push(/*this.finalPaymentReconcile, */this.apiCheckout);
-                
+                localStorage.removeItem('guestEmail');
                 api.steps(process).then(this.onCheckoutSuccess, this.onCheckoutError);
                 
 

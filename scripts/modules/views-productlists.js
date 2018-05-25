@@ -1,7 +1,10 @@
 ﻿define(['modules/jquery-mozu', 'underscore', 'modules/backbone-mozu', 'hyprlive'], function ($, _, Backbone, Hypr) {
-    
+    console.log("fjkds");
     var ProductListView = Backbone.MozuView.extend({
-            templateName: 'modules/product/product-list-tiled'
+            templateName: 'modules/product/product-list-tiled',
+            initialize: function () {
+               console.log(this.model);
+                }
         }),
 
     FacetingPanel = Backbone.MozuView.extend({

@@ -1,26 +1,55 @@
-<ul>
-    
-  {% for property in model.properties %}
-    {% if property.attributeFQN == "tenant~field_pre_brands" %}   
-      <li class="product-brand">
+Categories {% dump categories.all %} 
+
+<ul> 
+  {% for property in model.properties %} 
+    {% if property.attributeFQN == "tenant~field_pre_brands" %}
+      
+      <li class="col-md-4 col-xs-6 product-brand"> 
+         
         {% for propValue in property.values %}
-          <span class="brand-name"><strong>Brand:</strong> {{ propValue.stringValue|safe}}</span>   
-        {% endfor %}
-    </li>
+        <span class="brand-name"><strong>Brand:</strong> {{ propValue.stringValue|safe}}</span> 
+
+          {% for categoryObject in categories.all %}   
+            {% if categoryObject.content.name == "Brands" %} 
+              {{ categoryObject.content.name }}                
+                <div class="brand-logo-img"> 
+                {% for brandSubCat in categoryObject.childrenCategories %} 
+                  {% if brandSubCat.content.name == propValue.stringValue %}
+                      {% if brandSubCat.content.categoryImages.length>0 %} 
+                        {% for brandLogoImage in brandSubCat.content.categoryImages %}
+                          <a href="{{ brandSubCat.url }}">
+                            <img src="{{ brandLogoImage.imageUrl }}" alt="{{ brandLogoImage.altText }}">    
+                          </a> 
+                        {% endfor %} 
+                      {% else %} 
+                        <a href="{{ brandSubCat.url }}"> 
+                          <span class="noimage-placeholder"><span class="noimage-text">{{ labels.productImagePlaceholder }}</span></span>
+                        </a>  
+                      {% endif %}    
+                    
+                  {% endif %}  
+                {% endfor %}
+              </div> 
+                
+            {% endif %}
+          {% endfor %}
+        
+        {% endfor %} 
+      </li>
     {% endif %}
   {% endfor %} 
     
   {% for property in model.properties %}
     {% if property.attributeFQN == "tenant~field_certifications" %}  
-      <li class="product-certifications">
+      <li class="col-md-4 col-xs-6 product-certifications">
         {% for propValue in property.values %}
           <span><img src="/resources/images/product-certification-images/{{ propValue.value }}"></span>  
         {% endfor %}
       </li>  
     {% endif %}
-  {% endfor %} 
+  {% endfor %}  
 
-  <li class="service-tooltips">  
+  <li class="col-md-4 col-xs-12 service-tooltips">   
     {% include "modules/product/tooltips" %}      
   </li> 
-</ul>
+</ul>  

@@ -6,7 +6,7 @@
     {% require_script "pages/myaccount" %}
     {% preload_json model "customer" %}  
 
-    <div class="mz-l-container">
+    <div class="mz-l-container">  
         <div class="col-xs-12 col-sm-3 col-md-2">
             <div class="mz-l-sidebar mz-myaccount-nav">
                 {% include "modules/my-account/my-account-nav" with navtarget="body" %}
@@ -44,7 +44,7 @@
                 </div>
                 <div id="orderhistory" class="tab-pane fade">
                     <div class="mz-l-stack-section mz-accountorderhistory" id="account-orderhistory">
-                        {% include "modules/my-account/my-account-orderhistory" with model=model.orderHistory showPaging=true %}
+                        {% include "modules/my-account/my-account-orderhistory" with model=model.orderHistory showPaging=true %}  
                     </div>
                 </div>
                 <div id="paymentmethods" class="tab-pane fade">

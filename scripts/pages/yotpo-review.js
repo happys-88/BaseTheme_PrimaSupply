@@ -61,8 +61,8 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
 	var questions = HyprLiveContext.locals.themeSettings.questions;
 	var questionUrl = ""+yotpoQuestionBaseUrl+"/"+yotpoApiKey+"/"+getProductCode+"/"+questions+"";
 
-	$.get(questionUrl, function(data, status){
+	/*$.get(questionUrl, function(data, status){
 		//$("#totalQuestion").attr("value", data.response.total_questions);
-    });
+    });*/
 });
  

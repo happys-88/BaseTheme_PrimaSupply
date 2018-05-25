@@ -13,8 +13,8 @@ define([
 ], function(Backbone, _, UrlDispatcher, IntentEmitter, getPartialView, makeClearUrl) {
 
     function factory(conf) {
-
         var _$body = conf.$body;
+        console.log("CONF : "+_$body);
         var _dispatcher = UrlDispatcher;
         var ROUTE_NOT_FOUND = 'ROUTE_NOT_FOUND';
 
@@ -33,7 +33,9 @@ define([
         }
 
         function intentToUrl(e) {
+
             var elm = e.target;
+            console.log("OK : "+elm);    
             var url;
             if (elm.tagName.toLowerCase() === "select") {
                 elm = elm.options[elm.selectedIndex];
@@ -56,6 +58,7 @@ define([
                 parser.href = url;
                 url = window.location.pathname + parser.search;
             }
+            console.log("URL : "+url);
             return url;
         }
 

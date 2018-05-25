@@ -1,7 +1,7 @@
-<nav class="mz-sitenav visible-xs collapse in" id="mz-sitenav-container">    
+<nav class="mz-sitenav collapse" id="mz-mobilenav-container">      
     <div class="container">
-      <div class="mz-close-nav visible-xs">                        
-        <button data-toggle="collapse" data-target="#mz-sitenav-container" aria-expanded="false"><span></span></button>  
+      <div class="mz-close-nav hidden">                         
+        <button data-toggle="collapse" data-target="#mz-mobilenav-container" aria-expanded="false"><span></span></button>  
       </div>
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         {% partial_cache %}
@@ -49,15 +49,17 @@
                               </h4>
                             </div>
                             <div id="sub-nav-{{sublink.categoryCode}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sub-nav-heading-{{sublink.categoryCode}}">
-                              <div class="panel-body"><ul>
-                                {% for subsublink in sublink.items %}
-                                  {% if not subsublink.isHidden and not subsublink.isEmpty %}
-                                    <li class="mz-sitenav-item">
-                                    <a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{subsublink.url}}">{{ subsublink.name|replace(themeSettings.columnBreaker, "")|replace("_", " ")|safe }}</a>
-                                    </li>
-                                  {% endif %}
-                                {% endfor %}
-                              </ul></div>
+                              <div class="panel-body">
+                                <ul class="mz-sitenav-sub-sub"> 
+                                  {% for subsublink in sublink.items %}
+                                    {% if not subsublink.isHidden and not subsublink.isEmpty %}
+                                      <li class="mz-sitenav-item"> 
+                                        <a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{subsublink.url}}">{{ subsublink.name|replace(themeSettings.columnBreaker, "")|replace("_", " ")|safe }}</a>
+                                      </li>
+                                    {% endif %}
+                                  {% endfor %}
+                                </ul>
+                              </div>
                             </div>
                           </div>
                         {% endif %}
@@ -73,4 +75,4 @@
         {% endpartial_cache %}
       </div>
     </div>
-</nav>
+</nav> 

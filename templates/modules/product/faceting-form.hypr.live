@@ -1,5 +1,5 @@
 <section class="mz-facetingform">
-    <h2 {% if pageContext.isMobile or pageContext.isTablet %}class="mz-facets-dropdown"{% endif %}>{{ labels.refineBy }}</h2>
+    <h2 class="mz-facets-dropdown">{{ labels.refineBy }}</h2>
     
     {% block clear-facets %}
         {% if model.hasValueFacets %}
