@@ -48,6 +48,21 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
         },200)
     });
 
+    var ShippingSummary = Backbone.MozuView.extend({
+
+        initialize: function () {
+           console.log("BillingSummary");
+           // this.listenTo(this.model.get('billingInfo'), 'orderPayment', this.onOrderCreditChanged, this);
+           
+        },
+        onOrderCreditChanged: function (order, scope) {
+            this.render();
+        },
+        render: function() {
+            console.log("Current Model : ");
+        }
+    });
+
     var OrderSummaryView = Backbone.MozuView.extend({
         templateName: 'modules/checkout/checkout-order-summary',
 
@@ -587,6 +602,10 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
                         model: checkoutModel.get('billingInfo')
                     })
                 },
+                /*billingSummary: new ShippingSummary({
+                    el: $('#shipping-summary'),
+                    model: checkoutModel
+                }),*/
                 orderSummary: new OrderSummaryView({
                     el: $('#order-summary'),
                     model: checkoutModel
@@ -619,7 +638,6 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
 
         var $reviewPanel = $('#step-review');
         checkoutModel.on('change:isReady',function (model, isReady) {
-            alert("isReady : "+isReady);
             if (isReady) {
                 setTimeout(function () { window.scrollTo(0, $reviewPanel.offset().top); }, 750);
             }

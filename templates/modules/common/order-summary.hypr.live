@@ -47,7 +47,7 @@
             </td>
         </tr>
         {% for property in item.product.properties %}
-                  {% if property.name == 'lift-gate-delivery' %}
+                  {% if property.name == 'Free liftgate' %}
                     {% for v in property.values %}
                       {% if v.stringValue == true or v.value == true %}
                        <tr> <td class="lift-gate-msg" style="display: none;">{{ labels.liftGateMsg }}</td> </tr>
