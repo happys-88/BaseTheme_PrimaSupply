@@ -131,7 +131,7 @@ img[data-mztp]{
 }
 
 //Navigation
-.mz-mobile-nav{
+#mz-mobilenav-container, .mz-mobile-nav{  
 	display: none;   
 }
 .mz-sitenav {
@@ -756,4 +756,23 @@ img[data-mztp]{
 			} 
 		}
 	}
+}
+
+
+/**** My Account Dropdown ****/
+#mz-logged-in-notice {
+   .dropdown-menu {
+   		border-top: none;
+   		z-index: 99991;  
+   		.logged-user{
+   			background: #415265; 
+		    color: #fff;
+		    padding: 6px 15px;
+		    text-align: center;
+		    text-indent: -9999px;  
+   		}
+   		&:after{
+   			top: -20px; 
+   		}
+   	}
 }

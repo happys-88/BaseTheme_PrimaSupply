@@ -1,11 +1,11 @@
 <div class="container"> 
-	<div class="col-xs-12 col-sm-8">
+	<div class="col-xs-12 col-sm-7">
 	    <div class="mz-notification-bar">
 	        <p><strong>Save 10%</strong> on select  table &amp; bar sinks Code: SAVEONSTAINLESS</p>      
 	    </div>
 	</div>
 
-	<div class="col-xs-12 col-sm-4 pull-right text-right"> 
+	<div class="col-xs-12 col-sm-5 pull-right text-right">  
 	    <div class="live-chat">
 	        <a href="javascript:void(0);" class="mz-live-chat-link" onclick="SnapEngage.startLink();">{{ labels.liveChat }}<i class="fa fa-comments"></i></a>     
 	    </div>
@@ -14,4 +14,4 @@
 	    </div>
 
 	</div>
-</div> 
+</div>  

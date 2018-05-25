@@ -42,7 +42,7 @@
 
         {% block meta-tags %}
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0, user-scalable=no"> 
         <meta name="description" content="{{ PageContext.MetaDescription }}">
         <meta name="keywords" content="{{ PageContext.MetaKeywords }}">
         <meta name="correlationId" content="{{ pageContext.correlationId }}">
@@ -115,18 +115,15 @@
                 {% block page-header %}
                     {% include "modules/page-header" %}
                 {% endblock page-header %}
-
-                {% if pageContext.isDesktop or pageContext.isTablet %}
-                    {% block site-nav %}
-                        {% include "modules/site-nav" %}  
-                    {% endblock site-nav %}   
-                {% endif %}
                 
-                {% if pageContext.isMobile %}  
-                    {% block mobile-nav %}
-                        {% include "modules/mobile-nav" %}   
-                    {% endblock mobile-nav %}       
-                {% endif %}
+                {% block site-nav %} 
+                    {% include "modules/site-nav" %}  
+                {% endblock site-nav %}   
+                
+                {% block mobile-nav %} 
+                    {% include "modules/mobile-nav" %}   
+                {% endblock mobile-nav %}       
+               
             </div>
 
             <div role="main" id="page-content" class="mz-l-pagecontent container">    
