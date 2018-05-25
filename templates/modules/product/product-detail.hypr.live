@@ -1,4 +1,3 @@
-
 <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName }}</h1> 
 
 <dl class="mz-productcodes mz-propertylist mz-pagetitle-note mz-l-stack-section">
@@ -61,13 +60,13 @@
 </div>
 
 <section class="mz-l-stack-section mz-productdetail-conversion">
-  <div class="col-md-2">
+  <div class="col-md-2 col-xs-4">
     <div class="mz-productdetail-conversion-controls">
       <input class="mz-productdetail-qty" type="number" {% if model.quantity %} value="{{ model.quantity }}" {% else %} value="1" {% endif %} min="1" {% if not model.isPurchasable %} disabled="disabled" {% endif %} data-mz-value="quantity" />
       <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6 col-xs-8">
     <div class="mz-productdetail-conversion-buttons">
       {% if userAuth != true %}
         <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart" >
@@ -76,7 +75,7 @@
       {% endif %}
     </div>
   </div>
-  <div class="col-md-4"> 
+  <div class="col-md-4 col-xs-12"> 
     <div class="mz-productdetail-conversion-buttons text-center">
       {% if siteContext.generalSettings.isWishlistCreationEnabled and not user.isAnonymous %}
       <button id="add-to-wishlist" {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable %} disabled="disabled" {% else %} {% if model.inventoryInfo.outOfStockBehavior == 'HideProduct' and not model.inventoryInfo.onlineStockAvailable %} disabled="disabled" {% endif %} {% endif %} class="mz-productdetail-addtowishlist {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" data-mz-action="addToWishlist">

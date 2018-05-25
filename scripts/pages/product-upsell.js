@@ -12,12 +12,28 @@ define([
 	var productUpSellView = Backbone.MozuView.extend({
 	    templateName: 'modules/product/product-upsell',  
 	    productCarousel: function () {
+			var minSlides;
+		    var maxSlides;
+			var slideWidth;
+			var  slideMargin;
+			var windowWidth=$( window ).width();
+			if(windowWidth<767){
+				 minSlides=2;
+				 maxSlides=2;
+				 slideMargin= 10;
+				 slideWidth= 333;
+			}else{
+				 minSlides=4;
+				 maxSlides=12;
+				slideWidth= 333;
+				slideMargin=15;
+			}
 	        $('#UpSellSlider').bxSlider({ 
-		        minSlides: 4,
-                maxSlides: 12,
+				minSlides: minSlides,
+                maxSlides: maxSlides,
                 moveSlides: 1,
-                slideWidth: 333,
-                slideMargin: 15,
+                slideWidth: slideWidth,
+                slideMargin: slideMargin,
                 responsive: true,
                 pager: false,
                 speed: 1000,

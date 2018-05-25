@@ -7,7 +7,8 @@
     "modules/views-productimages", 
     "modules/product/recently-viewed-products", 
     "hyprlivecontext",
-    "modules/api"], function ($, _, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, RVIModel, HyprLiveContext, api) {
+    "modules/api",
+    "modules/page-header/global-cart"], function ($, _, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, RVIModel, HyprLiveContext, api, GlobalCart) {
 
     var ProductView = Backbone.MozuView.extend({
         templateName: 'modules/product/product-detail',
@@ -153,6 +154,7 @@
                 }, 1000);
                 
                 //CartMonitor.update('showGlobalCart');
+                GlobalCart.update();
                 product.set('quantity', 1);
                 $("#global-cart").show();
                 window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/cart"; 
