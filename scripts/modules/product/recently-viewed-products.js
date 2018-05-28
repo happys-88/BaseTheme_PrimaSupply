@@ -117,7 +117,7 @@ define([
                         }
                        
                         if(orderedProductList.length > 0) {
-                            $(container).removeClass('hide').append('<div class="col-xs-12"><ul class="recently-viewed-list"></ul></div><div class="clearfix"></div>');
+                            $(container).removeClass('hide').append('<div class="col-xs-12 recently-view"><ul class="recently-viewed-list"></ul></div><div class="clearfix"></div>');
                                 var recentModel = Backbone.MozuModel.extend();
                                var Modelrec = new recentModel();
                                Modelrec.set("items",orderedProductList);
@@ -131,9 +131,25 @@ define([
                                 var renderedView = view.render();
                         
                             if(orderedProductList.length > 1){
+                                var minSlides,
+                                    maxSlides,
+                                    slideWidth,
+                                    slideMargin,
+                                    windowWidth=$( window ).width();
+                                if(windowWidth<=767){
+                                    minSlides=2;
+                                    maxSlides=2;
+                                    slideMargin= 5;
+                                    slideWidth= 333;
+                                }else{
+                                    minSlides=4;
+                                    maxSlides=12;
+                                    slideWidth= 333;
+                                    slideMargin=15;
+                                }
                                 $(container + ' .recently-viewed-list').bxSlider({
-                                    minSlides: 2,
-                                    maxSlides: 7,
+                                    minSlides: minSlides,
+                                    maxSlides: maxSlides,
                                     slideWidth: 333,
                                     slideMargin: 15,
                                     responsive: true,

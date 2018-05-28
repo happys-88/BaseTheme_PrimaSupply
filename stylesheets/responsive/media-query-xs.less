@@ -348,32 +348,61 @@
 	.mz-product-cross-sells {
 		li {
 			&.mz-recentproductlist-item {
-				.mz-product-image{
+				max-width: 100%;
+				.mz-product-image {
 					img {
+						padding: 0;
 						max-width: 115px;
 					}
 					.mz-productimages-main {
 						min-height: 210px;
 					}
 				}
-				.mz-product-details{
-					.mz-productlisting-title{
+				.mz-product-details {
+					.mz-productlisting-title {
 						font-size: 12px;
 					}
 				}
 			}
 		}
-		.bx-wrapper{
+		.bx-wrapper {
 			padding: 0;
-			   li.mz-recentproductlist-item {
+			li.mz-recentproductlist-item {
 				text-align: center;
 				min-height: 238px;
 			}
-			   .bx-controls-direction {
-				   a {
-				   margin-top: -39px;
-			    }
-		   }
+			.bx-controls-direction {
+				a {
+					margin-top: -39px;
+				}
+			}
+		}
+	}
+	#rvi-container {
+		.recently-view {
+			padding: 0;
+			.bx-wrapper {
+				padding: 0;
+				.recently-viewed-list {
+					.mz-recentproductlist-item {
+						max-width: 100%;
+						min-height: 224px;
+						margin: 0 10px;
+					}
+				}
+				.bx-controls-direction {
+					a {
+						margin-top: -43px;
+					}
+				}
+			}
+		}
+	}
+	.mz-product {
+		.mz-productimages {
+			.mz-productimages-main {
+				min-height: 275px;
+			}
 		}
 	}
    	.mz-productdetail-wrap {
