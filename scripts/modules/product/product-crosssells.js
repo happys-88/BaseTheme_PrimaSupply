@@ -13,17 +13,32 @@ define([
 	var productCrossSellView = Backbone.MozuView.extend({
 	    templateName: 'modules/product/product-crosssells',  
 	    productCarousel: function () {
+			var minSlides,
+				maxSlides,
+				slideWidth,
+				slideMargin,
+				windowWidth=$( window ).width();
+			if(windowWidth<767){
+				 minSlides=2;
+				 maxSlides=2;
+				 slideMargin= 10;
+				 slideWidth= 333;
+			}else{
+				 minSlides=4;
+				 maxSlides=12;
+				slideWidth= 333;
+				slideMargin=15;
+			}
 	        $('#crossSellSlider').bxSlider({ 
-		        minSlides: 4,
-                maxSlides: 12,
+		        minSlides: minSlides,
+                maxSlides: maxSlides,
                 moveSlides: 1,
-                slideWidth: 333,
-                slideMargin: 15,
+                slideWidth: slideWidth,
+                slideMargin: slideMargin,
                 responsive: true,
                 pager: false,
                 speed: 1000,
                 infiniteLoop: false,
-                hideControlOnEnd: true,
 		        onSliderLoad: function() {
 		            $(".slider").css("visibility", "visible");
 		        }  
@@ -40,7 +55,11 @@ define([
     	if(value.attributeFQN == "tenant~product-crosssell"){
 	        $.each(value.values, function( index, value ){
 				prodCodeCrossSell.push(value.value);
-				variantion.push(value.value.slice(0,value.value.lastIndexOf("-")));         
+				if(value.value.lastIndexOf("-")!=-1){
+					variantion.push(value.value.slice(0,value.value.lastIndexOf("-")));
+				}else{
+					variantion.push(value.value);
+				}         
 	        });
         }
 	   });
@@ -52,7 +71,7 @@ define([
 				$.each(prodCodeCrossSell, function( index, value ) {
 					Crosssellurl = "productCode eq "+ "'" + value + "'"+ " or ";
 					CrosssellgenerateURL= CrosssellgenerateURL + Crosssellurl;
-					api.request("GET", "/api/commerce/catalog/storefront/products/"+variantion[index]+"?"+"variationProductCode="+value ).then(function(body){
+				api.request("GET", "/api/commerce/catalog/storefront/products/"+variantion[index]+"?"+"variationProductCode="+value ).then(function(body){
 						items.push(body); 
 					});
 				});
@@ -63,6 +82,7 @@ define([
 						items.push(value);
 					});					
 					product.set("items",items);
+					console.log(product);
 				var crosssellview = new productCrossSellView({
 					model:product,
 					el: $('#product-crosssells')

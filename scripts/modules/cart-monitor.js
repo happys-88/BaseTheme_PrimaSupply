@@ -6,10 +6,9 @@ define([
     'modules/jquery-mozu',
     'modules/api',
     'bootstrap',
-    'modules/page-header/global-cart',
-    'hyprlive'
-    ], function( $, api, Bootstrap, GlobalCart, Hypr ) {
-
+    'hyprlive',
+    'modules/page-header/global-cart'
+    ], function( $, api, Bootstrap, Hypr, GlobalCart ) {
     var $cartCount,
         user = require.mozuData('user'),
         userId = user.userId,
@@ -37,7 +36,6 @@ define([
                     $document.ready(function() {
                         CartMonitor.setCount(summary.data.totalQuantity);
                         CartMonitor.setAmount(summary.data.total);
-                        //GlobalCart.update(showGlobalCart);
                     });
                 });
 
@@ -55,6 +53,7 @@ define([
 
     //if (isNaN(savedCart.itemCount)) {
         CartMonitor.update();
+       // 
     //}
 
     $document.ready(function() {

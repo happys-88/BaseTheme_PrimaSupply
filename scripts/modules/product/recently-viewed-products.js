@@ -21,9 +21,10 @@ define([
 
         //Product List Item View
         var ProductListItemView = Backbone.MozuView.extend({
-            tagName: 'li',
-            className: 'mz-recentproductlist-item',
+           
             templateName: 'modules/product/recent/recent-products',
+            
+           
             initialize: function() {
                 var self = this;
                 self.listenTo(self.model, 'change', self.render);
@@ -63,6 +64,7 @@ define([
                     products.push(cookieValue[i].pCode);
                 }
             }
+            console.log("products"+products);
             return products;
         }
 
@@ -95,30 +97,59 @@ define([
             }
             addProduct();
             if ($(container).length > 0) {
-                var filter = getCurrentProducts().join(" or productCode+eq+");
+                var filter = getCurrentProducts().join(" or productCode eq ");
                 if (filter !== "" && filter !== " or ") {
                     showLoader();
-                    var serviceurl = sdk.getServiceUrls().searchService + 'search/?startIndex=0&pageSize='+rviNumberCookie+'&filter=productCode+eq+'+filter;
+                    var serviceurl = '/api/commerce/catalog/storefront/products/?startIndex=0&pageSize='+rviNumberCookie+'&filter=productCode eq '+filter;
+                   
                     api.request('GET', serviceurl).then(function(productslist){
+                       
                         var orderedProductList = [];
+                        
                         for(var i = 0;i<cookieValue.length;i++) {
                             var productAvailable = _.findWhere(productslist.items, {productCode: cookieValue[i].pCode});
+
                             if (productAvailable) {
                                 orderedProductList.push(productAvailable);
                                 continue;
                             }
+                             
                         }
+                       
                         if(orderedProductList.length > 0) {
-                            $(container).removeClass('hide').append('<div class="col-xs-12"><ul class="recently-viewed-list"></ul></div><div class="clearfix"></div>');
-                            for(var p=0;p<orderedProductList.length;p++) {
-                                var view = new ProductListItemView({ model: new Model(orderedProductList[p]) });
-                                var renderedView = view.render().el;
-                                $(container + ' .recently-viewed-list').append(renderedView);
-                            }
+                            $(container).removeClass('hide').append('<div class="col-xs-12 recently-view"><ul class="recently-viewed-list"></ul></div><div class="clearfix"></div>');
+                                var recentModel = Backbone.MozuModel.extend();
+                               var Modelrec = new recentModel();
+                               Modelrec.set("items",orderedProductList);
+        
+                              
+                            var view = new ProductListItemView({ 
+                                model: Modelrec,
+                                el:$('.recently-viewed-list')
+                            });
+                           
+                                var renderedView = view.render();
+                        
                             if(orderedProductList.length > 1){
+                                var minSlides,
+                                    maxSlides,
+                                    slideWidth,
+                                    slideMargin,
+                                    windowWidth=$( window ).width();
+                                if(windowWidth<=767){
+                                    minSlides=2;
+                                    maxSlides=2;
+                                    slideMargin= 5;
+                                    slideWidth= 333;
+                                }else{
+                                    minSlides=4;
+                                    maxSlides=12;
+                                    slideWidth= 333;
+                                    slideMargin=15;
+                                }
                                 $(container + ' .recently-viewed-list').bxSlider({
-                                    minSlides: 2,
-                                    maxSlides: 7,
+                                    minSlides: minSlides,
+                                    maxSlides: maxSlides,
                                     slideWidth: 333,
                                     slideMargin: 15,
                                     responsive: true,
