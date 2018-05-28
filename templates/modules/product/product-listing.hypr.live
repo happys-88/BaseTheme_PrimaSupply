@@ -1,4 +1,28 @@
-﻿<div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
+﻿<div id="{{ model.productCode }}"></div>
+{% comment %} Start -  My code for stock messages at category    {% endcomment %}
+       <div class="stock-messages">
+            {% if model.inventoryInfo.onlineStockAvailable < 10 and model.inventoryInfo.onlineStockAvailable > 0 %}
+                <dl>{{ labels.itemInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}</dl>
+                {% else %}
+                        {% if model.inventoryInfo.onlineStockAvailable > 10 %}
+                            <dl>{{ labels.inStock }}</dl>
+
+                        {% endif %}
+            {% endif %} 
+        
+       </div>
+
+       <div class="shipping-messages">
+            {% for propShipping in model.properties %}
+                {% if propShipping.attributeFQN == "tenant~availability" %}
+                    {% for shippingValue in propShipping.values  %}
+                        {{ shippingValue.stringValue }}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </div> 
+
+<div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
     
     <div class="mz-productlisting-image">
         {% block product-image %}
@@ -57,7 +81,7 @@
 
         <button class="mz-quick-view" data-mz-productcode="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button>
  
-        {% if not model.purchasableState.isPurchasable %}
+        {% if not model.inventoryInfo.onlineStockAvailable and not model.variations %}
             <p class="mz-product-notpurchasable">
                 {{ labels.outOfStock }} 
                 {% comment %}
@@ -68,10 +92,6 @@
             </p>
         {% endif %}  
 
-        {% if model.inventoryInfo.onlineStockAvailable < 10 and model.inventoryInfo.onlineStockAvailable > 0 %}
-            <span class="items-inStock">{{ labels.itemInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}</span>
-        {% endif %}
-
         {% with model|get_product_attribute("tenant~new-arrival") as newArrival %}
             {% if newArrival.values|first|prop("value") == true %}
                 <spna class="mz-new-arrival-tag">{{ labels.new }}</span>
@@ -79,5 +99,7 @@
         {% endwith %}   
     </div>
 </div>
+
+{% require_script "pages/stock-message" %}
 
 {% require_script "modules/quickview" %}
