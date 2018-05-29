@@ -71,10 +71,14 @@
                             }
                         }
                     }
-                    if(id !="tenant~color"){
-                        this.model.set({
-                            "dataurl": null
-                        });
+
+                    if(typeof this.model.get('productCode') !== 'undefined') {
+                        //Set url value here
+                        if(id !="tenant~color"){
+                            this.model.set({
+                                "dataurl": null
+                            });
+                        }
                     }
                 },
                 quantityMinus: function () {
@@ -138,6 +142,9 @@
                     this.model.addToCart();
                 },
                 colorswatch: function (event) {
+                    var me = this;
+                    if(typeof this.model.get('productCode') !== 'undefined') {
+
                     var $thisElem = $(event.currentTarget);
                     event.stopImmediatePropagation();
                     var colorValue = $thisElem.val();
@@ -147,21 +154,22 @@
                     var cdn = sitecontext.cdnPrefix;
                     var siteID = cdn.substring(cdn.lastIndexOf('-') + 1);
                     var imagefilepath = cdn + '/cms/' + siteID + '/files/' + productcode + '-' + colorcode + '.jpg';
+                    
                     this.model.set({
                         "dataurl": imagefilepath
                     });
+                  }
                 },
                 clickOnNextOrprevious: function(){
                      $('[src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1024px-No_image_3x4.svg.png"]').parent().remove();
-                     var imagecount=this.model.get("content").get("productImages").length;
                      if($(".bx-pager-item").length > imagecount){
                         $(".bx-pager-item").eq(2).remove();
                      }
                  }
             });
-
-            var product = new ProductModels.Product();
-            product.set(body);
+           
+            var product = new ProductModels.Product(body);
+            var imagecount= product.get("content").get("productImages").length;
             var Quickviewv = new quickviewv({
                 model: product,
                 el: $('#quickViewModal')
