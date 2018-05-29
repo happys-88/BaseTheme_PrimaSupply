@@ -136,5 +136,9 @@ define([
 		    $("#step-shipping-address").removeClass("mz-shipping-address-complete").removeClass("is-complete").addClass("is-incomplete");
 		    $("#step-shipping-method").removeClass("mz-shipping-method-complete").addClass("again-is-incomplete");
 		});
+
+		$(document).on('click','#step-shipping-address .mz-button', function(){
+		    $("#step-shipping-address").addClass("address-updated");
+		});
 	});
 }); 
