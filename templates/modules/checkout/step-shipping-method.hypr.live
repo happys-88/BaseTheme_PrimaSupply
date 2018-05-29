@@ -1,5 +1,4 @@
-<h3 class="mz-formstep-header mz-checkoutform-header">{{ labels.shippingMethod }}</h3>
-
+<h3 class="mz-formstep-header mz-checkoutform-header">{{ labels.shippingMethod }}<a href="javascript:;" class="mz-formstep-edit" data-mz-action="edit">{{ labels.change }}</a></h3>
 <div class="mz-formstep-body mz-checkoutform">
     {% if model.requiresFulfillmentInfo %}
         {% if model.availableShippingMethods.length %}
@@ -30,35 +29,7 @@
         <button type="button" class="mz-button" data-mz-action="next">{{ labels.next }}</button>
     </div>
 </div>
-<div class="mz-lightgate-section clearfix">
-    <div class="col-xs-12">
-        <h3>{{ labels.needLightGate }}</h3>
-        <div class="col-xs-4">
-            <iframe src="https://www.youtube.com/embed/d2yeBTBSRWc"></iframe>
-        </div>
-        <div class="col-xs-8">
-            <label>
-                <input type="radio" name="" value="">{{ labels.needLightGateMsg1 }} $59.00
-            </label>
-            <label>
-                <input type="radio" name="" value="">{{ labels.needLightGateMsg2 }}
-            </label>
-        </div>
-    </div>
-    <div class="col-xs-12">
-        <h3>{{ labels.freightShipment }}</h3>
-        <div class="col-xs-4">
-            <iframe src="https://www.youtube.com/embed/JYa-7j0tSwk"></iframe>
-        </div>
-        <div class="col-xs-8">
-            <label>
-                <input type="radio" name="" value="">{{ labels.freightShipmentMsg1 }}
-            </label>
-            <label>
-                <input type="radio" name="" value="">{{ labels.freightShipmentMsg2 }}
-            </label>
-        </div>
-    </div>
-</div>
 
-{% include "modules/checkout/checkout-shipping-items-detail" %}
+<div class="row mz-checkout-summary clearfix">
+    {% include "modules/checkout/checkout-shipping-items-detail" %}
+</div>

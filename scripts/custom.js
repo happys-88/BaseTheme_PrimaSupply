@@ -144,6 +144,28 @@ define([
 			});  
 		}  
 		
+		// Checkout Changes
+		setTimeout(function(){ 
+			$("#checkout-form").find("#step-shipping-address.is-complete").addClass("mz-shipping-address-complete");
+		}, 1000);
+		setTimeout(function(){
+			$("#checkout-form").find("#step-shipping-method.is-complete").addClass("mz-shipping-method-complete");
+		}, 1000);
+
+		$(document).on('click','#step-shipping-method .mz-button', function(){
+		    $("#step-shipping-address").addClass("mz-shipping-address-complete");
+		    $("#step-shipping-method").addClass("mz-shipping-method-complete");
+		    $("#step-shipping-method").removeClass("again-is-incomplete");
+		});
+
+		$(document).on('click','#step-shipping-method .mz-summary-edit', function(){
+		    $("#step-shipping-address").removeClass("mz-shipping-address-complete").removeClass("is-complete").addClass("is-incomplete");
+		    $("#step-shipping-method").removeClass("mz-shipping-method-complete").addClass("again-is-incomplete");
+		});
+
+		$(document).on('click','#step-shipping-address .mz-button', function(){
+		    $("#step-shipping-address").addClass("address-updated");
+		});
 
 	});
 }); 

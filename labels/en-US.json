@@ -1,4 +1,3 @@
- 
 {
 
   "dateFormat"                            : "F j, Y",  
@@ -503,7 +502,7 @@
   "liftGateMsg"                            :   "Liftgate Service Added",
   "tbybHeader"                             :   "Try Before You Buy",
   "tbybMsg"                                :   "TRY IT BEFORE YOU BUY IT!",
-  "tbybContent"                            :   "Congratulations! Products from your order qualify for our Try Before You Buy beta program. Any product you select below will be sent to you completely free of charge for 14 days from the date of shipment!*",
+  "tbybContent"                            :   "<strong>Congratulations!</strong> Products from your order qualify for our Try Before You Buy beta program. Any product you select below will be sent to you completely free of charge for 14 days from the date of shipment!*",
   "tbybCondition"                          :   "*Participation in the program is subject to approval. Please read the program details for more information",
   "labelOversized"                         :   "Oversized Shipping",
   "saveMyInfo"                             :   "Save My Information",
@@ -574,5 +573,13 @@
   "creditCardInformation"                  :   "credit card information",
   "shipsFromPrima"                         :   "Ships from PRIMA",
   "shipsFromDistributor"                   :   "Ships from Distributor",
-  "liftGateServiceAdded"                   :   "*Liftgate Service Added"
+  "liftGateServiceAdded"                   :   "*Liftgate Service Added",
+  "selectProductEnroll"                    :   "Select a product to enroll!",
+  "selectedProduct"                        :   "Selected Product",
+  "onlyCouponCode"                         :   "Coupon Code",
+  "shippingOptions"                        :   "Shipping Options",
+  "signUpForSpecialOffers"                 :   "Sign Up For Special Offers & Information",
+  "myCart"                                 :   "My cart",
+  "summaryOfCharges"                       :   "Summary of charges",
+  "yourSaved"                              :   "Your Saved"
 }

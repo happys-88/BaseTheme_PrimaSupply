@@ -11,7 +11,7 @@
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
       "commit": "0fac5f45df3e0485a8fea3f5c9152c827614312d"
-    },
+    }, 
     "baseThemeChannel": "stable"
   },
   "editors": [

@@ -13,11 +13,11 @@ define([
 	var productCrossSellView = Backbone.MozuView.extend({
 	    templateName: 'modules/product/product-crosssells',  
 	    productCarousel: function () {
-			var minSlides;
-		    var maxSlides;
-			var slideWidth;
-			var  slideMargin;
-			var windowWidth=$( window ).width();
+			var minSlides,
+				maxSlides,
+				slideWidth,
+				slideMargin,
+				windowWidth=$( window ).width();
 			if(windowWidth<767){
 				 minSlides=2;
 				 maxSlides=2;
@@ -39,7 +39,6 @@ define([
                 pager: false,
                 speed: 1000,
                 infiniteLoop: false,
-                hideControlOnEnd: true,
 		        onSliderLoad: function() {
 		            $(".slider").css("visibility", "visible");
 		        }  
@@ -56,7 +55,11 @@ define([
     	if(value.attributeFQN == "tenant~product-crosssell"){
 	        $.each(value.values, function( index, value ){
 				prodCodeCrossSell.push(value.value);
-				variantion.push(value.value.slice(0,value.value.lastIndexOf("-")));         
+				if(value.value.lastIndexOf("-")!=-1){
+					variantion.push(value.value.slice(0,value.value.lastIndexOf("-")));
+				}else{
+					variantion.push(value.value);
+				}         
 	        });
         }
 	   });
@@ -79,6 +82,7 @@ define([
 						items.push(value);
 					});					
 					product.set("items",items);
+					console.log(product);
 				var crosssellview = new productCrossSellView({
 					model:product,
 					el: $('#product-crosssells')

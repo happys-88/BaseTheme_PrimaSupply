@@ -196,7 +196,7 @@
                         parent.isLoading(false);
                         me.calculateStepStatus();
                         parent.calculateStepStatus();
-                        console.log("PARENT : "+JSON.stringify(parent));
+                        // console.log("PARENT : "+JSON.stringify(parent));
                     });                  
                 };
 
@@ -246,6 +246,7 @@
                 console.log("FulfillmentInfo Step");
                 // console.log("model FullFillmentInfo : "+JSON.stringify(this));
                 var me = this;
+                this.stepStatus('incomplete');
                 // console.log("FullFillmentInfo : "+JSON.stringify(me));
                 this.on('change:availableShippingMethods', function (me, value) {
                     me.updateShippingMethod(me.get('shippingMethodCode'), true);
@@ -345,10 +346,14 @@
                 // console.log("FulfillmentInfo calculateStepStatus : "+JSON.stringify(this));
                 if (!this.requiresFulfillmentInfo()) return this.stepStatus('complete');
 
+                console.log("CLASS : "+$('#step-shipping-address').hasClass('address-updated'));
                 // If there's no shipping address yet, go blank.
                 if (this.get('fulfillmentContact').stepStatus() !== 'complete') {
                     return this.stepStatus('new');
+                } else if ($('#step-shipping-address').hasClass('address-updated')) {
+                    return this.stepStatus('incomplete');
                 }
+
 
                 // Incomplete status for shipping is basically only used to show the Shipping Method's Next button,
                 // which does nothing but show the Payment Info step.

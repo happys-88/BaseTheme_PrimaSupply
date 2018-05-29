@@ -29,27 +29,18 @@
                 <div class="mz-formstep mz-checkoutform-ordersummary" id="order-summary">
                     {% include "modules/checkout/checkout-order-summary" %}
                 </div>
-
-                <div class="mz-l-formfieldgroup">
-                    <div class="mz-checkoutform-couponcode mz-l-formfieldgroup-row" id="coupon-code-field" >
-                        {% include "modules/checkout/coupon-code-field" %}
-                    </div>
-                    {% if themeSettings.showCheckoutCommentsField %}
-                    <div class="mz-checkoutform-comments mz-l-formfieldgroup-row" id="comments-field" >
-                        {% include "modules/checkout/comments-field" %}
-                    </div>
-                    {% endif %}
-                </div>
             </div>
 
             <div class="mz-l-column">
-               <div class="mz-formstep mz-checkoutform-shippingaddress" id="step-shipping-address">
+                <div class="mz-formstep mz-checkoutform-shippingaddress" id="step-shipping-address">
                     {% include "modules/checkout/step-shipping-address" %}
                 </div>
 
                 <div class="mz-formstep mz-checkoutform-shippingmethod" id="step-shipping-method" {% if not model.requiresFulfillmentInfo %}style="display:none"{% endif %}>
                     {% include "modules/checkout/step-shipping-method" %}
                 </div>
+
+                {% include "modules/checkout/checkout-shipping-items-detail" %}
 
                 <div class="mz-formstep mz-checkoutform-tbyb" id="step-tbyb">
                     {% include "modules/checkout/step-tbyb" %}

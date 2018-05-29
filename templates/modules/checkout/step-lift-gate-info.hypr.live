@@ -1,40 +1,53 @@
-<div class="mz-checkoutattributes-section mz-checkoutattributes-attributes">
-  
+<div class="mz-lightgate-section mz-checkoutattributes-attributes clearfix">
     {% for attribute in model %}
-     {% if attribute.attributeCode == 'lift-gate' or attribute.attributeCode == 'freight-shipment' %}
-      <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows mz-checkoutform">
-        {% if attribute.inputType === "YesNo" %}
-          {% if attribute.valueType !== "AdminEntered" %}
-            <label class="inline" for="checkout-attribute-{{ attribute.attributeFQN }}">
-            {{ attribute.content.value }}
-              {% if attribute.isRequired %}
-                <span class="is-required"> *</span>
-              {% endif %}
-            </label>
-            <div>
-            <input id="checkout-attribute-{{ attribute.attribute.FQN }}" type="radio" name="checkout-attribute-{{ attribute.attributeFQN }}" value="true"
-                data-mz-attribute="{{ attribute.attributeFQN }}" data-mz-value="orderAttribute-{{attribute.attributeFQN}}" {% if attribute.attributeCode == 'lift-gate' %} data-mz-lift-gate-option {% else %} data-mz-freight-shipment {% endif %} {% if liftGateVal === 'true' %}checked="checked"{% endif %} /> 
-                {% if attribute.attributeCode == 'lift-gate' %}
-                    {{ labels.liftGateAddY }} {{ liftGatePrice|currency }}
-                {% else %}
-                  {{ labels.freightShipmentY }}
+        {% if attribute.attributeCode == 'lift-gate' or attribute.attributeCode == 'freight-shipment' %}
+            {% if attribute.inputType === "YesNo" %}
+                {% if attribute.valueType !== "AdminEntered" %}
+                    <div class="col-xs-12">
+                        <h3>{{ labels.needLightGate }}</h3>
+                        <div class="col-xs-4">
+                            <iframe src="https://www.youtube.com/embed/d2yeBTBSRWc"></iframe>
+                        </div>
+                        <div class="col-xs-8">
+                            <label>
+                                <input id="checkout-attribute-{{ attribute.attribute.FQN }}" type="radio" name="checkout-attribute-{{ attribute.attributeFQN }}" value="true"
+                                data-mz-attribute="{{ attribute.attributeFQN }}" data-mz-value="orderAttribute-{{attribute.attributeFQN}}" {% if attribute.attributeCode == 'lift-gate' %} data-mz-lift-gate-option {% else %} data-mz-freight-shipment {% endif %} {% if liftGateVal === 'true' %}checked="checked"{% endif %} /> 
+                                {% if attribute.attributeCode == 'lift-gate' %}
+                                    {{ labels.liftGateAddY }} {{ liftGatePrice|currency }}
+                                {% else %}
+                                    {{ labels.freightShipmentY }}
+                                {% endif %}
+                            </label>
+                            <label>
+                                <input id="checkout-attribute-{{ attribute.attribute.FQN }}" type="radio" name="checkout-attribute-{{ attribute.attributeFQN }}" value="false"
+                                data-mz-attribute="{{ attribute.attributeFQN }}" data-mz-value="orderAttribute-{{attribute.attributeFQN}}" {% if attribute.attributeCode == 'lift-gate' %} data-mz-lift-gate-option {% else %} data-mz-freight-shipment {% endif %} {% if liftGateVal === '' %}checked="checked"{% endif %} /> 
+                                {% if attribute.attributeCode == 'lift-gate' %}
+                                    {{ labels.liftGateAddN }}
+                                {% else %}
+                                    {{ labels.freightShipmentN }}
+                                {% endif %}
+                            </label>
+                        </div>
+                    </div>
+                    <span class="mz-validationmessage" data-mz-validationmessage-for="orderAttribute-{{attribute.attributeFQN}}"></span>
                 {% endif %}
-
-            </div>
-            <div>
-              <input id="checkout-attribute-{{ attribute.attribute.FQN }}" type="radio" name="checkout-attribute-{{ attribute.attributeFQN }}" value="false"
-                data-mz-attribute="{{ attribute.attributeFQN }}" data-mz-value="orderAttribute-{{attribute.attributeFQN}}" {% if attribute.attributeCode == 'lift-gate' %} data-mz-lift-gate-option {% else %} data-mz-freight-shipment {% endif %} {% if liftGateVal === '' %}checked="checked"{% endif %} /> 
-                {% if attribute.attributeCode == 'lift-gate' %}
-                    {{ labels.liftGateAddN }}
-                {% else %}
-                  {{ labels.freightShipmentN }}
-                {% endif %}
-            </div>
-            <span class="mz-validationmessage" data-mz-validationmessage-for="orderAttribute-{{attribute.attributeFQN}}"></span>
-          {% endif %}
+            {% endif %}
         {% endif %}
-      </div>
-     {% endif %}
     {% endfor %}
- 
+    <!-- Static -->
+    <div class="col-xs-12">
+        <h3>{{ labels.freightShipment }}</h3>
+        <div class="col-xs-4">
+            <iframe src="https://www.youtube.com/embed/JYa-7j0tSwk"></iframe>
+        </div>
+        <div class="col-xs-8">
+            <label>
+                <input type="radio" name="" value="">{{ labels.freightShipmentMsg1 }}
+            </label>
+            <label>
+                <input type="radio" name="" value="">{{ labels.freightShipmentMsg2 }}
+            </label>
+        </div>
+    </div>
+    <!--/ Static -->
 </div>

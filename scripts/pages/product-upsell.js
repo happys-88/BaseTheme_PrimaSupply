@@ -12,11 +12,11 @@ define([
 	var productUpSellView = Backbone.MozuView.extend({
 	    templateName: 'modules/product/product-upsell',  
 	    productCarousel: function () {
-			var minSlides;
-		    var maxSlides;
-			var slideWidth;
-			var  slideMargin;
-			var windowWidth=$( window ).width();
+			var minSlides,
+			    maxSlides,
+			    slideWidth,
+			    slideMargin,
+			    windowWidth=$( window ).width();
 			if(windowWidth<767){
 				 minSlides=2;
 				 maxSlides=2;
@@ -65,7 +65,14 @@ define([
 	        $.each(value.values, function( index, value ){
 
 				prodCodeUpSell.push(value.value);
-				variantion.push(value.value.slice(0,value.value.lastIndexOf("-")));
+				if(value.value.lastIndexOf("-")!=-1){
+					variantion.push(value.value.slice(0,value.value.lastIndexOf("-")));
+				}else{
+					variantion.push(value.value);
+				}
+				
+				//console.log(prodCodeUpSell);
+				//console.log(variantion);
 	              
 	        });
         }
@@ -80,11 +87,16 @@ define([
 					upselgenerateURL= upselgenerateURL + Upsellurl;
 					api.request("GET", "/api/commerce/catalog/storefront/products/"+variantion[index]+"?"+"variationProductCode="+value ).then(function(body){
 						items.push(body); 
+						//console.log(items);
 					});
 				});
+				
 				upselgenerateURL = upselgenerateURL.slice(0, -3);
+				
 				var upsellUrl= "/api/commerce/catalog/storefront/products/?filter=(" + upselgenerateURL + ")";
+				console.log(upsellUrl);
 				api.request("GET", upsellUrl ).then(function(body){
+					console.log(body);
 					$.each(body.items, function( index, value ) {
 						items.push(value);
 					});					

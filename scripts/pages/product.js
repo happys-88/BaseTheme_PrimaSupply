@@ -152,12 +152,12 @@
                 $('html,body').animate({
                     scrollTop: $('header').offset().top
                 }, 1000);
-                
-                //CartMonitor.update('showGlobalCart');
                 GlobalCart.update();
                 product.set('quantity', 1);
-                $("#global-cart").show();
-                window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/cart"; 
+                $("#global-cart").show().delay(3000).hide(0,function() { 
+                    $(this).css("display", "");
+                  });
+                //window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/cart"; 
             } else {
                 product.trigger("error", { message: Hypr.getLabel('unexpectedError') });
             }

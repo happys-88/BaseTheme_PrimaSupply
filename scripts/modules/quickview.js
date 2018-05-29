@@ -27,15 +27,7 @@
                     "click .bx-controls-direction a":"clickOnNextOrprevious"
 
                 },
-                initialize: function() {
-                    console.log("initialze call");
-                    var self = this;
-                   // this.model.on("change:dataurl",self.render);
-                    //listenToOnce
-                   //self.listenToOnce(self.model, 'change:dataurl', self.render);
-                },
                 render: function () {
-                   console.log("render call");
                     Backbone.MozuView.prototype.render.call(this);
                     this.corousel();
                     return this;
@@ -55,8 +47,7 @@
                         this.model.updateQuantity(newQuantity);
                     }
                 }, 500),
-                onOptionChange: function (e) {
-                    this.render();
+                onOptionChange: function (e) {           
                     return this.configure($(e.currentTarget));
 
                 },
@@ -68,7 +59,7 @@
                         optionEl = $optionEl[0],
                         isPicked = (optionEl.type !== "checkbox" && optionEl.type !== "radio") || optionEl.checked,
                         option = this.model.get('options').get(id);
-
+                      
                     if (option) {
                         if (option.get('attributeDetail').inputType === "YesNo") {
                             option.set("value", isPicked);
@@ -79,6 +70,11 @@
                                 option.set('value', newValue);
                             }
                         }
+                    }
+                    if(id !="tenant~color"){
+                        this.model.set({
+                            "dataurl": null
+                        });
                     }
                 },
                 quantityMinus: function () {
@@ -142,7 +138,6 @@
                     this.model.addToCart();
                 },
                 colorswatch: function (event) {
-                    //this.render();
                     var $thisElem = $(event.currentTarget);
                     event.stopImmediatePropagation();
                     var colorValue = $thisElem.val();
@@ -152,18 +147,16 @@
                     var cdn = sitecontext.cdnPrefix;
                     var siteID = cdn.substring(cdn.lastIndexOf('-') + 1);
                     var imagefilepath = cdn + '/cms/' + siteID + '/files/' + productcode + '-' + colorcode + '.jpg';
-                    product.set({
+                    this.model.set({
                         "dataurl": imagefilepath
                     });
                 },
                 clickOnNextOrprevious: function(){
-                    //var newpath= imagefilepath + '?_mzcb=undefined';
                      $('[src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1024px-No_image_3x4.svg.png"]').parent().remove();
-                    $(".bx-pager-item").eq(2).remove();
-                    //$("[src=newpath]").eq(1).remove();
-                    //console.log($("[src=newpath]").length);
-                     //$('div.foo3').eq(1).remove();
-                     //cdn-sb.mozu.com/25008-37918/cms/37918/files/ric-002-Orange.jpg?_mzcb=undefined
+                     var imagecount=this.model.get("content").get("productImages").length;
+                     if($(".bx-pager-item").length > imagecount){
+                        $(".bx-pager-item").eq(2).remove();
+                     }
                  }
             });
 
@@ -174,9 +167,9 @@
                 el: $('#quickViewModal')
             });
             Quickviewv.render();
+           
             $('#quickViewModal').on('hidden.bs.modal', function (e) {
                 $(".destroy").remove();
-
                 product.clear();
             });
         });

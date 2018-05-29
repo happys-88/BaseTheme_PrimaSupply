@@ -32,6 +32,13 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <label>
+                            <input type="checkbox" name="create-new-account" > {{ labels.signUpForSpecialOffers }}
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
                     <div class="col-sm-4">
                         <label for="new-account-password">{{ labels.password }}<span class="is-required"> *</span>: </label>
                     </div>
