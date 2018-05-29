@@ -1,6 +1,7 @@
 define([ 
-	"modules/jquery-mozu"
-], function( $) {
+	"modules/jquery-mozu",
+	"bxslider" 
+], function( $, bxslider) { 
 	$(document).ready(function(){ 
 
 		// Check if sitenav-item has dropdown
@@ -123,6 +124,26 @@ define([
 			var getCartItemHeight = $(this).outerHeight(); 
 			console.log(getCartItemHeight);   
 		});*/ 
+
+		// Category Slider in mobile
+		var windowWidth = $(window).width();
+		if(windowWidth <= 767){ 
+			$('#shopByCategorySlider').bxSlider({  
+		        minSlides: 1,    
+	            moveSlides: 1,
+	            slideWidth: 300,    
+	            slideMargin: 0,  
+	            responsive: true,
+	            controls: false,  
+	            speed: 1000, 
+	            infiniteLoop: false,
+	            hideControlOnEnd: true,
+		        onSliderLoad: function() {
+		            $(".slider").css("visibility", "visible"); 
+		        }  
+			});  
+		}  
+		
 
 	});
 }); 

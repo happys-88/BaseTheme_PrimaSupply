@@ -9,8 +9,8 @@
     {% dropzone "home-slider" scope="page" %}
 
     <div class="container">
-        <h1 class="home-heading1">Restaurant Supplies for the... H1 statement</h1>
-
+        {% dropzone "h1-statement" scope="page" %}  
+        
         <div class="yotpo-gallery hidden"> 
             <h2>Pictures Gallery</h2>
             <div class="yotpo yotpo-pictures-gallery"

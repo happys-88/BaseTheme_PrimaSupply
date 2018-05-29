@@ -3,21 +3,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-4 col-xs-12">
+                    <div class="col-sm-4 col-md-4 col-xs-12"> 
                        {% block footer-logo %}
                             {% include "modules/page-footer/footer-logo" %}
                         {% endblock footer-logo %}
                     </div>
-                    <div class="col-md-2 col-xs-12">
+                    <div class="col-sm-4 col-md-2 col-xs-12">
                         {% dropzone "footer-dropzone-2" scope="site" %}
                     </div>
-                    <div class="col-md-2 col-xs-12">
+                    <div class="col-sm-4 col-md-2 col-xs-12">  
                         {% dropzone "footer-dropzone-3" scope="site" %}
                         {% block payment-options %}
                             {% include "modules/page-footer/payment-options" %}
                         {% endblock payment-options %}
                     </div>
-                    <div class="col-md-4 col-xs-12"> 
+                    <div class="col-sm-12 col-md-4 col-xs-12">   
                         {% block newsletter %}
                             {% include "modules/page-footer/newsletter" %}
                         {% endblock newsletter %}

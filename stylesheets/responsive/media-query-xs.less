@@ -12,6 +12,13 @@
 			}
 		}
 		.mz-header-bottom {
+			padding-bottom: 0;  
+			.container{
+				padding: 0; 
+			}
+			.mz-mobile-nav{
+				margin-left: 10px; 
+			}
 			.mz-storebranding {
 				width: 139px;
 				.mz-logo {
@@ -27,6 +34,9 @@
 		.mz-searchbox {
 			position: static;
 			width: 100%;
+			background: @textColor; 
+			padding: 2px 2px 5px;
+			margin-top: 10px; 
 			.mz-searchbox-field {
 				width: 100%;
 			}
@@ -40,7 +50,7 @@
 		.mz-utilitynav {
 			position: absolute;
 			right: 30px;
-			top: -12px;
+			top: 0; 
 			.mz-utilitynav-item {
 				margin-left: 15px;
 			}
@@ -59,10 +69,11 @@
 		top: 111px; 
 	}
 	.mz-homepage {
-		.home-heading1 {
+		.home-heading1 { 
 			font-size: 30px;
 			line-height: 36px;
 			color: #333;
+			margin: 0 0 15px;  
 		}
 	}
 	.heading-2 {
@@ -70,8 +81,65 @@
 		line-height: 24px;
 		margin-bottom: @gutter;
 	}
+
+	/**** Common Styles for slider ****/
+	.bx-wrapper{
+		padding: 0;
+		margin: 0 auto;  
+		.bx-pager{ 
+			position: static;
+		    float: left;
+		    width: 100%;
+		    padding: 0;
+		    font-size: 0;
+		    margin: 10px 0;
+		    &.bx-default-pager{
+		   		a{
+			    	width: 15px;
+			    	height: 15px; 
+			    	background: #e6e6e6; 
+			    	border-radius: 50%; 
+			    	&.active, &:focus{     
+			    		background: @textColor;  	
+			    	}
+			    }   	
+		    } 
+		    
+		}
+	}
+	
+	/**** Home Slider ****/
+	#mz-home-slider{
+		.bx-viewport{
+			min-height: inherit; 
+		}
+		.slider{
+			.mz-slide{
+				min-height: 420px;
+				background-position: 66% top; 
+			}
+			.mz-slide-details{
+				width: 100%;
+				left: 0;
+				right: 0; 
+				bottom: 35px; 
+				h2{
+					font-size: 70px;
+					font-weight: bold; 
+				} 
+				p{
+					font-size: 24px;
+					margin-bottom: 15px;  
+				}
+			}	
+		}
+		.bx-controls-direction{
+			display: none;  
+		}
+		
+	} 
 	#mz-drop-zone-shop-by-brand {
-		margin: 0 -15px;
+		margin: 0 -15px; 
 	}
 	.shop-by-brand {
 		padding: 0 15px;
@@ -102,30 +170,115 @@
 			}
 		}
 	}
+
 	/**** Shop By Category ****/
-	.mz-shop-by-category {
+	#mz-drop-zone-shop-by-category{
+		margin: 0 -15px;
+	}
+	.mz-shop-by-category {  
+		padding: 0 15px;
+		margin-bottom: 30px;   
 		.mz-shop-by-categorylist {
 			.mz-shop-by-categorylist-item {
-				width: 49%;
+				width: 48% !important; 
 				min-height: inherit;
-				margin: 0 1% @gutter 0;
+				margin: 0 1% @gutter 0;  
 				.mz-category-image {
-					min-height: 100px;
+					min-height: 100px; 
 				}
 				&:first-child {
-					width: 49%;
-					margin: 0 1% @gutter 0;
+					margin: 0 1% @gutter 0;  
 					min-height: inherit;
 					.mz-category-image {
 						min-height: 100px;
 					}
 				}
-				&:nth-child(even) {
-					margin: 0 0 @gutter 1%;
+				&:nth-child(even) { 
+					margin: 0 0 @gutter 1%; 
 				}
 			}
 		}
+		.bx-wrapper{
+			max-width: 300px !important;
+		} 
 	}
+
+	/**** Home Page - Featured Products ****/ 
+	.mz-featured-products{
+		.bx-wrapper{  
+			max-width: 300px !important;      
+			.mz-productlist-item{
+				width: 150px !important;
+			} 
+		} 	
+	}
+
+	/**** Shop Now Widgets ****/
+	#mz-drop-zone-shop-now-widget{
+		.mz-cms-col-6-12{
+			.shop-now-widget{ 
+				margin: 0 0 40px;
+				border-width: 4px; 
+				.col-xs-12, .col-xs-6{
+					padding: 0;   
+				}
+				img{
+					min-height: 130px;   
+				}
+				.mz-details-container{
+					padding: 20px 3px 10px; 
+					.mz-hot-deal-title-one{
+						font-size: 12px;
+						line-height: 24px; 
+					}
+					.mz-hot-deal-title-two{  
+						font-size: 22px;
+						line-height: 26px;  
+					}  
+					.mz-hot-deal-title-three{
+						font-size: 10px;
+						line-height: 14px; 
+					} 
+					.mz-btn{
+						font-size: 10px;
+						line-height: 18px; 
+					}
+
+				} 
+			}
+			
+			&:nth-child(1){  
+				.shop-now-widget{
+					margin: 0 0 40px; 
+				} 
+			}
+			&:nth-child(2) {
+	        	.shop-now-widget {
+	        		.mz-details-container{  
+						.mz-hot-deal-title-one{   
+							font-size: 12px;
+							line-height: 24px; 
+							padding: 0; 
+						}
+						.mz-hot-deal-title-two{  
+							font-size: 10px;
+							line-height: 14px;   
+						}  
+						.mz-hot-deal-title-three{
+							font-size: 22px;
+							line-height: 24px;  
+						} 
+						.mz-btn{
+							font-size: 10px;
+							line-height: 18px;
+							margin: 0;  
+						}
+					} 
+	        	}
+			} 
+		} 
+	}
+	
 	
 	/**** Directory Page ****/
 	.mz-category {
@@ -503,4 +656,20 @@
 			padding: 15px 0 30px;
 		}
 	}
+
+	#back-to-top{
+		width: 45px;
+		height: 45px; 
+		font-size: 23px; 
+		right: 15px;  
+	}
+
+	.mz-promo-banner{
+		margin-bottom: 25px; 
+	}
+	
+
+	
+
+
 }
