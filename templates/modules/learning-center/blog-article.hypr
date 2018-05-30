@@ -12,7 +12,7 @@
 
 {% dropzone "blog-name" scope="page" %} 
 
-<div class="mz-sitenav-lcenter">
+<div class="mz-sitenav-lcenter hidden-xs hidden-sm"> 
     {% include "modules/learning-center/lc-site-nav" %} 
 </div>
 {% if themeSettings.showBreadcrumbs %}
