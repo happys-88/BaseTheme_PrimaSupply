@@ -1,0 +1,21 @@
+<div class="mz-productoptions">
+    {% for option in model.options %}
+        <div class="mz-productoptions-optioncontainer">
+            {% for value in option.values %}
+                {% if value.isSelected and not value.bundledProduct %}
+                    {{ option.attributeDetail.name }} : {{value.stringValue|default(value.value)}}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <div class="mz-carttable-item-remove">
+        <a href="javascript:;" data-mz-removeItem data-mz-cart-item="{{ model.cartItemId }}">
+            {{ labels.removeFromPopup }}
+        </a>
+    </div>
+    <div id="cart">
+        <a class="mz-utilitynav-link mz-utilitynav-link-cart" href="/cart">
+            {{ labels.viewCartPopup }}
+        </a>
+    </div>
+</div>
