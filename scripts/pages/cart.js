@@ -16,7 +16,9 @@ define([
                 /*"change [data-mz-value=usShipping]":"populateShipping",
                 "change [data-mz-value=usStates]":"populateShipping"*/
                 "change [data-mz-value=usShipping]":"populateDropDowns",
-                "change [data-mz-value=usStates]":"populateDropDowns"
+                "change [data-mz-value=usStates]":"populateDropDowns",
+                "click [data-mz-qty-minus]": "quantityMinus",
+                "click [data-mz-qty-plus]": "quantityPlus"
 
         },
         initialize: function () {
@@ -237,22 +239,58 @@ define([
                 
                 
         },     
-        updateQuantity: _.debounce(function (e) {
-            var $qField = $(e.currentTarget),
-                newQuantity = parseInt($qField.val(), 10),
-                id = $qField.data('mz-cart-item'),
-                item = this.model.get("items").get(id);
-                // console.log("item data:"+JSON.stringify(item));
-            
-
-                //CartMonitor.update();
-                this._isSyncing = true;
+        // updateQuantity: _.debounce(function (e) {
+        //     var $qField = $(e.currentTarget),
+        //         newQuantity = parseInt($qField.val(), 10),
+        //         id = $qField.data('mz-cart-item'),
+        //         item = this.model.get("items").get(id);
+        //         console.log($qField);
+        //         this._isSyncing = true;
+        //     if (item && !isNaN(newQuantity)) {
+        //         item.set('quantity', newQuantity);
+        //         item.saveQuantity();
+                
+        //     }
+        // },400),
+        quantityMinus: _.debounce(function (e) {
+          
+            var $qField = $(e.currentTarget).parent(".qty-block"); 
+            var qFieldValue = $qField.find(".mz-carttable-qty-field").val();        
+            var _qtyCountObj = $qField.find(".mz-carttable-qty-field");  
+            var value = parseInt(qFieldValue, 10);   
+            value--;
+            _qtyCountObj.val(value); 
+            e.stopImmediatePropagation();
+             var newQuantity = parseInt( value, 10);
+             var id = _qtyCountObj.data('mz-cart-item');
+             var item = this.model.get("items").get(id);
+             this._isSyncing = true;
             if (item && !isNaN(newQuantity)) {
                 item.set('quantity', newQuantity);
                 item.saveQuantity();
                 
-            }
+            }     
+           
         },400),
+        quantityPlus:  _.debounce(function (e) {
+            var $qField = $(e.currentTarget).parent(".qty-block"); 
+            var qFieldValue = $qField.find(".mz-carttable-qty-field").val();            
+            var _qtyCountObj = $qField.find(".mz-carttable-qty-field");  
+            var value = parseInt(qFieldValue, 10);   
+            value++;
+            _qtyCountObj.val(value);  
+            e.stopImmediatePropagation();
+            var newQuantity = parseInt(value, 10);
+            var id = _qtyCountObj.data('mz-cart-item');
+            var item = this.model.get("items").get(id);
+            this._isSyncing = true;
+            if (item && !isNaN(newQuantity)) {
+                item.set('quantity', newQuantity);
+                item.saveQuantity();
+                
+            }         
+           
+    },400),
         onQuantityUpdateFailed: function(model, oldQuantity) {
             var field = this.$('[data-mz-cart-item=' + model.get('id') + ']');
             if (field) {
@@ -396,16 +434,16 @@ define([
         window.cartView = cartViews;
         
         CartMonitor.setCount(cartModel.count());
-        if(window.location.pathname=="/cart"){
+        // if(window.location.pathname=="/cart"){
            
-                var length=cartModel.attributes.changeMessages.length;
-                if(length>0){
-                    var productcode=cartModel.attributes.changeMessages[length-1].metadata[0].productCode;
-                    var id='#'+productcode;
-                    $(id).prependTo(".mz-carttable-items");
-                }
+        //         var length=cartModel.attributes.changeMessages.length;
+        //         if(length>0){
+        //             var productcode=cartModel.attributes.changeMessages[length-1].metadata[0].productCode;
+        //             var id='#'+productcode;
+        //             $(id).prependTo(".mz-carttable-items");
+        //         }
               
-        }
+        // }
 
     return CartView;
     

@@ -604,21 +604,21 @@
 	/*** Cart ***/
  	.mz-cart {
 		.mz-carttable-total-row {
-			display: -webkit-box;
-			display: -webkit-flex;
-			display: -ms-flexbox;
-			display: flex;
-			-webkit-flex-wrap: wrap;
-			-ms-flex-wrap: wrap;
-			flex-wrap: wrap;
+			// display: -webkit-box;
+			// display: -webkit-flex;
+			// display: -ms-flexbox;
+			// display: flex;
+			// -webkit-flex-wrap: wrap;
+			// -ms-flex-wrap: wrap;
+			// flex-wrap: wrap;
 			input#coupon-code {
 				width: 44vw;
 			}
-			.estimated-tax-shipping {
-				order:-2;
-			}
+			// .estimated-tax-shipping {
+			// 	//order:-2;
+			// }
 			.mz-carttable-checkout-couponcode{
-				order:-2;
+				//order:-2;
 				button{
 				    width: 23vw;
                     margin-left: 12px;
@@ -646,8 +646,36 @@
 				}
 				.mz-carttable-item-remove {
 					display: inline;
+					margin-left: 40px;
 				}
 				.mz-carttable-item-qty {
+					 .qty-block {
+						 #plus {
+								.arrow-up {
+									position: absolute;
+									width: 0;
+									height: 0;
+									border-left: 10px solid transparent;
+									border-right: 10px solid transparent;
+									border-bottom: 10px solid #495363;
+									top: 3px;
+									left:66px
+									
+								}
+						   }
+						    #minus {
+								.arrow-down {
+									position: absolute;
+									width: 0;
+									height: 0;
+									border-left: 10px solid transparent;
+									border-right: 10px solid transparent;
+									border-top: 10px solid #495363;
+									bottom: 10px;
+									left:66px;
+								}
+						    }
+						}
 					padding-left: 35%;
 					text-align: left;
 				}
