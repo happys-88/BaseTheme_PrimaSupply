@@ -1,5 +1,5 @@
 
-<div class="mz-carttable-header col-xs-12">
+<div class="mz-carttable-header col-xs-12 hidden-xs">
     <div class="mz-carttable-header-product col-md-6 text-left">{{ labels.shoppingCart }}</div>
     <div class="mz-carttable-header-qty col-md-2 col-sm-2 text-center">{{ labels.qty }}</div>
     <div class="mz-carttable-header-price-each col-md-2 col-sm-2 text-right no-padding">{{ labels.cartPriceEach }}</div> 
@@ -84,23 +84,33 @@
                   {{ labels.storePickupAt|string_format(item.fulfillmentLocationName)|safe }}
               </span>
             {% endif %}
-             <div class="mz-carttable-item-qty mz-cart-qty-box visible-xs mz-qty-xs-align">
-              <input class="mz-carttable-qty-field" type="number" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" min="1"/>
-              <a href="javascript:;" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}" class="btn-link" title="{{ labels.remove }}">{{ labels.remove }}</a>
-            </div>
           </div>
 
         </div>
-        <div class="mz-carttable-item-qty col-sm-2 col-xs-5">
+        {% comment %}
+        <div class="mz-carttable-item-qty col-sm-2 col-xs-12">
+
             <input class="mz-carttable-qty-field" type="number" min="1" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" />
             <a class="mz-carttable-item-remove" href="javascript:void(0);" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}"><i class="fa fa-times"></i>{{ labels.remove }}</a>
         </div>
+        {% endcomment %}
+        <div class=" mz-productdetail-conversion-controls mz-carttable-item-qty col-sm-2 col-xs-12">
+            <div class="qty-block clearfix">
+                <div class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="arrow-up" aria-hidden="true"></i></div>
+                <div class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="arrow-down"  aria-hidden="true"></i></div>   
+              <input  class="text-center mz-carttable-qty-field" type="text" min="1" value="{{ item.quantity }}" readonly="readonly" data-mz-cart-item="{{ item.id }}" data-mz-value='quantity' title="Quantity">
+              <a class="mz-carttable-item-remove" href="javascript:void(0);" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}"><i class="fa fa-times"></i>{{ labels.remove }}</a>
+                
+            </div>
+        </div>
 
-        <div class="mz-carttable-item-price col-sm-2 text-right no-padding">
-          {% include "modules/common/item-price" %}
+        <div class="mz-carttable-item-price col-xs-12 col-sm-2 text-right no-padding">
+            <span class="cart-each-price visible-xs">{{ labels.cartPriceEach }}</span>
+            {% include "modules/common/item-price" %}
         </div>
         
-        <div class="mz-carttable-item-total col-sm-2 text-right">
+        <div class="mz-carttable-item-total col-xs-12 col-sm-2 text-right">
+            <span class="cart-table-total visible-xs"> {{ labels.total }}</span>
             {% include "modules/common/item-total" %}
         </div>
       </div>
@@ -127,12 +137,10 @@
       <div class="col-sm-4 col-xs-12 mz-carttable-checkout-couponcode" id="coupon-code-field" >
         {% include "modules/cart/apply-coupon-code" %}
       </div>
-      <div class="col-sm-8 col-xs-12 text-right">
+      <div class="col-sm-8 col-xs-12 text-right hidden-xs">
         {% include "modules/cart/cart-merchandise-total" %}   
       </div>
-          
   </div>
-
   <div class="mz-carttable-total-row row">
     <div class="col-sm-4 col-xs-12 estimated-tax-shipping">
       <span class="mz-heading">{{ labels.estimateYourTaxShipping }}</span> 
@@ -165,6 +173,9 @@
              </select>
           </div>
       </div>     
+    </div>
+    <div class="col-sm-8 col-xs-12 text-right visible-xs">
+      {% include "modules/cart/cart-merchandise-total" %}   
     </div>
 
     <div class="col-sm-8 col-xs-12 text-right">

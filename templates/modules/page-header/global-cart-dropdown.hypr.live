@@ -65,8 +65,13 @@
                     </div>
                    
                     <div class="mz-carttable-item-qty col-sm-2">
-                        <input class="mz-carttable-qty-field" type="number" min="1" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" />
-                        <a class="mz-carttable-item-remove" href="javascript:void(0);" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}"><i class="fa fa-times"></i>{{ labels.remove }}</a>
+                      <div class="qty-block clearfix">
+                        <div class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="arrow-up" aria-hidden="true"></i></div>
+                        <div class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="arrow-down"  aria-hidden="true"></i></div>   
+                      <input  class="text-center mz-carttable-qty-field" type="text" min="1" value="{{ item.quantity }}" readonly="readonly" data-mz-cart-item="{{ item.id }}" data-mz-value='quantity' title="Quantity">
+                      <a class="mz-carttable-item-remove" href="javascript:void(0);" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}"><i class="fa fa-times"></i>{{ labels.remove }}</a>
+                        
+                    </div>
                     </div>
                     <div class="mz-carttable-item-price col-sm-2 text-right no-padding">
                       {% include "modules/common/item-price" %}

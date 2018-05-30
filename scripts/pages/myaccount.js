@@ -61,11 +61,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         cancelEdit: function() {
             var self = this;
             this.editing = false;
-            //Start Edited By:- Ashish
-            // this.model.set("firstName", this.beforeEditModel.firstName);
-            // this.model.set("lastName", this.beforeEditModel.lastName);
-            // this.model.set("emailAddress", this.beforeEditModel.emailAddress);
-            // self.render();
+            self.render();
             //End Edited By:- Ashish
         },
         finishEdit: function() {

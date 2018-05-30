@@ -14,7 +14,6 @@
         initialize: function() {
             var url = (HyprLiveContext.locals.siteContext.siteSubdirectory || '')  + "/product/" + this.get("productCode");
             this.set({ Url: url, url: url });
-            console.log(this);
         }
     }),
 
