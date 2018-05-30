@@ -1,4 +1,4 @@
-<ul>  
+<ul>   
   {% for property in model.properties %} 
     {% if property.attributeFQN == "tenant~field_pre_brands" %}
       
@@ -6,11 +6,9 @@
          
         {% for propValue in property.values %}
         <span class="brand-name"><strong>Brand:</strong> {{ propValue.stringValue|safe}}</span> 
-
           {% for categoryObject in categories.all %}   
             {% if categoryObject.content.name == "Brands" %} 
-              {{ categoryObject.content.name }}                
-                <div class="brand-logo-img"> 
+              <div class="brand-logo-img">   
                 {% for brandSubCat in categoryObject.childrenCategories %} 
                   {% if brandSubCat.content.name == propValue.stringValue %}
                       {% if brandSubCat.content.categoryImages.length>0 %} 

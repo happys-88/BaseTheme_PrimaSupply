@@ -11,32 +11,33 @@
 	{% dropzone "blog-name" scope="page" %}
 	
 	<div data-mz-category="{{model.categoryId}}" class="mz-l-container">
-		<div class="mz-sitenav-lcenter">
+		<div class="mz-sitenav-lcenter hidden-xs hidden-sm">   
 			{% include "modules/learning-center/lc-site-nav" %}	
 		</div>
-		{% if themeSettings.showBreadcrumbs %}
+
+		{% if themeSettings.showBreadcrumbs %} 
 	    	<div class="lc-breadcrumbs">
 	        	{% include "modules/breadcrumbs" %}
 	    	</div>
 	    {% endif %} 
-	    <div class="mz-content-section">
-	       	<div class="col-xs-12 col-sm-9 no-padding-left">
-				<div class="mz-content-widget row">
-					<div class="col-xs-12 col-sm-6"> 
+	    <div class="mz-content-section">  
+	       	<div class="col-xs-12 col-md-9 no-padding-left"> 
+				<div class="mz-content-widget">
+					<div class="col-xs-12 col-sm-6 no-padding-mobile"> 
 						{% dropzone "lc-image-dropzone" scope="page" %}	
 					</div>
 					<div class="col-xs-12 col-sm-6 mz-text-block">
 						{% dropzone "lc-text-dropzone" scope="page" %}	
 					</div>
 				</div>
-				<div class="mz-content-widget row">
+				<div class="mz-content-widget">
 					{% dropzone "featured-categories" scope="page" %} 	
 				</div>
-				<div class="mz-content-widget row">
+				<div class="mz-content-widget">  
 					{% dropzone "featured-posts" scope="page" %} 	
 				</div>
 			</div>    
-			<div class="col-xs-12 col-sm-3 mz-sidebar">
+			<div class="col-xs-12 col-md-3 mz-sidebar"> 
 				{% include "modules/learning-center/sidebar-widget" %}
 			</div>	
 		    
