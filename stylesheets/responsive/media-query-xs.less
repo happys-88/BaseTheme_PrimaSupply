@@ -606,6 +606,116 @@
 			}
 		}
 	}
+
+	/*** Cart ***/
+ 	.mz-cart {
+		.mz-carttable-total-row {
+			// display: -webkit-box;
+			// display: -webkit-flex;
+			// display: -ms-flexbox;
+			// display: flex;
+			// -webkit-flex-wrap: wrap;
+			// -ms-flex-wrap: wrap;
+			// flex-wrap: wrap;
+			input#coupon-code {
+				width: 44vw;
+			}
+			// .estimated-tax-shipping {
+			// 	//order:-2;
+			// }
+			.mz-carttable-checkout-couponcode{
+				//order:-2;
+				button{
+				    width: 23vw;
+                    margin-left: 12px;
+				}
+			}
+		}
+		.mz-pagetitle {
+        	font-size: 16px;
+		}
+		.mz-table-cart {
+			.mz-carttable-item {
+				padding: 0;
+				.mz-carttable-item-product-detail {
+					padding: 0 23px;
+				}
+				.mz-carttable-item-product {
+					padding-right: 8px;
+					padding-left: 8px;
+					margin-top: 10px;
+					.mz-carttable-item-product-image {
+						img {
+							max-width: 100%;
+						}
+				  	}
+				}
+				.mz-carttable-item-remove {
+					display: inline;
+					margin-left: 40px;
+				}
+				.mz-carttable-item-qty {
+					 .qty-block {
+						 #plus {
+								.arrow-up {
+									position: absolute;
+									width: 0;
+									height: 0;
+									border-left: 10px solid transparent;
+									border-right: 10px solid transparent;
+									border-bottom: 10px solid #495363;
+									top: 3px;
+									left:66px
+									
+								}
+						   }
+						    #minus {
+								.arrow-down {
+									position: absolute;
+									width: 0;
+									height: 0;
+									border-left: 10px solid transparent;
+									border-right: 10px solid transparent;
+									border-top: 10px solid #495363;
+									bottom: 10px;
+									left:66px;
+								}
+						    }
+						}
+					padding-left: 35%;
+					text-align: left;
+				}
+				.mz-carttable-item-price {
+					padding:0;
+					span {
+						display: inline-block!important;	
+					}
+				}
+				.mz-carttable-item-total {
+					padding:0;
+					span {
+						display: inline-block!important;
+					}
+				}
+			}
+			.mz-carttable-checkout-row{
+				.mz-cart-buttons {
+					display: flex;
+					flex-direction: column-reverse;
+					.mz-button {
+						width: 100%;
+						padding: 10px;
+						font-size: 14px;
+						margin-left: 0;
+						margin-right: 13px;
+						margin-bottom: 10px;
+					}
+			   }
+			} 
+ 		}
+	}
+	/***\ Cart ***/
+
 	/**** Footer ****/
 	.mz-pagefooter {
 		.mz-footer-top {
