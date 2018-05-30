@@ -10,8 +10,8 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "0fac5f45df3e0485a8fea3f5c9152c827614312d"
-    }, 
+      "commit": "c39ec8a1fe694970313eb66f0283a7edaf05e307"
+    },
     "baseThemeChannel": "stable"
   },
   "editors": [
@@ -576,7 +576,7 @@
     "rviNumberCookie": 10,
     "rviExpirationDuration": 21,
     "snapengaeWidgetId": "d93fa82a-6087-44f8-bd79-3df50a1c3130",
-    "searchSuggestionFilter": "2,9,10",
+    "searchSuggestionFilter": "2, 9, 10, 11",
     "usStates": [
       {
         "abbreviation": "AL",
