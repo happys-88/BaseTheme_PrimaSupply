@@ -19,7 +19,7 @@
                 <input name="password"  type="password" data-mz-login-password placeholder="{{ labels.password }}" />
             </div>
             <div class="input-group">
-                <a href="/user/forgotpassword" class="mz-forgot" data-mz-action="launchforgotpassword">{{ labels.forgotPasswordLink }}</a>
+                <a href="/user/forgotpassword" class="mz-forgot">{{ labels.forgotPasswordLink }}</a>
             </div>
             <section data-mz-role="popover-message" class="mz-popover-message"></section>
             <button class="mz-button mz-button-large mz-login-button" data-mz-action="loginpage-submit">{{ labels.logIn }}</button>

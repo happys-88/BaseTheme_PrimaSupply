@@ -595,5 +595,8 @@
   "loginForPriceTwo"                      : "login for pricing",
   "viewCartPopup"                         : "VIEW CART",
   "removeFromPopup"                       : "REMOVE ITEM",
-  "viewOnLoginErrMsg"                     : "Either Login for pricing or remove the Log in for price addon selection."
+  "viewOnLoginErrMsg"                     : "Either Login for pricing or remove the Log in for price addon selection.",
+
+  //Forget password
+  "forgetPasswordMsg"                     :  "Our apologies for any inconvenience trying to login. Let's try and recover your password. To have your password reset, enter the email address associated to your Prima Supply Explorer account below."
 }
