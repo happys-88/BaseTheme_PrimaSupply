@@ -24,11 +24,10 @@
                           {% if sublink.items %}
                             <ul class="mz-sitenav-sub-sub">
                               {% for subsublink in sublink.items %}
-                                
-                                  <li class="mz-sitenav-item">
-                                    <a class="mz-sitenav-link sub-sub-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{subsublink.url}}">{{ subsublink.name|replace("_", " ")|replace(themeSettings.columnBreaker, "")|safe }}</a>
-                                
-                              {% endfor %} 
+                                <li class="mz-sitenav-item">
+                                  <a class="mz-sitenav-link sub-sub-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{subsublink.url}}">{{ subsublink.name|replace("_", " ")|replace(themeSettings.columnBreaker, "")|safe }}</a>
+                                </li>
+                              {% endfor %}  
                             </ul>
                           {% endif %}
                         </li>
@@ -47,18 +46,8 @@
           {% require_script "modules/contextify" %}
       </ul>
 
-      <div class="learning-center-search">
-        <form id="searchbox-learning-center" class="mz-searchbox" action="{% make_url "search" %}">
-          <div class="mz-searchbox-field">
-              <input placeholder="{{ labels.searchLearningCenter }}" type="search" class="mz-searchbox-input" autocomplete="off" name="query" data-mz-role="searchquery" />
-              <button class="mz-searchbox-button" type="submit"><i class="fa fa-search"></i></button>
-          </div>
-        
-          {% if themeSettings.useSearchAutocomplete %} 
-              {% require_script "modules/search-autocomplete" %} 
-          {% endif %}
-
-        </form>  
+      <div class="learning-center-search"> 
+        {% include "modules/learning-center/search-box-lc" %}  
       </div> 
 
     </div>
