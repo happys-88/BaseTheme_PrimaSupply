@@ -301,4 +301,55 @@
 		}	
 	}
 
+	/*** My Account ***/
+	.mz-myaccount {
+		.mz-myaccount-panels {
+			.mz-accountaddressbook {
+				.mz-old-accountaddressbook {
+					li {
+				        &.mz-accountaddressbook-contact {
+				        	width: 50%;
+						    border-left: 0;
+				            &.mz-accountaddressbook-form {
+				            	.mz-label {
+				            		width: 100%;
+								    text-align: left;
+								}
+								.col-sm-8 {
+									width: 100%;
+								}
+								.mz-addressform-address2 {
+									width: 100%;
+									.col-sm-8 {
+										margin-left: 0;
+									}
+								}
+								.mz-contacttypes {
+									div {
+										margin-left: 0;
+									}
+								}
+								.mz-account-contact-actions {
+									margin-left: 0;
+								}
+				            }
+				            &:nth-child(odd) {
+						    	border-right: 1px solid #e0e0e0;
+			    				border-left: 0;
+			    				padding-left: 15px;
+						    }
+				        }
+				        &:nth-child(odd) {
+					    	&.mz-accountaddressbook-contact {
+				           		&.mz-accountaddressbook-form {
+				           			padding-left: 0;
+				           		}
+				           	}
+					    }
+				    }
+				}
+			}
+		}
+	}
+	/***\ My Account ***/
 }
