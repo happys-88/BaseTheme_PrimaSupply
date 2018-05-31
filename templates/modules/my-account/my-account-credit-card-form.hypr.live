@@ -5,7 +5,7 @@
         <div class="mz-l-formfieldgroup mz-creditcardform">
         {% parent %}
         <div class="form-group mz-payment-credit-card-defaultflag-row">
-            <div class="col-sm-8 col-md-offset-4">
+            <div class="col-sm-8 col-sm-offset-4">
                 <label for="editingcard-is-primary"><input type="checkbox" class="form-control" id="editingcard-is-primary" {% if model.isDefaultPayMethod %}checked="true"{% endif %} data-mz-value="{{ cardcontext }}isDefaultPayMethod" /> {{ labels.primary }}</label>
             </div>
         </div>

@@ -47,7 +47,7 @@
     <div class="col-sm-4">
         <label for="mz-payment-expiration-month">{{ labels.expires }}<span class="is-required"> *</span>:</label>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-4 col-xs-6">
         <select class="form-control mz-l-formfieldgroup-halfsize" id="mz-payment-expiration-month" name="expiration-month" data-mz-value="{{ cardcontext }}expireMonth">
             <option></option>
             <option {% if model.expireMonth == "01" %}selected="selected"{% endif %} value="01">01 - {{ labels.january }}</option>
@@ -64,7 +64,7 @@
             <option {% if model.expireMonth == "12" %}selected="selected"{% endif %} value="12">12 - {{ labels.december }}</option>
         </select>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-4 col-xs-6">
         <select class="form-control mz-l-formfieldgroup-halfsize" name="mz-payment-expiration-year" data-mz-value="{{ cardcontext }}expireYear">
             <option></option>
             <option {% if model.expireYear == "2014" %}selected="selected"{% endif %} value="2014">2014</option>

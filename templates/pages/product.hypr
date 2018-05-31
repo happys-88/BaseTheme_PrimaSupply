@@ -25,7 +25,7 @@
     <div class="row">
         <div data-mz-productimages class="col-md-6 mz-productimages mz-l-sidebar">
             {% include "modules/product/product-images" with model=prodMod %}
-        </div>
+        </div> 
         <div class="col-md-6 mz-productdetail-wrap">
             {% include "modules/common/message-bar" with model=prodMod %}
             <div class="mz-product-social-sharing hide">

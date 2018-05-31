@@ -3,15 +3,15 @@
     <div class="mz-accountsettings-section mz-accountsettings-name {% if editing %} is-editing {% endif %}">
         {% if editing %}
             <div class="form-group">
-                <label class="control-label col-sm-2">{{ labels.firstName }}</label>
-                <div class="col-sm-4">
+                <label class="control-label col-sm-4">{{ labels.firstName }}</label>
+                <div class="col-sm-8">
                     <input type="text" class="form-control" placeholder="{{ labels.firstName }}" data-mz-value="firstName" value="{{ model.firstName }}" />
                     <span class="mz-validationmessage" data-mz-validationmessage-for="firstName"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2">{{ labels.lastName }}</label>
-                <div class="col-sm-4">          
+                <label class="control-label col-sm-4">{{ labels.lastName }}</label>
+                <div class="col-sm-8">          
                     <input type="text" class="form-control" placeholder="{{ labels.lastName }}" data-mz-value="lastName" value="{{ model.lastName }}" />
                     <span class="mz-validationmessage" data-mz-validationmessage-for="lastName"></span>
                 </div>
@@ -23,8 +23,8 @@
     <div class="mz-accountsettings-section mz-accountsettings-email">
         {% if editing %}
             <div class="form-group">
-                <label class="control-label col-sm-2">{{ labels.emailAddress }}</label>
-                <div class="col-sm-4">
+                <label class="control-label col-sm-4">{{ labels.emailAddress }}</label>
+                <div class="col-sm-8">
                     <input type="email" class="form-control" placeholder="{{ labels.emailAddress }}" data-mz-value="emailAddress" value="{{ model.emailAddress }}" />
                     <span class="mz-validationmessage" data-mz-validationmessage-for="emailAddress"></span>
                 </div>
@@ -42,30 +42,29 @@
 {% else %}
     <div class="mz-accountsettings-section mz-accountsettings-name {% if editing %} is-editing {% endif %}">
         <div class="form-group">
-            <label class="control-label col-sm-2">{{ labels.firstName }}</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">{{ labels.firstName }}</label>
+            <div class="col-sm-8">
                 <input type="text" class="form-control" placeholder="{{ labels.firstName }}" data-mz-value="firstName" value="{{ model.firstName }}" />
                 <span class="mz-validationmessage" data-mz-validationmessage-for="firstName"></span>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2">{{ labels.lastName }}</label>
-            <div class="col-sm-4">          
+            <label class="control-label col-sm-4">{{ labels.lastName }}</label>
+            <div class="col-sm-8">          
                 <input type="text" class="form-control" placeholder="{{ labels.lastName }}" data-mz-value="lastName" value="{{ model.lastName }}" />
                 <span class="mz-validationmessage" data-mz-validationmessage-for="lastName"></span>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2">{{ labels.emailAddress }}</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">{{ labels.emailAddress }}</label>
+            <div class="col-sm-8">
                 <input type="email" class="form-control" placeholder="{{ labels.emailAddress }}" data-mz-value="emailAddress" value="{{ model.emailAddress }}" />
                 <span class="mz-validationmessage" data-mz-validationmessage-for="emailAddress"></span>
             </div>
         </div>
         <!-- Checkbox Static-->
-        <div class="form-group">
-            <label class="control-label col-sm-2"></label>
-            <div class="col-sm-4">  
+        <div class="clearfix">
+            <div class="col-sm-8 col-sm-offset-4">  
                 <p>{{ labels.signUpEmailMsg }}</p>
                 <div class="checkbox">
                     <label><input type="checkbox" value="">{{ labels.primaDeals }}</label>
@@ -154,11 +153,12 @@
 {% endcomment %}
 
 {% if not model.firstName or editing %}
-    <div class="form-group">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-4">
-            <button class="mz-button mz-button-small mz-accountsettings-editcancel" data-mz-action="cancelEdit">{{ labels.cancel }}</button>
-            <button class="mz-button mz-button-small mz-accountsettings-editdone" data-mz-action="finishEdit">{{ labels.save }}</button>
+    <div class="mz-accountsettings-btn-section">
+        <div class="form-group">
+            <div class="col-sm-8 col-sm-offset-4">
+                <button class="mz-button mz-button-small mz-accountsettings-editcancel" data-mz-action="cancelEdit">{{ labels.cancel }}</button>
+                <button class="mz-button mz-button-small mz-accountsettings-editdone" data-mz-action="finishEdit">{{ labels.save }}</button>
+            </div>
         </div>
     </div>
 {% endif %}

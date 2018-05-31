@@ -190,5 +190,25 @@ define([
 		    $("#step-shipping-address").addClass("address-updated");
 		});
 
+		// Featured Products Slider in blog detail
+		if(windowWidth <= 767){ 
+			//var sliderElement = $(".mz-blog-content-detail .featured-products").find(".mz-productlist-list");
+
+			$('#productSliderMobile').bxSlider({      
+		        minSlides: 1,    
+	            moveSlides: 1,
+	            slideWidth: 300,    
+	            slideMargin: 0,  
+	            responsive: true,
+	            controls: false,  
+	            speed: 1000, 
+	            infiniteLoop: false,
+	            hideControlOnEnd: true,
+		        onSliderLoad: function() {
+		            $(".slider").css("visibility", "visible"); 
+		        }  
+			});  
+		}
+
 	});
 }); 

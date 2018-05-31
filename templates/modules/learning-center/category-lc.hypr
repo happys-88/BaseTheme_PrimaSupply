@@ -14,7 +14,7 @@
 	{% dropzone "blog-name" scope="page" %} 
 
 	<div data-mz-category="{{model.categoryId}}" class="mz-l-container">
-	    <div class="mz-sitenav-lcenter">
+	    <div class="mz-sitenav-lcenter hidden-xs hidden-sm"> 
 			{% include "modules/learning-center/lc-site-nav" %}	
 		</div>
 		{% if themeSettings.showBreadcrumbs %}

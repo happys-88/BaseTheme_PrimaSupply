@@ -1,6 +1,7 @@
-﻿<div id="{{ model.productCode }}"></div>
+﻿<div class="stock-threshold-message" id="{{ model.productCode }}"></div>
 {% comment %} Start -  My code for stock messages at category    {% endcomment %}
-       <div class="stock-messages">
+
+       <div class="stock-messages" id="stock-messages-{{ model.productCode }}">
             {% if model.inventoryInfo.onlineStockAvailable < 10 and model.inventoryInfo.onlineStockAvailable > 0 %}
                 <dl>{{ labels.itemInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}</dl>
                 {% else %}
@@ -70,14 +71,14 @@
         {% endblock product-extrainfo %}
        
         {% with model|get_product_attribute("tenant~show-price") as showPriceAttr %}
-            {% if showPriceAttr.values|first|prop("value") == 'view-on-login' %}
-                {% if user.isAuthenticated %}
-                    <button class="mz-button add-to-cart {% if not model.purchasableState.isPurchasable %} is-disabled {% endif %}" data-productcode="{{model.productCode}}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} > {{ labels.addToCart }} </button>
-                {% endif %} 
-            {% else %}
-                <button class="mz-button add-to-cart {% if not model.purchasableState.isPurchasable %} is-disabled {% endif %}" data-productcode="{{model.productCode}}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} > {{ labels.addToCart }} </button>
-            {% endif %} 
-        {% endwith %}
+         {% if showPriceAttr.values|first|prop("value") == 'view-on-login' %}
+           {% if user.isAuthenticated %}
+             {% include "modules/product/product-add-to-cart" %}
+           {% endif %} 
+           {% else %}
+             {% include "modules/product/product-add-to-cart" %}
+         {% endif %} 
+       {% endwith %}
 
         <button class="mz-quick-view" data-mz-productcode="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button>
  

@@ -2,7 +2,7 @@
     <ul class="mz-scrollnav-list nav">
         <li class="mz-scrollnav-item active">
             <a class="mz-scrollnav-link" data-toggle="tab" href="#settings">
-                {{ labels.accountSettings }}
+                {{ labels.myAccount }}
             </a>
         </li>
         <li class="mz-scrollnav-item">
@@ -15,12 +15,12 @@
                 {{ labels.addressBook }}
             </a>
         </li>
-         <li class="mz-scrollnav-item">
+        <li class="mz-scrollnav-item">
             <a class="mz-scrollnav-link" data-toggle="tab" href="#orderhistory">
                 {{ labels.orderHistory }}
             </a>
         </li>
-         <li class="mz-scrollnav-item">
+        <li class="mz-scrollnav-item">
             <a class="mz-scrollnav-link" data-toggle="tab" href="#paymentmethods">
                 {{ labels.paymentMethods }}
             </a>
@@ -32,6 +32,10 @@
             </a>
         </li>
         {% endif %}
+        <li class="mz-scrollnav-item">
+            <a class="mz-scrollnav-link" href="/logout">
+                {{ labels.logOut }}
+            </a>
+        </li>
     </ul>
 </nav>
-{% require_script "modules/scroll-nav" %}
