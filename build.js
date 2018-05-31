@@ -9,7 +9,8 @@
         bootstrap:"vendor/bootstrap/js/bootstrap.min",
         blockui: "vendor/jquery.blockUI/jquery.blockUI.min",
         elevatezoom:"vendor/elevate-zoom/elevateZoom",
-        bxslider: "vendor/jquery-bxslider/jquery.bxslider.min"
+        bxslider: "vendor/jquery-bxslider/jquery.bxslider.min",
+        "session-management": "vendor/sessionManagement/sessionManagement"
     },
     dir: "compiled/scripts/",
     locale: "en-us",

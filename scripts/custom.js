@@ -2,6 +2,26 @@ define([
 	"modules/jquery-mozu",
 	"bxslider" 
 ], function( $, bxslider) { 
+
+	//home slider
+	$('#mz-home-slider .slider').bxSlider({
+		auto: false,
+		useCSS: false,
+		speed: 1000,  
+		minSlides: 1,
+		maxSlides: 1,
+		moveSlides: 1,
+		slideMargin: 0,
+		infiniteLoop: false,
+		pager: true,
+		hideControlOnEnd: true,
+		touchEnabled: true,
+		onSliderLoad: function() {
+			$(".slider").css("visibility", "visible");
+		}
+	});
+	//home slider
+	
 	$(document).ready(function(){ 
 
 		// Check if sitenav-item has dropdown
@@ -106,6 +126,9 @@ define([
 		});
 
 		// Blog Facets
+		$(".mz-facet-row").click(function(){ 
+			$(this).toggleClass("active");   
+		});
 		$("#lcBlogFacets .mz-facet-row").each(function(){
 			$(".mz-facet-title").click(function(){ 
 				$(this).parent(".mz-facet-row").toggleClass("active");   
