@@ -600,6 +600,10 @@
   "myCart"                                 :   "My cart",
   "summaryOfCharges"                       :   "Summary of charges",
   "yourSaved"                              :   "Your Saved",
+  "yourOrderEmailText"                     :   "Look for a summary of your order at",
+  "questionconnectWithUs"                  :   "Question? connect with us!",
+  "saved"                                  :   "Saved",
+  "savedMsg"                               :   "Look for email arriving very soon",
 
   // directory modal popup
   "optionsPopup"                          : "Almost there.. first tell us what to find for you.",
