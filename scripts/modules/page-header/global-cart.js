@@ -5,10 +5,15 @@ define([
     "modules/cart-monitor",
     "modules/api",
     'modules/models-cart',
-    "pages/cart"
+    "pages/cart",
+    "session-management"
 ], 
-function ($, Hypr, Backbone, CartMonitor, api, cartModel, cart) {
-   
+function ($, Hypr, Backbone, CartMonitor, api, cartModel, cart, sessionManagement) { 
+    if (require.mozuData('user').isAuthenticated) {
+        $(window).sessionManagement(Hypr.getThemeSetting('sessionTimeout'), function() {
+            window.location.href = '/logout';
+        });
+    }
         var GlobalCart = {
             update: function() {
                 api.get("cart").then(function(body){

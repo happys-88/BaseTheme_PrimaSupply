@@ -21,16 +21,19 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
 							$.each(productValue.variations, function(index, variationsValue){
 							sum += variationsValue.inventoryInfo.onlineStockAvailable;
 							});
+							var stockThreshold = HyprLiveContext.locals.themeSettings.stockThreshold;
+							var outOfStock = HyprLiveContext.locals.themeSettings.outOfStock;
 							if(sum < 10 && sum !== 0){
 								$("#"+getProductCode+"").show();
-								$("#"+getProductCode+"").html("Only "+sum+" is left");
+								$("#stock-messages-"+getProductCode+"").hide();
+								$("#"+getProductCode+"").html(stockThreshold.replace("{0}", sum));
+
 							}
-							if(sum > 0){
-								$('[data-productcode='+getProductCode+']').removeClass("is-disabled").removeAttr("disabled");
-							}
+							
 							if(sum === 0){
+								$('[data-mz-productcode='+getProductCode+']').attr("disabled", true);
 								$("#"+getProductCode+"").show();
-								$("#"+getProductCode+"").html("Out of stock");
+								$("#"+getProductCode+"").html(outOfStock);
 							}
 						}
 				});

@@ -55,5 +55,3 @@
     {% endif %}
   </div>
 </div>
-
-{% require_script "widgets/home-slider" %}
