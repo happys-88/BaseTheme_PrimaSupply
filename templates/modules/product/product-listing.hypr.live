@@ -58,7 +58,8 @@
             {% endif %} 
         {% endwith %}
 
-        {# <button class="mz-quick-view" data-mz-productcode="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button> #}
+        <button class="mz-quick-view" data-mz-productcode="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button>
+        
         <div class="mz-product-msg">
             <div class="stock-messages" id="stock-messages-{{ model.productCode }}">
                 {% if model.inventoryInfo.onlineStockAvailable < 10 and model.inventoryInfo.onlineStockAvailable > 0 %}
