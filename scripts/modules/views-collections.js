@@ -14,7 +14,7 @@ define([
 
     function factory(conf) {
         var _$body = conf.$body;
-        console.log("CONF : "+_$body);
+        console.log("CONF : "+conf.template);
         var _dispatcher = UrlDispatcher;
         var ROUTE_NOT_FOUND = 'ROUTE_NOT_FOUND';
 

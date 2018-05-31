@@ -6,7 +6,7 @@
 
 {% block item-listing-extras %}
 	{% if model.id %}
-		<div class="col-md-9">
+		<div class="col-md-9 col-xs-12">
 			{% if editing.added == model.id %}
 				<div  class="mz-itemlisting-prompt is-success">
 					<p>{{ labels.addedToCart|string_format(model.product.name) }}</p>
@@ -24,7 +24,7 @@
 {% endblock item-listing-extras %}
 
 {% block item-listing-actions %}
-	<div class="col-md-3 text-right">
+	<div class="col-md-3 col-xs-12 text-right">
 		<a class="mz-itemlisting-action" href="javascript:;" data-mz-action="beginRemoveItem" data-mz-item-id="{{ model.id }}"><i class="fa fa-times-circle"></i> {{ labels.remove }}</a>
 		<a class="mz-button mz-itemlisting-action" href="javascript:;" data-mz-action="addItemToCart" data-mz-item-id="{{ model.id }}">{{ labels.addToCart }}</a>
 	</div>

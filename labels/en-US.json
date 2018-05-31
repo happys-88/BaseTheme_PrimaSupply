@@ -478,8 +478,6 @@
   "enterEmailAddress"                      :   "Enter Email Address",
   "join"                                   :   "Join",
 
-  "viewOnCart"                             :   "See low price in cart",
-  "viewOnLogin"                            :   "Login for price",
   "quickView"                              :   "Quick View",
   "shopByBrandHeading"                     :   "Shop Brands We Love",
   "shopByCategoryHeading"                  :   "Shop By Category",
@@ -581,5 +579,24 @@
   "signUpForSpecialOffers"                 :   "Sign Up For Special Offers & Information",
   "myCart"                                 :   "My cart",
   "summaryOfCharges"                       :   "Summary of charges",
-  "yourSaved"                              :   "Your Saved"
+  "yourSaved"                              :   "Your Saved",
+
+  // directory modal popup
+  "optionsPopup"                          : "Almost there.. first tell us what to find for you.",
+  "selectOptions"                         : "SELECT OPTIONS",
+  "itemSubtotal"                          : "Item Subtotal",
+  "addToCartSuccess"                      : "Success! This item has been added to your cart.",
+  "addOnsSelect"                          : "CONSIDER THESE POPULAR ADD ONS",
+  "viewOnCart"                            : "SEE LOW PRICE IN CART",
+  "viewOnLogin"                           : "LOGIN FOR PRICE",
+  "viewOnCartForPopup"                    : "See price in cart",
+  "viewOnLoginForPopup"                   : "Log In for Price",
+  "loginForPrice"                         : "Some items need",
+  "loginForPriceTwo"                      : "login for pricing",
+  "viewCartPopup"                         : "VIEW CART",
+  "removeFromPopup"                       : "REMOVE ITEM",
+  "viewOnLoginErrMsg"                     : "Either Login for pricing or remove the Log in for price addon selection.",
+
+  //Forget password
+  "forgetPasswordMsg"                     :  "Our apologies for any inconvenience trying to login. Let's try and recover your password. To have your password reset, enter the email address associated to your Prima Supply Explorer account below."
 }
