@@ -1,28 +1,27 @@
 {% with model|get_product_attribute("tenant~show-price") as showPriceAttr %}
     {% if showPriceAttr.attributeDetail.name %} 
-        
         {% if showPriceAttr.values|first|prop("value") == 'view-on-cart' %} 
             {% if priceTxt == "no" %} 
                 {{ labels.viewOnCartForPopup }}
             {% else %}
-                <del  class="mz-productlisting-hide-price">
-                  $XXX.XX
-                </del> <br> <span class="orange-text">{{ labels.viewOnCart }}</span>
+                <div  class="mz-productlisting-hide-price">$XXX.XX</div>
+                <div class="orange-text">{{ labels.viewOnCart }}</div>
             {% endif %}
         {% endif %}
         {% if showPriceAttr.values|first|prop("value") == 'view-on-login' %} 
             {% if user.isAuthenticated %}
                 {% include "modules/product/price-stack-two" %}
             {% else %}
-                <del class="mz-productlisting-hide-price">$XXX.XX</del> <br>
-                <a class="mz-button login-for-lowprice" href="javascript:void(0);" data-toggle="modal" data-target="#loginPopup" data-productcode="{{model.productCode}}">{{ labels.viewOnLogin }}</a>
+                <div class="mz-productlisting-hide-price">$XXX.XX</div>
+                <div>
+                    <a class="mz-button login-for-lowprice" href="javascript:void(0);" data-toggle="modal" data-target="#loginPopup" data-productcode="{{model.productCode}}">{{ labels.viewOnLogin }}</a>
+                </div>
             {% endif %}
         {% endif %}
         {% if showPriceAttr.values|first|prop("value") == 'view' %} 
             {% include "modules/product/price-stack-two" %}
         {% endif %}
-        {% else %}
-            {% include "modules/product/price-stack-two" %}
+    {% else %}
+        {% include "modules/product/price-stack-two" %}
     {% endif %}
-    
 {% endwith %}

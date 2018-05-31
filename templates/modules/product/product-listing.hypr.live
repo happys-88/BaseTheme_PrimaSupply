@@ -1,30 +1,6 @@
-﻿<div class="stock-threshold-message" id="{{ model.productCode }}"></div>
-{% comment %} Start -  My code for stock messages at category    {% endcomment %}
-
-       <div class="stock-messages" id="stock-messages-{{ model.productCode }}">
-            {% if model.inventoryInfo.onlineStockAvailable < 10 and model.inventoryInfo.onlineStockAvailable > 0 %}
-                <dl>{{ labels.itemInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}</dl>
-                {% else %}
-                        {% if model.inventoryInfo.onlineStockAvailable > 10 %}
-                            <dl>{{ labels.inStock }}</dl>
-
-                        {% endif %}
-            {% endif %} 
-        
-       </div>
-
-       <div class="shipping-messages">
-            {% for propShipping in model.properties %}
-                {% if propShipping.attributeFQN == "tenant~availability" %}
-                    {% for shippingValue in propShipping.values  %}
-                        {{ shippingValue.stringValue }}
-                    {% endfor %}
-                {% endif %}
-            {% endfor %}
-        </div> 
+﻿{% require_script "pages/stock-message" %}
 
 <div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
-    
     <div class="mz-productlisting-image">
         {% block product-image %}
         <a href="{% make_url "product" model %}">
@@ -53,7 +29,9 @@
             <div id="product-rating"></div>
         {% endblock product-code %}
 
-        {% include "modules/product/price-show-stack" %}
+        <div class="mz-price-in-cart">
+            {% include "modules/product/price-show-stack" %}
+        </div>
 
         {% block product-extrainfo %}
             {% if dealOfTheDay %}
@@ -71,27 +49,43 @@
         {% endblock product-extrainfo %}
        
         {% with model|get_product_attribute("tenant~show-price") as showPriceAttr %}
-         {% if showPriceAttr.values|first|prop("value") == 'view-on-login' %}
-           {% if user.isAuthenticated %}
-             {% include "modules/product/product-add-to-cart" %}
-           {% endif %} 
-           {% else %}
-             {% include "modules/product/product-add-to-cart" %}
-         {% endif %} 
-       {% endwith %}
+            {% if showPriceAttr.values|first|prop("value") == 'view-on-login' %}
+                {% if user.isAuthenticated %}
+                    {% include "modules/product/product-add-to-cart" %}
+                {% endif %} 
+            {% else %}
+                {% include "modules/product/product-add-to-cart" %}
+            {% endif %} 
+        {% endwith %}
 
-        <button class="mz-quick-view" data-mz-productcode="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button>
- 
-        {% if not model.inventoryInfo.onlineStockAvailable and not model.variations %}
-            <p class="mz-product-notpurchasable">
-                {{ labels.outOfStock }} 
-                {% comment %}
-                {% for message in model.purchasableState.messages %}
-                    <span>{{ message.message }}</span>
+        {# <button class="mz-quick-view" data-mz-productcode="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button> #}
+        <div class="mz-product-msg">
+            <div class="stock-messages" id="stock-messages-{{ model.productCode }}">
+                {% if model.inventoryInfo.onlineStockAvailable < 10 and model.inventoryInfo.onlineStockAvailable > 0 %}
+                    <div>{{ labels.itemInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}</div>
+                {% else %}
+                    {% if model.inventoryInfo.onlineStockAvailable > 10 %}
+                        <div>{{ labels.inStock }}</div>
+                    {% endif %}
+                {% endif %} 
+            </div>
+
+            <div class="stock-threshold-message" id="{{ model.productCode }}"></div>
+
+            {% if not model.inventoryInfo.onlineStockAvailable and not model.variations %}
+                <div class="mz-product-notpurchasable">{{ labels.outOfStock }}</div>
+            {% endif %}
+
+            <div class="shipping-messages">
+                {% for propShipping in model.properties %}
+                    {% if propShipping.attributeFQN == "tenant~availability" %}
+                        {% for shippingValue in propShipping.values  %}
+                            {{ shippingValue.stringValue }}
+                        {% endfor %}
+                    {% endif %}
                 {% endfor %}
-                {% endcomment %}
-            </p>
-        {% endif %}  
+            </div>
+        </div>
 
         {% with model|get_product_attribute("tenant~new-arrival") as newArrival %}
             {% if newArrival.values|first|prop("value") == true %}
@@ -101,6 +95,5 @@
     </div>
 </div>
 
-{% require_script "pages/stock-message" %}
 
 {% require_script "modules/quickview" %}

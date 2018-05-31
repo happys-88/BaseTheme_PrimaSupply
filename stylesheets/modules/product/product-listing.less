@@ -12,16 +12,12 @@
         text-align: center;
         .mz-button{
             width: 100%;
+            max-width: 147px;
+            line-height: 13px;
         }
-
-        .mz-product-notpurchasable, .items-inStock{ 
-            color: #354051;
+        .mz-product-msg {
             font-size: 12px;
-            position: absolute;
-            right: 0;
-            bottom: 7px;
-            left: 0;
-            margin: 0; 
+            margin-top: 6px;
         }
     }
     .mz-productlisting-title {
@@ -63,9 +59,12 @@
 }
 
 .mz-productlisting-hide-price {
-    color: #bbbaba;
+    font-weight: 700;
+    float: left;
+    line-height: 30px;
+    min-height: 30px;
+    width: 100%;
 }
-
 
 /**** Product Listing Styling ****/ 
 .mz-productlist{ 
@@ -88,7 +87,7 @@
     &.mz-productlist-tiled { 
         .mz-productlist-item {
             //width: 25%;
-            margin-bottom: 43px;
+            margin-bottom: 30px;
             text-align: center;
             .mz-productlisting {
                 .mz-productlisting-image{
@@ -102,6 +101,7 @@
                 .mz-productlisting-title {
                     color: #495363;
                     font-size: 14px;
+                    min-height: 60px;
                     text-decoration: none;
                 }
                 .mz-productlisting-productcode {
@@ -122,18 +122,25 @@
                     transform: rotate(-90deg);
                     text-transform: uppercase;
                 }
-               
             }
             &:hover {
                 box-shadow: none;
             }
-           
+            .mz-price-in-cart {
+                float: left;
+                width: 100%;
+                min-height: 45px;
+                .orange-text {
+                    font-size: 12px;
+                    text-transform: capitalize;
+                }
+            }
             .mz-pricestack {
                 font-weight: 700;
-                position: absolute;
-                right: 0;
-                bottom: 85px;
-                left: 0;
+                float: left;
+                line-height: 30px;
+                min-height: 30px;
+                width: 100%;
                 .mz-price {
                     font-size: 14px;
                     color: #495363;
@@ -161,22 +168,19 @@
                 }
                 
             }
-            .login-for-lowprice{  
+            .login-for-lowprice {  
                 background: #00adce;
-                color: #fff;
                 border: none;
-                border-radius: 0;
-                font-weight: 500;
-                padding: 10px 5px;
-                text-transform: uppercase;
-                font-size: 14px;
-                position: absolute; 
-                right: 0;
-                bottom: 30px;
-                left: 0;
-                width: 150px; 
-                margin: 0 auto;
+                color: #fff;
             }
+        }
+    }
+}
+
+.mz-category {
+    .mz-productlist-tiled {
+        .mz-productlist-item {
+            min-height: 412px;
         }
     }
 }
