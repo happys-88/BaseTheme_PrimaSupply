@@ -27,6 +27,62 @@
                     "click .bx-controls-direction a":"clickOnNextOrprevious"
 
                 },
+                initialize: function() {
+                  // console.log("initialze call");
+                   
+                  //  console.log(this);
+                   var variations = this.model.get('variations');
+                   
+                    if(variations !== undefined)
+                    {
+                        var stockArray = [];
+                        var sum = 0;
+                        for(var i=0; i<variations.length; i++)
+                        {
+                            stockArray.push(variations[i].inventoryInfo.onlineStockAvailable);
+                            sum += variations[i].inventoryInfo.onlineStockAvailable;
+                        }
+                        this.model.set({'totalCount': sum});
+
+                        var outOfStock = _.every(stockArray, function(outOfStock) { return outOfStock === 0; });
+                        if(outOfStock){
+                        this.model.set({'stockStatus': 'Temporarily out of stock'});
+                        }
+                        else
+                        {
+                            var inStock =_.contains(stockArray, 0);
+                            if(!inStock){
+                                var numberInStock = _.find(stockArray, function(numberInStock) { return numberInStock < 10; });
+                                if(numberInStock)
+                                {
+                                    this.model.set({'stockStatus': 'Only '+numberInStock+' in stock. Better hurry!'});
+                                    this.model.set({'numberInStock': 'true'});
+                                }
+                                else
+                                {
+                                    this.model.set({'stockStatus': 'In Stock'});
+                                }
+                            }
+                            else
+                            {
+                                var numberInStocks = _.find(stockArray, function(numberInStocks) 
+                                { 
+                                    return numberInStocks > 0;
+                                });
+                                if(numberInStocks && inStock)
+                                {
+                                    this.model.set({'stockStatus': 'Some options in stock'});
+                               
+                                }
+                                else
+                                {
+                                    this.model.set({'stockStatus': ''+numberInStocks+' in stock. Better hurry!'});
+                                    this.model.set({'numberInStock': 'true'});
+                                }
+                            }
+                        } 
+                    }
+                },
                 render: function () {
                     Backbone.MozuView.prototype.render.call(this);
                     this.corousel();

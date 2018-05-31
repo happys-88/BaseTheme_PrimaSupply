@@ -1,6 +1,7 @@
-﻿<div id="{{ model.productCode }}"></div>
+﻿<div class="stock-threshold-message" id="{{ model.productCode }}"></div>
 {% comment %} Start -  My code for stock messages at category    {% endcomment %}
-       <div class="stock-messages">
+
+       <div class="stock-messages" id="stock-messages-{{ model.productCode }}">
             {% if model.inventoryInfo.onlineStockAvailable < 10 and model.inventoryInfo.onlineStockAvailable > 0 %}
                 <dl>{{ labels.itemInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}</dl>
                 {% else %}

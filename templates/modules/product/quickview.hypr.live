@@ -1,5 +1,6 @@
 <div class="modal-dialog destroy" role="document">
     <div class="modal-content">
+        {{ model.inventoryInfo.onlineStockAvailable }} 
         <div class="modal-header">
             <h4 class="modal-title">{{ labels.quickView }}</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -57,6 +58,145 @@
                     </div>
                     <!--/ Short description -->
 
+                    {{ model.inventoryInfo.onlineStockAvailable }} 
+                    <div class="stock-messages-in-quickview">
+                      
+                        {% if model.inventoryInfo.onlineStockAvailable > 0  and model.inventoryInfo.onlineStockAvailable != "" %}
+                          <p class="mz-productdetail-notpurchasable">
+                            {% for property in model.properties %}
+                              {% if property.values and not property.isHidden and property.attributeDetail.name == 'Display out of stock' %}
+
+                                {% for v in property.values %}
+                                  <dl>  
+                                   
+                                    {% if v.value == 0 %}
+                                        {{ v.value }} 
+                                      {% if model.inventoryInfo.onlineStockAvailable < 10 %}
+                                            <dl>{{ labels.numberInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}</dl>
+                                            <dl>{{ labels.distributorStockMessage }}</dl>
+                                      {% endif %}
+                                      {% if model.inventoryInfo.onlineStockAvailable >= 10 %}
+                                       
+                                            <dl>{{ labels.distributorStock }}</dl>
+                                            <dl>{{ labels.distributorStockMessage }}</dl>
+                                      {% endif %} 
+                                    {% endif %}
+                                 
+                                    {% if v.value == 2 %}
+                                      {% if model.inventoryInfo.onlineStockAvailable < 10 %}
+                                           <dl>{{ labels.numberInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}</dl>
+                                           <dl>{{ labels.preOrderOnlyMessage }}</dl>
+                                      {% endif %} 
+                                      {% if model.inventoryInfo.onlineStockAvailable >= 10 %}
+                                           <dl>{{ labels.preOrderOnly }}</dl>
+                                           <dl>{{ labels.preOrderOnlyMessage }}</dl>
+                                      {% endif %} 
+                                    {% endif %}
+
+                                    {% if v.value == 3 %}
+                                      {% if model.inventoryInfo.onlineStockAvailable < 10 %}
+                                          <dl>{{ labels.numberInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}</dl>
+                                          <dl>{{ labels.builtToOrderMessage }}</dl>
+                                      {% endif %} 
+                                      {% if model.inventoryInfo.onlineStockAvailable >= 10 %}
+                                          <dl>{{ labels.builtToOrder }}</dl>
+                                          <dl>{{ labels.builtToOrderMessage }}</dl>
+                                      {% endif %} 
+                                   {% endif %}
+                                 </dl>
+                                {% endfor %}
+                              {% endif %}
+                            {% endfor %}
+                          </p>
+                        {% else %}
+                            
+                          <p class="mz-productdetail-notpurchasable">
+                            {% if not model.variations  %}
+                              {% for property in model.properties %}
+                                {% if property.values and not property.isHidden and property.attributeDetail.name == 'Display out of stock' %}
+                                  {% for v in property.values %}
+                                    <dl>
+                                      {% if v.value == 0 %}
+                                        {% for properties in model.properties %}
+                                          {% if properties.values and not properties.isHidden and properties.attributeDetail.name == 'Expected Ship Date Message' %}
+                                              {% for u in properties.values %}
+                                                  <dl>{{u.stringValue}}</dl>
+                                              {% endfor %}
+                                          {% endif %}
+                                        {% endfor %}  
+                                      {% endif %}
+                                      {% if v.value == 2 %}
+                                        {% for properties in model.properties %}
+                                          {% if properties.values and not properties.isHidden and properties.attributeDetail.name == 'Expected Ship Date Message' %}
+                                          {{u.stringValue}} 
+                                            {% for u in properties.values %}
+                                                <dl>{{u.stringValue}}</dl>
+                                            {% endfor %}
+                                          {% endif %}
+                                        {% endfor %}
+                                      {% endif %}
+                                      {% if v.value == 3 %}
+                                        {% for properties in model.properties %}
+                                          {% if properties.values and not properties.isHidden and properties.attributeDetail.name == 'Expected Ship Date Message' %}
+                                            {% for u in properties.values %}
+                                              <dl>{{u.stringValue}}</dl>
+                                            {% endfor %}
+                                          {% endif %}
+                                        {% endfor %}
+                                      {% endif %}
+                                    </dl>
+                                  {% endfor %}
+                                {% endif %}
+                              {% endfor %}
+                            {% else %}
+                           
+                            {% if model.stockStatus and model.stockStatus!= "" %}
+                          
+                          {% if model.numberInStock %}
+                            <dl> {{ model.stockStatus }} </dl>
+                            <dl> {{ labels.someOptionInStockMessage }} </dl>
+                          {% endif %}
+                          {% if model.stockStatus == "Some options in stock" %}
+                             {% if model|get_product_attribute("tenant~expected_ship_date_message") %}
+                                    <dl> {{ model.stockStatus }} </dl>
+                                    <dl>{{ model|get_product_attribute_value("tenant~expected_ship_date_message") }}</dl>
+                              {% else %}
+                                    <dl> {{ model.stockStatus }} </dl>
+                                    <dl> {{ labels.someOptionInStockMessage }} </dl>      
+                              {% endif %}
+                          
+                          {% endif %}
+                          {% if model.stockStatus == "Temporarily out of stock" %}
+                            {% if model|get_product_attribute("tenant~expected_ship_date_message") %}
+                                    <dl> {{ model.stockStatus }} </dl>
+                                    <dl>{{ model|get_product_attribute_value("tenant~expected_ship_date_message") }}</dl>
+                            {% else %}
+                                    <dl> {{ model.stockStatus }} </dl>
+                                    <dl> {{ labels.temporarilyOutOfStockMessage }} </dl>      
+                            {% endif %}
+                         
+                          {% endif %}
+                          {% if model.stockStatus == "In Stock" %}
+                            <dl> {{ model.stockStatus }} </dl>
+                            <dl> {{ labels.inStockMessage }} </dl>
+                          {% endif %}
+                        {% endif %}
+                      {% endif %}
+                      </p>
+
+                                {% if not model.purchasableState.isPurchasable %}
+                                 <p class="mz-productdetail-notpurchasable">
+                                  {{ labels.notPurchasable }}:
+                                  {% for message in model.purchasableState.messages %}
+                                      <span>{{ message.message }}</span>
+                                  {% endfor %}
+                                 </p>
+                                {% endif %}
+
+
+                          {% endif %}
+
+                    </div>
                     <!-- Short options -->
                     {% if model.options and model.options.length > 0 %}
                         <div class="mz-productdetail-options mz-l-stack-section">
