@@ -191,8 +191,8 @@
   "createAccount"                         : "Create an account for easy checkout on future orders",
   "placeOrder"                            : "Place Order",
   "orderConfirmation"                     : "Order Confirmation",
-  "confirmationText"                      : "Thank you for your order!  You will receive an email confirmation.",
-  "yourOrderNumber"                       : "Your order number is <strong>{0}</strong>.",
+  "confirmationText"                      : "Thank you for your order!",
+  "yourOrderNumber"                       : "Your order number confirmation is <strong>{0}</strong>.",
   "payments"                              : "Payments",
   "orderDetails"                          : "Order Details",
   "orderNumber"                           : "Order Number",
@@ -558,6 +558,9 @@
   "myInformation"                          :   "My Information",
   "welcome"                                :   "Welcome",
   "items"                                  :   "items",
+  "resetPasswordMsg"                       :   "Enter a new password for your account",
+  "forgetPasswordMsg"                      :  "Our apologies for any inconvenience trying to login. Let's try and recover your password. To have your password reset, enter the email address associated to your Prima Supply Explorer account below.",
+  "clickHere"                              :   "Here",
 
   //QuickView
   "fullProductDetails"                     :   "Full product details",
@@ -612,8 +615,5 @@
   "loginForPriceTwo"                      : "login for pricing",
   "viewCartPopup"                         : "VIEW CART",
   "removeFromPopup"                       : "REMOVE ITEM",
-  "viewOnLoginErrMsg"                     : "Either Login for pricing or remove the Log in for price addon selection.",
-
-  //Forget password
-  "forgetPasswordMsg"                     :  "Our apologies for any inconvenience trying to login. Let's try and recover your password. To have your password reset, enter the email address associated to your Prima Supply Explorer account below."
+  "viewOnLoginErrMsg"                     : "Either Login for pricing or remove the Log in for price addon selection."
 }
