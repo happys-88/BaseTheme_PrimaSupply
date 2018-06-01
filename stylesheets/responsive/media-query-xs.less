@@ -66,6 +66,17 @@
 		}
 	}
 	
+	/*** Common top page heading ***/ 
+	.mz-l-container {
+	  	>h1 {
+			&.mz-pagetitle {
+			    font-size: 22px;
+			    margin-bottom: 20px;
+			}
+		}
+	}
+	/***\ Common top page heading ***/
+	
 	/**** Mobile Navigation ****/ 
 	#mz-mobilenav-container {
 		width: 100%;
@@ -84,7 +95,7 @@
 		line-height: 24px;
 		margin-bottom: @gutter;
 		span{
-			padding-left: 15px;   
+			padding-right: 15px;    
 		}
 	}
 
@@ -608,23 +619,15 @@
 	}
 
 	/*** Cart ***/
+	#global-cart{
+		display: none !important;  
+	}
  	.mz-cart {
 		.mz-carttable-total-row {
-			// display: -webkit-box;
-			// display: -webkit-flex;
-			// display: -ms-flexbox;
-			// display: flex;
-			// -webkit-flex-wrap: wrap;
-			// -ms-flex-wrap: wrap;
-			// flex-wrap: wrap;
 			input#coupon-code {
-				width: 44vw;
+				width: 44vw; 
 			}
-			// .estimated-tax-shipping {
-			// 	//order:-2;
-			// }
 			.mz-carttable-checkout-couponcode{
-				//order:-2;
 				button{
 				    width: 23vw;
                     margin-left: 12px;
@@ -823,7 +826,7 @@
 		.mz-banner{
 			float: left;
 			width: 100%; 
-			margin-bottom: 12px;  
+			margin-bottom: 12px;   
 			.col-xs-12{
 				padding: 0; 
 			}
@@ -832,9 +835,10 @@
 				line-height: 24px; 
 			}		
 		}
-		.mz-content-section{
+
+		.mz-content-section{ 
 			.col-xs-12{
-				&.no-padding-left{ 
+				&.no-padding-left{  
 					padding: 0;  
 				}
 			}
@@ -940,6 +944,38 @@
 				} 
 			}
 		}
+		.mz-blog-content-detail{ 
+			.mz-featured-products{
+				.mz-productlist, .mz-productlist-tiled{
+					.mz-productlist-item{
+						width: 135px !important;   
+						padding: 0 5px;   
+						.mz-productlisting{
+							.mz-productlisting-image{
+								img{
+									max-width: 120px;
+									max-height: 120px;    
+								}
+							}
+						}
+					}
+				}
+				.bx-wrapper{ 
+					padding: 0 10px;  
+					.bx-prev{
+						left: -5px;  
+					}
+					.bx-next{
+						right: -5px; 
+					}
+				}
+			} 
+		}
+		
+		.mz-blog-pagination{ 
+			width: 100%;
+			text-align: center;  
+		}
 	} 
 	/**** Learning Center Ends ****/ 
 
@@ -974,7 +1010,8 @@
 		}
 	}
 	.mz-login-page,
-	.mz-forget-password {
+	.mz-forget-password,
+	.mz-reset-password {
 		padding: 15px 15px 30px;
 		.mz-pagetitle {
 		    font-size: 20px;

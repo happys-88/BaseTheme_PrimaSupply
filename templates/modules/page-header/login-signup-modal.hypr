@@ -21,7 +21,7 @@
                             </div>
 
                             <div class="input-group">
-                                <a href="/user/forgotpassword" class="mz-forgot" data-mz-action="launchforgotpassword">{{ labels.forgotPasswordLink }}</a>
+                                <a href="/user/forgotpassword" class="mz-forgot">{{ labels.forgotPasswordLink }}</a>
                             </div>
                            
                             <button class="mz-button mz-button-large mz-login-button" data-mz-action="loginpage-submit">{{ labels.logIn }}</button>
