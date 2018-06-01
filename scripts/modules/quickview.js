@@ -7,15 +7,18 @@
         'modules/models-product',
         'bxslider',
         "pages/cart",
-        "modules/models-cart"
+        "modules/models-cart",
+        "modules/page-header/global-cart",
+        "modules/cart-monitor",
+        "hyprlive"
 
-    ], function($, _, api, Backbone, HyprLiveContext, ProductModels, bxslider, cart, cartModel) {
+    ], function($, _, api, Backbone, HyprLiveContext, ProductModels, bxslider, cart, cartModel, GlobalCart, CartMonitor, Hypr) {
     console.log("quicknew");
     $(document).on('click', '.mz-quick-view', function (event) {
         var $Elem = $(event.currentTarget);
-        var prdCode = $Elem.attr("data-mz-productcode");
+        var prdCode = $Elem.attr("data-mz-productcode-quickview");
         api.request("GET", "/api/commerce/catalog/storefront/products/" + prdCode).then(function (body) {
-            var quickviewv = Backbone.MozuView.extend({
+            var quickview = Backbone.MozuView.extend({
                 templateName: 'modules/product/quickview',
                 additionalEvents: {
                     'click .addtocart': 'AddToCart',
@@ -219,12 +222,22 @@
            
             var product = new ProductModels.Product(body);
             var imagecount= product.get("content").get("productImages").length;
-            console.log(imagecount);
-            var Quickviewv = new quickviewv({
+            var Quickview = new quickview({
                 model: product,
                 el: $('#quickViewModal')
             });
-            Quickviewv.render();
+            Quickview.render();
+            product.on('addedtocart', function (cartitem) {
+                console.log(GlobalCart);
+              
+                if (cartitem && cartitem.prop('id')) {
+                    CartMonitor.addToCount(product.get('quantity'));
+                    GlobalCart.update();
+                } else {
+                    product.trigger("error", { message: Hypr.getLabel('unexpectedError') });
+                }
+            });
+    
            
             $('#quickViewModal').on('hidden.bs.modal', function (e) {
                 $(".destroy").remove();

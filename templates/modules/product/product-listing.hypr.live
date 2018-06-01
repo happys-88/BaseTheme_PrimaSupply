@@ -80,7 +80,7 @@
          {% endif %} 
        {% endwith %}
 
-        <button class="mz-quick-view" data-mz-productcode="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button>
+        <button class="mz-quick-view" data-mz-productcode-quickview="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button>
  
         {% if not model.inventoryInfo.onlineStockAvailable and not model.variations %}
             <p class="mz-product-notpurchasable">
@@ -100,7 +100,6 @@
         {% endwith %}   
     </div>
 </div>
-
+{% require_script "modules/quickview" %}
 {% require_script "pages/stock-message" %}
 
-{% require_script "modules/quickview" %}

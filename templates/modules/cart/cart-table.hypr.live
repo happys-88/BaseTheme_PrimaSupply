@@ -1,4 +1,4 @@
-
+{% if not model.isEmpty %}
 <div class="mz-carttable-header col-xs-12 hidden-xs">
     <div class="mz-carttable-header-product col-md-6 text-left">{{ labels.shoppingCart }}</div>
     <div class="mz-carttable-header-qty col-md-2 col-sm-2 text-center">{{ labels.qty }}</div>
@@ -6,8 +6,6 @@
     <div class="mz-carttable-header-price col-md-2 col-sm-2 text-right">{{ labels.cartPrice }}</div>
 </div>
 <div class="mz-carttable-{% if Model.IsEmpty %} isempty {% else %}items{% endif %} col-xs-12">
-  {% if not model.isEmpty %}
-  
     {% for item in model.items %}
     
       <div class="mz-carttable-item row" id="{{ item.product.productCode }}">
@@ -115,13 +113,7 @@
         </div>
       </div>
     {% endfor %}
-{% else %}
-  <div class="mz-carttable-noitems">
-    <div colspan="5">
-        {{ labels.cartEmpty }}
-    </div>
-  </div>
-  {% endif %}
+
 </div>
 
 <div class="mz-carttable-total-main-container col-xs-12">
@@ -187,10 +179,12 @@
     {% include "modules/cart/cart-buttons" %}
   </div>
 
-  <div class="col-sm-6 col-xs-12 text-left"> 
-    {% if not model.isEmpty %}
-      <a class="mz-empty-cart" href="javascript:void(0);" data-mz-action="empty">{{ labels.emptyCart }}</a>
-    {% endif %}
-  </div>
-
 </div>
+{% else %}
+  <div class="mz-carttable-noitems">
+      <div class="col-xs-12 mz-cart-empty text-center">
+          <p>{{ labels.cartEmpty }}</p>
+          <a class="mz-button mz-button-large continue-btn" href="/">{{ labels.continueShopping }}</a> 
+      </div>
+  </div>
+{% endif %}

@@ -10,31 +10,26 @@
             <div class="modal-body">
                 {% if model.addonsPopup %}
                     <div class="mz-product-addons">
-                        <h4 class="mz-l-stack-sectiontitle">{{ model.content.productName }}</h4>
+                        <h4 class="mz-l-stack-sectiontitle"><a class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName}}</a></h4>
                         <div class="mz-product-image">
-                            <div class="product-slider">
-                                <div class="bxslider-Quickview" id="quick-slider">
-                                    {% for image in model.content.productImages %}
-                                        <div class="product-image-slide">
-                                            <img src="{{ image.imageUrl }}" />
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
+                           
+                            {% with model.mainImage as image %}
+                            <img class="mz-itemlisting-thumb-img" src="{% make_url "image" image with max=120 as_parameters %}" {% if image.altText %}alt="{{ image.altText }}"{% endif %} />
+                            {% endwith %}
                         </div>
                         <div class="mz-productdetail-options mz-l-stack-section">
-                            <div class="mz-carttable-item-remove">
+                            <div class="mz-carttable-item-remove col-xs-5">
                                 <a href="javascript:;" data-mz-removeItem data-mz-cart-item="{{ model.cartItemId }}">
-                                    {{ labels.removeFromPopup }}
+                                    <i class="fa fa-times"></i>{{ labels.removeFromPopup }}
                                 </a>
                             </div>
-                            <div id="cart">
-                                <a class="mz-utilitynav-link mz-utilitynav-link-cart" href="/cart">
+                            <div id="cart" class="col-xs-7" >
+                                <a class="mz-utilitynav-link mz-utilitynav-link-cart mz-button mz-button-large" href="/cart">
                                     {{ labels.viewCartPopup }}
                                 </a>
                             </div>
                             {% if model.hasAddon === true %}
-                                <h4 class="mz-l-stack-sectiontitle">
+                                <h4 class="mz-l-stack-sectiontitle add-on-section-title">
                                     {{ labels.addOnsSelect }}
                                 </h4>
                                 {% include "modules/product/product-addons-for-popup" %}
@@ -44,23 +39,25 @@
                             {{ labels.itemSubtotal }}: 
                             {% include "modules/product/price-show-stack" %}
                         </div>
-                        <button type="button" class="close" data-dismiss="modal">
+                        <div class="cart-cont-shop row clearfix">
+                        <button type="button" class="col-sm-7 col-xs-7 continue-shopping mz-button mz-button-large " data-dismiss="modal">
                             {{ labels.continueShopping }}
                         </button>
                         <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
                         {% if model.hasAddon === true %}
                             
                             <div class="mz-productdetail-conversion-buttons">
-                                <button class="addtocartaddon mz-productdetail-addtocart mz-button mz-button-medium  {% if not model.inventoryInfo.onlineStockAvailable %} is-disabled {% endif %}" data-mz-productcode="{{model.variationProductCode|default(model.productCode) }}" >
+                                <button class=" col-sm-5 col-xs-5 addtocartaddon mz-productdetail-addtocart mz-button mz-button-medium  {% if not model.inventoryInfo.onlineStockAvailable %} is-disabled {% endif %}" data-mz-productcode="{{model.variationProductCode|default(model.productCode) }}" >
                                     {{ labels.addToCart }}
                                 </button>
                             </div>
                         {% endif %}
+                     </div>
                     </div>
                 {% else %}
                         <input id="qty-field" class="mz-productdetail-qty text-center mz-carttable-qty-field" type="text" data-mz-cart-item="{{ model.productTypeId }}" value="1" readonly="readonly"data-mz-value='quantity' title="Quantity" style="display: none;">
                         <div class="mz-productdetail-conversion-buttons">
-                            <button class="addtocart mz-productdetail-addtocart mz-button mz-button-medium"  {% if not model.isPurchasable %} disabled="disabled" {% endif %}" data-mz-productcode="{{model.variationProductCode|default(model.productCode) }}" style="display: none;">
+                            <button class="addtocart mz-productdetail-addtocart mz-button mz-button-medium" disabled= "{% if not model.isPurchasable %} disabled {% endif %}" data-mz-productcode="{{model.variationProductCode|default(model.productCode) }}" style="display: none;">
                             </button>
                         </div>
                 {% endif %}

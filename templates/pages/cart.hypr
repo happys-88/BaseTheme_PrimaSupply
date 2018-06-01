@@ -30,6 +30,7 @@
 	            {% include "modules/cart/cart-table" %}
 	        </div>
 		</form>
+	<div id="upsell"></div>
 	<!-- Show empty cart if model is empty -->
 	{% else %}
 		<div class="col-xs-12 mz-cart-empty text-center">
@@ -44,6 +45,6 @@
 			{% dropzone "cart-advert" scope="page" %}
 		</div>
 	</div>
-<div id="upsell"></div>
+
 </div>
 {% endblock body-content %}
