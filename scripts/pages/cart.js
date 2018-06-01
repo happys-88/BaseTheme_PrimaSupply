@@ -17,8 +17,8 @@ define([
                 "change [data-mz-value=usStates]":"populateShipping"*/
                 "change [data-mz-value=usShipping]":"populateDropDowns",
                 "change [data-mz-value=usStates]":"populateDropDowns",
-                "click [data-mz-qty-minus]": "quantityMinus",
-                "click [data-mz-qty-plus]": "quantityPlus"
+                "click [data-mz-qty=minus]": "quantityMinus", 
+                "click [data-mz-qty=plus]": "quantityPlus" 
 
         },
         initialize: function () {
