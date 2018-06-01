@@ -1,5 +1,10 @@
 #global-cart { 
-    .jsut-added{
+    .just-added{  
+        float: right; 
+        font-size: 14px;
+        color: #d05f2a;
+        font-weight: bold;
+        text-transform: uppercase; 
         padding-right: 28px;
     }
     display: none;
@@ -22,7 +27,14 @@
         border-left: 10px solid transparent;
         border-bottom: 10px solid #f63; 
         border-right: 10px solid transparent; 
-    }  
+    } 
+    .no-cart-item{
+        font-size: 16px; 
+        margin: 0 0 15px; 
+        padding: 6px 0;
+        background: #d15f2a;
+        color: #fff;  
+    } 
     .mz-carttable-item{
         .mz-carttable-item-qty{
             .qty-block{
@@ -41,7 +53,10 @@
                     }
                 }           
              }
-       }
+        }
+        .mz-carttable-item-remove{
+            font-size: 11px; 
+        }
     }
    
 }

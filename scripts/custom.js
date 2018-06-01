@@ -197,10 +197,11 @@ define([
 			$('#productSliderMobile').bxSlider({      
 		        minSlides: 1,    
 	            moveSlides: 1,
-	            slideWidth: 300,    
+	            slideWidth: 300,       
 	            slideMargin: 0,  
 	            responsive: true,
-	            controls: false,  
+	            pager: false,   
+	            controls: true,   
 	            speed: 1000, 
 	            infiniteLoop: false,
 	            hideControlOnEnd: true,
@@ -208,6 +209,13 @@ define([
 		            $(".slider").css("visibility", "visible"); 
 		        }  
 			});  
+		}
+
+		// Learning Center Toggle Button
+		if(windowWidth <= 1024){      
+			$(".mz-mobilenav-lcenter .toggle-btn").click(function(){  
+				$(this).toggleClass("active");       
+			}); 
 		}
 
 	});

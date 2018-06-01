@@ -1,8 +1,8 @@
-<div class="col-xs-12">
-    <div class="col-sm-8 col-xs-12 mz-cart-buttons">
+<div class="col-xs-12">  
+    <div class="mz-cart-buttons">
         <button class="mz-button mz-button-large continue-btn">{{ labels.continueShopping }}</button>
         {% if not user.isAnonymous %} 
-            <button class="mz-button mz-button-large">{{ labels.saveCart }}</button> 
+            <button type="button" class="mz-button mz-button-large" data-toggle="modal" data-target="#loginPopup">{{ labels.saveCart }}</button>   
         {% endif %}
 
         {% if user.isAnonymous %}
@@ -12,7 +12,7 @@
         {% endif %}  
     </div>
     {% if siteContext.checkoutSettings.visaCheckout.isEnabled %}
-        <div>
+        <div class="mz-visa-checkout"> 
             <p>or checkout with</p>
             <img src="{{pageContext.visaCheckoutButtonUrl}}" alt="Visa Checkout" class="v-button" role="button"/>       
         </div>

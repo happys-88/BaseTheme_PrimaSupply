@@ -12,14 +12,9 @@
 
 {% dropzone "blog-name" scope="page" %} 
 
-<div class="mz-sitenav-lcenter hidden-xs hidden-sm"> 
-    {% include "modules/learning-center/lc-site-nav" %} 
-</div>
-{% if themeSettings.showBreadcrumbs %}
-    <div class="lc-breadcrumbs">
-        {% include "modules/breadcrumbs" %} 
-    </div>
-{% endif %}  
+<div class="lc-top-section"> 
+    {% include "modules/learning-center/lc-top-section" %}  
+</div>   
 
 <div itemscope itemtype="http://schema.org/Product" class="mz-l-container mz-blog-content">
     <div class="container">

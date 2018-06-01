@@ -191,8 +191,8 @@
   "createAccount"                         : "Create an account for easy checkout on future orders",
   "placeOrder"                            : "Place Order",
   "orderConfirmation"                     : "Order Confirmation",
-  "confirmationText"                      : "Thank you for your order!  You will receive an email confirmation.",
-  "yourOrderNumber"                       : "Your order number is <strong>{0}</strong>.",
+  "confirmationText"                      : "Thank you for your order!",
+  "yourOrderNumber"                       : "Your order number confirmation is <strong>{0}</strong>.",
   "payments"                              : "Payments",
   "orderDetails"                          : "Order Details",
   "orderNumber"                           : "Order Number",
@@ -558,6 +558,9 @@
   "myInformation"                          :   "My Information",
   "welcome"                                :   "Welcome",
   "items"                                  :   "items",
+  "resetPasswordMsg"                       :   "Enter a new password for your account",
+  "forgetPasswordMsg"                      :  "Our apologies for any inconvenience trying to login. Let's try and recover your password. To have your password reset, enter the email address associated to your Prima Supply Explorer account below.",
+  "clickHere"                              :   "Here",
 
   //QuickView
   "fullProductDetails"                     :   "Full product details",
@@ -597,6 +600,10 @@
   "myCart"                                 :   "My cart",
   "summaryOfCharges"                       :   "Summary of charges",
   "yourSaved"                              :   "Your Saved",
+  "yourOrderEmailText"                     :   "Look for a summary of your order at",
+  "questionconnectWithUs"                  :   "Question? connect with us!",
+  "saved"                                  :   "Saved",
+  "savedMsg"                               :   "Look for email arriving very soon",
 
   // directory modal popup
   "optionsPopup"                          : "Almost there.. first tell us what to find for you.",
@@ -604,7 +611,7 @@
   "itemSubtotal"                          : "Item Subtotal",
   "addToCartSuccess"                      : "Success! This item has been added to your cart.",
   "addOnsSelect"                          : "CONSIDER THESE POPULAR ADD ONS",
-  "viewOnCart"                            : "SEE LOW PRICE IN CART",
+  "viewOnCart"                            : "See low price in cart",
   "viewOnLogin"                           : "LOGIN FOR PRICE",
   "viewOnCartForPopup"                    : "See price in cart",
   "viewOnLoginForPopup"                   : "Log In for Price",
@@ -612,9 +619,7 @@
   "loginForPriceTwo"                      : "login for pricing",
   "viewCartPopup"                         : "VIEW CART",
   "removeFromPopup"                       : "REMOVE ITEM",
-  "viewOnLoginErrMsg"                     : "Either Login for pricing or remove the Log in for price addon selection.",
-  "select"                                : "Select",
-
-  //Forget password
-  "forgetPasswordMsg"                     :  "Our apologies for any inconvenience trying to login. Let's try and recover your password. To have your password reset, enter the email address associated to your Prima Supply Explorer account below."
+  "viewOnLoginErrMsg" : "Either Login for pricing or remove the Log in for price addon selection.",
+  "select"                                : "Select" 
+ 
 }

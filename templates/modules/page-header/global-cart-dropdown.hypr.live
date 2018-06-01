@@ -1,7 +1,7 @@
 
 <div class="global-cart-dropdown {% if model.isEmpty==true %} cart-empty {% endif %}">
     {% if model.isEmpty==true %}
-        <p>{{ labels.cartEmpty }}</p>
+        <p class="no-cart-item">{{ labels.cartEmpty }}</p> 
         <a class="mz-button mz-button-large continue-btn" href="/" role="button">{{ labels.continueShopping }}</a>
     {% else %}
         <div class="mz-l-container">
@@ -14,7 +14,7 @@
                 <div class="mz-carttable-header-price-each col-sm-2 text-right no-padding">{{ labels.cartPriceEach }}</div> 
                 <div class="mz-carttable-header-price col-sm-2 text-right">{{ labels.cartPrice }}</div>
               </div>
-              <div class="jsut-added text-right">Just Added</div>
+              <span class="just-added">Just Added!</span>   
             <div class="mz-carttable-{% if Model.IsEmpty %} isempty {% else %}items-global{% endif %} col-xs-12"> 
                 {% if not model.isEmpty %}
                 {% for item in model.items %}
@@ -46,95 +46,90 @@
                           </dl>
                         {% endif %}
 
-                        {% if item.product.productUsage == 'Bundle' %}
-                          <dl class="mz-propertylist">
-                            {% for bundledProduct in item.product.bundledProducts %}
-                            <dt>{{ bundledProduct.productCode }}</dt>&nbsp;
-                            <dd>{{ bundledProduct.name }} ({{ bundledProduct.quantity }})</dd>
-                            {% endfor %}
-                          </dl>
-                        {% endif %}
+                          {% if item.product.productUsage == 'Bundle' %}
+                            <dl class="mz-propertylist">
+                              {% for bundledProduct in item.product.bundledProducts %}
+                              <dt>{{ bundledProduct.productCode }}</dt>&nbsp;
+                              <dd>{{ bundledProduct.name }} ({{ bundledProduct.quantity }})</dd>
+                              {% endfor %}
+                            </dl>
+                          {% endif %}
+                          
+                          {% if item.fulfillmentMethod == 'Pickup' %}
+                            <span class="mz-carttable-item-pickuplocation">
+                                {{ labels.storePickupAt|string_format(item.fulfillmentLocationName)|safe }}
+                            </span>
+                          {% endif %}
+                        </div>
                         
-                        {% if item.fulfillmentMethod == 'Pickup' %}
-                          <span class="mz-carttable-item-pickuplocation">
-                              {{ labels.storePickupAt|string_format(item.fulfillmentLocationName)|safe }}
-                          </span>
-                        {% endif %}
+                      </div>
+                     
+                      <div class="mz-carttable-item-qty col-sm-2">
+                        <div class="qty-block">  
+                          <span class="qty-counter" data-mz-qty="plus" role="button"><i class="mz-icon arrow-up" aria-hidden="true"></i></span> 
+                          <span class="qty-counter" data-mz-qty="minus" role="button"><i class="mz-icon arrow-down"  aria-hidden="true"></i></span>    
+                          <input  class="text-center mz-carttable-qty-field" type="text" min="1" value="{{ item.quantity }}" readonly="readonly" data-mz-cart-item="{{ item.id }}" data-mz-value='quantity' title="Quantity">
+                          <a class="mz-carttable-item-remove" href="javascript:void(0);" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}"><i class="fa fa-times"></i>{{ labels.remove }}</a>
+                        </div> 
+                      </div>
+                      <div class="mz-carttable-item-price col-sm-2 text-right no-padding">
+                        {% include "modules/common/item-price" %}
                       </div>
                       
-                    </div>
-                   
-                    <div class="mz-carttable-item-qty col-sm-2">
-                      <div class="qty-block clearfix">
-                        <div class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="arrow-up" aria-hidden="true"></i></div>
-                        <div class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="arrow-down"  aria-hidden="true"></i></div>   
-                      <input  class="text-center mz-carttable-qty-field" type="text" min="1" value="{{ item.quantity }}" readonly="readonly" data-mz-cart-item="{{ item.id }}" data-mz-value='quantity' title="Quantity">
-                      <a class="mz-carttable-item-remove" href="javascript:void(0);" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}"><i class="fa fa-times"></i>{{ labels.remove }}</a>
-                        
-                    </div>
-                    </div>
-                    <div class="mz-carttable-item-price col-sm-2 text-right no-padding">
-                      {% include "modules/common/item-price" %}
-                    </div>
-                    
-                    <div class="mz-carttable-item-total col-sm-2 text-right">
-                        {% include "modules/common/item-total" %}
-                    </div>
-
-                          
-
-                  </div>
-                
-
+                      <div class="mz-carttable-item-total col-sm-2 text-right"> 
+                          {% include "modules/common/item-total" %}
+                      </div>
+                    </div>  
                   {% endfor %}
-                  {% else %}
+                {% else %}
                  
-                  {% endif %}
-                </div>
+                {% endif %}
+            </div>
                
                  <div class="mz-carttable-total-row col-xs-12 text-right">
                   
                   <!-- Discounts -->
                   <div class="mz-item-discount">
-                  {% for discount in model.orderDiscounts %}
-                    {% if not discount.excluded %}
-                      <div class="mz-carttable-total-row">
-                        <div class="mz-carttable-total-label" >
-                            {{ discount.discount.name }}:
+                    {% for discount in model.orderDiscounts %}
+                      {% if not discount.excluded %}
+                        <div class="mz-carttable-total-row">
+                          <div class="mz-carttable-total-label" >
+                              {{ discount.discount.name }}:
+                          </div>
+                          <div class="mz-carttable-total-wrap">
+                            <span class="mz-carttable-rowtotal">- {{ discount.impact|currency }}</span>
+                          </div>
                         </div>
-                        <div class="mz-carttable-total-wrap">
-                          <span class="mz-carttable-rowtotal">- {{ discount.impact|currency }}</span>
-                        </div>
-                      </div>
-                    {% endif %}
-                  {% endfor %}
-                </div>
-                <!-- Discounts -->
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                  <!-- Discounts -->
 
                   <div class="mz-carttable-total-wrap col-xs-12">
                     {{ labels.subtotal }}:
-                      <span id="mz-carttable-total" class="mz-carttable-total">
-                        <strong>{{ model.subtotal|currency }}</strong>
-                      </span>
-                    </div>
+                    <span id="mz-carttable-total" class="mz-carttable-total">
+                      <strong>{{ model.subtotal|currency }}</strong>
+                    </span>
+                  </div>
                 </div>
                 
                 <div class="mz-cart-buttons col-xs-12">
                       <div class="col-xs-6 col-md-5">
                         {% if not user.isAnonymous %} 
-                          <button class="mz-button mz-button-large save-cart">{{ labels.saveCart }}</button> 
+                          <button type="button" class="mz-button mz-button-large save-cart" data-toggle="modal" data-target="#loginPopup">{{ labels.saveCart }}</button>  
                         {% endif %}
                       </div>
                       <div  class="col-xs-6 col-md-7">
-                          <a class="mz-button mz-button-large" href="/cart">{{ labels.viewCart}}</a>
+                          <a class="mz-button mz-button-large" href="/cart">{{ labels.viewCart}}</a> 
                       </div>     
                 </div>
 
-                <div class="mz-dropzone-empty col-xs-12">Merchandising Zone</div> 
+                  
               </div>
                   
            </div>
        </form>
+       {% dropzone "global-cart" scope "site" %}   
         </div>
     </div>
      
