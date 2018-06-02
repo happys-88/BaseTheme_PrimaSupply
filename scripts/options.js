@@ -1,7 +1,4 @@
 define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "hyprlivecontext", "modules/api", "modules/models-product", "pages/cart", "modules/models-cart", "pages/product","modules/cart-monitor"], function ($, _, Hypr, Backbone, HyprLiveContext, api, ProductModel, cart, cartModel, product, CartMonitor) {  
-    $(document).ready(function(){
-        console.log('options.js ------------');
-    });
     $(document).on("click",".mz-option-add-to-cart", function (event) {
         var $thisElem = $(event.currentTarget);
         var productCode = $thisElem.attr("data-mz-productcode");
@@ -95,7 +92,6 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             var productCode = $optionEl.val();
             var attributeFQN = $optionEl.data('mz-product-option');
             this.model.set('selected'+attributeFQN,productCode);
-            alert(productCode);
             this.configure($(e.currentTarget));
         },
         configure: function ($optionEl) {
@@ -225,7 +221,6 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                 optionModel.set('totalQuant',cartitem.data.quantity);
                 optionModel.set('hasAddon', false);
                 var options = JSON.parse(JSON.stringify(optionModel.get('options')));
-                console.log(options);
                 for (var i = 0; i < options.length; i++) {
                     var option = options[i];
                     if(option.attributeDetail.dataType == 'ProductCode') {

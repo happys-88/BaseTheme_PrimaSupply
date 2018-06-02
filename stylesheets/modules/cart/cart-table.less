@@ -1,4 +1,9 @@
-﻿.mz-table-cart {
+﻿.mz-cart{
+    .mz-breadcrumbs{
+        display: none; 
+    }
+}
+.mz-table-cart {
     float: left;
     width: 100%;
     .mz-carttable-header{
@@ -25,6 +30,7 @@
             text-align: center;
             img{
                 max-width: 100px;
+                width: 100%; 
             }    
         }
       
@@ -79,14 +85,6 @@
             display: block;
             margin-bottom: 15px;
         } 
-        .divider{
-            width: 100%;
-            height: 1px;
-            background-color: #ddd;
-            display: block;
-            float: left;
-            margin: 20px 0;
-        }
         
     }
 
@@ -94,6 +92,8 @@
         margin: 20px 0 18px;
         .mz-button{
             width: 100%;
+            max-width: 330px;
+            float: right;   
             display: block;
             font-size: @fontSizeLarger+2; 
             color: @textColorWhite;
@@ -157,6 +157,7 @@
             padding: 0;
             .mz-button{
                 display: inline-block;
+                float: none; 
                 width: auto;
                 margin-left: @gutter; 
             }
@@ -212,33 +213,27 @@
 }
  
 .qty-block{
+    display: inline-block;  
     position: relative;
-    #plus{
-        .arrow-up {
-            position: absolute;
+    .qty-counter{
+        .mz-icon{
+            position: absolute; 
             width: 0;
             height: 0;
+            right: -25px;   
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-bottom: 10px solid #495363; 
-            top: 3px;
-            left:130px;
+            &.arrow-up {
+                border-bottom: 10px solid #495363; 
+                top: 3px;
+            } 
+            &.arrow-down {
+                border-top: 10px solid #495363; 
+                bottom: 28px;  
+            }
         }
-    }
-    
-    #minus{
-        .arrow-down {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 10px solid #495363;
-            left:130px;
-            bottom: 28px;
-        }
-    }           
-} 
+    } 
+}  
        
   
 

@@ -39,17 +39,7 @@
             </div>
         </div>
     </div>
-    <div class="mz-footer-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                  <div class="pull-right">
-                      <!--
-                      <img src="/../resources/images/footer-images/chat.png" alt="chat-icon">
-                      --> 
-                  </div>  
-                </div>
-            </div>
-        </div>
+    <div class="mz-footer-bottom"> 
+        
     </div>
 </footer>

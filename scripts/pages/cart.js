@@ -17,8 +17,8 @@ define([
                 "change [data-mz-value=usStates]":"populateShipping"*/
                 "change [data-mz-value=usShipping]":"populateDropDowns",
                 "change [data-mz-value=usStates]":"populateDropDowns",
-                "click [data-mz-qty-minus]": "quantityMinus",
-                "click [data-mz-qty-plus]": "quantityPlus"
+                "click [data-mz-qty=minus]": "quantityMinus", 
+                "click [data-mz-qty=plus]": "quantityPlus" 
 
         },
         initialize: function () {
@@ -447,7 +447,8 @@ define([
         //         if(length>0){
         //             var productcode=cartModel.attributes.changeMessages[length-1].metadata[0].productCode;
         //             var id='#'+productcode;
-        //             $(id).prependTo(".mz-carttable-items");
+        //             $(".mz-carttable-items").find(id).addClass("just-added");
+        //            // $(id).prependTo(".mz-carttable-items");
         //         }
               
         // }

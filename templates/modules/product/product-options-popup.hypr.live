@@ -14,24 +14,24 @@
                 {% if model.addonsPopup %}
                     <div class="mz-product-addons">
                         <h4 class="mz-l-stack-sectiontitle">
-                            {{ model.content.productName }}
+                            <a class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName}}</a>
                         </h4>
                         <div class="mz-product-image">
                             <div class="product-slider">
-                                <div class="bxslider-Quickview" id="quick-slider">
-                                    {% for image in model.content.productImages %}
-                                        <div class="product-image-slide">
-                                            <img src="{{ image.imageUrl }}" />
-                                        </div>
-                                    {% endfor %}
+                                   
+                                <div class="product-image-slide">
+                                        {% with model.mainImage as image %}
+                                        <img class="mz-itemlisting-thumb-img" src="{% make_url "image" image with max=120 as_parameters %}" {% if image.altText %}alt="{{ image.altText }}"{% endif %} />
+                                        {% endwith %}
                                 </div>
+                                  
                             </div>
                         </div>
                         {% if model.options and model.options.length > 0 %}
                             <div class="mz-productdetail-options mz-l-stack-section">
                               {% include "modules/product/product-selected-options-view" %}
                               {% if model.hasAddon === true %}
-                                  <h4 class="mz-l-stack-sectiontitle">
+                                  <h4 class="mz-l-stack-sectiontitle add-on-select">
                                       {{ labels.addOnsSelect }}
                                   </h4>
                                   {% include "modules/product/product-addons-for-popup" %}
@@ -41,18 +41,21 @@
                         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price">
                             {{ labels.itemSubtotal }}: 
                             {% include "modules/product/price-show-stack" %}
+                        </div >
+                        <div class="cart-cont-shop row clearfix">
+                            <button type="button" class="col-sm-7 col-xs-7 continue-shopping mz-button mz-button-large" data-dismiss="modal">
+                                {{ labels.continueShopping }}
+                            </button>
+                            <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
+                            {% if model.hasAddon === true %}
+                                <div class="col-sm-5 col-xs-5 mz-productdetail-conversion-buttons">
+                                    <button class="addtocartaddon mz-productdetail-addtocart mz-button mz-button-medium  {% if not model.inventoryInfo.onlineStockAvailable %} is-disabled {% endif %}" data-mz-productcode="{{model.variationProductCode|default(model.productCode) }}" >
+                                        {{ labels.addToCart }}
+                                    </button>
+                                </div>
+                            {% endif %}
                         </div>
-                        <button type="button" class="close" data-dismiss="modal">
-                            {{ labels.continueShopping }}
-                        </button>
-                        <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
-                        {% if model.hasAddon === true %}
-                            <div class="mz-productdetail-conversion-buttons">
-                                <button class="addtocartaddon mz-productdetail-addtocart mz-button mz-button-medium  {% if not model.inventoryInfo.onlineStockAvailable %} is-disabled {% endif %}" data-mz-productcode="{{model.variationProductCode|default(model.productCode) }}" >
-                                    {{ labels.addToCart }}
-                                </button>
-                            </div>
-                        {% endif %}
+                       
                     </div>
                 {% else %}
                     <div class="mz-product-options">
@@ -72,19 +75,24 @@
                             {% endwith %}
                         </div>
                          <div class="mz-productdetail-conversion-controls">
-                            <label class="mz-qty-label text-uppercase" for="qty-field">{{ labels.qty }}</label>
-                            <div class="qty-block">
-                                <div class="qty-counter" id="minus" data-mz-qty-minus role="button">minus</div>
-                                <input id="qty-field" class="mz-productdetail-qty text-center mz-carttable-qty-field" type="text" data-mz-cart-item="{{ model.productTypeId }}" value="1" readonly="readonly" data-mz-value='quantity' title="Quantity">
-                                <div class="qty-counter" id="plus" data-mz-qty-plus role="button">add</div>
+                            <div class="col-xs-1">
+                                <label class="mz-qty-label text-uppercase" for="qty-field">{{ labels.qty }}</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="qty-block">
+                                    <div class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="arrow-down"></i></div>
+                                    <input id="qty-field" class="mz-productdetail-qty text-center mz-carttable-qty-field form-control" type="text" data-mz-cart-item="{{ model.productTypeId }}" value="1" readonly="readonly" data-mz-value='quantity' title="Quantity">
+                                    <div class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="arrow-up"></i></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="mz-productdetail-conversion-buttons">
+                                    <button class="addtocart mz-productdetail-addtocart mz-button mz-button-medium" {% if not model.isPurchasable %} disabled="disabled" {% endif %} data-mz-productcode="{{ model.variationProductCode|default(model.productCode) }}">{{ labels.addToCart }}</button>
+                                </div>
                             </div>
                         </div>
                         <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
-                        <div class="mz-productdetail-conversion-buttons">
-                            <button class="addtocart mz-productdetail-addtocart mz-button mz-button-medium"  {% if not model.isPurchasable %} disabled="disabled" {% endif %}" data-mz-productcode="{{model.variationProductCode|default(model.productCode) }}">
-                                {{ labels.addToCart }}
-                            </button>
-                        </div>
+                        
                         {% if not model.isPurchasable %}
                           <p class="mz-productdetail-notpurchasable">
                             {{ labels.notPurchasable }}:

@@ -9,7 +9,7 @@
 {% endif %}
 {% endblock head-tag-scripts %}
 
-{% block body-tag-classes %} mz-cart {% endblock body-tag-classes %}
+{% block body-tag-classes %}mz-cart{% endblock body-tag-classes %} 
 
 {% block body-content %}
 
@@ -30,6 +30,7 @@
 	            {% include "modules/cart/cart-table" %}
 	        </div>
 		</form>
+	<div id="upsell"></div>
 	<!-- Show empty cart if model is empty -->
 	{% else %}
 		<div class="col-xs-12 mz-cart-empty text-center">
@@ -38,12 +39,10 @@
 		</div>
     {% endif %}
 
-	<!-- Widget code -->
-	<div class="row" style="padding-top: 10px;">
-		<div class="col-xs-12">
-			{% dropzone "cart-advert" scope="page" %}
-		</div>
-	</div>
-<div id="upsell"></div>
+	<!-- Cart Dropzone -->
+	{% dropzone "cart-advertising" scope="template" %}  
+
+	<div id="upsell"></div> 
 </div>
-{% endblock body-content %}
+
+{% endblock body-content %} 

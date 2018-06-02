@@ -1,4 +1,4 @@
-<div class="mz-productoptions">
+<div class="mz-productoptions option-selected ">
     {% for option in model.options %}
         <div class="mz-productoptions-optioncontainer">
             {% for value in option.values %}
@@ -8,14 +8,14 @@
             {% endfor %}
         </div>
     {% endfor %}
-    <div class="mz-carttable-item-remove">
+</div>
+<div class="mz-carttable-item-remove col-xs-5">
         <a href="javascript:;" data-mz-removeItem data-mz-cart-item="{{ model.cartItemId }}">
-            {{ labels.removeFromPopup }}
+                <i class="fa fa-times"></i>{{ labels.removeFromPopup }}
         </a>
     </div>
-    <div id="cart">
-        <a class="mz-utilitynav-link mz-utilitynav-link-cart" href="/cart">
+    <div id="cart" class="col-xs-7">
+        <a class="mz-utilitynav-link mz-utilitynav-link-cart mz-button mz-button-large" href="/cart">
             {{ labels.viewCartPopup }}
         </a>
-    </div>
 </div>

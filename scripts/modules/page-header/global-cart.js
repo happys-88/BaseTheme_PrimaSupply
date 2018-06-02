@@ -8,7 +8,7 @@ define([
     "pages/cart",
     "session-management"
 ], 
-function ($, Hypr, Backbone, CartMonitor, api, cartModel, cart, sessionManagement) { 
+function ($, Hypr, Backbone, CartMonitor, api, cartModel, cart, sessionManagement) {
     if (require.mozuData('user').isAuthenticated) {
         $(window).sessionManagement(Hypr.getThemeSetting('sessionTimeout'), function() {
             window.location.href = '/logout';
@@ -36,7 +36,8 @@ function ($, Hypr, Backbone, CartMonitor, api, cartModel, cart, sessionManagemen
                      globalcartView.render();
                       var lengt=cartModels.attributes.changeMessages.length;
                       var productcod=cartModels.attributes.changeMessages[lengt-1].metadata[0].productCode;
-                      var id='.'+productcod;
+                      var id='#'+productcod;
+                      $(".mz-carttable-items-global").find(id).addClass("just-added-to-cart");
                       $(id).prependTo(".mz-carttable-items-global");
           
                   });

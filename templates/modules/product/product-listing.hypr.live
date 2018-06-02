@@ -95,6 +95,7 @@
         {% endwith %}   
     </div>
 </div>
+{% require_script "modules/quickview" %} 
+{% require_script "pages/stock-message" %}
 
 
-{% require_script "modules/quickview" %}
