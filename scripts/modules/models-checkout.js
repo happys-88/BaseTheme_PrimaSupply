@@ -346,7 +346,6 @@
                 // console.log("FulfillmentInfo calculateStepStatus : "+JSON.stringify(this));
                 if (!this.requiresFulfillmentInfo()) return this.stepStatus('complete');
 
-                console.log("CLASS : "+$('#step-shipping-address').hasClass('address-updated'));
                 // If there's no shipping address yet, go blank.
                 if (this.get('fulfillmentContact').stepStatus() !== 'complete') {
                     return this.stepStatus('new');
@@ -378,6 +377,20 @@
                 }
             },
             updateLiftGateOption: function (liftGateVal) {
+                console.log("UPDATE SELCTED");
+              /* api.request("GET","/liftgateRoute").then(function(res){
+                    console.log("Response : "+res);                
+                })
+               .catch(function(err){
+                console.log("Error");
+               });*/
+
+               $.get("/taxEstimation", function(res){ 
+                   console.log("Response : "+res);   
+                }).fail(function() {
+                    console.log("Failure ");   
+                });
+               
                 var order = this.getOrder(),
                     process = [function() {
                         return order.update({
@@ -429,7 +442,7 @@
                         });
                 }
                 /*var total = order.get('total');
-                console.log(total);*/
+                console.log(total);
                 /*var liftGateTotal = order.get('fulfillmentInfo').get('liftGateTotal');
                 console.log(liftGateTotal);
                 if(liftGateTotal !== ''){

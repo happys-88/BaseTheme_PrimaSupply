@@ -38,7 +38,8 @@
                      console.log("valArray : "+valArray);
                     var result = _.filter(thisGroup.suggestions, function(someThing) {
                         var boolVal = false;
-                        if(someThing.suggestion.categories.length > 0) {
+                        return someThing.suggestion.productType === 'content';
+                        /*if(someThing.suggestion.categories.length > 0) {
                             $.each(someThing.suggestion.categories, function(index, obj){
                                 if(valArray.indexOf(obj.categoryId) >= 0) {
                                     boolVal = true;
@@ -51,15 +52,16 @@
                             return boolVal;
                         } else {
                             return true;
-                        }
+                        }*/
                     });
                     return result;
                 } else if($('#globalSearch').is(':focus') && name==='Pages') {
                     var valArrayGlobal = filterCatsArray();
                     console.log("valArrayGlobal : "+valArrayGlobal);
                     var resultGlobal = _.filter(thisGroup.suggestions, function(someThing) {
-                        var boolVal = false;
-                        if(someThing.suggestion.categories.length > 0) {
+                    var boolVal = false;
+                    return someThing.suggestion.productType !== 'content';
+                        /*if(someThing.suggestion.categories.length > 0) {
                             $.each(someThing.suggestion.categories, function(index, obj){
                                 if(valArrayGlobal.indexOf(obj.categoryId) == -1) {
                                     boolVal = true;
@@ -71,7 +73,7 @@
                             return boolVal;
                         } else {
                             return true;
-                        }
+                        }*/
 
                         /*if(someThing.suggestion.categories.length > 0) {
                             return valArrayGlobal.indexOf(someThing.suggestion.categories[0].categoryId) == -1;
@@ -79,6 +81,7 @@
                             return true;
                         }*/
                     });
+                    console.log("resultGlobal : "+JSON.stringify(resultGlobal));
                     return resultGlobal;
                 }            
                 return thisGroup.suggestions;
