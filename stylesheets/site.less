@@ -468,6 +468,7 @@ img[data-mztp]{
 				.mz-productlisting-title {
 				    font-size: 14px;
 				    color: #495363;
+				    min-height: auto;
 				}
 				.mz-productlisting-productcode {
 					display: none;
@@ -493,15 +494,28 @@ img[data-mztp]{
 						font-size: 13px;
 					    margin-top: 5px;
 					}
+					.shipping-messages {
+						display: none;
+					}
 				}
+			}
+			.mz-price-in-cart {
+			    min-height: auto;
 			}
 			.mz-pricestack {
 				position: static; 
 				.mz-price {
 				    font-size: 20px;
-				    color: #9a9fa8;
-				    &.is-saleprice {
-				    	font-weight: 400;
+				    font-weight: 400;
+				    &.is-crossedout {
+				    	color: #9a9fa8;
+				    }
+				}
+			}
+			&:hover {
+				button {
+					&.mz-quick-view {
+					    display: none;
 					}
 				}
 			}
