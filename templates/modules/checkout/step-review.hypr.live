@@ -7,7 +7,7 @@
         </div>
 
         {% if themeSettings.requireCheckoutAgreeToTerms %}
-            <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows mz-checkoutform">
+            <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows">
                 <label class='inline'>
                     <input type="checkbox" name="terms-and-conditions" id="mz-terms-and-conditions" data-mz-value="agreeToTerms" {% if model.agreeToTerms %} checked="checked"{% endif %}> {{ labels.agreeToTerms }}
                 </label>
@@ -16,7 +16,7 @@
         {% endif %}
 
         {% if not user or user.isAnonymous %}
-            <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows mz-checkoutform">
+            <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows">
                 <label>
                     <input type="checkbox" name="create-new-account" data-mz-value="createAccount" {% if model.createAccount %} checked="checked"{% endif %} > {{ labels.createAccount }}
                 </label>

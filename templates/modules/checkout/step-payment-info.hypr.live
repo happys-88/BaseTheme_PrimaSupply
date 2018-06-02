@@ -77,13 +77,7 @@
         {% endfor %}
 
         <div class="mz-l-stack-section mz-paymentselector-separator mz-checkoutform">
-            <p>
-                {{ labels.billingContact }}: <strong>{{ model.billingContact.email }}</strong>
-            </p>
-        </div>
-        
-        <div class="mz-l-stack-section mz-paymentselector-separator mz-checkoutform">
-            {% include "modules/checkout/checkout-digital-credit" %}
+            <p>{{ labels.billingContact }}: <strong>{{ model.billingContact.email }}</strong></p>
         </div>
     </div>
 
@@ -140,7 +134,7 @@
 
         {% endif %}
 
-        <div class="mz-l-stack-section mz-paymentselector-separator mz-checkoutform">
+        <div class="mz-l-stack-section mz-paymentselector-separator mz-checkoutform mz-biiling-email-address">
             <div class="form-group clearfix">
                 <div class="col-sm-4">
                     <label for="billing-email">
@@ -157,10 +151,6 @@
                     <input type="checkbox" name="special-offers" {% if model.acceptsMarketing %}checked="checked" {% endif %}data-mz-value="acceptsMarketing" class="mz-checkout-optin" /> {{ labels.optIn|string_format(siteContext.generalSettings.websiteName) }}
                 </label>
             </div>
-        </div>
-
-        <div class="mz-l-stack-section mz-formfieldgroup-row mz-paymentselector-separator mz-checkoutform">
-            {% include "modules/checkout/checkout-digital-credit" %}
         </div>
     </div>
 

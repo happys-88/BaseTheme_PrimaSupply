@@ -21,20 +21,20 @@
     {% endif %}
 
     <div class="mz-payment-option clearfix">
-        <div class="{% if model.savedPaymentMethods %}col-xs-3{% else %} col-xs-4{% endif %}">
+        <div class="{% if model.savedPaymentMethods %} col-md-3 col-sm-12{% else %}  col-md-4 col-sm-12{% endif %}">
             <input data-mz-value="paymentType" data-mz-new-credit-card data-mz-payment-type id="paymentType-newcreditcard-{{ paymentId }}" name="paymentType" type="radio" class="mz-paymenttype-input" value="CreditCard" {% if model.paymentType == "CreditCard" and not model.usingSavedCard %}checked="true"{% endif %} />
             <label class="mz-paymentselector-label mz-paymentselector-label-newcreditcard mz-checkoutform-radio" for="paymentType-newcreditcard-{{ paymentId }}">{% if model.savedPaymentMethods %}{{ labels.newCreditCard }}{% else %}{{ labels.creditCard }}{% endif %}</label>
         </div>
-        <div class="{% if model.savedPaymentMethods %}col-xs-3{% else %} col-xs-4{% endif %}">
+        <div class="{% if model.savedPaymentMethods %} col-md-3 col-sm-12{% else %}  col-md-4 col-sm-12{% endif %}">
             <input data-mz-value="paymentType" id="paymentType-check-{{ labels.payPalBillingInfo }}" name="" type="radio" class="mz-paymenttype-input" value=""/>
             <label class="mz-paymentselector-label mz-paymentselector-label-check mz-checkoutform-radio" for="paymentType-check-{{ labels.payPalBillingInfo }}">{{ labels.payPalBillingInfo }}</label>
         </div>
-        <div class="{% if model.savedPaymentMethods %}col-xs-3{% else %} col-xs-4{% endif %}">
+        <div class="{% if model.savedPaymentMethods %} col-md-3 col-sm-12{% else %}  col-md-4 col-sm-12{% endif %}">
             <input data-mz-value="paymentType" data-mz-check data-mz-payment-type id="paymentType-check-{{ paymentId }}" name="paymentType" type="radio" class="mz-paymenttype-input" value="Check" {% if model.paymentType == "Check" %}checked="checked"{% endif %} />
             <label class="mz-paymentselector-label mz-paymentselector-label-check mz-checkoutform-radio" for="paymentType-check-{{ paymentId }}">{{ labels.checkByMail }}</label>
         </div>
         {% if model.savedPaymentMethods %}
-        <div class="col-xs-3">
+        <div class=" col-md-3 col-sm-12">
             <input data-mz-value="paymentType" data-mz-saved-credit-card data-mz-payment-type id="paymentType-savedcreditcard-{{ paymentId }}" name="paymentType" type="radio" class="mz-paymenttype-input" value="CreditCard" {% if model.paymentType == "CreditCard" and model.usingSavedCard %}checked="checked"{% endif %} />
             <label class="mz-paymentselector-label mz-paymentselector-label-savedcreditcard mz-checkoutform-radio" for="paymentType-savedcreditcard-{{ paymentId }}">{{ labels.savedCreditCard }}</label>
         </div>

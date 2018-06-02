@@ -1,6 +1,7 @@
 <div class="clearfix">
     {% if model.fulfillmentContact %}
-        <div class="col-xs-6">
+        <a href="javascript:;" class="mz-summary-edit">{{ labels.edit }}</a>
+        <div class="col-md-6 col-sm-12">
             <div class="mz-formstep-summary mz-addresssummary">
                 <h3 class="mz-summary-header">{{ labels.shipTo }}</h3>
                 {% with model.fulfillmentContact as dataModel %}
@@ -23,10 +24,7 @@
     {% endif %}
 
     {% if model.shippingMethodCode %}
-        <div class="col-xs-6">
-            <div class="text-right">
-                <a href="javascript:;" class="mz-summary-edit">{{ labels.edit }}</a>
-            </div>
+        <div class="col-md-6 col-sm-12">
             <h3 class="mz-summary-header">{{ labels.shippingOptions }}</h3>
             <span>{{ model.shippingMethodName }}</span>
         </div>
@@ -39,13 +37,13 @@
         			<h4>{{ labels.shipsFromPrima }} </h4>
         			{% for item in itemArray.primaShip %}
                         <div class="mz-prima-product clearfix">
-            				<div class="col-xs-6">
+            				<div class="col-md-6 col-sm-12">
                 				<h5 class="mz-product-name">{{ item.product.name }}</h5>
             	                {% for optionlist in item.product.options %}
             	                    <div>{{ optionlist.name }}: {{ optionlist.value }}</div>
             	                {% endfor %}		
         	                </div>	    	
-        	                <div class="col-xs-6">
+        	                <div class="col-md-6 col-sm-12">
         	                	{% for property in item.product.properties %}
         	                		{% if property.name === 'Availability' %}
         	                			{% for v in property.values %}
@@ -74,13 +72,13 @@
         			<h4>{{ labels.shipsFromDistributor }}</h4>
         			{% for item in itemArray.distShip %}
                         <div class="mz-distributor-product clearfix">
-        					<div class="col-xs-6">
+        					<div class="col-md-6 col-sm-12">
         						<h5 class="mz-product-name">{{ item.product.name }}</h5>
         		                {% for optionlist in item.product.options %}
         		                    <div>{{ optionlist.name }}: {{ optionlist.value }}</div>
         		                {% endfor %}
         	            	</div>
-        	                <div class="col-xs-6">
+        	                <div class="col-md-6 col-sm-12">
         	                	{% for property in item.product.properties %}
         	                		{% if property.name === 'Free liftgate' %}
         	                			{% for v in property.values %}
