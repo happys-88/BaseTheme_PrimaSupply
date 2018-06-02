@@ -24,11 +24,11 @@
                         {% block social-bar %}
                             {% include "modules/page-footer/social-bar" %}
                         {% endblock social-bar %}
-                        <div class="clearfix">
-                            <div class="pull-left mz-policy">
+                        <div class="mz-policy-section">
+                            <div class="mz-policy">
                                 {% dropzone "footer-dropzone-4" scope="site" %}
                             </div>
-                            <div class="pull-right mz-pagefooter-copyright" id="copyright">
+                            <div class="mz-pagefooter-copyright" id="copyright">
                                 <span class="mz-pagefooter-copyrighttext">
                                     {{ labels.copyRight }} {% now Y %} {{ siteContext.generalSettings.websiteName }}.
                                 </span>
@@ -39,7 +39,5 @@
             </div>
         </div>
     </div>
-    <div class="mz-footer-bottom"> 
-        
-    </div>
+    <div class="mz-footer-bottom"></div>
 </footer>
