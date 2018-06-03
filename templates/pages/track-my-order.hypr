@@ -2,19 +2,17 @@
 
 {% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  - {% parent %}{% endblock title-tag-content %}
 {% block body-tag-classes %} track-my-order {% endblock body-tag-classes %}
-
 {% block breadcrumbs %}
     {% include "modules/customer-service-breadcumb" %}
 {% endblock breadcrumbs %}
-
 {% block body-content %}
 <div class="mz-customer-service-page">
-    <div class="col-xs-12 col-sm-9 col-md-10 pull-right">
-        <h3 class="mz-l-stack-sectiontitle">{{ labels.trackMyOrder }}</h3>
-        <p>{{ labels.trackMyOrderMsg }}</p>
-        <div class="row">
-            <div class="col-md-6 col-sm-8 mz-track-order-form">
-                <div class="row">
+    <div class="mz-l-container">
+        <div class="row"> 
+            <div class="col-sm-9 col-lg-10 mz-customer-service-panels pull-right">
+                <h3 class="mz-l-stack-sectiontitle">{{ labels.trackMyOrder }}</h3>
+                <p>{{ labels.trackMyOrderMsg }}</p>
+                <div class="mz-track-order-form">
                     <form method="post" class="mz-loginform mz-loginform-page" name="mz-anonymousorder">
                         <input type="hidden" name="order-returnUrl" value="{{ model.returnUrl }}"/>
                         <div class="form-group">
@@ -50,11 +48,11 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-3 col-md-2">     
-        <div class="mz-l-sidebar mz-myaccount-nav">
-            {% include "modules/customer-service/service-nav" %}
+            <div class="col-sm-3 col-lg-2 mz-customer-service-nav">     
+                <div class="mz-l-sidebar">
+                    {% include "modules/customer-service/service-nav" %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

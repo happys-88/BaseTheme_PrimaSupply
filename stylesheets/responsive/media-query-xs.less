@@ -448,13 +448,6 @@
 	//Breadcrumbs
 	.mz-breadcrumbs {
 		line-height: 12px;
-		padding: 0 15px;
-	}
-	.mz-breadcrumbs {
-		.mz-service-breadcrumbs {
-			line-height: 10px;
-			padding: 0;
-		}
 	}
 	//Brand Gateway
 	.Brands {
@@ -480,38 +473,31 @@
 			}
 		}
 	}
-	//Customer services
-	.mz-scrollnav {
-		.mz-scrollnav-list {
-			li {
-				&.mz-scrollnav-item {
-					margin: 0;
-					border-bottom: 1px solid #e0e0e0;
-				}
-			}
+	/*** Customer services ***/
+	.mz-breadcrumbs {
+		.mz-service-breadcrumbs {
+			line-height: 10px;
+			padding: 0;
 		}
 	}
-	.track-my-order,
-	.contact-us {
-		.mz-customer-service-page {
-			label {
-				text-align: left;
-			}
-		}
+	.mz-customer-service-nav {
+	    float: left;
+	    width: 100%;
 	}
-	//Detail page
-	.mz-customer-service-page{
-		.mz-scrollnav {
-			.mz-scrollnav-list {
-				li {
-					&.mz-scrollnav-item {
-						margin: 0;
-						border-bottom: 1px solid #e0e0e0;
-					}
-				}
-			}
+	.mz-customer-service-page {
+		.mz-customer-service-panels {
+		    float: left;
+		    width: 100%;
 		}
-	}
+    	form {
+		    max-width: 380px;
+		}
+		label {
+			line-height: 25px;
+			text-align: left;
+		}
+    }
+    /***\ Customer services ***/
 	
 	//Recently View
 	.recently-viewed-list,
@@ -1020,20 +1006,6 @@
 		padding: 15px 15px 30px;
 		.mz-pagetitle {
 		    font-size: 20px;
-		}
-	}
-	.mz-myaccount-nav {
-		.mz-scrollnav {
-			border-bottom: 1px solid #e0e0e0;
-			.mz-scrollnav-list {
-				li {
-					&.mz-scrollnav-item {
-					    border-bottom: 0;
-					    margin: 0;
-					    width: 100%;
-					}
-				}
-			}
 		}
 	}
 	.mz-myaccount {

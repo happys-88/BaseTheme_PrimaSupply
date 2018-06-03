@@ -1705,16 +1705,10 @@
       "displayTemplate": "cms/category-banner",
       "editViewFields": [
         {
-          "xtype": "panel",
-          "title": "First Slide",
-          "items": [
-            {
-              "anchor": "50%",
-              "fieldLabel": "Add Image",
-              "name": "categoryBanner",
-              "xtype": "mz-input-image"
-            }
-          ]
+          "anchor": "50%",
+          "fieldLabel": "Add Image",
+          "name": "categoryBanner",
+          "xtype": "mz-input-image"
         }
       ],
       "icon": "/resources/admin/widgets/28_deal_of_the_day.png",
