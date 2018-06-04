@@ -98,8 +98,7 @@ define([
 	    });
 
 		// Refine By Toggle in Mobile
-
-	    $(".mz-facets-dropdown").click(function(){
+		$(document).on('click','.mz-facets-dropdown', function(){ 
 			$(this).toggleClass("mz-facets-dropdown-open");
 		    $(".mz-faceting-section").toggleClass("mz-faceting-section-open");
 		});
