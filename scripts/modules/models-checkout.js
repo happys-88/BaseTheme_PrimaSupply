@@ -377,21 +377,14 @@
                 }
             },
             updateLiftGateOption: function (liftGateVal) {
-                console.log("UPDATE SELCTED");
-              /* api.request("GET","/liftgateRoute").then(function(res){
-                    console.log("Response : "+res);                
-                })
-               .catch(function(err){
-                console.log("Error");
-               });*/
-
-               $.get("/taxEstimation", function(res){ 
+                /*console.log("UPDATE SELCTED");
+              $.get("/sampleTemplate", function(res){ 
                    console.log("Response : "+res);   
                 }).fail(function() {
                     console.log("Failure ");   
-                });
-               
-                var order = this.getOrder(),
+                });*/
+
+              var order = this.getOrder(),
                     process = [function() {
                         return order.update({
                             ipAddress: order.get('ipAddress'),
