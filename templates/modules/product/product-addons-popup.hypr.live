@@ -33,14 +33,12 @@
 
                         </div>
                         {% if model.hasAddon === true %}
-                        <div class=add-on-popup>
-                            {% if model.hasAddon === true %}
-                                    <h4 class="mz-l-stack-sectiontitle add-on-section-title">
-                                        {{ labels.addOnsSelect }}
-                                    </h4>
-                                    {% include "modules/product/product-addons-for-popup" %}
-                               
-                        </div>
+                            <div class=add-on-popup>
+                                <h4 class="mz-l-stack-sectiontitle add-on-section-title">
+                                    {{ labels.addOnsSelect }}
+                                </h4>
+                                {% include "modules/product/product-addons-for-popup" %}
+                            </div>
                         {% endif %}
                         
                        
