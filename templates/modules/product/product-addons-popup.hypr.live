@@ -11,38 +11,44 @@
                 {% if model.addonsPopup %}
                     <div class="mz-product-addons">
                         <h4 class="mz-l-stack-sectiontitle"><a class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName}}</a></h4>
-                        <div class="mz-product-image">
-                           
-                            {% with model.mainImage as image %}
-                            <img class="mz-itemlisting-thumb-img" src="{% make_url "image" image with max=120 as_parameters %}" {% if image.altText %}alt="{{ image.altText }}"{% endif %} />
-                            {% endwith %}
-                        </div>
-                        <div class="mz-productdetail-options mz-l-stack-section">
-                            <div class="mz-carttable-item-remove col-xs-5">
-                                <a href="javascript:;" data-mz-removeItem data-mz-cart-item="{{ model.cartItemId }}">
-                                    <i class="fa fa-times"></i>{{ labels.removeFromPopup }}
-                                </a>
+                        <div class="product-detail">
+                            <div class="mz-product-image">
+                                {% with model.mainImage as image %}
+                                <img class="mz-itemlisting-thumb-img" src="{% make_url "image" image with max=120 as_parameters %}" {% if image.altText %}alt="{{ image.altText }}"{% endif %} />
+                                {% endwith %}
                             </div>
-                            <div id="cart" class="col-xs-7" >
-                                <a class="mz-utilitynav-link mz-utilitynav-link-cart mz-button mz-button-large" href="/cart">
-                                    {{ labels.viewCartPopup }}
-                                </a>
+                            <div class="mz-productdetail-options mz-l-stack-section">
+                                <div class="mz-carttable-item-remove col-xs-5">
+                                    <a href="javascript:;" data-mz-removeItem data-mz-cart-item="{{ model.cartItemId }}">
+                                        <i class="fa fa-times"></i>{{ labels.removeFromPopup }}
+                                    </a>
+                                </div>
+                                <div id="cart" class="col-xs-7 text-right">
+                                    <a class="mz-utilitynav-link mz-utilitynav-link-cart mz-button mz-button-large" href="/cart">
+                                        {{ labels.viewCartPopup }}
+                                    </a>
+                                </div>
                             </div>
-                            {% if model.hasAddon === true %}
-                                <h4 class="mz-l-stack-sectiontitle add-on-section-title">
-                                    {{ labels.addOnsSelect }}
-                                </h4>
-                                {% include "modules/product/product-addons-for-popup" %}
-                            {% endif %}
+
                         </div>
-                        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price">
-                            {{ labels.itemSubtotal }}: 
+                        {% if model.hasAddon === true %}
+                        <div class="add-on-popup">
+                                    <h4 class="mz-l-stack-sectiontitle add-on-section-title">
+                                        {{ labels.addOnsSelect }}
+                                    </h4>
+                                    {% include "modules/product/product-addons-for-popup" %}   
+                        </div>
+                        {% endif %}
+                       {{ labels.itemSubtotal }}: 
                             {% include "modules/product/price-show-stack" %}
-                        </div>
-                        <div class="cart-cont-shop row clearfix">
-                        <button type="button" class="col-sm-7 col-xs-7 continue-shopping mz-button mz-button-large " data-dismiss="modal">
+                            <button type="button" class="col-sm-7 col-xs-7 continue-shopping mz-button mz-button-large " data-dismiss="modal">
                             {{ labels.continueShopping }}
                         </button>
+                        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price">
+                            
+                        </div>
+                        <div class="cart-cont-shop row clearfix">
+                        
                         <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
                         {% if model.hasAddon === true %}
                             

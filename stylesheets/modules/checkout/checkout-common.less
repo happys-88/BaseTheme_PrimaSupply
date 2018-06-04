@@ -154,8 +154,21 @@
 		}
 		.mz-checkoutform-active {
 			background: #fff;
+			float: left;
+    		width: 100%;
+    		max-width: 585px;
+    		padding-left: 0;
+		}
+		.mz-formstep-next {
+		    float: left;
+		    width: 100%;
+    		padding-right: 15px;
+     		text-align: right;
 		}
 		.mz-formstep {
+			float: left;
+			margin-bottom: 0;
+    		width: 100%;
 			&.mz-checkoutform-shippingmethod {
 				&.is-new {
 					.mz-checkout-summary {
@@ -198,14 +211,18 @@
 			}
 		}
 		.mz-checkout-summary {
+			position: relative;
+			.mz-ships-from {
+				margin-bottom: 10px;
+			}
 			.mz-summary-detail {
 				float: left;
 				width: 100%;
-				.mz-product-name {
+			}
+			.mz-product-name {
 					font-weight: 700;
 					margin: 0;
 				}
-			}
 		}
 		.mz-checkoutform-shipping {
 			label {
@@ -274,6 +291,11 @@
 			}
 		}
 		.mz-paymentselector-separator {
+			&.mz-biiling-email-address {
+				border-top: 0;
+				max-width: 585px;
+				padding-left: 0;
+			}
 			label {
 				display: block;
 				color: #495363;
@@ -285,35 +307,27 @@
 			.mz-special-offers {
 				label {
 					line-height: 1.4;
-					padding-left: 20px;
+					//padding-left: 20px;
 					position: relative;
 				    text-align: left;
-				    input[type="checkbox"] {
-				    	position: absolute;
-				    	left: 0;
-				    }
+				    // input[type="checkbox"] {
+				    // 	position: absolute;
+				    // 	left: 0;
+				    // }
 				}
 			}
-			.mz-checkout-digitalcredit {
-				.mz-button {
-					border-color: #d15f2a;
-					background: #d15f2a;
-					float: right;
-					line-height: 8px;
-					margin-top: 0;
-				    &[disabled] {
-				    	opacity: 0.5;
-				    	&:hover {
-					    	border-color: #d15f2a;
-					    	background: #d15f2a;
-					    	color: #fff;
-					    }
-				    }
-				    &:hover {
-				    	border-color: #d15f2a;
-				    	background: #fff;
-				    	color: #d15f2a;
-				    }
+			strong {
+				text-transform: none;
+			}
+		}
+		.mz-checkout-saved-billingaddress {
+			color: #495363;
+			.mz-addresssummary {
+				span {
+					text-transform: none;
+					&:first-child {
+						font-weight: 700;
+					}
 				}
 			}
 		}
@@ -326,7 +340,11 @@
 			}
 		}
 		.mz-lightgate-section {
-			margin-top: 10px;
+			.mz-lift-gate-section,
+			.mz-lift-shipment-section {
+				float: left;
+				width: 100%;
+			}
 			h3 {
 			    font-size: 16px;
 			    font-weight: 700;
@@ -393,6 +411,7 @@
 		.mz-summary-edit {
 		    position: absolute;
 		    right: 15px;
+		    z-index: 1;
 		}
 
 		.mz-checkoutform-couponcode {
@@ -409,7 +428,7 @@
 			    padding-right: 0;
 			}
 			input[type="text"] {
-			    width: 78%;
+			    width: 70%;
 			    float: left;
 			}
 			.mz-button {
@@ -418,7 +437,7 @@
 				float: right;
 				line-height: 8px;
 				margin-top: 0;
-				width: 20%;
+				width: 27%;
 			    &[disabled] {
 			    	opacity: 0.5;
 			    	&:hover {
@@ -452,6 +471,7 @@
 				overflow-y: auto;
 	    		.mz-ordersummary-lineitems {
 					border-top: 1px solid #e0e0e0;
+					font-size: 14px;
 					min-height: 120px;
 					margin-bottom: 20px;
 					padding: 20px 0;
@@ -460,7 +480,7 @@
 					}
 			        .mz-ordersummary-item-product {
 				        float: left;
-				        width: 52%;
+				        width: 44%;
 				        position: relative;
 				        .mz-order-product-image {
 					        border: 1px solid #e0e0e0;
@@ -474,12 +494,11 @@
 					    .mz-order-product-info {
 					        padding-left: 120px;
 					        .mz-product-name {
-					        	font-size: 15px;
+					        	font-size: 14px;
 							    margin-top: 0;
 							    margin-bottom: 8px;
 					        }
 					        .mz-product-options {
-							    font-size: 14px;
 							    span {
 								    font-weight: 700;
 								    margin-right: 6px;
@@ -498,7 +517,7 @@
 				    .mz-order-product-save-price,
 				    .mz-order-product-total-price {
 				        float: left;
-				        width: 12%;
+				        width: 14%;
 				        padding: 0 10px;
 				        text-align: center;
 				    }
@@ -534,6 +553,16 @@
 				}
 		    }
 		}
+		.mz-create-account-fields {
+			.col-sm-4 {
+				label {
+					display: block;
+					line-height: 35px;
+					margin-bottom: 0;
+					text-align: right;
+				}
+			}
+		}
 	}
 }
 
@@ -552,7 +581,7 @@
 	}
 	.mz-l-container {
 		h3 {
-			margin: 0;
+			margin-top: 0;
 			text-transform: capitalize;
 		}
 	}
@@ -564,13 +593,18 @@
 			font-weight: 700;
 		}
 	}
+	.mz-confirmation-signup-from {
+	    float: left;
+	    width: 100%;
+	    max-width: 580px;
+	}
 	.mz-look-email {
 	    border: 1px solid #e0e0e0;
-	    width: 160px;
-	    padding: 15px;
+	    width: 140px;
+	    padding: 15px 10px;
 	    position: absolute;
 	    top: 53px;
-	    right: 40px;
+	    right: 15px;
 	    text-align: center;
 	    span {
 	    	display: block;
@@ -591,5 +625,184 @@
 	   		font-weight: 700;
 	   		text-transform: uppercase;
 	   }
+	}
+
+	#guestUserSignUp {
+		.mz-checkoutform-active {
+			float: left;
+			padding: 20px 15px;
+			width: 100%;
+		}
+		.mz-confirmation-signup-from {
+		    float: left;
+		    margin-top: 15px;
+		    width: 100%;
+		    max-width: 380px;
+	        .input-group {
+                margin-bottom: 15px;
+            }
+            .input-group-addon {
+                padding: 10px 15px;
+                font-size: 12px;
+                line-height: 10px;
+                border-radius: 0;
+            }
+            input[type="text"], 
+            input[type="password"] {
+                border: 1px solid #d4d4d4;
+                margin-bottom: 0px;
+                width: 100%;
+                height: 36px;
+            }
+		    .mz-checkoutform {
+		    	float: left;
+		    	padding: 20px 15px;
+		    	width: 100%;
+			}
+			.mz-button {
+				padding: 8px;
+				width: 100%;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  	.mz-checkout {
+  		.mz-checkoutform {
+  			.mz-ordersummary {
+  				.mz-ordersummary-product-lists {
+  					.mz-ordersummary-lineitems {
+  						.mz-ordersummary-item-product,
+  						.mz-order-product-qty, 
+						.mz-order-product-each-price, 
+						.mz-order-product-save-price, 
+						.mz-order-product-total-price {
+						    width: 100%;
+						}
+						.mz-order-product-qty, 
+						.mz-order-product-each-price, 
+						.mz-order-product-save-price, 
+						.mz-order-product-total-price {
+							padding-left: 120px;
+							text-align: left;
+							div {
+								display: inline-block;
+								width: 50px;
+							}
+						}
+						.mz-ordersummary-item-product {
+							.mz-order-product-info {
+								.mz-product-options {
+									span {
+									    margin-right: 0;
+									    width: 50px;
+									    display: inline-block;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	.mz-checkout {
+		.mz-checkoutform {
+			.mz-checkoutform-shipping {
+				.mz-label,
+				.mz-formgroup-align {
+					width: 100%;
+				}
+				label {
+					line-height: 25px;
+				    text-align: left;
+				}
+			}
+			.mz-addressform-address2 {
+				.mz-formgroup-align {
+					margin-left: 0;
+				}
+			}
+			.mz-checkoutform-couponcode {
+				label {
+				    text-align: left;
+				}
+			}
+			.mz-paymentselector-option {
+				.col-sm-4,
+				.col-sm-8 {
+				    width: 100%;
+				    text-align: left;
+				}
+				.col-sm-4 {
+					label {
+    					line-height: 25px;
+					}
+				}
+			}
+			.mz-payment-credit-card-expiration-row {
+				.col-sm-4 {
+					&.col-xs-6 {
+						width: 50%;
+					}
+				}
+			}
+			.mz-same-shipping-address {
+				.col-sm-offset-4 {
+				    margin-left: 0;
+				}
+			}
+
+			.mz-l-formfieldgroup-address {
+				.col-sm-4 {
+					&.mz-label {
+					    text-align: left;
+					    label {
+						    line-height: 25px;
+						}
+					}
+				}
+			}
+			.mz-paymentselector-separator {
+				&.mz-biiling-email-address {
+					.col-sm-4,
+					.col-sm-8, {
+						width: 100%;
+					}
+					.mz-special-offers {
+						margin-left: 0;
+					}
+				}
+				label {
+				    line-height: 35px;
+				    text-align: left;
+				}
+			}
+			.mz-create-account-fields {
+				.col-sm-4 {
+					width: 100%;
+					label {
+					    line-height: 25px;
+					    text-align: left;
+					}
+				}
+				.col-sm-8 {
+					width: 100%;
+					&.col-sm-offset-4 {
+						margin-left: 0;
+					}
+				}
+
+			}
+		}
+	}
+	.mz-confirmation {
+		#guestUserSignUp {
+		    margin-top: 30px;
+		}
 	}
 }

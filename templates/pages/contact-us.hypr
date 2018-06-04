@@ -2,19 +2,17 @@
 
 {% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  - {% parent %}{% endblock title-tag-content %}
 {% block body-tag-classes %} contact-us {% endblock body-tag-classes %}
-
 {% block breadcrumbs %}
     {% include "modules/customer-service-breadcumb" %}
 {% endblock breadcrumbs %}
-
 {% block body-content %}
 <div class="mz-customer-service-page">
-    <div class="col-xs-12 col-sm-9 col-md-10 pull-right">
-        <h3 class="mz-l-stack-sectiontitle">{{ labels.contactUs }}</h3>
-        <div class="row">
-            <div class="col-sm-6 col-xs-12">
+    <div class="mz-l-container">
+        <div class="row"> 
+            <div class="col-sm-9 col-lg-10 mz-customer-service-panels pull-right">
+                <h3 class="mz-l-stack-sectiontitle">{{ labels.contactUs }}</h3>
                 <div class="row">
-                    <div class="mz-contact-form">
+                    <div class="col-md-6 col-xs-12 mz-contact-form">
                         <form method="" name="">
                             <div class="form-group">
                                 <label class="col-sm-4 col-xs-12" for="{{ labels.firstName }}">{{ labels.firstName }}</label>
@@ -62,19 +60,19 @@
                             </div>
                         </form>
                     </div>
+                    <div class="col-md-6 col-xs-12 text-center">
+                        <div class="mz-dropzone">
+                            {% dropzone "contact" scope="page" %}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xs-12">
-                <div class="mz-dropzone-empty">
-                    {% dropzone "contact" scope="page" %} Contant US
+            <div class="col-sm-3 col-lg-2 mz-customer-service-nav">     
+                <div class="mz-l-sidebar">
+                    {% include "modules/customer-service/service-nav" %}
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-3 col-md-2 shown-xs">     
-            <div class="mz-l-sidebar mz-myaccount-nav">
-                {% include "modules/customer-service/service-nav" %}
-            </div>
-        </div>
 </div>
 {% endblock body-content %}

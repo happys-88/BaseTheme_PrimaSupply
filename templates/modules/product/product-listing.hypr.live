@@ -1,5 +1,16 @@
 ﻿{% require_script "pages/stock-message" %}
-
+{% set_var hasStock=false %}
+{% if model.variations %}
+    {% for variation in model.variations %}
+        {% if variation.inventoryInfo.onlineStockAvailable > 0 %}
+            {% set_var hasStock=true %}
+        {% endif %}
+    {% endfor %}
+{% else %}
+    {% if model.inventoryInfo.onlineStockAvailable > 0 %}
+        {% set_var hasStock=true %}
+    {% endif %}
+{% endif %}
 <div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
     <div class="mz-productlisting-image">
         {% block product-image %}
@@ -13,8 +24,11 @@
         {% endblock product-image %}
     </div>
     <div class="mz-productlisting-info">
-        <a class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName}}</a>
-
+        {% if pageContext.isDesktop %}
+            <a class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName}}</a>
+        {% else %}
+            <a class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName|truncatechars(30) }}</a>
+        {% endif %}
         {% comment %}
         {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
             <p class="mz-productlisting-shortdesc">{{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
@@ -48,17 +62,19 @@
             {% endif %}
         {% endblock product-extrainfo %}
        
-        {% with model|get_product_attribute("tenant~show-price") as showPriceAttr %}
-            {% if showPriceAttr.values|first|prop("value") == 'view-on-login' %}
-                {% if user.isAuthenticated %}
-                    {% include "modules/product/product-add-to-cart" %}
-                {% endif %} 
-            {% else %}
-                {% include "modules/product/product-add-to-cart" %}
-            {% endif %} 
-        {% endwith %}
+        {% with model|get_product_attribute("tenant~login-for-price") as loginForPrice %}
+         {% if loginForPrice.values|first|prop("value") === true %}
+           {% if user.isAuthenticated %}
+             {% include "modules/product/product-add-to-cart" %}
+           {% else %}
+             <a class="mz-button login-for-lowprice" href="javascript:void(0);" data-toggle="modal" data-target="#loginPopup" data-productcode="{{model.productCode}}">{{ labels.viewOnLogin }}</a>
+           {% endif %} 
+           {% else %}
+             {% include "modules/product/product-add-to-cart" %}
+         {% endif %} 
+       {% endwith %}
 
-        <button class="mz-quick-view" data-mz-productcode="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button>
+        <button class="mz-quick-view" data-mz-productcode-quickview="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button>
         
         <div class="mz-product-msg">
             <div class="stock-messages" id="stock-messages-{{ model.productCode }}">
@@ -76,16 +92,17 @@
             {% if not model.inventoryInfo.onlineStockAvailable and not model.variations %}
                 <div class="mz-product-notpurchasable">{{ labels.outOfStock }}</div>
             {% endif %}
-
-            <div class="shipping-messages">
-                {% for propShipping in model.properties %}
-                    {% if propShipping.attributeFQN == "tenant~availability" %}
-                        {% for shippingValue in propShipping.values  %}
-                            {{ shippingValue.stringValue }}
-                        {% endfor %}
-                    {% endif %}
-                {% endfor %}
-            </div>
+            {% if hasStock == true %}
+                <div class="shipping-messages">
+                    {% for propShipping in model.properties %}
+                        {% if propShipping.attributeFQN == "tenant~availability" %}
+                            {% for shippingValue in propShipping.values  %}
+                                {{ shippingValue.stringValue }}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
 
         {% with model|get_product_attribute("tenant~new-arrival") as newArrival %}
