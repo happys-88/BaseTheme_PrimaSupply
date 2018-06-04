@@ -9,13 +9,3 @@
         </div>
     {% endfor %}
 </div>
-<div class="mz-carttable-item-remove col-xs-5">
-        <a href="javascript:;" data-mz-removeItem data-mz-cart-item="{{ model.cartItemId }}">
-                <i class="fa fa-times"></i>{{ labels.removeFromPopup }}
-        </a>
-    </div>
-    <div id="cart" class="col-xs-7">
-        <a class="mz-utilitynav-link mz-utilitynav-link-cart mz-button mz-button-large" href="/cart">
-            {{ labels.viewCartPopup }}
-        </a>
-</div>
