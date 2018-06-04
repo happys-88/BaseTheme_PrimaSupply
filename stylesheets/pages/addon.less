@@ -32,6 +32,10 @@
                     font-size: 12px;
                     line-height: 40px;
                 }
+                .mz-productdetail-price{
+                        float: left;
+                        width: 100%;
+                }
                 #cart {
                    .mz-button {
                         font-size: 14px;
@@ -72,24 +76,21 @@
                              margin-top: 0;
                         }
                     }
-                    .qty-block{
+                    .qty-block {
                         margin-left: 10px;
-                        #minus{
-                            position: absolute;
-                            top: 62px;
-                            left: -62px;
+                        position: relative;
+                        .qty-counter {
+                            .mz-icon {
+                                &.arrow-down {
+                                    bottom: 12px;
+                                }
+                            }
                         }
-                        .mz-productdetail-qty{
+                        .mz-productdetail-qty {
                             width: 60px;
-                            height: 38px;
-                        }
-                        #plus{
-                            position: absolute;
-                            top: 4px;
-                            left: -62px;
+                            height: 36px;
                         }
                     }
-                   
                 }
             }
         }
