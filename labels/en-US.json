@@ -479,7 +479,7 @@
   "volumePriceSavings"                    : "Savings",
   "volumePriceMinMaxQty"                  : "{0} - {1}",
   "volumePriceMinOnlyQty"                 : "{0}+",
-  "mapPrice"                              : "add to cart to see final price",
+  "mapPrice"                              : "See Low Price In Cart",
   "additionalInformation"                 : "Additional Information",
   "printWindowPrintButton"                 : "Print",
   "printWindowCancelButton"               : "Cancel",
