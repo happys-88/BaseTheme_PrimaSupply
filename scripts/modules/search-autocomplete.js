@@ -33,7 +33,7 @@
                     }
                 }
 
-                if($('#learningCenter').is(':focus') && name==='Pages') {
+                if($('.learningCenterInput').is(':focus') && name==='Pages') { 
                     var valArray = filterCatsArray();
                      console.log("valArray : "+valArray);
                     var result = _.filter(thisGroup.suggestions, function(someThing) {

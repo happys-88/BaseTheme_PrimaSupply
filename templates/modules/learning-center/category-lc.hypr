@@ -8,12 +8,10 @@
 {% block body-tag-classes %}mz-learning-center directory-page{% endblock body-tag-classes %} 
 
 {% block body-content %}
-
-	{% require_script "pages/category" %}
 	
-	{% dropzone "blog-name" scope="page" %} 
+	{% dropzone "blog-name" scope="page" %}  
 
-	<div data-mz-category="{{model.categoryId}}" class="mz-l-container">
+	<div data-mz-category="{{model.categoryId}}" class="mz-l-container" id="lcCategoryContent"> 
 	    <div class="lc-top-section"> 
 			{% include "modules/learning-center/lc-top-section" %} 	
 		</div> 
@@ -23,5 +21,7 @@
 		</div> 
 	    
 	</div>
+
+	{% require_script "category-lc" %}     
 
 {% endblock body-content %} 
