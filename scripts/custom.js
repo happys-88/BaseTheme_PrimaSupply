@@ -74,13 +74,14 @@ define([
 		$(window).scroll(function() {    
 		    var scroll = $(window).scrollTop();
 
-		    if (scroll >= 1) {
+		    if (scroll >= 34) {
 		        $("body").addClass("header-fixed");
 		        $(".mz-sticky-header").addClass("fixed");
-		        
+		        $("#page-content").addClass("fixed-header");		        
 		    } else {
 		        $(".mz-sticky-header").removeClass("fixed"); 
-		        $("body").removeClass("header-fixed"); 
+		        $("body").removeClass("header-fixed");
+		        $("#page-content").removeClass("fixed-header"); 
 		        $(".mz-back-to-top-btn").fadeOut();
 		    }
 
