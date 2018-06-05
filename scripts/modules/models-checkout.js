@@ -377,8 +377,8 @@
                 }
             },
             updateLiftGateOption: function (liftGateVal) {
-                /*console.log("UPDATE SELCTED");
-              $.get("/sampleTemplate", function(res){ 
+                console.log("UPDATE SELCTED");
+              /*$.get("/sampleTemplate", function(res){ 
                    console.log("Response : "+res);   
                 }).fail(function() {
                     console.log("Failure ");   

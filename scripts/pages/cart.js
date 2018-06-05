@@ -59,7 +59,7 @@ define([
             var productCode = this.model.get("items").models[0].get('product').get('productCode');
             var shipping = localStorage.getItem("selectedShipping");
 
-           /* $.get("/taxEstimation", function(res){ 
+            /*$.get("/taxEstimation", function(res){ 
                console.log("Response 11 : "+res);   
             }).fail(function() {
                 console.log("Failure ");   
