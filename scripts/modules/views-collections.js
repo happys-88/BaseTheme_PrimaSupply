@@ -9,20 +9,21 @@ define([
     'modules/url-dispatcher',
     'modules/intent-emitter',
     'modules/get-partial-view',
-    'modules/facet-clear'
-], function(Backbone, _, UrlDispatcher, IntentEmitter, getPartialView, makeClearUrl) {
+    'modules/facet-clear',
+    'modules/block-ui'  
+], function(Backbone, _, UrlDispatcher, IntentEmitter, getPartialView, makeClearUrl, blockUiLoader) { 
 
     function factory(conf) {
         var _$body = conf.$body;
-        console.log("CONF : "+conf.template);
         var _dispatcher = UrlDispatcher;
         var ROUTE_NOT_FOUND = 'ROUTE_NOT_FOUND';
 
         function updateUi(response) {
             var url = response.canonicalUrl;
-            _$body.html(response.body);
+            _$body.html(response.body); 
             if (url) _dispatcher.replace(url);
             _$body.removeClass('mz-loading');
+            blockUiLoader.unblockUi();  
         }
 
         function showError(error) {
@@ -33,9 +34,10 @@ define([
         }
 
         function intentToUrl(e) {
+            blockUiLoader.globalLoader(); 
 
             var elm = e.target;
-            console.log("OK : "+elm);    
+            //console.log("OK : "+elm);     
             var url;
             if (elm.tagName.toLowerCase() === "select") {
                 elm = elm.options[elm.selectedIndex];
@@ -45,6 +47,7 @@ define([
              * Custom code applied for the facet clear functionality
              */
             if(elm.getAttribute('data-mz-facet-clear')) {
+                blockUiLoader.globalLoader(); 
                 var pathName = _$body.context.location.pathname;
                 var searchName = _$body.context.location.search;
                 url = pathName+searchName;
@@ -58,7 +61,7 @@ define([
                 parser.href = url;
                 url = window.location.pathname + parser.search;
             }
-            console.log("URL : "+url);
+            //console.log("URL : "+url); 
             return url;
         }
 
@@ -70,7 +73,7 @@ define([
                 'click a[data-mz-facet-value]',
                 'click [data-mz-action="clearFacets"]',
                 'click button[data-mz-facet]',
-                'click button[data-mz-facet-clear=facetClear]',
+                'click button[data-mz-facet-clear=facetClear]', 
                 'click label[data-mz-facet-value]',
                 'change input[data-mz-facet-value]',
                 'change [data-mz-value="pageSize"]',
@@ -87,7 +90,7 @@ define([
         });
 
         _dispatcher.onChange(function(url) {
-            getPartialView(url, conf.template).then(updateUi, showError);
+            getPartialView(url, conf.template).then(updateUi, showError); 
         });
 
     }
