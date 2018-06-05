@@ -126,11 +126,11 @@ define([
 		});
 
 		// Blog Facets
-		$(".mz-facet-row").click(function(){ 
-			$(this).toggleClass("active");   
+		$(document).on('click','.mz-facet-row', function(){    
+			$(this).toggleClass("active");    
 		});
 		$("#lcBlogFacets .mz-facet-row").each(function(){
-			$(".mz-facet-title").click(function(){ 
+			$(document).on('click','.mz-facet-title', function(){   
 				$(this).parent(".mz-facet-row").toggleClass("active");   
 			});
 
@@ -138,7 +138,7 @@ define([
 			$(document).mouseup(function (e){
 			  var currentFacetRow = $(".mz-facet-row"); 
 			  if (!currentFacetRow.is(e.target) && currentFacetRow.has(e.target).length === 0) {
-			    currentFacetRow.removeClass("active");  
+				currentFacetRow.removeClass("active");  
 			  }
 			}); 
 		});

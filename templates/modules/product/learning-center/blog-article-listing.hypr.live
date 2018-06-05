@@ -1,5 +1,4 @@
-
-<div class="mz-productlisting" data-mz-product="{{ model.productCode }}"> 
+<div class="mz-productlisting" data-mz-product="{{ model.productCode }}">    
     <div class="mz-productlisting-image"> 
         {% block product-image %}
         <a href="{% make_url "product" model %}">
