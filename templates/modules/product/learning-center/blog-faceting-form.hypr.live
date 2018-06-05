@@ -1,6 +1,36 @@
 <section class="mz-facetingform">
     <h2 {% if pageContext.isMobile or pageContext.isTablet %}class="mz-facets-dropdown"{% endif %}>Filter By:</h2> 
     
+    <div class="mz-faceting-section" id="lcBlogFacets"> 
+        {% for facet in model.facets %} 
+            {% if facet.values and facet.facetType != "Hierarchy" %} 
+                <div class="mz-facet-row {{ facet.label|slugify }}">   
+                    {% if facet.field == "tenant~content-type" %}
+                        <ul class="mz-facetingform-facet mz-facetingform-facet-hierarchy {{ facet.label|slugify }} clearfix">
+                            {% for fval in facet.values %}
+                                <li {% if fval.isApplied %}class="checked"{% endif %}>
+                                    <input type="checkbox" id="{{facet.field|slugify }}_{{ fval.value|slugify }}" class="mz-facetingform-value" {% if fval.isApplied %}checked="checked"{% endif %} data-mz-facet="{{ facet.field }}" data-mz-facet-value="{{ fval.value }}" data-mz-url="{% make_url "facet" fval %}">
+                                    <label class="mz-facetingform-valuelabel" for="{{facet.field|slugify }}_{{ fval.value|slugify }}" >{{ fval.label }}</label>
+                                </li>
+                            {% endfor %}
+                        </ul>  
+                    {% endif %}
+
+                    {% if facet.field == "tenant~author" %} 
+                        <h4 class="mz-facet-title">Authors <i class="fa fa-angle-down"></i></h4> 
+                        <ul class="mz-facetingform-facet mz-facetdropdown mz-facetingform-facet-hierarchy {{ facet.label|slugify }} clearfix">
+                            {% for fval in facet.values %}
+                                <li {% if fval.isApplied %}class="checked"{% endif %}>
+                                    <input type="checkbox" id="{{facet.field|slugify }}_{{ fval.value|slugify }}" class="mz-facetingform-value" {% if fval.isApplied %}checked="checked"{% endif %} data-mz-facet="{{ facet.field }}" data-mz-facet-value="{{ fval.value }}" data-mz-url="{% make_url "facet" fval %}">
+                                    <label class="mz-facetingform-valuelabel" for="{{facet.field|slugify }}_{{ fval.value|slugify }}" >{{ fval.label }}</label>
+                                </li>
+                            {% endfor %}
+                        </ul>  
+                    {% endif %} 
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
     {% block clear-facets %}
         {% if model.hasValueFacets %}
             {% if model.hasValueFacets %}
@@ -16,16 +46,15 @@
             {% endif %}
             
             {% if clearbool %}
-                <div class="mz-clear-all"> 
-                    <div>
-                        <button class="mz-button mz-facetingform-clearall" data-mz-action="clearFacets" data-mz-url="{% make_url "facet" "clear"  %}">{{ labels.clearAllFilters }}<i class="fa fa-times-circle"></i></button>
-                    </div>
+                <div class="mz-clear-all">  
+                    <button class="mz-button mz-facetingform-clearall" data-mz-action="clearFacets" data-mz-url="{% make_url "facet" "clear"  %}">{{ labels.clearAllFilters }}<i class="fa fa-times-circle"></i></button>
+                    
                     {% for facet in model.facets %}
                         {% if facet.values and facet.facetType != "Hierarchy" %}
                             {% for fval in facet.values %}
                                 {% if fval.isApplied %}
                                     <input type="checkbox" id="{{facet.field|slugify }}_{{ fval.value|slugify }}" class="mz-facetingform-value" {% if fval.isApplied %}checked="checked"{% endif %} data-mz-facet="{{ facet.field }}" data-mz-facet-value="{{ fval.value }}" data-mz-url="{% make_url "facet" fval %}">
-                                    <label class="mz-facetingform-valuelabel" for="{{facet.field|slugify }}_{{ fval.value|slugify }}" {% if facet.label == 'Color' %}style="background: {{ fval.value }}"{% endif %} ><i class="fa fa-times-circle"></i>{{ fval.label }}</label>
+                                    <label class="mz-facetingform-valuelabel" for="{{facet.field|slugify }}_{{ fval.value|slugify }}" {% if facet.label == 'Color' %}style="background: {{ fval.value }}"{% endif %} >{{ fval.label }} <i class="fa fa-times-circle"></i></label> 
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
@@ -34,82 +63,4 @@
             {% endif %}
         {% endif %}
     {% endblock clear-facets %}
-
-    <div class="mz-faceting-section" id="lcBlogFacets">
-        {% comment %}
-        {% for facet in model.facets %}
-          {% if facet.values and facet.facetType == "Hierarchy" %} 
-            {% if facet.values.length == 1 %}        
-              {% include "modules/product/learning-center/blog-hierarchy-facets" with facet=facet facetValues=facet.values|first|prop("childrenFacetValues") %}
-            {% else %}
-              {% include "modules/product/learning-center/blog-hierarchy-facets" with facet=facet facetValues=facet.values %}
-            {% endif %}
-          {% endif %}
-        {% endfor %}
-        {% endcomment %} 
-        {% for facet in model.facets %}
-            {% if facet.values and facet.facetType != "Hierarchy" %} 
-                <div class="mz-facet-row">
-                    {% if facet.field == "tenant~content-type" %}
-                    <ul class="mz-facetingform-facet mz-facetingform-facet-hierarchy {{ facet.label|slugify }} clearfix">
-                        {% for fval in facet.values %}
-                            <li {% if fval.isApplied %}class="checked"{% endif %}>
-                                <input type="checkbox" id="{{facet.field|slugify }}_{{ fval.value|slugify }}" class="mz-facetingform-value" {% if fval.isApplied %}checked="checked"{% endif %} data-mz-facet="{{ facet.field }}" data-mz-facet-value="{{ fval.value }}" data-mz-url="{% make_url "facet" fval %}">
-                                <label class="mz-facetingform-valuelabel" for="{{facet.field|slugify }}_{{ fval.value|slugify }}" >{{ fval.label }}</label>
-                            </li>
-                        {% endfor %}
-                    </ul> 
-                    {% endif %}
-
-                    {% if facet.field == "tenant~author-name" %}
-                    <h4 class="mz-facet-title">Authors <i class="fa fa-angle-down"></i></h4> 
-                    <ul class="mz-facetingform-facet mz-facetdropdown mz-facetingform-facet-hierarchy {{ facet.label|slugify }} clearfix">
-                        {% for fval in facet.values %}
-                            <li {% if fval.isApplied %}class="checked"{% endif %}>
-                                <input type="checkbox" id="{{facet.field|slugify }}_{{ fval.value|slugify }}" class="mz-facetingform-value" {% if fval.isApplied %}checked="checked"{% endif %} data-mz-facet="{{ facet.field }}" data-mz-facet-value="{{ fval.value }}" data-mz-url="{% make_url "facet" fval %}">
-                                <label class="mz-facetingform-valuelabel" for="{{facet.field|slugify }}_{{ fval.value|slugify }}" >{{ fval.label }}</label>
-                            </li>
-                        {% endfor %}
-                    </ul>  
-                    {% endif %}
-                </div>
-            {% endif %}
-        {% endfor %}
-
-        <!-- Dummy Code -->
-        {% comment %}
-        <div class="mz-facet-row">
-            <h4 class="mz-facet-title">Authors <i class="fa fa-angle-down"></i></h4> 
-            <ul class="mz-facetingform-facet mz-facetdropdown"> 
-                <li>
-                    <input type="checkbox" id="author_1" class="mz-facetingform-value">
-                    <label class="mz-facetingform-valuelabel" for="author_1">Author Name 1</label> 
-                </li>
-                <li>
-                    <input type="checkbox" id="author_2" class="mz-facetingform-value">
-                    <label class="mz-facetingform-valuelabel" for="author_2">Author Name 2</label> 
-                </li> 
-                <li>
-                    <input type="checkbox" id="author_3" class="mz-facetingform-value">
-                    <label class="mz-facetingform-valuelabel" for="author_3">Author Name 3</label> 
-                </li> 
-                <li>
-                    <input type="checkbox" id="author_4" class="mz-facetingform-value">
-                    <label class="mz-facetingform-valuelabel" for="author_4">Author Name 4</label> 
-                </li> 
-                <li>
-                    <input type="checkbox" id="author_5" class="mz-facetingform-value">
-                    <label class="mz-facetingform-valuelabel" for="author_5">Author Name 5</label> 
-                </li> 
-                <li>
-                    <input type="checkbox" id="author_6" class="mz-facetingform-value">
-                    <label class="mz-facetingform-valuelabel" for="author_6">Author Name 6</label>  
-                </li>  
-                
-            </ul> 
-
-        </div> 
-        {% endcomment %} 
-
-    </div>
-</section>
+</section> 
