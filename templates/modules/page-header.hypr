@@ -1,9 +1,7 @@
 ﻿<header class="mz-pageheader{% if themeSettings.bannerImageEnabled %} mz-pageheader-hasbanner {% endif %}">
-    
     <div class="mz-header-top">
         {% include "modules/page-header/header-top" %}     	
     </div>
-    
     <div class="mz-header-bottom">
         <div class="container"> 
             {% block store-branding %}
@@ -19,5 +17,4 @@
             {% endblock utility-nav %}
         </div>
     </div>
-    
 </header> 

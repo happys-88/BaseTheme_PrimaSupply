@@ -18,46 +18,8 @@ define([
                     fontSize: '60px'
                 }
             });
-        },
-        productValidationMessage: function() {
-            $.blockUI({
-                baseZ: 1050,
-                message: $('#SelectValidOption'),
-                css: {
-                    border: 'none',
-                    padding: '15px',
-                    backgroundColor: '#fff',
-                    opacity: 1,
-                    color: '#000',
-                    width: 'auto',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    fontSize: '14px'
-                }
-            });
-            $('.zoomContainer').remove();
-            $('#zoom').removeData('elevateZoom');
-        },
-        deliverySurchargeMessage: function() {
-            $.blockUI({
-                baseZ: 1050,
-                message: $('.del-surcharge-popup'),
-                css: {
-                    border: 'none',
-                    padding: '15px',
-                    backgroundColor: '#fff',
-                    opacity: 1,
-                    color: '#000',
-                    width: 'auto',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    fontSize: '14px'
-                }
-            });
-            $('.zoomContainer').remove();
-            $('#zoom').removeData('elevateZoom');
-        },
-        unblockUi: function() {
+        }, 
+        unblockUi: function() { 
             $.unblockUI();
         }
     };

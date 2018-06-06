@@ -165,7 +165,7 @@
         {% visitor_tracking_pixel %}
 
 
-        {% block yotpo-main-script %}
+        {% block live-chat-script %}
             <script type="text/javascript">
                 (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/OlkNvoLh5f5XgW1NdooEsafbEGVnWuH8oYr90j13/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})(); 
             </script>
@@ -202,7 +202,7 @@
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(se, s);
               })();
             </script>
-       {% endblock yotpo-main-script %}
+       {% endblock live-chat-script %}
     </body>
     {% endblock body-tag %}
 

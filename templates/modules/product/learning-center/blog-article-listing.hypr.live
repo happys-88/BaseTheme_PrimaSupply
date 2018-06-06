@@ -1,5 +1,4 @@
-
-<div class="mz-productlisting" data-mz-product="{{ model.productCode }}"> 
+<div class="mz-productlisting" data-mz-product="{{ model.productCode }}">    
     <div class="mz-productlisting-image"> 
         {% block product-image %}
         <a href="{% make_url "product" model %}">
@@ -14,8 +13,15 @@
     <div class="mz-productlisting-info"> 
         <h4><a class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName}}</a></h4>
         <div class="mz-blog-metadata">
-            <span class="post-date">{{ model.createDate|date("M jS, Y" }}</span> 
-            <span class="author-name">, Written by Lee Sill</span>
+            <span class="post-date">{{ model.createDate|date("M jS, Y" }}</span>
+            
+            {% for property in model.properties %}   
+                {% if property.attributeFQN == "tenant~author" %}
+                    {% for propValue in property.values %} 
+                        <span class="author-name">Written by {{ propValue.value }}</span>  
+                    {% endfor %}  
+                {% endif %}
+            {% endfor %} 
         </div> 
     </div> 
 

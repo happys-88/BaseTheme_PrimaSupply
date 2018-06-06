@@ -74,13 +74,14 @@ define([
 		$(window).scroll(function() {    
 		    var scroll = $(window).scrollTop();
 
-		    if (scroll >= 1) {
+		    if (scroll >= 34) {
 		        $("body").addClass("header-fixed");
 		        $(".mz-sticky-header").addClass("fixed");
-		        
+		        $("#page-content").addClass("fixed-header");		        
 		    } else {
 		        $(".mz-sticky-header").removeClass("fixed"); 
-		        $("body").removeClass("header-fixed"); 
+		        $("body").removeClass("header-fixed");
+		        $("#page-content").removeClass("fixed-header"); 
 		        $(".mz-back-to-top-btn").fadeOut();
 		    }
 
@@ -98,8 +99,7 @@ define([
 	    });
 
 		// Refine By Toggle in Mobile
-
-	    $(".mz-facets-dropdown").click(function(){
+		$(document).on('click','.mz-facets-dropdown', function(){ 
 			$(this).toggleClass("mz-facets-dropdown-open");
 		    $(".mz-faceting-section").toggleClass("mz-faceting-section-open");
 		});
@@ -126,11 +126,11 @@ define([
 		});
 
 		// Blog Facets
-		$(".mz-facet-row").click(function(){ 
-			$(this).toggleClass("active");   
+		$(document).on('click','.mz-facet-row', function(){    
+			$(this).toggleClass("active");    
 		});
 		$("#lcBlogFacets .mz-facet-row").each(function(){
-			$(".mz-facet-title").click(function(){ 
+			$(document).on('click','.mz-facet-title', function(){   
 				$(this).parent(".mz-facet-row").toggleClass("active");   
 			});
 
@@ -138,7 +138,7 @@ define([
 			$(document).mouseup(function (e){
 			  var currentFacetRow = $(".mz-facet-row"); 
 			  if (!currentFacetRow.is(e.target) && currentFacetRow.has(e.target).length === 0) {
-			    currentFacetRow.removeClass("active");  
+				currentFacetRow.removeClass("active");  
 			  }
 			}); 
 		});

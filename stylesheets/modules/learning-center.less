@@ -474,7 +474,7 @@
 /**** Blog Listing Page - Directory ****/
 .mz-learning-center{
 	.mz-l-paginatedlist{
-		margin: 0;
+		margin: 0 -15px; 
 		.mz-pagetitle{
 			font-size: 24px;
 			line-height: 28px;
@@ -502,6 +502,7 @@
 		.mz-facetingform{
 			float: left;
 			width: 100%;
+			position: relative; 
 			h2{
 				float: left;
 				font-size: 16px;
@@ -513,14 +514,41 @@
 			.mz-faceting-section{
 				float: left;
 				width: auto;
+				.mz-facetingform-valuelabel{
+					margin: 0;
+					text-transform: capitalize;   
+				}
 				.mz-facet-row{
-					position: relative; 
+					float: left;
+					&.author{
+						float: right;
+						border-left: 1px solid #ddd;
+						margin-top: 5px;    
+					}
+					.mz-facetingform-facet{ 
+						margin: 5px 0 0; 
+						li{
+							float: left;
+							margin: 0 10px 0 0;
+							padding-left: 10px;
+							border-left: 1px solid #ddd;
+							&:first-child{
+								padding:0;
+								border: none;  
+							} 
+							.mz-facetingform-value{
+								display: none;  
+							} 
+						}
+					}  
+					
 					.mz-facet-title{ 
 						line-height: 20px;
 						margin: 0;
-						padding: 5px 10px; 
+						padding: 0 10px;  
 						cursor: pointer;
 						text-transform: capitalize; 
+						position: relative; 
 						&:after{
 							display: none;
 						}
@@ -530,37 +558,36 @@
 					}
 					.mz-facetdropdown{
 						display: block; 
+						width: 100%; 
 						min-width: 300px; 
-					    max-width: 540px;
 					    padding: 15px; 
 					    position: absolute;
 					    left: 0;
-					    top: 32px;   
+					    top: 35px;     
 					    background: #ebebeb;
-					    border: 1px solid #ddd; 
+					    border: 1px solid #ddd;
+					    margin: 0;   
 					    z-index: -9;
-					    opacity: 0;  
-					    &:before{
-							content: "";
-				            position: absolute;
-				            left: 25px;
-				            top: -10px; 
-				            border-left: 10px solid transparent;
-				            border-bottom: 10px solid #ebebeb;
-				            border-right: 10px solid transparent; 
-				        } 
+					    opacity: 0;    
+					    
 					    li{
 					    	float: left;
-					    	width: 50%;
+					    	width: 220px;  
+					    	padding: 0;
+					    	margin: 0 0 10px;
+					    	border: none;
+					    	&:nth-child(4n){  
+					    		clear: both; 
+					    	}   
 					    }
 					    .mz-facetingform-value{
-					    	display: inline-block;
+					    	display: inline-block !important; 
 					    	position: relative;
 					    	top: 3px;
 					    	margin: 0 5px 0 0;  
 					    }
 					}
-					&.active{
+					&.active{ 
 						.mz-facet-title{
 							background: #666;
 							color: #fff;
@@ -569,6 +596,17 @@
 									content: "\f106"; 
 								}
 							}
+							&:before{ 
+								content: ""; 
+					            position: absolute; 
+					            left: 50%;
+					            top: 21px;  
+					            border-left: 10px solid transparent;
+					            border-bottom: 10px solid #ebebeb;
+					            border-right: 10px solid transparent;  
+					            z-index: 99;
+					            transform: translate(-50%, 0);  
+					        } 
 						} 
 						.mz-facetdropdown{ 
 							opacity: 1; 
@@ -577,21 +615,42 @@
 					}
 				}
 			}
+			.mz-clear-all{
+				float: left; 
+				padding: 0;
+				border: none;
+				margin-top: -3px;  
+				.mz-facetingform-valuelabel{
+					font-size: 14px;  
+					text-decoration: none;
+					margin: 0 0 0 10px;
+					text-transform: capitalize;    
+				} 
+			}
 		}
 		
 	}	
 }
 
 .mz-blog-listing{
-	.mz-productlist-item{
+	.mz-productlist-item{ 
+		&:first-child,
+		&:nth-child(4n){ 
+			padding-left: 0; 
+		}
+		&:nth-child(3n){
+			padding-right: 0;   
+		}
 		.mz-productlisting-image{
 			img{
+				width: 100%; 
 				max-width: 100%; 
 				max-height: 230px;
 			} 
 		}
 		.mz-productlisting-info{
 			text-align: left;
+			min-height: 100px;  
 			.mz-productlisting-title{
 				font-size: @fontSizeLarge - 2; 
 				color: @learningCenterTextColor;	
@@ -784,41 +843,6 @@
 	}
 }
 
-
-#lcBlogFacets{
-	.mz-facet-row{
-		float: left; 
-		.mz-facetingform-facet{ 
-			margin: 5px 0 0; 
-			li{
-				float: left;
-				margin: 0 10px 0 0;
-				padding-left: 10px;
-				border-left: 1px solid #333;
-				&:first-child{
-					padding:0;
-					border: none;  
-				} 
-				.mz-facetingform-value{
-					display: none;  
-				} 
-			}
-			&.mz-facetdropdown{
-				.mz-facetingform-value{
-					display: inline-block;    
-				}	
-			} 
-		}
-		&.active {
-			.mz-facetingform-facet {
-				li {
-					border-left: 0;
-					&:first-child {
-						padding-left: 10px;
-					}
-				}
-			}
-		
-		}
-	}
+.mz-facetingform{
+	
 }
