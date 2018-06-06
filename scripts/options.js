@@ -1,4 +1,4 @@
-define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "hyprlivecontext", "modules/api", "modules/models-product", "pages/cart", "modules/models-cart", "pages/product","modules/cart-monitor"], function ($, _, Hypr, Backbone, HyprLiveContext, api, ProductModel, cart, cartModel, product, CartMonitor) {  
+define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "hyprlivecontext", "modules/api", "modules/models-product", "pages/cart", "modules/models-cart", "modules/cart-monitor"], function ($, _, Hypr, Backbone, HyprLiveContext, api, ProductModel, cart, cartModel, CartMonitor) {  
     $(document).on("click",".mz-option-add-to-cart", function (event) {
         var $thisElem = $(event.currentTarget);
         var productCode = $thisElem.attr("data-mz-productcode");
@@ -128,11 +128,11 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             value--;
             this.model.updateQuantity(value);
             _qtyCountObj.val(value);
-            if (typeof product.attributes.inventoryInfo.onlineStockAvailable !== 'undefined') {
-                if (product.attributes.inventoryInfo.onlineStockAvailable >= value)
+            if (typeof this.model.attributes.inventoryInfo.onlineStockAvailable !== 'undefined') {
+                if (this.model.attributes.inventoryInfo.onlineStockAvailable >= value)
                 $(".mz-productdetail-addtocart").removeClass("is-disabled");
-                if (product.attributes.inventoryInfo.onlineStockAvailable < value && product.attributes.inventoryInfo.onlineStockAvailable > 0)
-                    $('[data-mz-validationmessage-for="quantity"]').text("*Only " + product.attributes.inventoryInfo.onlineStockAvailable + " left in stock.");
+                if (this.model.attributes.inventoryInfo.onlineStockAvailable < value && this.model.attributes.inventoryInfo.onlineStockAvailable > 0)
+                    $('[data-mz-validationmessage-for="quantity"]').text("*Only " + this.model.attributes.inventoryInfo.onlineStockAvailable + " left in stock.");
             }
         },
         quantityPlus: function() {
@@ -147,10 +147,10 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             value++;
             this.model.updateQuantity(value);
             _qtyCountObj.val(value);
-            if (typeof product.attributes.inventoryInfo.onlineStockAvailable !== 'undefined' && product.attributes.inventoryInfo.onlineStockAvailable < value) {
+            if (typeof this.model.attributes.inventoryInfo.onlineStockAvailable !== 'undefined' && this.model.attributes.inventoryInfo.onlineStockAvailable < value) {
                 $(".mz-productdetail-addtocart").addClass("is-disabled");
-                if (product.attributes.inventoryInfo.onlineStockAvailable > 0)
-                    $('[data-mz-validationmessage-for="quantity"]').text("*Only " + product.attributes.inventoryInfo.onlineStockAvailable + " left in stock.");
+                if (this.model.attributes.inventoryInfo.onlineStockAvailable > 0)
+                    $('[data-mz-validationmessage-for="quantity"]').text("*Only " + this.model.attributes.inventoryInfo.onlineStockAvailable + " left in stock.");
             }
         },
         removeItem: function() {
@@ -220,6 +220,10 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                 optionModel.set('cartItemId',cartitem.data.id);
                 optionModel.set('totalQuant',cartitem.data.quantity);
                 optionModel.set('hasAddon', false);
+                optionModel.set('prodPrice', 'prodPrice');
+                var price = JSON.parse(JSON.stringify(optionModel.get('price')));
+                optionModel.set('oldPrice', price.price);
+                optionModel.set('oldSalePrice', price.salePrice);
                 var options = JSON.parse(JSON.stringify(optionModel.get('options')));
                 for (var i = 0; i < options.length; i++) {
                     var option = options[i];
@@ -312,11 +316,11 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             value--;
             this.model.updateQuantity(value);
             _qtyCountObj.val(value);
-            if (typeof product.attributes.inventoryInfo.onlineStockAvailable !== 'undefined') {
-                if (product.attributes.inventoryInfo.onlineStockAvailable >= value)
+            if (typeof this.model.attributes.inventoryInfo.onlineStockAvailable !== 'undefined') {
+                if (this.model.attributes.inventoryInfo.onlineStockAvailable >= value)
                 $(".mz-productdetail-addtocart").removeClass("is-disabled");
-                if (product.attributes.inventoryInfo.onlineStockAvailable < value && product.attributes.inventoryInfo.onlineStockAvailable > 0)
-                    $('[data-mz-validationmessage-for="quantity"]').text("*Only " + product.attributes.inventoryInfo.onlineStockAvailable + " left in stock.");
+                if (this.model.attributes.inventoryInfo.onlineStockAvailable < value && this.model.attributes.inventoryInfo.onlineStockAvailable > 0)
+                    $('[data-mz-validationmessage-for="quantity"]').text("*Only " + this.model.attributes.inventoryInfo.onlineStockAvailable + " left in stock.");
             }
         },
         quantityPlus: function() {
@@ -331,10 +335,10 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             value++;
             this.model.updateQuantity(value);
             _qtyCountObj.val(value);
-            if (typeof product.attributes.inventoryInfo.onlineStockAvailable !== 'undefined' && product.attributes.inventoryInfo.onlineStockAvailable < value) {
+            if (typeof this.model.attributes.inventoryInfo.onlineStockAvailable !== 'undefined' && this.model.attributes.inventoryInfo.onlineStockAvailable < value) {
                 $(".mz-productdetail-addtocart").addClass("is-disabled");
-                if (product.attributes.inventoryInfo.onlineStockAvailable > 0)
-                    $('[data-mz-validationmessage-for="quantity"]').text("*Only " + product.attributes.inventoryInfo.onlineStockAvailable + " left in stock.");
+                if (this.model.attributes.inventoryInfo.onlineStockAvailable > 0)
+                    $('[data-mz-validationmessage-for="quantity"]').text("*Only " + this.model.attributes.inventoryInfo.onlineStockAvailable + " left in stock.");
             }
         },
         removeItem: function() {

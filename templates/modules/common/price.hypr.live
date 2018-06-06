@@ -1,4 +1,41 @@
-﻿ {% if model.onSale %}
+﻿ {% if prodPrice == 'prodPrice' %}
+    {% if model.onSale %}
+     <span class="mz-price is-crossedout">
+         {{oldPrice|currency}}
+     </span>
+     <span itemprop="price" class="mz-price is-saleprice">
+         {% if model.discount.discount.name %}
+         <span class="mz-price-discountname">{{model.discount.discount.name}} &ndash;</span>
+         {% endif %}
+
+         {% if model.priceType != "MAP" %}
+             {{oldSalePrice|currency}}
+         {% else %}
+            {% if hasStock == true %}
+                <div class="orange-text">{{ labels.mapPrice }}</div>
+            {% endif %}
+         {% endif %}
+     </span>
+     {% else %}
+         <span itemprop="price" class="mz-price">
+            {% if model.priceType != "MAP" %}
+                {{oldPrice|currency}}
+            {% else %}
+                <span class="mz-price is-crossedout">
+                    {{oldPrice|currency}}
+                </span>
+                {% if hasStock == true %}
+                    <div class="orange-text">{{ labels.mapPrice }}</div>
+                {% endif %}
+            {% endif %}
+         </span>
+     {% endif %}
+
+     {% if themeSettings.showMSRP and model.msrp %}
+        <span class="mz-price-msrp">{{ labels.msrp}}: <span class="mz-price">{{ model.msrp|currency }}</span></span> 
+     {% endif %}
+ {% else %}
+    {% if model.onSale %}
      <span class="mz-price is-crossedout">
          {{model.price|currency}}
      </span>
@@ -11,25 +48,27 @@
              {{model.salePrice|currency}}
          {% else %}
             {% if hasStock == true %}
-                <div>{{ labels.mapPrice }}</div>
+                <div class="orange-text">{{ labels.mapPrice }}</div>
             {% endif %}
          {% endif %}
      </span>
- {% else %}
-     <span itemprop="price" class="mz-price">
-        {% if model.priceType != "MAP" %}
-            {{model.price|currency}}
-        {% else %}
-            <span class="mz-price is-crossedout">
+     {% else %}
+         <span itemprop="price" class="mz-price">
+            {% if model.priceType != "MAP" %}
                 {{model.price|currency}}
-            </span>
-            {% if hasStock == true %}
-                <div>{{ labels.mapPrice }}</div>
+            {% else %}
+                <span class="mz-price is-crossedout">
+                    {{model.price|currency}}
+                </span>
+                {% if hasStock == true %}
+                    <div class="orange-text">{{ labels.mapPrice }}</div>
+                {% endif %}
             {% endif %}
-        {% endif %}
-     </span>
- {% endif %}
+         </span>
+     {% endif %}
 
- {% if themeSettings.showMSRP and model.msrp %}
-    <span class="mz-price-msrp">{{ labels.msrp}}: <span class="mz-price">{{ model.msrp|currency }}</span></span> 
+     {% if themeSettings.showMSRP and model.msrp %}
+        <span class="mz-price-msrp">{{ labels.msrp}}: <span class="mz-price">{{ model.msrp|currency }}</span></span> 
+     {% endif %}
  {% endif %}
+ 

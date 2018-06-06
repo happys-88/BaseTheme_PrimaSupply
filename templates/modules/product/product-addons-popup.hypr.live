@@ -18,6 +18,9 @@
                                 <img class="mz-itemlisting-thumb-img" src="{% make_url "image" image with max=120 as_parameters %}" {% if image.altText %}alt="{{ image.altText }}"{% endif %} />
                                 {% endwith %}
                             </div>
+                            {% include "modules/product/price-show-stack" with prodPrice=model.prodPrice
+                            oldPrice=model.oldPrice 
+                            oldSalePrice=model.oldSalePrice %}
                             <div class="mz-productdetail-options mz-l-stack-section">
                                 <div class="mz-carttable-item-remove col-xs-5">
                                     <a href="javascript:;" data-mz-removeItem data-mz-cart-item="{{ model.cartItemId }}">
@@ -33,11 +36,12 @@
 
                         </div>
                         {% if model.hasAddon === true %}
-                            <div class=add-on-popup>
-                                <h4 class="mz-l-stack-sectiontitle add-on-section-title">
-                                    {{ labels.addOnsSelect }}
-                                </h4>
-                                {% include "modules/product/product-addons-for-popup" %}
+                            <div class="add-on-popup">
+                                    <h4 class="mz-l-stack-sectiontitle add-on-section-title">
+                                        {{ labels.addOnsSelect }}
+                                    </h4>
+                                    {% include "modules/product/product-addons-for-popup" %}
+                               
                             </div>
                         {% endif %}
                         

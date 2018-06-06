@@ -17,7 +17,9 @@
     $(document).on('click', '.mz-quick-view', function (event) {
         var $Elem = $(event.currentTarget);
         var prdCode = $Elem.attr("data-mz-productcode-quickview");
+        console.log(prdCode);
         api.request("GET", "/api/commerce/catalog/storefront/products/" + prdCode).then(function (body) {
+            console.log(body);
             var quickview = Backbone.MozuView.extend({
                 templateName: 'modules/product/quickview',
                 additionalEvents: {
@@ -33,58 +35,36 @@
                 initialize: function() {
                   // console.log("initialze call");
                    
-                  //  console.log(this);
+                   // console.log(this.model());
+                
+                 
+                if(typeof this.model.get('variations') !== "undefined" ){
+                    
                    var variations = this.model.get('variations');
-                   
-                    if(variations !== undefined)
-                    {
-                        var stockArray = [];
-                        var sum = 0;
-                        for(var i=0; i<variations.length; i++)
-                        {
-                            stockArray.push(variations[i].inventoryInfo.onlineStockAvailable);
-                            sum += variations[i].inventoryInfo.onlineStockAvailable;
-                        }
-                        this.model.set({'totalCount': sum});
-
-                        var outOfStock = _.every(stockArray, function(outOfStock) { return outOfStock === 0; });
-                        if(outOfStock){
-                        this.model.set({'stockStatus': 'Temporarily out of stock'});
-                        }
-                        else
-                        {
-                            var inStock =_.contains(stockArray, 0);
-                            if(!inStock){
-                                var numberInStock = _.find(stockArray, function(numberInStock) { return numberInStock < 10; });
-                                if(numberInStock)
-                                {
-                                    this.model.set({'stockStatus': 'Only '+numberInStock+' in stock. Better hurry!'});
-                                    this.model.set({'numberInStock': 'true'});
-                                }
-                                else
-                                {
-                                    this.model.set({'stockStatus': 'In Stock'});
-                                }
-                            }
-                            else
-                            {
-                                var numberInStocks = _.find(stockArray, function(numberInStocks) 
+                                var sum = 0;
+                                 
+                                if(variations.length !== 0)
                                 { 
-                                    return numberInStocks > 0;
-                                });
-                                if(numberInStocks && inStock)
-                                {
-                                    this.model.set({'stockStatus': 'Some options in stock'});
+                                    var stockArray = [];
+                                        
+                                    for(var i=0; i<variations.length; i++)
+                                    {
+                                        stockArray.push(variations[i].inventoryInfo.onlineStockAvailable);
+                                        sum += variations[i].inventoryInfo.onlineStockAvailable;
+                                    }
+                                    this.model.set({'totalCount': sum});
+                                    var inStock =_.contains(stockArray, 0);
+                                    this.model.set({'containsZero': inStock});
+                                       
+                                }
                                
-                                }
-                                else
-                                {
-                                    this.model.set({'stockStatus': ''+numberInStocks+' in stock. Better hurry!'});
-                                    this.model.set({'numberInStock': 'true'});
-                                }
-                            }
-                        } 
+
+                 }
+                else{
+                        this.model.set({'totalCount': this.model.attributes.inventoryInfo.onlineStockAvailable});
+                                       
                     }
+                           
                 },
                 render: function () {
                     Backbone.MozuView.prototype.render.call(this);

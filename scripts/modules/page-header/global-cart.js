@@ -6,9 +6,10 @@ define([
     "modules/api",
     'modules/models-cart',
     "pages/cart",
-    "session-management"
+    "session-management",
+    "hyprlivecontext"
 ], 
-function ($, Hypr, Backbone, CartMonitor, api, cartModel, cart, sessionManagement) {
+function ($, Hypr, Backbone, CartMonitor, api, cartModel, cart, sessionManagement, HyprLiveContext) {
     if (require.mozuData('user').isAuthenticated) {
         $(window).sessionManagement(Hypr.getThemeSetting('sessionTimeout'), function() {
             window.location.href = '/logout';

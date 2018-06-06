@@ -276,9 +276,11 @@
             this.lastConfiguration = [];
             this.calculateHasPriceRange(conf);
             this.on('sync', this.calculateHasPriceRange);
-            var variations = this.get('variations');
+            var variations = [];
+            if(typeof this.get('variations') !== "undefined" ){
+            variations = this.get('variations');
             var sum = 0;
-           
+           try{
             if(variations.length !== 0)
             { 
                 var stockArray = [];
@@ -293,10 +295,16 @@
                 this.set({'containsZero': inStock});
                
             }
+
             else{
                 this.set({'totalCount': this.get('inventoryInfo').onlineStockAvailable});
                 
             }
+            }
+            catch(err){
+                //alert("hiuu");
+            }
+        }
         },
         mainImage: function() {
             var productImages = this.get('content.productImages');

@@ -11,23 +11,6 @@ require([
             template: "category-interior"
         });
 
-        // Add To Cart Button functionality in Category Page
-        // $(".add-to-cart").click(function(event){
-
-        // 	var $thisElem = $(event.currentTarget);
-		// 	Api.request("POST", "/api/commerce/carts/current/items", {
-		// 		product: {
-		// 			productCode: $thisElem.data("productcode")
-		// 			//options: [prodOptions]
-		// 			//options: []
-		// 		},
-		// 		quantity: 1,
-		// 		fulfillmentMethod: "ship"
-		// 	}).then(function(){
-		//  		window.location = "/cart";
-		// 	});
-		// });
-
 		// Custom Yotpo Rating
 		var yotpoApiKey = HyprLiveContext.locals.themeSettings.yotpoApiKey;
 		var bottomline = HyprLiveContext.locals.themeSettings.bottomline;

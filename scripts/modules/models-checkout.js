@@ -19,14 +19,12 @@
             // reference in .getOrder to exist;
             initStep: function () {
                 var me = this;
-                // console.log("initStep : "+JSON.stringify(this));
                 this.next = (function(next) {
                     return _.debounce(function() {
                         if (!me.isLoading()) next.call(me);
                     }, 750, true);
                 })(this.next);
                 var order = me.getOrder();
-                // console.log("CheckoutStep initstep before calculateStepStatus : "+JSON.stringify(order));
                 me.calculateStepStatus();
                 me.listenTo(order, 'error', function () {
                     if (me.isLoading()) {
@@ -45,9 +43,7 @@
             },
             calculateStepStatus: function () {
                 // override this!
-                // console.log("this.stepStatus() : "+this.stepStatus());
                 var newStepStatus = this.isValid(!this.stepStatus()) ? 'complete' : 'invalid';
-                // console.log("CheckoutStep calculateStepStatus : "+newStepStatus);
                 return this.stepStatus(newStepStatus);
             },
             getOrder: function () {
@@ -55,7 +51,6 @@
             },
             stepStatus: function (newStatus) {
                 if (arguments.length > 0) {
-                    // console.log("Arguments : "+JSON.stringify(arguments)+ " ::: "+newStatus);
                     this._stepStatus = newStatus;
                     this.trigger('stepstatuschange', newStatus);
                 }
@@ -97,8 +92,6 @@
             initialize: function () {
                
                 var self = this;
-                 // console.log("FulfillmentContact Step :"+JSON.stringify(self));
-                // console.log("model FullfillmentContact initialize "+JSON.stringify(this));
                 this.on('change:contactId', function (model, newContactId) {
                     if (!newContactId || newContactId === 'new') {
                         model.get('address').clear();
@@ -113,7 +106,6 @@
 
             },
             calculateStepStatus: function () {
-                // console.log("FulfillmentContact step status : "+this);
                 if (!this.requiresFulfillmentInfo() && this.requiresDigitalFulfillmentContact()) {
                     this.validation = this.digitalOnlyValidation;
                 }
@@ -158,11 +150,9 @@
                 });
             },
             edit: function () {
-                console.log("Edit called");
                 this.stepStatus('incomplete');
             },
             next: function () {
-                console.log("FullfillmentContact Next");
                 if (!this.requiresFulfillmentInfo() && this.requiresDigitalFulfillmentContact()) {
                     return this.nextDigitalOnly();
                 }
@@ -196,7 +186,6 @@
                         parent.isLoading(false);
                         me.calculateStepStatus();
                         parent.calculateStepStatus();
-                        // console.log("PARENT : "+JSON.stringify(parent));
                     });                  
                 };
 
@@ -243,11 +232,8 @@
 
         FulfillmentInfo = CheckoutStep.extend({
             initialize: function () {
-                console.log("FulfillmentInfo Step");
-                // console.log("model FullFillmentInfo : "+JSON.stringify(this));
                 var me = this;
                 this.stepStatus('incomplete');
-                // console.log("FullFillmentInfo : "+JSON.stringify(me));
                 this.on('change:availableShippingMethods', function (me, value) {
                     me.updateShippingMethod(me.get('shippingMethodCode'), true);
                 });
@@ -328,7 +314,6 @@
                     } 
                 });
                 lineItems.push({primaShip:primaShipProds, distShip:distributorShipProds, liftGate: liftGateSelected});
-                // console.log("ITEM : "+JSON.stringify(distributorShipProds));
                 return lineItems;
             },
             refreshShippingMethods: function (methods) {
@@ -343,7 +328,6 @@
                 this.updateShippingMethod();
             },
             calculateStepStatus: function () {
-                // console.log("FulfillmentInfo calculateStepStatus : "+JSON.stringify(this));
                 if (!this.requiresFulfillmentInfo()) return this.stepStatus('complete');
 
                 // If there's no shipping address yet, go blank.
@@ -367,7 +351,6 @@
                 var available = this.get('availableShippingMethods'),
                     newMethod = _.findWhere(available, { shippingMethodCode: code }),
                     lowestValue = _.min(available, function(ob) { return ob.price; }); // Returns Infinity if no items in collection.
-                    // console.log("Avaialble Shipping method : "+newMethod);
                 if (!newMethod && available && available.length && lowestValue) {
                     newMethod = lowestValue;
                 }
@@ -377,20 +360,6 @@
                 }
             },
             updateLiftGateOption: function (liftGateVal) {
-                console.log("UPDATE SELCTED");
-              /* api.request("GET","/liftgateRoute").then(function(res){
-                    console.log("Response : "+res);                
-                })
-               .catch(function(err){
-                console.log("Error");
-               });*/
-
-               $.get("/taxEstimation", function(res){ 
-                   console.log("Response : "+res);   
-                }).fail(function() {
-                    console.log("Failure ");   
-                });
-               
                 var order = this.getOrder(),
                     process = [function() {
                         return order.update({
@@ -417,7 +386,6 @@
                 this.set('freightShipmentVal',freightShipmentVal);
             },
             applyShipping: function(resetMessage) {
-                // console.log("Apply Shipping");
                 if (this.validate()) return false;
                 var me = this;
                 this.isLoading(true);
@@ -441,25 +409,11 @@
                             }
                         });
                 }
-                /*var total = order.get('total');
-                console.log(total);
-                /*var liftGateTotal = order.get('fulfillmentInfo').get('liftGateTotal');
-                console.log(liftGateTotal);
-                if(liftGateTotal !== ''){
-                    liftGateTotal = parseFloat(liftGateTotal);
-                    total = parseFloat(total);
-                    order.set('totall',liftGateTotal+total);
-                }*/
             },
             next: function () {
-                // console.log("Fullfillment Info next"+JSON.stringify(this));
                 this.stepStatus('complete');
-                                
                 // To show the TBYB step when tbyb line item exist
-                
                 if(this.parent.get('tbybInfo').tbybItemExist()) {
-                    // console.log("Set Tbyb incomplete");
-                    // this.parent.get('tbybInfo').calculateStepStatus();
                     this.parent.get('tbybInfo').stepStatus('incomplete');
                 } else {
                     this.parent.get('tbybInfo').stepStatus('invalid');
@@ -469,8 +423,6 @@
         }),
         TbybInfo = CheckoutStep.extend({
             initialize: function () {                
-                // this.set("tbyb", "TRUE");
-                // console.log("Model TBYB Step :: ");
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     this.set('orderAttributes', storefrontOrderAttributes);
@@ -496,13 +448,11 @@
                         }
                     }
                 }
-                // console.log("TBYB Products : "+JSON.stringify(tbybProducts));
                 this.set('tbybProducts',tbybProducts);
                
             },
             helpers: ['requireOrderModel', 'tbybSelectedProd','checktbybProductExist'],
             requireOrderModel: function() {
-                // console.log("requireOrderModel O");
                 var items = this.getOrder().get('items');
                 var selectedTbybExists = false;
                 // var selectedTbybItem = this.tbybSelectedProd();
@@ -540,7 +490,6 @@
                 return prodVals;
             },
             calculateStepStatus: function () {
-                // console.log("calculateStepStatus TBYB: "+this.parent.get('billingInfo').stepStatus());
                 if(this.tbybItemExist()) {
                     var fulfillmentStepComplete = this.parent.get('fulfillmentInfo').stepStatus() === 'complete';
                     var billingStepComplete = this.parent.get('billingInfo').stepStatus() === 'complete';
@@ -550,7 +499,6 @@
                     
                     if(fulfillmentStepComplete && thisStepComplete) {
                         if(this.getTbybSelected() === 'NONE') {
-                            // console.log("SET Incomplete");
                             return this.stepStatus('incomplete');
                         } else {
                             this.parent.get('billingInfo').stepStatus('incomplete');
@@ -568,71 +516,48 @@
                 // return this.stepStatus('incomplete');
             },
             checktbybProductExist: function(){
-                // console.log("LOGGG : "+JSON.stringify(this.get('tbybProducts').length));
                 if(this.get('tbybProducts').length > 0) {
-                    // console.log("FROM INNER PROD : "+this.getTbybSelected());
                     return "true";
                 } else {
-                    // console.log("Calling setTbybEmpty from else");
                     this.setTbybEmpty();
                     return "false";
                 }
                  
             },
             setTbybEmpty: _.once(function() {
-                // console.log("setTbybEmpty Once");
                 var order = this.getOrder();
-                // console.log(order);
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     var updateAttrs = [];
                     storefrontOrderAttributes.forEach(function(attr){
-                        // tenant~trybeforebuy
-                        // console.log("ATTR : "+ attr.attributeFQN);
-
                         var attrVal;
                         if(attr.attributeFQN === 'tenant~trybeforebuy'){
                             attrVal = "NONE";
-                            // updateAttrs.push({'tenant~trybeforebuy': attrVal});
                             updateAttrs.push({
                                 'fullyQualifiedName': attr.attributeFQN,
                                 'values': [ attrVal ]
                             });
                         }                    
                     });
-                    // console.log("updateAttrs : "+JSON.stringify(updateAttrs));
-                    // order.set('updateAttr',updateAttrs);
                     order.apiUpdateAttributes(updateAttrs);
-                    
-                    // console.log("ORDER FINAL : "+JSON.stringify(order));
-                    // this.tbybSelectedProd();   
                 }
-                // order.update();
             }),
             tbybSelectedProd: function(){
-                // console.log("tbybSelectedProd called");
-                // console.log("this . : "+JSON.stringify(this.parent.get('tbybInfo')));
                 if(this.checkTbybSelected()){
-                    // console.log("SLECTED : "+this.getTbybSelected());
                     return this.getTbybSelected();
                 } else {
                     return "NONE";
                 }
             },
             setTybySelected: function(prodCode) {
-                // console.log("Set Code : "+prodCode);
                 var order = this.getOrder();
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     var updateAttrs = [];
                     storefrontOrderAttributes.forEach(function(attr){
-                        // tenant~trybeforebuy
-                        // console.log("ATTR : "+ attr.attributeFQN);
-
                         var attrVal;
                         if(attr.attributeFQN === 'tenant~trybeforebuy'){
                             attrVal = prodCode;
-                            // updateAttrs.push({'tenant~trybeforebuy': attrVal});
                             updateAttrs.push({
                                 'fullyQualifiedName': attr.attributeFQN,
                                 'values': [ attrVal ]
@@ -2109,7 +2034,6 @@
                 if (!customerEmail) {
                    this.set('emailAddress', billingEmail);
                 }
-                // console.log("Billing email storage : "+billingEmail);
                 if (!billingEmail) {
                     this.set('billingInfo.billingContact.email', customerEmail);
                 }
@@ -2160,7 +2084,6 @@
                             shopperNotes: order.get('shopperNotes').toJSON()
                         });
                     }];
-                    // console.log("ORDER : "+JSON.stringify(order));
                 var liftGateVal = this.get('fulfillmentInfo').get('liftGateVal');
                 var freightShipmentVal = this.get('fulfillmentInfo').get('freightShipmentVal');
                 var tbybVal = this.get('tenant~trybeforebuy');
@@ -2225,7 +2148,6 @@
                     return false;
                 } 
                 } else {
-                    // console.log("ELSE : "+nonStoreCreditTotal +" : "+this.validateReviewCheckoutFields());
                     if ((nonStoreCreditTotal > 0 && _.has(this.validate(), "agreeToTerms"))) {
                        this.isSubmitting = false;
                         return false;
@@ -2297,7 +2219,6 @@
                        'tbybInfo',
                        'billingInfo'
                 ], function(name) {
-                    console.log("Name : "+name);
                     cb.call(me.get(name));
                 });
             },
