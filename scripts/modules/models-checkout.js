@@ -361,7 +361,6 @@
             },
             updateLiftGateOption: function (liftGateVal) {
               var order = this.getOrder(),
-              var order = this.getOrder(),
                     process = [function() {
                         return order.update({
                             ipAddress: order.get('ipAddress'),
