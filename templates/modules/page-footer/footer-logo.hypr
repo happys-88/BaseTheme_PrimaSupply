@@ -1,7 +1,7 @@
 <div class="mz-footer-logo-section clearfix"> 
     <div class="col-sm-6 col-xs-5"> 
         <div class="mz-footer-logo">
-            <a href="javascript:void(0);">
+            <a href="{{siteContext.siteSubdirectory}}/">
                 <img src="../../resources/images/footer-images/footer-logo@2x.png" alt="Prima Supply"/>
             </a>
         </div>
@@ -9,17 +9,17 @@
     <div class="col-sm-6 col-xs-7"> 
         <ul>
             <li>
-                <a href="javascript:void(0);">
+                <a href="/free-shipping">
                     <img src="../../resources/images/footer-images/free-shipping.png" alt="free-shipping">
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0);">
+                <a href="/price-match-guarantee">
                     <img src="../../resources/images/footer-images/price-match.png" alt="price-match">
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0);">
+                <a href="/try-before-you-buy">
                     <img src="../../resources/images/footer-images/try-before.png" alt="try-before">
                 </a>
             </li> 

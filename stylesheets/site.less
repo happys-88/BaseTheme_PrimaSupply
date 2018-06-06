@@ -36,12 +36,14 @@ img{
 .container{
 	max-width: 1440px;        
 }
-
 .mz-l-pagecontent{
 	background: @textColorWhite;
 	margin-bottom: @gutter; 
 	padding: @gutter 15px; 
 	overflow: visible; 
+	.mz-cms-row {
+		max-width: 100%;
+	}
 }
 
 .mz-cms-content{
@@ -53,8 +55,8 @@ img[data-mztp]{
 	display: none;
 }
 
-.mz-l-container {
-  	>h1 {
+.mz-l-pagecontent {
+  	h1 {
 		&.mz-pagetitle {
 		    color: #495363;
 		    border-bottom: 1px solid #e0e0e0;
