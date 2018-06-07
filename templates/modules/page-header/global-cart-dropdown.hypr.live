@@ -16,7 +16,6 @@
               </div>
               <span class="just-added">Just Added!</span>   
             <div class="mz-carttable-{% if Model.IsEmpty %} isempty {% else %}items-global{% endif %} col-xs-12"> 
-                {% if not model.isEmpty %}
                 {% for item in model.items %}
                   <div class="mz-carttable-item row" id="{{ item.product.productCode }}">
                           
@@ -25,7 +24,7 @@
                         {% if item.product.imageUrl and themeSettings.showCartItemImage %}
                           <img src="{% make_url "image" item.product with max=80 as_parameters %}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% endif %} />
                           <span class="mz-carttable-item-code">
-                            {{ item.product.productCode }}
+                            SKU: {{ item.product.variationProductCode|default(item.product.productCode) }}
                           </span>
                         {% endif %}  
                       </div>
@@ -68,7 +67,7 @@
                         <div class="qty-block">  
                           <span class="qty-counter" data-mz-qty="plus" role="button"><i class="mz-icon arrow-up" aria-hidden="true"></i></span> 
                           <span class="qty-counter" data-mz-qty="minus" role="button"><i class="mz-icon arrow-down"  aria-hidden="true"></i></span>    
-                          <input  class="text-center mz-carttable-qty-field" type="text" min="1" value="{{ item.quantity }}" readonly="readonly" data-mz-cart-item="{{ item.id }}" data-mz-value='quantity' title="Quantity">
+                          <input  class="text-center mz-carttable-qty-field" type="text" min="1" value="{{ item.quantity }}" data-mz-cart-item="{{ item.id }}" data-mz-value='quantity' title="Quantity">
                           <a class="mz-carttable-item-remove" href="javascript:void(0);" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}"><i class="fa fa-times"></i>{{ labels.remove }}</a>
                         </div> 
                       </div>
@@ -81,9 +80,6 @@
                       </div>
                     </div>  
                   {% endfor %}
-                {% else %}
-                 
-                {% endif %}
             </div>
                
                  <div class="mz-carttable-total-row col-xs-12 text-right">
@@ -126,8 +122,6 @@
 
                   
               </div>
-                  
-           </div>
        </form>
        {% dropzone "global-cart" scope "site" %}   
         </div>
