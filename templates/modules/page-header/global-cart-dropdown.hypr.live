@@ -5,7 +5,6 @@
         <a class="mz-button mz-button-large continue-btn" href="/" role="button">{{ labels.continueShopping }}</a>
     {% else %}
         <div class="mz-l-container">
-          
             <form method="post" action="{{ siteContext.secureHost }}{{siteContext.siteSubdirectory}}/cart/checkout" id="cartform">
              <div class="mz-table mz-table-cart">
              <div class="mz-carttable-header col-xs-12"> 
@@ -17,7 +16,7 @@
               <span class="just-added">Just Added!</span>   
             <div class="mz-carttable-{% if Model.IsEmpty %} isempty {% else %}items-global{% endif %} col-xs-12"> 
                 {% for item in model.items %}
-                  <div class="mz-carttable-item row" id="{{ item.product.productCode }}">
+                  <div class="mz-carttable-item row" id="{{ item.product.variationProductCode|default(item.product.productCode) }}">
                           
                     <div class="mz-carttable-item-product col-sm-6">
                       <div class="mz-carttable-item-product-image">

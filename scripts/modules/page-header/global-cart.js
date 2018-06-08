@@ -39,9 +39,9 @@ function ($, Hypr, Backbone, CartMonitor, api, cartModel, cart, sessionManagemen
                       var productcod=cartModels.attributes.changeMessages[lengt-1].metadata[0].productCode;
                       var id='#'+productcod;
                   
-                      var clone=$(".mz-carttable-items-global").find(id).addClass("just-added-to-cart").clone();
-                      $(".mz-carttable-items-global").find(id).addClass("just-added-to-cart").remove();
-                       $(clone).prependTo(".mz-carttable-items-global");
+                      //var clone=$(".mz-carttable-items-global").find(id).addClass("just-added-to-cart").clone();
+                     // $(".mz-carttable-items-global").find(id).addClass("just-added-to-cart").remove();
+                       $(id).prependTo(".mz-carttable-items-global");
           
                   });
             }

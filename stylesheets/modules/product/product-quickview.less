@@ -60,8 +60,16 @@
 		    .modal-body{
 				padding: 15px 0;
 				.product-image-slide {
-					width: 418px!important;
+					width: 385px!important;
 					height: 350px;
+					text-align: center;
+					img{
+						height: auto;
+						max-width: 100%;
+						vertical-align: middle;
+						transform: translateY(-50%);
+						margin-top: 50%;
+					}
 				}
 				.bx-wrapper {
 					.bx-viewport {
@@ -81,10 +89,6 @@
 								background-position: -29px 0;
 							}
 						}
-					}
-					.bx-pager {
-					    text-align: right;
-					    right: 50px;
 					}
 				}
 				.mz-product-info {
@@ -128,12 +132,6 @@
 					    font-weight: 700;
 					    text-transform: uppercase;
 					}
-					.mz-productdetail-conversion-controls{
-						label {
-							color: #999;
-					    	text-transform: uppercase;
-						}
-					} 
 					.mz-productdetail-options {
 						h4 {
 						    color: #495363;
@@ -174,11 +172,37 @@
 						}
 					}
 				}
+				.mz-productdetail-conversion-controls{
+					label {
+						color: #999;
+						text-transform: uppercase;
+					}
+					
+					.qty-block{
+						.mz-icon{
+							&.arrow-up{
+								top: 8px;
+							}
+							&.arrow-down {
+								bottom: 17px;
+							}
+						} 
+						.mz-productdetail-qty{
+							height: 44px;
+							width:50px;
+						}
+					}
+				} 
+				.mz-availability{
+					p{
+						margin:0;
+					}
+				}
 				button {
 					&.mz-button {
 						border-radius: 0;
-						margin: 30px 0 20px;
-						width: 70%;
+						margin: 0px 0 20px;
+						width: 100%;
 					}
 					&.is-disabled {
 						opacity: 0.5;
@@ -195,7 +219,10 @@
 				    font-size: 12px;
 				    font-weight: 700;
 				    text-transform: uppercase;
-				    text-decoration: underline;
+					text-decoration: underline;
+					width: 100%;
+					text-align: center;
+					display: block;
 				    &:hover {
 				    	text-decoration: none;
 				    }

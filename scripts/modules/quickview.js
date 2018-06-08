@@ -70,11 +70,15 @@ $(document).on('click', '.mz-quick-view', function (event) {
                 return this;
             },
             corousel: function () {
-                $('#quick-slider').bxSlider({
-                    minSlides: 1,
-                    maxSlides: 1,
-                    slideWidth: 600
-                });
+                console.log(this.model);
+                if( this.model.get("content").get("productImages").length > 1){
+                    $('#quick-slider').bxSlider({
+                        minSlides: 1,
+                        maxSlides: 1,
+                        slideWidth: 600
+                    });
+                }
+               
 
             },
             onQuantityChange: _.debounce(function (e) {
@@ -239,7 +243,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
         });
         Quickview.render();
     
-        this.model.on('addedtocart', function (cartitem) {
+        product.on('addedtocart', function (cartitem) {
             GlobalCart.update();
         });
 

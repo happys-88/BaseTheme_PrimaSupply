@@ -46,6 +46,9 @@
         <meta name="description" content="{{ PageContext.MetaDescription }}">
         <meta name="keywords" content="{{ PageContext.MetaKeywords }}">
         <meta name="correlationId" content="{{ pageContext.correlationId }}">
+        {% if not user.isAnonymous and not user.isAuthenticated and user.email !== "" %}
+        <meta http-equiv="refresh" content="0;url=/logout">
+       {% endif %}
 
         {% endblock meta-tags %}
 
