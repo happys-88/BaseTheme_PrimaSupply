@@ -21,10 +21,7 @@ define([
 
         //Product List Item View
         var ProductListItemView = Backbone.MozuView.extend({
-           
             templateName: 'modules/product/recent/recent-products',
-            
-           
             initialize: function() {
                 var self = this;
                 self.listenTo(self.model, 'change', self.render);
@@ -64,8 +61,7 @@ define([
                     products.push(cookieValue[i].pCode);
                 }
             }
-            console.log("products"+products);
-            return products;
+            return products; 
         }
 
         function addProduct() {

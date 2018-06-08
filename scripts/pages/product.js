@@ -101,7 +101,8 @@
 
         var product = ProductModels.Product.fromCurrent();
         var currentProductCode = product.attributes.productCode;
-        $.each(product.attributes.categories, function( index, value ) {
+        if(typeof product.attributes.categories !== "undefined"){
+            $.each(product.attributes.categories, function( index, value ) {
             var currentCategoryCode = value.categoryId;
             $.each(product.attributes.properties, function( index, value ) {
                 
@@ -111,39 +112,43 @@
                         var flag2 = false;
                         var nxtUrl;
                         api.request("GET", "/api/commerce/catalog/storefront/products/?filter=categoryId eq "+currentCategoryCode+"").then(function(body){
-                            //console.log("Category Dataiiiii "+JSON.stringify(body));
-
+                            
                             $.each(body.items, function(index, item){
                                 var productCode = item.productCode;
                                 var seoFriendlyUrl = item.content.seoFriendlyUrl;
-                                
                                 if(currentProductCode === productCode){
-                                        flag1 = true;
+                                    flag1 = true;
                                 }
                                 else{
-
-                                        if(!flag1){
-                                            preUrl = "http://"+hostname+"/"+seoFriendlyUrl+"/p/"+productCode+"";
-                                        }
-                                        else{
-                                            if(!flag2){
-                                                nxtUrl = "http://"+hostname+"/"+seoFriendlyUrl+"/p/"+productCode+"";
-                                                flag2 = true;
-                                                return false;
-                                            } 
-                                        }
+                                    if(!flag1){
+                                        preUrl = "http://"+hostname+"/"+seoFriendlyUrl+"/p/"+productCode+"";
                                     }
-                               });
-                            // console.log("hello "+preUrl);
+                                    else{
+                                        if(!flag2){
+                                            nxtUrl = "http://"+hostname+"/"+seoFriendlyUrl+"/p/"+productCode+"";
+                                            flag2 = true;
+                                            return false;
+                                        } 
+                                    }
+                                }
+                            }); 
+                            
                             if(!_.isUndefined(preUrl)){
-                            $("#prev-url").attr("href", preUrl);
-                           }
-                           if(!_.isUndefined(nxtUrl)){
-                            $("#next-url").attr("href", nxtUrl);
+                                $("#prev-url").attr("href", preUrl).removeClass("is-disabled");
+                            } 
+                            else{
+                                $("#prev-url").addClass("is-disabled");
+                            }
+                            if(!_.isUndefined(nxtUrl)){
+                                $("#next-url").attr("href", nxtUrl).removeClass("is-disabled");  
+                            }
+                            else{
+                                $("#next-url").addClass("is-disabled");  
                             }
                         });
                     });
                 });
+        }
 
         product.on('addedtocart', function (cartitem) {
             if (cartitem && cartitem.prop('id')) {

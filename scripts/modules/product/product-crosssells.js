@@ -47,13 +47,13 @@ define([
 		}
 	});
 
-	 var sell = require.mozuData("productCrossSell");
-	 console.log(sell);
-	 var cartModels = cartModel.Cart.fromCurrent();
-	 var indexcartnewproduct;
-	 var prodCodeCrossSell = [];
-	 var variantion=[];
-	 if(typeof sell.properties!= "undefined"){
+	var sell = require.mozuData("productCrossSell");
+	var cartModels = cartModel.Cart.fromCurrent();
+	var indexcartnewproduct;
+	var prodCodeCrossSell = [];
+	var variantion=[]; 
+	
+	if(typeof sell.properties!= "undefined"){
 		$.each(sell.properties, function( index, value ) {
 			if(value.attributeFQN == "tenant~product-crosssell"){
 				$.each(value.values, function( index, value ){
@@ -65,46 +65,47 @@ define([
 					}         
 				});
 			}
-		   });
-		   if(prodCodeCrossSell.length>0){
-					var Crosssellurl = "";
-					var CrosssellgenerateURL = "";
-					var items=[];
-					var product = ProductModel.Product.fromCurrent();
-					$.each(prodCodeCrossSell, function( index, value ) {
-						Crosssellurl = "productCode eq "+ "'" + value + "'"+ " or ";
-						CrosssellgenerateURL= CrosssellgenerateURL + Crosssellurl;
-					api.request("GET", "/api/commerce/catalog/storefront/products/"+variantion[index]+"?"+"variationProductCode="+value ).then(function(body){
-							items.push(body); 
-						});
-					});
-					CrosssellgenerateURL = CrosssellgenerateURL.slice(0, -3);
-					var upsellUrl= "/api/commerce/catalog/storefront/products/?filter=(" + CrosssellgenerateURL + ")";
-					var crosssellview;
-					var crosssell={
-						crosssellcall:function(){
-							api.request("GET", upsellUrl ).then(function(body){
+		});
+	    if(prodCodeCrossSell.length>0){
+			var Crosssellurl = "";
+			var CrosssellgenerateURL = "";
+			var items=[];
+			var product = ProductModel.Product.fromCurrent();
+
+			$.each(prodCodeCrossSell, function( index, value ) {
+				Crosssellurl = "productCode eq "+ "'" + value + "'"+ " or ";
+				CrosssellgenerateURL= CrosssellgenerateURL + Crosssellurl;
+				api.request("GET", "/api/commerce/catalog/storefront/products/"+variantion[index]+"?"+"variationProductCode="+value ).then(function(body){
+					items.push(body); 
+				});
+			});
+
+			CrosssellgenerateURL = CrosssellgenerateURL.slice(0, -3);
+			var upsellUrl= "/api/commerce/catalog/storefront/products/?filter=(" + CrosssellgenerateURL + ")";
+			var crosssellview;
+			var crosssell={
+				crosssellcall:function(){
+					api.request("GET", upsellUrl ).then(function(body){
 						$.each(body.items, function( index, value ) {
 							items.push(value);
 						});					
 						product.set("items",items);
-					crosssellview = new productCrossSellView({
-						model:product,
-						el: $('#product-crosssells')
+						crosssellview = new productCrossSellView({
+							model:product,
+							el: $('#product-crosssells')
+						});
+				
+						crosssellview.render();
+						crosssellview.productCarousel();
 					});
-					
-					crosssellview.render();
-					crosssellview.productCarousel();
-				});
-		   }
-		};
-		crosssell.crosssellcall();
-		   $(window).resize(function(){
-			crosssellview.productCarousel();
-		});
-	  
-	  }
-	 }
+	   			}
+			};
+			crosssell.crosssellcall();
+			$(window).resize(function(){
+				crosssellview.productCarousel();
+			}); 
+		} 
+	}
  
 });
 
