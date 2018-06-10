@@ -44,25 +44,94 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         startEdit: function(event) {
             event.preventDefault();
             this.editing = true;
-            //Start Edited By:- Ashish
-            // if ($("#account-settings-name").text() !== "" && this.beforeEditModel) {
-            //     this.model.set("firstName", this.beforeEditModel.firstName);
-            //     this.model.set("lastName", this.beforeEditModel.lastName);
-            //     this.model.set("emailAddress", this.beforeEditModel.emailAddress);
-            // }
-            // this.beforeEditModel = {
-            //     firstName: this.model.get('firstName'),
-            //     lastName: this.model.get('lastName'),
-            //     emailAddress: this.model.get('emailAddress')
-            // };
-            //End Edited By:- Ashish
             this.render();
         },
         cancelEdit: function() {
             var self = this;
             this.editing = false;
             self.render();
-            //End Edited By:- Ashish
+        },
+        finishEdit: function() {
+            var self = this;
+
+            this.doModelAction('apiUpdate').then(function() {
+                self.editing = false;
+            }).otherwise(function() {
+                self.editing = true;
+            }).ensure(function() {
+                self.afterEdit();
+            });
+        },
+        myEdit: function() {
+            var self = this;
+
+            this.doModelAction('apiUpdate').then(function() {
+                self.editing = false;
+            }).otherwise(function() {
+                self.editing = true;
+            }).ensure(function() {
+                self.afterEdit();
+            });
+        },
+        afterEdit: function() {
+            var self = this;
+
+            self.initialize().ensure(function() {
+                self.render();
+            });
+        }
+    });
+
+    var MyinformationView = EditableView.extend({
+        templateName: 'modules/my-account/my-account-information',
+        autoUpdate: [
+            'firstName',
+            'lastName',
+            'emailAddress',
+            'acceptsMarketing'
+        ],
+        constructor: function() {
+            EditableView.apply(this, arguments);
+            this.editing = false;
+            this.invalidFields = {};
+        },
+        initialize: function() {
+            return this.model.getAttributes().then(function(customer) {
+                customer.get('attributes').each(function(attribute) {
+                    attribute.set('attributeDefinitionId', attribute.get('id'));
+                });
+                return customer;
+            });
+        },
+        updateAttribute: function(e) {
+            var self = this;
+            var attributeFQN = e.currentTarget.getAttribute('data-mz-attribute');
+            var attribute = this.model.get('attributes').findWhere({
+                attributeFQN: attributeFQN
+            });
+            var nextValue = attribute.get('inputType') === 'YesNo' ? $(e.currentTarget).prop('checked') : $(e.currentTarget).val();
+
+            attribute.set('values', [nextValue]);
+            attribute.validate('values', {
+                valid: function(view, attr, error) {
+                    self.$('[data-mz-attribute="' + attributeFQN + '"]').removeClass('is-invalid')
+                        .next('[data-mz-validationmessage-for="' + attr + '"]').text('');
+                },
+                invalid: function(view, attr, error) {
+                    self.$('[data-mz-attribute="' + attributeFQN + '"]').addClass('is-invalid')
+                        .next('[data-mz-validationmessage-for="' + attr + '"]').text(error);
+                }
+            });
+        },
+        startEdit: function(event) {
+            event.preventDefault();
+            this.editing = true;
+            this.render();
+        },
+        cancelEdit: function() {
+            var self = this;
+            this.editing = false;
+            self.render();
         },
         finishEdit: function() {
             var self = this;
@@ -675,7 +744,8 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
 
         var accountModel = window.accountModel = CustomerModels.EditableCustomer.fromCurrent();
 
-        var $accountSettingsEl = $('.account-settings'),
+        var $accountSettingsEl = $('#account-settings'),
+            $MyinformationEl = $('#my-account-information'),
             $passwordEl = $('#password-section'),
             $orderHistoryEl = $('#account-orderhistory'),
             $returnHistoryEl = $('#account-returnhistory'),
@@ -690,6 +760,11 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         var accountViews = window.accountViews = {
             settings: new AccountSettingsView({
                 el: $accountSettingsEl,
+                model: accountModel,
+                messagesEl: $messagesEl
+            }),
+            myinformation: new MyinformationView({
+                el: $MyinformationEl,
                 model: accountModel,
                 messagesEl: $messagesEl
             }),

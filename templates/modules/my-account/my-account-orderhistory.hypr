@@ -1,5 +1,4 @@
-﻿
-{% if showPaging %}  
+﻿{% if showPaging %}  
     <h3 class="mz-l-stack-sectiontitle">{{ labels.orderHistory }}</h3>
 {% else %}
     <h3 class="mz-l-stack-sectiontitle">{{ labels.order }}</h3>
@@ -9,19 +8,20 @@
         <div data-mz-orderlist class="mz-l-paginatedlist-list">
             {% include "modules/my-account/order-history-list" %}
         </div>
-        {% if showPaging %}
-            <div data-mz-pagenumbers class="mz-pagenumbers with-border">
-                {% include "modules/common/page-numbers" %}
-            </div>
-            
+        {% if showPaging %}            
+            {% if model.items.length > 5 %}
+               <div data-mz-pagenumbers class="mz-pagenumbers">
+                    {% include "modules/common/page-numbers" %}
+                </div>
+            {% endif %}
+            {% comment %}
             <div data-mz-pagingcontrols class="mz-pagingcontrols">
                 {% include "modules/common/order-history-paging-controls" %}         
-            </div>  
-            
-
+            </div>
+            {% endcomment %}
         {% endif %}
     {% else %}
-        {{ labels.accountNoOrders }}
+        <p>{{ labels.accountNoOrders }}</p>
         <div class="mz-order-history-dropzone">
             {% dropzone "order-history" scope="page" %} 
         </div>

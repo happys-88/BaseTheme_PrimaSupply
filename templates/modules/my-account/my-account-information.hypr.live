@@ -1,5 +1,5 @@
 ﻿<h3 class="mz-l-stack-sectiontitle">
-    {{ labels.myAccount }}
+    {{ labels.myInformation }}
     {% if model.firstName %}
         {% if not editing %}
             <a href class="mz-link-edit-accountsettings" data-mz-action="startEdit">{{ labels.edit }}</a>

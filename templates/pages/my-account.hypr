@@ -23,7 +23,7 @@
                         {% include "modules/common/message-bar" with model=model.messages %}
                     </div>
                     <div id="settings" class="tab-pane fade in active">
-                        <div class="mz-l-stack-section mz-accountsettings account-settings">
+                        <div class="mz-l-stack-section mz-accountsettings" id="account-settings">
                             {% include "modules/my-account/my-account-settings" %}
                         </div>    
                         {% if model.orderHistory.items.0 %}
@@ -33,8 +33,8 @@
                         {% endif %}
                     </div>
                     <div id="myInformation" class="tab-pane fade">
-                        <div class="mz-l-stack-section mz-accountsettings account-settings">
-                            {% include "modules/my-account/my-account-settings" %}
+                        <div class="mz-l-stack-section mz-accountsettings" id="my-account-information">
+                            {% include "modules/my-account/my-account-information" %}
                         </div>
                         <div class="mz-l-stack-section mz-passwordsection" id="password-section">
                             {% include "modules/my-account/my-account-password" %}
