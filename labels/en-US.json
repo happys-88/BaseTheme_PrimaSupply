@@ -565,6 +565,7 @@
 
   //QuickView
   "fullProductDetails"                     :   "view details",
+  "sku"                                    :   "SKU",
 
   //Customer services
   "customerService"                        :   "Customer Service",

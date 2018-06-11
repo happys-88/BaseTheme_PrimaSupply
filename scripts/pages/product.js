@@ -92,6 +92,22 @@
                     }
                 }
             });
+            console.log(this.model);
+            var options = JSON.parse(JSON.stringify(this.model.get('options')));
+            var count = 0;
+            count = parseInt(count, 10);
+            for (var j = 0; j < options.length; j++) {
+                var option = options[j];
+                if (option.attributeFQN == "tenant~size" || option.attributeFQN == "tenant~color" || option.attributeDetail.dataType == "ProductCode") {
+                    count++;
+                } 
+            }
+            
+            this.model.set('showColorIcon', false);
+            if (count == options.length) {
+                this.model.set('showColorIcon', true);
+            }
+            console.log(this.model.get('showColorIcon'));
         }
     });
 

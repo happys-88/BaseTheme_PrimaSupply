@@ -35,10 +35,15 @@
 		right: -490px;
 		bottom: 0;
 		margin: 0;
+		height: 100%;
+		background: #fff;
+		box-shadow: 0 5px 15px rgba(0,0,0,.5);
+		overflow-y: auto;
 		transition: .5s ease;
 		.modal-content {
 			border-radius: 0;
 			padding: 10px 20px;
+			min-height: 100%;
 			.modal-header {
 		        padding: 0 0 8px 0;
 		        border-bottom: 2px solid #495363;
@@ -59,16 +64,40 @@
 		    }
 		    .modal-body{
 				padding: 15px 0;
+				.mz-product-quick-view{
+					
+					position: relative;
+					.new-arrival{
+						width: 70px;
+						height: 70px;
+						position: absolute;
+						border:2px dotted #00adce;
+						border-radius: 50%;
+						text-align: center;
+						top: 0%;
+						left: 0;
+						vertical-align: middle;
+						z-index: 99;
+							p{
+								transform: translateY(-50%);
+								margin-top: 48%;
+							}
+					}
+				}
 				.product-image-slide {
-					width: 385px!important;
+					width: 365px !important;
 					height: 350px;
 					text-align: center;
+					margin: 0 auto;
 					img{
-						height: auto;
+						height: 250px;
 						max-width: 100%;
 						vertical-align: middle;
 						transform: translateY(-50%);
-						margin-top: 50%;
+						margin-top: 42%;
+						margin-right:0;
+						width: auto;
+    					display: inline-block;
 					}
 				}
 				.bx-wrapper {
@@ -94,10 +123,11 @@
 				.mz-product-info {
 					.mz-pagetitle {
 						border-bottom: 0;
-						font-size: 22px;
+						font-size: 16px;
 						margin-top: 0px;
 						margin-bottom: 0;
 						padding-bottom: 0;
+						text-transform: capitalize;
 						a {
 							color: #495363;
 						}
@@ -105,7 +135,7 @@
 					.mz-product-code {
 						border-bottom: 1px solid #e0e0e0;
 						color: #999;
-						font-size: 12px;
+						font-size: 16px;
 						font-weight: 500;
     					line-height: 40px;
 						span {
@@ -116,11 +146,11 @@
 					}
 					.mz-productdetail-price {
 						.mz-price {
-						    font-size: 30px;
+						    font-size: 16px;
 						}
 						.mz-price-msrp {
 						    display: block;
-						    font-size: 12px;
+						    font-size: 16px;
 						    .mz-price {
 							    font-size: 12px;
 							}
@@ -128,7 +158,7 @@
 					}
 					.mz-stock {
 					    color: #666;
-					    font-size: 12px;
+					    font-size: 16px;
 					    font-weight: 700;
 					    text-transform: uppercase;
 					}
@@ -149,7 +179,10 @@
 							}
 						}
 						.mz-productoptions-valuecontainer {
-						    display: block;
+							display: block;
+							.mz-productoptions-option{
+								width: 100%;
+							}
 						}
 					}
 					.qty-block {

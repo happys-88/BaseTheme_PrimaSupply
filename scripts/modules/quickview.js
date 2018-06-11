@@ -62,6 +62,21 @@ $(document).on('click', '.mz-quick-view', function (event) {
                     this.model.set({'totalCount': this.model.attributes.inventoryInfo.onlineStockAvailable});
                                    
                 }
+                var options = JSON.parse(JSON.stringify(this.model.get('options')));
+                var count = 0;
+                count = parseInt(count, 10);
+                for (var j = 0; j < options.length; j++) {
+                    var option = options[j];
+                    if (option.attributeFQN == "tenant~size" || option.attributeFQN == "tenant~color" || option.attributeDetail.dataType == "ProductCode") {
+                        count++;
+                    } 
+                }
+                this.model.set('hideAddon', true);
+                this.model.set('showColorIcon', false);
+                if (count == options.length) {
+                    this.model.set('showColorIcon', true);
+                }
+                console.log(this.model.get('showColorIcon'));
                        
             },
             render: function () {
@@ -75,7 +90,8 @@ $(document).on('click', '.mz-quick-view', function (event) {
                     $('#quick-slider').bxSlider({
                         minSlides: 1,
                         maxSlides: 1,
-                        slideWidth: 600
+                        slideWidth: 600,
+                        pager:false
                     });
                 }
                
@@ -227,7 +243,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
             },
             clickOnNextOrprevious: function(){
                 if(typeof this.model.get('productCode') !== 'undefined'){
-                 $('[src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1024px-No_image_3x4.svg.png"]').parent().remove();
+                 $('[src="http://southasia.oneworld.net/ImageCatalog/no-image-icon/image_preview').parent().remove();
                  if($(".bx-pager-item").length > imagecount){
                     $(".bx-pager-item").eq(2).remove();
                  }
