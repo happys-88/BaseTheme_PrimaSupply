@@ -14,31 +14,14 @@
         <li class="mz-utilitynav-item login-link">
             {% if not user.isAnonymous %} 
                 <div id="mz-logged-in-notice"> 
-                      
-                    <span class="login-icon mz-mobile" data-toggle="dropdown"> 
+                    <span class="login-icon mz-mobile" data-toggle="dropdown">  
                         <i class="fa fa-user"></i><i class="fa fa-angle-down"></i>          
                     </span>
-                    <span class="welcome-text">{{ labels.welcome }},</span>  
-                    <span class="user-name mz-utilitynav-link" data-toggle="dropdown">   
-                        {% if user.firstName %}
-                            {{user.firstName|default(user.emailAddress)}}
-                        {% else %}
-                            {{user.email|default(user.emailAddress)}}
-                        {% endif %}
-                    </span>
+                    <span class="user-name mz-utilitynav-link" data-toggle="dropdown">My Account</span>  
                     
                     <!-- My Account Dropdown -->
                     <div class="dropdown-menu">
-                        <div class="logged-user"> 
-                            <span class="welcome-text mz-mobile">{{ labels.welcome }}</span>, 
-                            <span class="user-name mz-mobile">     
-                                {% if user.firstName %}
-                                    {{user.firstName|default(user.emailAddress)}}
-                                {% else %}
-                                    {{user.email|default(user.emailAddress)}}
-                                {% endif %}
-                            </span>    
-                        </div> 
+                        <div class="logged-user"></div>  
                         <div class="my-account-details">
                             <a href="/myaccount#settings">
                                 <h4>{{ labels.accountSettings }}</h4>

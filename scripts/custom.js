@@ -74,7 +74,7 @@ define([
 		$(window).scroll(function() {    
 		    var scroll = $(window).scrollTop();
 
-		    if (scroll >= 34) {
+		    /*if (scroll >= 34) {
 		        $("body").addClass("header-fixed");
 		        $(".mz-sticky-header").addClass("fixed");
 		        $("#page-content").addClass("fixed-header");		        
@@ -83,7 +83,7 @@ define([
 		        $("body").removeClass("header-fixed");
 		        $("#page-content").removeClass("fixed-header"); 
 		        $(".mz-back-to-top-btn").fadeOut();
-		    }
+		    }*/ 
 
 		    if (scroll >= 200) {
 		    	$(".mz-back-to-top-btn").fadeIn();

@@ -5,9 +5,16 @@
 		width: 100%;         
 	} 
 	.mz-sitenav{
+		.mz-sitenav-top-categories{
+			padding: 15px;
+			.mz-category-image{
+				margin-bottom: 12px; 
+			}  
+		}
 		.mz-sitenav-item{
 			.mz-sitenav-link{
-				/*padding: 8px 15px;  */ 
+				font-size: 14px; 
+				padding: 10px 25px; 
 			} 	
 		}
 	}
@@ -17,6 +24,18 @@
 		.noimage-text{
 			font-size: 20px;    
 		} 
-	}  
+	}
+
+	/**** Search Box ****/  
+	.mz-searchbox{
+		@expandedSearchWidth: 750px;
+		.mz-searchbox-input{
+			width: @expandedSearchWidth;  
+		} 
+		.tt-dropdown-menu{
+			width: @expandedSearchWidth + 2; 
+		}	
+	}
+	
 	
 } 
