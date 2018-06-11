@@ -993,7 +993,91 @@
 			width: 100%;
 			text-align: center;  
 		}
-	} 
+		.mz-l-sidebar {
+			padding: 0;
+			h2 {
+				&.mz-facets-dropdown {
+					&:after {
+					    display: block;
+					    top: 9px;
+					}
+				}
+			}
+			.mz-facetingform {
+				width: 100%;
+				h2 {
+					margin-top: 0;
+					padding: 14px 15px;
+					width: 100%;
+				}
+				.mz-faceting-section {
+					display: none;
+					width: 100%;
+					.mz-facet-row {
+					    width: 100%;
+					    .mz-facetingform-facet {
+					    	margin: 0;
+					    	li {
+								width: 100%;
+							}
+						}
+						.mz-facetdropdown {
+						    border: 0;
+						}
+						&.content-type {
+							.mz-facetingform-facet {
+						    	li {
+						    		padding-left: 15px;
+						    		padding-right: 15px;
+									border-bottom: 1px solid #ddd;
+									border-left: 0;
+								    &:first-child {
+									    padding-left: 15px;
+									    padding-right: 15px;
+									}
+								}
+							}
+							.mz-facetingform-valuelabel {
+							    display: block;
+							    padding: 10px 0;
+							}
+						}
+						&.author  {
+							border-left: 0;
+							margin: 0;
+							.mz-facet-title {
+							    line-height: 22px;
+							    padding: 10px 15px;
+							}
+							&.active {
+								.mz-facetdropdown {
+								    position: static;
+								}
+								.mz-facet-title {
+									&:before {
+									   display: none;
+									}
+								}
+							}
+						}					
+					}
+				}
+				.mz-clear-all {
+					float: left;
+				    border-top: 1px solid #ddd;
+				    margin-top: 0;
+				    padding: 5px 15px;
+				   	width: 100%;
+				}
+			}
+			.mz-faceting-section {
+				&.mz-faceting-section-open {
+				    border-top: 1px solid #ddd;
+					display: block;
+				}
+			}
+		}
+	}
 	/**** Learning Center Ends ****/ 
 
 
