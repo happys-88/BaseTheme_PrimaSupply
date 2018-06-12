@@ -49,10 +49,19 @@ define([
 
 	 var sell = require.mozuData("productCrossSell");
 	 var cartModels = cartModel.Cart.fromCurrent();
-	 var indexcartnewproduct;
-	 var newaddedproductcode= sell.changeMessages[sell.changeMessages.length-1].metadata[0].productCode;
-	 
+	 console.log(cartModels);
+
+	 var indexcartnewproduct; 
+	 var newaddedproductcode;
+	 var length = sell.changeMessages.length-1;
 	 if(sell.isEmpty!==true){
+	 for(var index = length; index >= 0; index--) {
+		if(sell.changeMessages[index].verb !== "Merged"){
+			newaddedproductcode = sell.changeMessages[index].metadata[0].productCode;
+		  	break;
+		}
+	 }
+	
 		$.each(sell.items, function( index, value ) {
 			if(value.product.productCode==newaddedproductcode){
 				indexcartnewproduct=index;

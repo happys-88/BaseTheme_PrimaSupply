@@ -92,7 +92,6 @@
                     }
                 }
             });
-            console.log(this.model);
             var options = JSON.parse(JSON.stringify(this.model.get('options')));
             var count = 0;
             count = parseInt(count, 10);
@@ -102,12 +101,9 @@
                     count++;
                 } 
             }
-            
-            this.model.set('showColorIcon', false);
             if (count == options.length) {
                 this.model.set('showColorIcon', true);
             }
-            console.log(this.model.get('showColorIcon'));
         }
     });
 
