@@ -32,8 +32,8 @@
         <div class="row">
             <div class="col-xs-12">
                 
-                <div class="mz-product-social-sharing hide">
-                    {% dropzone "social-sharing" scope="template" %}      
+                <div class="mz-product-social-sharing">  
+                    {% dropzone "social-sharing" scope="template" %}           
                 </div>
                 <h1 class="mz-blog-title" itemprop="name">{{ prodMod.content.productName }}</h1>  
                 <div class="mz-blog-mainimage">
@@ -64,8 +64,8 @@
 {% endblock body-content %}
 
 {% block body-below-content %}
-    {% dropzone "body-bottom" scope="page" %}   
-{% endblock body-below-content %} 
+    {% dropzone "body-bottom" scope="page" %}
+{% endblock body-below-content %}    
 
 
 

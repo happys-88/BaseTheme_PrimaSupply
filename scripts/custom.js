@@ -67,23 +67,23 @@ define([
 	        }, 600); 
         }
 		
-		if ($(this).scrollTop() > 200) { 
+		if ($(this).scrollTop() > 200) {  
 	        $("#scroll-to-top").show();
 	    }
 		// Sticky Nav Header
 		$(window).scroll(function() {    
-		    var scroll = $(window).scrollTop();
+		    var scroll = $(window).scrollTop();  
 
-		    /*if (scroll >= 34) {
+		    if (scroll >= 34) {
 		        $("body").addClass("header-fixed");
-		        $(".mz-sticky-header").addClass("fixed");
+		        $(".mz-sticky-header").addClass("fixed"); 
 		        $("#page-content").addClass("fixed-header");		        
 		    } else {
 		        $(".mz-sticky-header").removeClass("fixed"); 
 		        $("body").removeClass("header-fixed");
 		        $("#page-content").removeClass("fixed-header"); 
 		        $(".mz-back-to-top-btn").fadeOut();
-		    }*/ 
+		    }  
 
 		    if (scroll >= 200) {
 		    	$(".mz-back-to-top-btn").fadeIn();
