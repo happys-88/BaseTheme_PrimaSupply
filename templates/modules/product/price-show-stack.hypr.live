@@ -2,10 +2,10 @@
 
     {% if loginForPrice.values|first|prop("value") === true %} 
         {% if user.isAuthenticated %} 
-            {% include "modules/product/price-stack-two" %}
+            {% include "modules/product/price-stack-two" with prodCode=model.productCode %}
         {% endif %}
     {% else %}
-        {% include "modules/product/price-stack-two" %}
+        {% include "modules/product/price-stack-two" with prodCode=model.productCode %}
     {% endif %}
     
 {% endwith %}

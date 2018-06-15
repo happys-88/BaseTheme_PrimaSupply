@@ -13,7 +13,6 @@ define([
     "hyprlive"
 
 ], function($, _, api, Backbone, HyprLiveContext, ProductModels, bxslider, cart, cartModel, GlobalCart, CartMonitor, Hypr) {
-console.log("quicknew");
 $(document).on('click', '.mz-quick-view', function (event) {
     var $Elem = $(event.currentTarget);
     var prdCode = $Elem.attr("data-mz-productcode-quickview");
@@ -32,35 +31,21 @@ $(document).on('click', '.mz-quick-view', function (event) {
 
             },
             initialize: function() {
-              // console.log("initialze call");
-               
-               // console.log(this.model());
-            
-             
-            if(typeof this.model.get('variations') !== "undefined" ){
-                
-               var variations = this.model.get('variations');
-                            var sum = 0;
-                             
-                            if(variations.length !== 0)
-                            { 
-                                var stockArray = [];
-                                    
-                                for(var i=0; i<variations.length; i++)
-                                {
-                                    stockArray.push(variations[i].inventoryInfo.onlineStockAvailable);
-                                    sum += variations[i].inventoryInfo.onlineStockAvailable;
-                                }
-                                this.model.set({'totalCount': sum});
-                                var inStock =_.contains(stockArray, 0);
-                                this.model.set({'containsZero': inStock});
-                                   
-                            }                    
-
-             }
-            else{
+                if(typeof this.model.get('variations') !== "undefined" ) {
+                   var variations = this.model.get('variations');
+                    var sum = 0;
+                    if(variations.length !== 0) { 
+                        var stockArray = [];
+                        for(var i=0; i<variations.length; i++) {
+                            stockArray.push(variations[i].inventoryInfo.onlineStockAvailable);
+                            sum += variations[i].inventoryInfo.onlineStockAvailable;
+                        }
+                        this.model.set({'totalCount': sum});
+                        var inStock =_.contains(stockArray, 0);
+                        this.model.set({'containsZero': inStock});
+                    }                    
+                } else {
                     this.model.set({'totalCount': this.model.attributes.inventoryInfo.onlineStockAvailable});
-                                   
                 }
                 var options = JSON.parse(JSON.stringify(this.model.get('options')));
                 var count = 0;
@@ -76,8 +61,6 @@ $(document).on('click', '.mz-quick-view', function (event) {
                 if (count == options.length) {
                     this.model.set('showColorIcon', true);
                 }
-                console.log(this.model.get('showColorIcon'));
-                       
             },
             render: function () {
                 Backbone.MozuView.prototype.render.call(this);
@@ -85,7 +68,6 @@ $(document).on('click', '.mz-quick-view', function (event) {
                 return this;
             },
             corousel: function () {
-                console.log(this.model);
                 if( this.model.get("content").get("productImages").length > 1){
                     $('#quick-slider').bxSlider({
                         minSlides: 1,
@@ -222,6 +204,20 @@ $(document).on('click', '.mz-quick-view', function (event) {
             },
             AddToCart: function (event) {
                 this.model.addToCart();
+                var quickviewModel = this.model;
+                this.model.on('addedtocart', function (cartitem) {
+                    $('#quickViewModal').modal('hide');
+                });
+                var me = this;
+                this.model.on('addedtocarterror', function (error) {
+                    if (error.message.indexOf('Validation Error: The following items have limited quantity or are out of stock') > -1) {
+                        quickviewModel.set('addToCartErr', Hypr.getLabel('outOfStockError'));
+                    } else {
+                        quickviewModel.set('addToCartErr', error.message);
+                    }
+                    quickviewModel.set('quantity', 1);
+                    me.render();
+                });
             },
             colorswatch: function (event) {
                 if(typeof this.model.get('productCode') !== 'undefined') {

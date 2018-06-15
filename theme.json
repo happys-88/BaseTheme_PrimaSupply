@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "cefda9b20972ffccbf75ec016cdff555a66730ef"
+      "commit": "40ee9244a72d9109385065000123317447b2356b"
     },
     "baseThemeChannel": "stable"
   },
@@ -475,7 +475,7 @@
     }
   ],
   "settings": {
-    "sessionTimeout": "1800",
+    "sessionTimeout": "18000",
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",
     "extendedPropertiesEnabled": false,
     "extendedPropertyParameters": "",

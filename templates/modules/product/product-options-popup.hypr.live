@@ -102,6 +102,7 @@
                             </div>
                         </div>
                     </div>
+                    <span class="mz-validationmessage">{{ model.addToCartErr }}</span>
                     <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
                     
                     {% comment %}

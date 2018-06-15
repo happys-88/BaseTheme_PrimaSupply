@@ -170,7 +170,7 @@
                     scrollTop: $('header').offset().top
                 }, 1000);
                 GlobalCart.update();
-                product.set('quantity', 1);
+                //product.set('quantity', 1);
                 $("#global-cart").show().delay(3000).hide(0,function() { 
                     $(this).css("display", "");
                   });

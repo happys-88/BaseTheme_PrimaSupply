@@ -1,4 +1,4 @@
-define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "hyprlivecontext", "modules/api", "modules/models-product", "pages/cart", "modules/models-cart", "modules/cart-monitor"], function ($, _, Hypr, Backbone, HyprLiveContext, api, ProductModel, cart, cartModel, CartMonitor) {  
+define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "hyprlivecontext", "modules/api", "modules/models-product", "pages/cart", "modules/models-cart", "modules/cart-monitor","modules/page-header/global-cart"], function ($, _, Hypr, Backbone, HyprLiveContext, api, ProductModel, cart, cartModel, CartMonitor, GlobalCart) {  
     $(document).on("click",".mz-option-add-to-cart", function (event) {
         var $thisElem = $(event.currentTarget);
         var productCode = $thisElem.attr("data-mz-productcode");
@@ -36,7 +36,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                 el: $('#addonModal')
             });
             addonView.addToCart();
-            addonView.render();
+            //addonView.render();
             $('#addonModal').on('hidden.bs.modal', function (e) {
                 $(".modal-dialog").remove();
                 product.clear();    
@@ -88,6 +88,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             }
         },500),
         onOptionChange: function (e) {
+            this.model.set('addToCartErr', '');
             var $optionEl = $(e.currentTarget);
             var productCode = $optionEl.val();
             var attributeFQN = $optionEl.data('mz-product-option');
@@ -204,19 +205,19 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             if(method) {
                api.request( method, url ).then(function () {
                     me.addToCart();
-                    setTimeout(function(){
-                        window.location = "/cart";
-                    },500);
+                    me.on('addedtocart', function (cartitem) {
+                        GlobalCart.update('redirect_to_cart');
+                    });
                 }); 
             }
         },
         addToCart: function (event) {
 
             this.model.addToCart();
-            this.model.set('addonsPopup', true);
             var optionModel = this.model;
             var me = this;
             this.model.on('addedtocart', function (cartitem) {
+                optionModel.set('addonsPopup', true);
                 optionModel.set('cartItemId',cartitem.data.id);
                 optionModel.set('totalQuant',cartitem.data.quantity);
                 optionModel.set('hasAddon', false);
@@ -231,6 +232,18 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                         optionModel.set('hasAddon', true);
                         break;
                     }
+                }
+                me.render();
+                if (cartitem && cartitem.prop('id')) {
+                    CartMonitor.addToCount(optionModel.get('quantity'));
+                    GlobalCart.update();
+                }
+            });
+            this.model.on('addedtocarterror', function (error) {
+                if (error.message.indexOf('Validation Error: The following items have limited quantity or are out of stock') > -1) {
+                    optionModel.set('addToCartErr', Hypr.getLabel('outOfStockError'));
+                } else {
+                    optionModel.set('addToCartErr', error.message);
                 }
                 me.render();
             });
@@ -392,9 +405,9 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             if(method) {
                api.request( method, url ).then(function () {
                     me.addToCart();
-                    setTimeout(function(){
-                        window.location = "/cart";
-                    },500);
+                    me.on('addedtocart', function (cartitem) {
+                        GlobalCart.update('redirect_to_cart');
+                    });
                 }); 
             }
         },
@@ -414,6 +427,18 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                         optionModel.set('hasAddon', true);
                         break;
                     }
+                }
+                me.render();
+                if (cartitem && cartitem.prop('id')) {
+                    CartMonitor.addToCount(optionModel.get('quantity'));
+                    GlobalCart.update();
+                }
+            });
+            this.model.on('addedtocarterror', function (error) {
+                if (error.message.indexOf('Validation Error: The following items have limited quantity or are out of stock') > -1) {
+                    optionModel.set('addToCartErr', Hypr.getLabel('outOfStockError'));
+                } else {
+                    optionModel.set('addToCartErr', error.message);
                 }
                 me.render();
             });
