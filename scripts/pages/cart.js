@@ -18,7 +18,8 @@ define([
                 "change [data-mz-value=usShipping]":"populateDropDowns",
                 "change [data-mz-value=usStates]":"populateDropDowns",
                 "click [data-mz-qty=minus]": "quantityMinus", 
-                "click [data-mz-qty=plus]": "quantityPlus" 
+                "click [data-mz-qty=plus]": "quantityPlus",
+                "keyup [data-mz-value=quantity]":"updateQuantity"
 
         },
         initialize: function () {
@@ -246,19 +247,19 @@ define([
                 
                 
         },     
-        // updateQuantity: _.debounce(function (e) {
-        //     var $qField = $(e.currentTarget),
-        //         newQuantity = parseInt($qField.val(), 10),
-        //         id = $qField.data('mz-cart-item'),
-        //         item = this.model.get("items").get(id);
-        //         console.log($qField);
-        //         this._isSyncing = true;
-        //     if (item && !isNaN(newQuantity)) {
-        //         item.set('quantity', newQuantity);
-        //         item.saveQuantity();
+        updateQuantity: _.debounce(function (e) {
+            var $qField = $(e.currentTarget),
+                newQuantity = parseInt($qField.val(), 10),
+                id = $qField.data('mz-cart-item'),
+                item = this.model.get("items").get(id);
+                console.log($qField);
+                this._isSyncing = true;
+            if (item && !isNaN(newQuantity)) {
+                item.set('quantity', newQuantity);
+                item.saveQuantity();
                 
-        //     }
-        // },400),
+            }
+        },400),
         quantityMinus: _.debounce(function (e) {
           
             var $qField = $(e.currentTarget).parent(".qty-block"); 

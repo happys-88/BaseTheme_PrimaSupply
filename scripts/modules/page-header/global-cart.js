@@ -35,30 +35,9 @@ function ($, Hypr, Backbone, CartMonitor, api, cartModel, cart, sessionManagemen
                         
                      });
                      globalcartView.render();
-                      var lengt=cartModels.attributes.changeMessages.length;
-                     
-                  
-                      //var clone=$(".mz-carttable-items-global").find(id).addClass("just-added-to-cart").clone();
-                     // $(".mz-carttable-items-global").find(id).addClass("just-added-to-cart").remove();
-                       //$(id).prependTo(".mz-carttable-items-global");
-                       if(cartModels.isEmpty!==true){
-                        var id;
-                        var productcod;
-                        for(var index = length; index >= 0; index--) {
-                           if(cartModels.attributes.changeMessages[index].verb !== "Merged"){
-                               if(cartModels.attributes.changeMessages[index].metadata[0].variationProductCode){
-                                productcod=cartModels.attributes.changeMessages[index].metadata[0].variationProductCode;
-                                id='#'+productcod;
-                               }
-                               else{
-                                productcod=cartModels.attributes.changeMessages[index].metadata[0].productCode;
-                                id='#'+productcod;
-                               }
-                            $(id).prependTo(".mz-carttable-items-global");
-                            break;
-                           }
-                        }
-                     }
+                     var productcod=localStorage.getItem("lastAddedItemToCart");
+                       var id="#"+productcod;
+                       $(id).prependTo(".mz-carttable-items-global");
                     if (redirect_to_cart == 'redirect_to_cart') {
                       window.location = "/cart";
                     }
