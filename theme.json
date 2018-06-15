@@ -312,6 +312,15 @@
       "userCreatable": true
     },
     {
+      "documentType": "web_page",
+      "editor": "landing-page",
+      "entityType": "webpage",
+      "id": "print-receipt",
+      "template": "pages/print-receipt",
+      "title": "Print Receipt",
+      "userCreatable": true
+    }, 
+    {
       "entityType": "siteTemplate",
       "id": "site_page",
       "template": "page",

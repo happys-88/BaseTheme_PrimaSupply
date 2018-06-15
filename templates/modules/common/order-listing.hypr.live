@@ -58,6 +58,7 @@
                             <dd>{{ model.fulfillmentInfo.fulfillmentContact.firstName }} {{ model.fulfillmentInfo.fulfillmentContact.lastNameOrSurname }}</dd>
                         {% endblock order-shipped-to %}
                     </dl>
+                    <a class="print-order" href="/print-receipt#{{ model.id }}">Print Order</a>  
                 </li>
             {% endif %}
 
@@ -104,3 +105,5 @@
         {% endblock order-items %}
     </div>
 </div>
+
+{% require_script "pages/print-receipt" %}   

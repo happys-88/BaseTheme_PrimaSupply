@@ -1,0 +1,15 @@
+{% for order in model.items %}
+<div>
+	<div class="billing-info">
+		<span>{{ order.billingInfo.billingContact.firstName }}</span>
+		<span>{{ order.billingInfo.billingContact.lastNameOrSurname }}</span>
+		<span>{{ order.billingInfo.billingContact.email }}</span>
+		<span>{{ order.billingInfo.billingContact.address.address1 }}</span>
+		<span>{{ order.billingInfo.billingContact.address.address2 }}</span>
+		<span>{{ order.billingInfo.billingContact.address.cityOrTown }}</span>
+		<span>{{ order.billingInfo.billingContact.address.stateOrProvince }}</span>
+		<span>{{ order.billingInfo.billingContact.address.postalOrZipCode }}</span>
+		<span>{{ order.billingInfo.billingContact.address.countryCode }}</span>
+	</div>
+</div>
+{% endfor %} 
