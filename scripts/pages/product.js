@@ -16,7 +16,9 @@
             "change [data-mz-product-option]": "onOptionChange",
             "blur [data-mz-product-option]": "onOptionChange",
             "change [data-mz-value='quantity']": "onQuantityChange",
-            "keyup input[data-mz-value='quantity']": "onQuantityChange"
+            "keyup input[data-mz-value='quantity']": "onQuantityChange",
+            "click [data-mz-qty=minus]": "quantityMinus",
+            "click [data-mz-qty=plus]": "quantityPlus"
         },
         render: function () {
             var me = this;
@@ -34,6 +36,23 @@
             if (!isNaN(newQuantity)) {
                 this.model.updateQuantity(newQuantity);
             }
+        },500),
+        quantityMinus: _.debounce(function () {
+            var _qtyCountObj = $('.mz-productdetail-qty');
+            var value = parseInt(_qtyCountObj.val(), 10);
+            if (value == 1) {
+                return;
+            }
+            value--;
+            this.model.updateQuantity(value);
+            _qtyCountObj.val(value);
+        },500),
+        quantityPlus: _.debounce(function () {
+            var _qtyCountObj = $('.mz-productdetail-qty');
+            var value = parseInt(_qtyCountObj.val(), 10);
+            value++;
+            this.model.updateQuantity(value);
+            _qtyCountObj.val(value);      
         },500),
         configure: function ($optionEl) {
             var newValue = $optionEl.val(),

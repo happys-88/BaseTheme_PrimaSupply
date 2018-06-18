@@ -15,8 +15,9 @@
               </div>
               <span class="just-added">Just Added!</span>   
             <div class="mz-carttable-{% if Model.IsEmpty %} isempty {% else %}items-global{% endif %} col-xs-12"> 
+
                 {% for item in model.items %}
-                  <div class="mz-carttable-item row" id="{{ item.product.variationProductCode|default(item.product.productCode) }}">
+                  <div class="mz-carttable-item row" id="{{ item.id }}">
                           
                     <div class="mz-carttable-item-product col-sm-6">
                       <div class="mz-carttable-item-product-image">

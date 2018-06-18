@@ -18,6 +18,7 @@ function ($, Hypr, Backbone, CartMonitor, api, cartModel, cart, sessionManagemen
         var GlobalCart = {
             update: function(redirect_to_cart) {
                 api.get("cart").then(function(body){
+                    
                     var globalCartView =cart.extend({
                       templateName: 'modules/page-header/global-cart-dropdown'
                     });
