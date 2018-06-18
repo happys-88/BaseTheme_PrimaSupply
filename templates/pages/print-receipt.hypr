@@ -1,6 +1,0 @@
-{% extends "page" %}
-{% block body-content %}
-	{% require_script "pages/print-receipt" %}   
-	Print Order Page 
-	<div id="print"></div>
-{% endblock body-content %} 

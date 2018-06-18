@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "40ee9244a72d9109385065000123317447b2356b"
+      "commit": "1ab08a48efb28cd915a7a5726d81ca548ea66382"
     },
     "baseThemeChannel": "stable"
   },
@@ -313,13 +313,12 @@
     },
     {
       "documentType": "web_page",
-      "editor": "landing-page",
       "entityType": "webpage",
-      "id": "print-receipt",
-      "template": "pages/print-receipt",
-      "title": "Print Receipt",
+      "id": "print", 
+      "template": "print-order",
+      "title": "Print Order",  
       "userCreatable": true
-    }, 
+    },
     {
       "entityType": "siteTemplate",
       "id": "site_page",

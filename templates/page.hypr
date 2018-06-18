@@ -94,10 +94,7 @@
         {% header_content %}
 
         <!-- Script for custom JS changes -->
-        {% require_script "custom" %}
-
-        <!-- Order Confirmation & Print Order JS --> 
-        {% require_script "print-order" %} 
+        {% require_script "custom" %} 
         
     </head>
     {% endblock head-tag %}

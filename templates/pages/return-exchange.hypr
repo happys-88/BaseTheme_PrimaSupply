@@ -1,7 +1,7 @@
 {% extends "page" %}
 
 {% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  - {% parent %}{% endblock title-tag-content %}
-{% block body-tag-classes %} refund-exchange{% endblock body-tag-classes %}
+{% block body-tag-classes %}refund-exchange{% endblock body-tag-classes %}
 {% block breadcrumbs %}
     {% include "modules/customer-service-breadcumb" %}
 {% endblock breadcrumbs %}
