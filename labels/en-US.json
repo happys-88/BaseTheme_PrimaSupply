@@ -58,6 +58,7 @@
   "comments"                              : "Comments",
   "couponCode"                            : "Promotion or Coupon Code",
   "couponDisclaimer"                      : "Note: \"{0}\" may be reflected in checkout.",
+  "couponCodeRequired"                    : "Please enter coupon code", 
   "apply"                                 : "Apply",
   "nameOnCheck"                           : "Name On Check",
   "routingNumber"                         : "Routing Number",
@@ -608,6 +609,7 @@
   "saved"                                  :   "Saved",
   "savedMsg"                               :   "Look for email arriving very soon",
   "accountCreated"                         :   "Account Created !!",
+  "orWith"                                 :   "or checkout with", 
 
   // directory modal popup
   "optionsPopup"                          : "Almost there.. first tell us what to find for you.",

@@ -9,8 +9,9 @@ define([
     'modules/preserve-element-through-render',
     'modules/models-checkout', 
     'modules/api',
-    'modules/xpressPaypal'
-], function (Backbone, _, $, CartModels, CartMonitor, HyprLiveContext, Hypr, preserveElement, CheckoutModels, api, paypal) {
+    'modules/xpressPaypal',
+    'modules/block-ui'
+], function (Backbone, _, $, CartModels, CartMonitor, HyprLiveContext, Hypr, preserveElement, CheckoutModels, api, paypal, blockUiLoader) { 
     var CartView = Backbone.MozuView.extend({
         templateName: "modules/cart/cart-table",
         additionalEvents: {
@@ -335,13 +336,40 @@ define([
             this.model.isLoading(true);
             // the rest is done through a regular HTTP POST
         },
-        addCoupon: function () {
+        addCoupon: function() {  
             var self = this;
-            this.model.addCoupon().ensure(function () {
+            if (!$('#coupon-code').val()) {
+                $('[data-mz-validationmessage-for="couponcode"]').text(Hypr.getLabel('couponCodeRequired'));
+                return false;
+            } else {
+                $('[data-mz-validationmessage-for="couponcode"]').text('');
+            }
+            //blockUiLoader.globalLoader(); 
+            this.model.addCoupon().ensure(function() {   
                 self.model.unset('couponCode');
                 self.render();
             });
+             
         },
+        removeCoupon: function() {
+            var self = this;
+            var getCouponCode = this.$el.find('.mz-coupon-detail .mz-coupon-code').attr('id');
+            console.log(getCouponCode);  
+
+            var apiData = require.mozuData('apicontext');  
+            blockUiLoader.globalLoader();
+            var serviceurl = '/api/commerce/carts/' + this.model.get('id') + '/coupons/' + getCouponCode;
+            api.request('DELETE', serviceurl).then(function(response) {
+                blockUiLoader.unblockUi();
+                self.model.set(response);
+                self.render();
+                $("#couponDisclaimer").text("");
+            }, function(err) {
+                self.trigger('error', {
+                    message: Hypr.getLabel('promoCodeError', getCouponCode) 
+                });
+            });
+        }, 
         onEnterCouponCode: function (model, code) {
             if (code && !this.codeEntered) {
                 this.codeEntered = true;
