@@ -15,13 +15,36 @@
               </div>
               <span class="just-added">Just Added!</span>   
             <div class="mz-carttable-{% if Model.IsEmpty %} isempty {% else %}items-global{% endif %} col-xs-12"> 
+
                 {% for item in model.items %}
-                  <div class="mz-carttable-item row" id="{{ item.product.variationProductCode|default(item.product.productCode) }}">
+                  <div class="mz-carttable-item row" id="{{ item.id }}">
                           
                     <div class="mz-carttable-item-product col-sm-6">
                       <div class="mz-carttable-item-product-image">
                         {% if item.product.imageUrl and themeSettings.showCartItemImage %}
-                          <img src="{% make_url "image" item.product with max=80 as_parameters %}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% endif %} />
+                          {% with item.product|get_product_attribute("tenant~color") as colorAttr %}  
+                          {% if colorAttr %}
+                            {% with colorAttr.value|replace(" ","_") as colorValue %}
+                              {% with "/cms/files/{0}_{1}_v1.jpg"|string_format(item.product.productCode, colorValue, themeSettings.maxProductImageThumbnailSize) as fileName %}
+                                  <a href="{{ item.product.url }}">
+                                    <img class="mz-carttable-item-image" src="https:{% make_url "cdn" fileName with maxWidth=themeSettings.maxProductImageThumbnailSize as_parameter %} " {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% endif %} onerror="this.setAttribute('src','{% make_url "image" item.product with maxWidth=themeSettings.maxProductImageThumbnailSize as_parameters %}')" />
+                                  </a>
+                              {% endwith %}     
+                            {% endwith %}
+                          {% else %}
+                            {% if item.product.imageUrl %}
+                                <a href="{{ item.product.url }}">
+                                  <img class="mz-carttable-item-image" src="{% make_url "image" item.product with maxWidth=themeSettings.maxProductImageThumbnailSize as_parameters %}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% endif %} />
+                                </a>
+                            {% else %}
+                              <a href="{{ item.product.url }}">
+                                <div class="cart-noimage">
+                                  [{{ labels.noImages }}]
+                                </div>
+                              </a>
+                            {% endif %}    
+                          {% endif %}  
+                        {% endwith %}
                           <span class="mz-carttable-item-code">
                             SKU: {{ item.product.variationProductCode|default(item.product.productCode) }}
                           </span>

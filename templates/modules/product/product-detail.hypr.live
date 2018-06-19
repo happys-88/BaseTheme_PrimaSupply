@@ -1,6 +1,7 @@
 
 <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName }}</h1> 
 
+
 <dl class="mz-productcodes mz-propertylist mz-pagetitle-note mz-l-stack-section">
   <dt class="mz-productcodes-productcode-label">{{ labels.productCode }}</dt>
   <dd class="mz-productcodes-productcode" itemprop="sku">{{ model.variationProductCode|default(model.productCode) }}</dd>
@@ -48,7 +49,7 @@
 <div class="mz-stock-availability">
   <div class="mz-stock">
 
-    {% if model|get_product_attribute("tenant~field_display_oos1") and model.inventoryInfo.onlineStockAvailable !== 0 and model.inventoryInfo.manageStock === true  %}  
+    {% if model|get_product_attribute("tenant~field_display_oos1") and model.inventoryInfo.onlineStockAvailable !== 0 and model.inventoryInfo.isPurchasable === true  %}  
         {% if model|get_product_attribute_value("tenant~field_display_oos1") === 0 %}
           
               {% if model.inventoryInfo.onlineStockAvailable < 10 %}
@@ -144,7 +145,11 @@
 <section class="mz-l-stack-section mz-productdetail-conversion">
   <div class="col-md-2 col-xs-4">
     <div class="mz-productdetail-conversion-controls">
-      <input class="mz-productdetail-qty" type="number" {% if model.quantity %} value="{{ model.quantity }}" {% else %} value="1" {% endif %} min="1" {% if not model.isPurchasable %} disabled="disabled" {% endif %} data-mz-value="quantity" />
+            <div class="qty-block">  
+              <span class="qty-counter" data-mz-qty="plus" role="button"><i class="mz-icon arrow-up" aria-hidden="true"></i></span> 
+              <span class="qty-counter" data-mz-qty="minus" role="button"><i class="mz-icon arrow-down"  aria-hidden="true"></i></span>    
+              <input  class=" mz-productdetail-qty text-center" type="text" min="1"  {% if model.quantity %} value="{{ model.quantity }}" {% else %} value="1" {% endif %} {% if not model.isPurchasable %} disabled="disabled" {% endif %} data-mz-value='quantity' title="Quantity">
+          </div>
       <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
     </div>
   </div>
@@ -153,7 +158,7 @@
       {% if userAuth != true %}
           {# start code modification #}
           {% if model.totalCount === 0 %}
-        <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart" >
+        <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large {% if not model.inventoryInfo.isPurchasable %} is-disabled {% endif %}" {% if not model.inventoryInfo.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart" >
             {{ labels.addToCart }}
         </button>
             {% else %}

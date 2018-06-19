@@ -1,14 +1,14 @@
 {% extends "page" %}
 
-{% block title-tag-content %}{% firstof pageContext.metaTitle model.0.prodModel.content.productName %}  - {% parent %}{% endblock title-tag-content %}
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.content.productName %}  - {% parent %}{% endblock title-tag-content %}
 
-{% block body-tag-classes %} mz-product {% endblock body-tag-classes %}
+{% block body-tag-classes %}mz-product{% endblock body-tag-classes %} 
 
 {% block body-content %}
 
 {% require_script "pages/product" %} 
+{% preload_json model "product" %} 
 
-{% preload_json model "product" %}
 {% if model.length==2 %}
     {% for vals in model %}
         {% if forloop.first %}

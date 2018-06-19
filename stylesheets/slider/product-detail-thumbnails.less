@@ -7,11 +7,14 @@
     margin-bottom:0px;
     .mz-productimages-thumb {
       margin: 10px 1.5% 10px 1.5%;
-      border: 1px solid #ccc;
+      border: 2px solid transparent; 
       width: 17%;
       display: inline-block;
       vertical-align: top;
-      min-height: 102px;
+      /*min-height: 102px;*/ 
+      &:focus, &.active-thumb{   
+        border-color: #495363;   
+      }
     }
     img {
       display:inline-block;

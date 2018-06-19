@@ -53,6 +53,8 @@
         switchImage: function (e) {
             var $thumb = $(e.currentTarget);
             this.selectedImageIx = $thumb.data('mz-productimage-thumb');
+            $(".mz-productimages-thumb").removeClass("active-thumb");    
+            $thumb.addClass("active-thumb");   
             this.updateMainImage();
             return false;
         },
