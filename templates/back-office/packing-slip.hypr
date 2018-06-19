@@ -25,7 +25,7 @@
                 {% if order.billingInfo.billingContact.address.address2 %}<div>{{ order.billingInfo.billingContact.address.address2 }}</div>{% endif %}
                 {% if order.billingInfo.billingContact.address.address3 %}<div>{{ order.billingInfo.billingContact.address.address3 }}</div>{% endif %}
                 {% if order.billingInfo.billingContact.address.address4 %}<div>{{ order.billingInfo.billingContact.address.address4 }}</div>{% endif %}
-                <div>{{ order.billingInfo.billingContact.address.cityOrTown }}, {{ order.billingInfo.billingContact.address.stateOrProvince }} {{ order.billingInfo.billingContact.address.postalOrZipCode }}</div>
+                {% if order.billingInfo.billingContact.address.cityOrTown %}<div>{{ order.billingInfo.billingContact.address.cityOrTown }}, {{ order.billingInfo.billingContact.address.stateOrProvince }} {{ order.billingInfo.billingContact.address.postalOrZipCode }}</div>{% endif %}
                 {% if order.billingInfo.billingContact.phoneNumbers.home %}<div>{{ order.billingInfo.billingContact.phoneNumbers.home }} (home)</div>{% endif %}
                 {% if order.billingInfo.billingContact.phoneNumbers.work %}<div>{{ order.billingInfo.billingContact.phoneNumbers.work }} (work)</div>{% endif %}
                {% if order.billingInfo.billingContact.phoneNumbers.mobile %}<div>{{ order.billingInfo.billingContact.phoneNumbers.mobile }} (mobile)</div>{% endif %}
@@ -61,6 +61,9 @@
                         {% if type.grouper == "DigitalCredit" %}{{ labels.digitalCredit }}{% endif %}
                         {% if type.grouper == "Paypal" %}{{ labels.payPal }}{% endif %}
                         {% if type.grouper == "PaypalExpress" %}{{ labels.paypalExpress }}{% endif %}
+                        {% if type.grouper|lower == "paypalexpress2" %}
+                            {{ labels.paypalExpress }}
+                        {% endif %} 
                         {% if type.grouper == "PurchaseOrder" %}{{ labels.purchaseOrder }}
                         <table class="
                                 {% for payment in order.payments %}

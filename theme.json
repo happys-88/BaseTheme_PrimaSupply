@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "1ab08a48efb28cd915a7a5726d81ca548ea66382"
+      "commit": "4e046f500b1ed181a96174d7380839cf83180189"
     },
     "baseThemeChannel": "stable"
   },
@@ -314,9 +314,9 @@
     {
       "documentType": "web_page",
       "entityType": "webpage",
-      "id": "print", 
+      "id": "print",
       "template": "print-order",
-      "title": "Print Order",  
+      "title": "Print Order",
       "userCreatable": true
     },
     {

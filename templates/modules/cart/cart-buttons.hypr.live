@@ -11,10 +11,25 @@
            <button id="cart-checkout"  class="mz-button mz-button-large"  {% if model.isEmpty %} disabled="disabled" {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button>
         {% endif %}  
     </div>
-    {% if siteContext.checkoutSettings.visaCheckout.isEnabled %}
-        <div class="mz-visa-checkout"> 
-            <p>or checkout with</p>
-            <img src="{{pageContext.visaCheckoutButtonUrl}}" alt="Visa Checkout" class="v-button" role="button"/>       
-        </div>
-    {% endif %}
+    {% if not model.isEmpty %}
+        {% with siteContext.checkoutSettings.externalPaymentWorkflowSettings|findwhere("isEnabled", true) as externalPaymentWorkflowsEnabled %}
+           {% if externalPaymentWorkflowsEnabled %}
+            <div>
+              <p>{{labels.orWith}}</p>
+              {% for externalPayment in siteContext.checkoutSettings.externalPaymentWorkflowSettings %}
+                  {% if externalPayment.isEnabled %}
+                  <div class="mz-carttable-thirdpartypayment" >
+                    {% if externalPayment.name == "VisaCheckout" %}
+                      <img alt="Visa Checkout" class="v-button" role="button" src="{{pageContext.visaCheckoutButtonUrl}}"/>
+                    {%endif%}
+                    {% if externalPayment.name == "PayPalExpress2" %}
+                      <img id="btn_xpressPaypal" class="p-button" alt="Check out with PayPal" role="button" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png" width="170px" height="32px" align="left" style="margin-top:12px; float:right;"/>
+                    {%endif%}
+                  </div>
+                  {%endif%}
+              {%endfor%}
+            </div>
+          {% endif %}
+        {%endwith%}
+      {% endif %}
 </div>

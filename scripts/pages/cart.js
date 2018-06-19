@@ -8,8 +8,9 @@ define([
     'hyprlive',
     'modules/preserve-element-through-render',
     'modules/models-checkout', 
-    'modules/api'
-], function (Backbone, _, $, CartModels, CartMonitor, HyprLiveContext, Hypr, preserveElement, CheckoutModels, api) {
+    'modules/api',
+    'modules/xpressPaypal'
+], function (Backbone, _, $, CartModels, CartMonitor, HyprLiveContext, Hypr, preserveElement, CheckoutModels, api, paypal) {
     var CartView = Backbone.MozuView.extend({
         templateName: "modules/cart/cart-table",
         additionalEvents: {
@@ -179,7 +180,7 @@ define([
                         
             CartMonitor.update();
           
-            preserveElement(this, ['.v-button'], function() {
+            preserveElement(this, ['.v-button', '.p-button'], function() {
                 Backbone.MozuView.prototype.render.call(this);
             });
         },
@@ -442,6 +443,8 @@ define([
         window.cartView = cartViews;
         
         CartMonitor.setCount(cartModel.count());
+
+        paypal.loadScript();
         // if(window.location.pathname=="/cart"){
            
         //         var length=cartModel.attributes.changeMessages.length;

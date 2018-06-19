@@ -12,7 +12,7 @@
     function ($, _, Hypr, Backbone, api, CustomerModels, AddressModels, PaymentMethods, HyprLiveContext) {
 
         var CheckoutStep = Backbone.MozuModel.extend({
-            helpers: ['stepStatus', 'requiresFulfillmentInfo', 'requiresDigitalFulfillmentContact'],  //
+            helpers: ['stepStatus', 'requiresFulfillmentInfo','isNonMozuCheckout', 'requiresDigitalFulfillmentContact', 'isShippingEditHidden'],
             // instead of overriding constructor, we are creating
             // a method that only the CheckoutStepView knows to
             // run, so it can run late enough for the parent
@@ -59,6 +59,16 @@
             requiresFulfillmentInfo: function () {
                 return this.getOrder().get('requiresFulfillmentInfo');
             },
+            isNonMozuCheckout: function() {
+                var activePayments = this.getOrder().apiModel.getActivePayments();
+                if (activePayments && activePayments.length === 0) return false;
+                return (activePayments && (_.findWhere(activePayments, { paymentType: 'PayPalExpress2' })));
+            },
+            isShippingEditHidden: function() {
+              if (HyprLiveContext.locals.themeSettings.changeShipping) return false;
+
+              return this.isNonMozuCheckout();
+             },
             requiresDigitalFulfillmentContact: function () {
                 return this.getOrder().get('requiresDigitalFulfillmentContact');
             },
@@ -165,6 +175,10 @@
                     }, this);
 
                     return false;
+                }
+
+                if (this.get('updateMode') === 'edit') {
+                    this.set('updateMode', 'editComplete');
                 }
 
                var parent = this.parent,
@@ -704,14 +718,20 @@
 
             },
             helpers: ['acceptsMarketing', 'savedPaymentMethods', 'availableStoreCredits', 'applyingCredit', 'maxCreditAmountToApply',
-              'activeStoreCredits', 'nonStoreCreditTotal', 'activePayments', 'hasSavedCardPayment', 'availableDigitalCredits', 'digitalCreditPaymentTotal', 'isAnonymousShopper', 'visaCheckoutFlowComplete'],
+              'activeStoreCredits', 'nonStoreCreditTotal', 'activePayments', 'hasSavedCardPayment', 'availableDigitalCredits', 'digitalCreditPaymentTotal', 'isAnonymousShopper', 'visaCheckoutFlowComplete','isExternalCheckoutFlowComplete', 'checkoutFlow'],
             acceptsMarketing: function () {
                 return this.getOrder().get('acceptsMarketing');
+            },
+            isExternalCheckoutFlowComplete: function () {
+                return this.get('paymentWorkflow') !== "Mozu";
             },
             visaCheckoutFlowComplete: function() {
                 return this.get('paymentWorkflow') === 'VisaCheckout';
             },
-            cancelVisaCheckout: function() {
+            checkoutFlow: function () {
+                return this.get('paymentWorkflow');
+            },
+            cancelExternalCheckout: function () {
                 var self = this;
                 var order = this.getOrder();
                 var currentPayment = order.apiModel.getCurrentPayment();
@@ -1270,7 +1290,9 @@
                 var amount = purchaseOrderInfo.totalAvailableBalance > order.get('amountRemainingForPayment') ?
                         order.get('amountRemainingForPayment') : purchaseOrderInfo.totalAvailableBalance;
 
+                if(!currentPurchaseOrderAmount || currentPurchaseOrderAmount !== amount) {
                 currentPurchaseOrder.set('amount', amount);
+                }
 
                 currentPurchaseOrder.set('totalAvailableBalance', purchaseOrderInfo.totalAvailableBalance);
                 currentPurchaseOrder.set('availableBalance', purchaseOrderInfo.availableBalance);
@@ -1279,7 +1301,8 @@
                 if(purchaseOrderInfo.totalAvailableBalance < order.get('amountRemainingForPayment')) {
                     currentPurchaseOrder.set('splitPayment', true);
                 }
-                
+
+                if(currentPurchaseOrder.get('paymentTermOptions').length === 0) {
                 var paymentTerms = [];
                 purchaseOrderInfo.paymentTerms.forEach(function(term) {
                     if(term.siteId === siteId) {
@@ -1290,9 +1313,10 @@
                     }
                 });
                 currentPurchaseOrder.set('paymentTermOptions', paymentTerms, {silent: true});
+                }
 
                 var paymentTermOptions = currentPurchaseOrder.get('paymentTermOptions');
-                if(paymentTermOptions.length === 1) {
+                if(!currentPurchaseOrder.get('paymentTerm').get('code') && paymentTermOptions.length === 1) {
                     var paymentTerm = {};
                     paymentTerm.code = paymentTermOptions.models[0].get('code');
                     paymentTerm.description = paymentTermOptions.models[0].get('description');
@@ -1376,7 +1400,7 @@
                 _.bindAll(this, 'applyPayment', 'markComplete');
             },
             selectPaymentType: function(me, newPaymentType) {
-                if (!me.changed || !me.changed.paymentWorkflow) {
+                if ((!me.changed || !me.changed.paymentWorkflow) && !me.get('paymentWorkflow')) {
                     me.set('paymentWorkflow', 'Mozu');
                 }
                 me.get('check').selected = newPaymentType === 'Check';
@@ -1406,8 +1430,10 @@
                     activePayments = this.activePayments(),
                     thereAreActivePayments = activePayments.length > 0,
                     paymentTypeIsCard = activePayments && !!_.findWhere(activePayments, { paymentType: 'CreditCard' }),
+                    paymentTypeIsPayPalNew = activePayments && !!_.findWhere(activePayments, { paymentType: 'PayPalExpress2' }),
                     balanceNotPositive = this.parent.get('amountRemainingForPayment') <= 0;
 
+                if (this.isNonMozuCheckout()) return this.stepStatus("complete");
                 if (paymentTypeIsCard && !Hypr.getThemeSetting('isCvvSuppressed')) return this.stepStatus('incomplete'); // initial state for CVV entry
 
                 if (!fulfillmentComplete) return this.stepStatus('new');
@@ -1837,14 +1863,36 @@
                     errorHandled = false;
                 order.isLoading(false);
                 if (!error || !error.items || error.items.length === 0) {
-                    error = {
-                        items: [
-                            {
-                                message: error.message || Hypr.getLabel('unknownError')
-                            }
-                        ]
-                    };
+
+                    if (error.message.indexOf('10486') != -1){
+
+                        var siteContext = HyprLiveContext.locals.siteContext,
+                            externalPayment = _.findWhere(siteContext.checkoutSettings.externalPaymentWorkflowSettings, {"name" : "PayPalExpress2"}),
+                            environment = _.findWhere(externalPayment.credentials, {"apiName" : "environment"}),
+                            url = "";
+
+                        if (environment.value.toLowerCase() === "sandbox"){
+                            url = "https://www.sandbox.paypal.com";
+                        }
+                        else{
+                            url = "https://www.paypal.com";
+                        }
+
+                        window.location.href = url + "/cgi-bin/webscr?cmd=_express-checkout&token=" + order.get('payments')[order.get('payments').length-1].externalTransactionId;
+
+                        return;
+                    }
+                    else {
+                        error = {
+                            items: [
+                                {
+                                    message: error.message || Hypr.getLabel('unknownError')
+                                }
+                            ]
+                        };
+                    }
                 }
+
                 $.each(error.items, function (ix, errorItem) {
                     if (errorItem.name === 'ADD_CUSTOMER_FAILED' && errorItem.message.toLowerCase().indexOf('invalid parameter: password')) {
                         errorHandled = true;
@@ -2066,7 +2114,11 @@
 
                 return validationResults.length > 0;
             },
-
+            isNonMozuCheckout: function() {
+                var activePayments = this.apiModel.getActivePayments();
+                if (activePayments && activePayments.length === 0) return false;
+                return (activePayments && (_.findWhere(activePayments, { paymentType: 'PayPalExpress2' })));
+            },
             submit: function () {
                 var order = this,
                     billingInfo = this.get('billingInfo'),
@@ -2078,12 +2130,18 @@
                     nonStoreCreditTotal = billingInfo.nonStoreCreditTotal(),
                     requiresFulfillmentInfo = this.get('requiresFulfillmentInfo'),
                     requiresBillingInfo = nonStoreCreditTotal > 0,
+                    currentPayment = this.apiModel.getCurrentPayment(),
                     process = [function() {
                         return order.update({
                             ipAddress: order.get('ipAddress'),
                             shopperNotes: order.get('shopperNotes').toJSON()
                         });
                     }];
+
+                if (this.isNonMozuCheckout()) {
+                    billingContact.set("address", null);
+                }
+
                 var liftGateVal = this.get('fulfillmentInfo').get('liftGateVal');
                 var freightShipmentVal = this.get('fulfillmentInfo').get('freightShipmentVal');
                 var tbybVal = this.get('tenant~trybeforebuy');
@@ -2143,7 +2201,7 @@
                 // skip payment validation, if there are no payments, but run the attributes and accept terms validation.
                 var radioVal = $('input[name=paymentType]:checked').val();                
                 if(radioVal !== 'Check') {
-                if ((nonStoreCreditTotal > 0 && this.validate()) || this.validateReviewCheckoutFields()) {
+                if (nonStoreCreditTotal > 0 && this.validate() && ( !this.isNonMozuCheckout() || this.validate().agreeToTerms)) {
                     this.isSubmitting = false;
                     return false;
                 } 
@@ -2180,7 +2238,7 @@
                 }
 
                 //save contacts
-                if (isAuthenticated || isSavingNewCustomer) {
+                if (!this.isNonMozuCheckout() && (isAuthenticated || isSavingNewCustomer)) {
                     if (!isSameBillingShippingAddress && !isSavingCreditCard) {
                         if (requiresFulfillmentInfo) process.push(this.addShippingContact);
                         if (requiresBillingInfo) process.push(this.addBillingContact);

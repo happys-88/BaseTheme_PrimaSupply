@@ -1,5 +1,4 @@
-require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "modules/models-checkout", "modules/views-messages", "modules/cart-monitor", 'hyprlivecontext', 'modules/editable-view', 'modules/preserve-element-through-render'], function ($, _, Hypr, Backbone, CheckoutModels, messageViewFactory, CartMonitor, HyprLiveContext, EditableView, preserveElements) {
-
+require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "modules/models-checkout", "modules/views-messages", "modules/cart-monitor", 'hyprlivecontext', 'modules/editable-view', 'modules/preserve-element-through-render', 'modules/xpresspaypal'], function ($, _, Hypr, Backbone, CheckoutModels, messageViewFactory, CartMonitor, HyprLiveContext, EditableView, preserveElements, paypal) {
 
     var CheckoutStepView = EditableView.extend({
         edit: function () {
@@ -111,7 +110,8 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             'address.addressType',
             'phoneNumbers.home',
             'contactId',
-            'email'
+            'email',
+            'updateMode'
         ],
         renderOnChange: [
             'address.countryCode',
@@ -284,6 +284,9 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
                 require([pageContext.visaCheckoutJavaScriptSdkUrl]);
                 this.visaCheckoutInitialized = true;
             }
+            if (this.$(".p-button").length > 0)
+              paypal.loadScript();
+
             $('#mailBillingForm').hide();
             // console.log("SESSION STORAGE : "+sessionStorage.getItem('guestEmail'));
             if(sessionStorage.getItem('guestEmail')) {
@@ -306,8 +309,14 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
                 this.editing.savedCard = true;
                 this.render();
             } else {
-                this.doModelAction('cancelVisaCheckout').then(function() {
-                    me.editing.savedCard = false;
+                this.cancelExternalCheckout();
+            }
+        },
+        beginEditingExternalPayment: function () {
+            var me = this;
+            if (this.model.isExternalCheckoutFlowComplete()) {
+                this.doModelAction('cancelExternalCheckout').then(function () {
+                    me.editing.savedCard = true;
                     me.render();
                 });
             }
@@ -323,6 +332,13 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
         cancelApplyCredit: function () {
             this.model.closeApplyCredit();
             this.render();
+        },
+        cancelExternalCheckout: function () {
+            var me = this;
+            this.doModelAction('cancelExternalCheckout').then(function () {
+                me.editing.savedCard = false;
+                me.render();
+            });
         },
         finishApplyCredit: function () {
             var self = this;
