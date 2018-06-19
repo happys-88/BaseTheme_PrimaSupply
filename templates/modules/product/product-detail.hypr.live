@@ -1,6 +1,7 @@
 
 <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName }}</h1> 
 
+
 <dl class="mz-productcodes mz-propertylist mz-pagetitle-note mz-l-stack-section">
   <dt class="mz-productcodes-productcode-label">{{ labels.productCode }}</dt>
   <dd class="mz-productcodes-productcode" itemprop="sku">{{ model.variationProductCode|default(model.productCode) }}</dd>
@@ -48,7 +49,7 @@
 <div class="mz-stock-availability">
   <div class="mz-stock">
 
-    {% if model|get_product_attribute("tenant~field_display_oos1") and model.inventoryInfo.onlineStockAvailable !== 0 and model.inventoryInfo.manageStock === true  %}  
+    {% if model|get_product_attribute("tenant~field_display_oos1") and model.inventoryInfo.onlineStockAvailable !== 0 and model.inventoryInfo.isPurchasable === true  %}  
         {% if model|get_product_attribute_value("tenant~field_display_oos1") === 0 %}
           
               {% if model.inventoryInfo.onlineStockAvailable < 10 %}
@@ -157,7 +158,7 @@
       {% if userAuth != true %}
           {# start code modification #}
           {% if model.totalCount === 0 %}
-        <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart" >
+        <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large {% if not model.inventoryInfo.isPurchasable %} is-disabled {% endif %}" {% if not model.inventoryInfo.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart" >
             {{ labels.addToCart }}
         </button>
             {% else %}
