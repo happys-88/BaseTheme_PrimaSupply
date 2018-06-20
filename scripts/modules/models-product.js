@@ -12,6 +12,7 @@
         return [zeroPad(date.getFullYear(), 4), zeroPad(date.getMonth() + 1, 2), zeroPad(date.getDate(), 2)].join('-');
     }
 
+
     var ProductOption = Backbone.MozuModel.extend({
         idAttribute: "attributeFQN",
         helpers: ['isChecked'],
@@ -287,10 +288,7 @@
                 for(var i=0; i<variations.length; i++)
                 {
                         stockArray.push(variations[i].inventoryInfo.onlineStockAvailable);
-                        if (!isNaN(variations[i].inventoryInfo.onlineStockAvailable)) {
                         sum += variations[i].inventoryInfo.onlineStockAvailable;
-                }
-                        
                 }
                 this.set({'totalCount': sum});
                 var inStock =_.contains(stockArray, 0);
@@ -299,12 +297,8 @@
             }
 
             else{
-                if (typeof this.get('inventoryInfo').onlineStockAvailable  === 'undefined') {
-                    this.set({'totalCount': 0});
-                }
-                else {
                 this.set({'totalCount': this.get('inventoryInfo').onlineStockAvailable});
-                }
+                
             }
             }
             catch(err){
@@ -353,10 +347,7 @@
                         fulfillmentMethod: fulfillMethod,
                         quantity: me.get("quantity")
                     }).then(function (item) {
-                        localStorage.setItem("lastAddedItemToCart", item.data.id);
                         me.trigger('addedtocart', item);
-                    }, function(error) {
-                        me.trigger('addedtocarterror', error);
                     });
                 }
             });
