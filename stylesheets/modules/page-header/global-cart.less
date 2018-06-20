@@ -1,11 +1,12 @@
 #global-cart { 
-    .just-added{  
-        float: right; 
-        font-size: 14px;
+    .recently-added:before {
+        content: "Just added !";
         color: #d05f2a;
-        font-weight: bold;
-        text-transform: uppercase; 
-        padding-right: 28px;
+        font-weight: 700;
+        text-transform: uppercase;
+        position: absolute;
+        top: -19px;
+        right: 33px;
     }
     display: none;
     position: absolute;

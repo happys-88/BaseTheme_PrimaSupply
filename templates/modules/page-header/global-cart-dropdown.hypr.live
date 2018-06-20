@@ -13,7 +13,6 @@
                 <div class="mz-carttable-header-price-each col-sm-2 text-right no-padding">{{ labels.cartPriceEach }}</div> 
                 <div class="mz-carttable-header-price col-sm-2 text-right">{{ labels.cartPrice }}</div>
               </div>
-              <span class="just-added">Just Added!</span>   
             <div class="mz-carttable-{% if Model.IsEmpty %} isempty {% else %}items-global{% endif %} col-xs-12"> 
 
                 {% for item in model.items %}
@@ -90,8 +89,8 @@
                           <span class="qty-counter" data-mz-qty="plus" role="button"><i class="mz-icon arrow-up" aria-hidden="true"></i></span> 
                           <span class="qty-counter" data-mz-qty="minus" role="button"><i class="mz-icon arrow-down"  aria-hidden="true"></i></span>    
                           <input  class="text-center mz-carttable-qty-field" type="text" min="1" value="{{ item.quantity }}" data-mz-cart-item="{{ item.id }}" data-mz-value='quantity' title="Quantity">
-                          <a class="mz-carttable-item-remove" href="javascript:void(0);" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}"><i class="fa fa-times"></i>{{ labels.remove }}</a>
                         </div> 
+                        <a class="mz-carttable-item-remove" href="javascript:void(0);" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}"><i class="fa fa-times"></i>{{ labels.remove }}</a> 
                       </div>
                       <div class="mz-carttable-item-price col-sm-2 text-right no-padding">
                         {% include "modules/common/item-price" %}
@@ -131,13 +130,13 @@
                   </div>
                 </div>
                 
-                <div class="mz-cart-buttons col-xs-12">
+                <div class="mz-cart-buttons col-xs-12"> 
                       <div class="col-xs-6 col-md-5">
-                        {% if not user.isAnonymous %} 
-                          <button type="button" class="mz-button mz-button-large save-cart" data-toggle="modal" data-target="#loginPopup">{{ labels.saveCart }}</button>  
+                        {% if user.isAnonymous %}  
+                          <button type="button" class="mz-button save-cart" data-toggle="modal" data-target="#loginPopup">{{ labels.saveCart }}</button>  
                         {% endif %}
                       </div>
-                      <div  class="col-xs-6 col-md-7">
+                      <div class="col-xs-6 col-md-7">
                           <a class="mz-button mz-button-large" href="/cart">{{ labels.viewCart}}</a> 
                       </div>     
                 </div>

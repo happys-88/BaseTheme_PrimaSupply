@@ -13,6 +13,7 @@ define([
     "hyprlive"
 
 ], function($, _, api, Backbone, HyprLiveContext, ProductModels, bxslider, cart, cartModel, GlobalCart, CartMonitor, Hypr) {
+    console.log("quivkview");
 $(document).on('click', '.mz-quick-view', function (event) {
     var $Elem = $(event.currentTarget);
     var prdCode = $Elem.attr("data-mz-productcode-quickview");
@@ -68,7 +69,8 @@ $(document).on('click', '.mz-quick-view', function (event) {
                 return this;
             },
             corousel: function () {
-                if( this.model.get("content").get("productImages").length > 1){
+                console.log(this.model);
+                if( this.model.get("content").get("productImages").length > 1 || this.model.attributes.dataurl){
                     $('#quick-slider').bxSlider({
                         minSlides: 1,
                         maxSlides: 1,
