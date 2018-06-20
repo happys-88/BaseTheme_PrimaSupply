@@ -1,10 +1,11 @@
 ﻿<div class="mz-productoptions">
     {% for option in model.options %}
     <div class="mz-productoptions-optioncontainer">
-        {% if option.isRequired %}
-        <strong class="is-required">*</strong>
-        {% endif %}
+        
         {% if model.showColorIcon %}
+            {% if option.isRequired %}
+            <strong class="is-required">*</strong>
+            {% endif %}
             {% if option.attributeFQN == "tenant~size" or option.attributeFQN == "tenant~color" %}
                 <label class="mz-productoptions-optionlabel">SELECT A {{ option.attributeDetail.name }}</label>
                     <div class="mz-productoptions-valuecontainer {{ option.attributeDetail.name|slugify }}">
