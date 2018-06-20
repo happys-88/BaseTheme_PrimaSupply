@@ -12,7 +12,6 @@
         return [zeroPad(date.getFullYear(), 4), zeroPad(date.getMonth() + 1, 2), zeroPad(date.getDate(), 2)].join('-');
     }
 
-
     var ProductOption = Backbone.MozuModel.extend({
         idAttribute: "attributeFQN",
         helpers: ['isChecked'],

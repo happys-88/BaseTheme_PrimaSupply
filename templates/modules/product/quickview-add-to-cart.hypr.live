@@ -1,5 +1,5 @@
 <!-- Add to cart button -->
-<div class="row">
+<div class="row"> 
     <div class="mz-productdetail-conversion-controls col-sm-3">
         <div class="qty-block clearfix">
                 <span class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="mz-icon arrow-up" aria-hidden="true"></i></span>
@@ -67,16 +67,19 @@
         
                 {% else %}
                 
-                    {% if model.inventoryInfo.onlineStockAvailable > 0  %}
+                    {% if model.inventoryInfo.onlineStockAvailable > 0 %}
                         <p>{{ labels.inStock }} {{model.inventoryInfo.onlineStockAvailable}}</p>
                     {% else %}
-                        {% if model.totalCount > 0 %}
-                            <p>{{ labels.inStock }} {{ model.totalCount }}</p>
-                        {% else %}
+                        {% if model.inventoryInfo.onlineStockAvailable === 0 %}
                             <p>{{ labels.outOfStock }}</p>
+                        {% else %}
+                            {% if model.totalCount > 0 %}
+                                <p>{{ labels.inStock }} {{ model.totalCount }}</p>
+                            {% else %}
+                                <p>{{ labels.outOfStock }}</p>
+                            {% endif %}
                         {% endif %}
                     {% endif %}
-                {% endif %}
             </div>
         </div>
         <!--/ Stock msg -->

@@ -20,7 +20,36 @@ define([
 			$(".slider").css("visibility", "visible");
 		}
 	});
-	//home slider
+	//home slider ends
+
+	// My Account Tabbing Redirection
+	if(window.location.pathname == "/myaccount"){
+		var hash=window.location.hash;
+		if(hash !==""){
+			$("li.mz-scrollnav-item").removeClass("active");
+			$("#accordion div").removeClass("in").removeClass("active");
+			$("a").attr( "href" );
+			var href="a[href="+"'"+ hash +"'"+"]";
+			$(href).parent(".mz-scrollnav-item").addClass("active");
+			$(hash).addClass("in").addClass("active");
+		}
+	}
+	$(document).on('click','.dropdown-menu a', function(e){ 
+		e.stopImmediatePropagation();
+		var str = $(this).attr("href");
+		var n = str.indexOf("#");
+		changehash(str.slice(n));
+    });
+	function changehash(hash){	
+		//var hash=window.location.hash;
+		$("li.mz-scrollnav-item").removeClass("active");
+		$("#accordion div").removeClass("in").removeClass("active");
+		$("a").attr( "href" );
+		var href="a[href="+"'"+ hash +"'"+"]";
+		console.log(href);
+		$(href).parent(".mz-scrollnav-item").addClass("active");
+		$(hash).addClass("in").addClass("active");
+	}
 	
 	$(document).ready(function(){ 
 
