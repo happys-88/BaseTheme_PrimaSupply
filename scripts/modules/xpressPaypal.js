@@ -11,9 +11,9 @@ function($, Api, CartModels, hyprlivecontext, _) {
           externalPayment = _.findWhere(siteContext.checkoutSettings.externalPaymentWorkflowSettings, {"name" : "PayPalExpress2"}),
           merchantAccountId = _.findWhere(externalPayment.credentials, {"apiName" : "merchantAccountId"}),
           environment = _.findWhere(externalPayment.credentials, {"apiName" : "environment"}),
-          id = CartModels.Cart.fromCurrent().id || window.order.id,
+          id = CartModels.Cart.fromCurrent().id ? CartModels.Cart.fromCurrent().id : window.order.id,
           isCart = window.location.href.indexOf("cart") > 0;
-
+          
         window.paypal.checkout.setup(merchantAccountId.value, {
             environment: environment.value,
             click: function(event) {

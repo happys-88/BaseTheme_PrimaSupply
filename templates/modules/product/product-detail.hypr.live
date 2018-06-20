@@ -49,7 +49,7 @@
 <div class="mz-stock-availability">
   <div class="mz-stock">
 
-    {% if model|get_product_attribute("tenant~field_display_oos1") and model.inventoryInfo.onlineStockAvailable !== 0 and model.inventoryInfo.isPurchasable === true  %}  
+    {% if model|get_product_attribute("tenant~field_display_oos1") and model.inventoryInfo.onlineStockAvailable !== 0 %} 
         {% if model|get_product_attribute_value("tenant~field_display_oos1") === 0 %}
           
               {% if model.inventoryInfo.onlineStockAvailable < 10 %}
@@ -157,14 +157,14 @@
     <div class="mz-productdetail-conversion-buttons">
       {% if userAuth != true %}
           {# start code modification #}
-          {% if model.totalCount === 0 %}
-        <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large {% if not model.inventoryInfo.isPurchasable %} is-disabled {% endif %}" {% if not model.inventoryInfo.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart" >
-            {{ labels.addToCart }}
-        </button>
+        {% if model.totalCount === 0 or not model.purchasableState.isPurchasable %}
+          <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large is-disabled" disabled="disabled" data-mz-action="addToCart" >{{ labels.addToCart }}</button>
+        {% else %}
+             {% if not model.totalCount === 0 and model.purchasableState.isPurchasable %}
+              <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large" data-mz-action="addToCart" >{{ labels.addToCart }}</button>
             {% else %}
-              <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large" data-mz-action="addToCart" >
-                  {{ labels.addToCart }}
-              </button>
+             <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large is-disabled" disabled="disabled" data-mz-action="addToCart" >{{ labels.addToCart }}</button>
+             {% endif %}
           {% endif %}
           {# end code modification #}
       {% endif %}

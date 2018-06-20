@@ -284,8 +284,9 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
                 require([pageContext.visaCheckoutJavaScriptSdkUrl]);
                 this.visaCheckoutInitialized = true;
             }
-            if (this.$(".p-button").length > 0)
+            if (this.$(".p-button").length > 0) {
               paypal.loadScript();
+            }
 
             $('#mailBillingForm').hide();
             // console.log("SESSION STORAGE : "+sessionStorage.getItem('guestEmail'));

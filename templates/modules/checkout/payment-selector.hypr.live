@@ -27,7 +27,7 @@
         </div>
         Type : {{model.paymentType}}
         <div class="{% if model.savedPaymentMethods %} col-md-3 col-sm-12{% else %}  col-md-4 col-sm-12{% endif %}">
-            <input data-mz-value="paymentType" id="paymentType-check-{{ labels.payPalBillingInfo }}" name="" type="radio" class="mz-paymenttype-input" value="" {% if model.paymentType == "Check" %}checked="checked"{% endif %} />
+            <input data-mz-value="paymentType" id="paymentType-check-{{ labels.payPalBillingInfo }}" name="" type="radio" class="mz-paymenttype-input" value="paypal" {% if model.paymentType == "paypal" %}checked="checked"{% endif %} />
             <label class="mz-paymentselector-label mz-paymentselector-label-check mz-checkoutform-radio" for="paymentType-check-{{ labels.payPalBillingInfo }}">{{ labels.payPalBillingInfo }}</label>
         </div>
         <div class="{% if model.savedPaymentMethods %} col-md-3 col-sm-12{% else %}  col-md-4 col-sm-12{% endif %}">

@@ -288,7 +288,10 @@
                 for(var i=0; i<variations.length; i++)
                 {
                         stockArray.push(variations[i].inventoryInfo.onlineStockAvailable);
+                        if (!isNaN(variations[i].inventoryInfo.onlineStockAvailable)) {
                         sum += variations[i].inventoryInfo.onlineStockAvailable;
+                }
+                        
                 }
                 this.set({'totalCount': sum});
                 var inStock =_.contains(stockArray, 0);
@@ -297,8 +300,12 @@
             }
 
             else{
+                if (typeof this.get('inventoryInfo').onlineStockAvailable  === 'undefined') {
+                    this.set({'totalCount': 0});
+                }
+                else {
                 this.set({'totalCount': this.get('inventoryInfo').onlineStockAvailable});
-                
+                }
             }
             }
             catch(err){
