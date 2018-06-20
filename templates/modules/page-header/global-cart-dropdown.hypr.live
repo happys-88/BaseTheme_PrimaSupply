@@ -13,7 +13,6 @@
                 <div class="mz-carttable-header-price-each col-sm-2 text-right no-padding">{{ labels.cartPriceEach }}</div> 
                 <div class="mz-carttable-header-price col-sm-2 text-right">{{ labels.cartPrice }}</div>
               </div>
-              <span class="just-added">Just Added!</span>   
             <div class="mz-carttable-{% if Model.IsEmpty %} isempty {% else %}items-global{% endif %} col-xs-12"> 
 
                 {% for item in model.items %}

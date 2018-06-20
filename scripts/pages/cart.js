@@ -180,6 +180,11 @@ define([
                 
                         
             CartMonitor.update();
+              //recently added
+           var productcod=localStorage.getItem("lastAddedItemToCart");
+           var id="#"+productcod;
+           $(id).prependTo(".mz-carttable-items-global");
+           $(id).addClass("recently-added");
           
             preserveElement(this, ['.v-button', '.p-button'], function() {
                 Backbone.MozuView.prototype.render.call(this);

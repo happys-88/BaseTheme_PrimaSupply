@@ -107,7 +107,7 @@
 
         {% with model|get_product_attribute("tenant~new-arrival") as newArrival %}
             {% if newArrival.values|first|prop("value") == true %}
-                <spna class="mz-new-arrival-tag">{{ labels.new }}</span>
+                <span class="mz-new-arrival-tag">{{ labels.new }}</span>
             {% endif %} 
         {% endwith %}   
     </div>

@@ -9,7 +9,7 @@
             <div class="mz-product-quick-view">
                  {% with model|get_product_attribute_values("tenant~new-arrival") as attribute %}
                         {% if attribute== "true" %}
-                            <div class="new-arrival"> <p> New Arrival </p> </div>
+                            <span class="mz-new-arrival-tag">{{ labels.new }}</span>
                         {% endif %}
                   {%  endwith %}
                 <div class="mz-product-image">
@@ -20,7 +20,8 @@
                                 <img src="{% make_url " image " model.dataurl %}" onerror="this.src='http://southasia.oneworld.net/ImageCatalog/no-image-icon/image_preview'" alt="{{ model.dataurl}}"
                                 />
                             </div>
-                            {% endif %} {% for image in model.content.productImages %}
+                            {% endif %} 
+                            {% for image in model.content.productImages %}
                             <div class="product-image-slide">
                                 <img src="{{ image.imageUrl }}" alt="{{ image.altText }}" />
                             </div>
