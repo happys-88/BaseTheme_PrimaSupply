@@ -6,7 +6,6 @@
 {% block breadcrumbs %} {% endblock breadcrumbs %}  
 
 {% block body-content %}
-	<h1>Print Order Page</h1> 
 	{% require_script "pages/print-order" %} 
 	<div id="print-order"></div>  
 {% endblock body-content %}    

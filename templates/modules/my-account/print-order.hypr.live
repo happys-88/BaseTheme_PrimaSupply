@@ -74,12 +74,15 @@
 		</div>
 		<div class="col-xs-12" >
 			<div class="merchandise-subtotal text-right">
-				<div>{{ labels.merchandiseSubtotal }}:{{ model.discountedSubtotal|currency }}</div>
-				<div>Tax:{{ model.taxTotal|currency }}</div>
-				<div>Shipping:{{ model.shippingTotal|currency }}</div>
-				<div>Total:{{ model.total|currency }}</div>
-				<div>You Saved:{{ model.discountTotal|currency }}</div>
+				<div>{{ labels.merchandiseSubtotal }}:<span>{{ model.discountedSubtotal|currency }}</span></div>
+				<div>Tax:<span>{{ model.taxTotal|currency }}</span></div>
+				<div>Shipping:<span> {{ model.shippingTotal|currency }}</span></div>
+				<div>Total:<span>{{ model.total|currency }}</span></div>
+				<div>You Saved:<span>{{ model.discountTotal|currency }}</span></div>
 			</div>
+		</div>
+		<div class="col-xs-12">
+			<a class="mz-button print-in-voice">Print In Voice</a>
 		</div>
 	</div>
 </div>
