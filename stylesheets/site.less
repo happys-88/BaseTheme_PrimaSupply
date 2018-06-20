@@ -834,9 +834,19 @@ img[data-mztp]{
 	#shipping-address{
 		border-right: 1px solid;
 		padding-left: 180px;
+		.shipping-address{
+			p {
+				margin: 5px 0;
+			}
+		}
 	}
 	#bill-address{
 		padding-left: 150px;
+		.bill-address{
+			p {
+				margin: 5px 0;
+			}
+		}
 	}
 	.mz-print-list{
 		.mz-carttable-header{
@@ -848,6 +858,7 @@ img[data-mztp]{
 			.mz-itemlisting{
 				.mz-itemlisting-details{
 					width: 100%;
+					border-bottom: 1px solid #ccc;
 					.mz-itemlisting-thumb{
 						border: 1px solid #e0e0e0;
 						width: 120px;
@@ -865,6 +876,17 @@ img[data-mztp]{
 				}
 			}
 		}
+	 }
+	 .merchandise-subtotal {
+		 font-weight: 700;
+		 span {
+			width: 90px;
+			display: inline-block;
+		 }
+	 }
+	 .print-in-voice {
+		float: right;
+		margin: 25px 0;
 	 }
    }
 }
