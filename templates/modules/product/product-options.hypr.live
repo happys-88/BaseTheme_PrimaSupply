@@ -3,11 +3,20 @@
     <div class="mz-productoptions-optioncontainer">
         
         {% if model.showColorIcon %}
-            {% if option.isRequired %}
-            <strong class="is-required">*</strong>
+           
+            {% with option.values|findwhere("isSelected", "true") as optionsselected %}
+
+            {% if optionsselected %} 
+                <span>{{ option.attributeDetail.name }} : {{ optionsselected.value }}</span>
+                {% else %}
+                    {% if option.isRequired %}
+                      <strong class="is-required">*</strong>
+                      <label class="mz-productoptions-optionlabel">SELECT A {{ option.attributeDetail.name }}</label>
+                    {% endif %}
             {% endif %}
+        {% endwith %}
             {% if option.attributeFQN == "tenant~size" or option.attributeFQN == "tenant~color" %}
-                <label class="mz-productoptions-optionlabel">SELECT A {{ option.attributeDetail.name }}</label>
+               
                     <div class="mz-productoptions-valuecontainer {{ option.attributeDetail.name|slugify }}">
                         {% if option.attributeDetail.inputType == "List" %}
                             {% for value in option.values %}
