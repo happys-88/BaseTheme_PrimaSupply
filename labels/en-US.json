@@ -507,7 +507,7 @@
   "continueShopping"                       :   "Continue Shopping",
   "refineBy"                               :   "Refine by:" ,
   "shoppingCart"                           :   "Shopping Cart",
-  "quickShop"                              :   "Quick Shop",
+  "quickShop"                              :   "Quick View", 
   "new"                                    :   "New",
 
   // Checkout Labels

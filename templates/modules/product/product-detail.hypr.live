@@ -1,4 +1,3 @@
-{% dump model %}
 <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName }}</h1> 
 
 <dl class="mz-productcodes mz-propertylist mz-pagetitle-note mz-l-stack-section">

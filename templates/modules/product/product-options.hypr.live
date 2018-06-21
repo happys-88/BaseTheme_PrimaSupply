@@ -7,7 +7,7 @@
             {% with option.values|findwhere("isSelected", "true") as optionsselected %}
 
             {% if optionsselected %} 
-                <span>{{ option.attributeDetail.name }} : {{ optionsselected.value }}</span>
+                <span><strong>{{ option.attributeDetail.name }}</strong> : {{ optionsselected.value }}</span> 
                 {% else %}
                     {% if option.isRequired %}
                       <strong class="is-required">*</strong>
