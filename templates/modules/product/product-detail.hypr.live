@@ -1,4 +1,4 @@
-
+{% dump model %}
 <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName }}</h1> 
 
 <dl class="mz-productcodes mz-propertylist mz-pagetitle-note mz-l-stack-section">
@@ -159,7 +159,7 @@
           </button>
           {% else %}
               {% comment %} when quantity is zero {% endcomment %}
-            {% if model.totalCount === 0 %}
+            {% if model.totalCount === 0 or model.inventoryInfo.onlineStockAvailable === 0 %}
               <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart" >
               {{ labels.addToCart }}
               </button>
