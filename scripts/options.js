@@ -115,6 +115,26 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                     }
                 }
             }
+            var selectedCount = 0;
+            selectedCount = parseInt(selectedCount, 10);
+            var options = JSON.parse(JSON.stringify(this.model.get('options')));
+            for (var i = 0; i < options.length; i++) {
+                var optionn = options[i];
+                var optionValues = optionn.values;
+                if(optionn.attributeDetail.dataType == 'ProductCode') {
+                    for (var j = 0; j < optionValues.length; j++) {
+                        var optionValue = optionValues[j];
+                        if (optionValue.isSelected === true) {
+                            selectedCount++;
+                        }
+                    }
+                }
+            }
+            if(selectedCount === 0){
+                this.model.set('addToCartButton','disabled');
+            } else {
+                this.model.set('addToCartButton','');
+            }
         },
         quantityMinus: function() {
             var _qtyObj = $('[data-mz-validationmessage-for="quantity"]'),
@@ -177,6 +197,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             if(method) {
                api.request( method, url ).then(function () {
                     $('#optionModal').modal('hide');
+                    GlobalCart.update();
                 }); 
             }
         },
@@ -233,6 +254,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                         break;
                     }
                 }
+                optionModel.set('addToCartButton','disabled');
                 me.render();
                 if (cartitem && cartitem.prop('id')) {
                     CartMonitor.addToCount(optionModel.get('quantity'));
@@ -315,6 +337,26 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                     }
                 }
             }
+            var selectedCount = 0;
+            selectedCount = parseInt(selectedCount, 10);
+            var options = JSON.parse(JSON.stringify(this.model.get('options')));
+            for (var i = 0; i < options.length; i++) {
+                var optionn = options[i];
+                var optionValues = optionn.values;
+                if(optionn.attributeDetail.dataType == 'ProductCode') {
+                    for (var j = 0; j < optionValues.length; j++) {
+                        var optionValue = optionValues[j];
+                        if (optionValue.isSelected === true) {
+                            selectedCount++;
+                        }
+                    }
+                }
+            }
+            if(selectedCount === 0){
+                this.model.set('addToCartButton','disabled');
+            } else {
+                this.model.set('addToCartButton','');
+            }
         },
         quantityMinus: function() {
             var _qtyObj = $('[data-mz-validationmessage-for="quantity"]'),
@@ -377,6 +419,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             if(method) {
                api.request( method, url ).then(function () {
                     $('#addonModal').modal('hide');
+                    GlobalCart.update();
                 }); 
             }
         },
@@ -416,10 +459,21 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             this.model.set('addonsPopup', true);
             var optionModel = this.model;
             var me = this;
+            var selectedCount = 0;
+            selectedCount = parseInt(selectedCount, 10);
             this.model.on('addedtocart', function (cartitem) {
                 optionModel.set('cartItemId',cartitem.data.id);
                 optionModel.set('totalQuant',cartitem.data.quantity);
                 optionModel.set('hasAddon', false);
+                optionModel.set('prodPrice', 'prodPrice');
+                var price = JSON.parse(JSON.stringify(optionModel.get('price')));
+                if (price.priceType == 'MAP') {
+                    optionModel.set('oldCatalogListPrice', price.catalogListPrice);
+                    optionModel.set('oldCatalogSalePrice', price.catalogSalePrice);
+                } else {
+                    optionModel.set('oldPrice', price.price);
+                    optionModel.set('oldSalePrice', price.salePrice);
+                }
                 var options = JSON.parse(JSON.stringify(optionModel.get('options')));
                 for (var i = 0; i < options.length; i++) {
                     var option = options[i];
@@ -428,6 +482,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                         break;
                     }
                 }
+                optionModel.set('addToCartButton','disabled');
                 me.render();
                 if (cartitem && cartitem.prop('id')) {
                     CartMonitor.addToCount(optionModel.get('quantity'));

@@ -348,6 +348,8 @@
                         quantity: me.get("quantity")
                     }).then(function (item) {
                         me.trigger('addedtocart', item);
+                    }, function(error) {
+                        me.trigger('addedtocarterror', error);
                     });
                 }
             });

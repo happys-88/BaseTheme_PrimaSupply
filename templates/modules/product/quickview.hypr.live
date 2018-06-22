@@ -44,7 +44,7 @@
 
                     <!-- Price -->
                     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price">
-                        {% include "modules/product/price-stack" %}
+                        {% include "modules/product/price-show-stack" %}
                     </div>
                     <!--/ Price -->
 

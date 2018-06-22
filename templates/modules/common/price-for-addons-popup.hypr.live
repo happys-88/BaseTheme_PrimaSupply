@@ -1,0 +1,94 @@
+ {% if prodPrice == 'prodPrice' %}
+    {% if model.priceType == "MAP" %}
+        {% if model.discount %}
+            {% if oldCatalogSalePrice %} 
+                <span class="mz-price is-crossedout">
+                     {{ oldCatalogSalePrice|currency }}
+                </span>
+                <span itemprop="price" class="mz-price is-saleprice">
+                     {% if model.discount.discount.name %}
+                     <span class="mz-price-discountname">{{model.discount.discount.name}} &ndash;</span>
+                     {% endif %}
+                     {% filter currency %} {{ oldCatalogSalePrice|subtract(model.discount.impact)}} {% endfilter %}
+                </span>
+            {% else %}
+                <span class="mz-price is-crossedout">
+                     {{ oldCatalogListPrice|currency }}
+                </span>
+                <span itemprop="price" class="mz-price is-saleprice">
+                     {% if model.discount.discount.name %}
+                     <span class="mz-price-discountname">{{model.discount.discount.name}} &ndash;</span>
+                     {% endif %}
+                     {% filter currency %} {{ oldCatalogListPrice|subtract(model.discount.impact)}} {% endfilter %}
+                </span>
+            {% endif %}
+        {% else %}
+            {% if oldCatalogSalePrice %} 
+                <span class="mz-price is-crossedout">
+                     {{ oldCatalogListPrice|currency }}
+                 </span>
+                 <span itemprop="price" class="mz-price is-saleprice">
+                     {{oldCatalogSalePrice|currency}}
+                 </span>
+            {% else %}
+                 <span itemprop="price" class="mz-price">
+                     {{ oldCatalogListPrice|currency }}
+                </span>
+            {% endif %}
+        {% endif %}
+    {% else %}
+        {% if model.onSale %}
+             <span class="mz-price is-crossedout">
+                 {{oldPrice|currency}}
+             </span>
+             <span itemprop="price" class="mz-price is-saleprice">
+                 {% if model.discount.discount.name %}
+                 <span class="mz-price-discountname">{{model.discount.discount.name}} &ndash;</span>
+                 {% endif %}
+                 {{oldSalePrice|currency}}
+             </span>
+        {% else %}
+             <span itemprop="price" class="mz-price">
+                {{oldPrice|currency}}
+             </span>
+         {% endif %}
+    {% endif %}
+ {% else %}
+    {% if model.discount %}
+        {% if model.catalogSalePrice %} 
+            <span class="mz-price is-crossedout">
+                 {{ model.catalogSalePrice|currency }}
+            </span>
+            <span itemprop="price" class="mz-price is-saleprice">
+                 {% if model.discount.discount.name %}
+                 <span class="mz-price-discountname">{{model.discount.discount.name}} &ndash;</span>
+                 {% endif %}
+                 {% filter currency %} {{ model.catalogSalePrice|subtract(model.discount.impact)}} {% endfilter %}
+            </span>
+        {% else %}
+            <span class="mz-price is-crossedout">
+                 {{ model.catalogListPrice|currency }}
+            </span>
+            <span itemprop="price" class="mz-price is-saleprice">
+                 {% if model.discount.discount.name %}
+                 <span class="mz-price-discountname">{{model.discount.discount.name}} &ndash;</span>
+                 {% endif %}
+                 {% filter currency %} {{ model.catalogListPrice|subtract(model.discount.impact)}} {% endfilter %}
+            </span>
+        {% endif %}
+    {% else %}
+        {% if model.catalogSalePrice %} 
+            <span class="mz-price is-crossedout">
+                 {{ model.catalogListPrice|currency }}
+             </span>
+             <span itemprop="price" class="mz-price is-saleprice">
+                 {{model.catalogSalePrice|currency}}
+             </span>
+        {% else %}
+             <span itemprop="price" class="mz-price">
+                 {{ model.catalogListPrice|currency }}
+            </span>
+        {% endif %}
+    {% endif %}
+ {% endif %}
+ 
