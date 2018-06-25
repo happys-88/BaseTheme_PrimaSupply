@@ -1,12 +1,6 @@
 <div class="mz-productoptions">
     {% for option in model.options %}
     <div class="mz-productoptions-optioncontainer">
-        {% if option.isRequired %}
-            <strong class="is-required">*</strong>
-        {% endif %}
-        {% if option.attributeDetail.dataType != "ProductCode" %}
-            <label class="mz-productoptions-optionlabel">{{ option.attributeDetail.name }}</label>
-        {% endif %}
         <div class="mz-productoptions-valuecontainer">
             {% if option.attributeDetail.inputType == "List" %}
                 {% if option.attributeDetail.dataType != "ProductCode" %}

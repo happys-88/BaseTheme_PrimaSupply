@@ -62,7 +62,7 @@
                         <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
                         {% if model.hasAddon === true %}
                             <div class="pull-right mz-productdetail-conversion-buttons">
-                                <button class="addtocartaddon mz-productdetail-addtocart mz-button mz-button-medium  {% if not model.inventoryInfo.onlineStockAvailable %} is-disabled {% endif %}" data-mz-productcode="{{model.variationProductCode|default(model.productCode) }}" >
+                                <button class="addtocartaddon mz-productdetail-addtocart mz-button mz-button-medium  {% if not model.inventoryInfo.onlineStockAvailable %} is-disabled {% endif %}" data-mz-productcode="{{model.variationProductCode|default(model.productCode) }}" {{ model.addToCartButton }}>
                                     {{ labels.addToCart }}
                                 </button>
                             </div>

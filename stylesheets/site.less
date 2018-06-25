@@ -651,7 +651,10 @@ img[data-mztp]{
 
 /**** bxslider ****/
 .bx-wrapper{
-	padding: 0 @gutter*2; 
+	padding: 0 @gutter*2;
+	.bx-controls-direction a{
+		z-index: 9;  
+	}  
 	.bx-prev{
 		left: 10px;
 	}
@@ -822,7 +825,7 @@ img[data-mztp]{
 			&.mz-pagetitle {
 				margin-bottom: 16px;
 				text-transform: none;
-				font-size:22px;
+				font-size: 22px; 
 			}
 		}
 	}

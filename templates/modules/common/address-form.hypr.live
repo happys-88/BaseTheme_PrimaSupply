@@ -28,7 +28,7 @@
     </div>
     <div class="form-group mz-l-formfieldgroup-row mz-addressform-address2">
         <div class="col-sm-4 mz-formgroup-align mz-label">
-            <label class="text-label" for="{{ addresscontext }}_{{ labels.address }}">Optional:</label> 
+            <label class="text-label optional" for="{{ addresscontext }}_{{ labels.address }}">Optional:</label>  
         </div>
         <div class="col-sm-8 mz-formgroup-align">
             <input class="form-control" aria-label="address-line-2" type="text" class="text-input" name="address-line-2" data-mz-value="{{ addresscontext }}address.address2" value="{{ model.address.address2 }}" maxlength="{{ themeSettings.addressLength}}" placeholder="(apt #, floor, building, company, etc.)">

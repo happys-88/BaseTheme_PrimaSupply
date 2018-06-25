@@ -9,26 +9,16 @@
         <div class="row"> 
             <div class="col-sm-9 col-lg-10 mz-customer-service-panels pull-right">
                 <div class="mz-customer-service-section">
-                    <h3 class="mz-l-stack-sectiontitle">{{ labels.customerService }}</h3>
-                    <div class="mz-dropzone">
-                        {% dropzone "service-dropzone" scope="page" %}
-                    </div>
-                    <div class="row">  
-                        <div class="col-sm-4 mz-dropzone">
-                            {% dropzone "track-my-order" scope="page" %}
-                        </div>
-                        <div class="col-sm-4 mz-dropzone">
-                            {% dropzone "contact-Us" scope="page" %}
-                        </div>
-                        <div class="col-sm-4 mz-dropzone">
-                            {% dropzone "return-exchange" scope="page" %}
-                        </div>
-                    </div>
+                    <h3 class="mz-l-stack-sectiontitle">{{ model.properties.title|safe }}</h3>     
+                    {% dropzone "customer-service-dropzone1" scope="page" %}
+                    {% dropzone "customer-service-dropzone2" scope="page" %}
+                    {% dropzone "customer-service-dropzone3" scope="page" %}
+                    {% dropzone "customer-service-dropzone4" scope="page" %}  
                 </div>
             </div>
             <div class="col-sm-3 col-lg-2 mz-customer-service-nav">     
                 <div class="mz-l-sidebar">
-                    {% include "modules/customer-service/service-nav" %}
+                    {% include "pages/service-nav" %}
                 </div>
             </div>
         </div>

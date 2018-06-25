@@ -347,7 +347,11 @@
                         fulfillmentMethod: fulfillMethod,
                         quantity: me.get("quantity")
                     }).then(function (item) {
+                        localStorage.setItem("lastAddedItemToCart", item.data.id);
                         me.trigger('addedtocart', item);
+
+                    }, function(error) {
+                        me.trigger('addedtocarterror', error);
                     });
                 }
             });

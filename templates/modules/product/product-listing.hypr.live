@@ -44,7 +44,7 @@
         {% endblock product-code %}
 
         <div class="mz-price-in-cart">
-            {% include "modules/product/price-show-stack" %}
+            {% include "modules/product/price-show-stack" with hide=model.productCode %}
         </div>
 
         {% block product-extrainfo %}

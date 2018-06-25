@@ -1,4 +1,3 @@
-﻿{% if hide %}
 {% if model.priceType == "MAP" %}
     <div class="cartPrice-{{ prodCode }}" style="display: none;">
         {% if model.discount %}
@@ -53,9 +52,7 @@
          {% if model.priceType != "MAP" %}
              {{model.salePrice|currency}}
          {% else %}
-            {% if hasStock == true %}
-                <div class="orange-text">{{ labels.mapPrice }}</div>
-            {% endif %}
+             <div class="orange-text">{{ labels.mapPrice }}</div>
          {% endif %}
      </span>
      {% else %}
@@ -67,22 +64,8 @@
              <span class="mz-price is-crossedout">
              {{model.price|currency}}
              </span>
-             {% if hasStock == true %}
-                <div class="orange-text">{{ labels.mapPrice }}</div>
-            {% endif %}
+             <div class="orange-text">{{ labels.mapPrice }}</div>
          {% endif %}
      </span>
      {% endif %}
  </div>
- {% else %}
-    {% if priceForProductDetail %}
-        {% include "modules/common/price-for-product-detail" %}
-    {% else %}
-        {% include "modules/common/price-for-addons-popup" %}
-    {% endif %}
-    
-{% endif %}
-
- {% if themeSettings.showMSRP and model.msrp %}
- <span class="mz-price-msrp">{{ labels.msrp}}: <span class="mz-price">{{ model.msrp|currency }}</span></span>
- {% endif %}

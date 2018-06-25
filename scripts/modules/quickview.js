@@ -13,7 +13,6 @@ define([
     "hyprlive"
 
 ], function($, _, api, Backbone, HyprLiveContext, ProductModels, bxslider, cart, cartModel, GlobalCart, CartMonitor, Hypr) {
-    console.log("quivkview");
 $(document).on('click', '.mz-quick-view', function (event) {
     var $Elem = $(event.currentTarget);
     var prdCode = $Elem.attr("data-mz-productcode-quickview");
@@ -28,7 +27,8 @@ $(document).on('click', '.mz-quick-view', function (event) {
                 "click [data-mz-qty-minus]": "quantityMinus",
                 "click [data-mz-qty-plus]": "quantityPlus",
                 "click .bx-controls-direction a":"clickOnNextOrprevious",
-                "keyup [id=qty-field]":"updateqtyManual"
+                "keyup [id=qty-field]":"updateqtyManual",
+                "click .login-for-lowprice" : "closeQuickviewModal"
 
             },
             initialize: function() {
@@ -69,7 +69,6 @@ $(document).on('click', '.mz-quick-view', function (event) {
                 return this;
             },
             corousel: function () {
-                console.log(this.model);
                 if( this.model.get("content").get("productImages").length > 1 || this.model.attributes.dataurl){
                     $('#quick-slider').bxSlider({
                         minSlides: 1,
@@ -220,6 +219,9 @@ $(document).on('click', '.mz-quick-view', function (event) {
                     quickviewModel.set('quantity', 1);
                     me.render();
                 });
+            },
+            closeQuickviewModal: function() {
+                $('#quickViewModal').modal('hide');
             },
             colorswatch: function (event) {
                 if(typeof this.model.get('productCode') !== 'undefined') {

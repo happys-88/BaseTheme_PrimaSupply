@@ -44,7 +44,7 @@
 
                     <!-- Price -->
                     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price">
-                        {% include "modules/product/price-stack" %}
+                        {% include "modules/product/price-show-stack" %}
                     </div>
                     <!--/ Price -->
 
@@ -87,6 +87,7 @@
                      {% include "modules/product/quickview-add-to-cart" %}
                    {% else %}
                      <a class="mz-button login-for-lowprice" href="javascript:void(0);" data-toggle="modal" data-target="#loginPopup" data-productcode="{{model.productCode}}">{{ labels.viewOnLogin }}</a>
+                     <a class="mz-full-product-details mz-left" href="{{model.url}}">{{ labels.fullProductDetails }}</a>
                    {% endif %} 
                    {% else %}
                      {% include "modules/product/quickview-add-to-cart" %}

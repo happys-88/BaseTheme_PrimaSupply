@@ -1,8 +1,17 @@
-﻿<label class="mz-pagingcontrols-pagesize-label">
+﻿<label class="mz-pagingcontrols-pagesize-label"> 
   <span data-mz-value="pageSize">
     {% for size in themeSettings.pageSizeOptions %}
       <a data-mz-url="{% make_url "paging" model with pageSize=size page=1 %}" {% if model.pageSize == size %}class="selected"{% endif %} value="{{ size }}">{{ size }}</a>
     {% endfor %}
   </span>
 </label>
-<a class="btn view-all{% if model.pageSize == themeSettings.viewAllPageSize %} selected{% endif %}" data-mz-url="{% make_url "paging" model with pageSize=themeSettings.viewAllPageSize page=1 %}">{{ labels.viewAll }} ({{ model.totalCount }})</a>
+
+<span class="mz-pagingcontrols-pagestate-label">
+  {% if model.totalCount %}
+    {% if model.totalCount != 1 %}
+      {{ labels.pageStatePlural|string_format(model.firstIndex,model.lastIndex,model.totalCount) }}
+    {% else %}
+      {{ labels.pageStateSingular }}
+    {% endif %}
+  {% endif %}
+</span>

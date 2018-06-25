@@ -74,6 +74,11 @@
         },
         addToCart: function () {
             this.model.addToCart();
+            this.model.on('addedtocarterror', function (error) {
+                if (error.message.indexOf('Validation Error: The following items have limited quantity or are out of stock') > -1) {
+                    $('.mz-errors').find('.mz-message-item').html(Hypr.getLabel('outOfStockError'));
+                }
+            });
         },
         addToWishlist: function () {
             this.model.addToWishlist();
@@ -123,6 +128,19 @@
             if (count == options.length) {
                 this.model.set('showColorIcon', true);
             }
+            var productModel = this.model;
+            api.request("GET", "/api/commerce/carts/current/items").then(function(response) {
+                var items = response.items;
+                productModel.set('viewOnCart', true);
+                for (var k = 0; k < items.length; k++) {
+                    var item = items[k];
+                    if (item.product.productCode == productModel.get('productCode')) {
+                        productModel.set('viewOnCart', false);
+                        me.render();
+                        break;
+                    }
+                }
+            });
         }
     });
 

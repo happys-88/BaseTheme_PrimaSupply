@@ -110,12 +110,14 @@
                     {% for discount in model.orderDiscounts %}
                       {% if not discount.excluded %}
                         <div class="mz-carttable-total-row">
-                          <div class="mz-carttable-total-label" >
-                              {{ discount.discount.name }}:
+                          <div class="mz-carttable-total-label mz-coupon-discount" >
+                              {{ discount.discount.name }}: {{ discount.impact|currency }}
                           </div>
+                          {% comment %}
                           <div class="mz-carttable-total-wrap">
                             <span class="mz-carttable-rowtotal">- {{ discount.impact|currency }}</span>
                           </div>
+                          {% endcomment %}
                         </div>
                       {% endif %}
                     {% endfor %}

@@ -19,7 +19,7 @@
                                 <input name="password"  type="password" data-mz-login-password placeholder="{{ labels.password }}" />
                             </div>
                             <div class="input-group">
-                                <a href="/user/forgotpassword" class="mz-forgot" data-mz-action="launchforgotpassword">{{ labels.forgotPasswordLink }}</a>
+                                <a href="/user/forgotpassword" class="mz-forgot">{{ labels.forgotPasswordLink }}</a> 
                             </div>
                             <div class="clearfix">
                                 <button type="button" class="mz-close" data-dismiss="modal">{{ labels.cancel }}</button>
