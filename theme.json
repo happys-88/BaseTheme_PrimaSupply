@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "6983734c0398477feb38901f8c93fa23dc1f7130"
+      "commit": "5e874db50b7be181dccbce109e0ba71c8a0c64cf"
     },
     "baseThemeChannel": "stable"
   },
@@ -577,8 +577,6 @@
     "yotpoBottomlineBaseUrl": "https://api.yotpo.com/products",
     "yotpoQuestionBaseUrl": "https://api.yotpo.com/products",
     "questions": "questions",
-    "stockThreshold": "Hurry, only {0} more in stock",
-    "outOfStock": "Out of stock",
     "categoryEntityName": "categoryAttributes@ng",
     "columnBreaker": "~",
     "liftGatePrice": 59,

@@ -417,7 +417,7 @@
   "notPurchasable"                        : "Not Purchasable",
 
 // Start:stock related labels
-"distributorStock"                      : "Distributor Stock",
+"distributorStock"                        : "Distributor Stock",
   "distributorStockMessage"               : "(Usually Ships Out In 4-7 Business Days)",
   "numberInStock"                         : "Only {0} in stock. Better hurry!",
   "inStockMessage"                        : "(Quick Ship - Ships Out Next Business Day!)",
@@ -430,6 +430,7 @@
   "someOptionInStockMessage"              : "(Available Options Ship Out Next Business Day)",
   "temporarilyOutOfStock"                 : "Temporarily out of stock",
   "temporarilyOutOfStockMessage"          : "(Once Stock Arrives, Ships Out Next Business Day)",
+  "stockThreshold"                        : "Hurry, only {0} more in stock",
 // End:stock related labels
 
   "addToWishlist"                         : "Add To Wishlist",
