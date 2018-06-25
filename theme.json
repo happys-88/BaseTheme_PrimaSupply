@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "5e874db50b7be181dccbce109e0ba71c8a0c64cf"
+      "commit": "d1b63cfa9a9998b9ecf1cc792bcf21902178c2d9"
     },
     "baseThemeChannel": "stable"
   },
@@ -569,21 +569,9 @@
     "showProductDetailShortDesc": true,
     "showProductDetailUPC": true,
     "textColor": "#444444",
-    "yotpoApiKey": "4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD",
-    "yotpoBaseUrl": "https://api.yotpo.com/v1/widget",
-    "products": "products",
-    "reviews": "reviews",
-    "bottomline": "bottomline",
-    "yotpoBottomlineBaseUrl": "https://api.yotpo.com/products",
-    "yotpoQuestionBaseUrl": "https://api.yotpo.com/products",
-    "questions": "questions",
-    "categoryEntityName": "categoryAttributes@ng",
+    "categoryEntityName": "categoryAttributes@ng", 
     "columnBreaker": "~",
     "liftGatePrice": 59,
-    "rviEnable": true,
-    "rviHeading": "Recently Viewed",
-    "rviNumberCookie": 10,
-    "rviExpirationDuration": 21,
     "snapengaeWidgetId": "d93fa82a-6087-44f8-bd79-3df50a1c3130",
     "searchSuggestionFilter": "424,425,426,427,428,429,430,431,432",
     "usStates": [
@@ -827,7 +815,28 @@
     "useDebugScripts": false,
     "useSearchAutocomplete": true,
     "allowCustomerInitiatedReturns": true,
-    "visaCheckoutSdkUrl": "https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js"
+    "visaCheckoutSdkUrl": "https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js",
+    "globalCartMaxItemCount": 3,
+    "globalCartEnableSaveCart": "true",
+    "globalCartHidePopover": "",
+    "globalCartShowSubtotal": false,
+    "globalCartItemImageMaxWidth": 105,
+    "globalCartEmptyBasketKickerLink": "",
+    "globalCartRelatedProducts": "true",
+    "rviEnable": true,
+    "rviHeading": "Recently Viewed",
+    "rviNumberCookie": 10,
+    "rviExpirationDuration": 21,
+    "yotpoApiKey": "4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD",
+    "yotpoBaseUrl": "https://api.yotpo.com/v1/widget", 
+    "yotpoBottomlineBaseUrl": "https://api.yotpo.com/products",
+    "yotpoQuestionBaseUrl": "https://api.yotpo.com/products",
+    "products": "products",
+    "reviews": "reviews",
+    "bottomline": "bottomline",
+    "questions": "questions",  
+    "showYotpoGallery": true,
+    "instagramFollowUsLink": "https://www.instagram.com/prima.supply/?hl=en"      
   },
   "layoutWidgets": [
     {

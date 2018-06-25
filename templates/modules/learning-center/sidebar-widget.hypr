@@ -1,3 +1,4 @@
+{% if themeSettings.showYotpoGallery %} 
 <div class="mz-sidebar-content-widget"> 
 	<div class="yotpo-gallery">  
         <h2 class="heading-2"><span>Prima Supply</span></h2>    
@@ -13,9 +14,10 @@
             data-cta-text="Shop Now"
             data-cta-color="#ff7a00">
         </div>
-        <button class="mz-button">Follow Us</button>   
+        <a href="{{ themeSettings.instagramFollowUsLink }}" target="_blank" class="mz-button">Follow Us</a>       
     </div> 
 </div>
+{% endif %} 
 <div class="mz-sidebar-content-widget">
 	{% dropzone "featured-products" scope="page" %}	
 </div>
