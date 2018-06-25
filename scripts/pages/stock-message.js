@@ -38,6 +38,7 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
 								}
 								else{
 									$("#"+getProductCode+"").show();
+									$("#stock-messages-"+getProductCode+"").hide();
 									$("#"+getProductCode+"").html(inStock);
 								}
 							}
