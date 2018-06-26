@@ -5,8 +5,8 @@
         font-weight: 700;
         text-transform: uppercase;
         position: absolute;
-        top: -19px;
-        right: 33px;
+        top: 0;
+        right: 25px;
     }
     display: none;
     position: absolute;
@@ -59,6 +59,20 @@
             font-size: 11px; 
         }
     }
+    .mz-messagebar:empty {
+        display: none;
+    }
+    .mz-messagebar {
+        float: left;
+        width: 100%;
+        background: #f2dede url(../resources/images/error-exclamation.png) no-repeat 10px 9px;
+        padding: 8px;
+        text-align: left;
+        padding-left: 40px;
+        color: #b94a48;
+        background-size: 18px;
+        margin-top: -25px;
+    }
    
 }
 
@@ -68,4 +82,8 @@
 			display: block; 
 		}
 	}
+}
+.mz-carttable-items-global {
+    max-height: 290px;
+    overflow-y: auto;
 }

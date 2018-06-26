@@ -21,19 +21,31 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
 							$.each(productValue.variations, function(index, variationsValue){
 							sum += variationsValue.inventoryInfo.onlineStockAvailable;
 							});
-							var stockThreshold = HyprLiveContext.locals.themeSettings.stockThreshold;
-							var outOfStock = HyprLiveContext.locals.themeSettings.outOfStock;
-							if(sum < 10 && sum !== 0){
-								$("#"+getProductCode+"").show();
-								$("#stock-messages-"+getProductCode+"").hide();
-								$("#"+getProductCode+"").html(stockThreshold.replace("{0}", sum));
+							var stockThreshold = Hypr.getLabel('stockThreshold');
+							var outOfStock = Hypr.getLabel('outOfStock');
+							var inStock = Hypr.getLabel('inStock');
+							if(singleProduct.items[0].inventoryInfo.manageStock){
+								if(sum < 10 && sum !== 0){
+									$("#"+getProductCode+"").show();
+									$("#stock-messages-"+getProductCode+"").hide();
+									$("#"+getProductCode+"").html(stockThreshold.replace("{0}", sum));
 
+								}
+								else if(sum === 0){
+									$('[data-mz-productcode='+getProductCode+']').attr("disabled", true);
+									$("#"+getProductCode+"").show();
+									$("#"+getProductCode+"").html(outOfStock);
+								}
+								else{
+									$("#"+getProductCode+"").show();
+									$("#stock-messages-"+getProductCode+"").hide();
+									$("#"+getProductCode+"").html(inStock);
+								}
 							}
-							
-							if(sum === 0){
+							else{
 								$('[data-mz-productcode='+getProductCode+']').attr("disabled", true);
-								$("#"+getProductCode+"").show();
-								$("#"+getProductCode+"").html(outOfStock);
+									$("#"+getProductCode+"").show();
+									$("#"+getProductCode+"").html(outOfStock);
 							}
 						}
 				});

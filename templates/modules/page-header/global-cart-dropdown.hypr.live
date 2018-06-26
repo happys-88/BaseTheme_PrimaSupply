@@ -13,8 +13,9 @@
                 <div class="mz-carttable-header-price-each col-sm-2 text-right no-padding">{{ labels.cartPriceEach }}</div> 
                 <div class="mz-carttable-header-price col-sm-2 text-right">{{ labels.cartPrice }}</div>
               </div>
+              <div class="mz-messagebar" data-mz-message-bar></div>
             <div class="mz-carttable-{% if Model.IsEmpty %} isempty {% else %}items-global{% endif %} col-xs-12"> 
-
+             
                 {% for item in model.items %}
                   <div class="mz-carttable-item row" id="{{ item.id }}">
                           
@@ -124,18 +125,20 @@
                   </div>
                   <!-- Discounts -->
 
-                  <div class="mz-carttable-total-wrap col-xs-12">
-                    {{ labels.subtotal }}:
-                    <span id="mz-carttable-total" class="mz-carttable-total">
-                      <strong>{{ model.subtotal|currency }}</strong>
-                    </span>
-                  </div>
+                  {% if themeSettings.globalCartShowSubtotal %}
+                    <div class="mz-carttable-total-wrap col-xs-12">
+                      {{ labels.subtotal }}:
+                      <span id="mz-carttable-total" class="mz-carttable-total">
+                        <strong>{{ model.subtotal|currency }}</strong>
+                      </span>
+                    </div>
+                  {% endif %}  
                 </div>
                 
                 <div class="mz-cart-buttons col-xs-12"> 
                       <div class="col-xs-6 col-md-5">
-                        {% if user.isAnonymous %}  
-                          <button type="button" class="mz-button save-cart" data-toggle="modal" data-target="#loginPopup">{{ labels.saveCart }}</button>  
+                        {% if themeSettings.globalCartEnableSaveCart && user.isAnonymous && user.isAuthenticated %}   
+                          <button type="button" class="mz-button save-cart" data-toggle="modal" data-target="#loginPopup">{{ labels.saveCart }}</button>
                         {% endif %}
                       </div>
                       <div class="col-xs-6 col-md-7">

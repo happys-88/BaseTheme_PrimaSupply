@@ -382,6 +382,43 @@
                     "name": "rviExpirationDuration"
                 }
             ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Yotpo Reviews, Questions & Gallery",     
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Yotpo API Key", 
+                    "xtype": "mz-input-text",
+                    "name": "yotpoApiKey"  
+                },
+                {
+                    "fieldLabel": "Yotpo Base URL",  
+                    "xtype": "mz-input-text",
+                    "name": "yotpoBaseUrl"  
+                },
+                {
+                    "fieldLabel": "Yotpo Bottom Line URL",   
+                    "xtype": "mz-input-text",
+                    "name": "yotpoBottomlineBaseUrl"    
+                },
+                {
+                    "fieldLabel": "Yotpo Question Base URL",   
+                    "xtype": "mz-input-text",
+                    "name": "yotpoQuestionBaseUrl"    
+                },
+                {
+                    "fieldLabel": "Show Instagram Gallery", 
+                    "xtype": "mz-input-checkbox",
+                    "name": "showYotpoGallery" 
+                },
+                {
+                    "fieldLabel": "Instagram URL",
+                    "xtype": "mz-input-text",
+                    "name": "instagramFollowUsLink" 
+                }
+            ]
         }
     ]
 }

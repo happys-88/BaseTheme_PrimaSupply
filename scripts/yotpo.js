@@ -47,10 +47,10 @@ function ($, Hypr, Backbone, api, HyprLiveContext) {
             // </----- code for show/hide pricing end ----->
 
               var ratingURL = ""+yotpoBottomlineBaseUrl+"/"+yotpoApiKey+"/"+productCode+"/"+bottomline+"";
-              $.get(ratingURL, function(data, status){
+              $.get(ratingURL, function(data, status){ 
               var ratingAverageScore = data.response.bottomline.average_score;
                   var ratingTotalCount = data.response.bottomline.total_reviews;
-                  $(currentProduct).find("#product-rating").html("Average score...="+ratingAverageScore+" Total count="+ratingTotalCount); 
+                  //$(currentProduct).find("#product-rating").html("Average score...="+ratingAverageScore+" Total count="+ratingTotalCount); 
               }).done(function() {
               
               }).fail(function() {

@@ -19,7 +19,7 @@
       <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section">
         {% include "modules/product/price-show-stack" with priceForProductDetail=model.productCode 
         viewOnCart=model.viewOnCart 
-        hasStock=model.totalCount %}
+        hasStock=model.totalCount %} 
       </div>
     </div>
   </div>
@@ -143,7 +143,7 @@
       <div class="qty-block">   
           <span class="qty-counter" data-mz-qty="plus" role="button"><i class="mz-icon arrow-up" aria-hidden="true"></i></span> 
           <span class="qty-counter" data-mz-qty="minus" role="button"><i class="mz-icon arrow-down"  aria-hidden="true"></i></span>    
-          <input  class=" mz-productdetail-qty text-center" type="text" min="1"  {% if model.quantity %} value="{{ model.quantity }}" {% else %} value="1" {% endif %} {% if not model.isPurchasable %} disabled="disabled" {% endif %} data-mz-value='quantity' title="Quantity">
+          <input  class=" mz-productdetail-qty text-center" readonly type="text" min="1" {% if model.quantity %} value="{{ model.quantity }}" {% else %} value="1" {% endif %} {% if not model.isPurchasable %} disabled="disabled" {% endif %} data-mz-value='quantity' title="Quantity">
       </div>
     </div>
   </div>

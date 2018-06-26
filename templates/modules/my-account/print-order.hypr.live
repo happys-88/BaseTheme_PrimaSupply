@@ -3,7 +3,7 @@
 		<div class="col-xs-12">
 			<h2 class="text-center">Order Invoice #{{ model.orderNumber }}</h2> 
 			<div class="address-col col-xs-6" id="shipping-address">
-				<p>SHIP To</p>
+				<p>SHIP TO</p> 
 				<div class="shipping-address">
 					<p>{{ model.fulfillmentInfo.fulfillmentContact.firstName }} {{ model.fulfillmentInfo.fulfillmentContact.lastNameOrSurname }}</p>
 					<p>{{ model.fulfillmentInfo.fulfillmentContact.address.address1 }} </p>
@@ -33,9 +33,9 @@
 		<div class="col-xs-12">
 			<div class="mz-print-list">
 				<div class="mz-carttable-header col-xs-12">
-					<div class="col-sm-8 text-left">{{ labels.items }}</div>
+					<div class="col-sm-8 text-left">{{ labels.printOrderItem }}</div> 
 					<div class="mz-title col-sm-2 text-left">{{ labels.qty }}</div>
-					<div class="mz-title col-sm-2 text-left">{{labels.cartPrice}}</div>
+					<div class="mz-title col-sm-2 text-left">{{ labels.cartPrice }}</div>
 				</div>
 				
 				{% for item in model.items %}
@@ -82,7 +82,9 @@
 			</div>
 		</div>
 		<div class="col-xs-12">
-			<a class="mz-button print-in-voice">Print In Voice</a>
+			<a class="mz-button print-in-voice" href="javascript:void(0);" id="printInvoice">{{ labels.printInvoice }} </a>   
 		</div>
 	</div>
 </div>
+
+{% require_script "pages/print-order" %} 
