@@ -15,7 +15,7 @@
 {% block body-content %}
     {% require_script "pages/checkout" %}
     {% preload_json model "checkout" %}
-    
+   
     {% block checkout-top-content %}
         {% dropzone "checkout-top" scope="template" %} 
     {% endblock checkout-top-content %}

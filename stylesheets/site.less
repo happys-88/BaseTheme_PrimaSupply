@@ -818,6 +818,7 @@ img[data-mztp]{
 	transform: rotate(-90deg);
 	text-transform: uppercase;
 }
+
 //search result
 .mz-searchresults {
 	.mz-l-pagecontent {
@@ -830,7 +831,27 @@ img[data-mztp]{
 		}
 	}
 }
-//print
+
+/**** Print Order Page ****/ 
+.mz-printorder{
+	.mz-sticky-header{
+		display: none;  
+	}
+	.fixed-header{
+		margin-top: 0; 
+	}
+}
+.mz-print-header{
+	float: left;
+	width: 100%;
+	padding-bottom: 20px;
+	border-bottom: 1px solid @defaultBorderColor;
+	.phone-no{
+		a{
+			color: @textColor;	
+		}
+	}     
+}
 #print-order{
 	.container{
 		max-width:1048px;
@@ -891,6 +912,13 @@ img[data-mztp]{
 	 .print-in-voice {
 		float: right;
 		margin: 25px 0;
+		&:focus,
+		&:visited{
+			color: #fff;
+			&:hover{
+				background: @buttonBgColor;  
+			}    
+		}
 	 }
    }
 }

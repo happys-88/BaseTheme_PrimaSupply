@@ -19,7 +19,7 @@
       <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section">
         {% include "modules/product/price-show-stack" with priceForProductDetail=model.productCode 
         viewOnCart=model.viewOnCart 
-        hasStock=model.totalCount %}
+        hasStock=model.totalCount %} 
       </div>
     </div>
   </div>
