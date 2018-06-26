@@ -42,10 +42,6 @@ function ($, Hypr, Backbone, CartMonitor, api, cartModel, cart, sessionManagemen
                     messagesEl: $('[data-mz-message-bar]')
                 });
                 globalcartView.render();
-                var productcod = localStorage.getItem("lastAddedItemToCart");
-                var id = "#"+productcod;
-                $(id).prependTo(".mz-carttable-items-global");
-                $(id).addClass("recently-added");
                 if (redirect_to_cart == 'redirect_to_cart') {
                   window.location = "/cart";
                 }

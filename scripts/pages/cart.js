@@ -177,18 +177,16 @@ define([
             if(this.model.get("items").length!==0){
                 this.beforeRender(); 
             }
-                
-                        
             CartMonitor.update();
-              //recently added
-           var productcod=localStorage.getItem("lastAddedItemToCart");
-           var id="#"+productcod;
-           $(id).prependTo(".mz-carttable-items-global");
-           $(id).addClass("recently-added");
-          
             preserveElement(this, ['.v-button', '.p-button'], function() {
                 Backbone.MozuView.prototype.render.call(this);
             });
+            //recently added
+            var productcod=localStorage.getItem("lastAddedItemToCart");
+            console.log(productcod);
+            var id="#"+productcod;
+            $(id).prependTo(".mz-carttable-items-global"); 
+            $(id).addClass("recently-added");
         },
         getShippingMethodsDetail: function() {
            /* console.log("DATA");
@@ -308,8 +306,15 @@ define([
     },400),
         onQuantityUpdateFailed: function(model, oldQuantity) {
             var field = this.$('[data-mz-cart-item=' + model.get('id') + ']');
+            var errormsg = this.$('[data-mz-message-bar]');
             if (field) {
                 field.val(oldQuantity);
+                if(oldQuantity==1){
+                    errormsg.text("Quantity cant be null");
+                }else{
+                    errormsg.text(model.get('product').get('variationProductCode') +" is limited in stock");
+                }
+               
             }
             else {
                 this.render();

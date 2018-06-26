@@ -79,7 +79,9 @@
             });
         },
         removeItem: function (id) {
-            return this.get('items').get(id).apiModel.del();
+            if( typeof this.get('items').get(id)!="undefined"){
+                return this.get('items').get(id).apiModel.del();
+            }
         },
         addCoupon: function () {
             var me = this;
