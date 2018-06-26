@@ -86,9 +86,6 @@
         .mz-heading, .merchandise-subtotal, .mz-carttable-total-wrap{
             font-weight: bold;  
         }
-        .mz-carttable-total-wrap {
-            padding: 10px 30px 0;
-        }
         .mz-heading{
             display: block;
             margin-bottom: 15px;
@@ -312,6 +309,12 @@
     }  
 }       
   
-
-
- 
+#global-cart {
+    .mz-table-cart {
+        .mz-carttable-total-row {
+            .mz-carttable-total-wrap {
+                padding: 10px 30px 0;
+            }
+        }
+    }
+}

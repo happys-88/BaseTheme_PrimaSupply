@@ -113,13 +113,7 @@
         {% endfor %}
 
         <div class="mz-l-stack-section mz-paymentselector-separator mz-checkoutform">
-            <p>
-                {{ labels.billingContact }}: <strong>{{ model.billingContact.email }}</strong>
-            </p>
-        </div>
-
-        <div class="mz-l-stack-section mz-paymentselector-separator mz-checkoutform">
-            {% include "modules/checkout/checkout-digital-credit" %}
+            <p>{{ labels.billingContact }}: <strong>{{ model.billingContact.email }}</strong></p>
         </div>
     </div>
 
