@@ -26,11 +26,6 @@
   <div class="col-md-6">
     <div class="row">
       <!-- Yotpo Rating -->
-      <script type="text/javascript">
-          (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
-      </script>
-      <div class="yotpo bottomLine" data-product-id="7364" data-url="https://primasupply.com/equipment/sharp/r-21lvf"></div>
-
       {% block star-rating %}
         <div class="yotpo bottomLine" data-product-id="{{model.productCode}}"></div>
         <div id="product-star-rating"></div>
