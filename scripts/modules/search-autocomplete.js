@@ -205,6 +205,16 @@
         $field.on('typeahead:selected', function (e, data, set) {
             if (data.suggestion.productCode) window.location = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/p/" + data.suggestion.productCode;
         });
+        $('#searchbox').on('submit', function(e) {
+            var searchVal = $('#globalSearch').val().trim();
+            if (searchVal === "") {
+                window.alert(Hypr.getLabel('blankSearchResult'));
+                e.preventDefault();
+            } else if (searchVal.length < 3) {
+                window.alert("Your keyword or item number must be at least 3 characters long");
+                e.preventDefault();
+            }
+        });
     });
 
     return AutocompleteManager;
