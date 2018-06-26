@@ -3,6 +3,7 @@
     <li class="active"><a href="#tab1" data-toggle="tab">{{ labels.reviews }}</a></li>  
     <li><a href="#tab2" data-toggle="tab">{{ labels.questions }}</a></li>
   </ul>
+ 
   <div class="tab-content">
     <div class="tab-pane active" id="tab1">
         <div class="yotpo yotpo-main-widget col-xs-12 col-md-6"
@@ -14,7 +15,7 @@
             data-image-url="{{ model.mainImage.imageUrl }}"
             data-description="{{ model.content.productFullDescription }}"
             data-yotpo-element-id="1">
-
+            {% include "modules/product/yotpo-review" with reviews=reviewData %}
             <div class="custom-yotpo-review"></div> 
 
         </div>
