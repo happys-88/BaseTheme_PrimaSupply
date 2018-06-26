@@ -13,14 +13,14 @@
 	{% block site-nav %} {% endblock %}
 	{% block mobile-nav %} {% endblock %}
 
-	<div class="mz-print-header">  
+	<div class="mz-logo-header">   
 		<div class="mz-storebranding pull-left">
 			<a class="mz-logo" href="{{siteContext.siteSubdirectory}}/" title="{{ siteContext.generalSettings.websiteName }}">
 				<img src="{% make_url "cdn" "/cms/files/prima-supply-logo.png" %}" alt="Prima Supply">   
 			</a>
 		</div>
 		<div class="phone-no pull-right"> 
-	        <a href="tel:+(888)810-5043">(888) 810-5043</a>   
+	        <a href="tel:+(888)810-5043">(888) 810-5043</a>      
 	    </div>	 		
 	</div>    
 

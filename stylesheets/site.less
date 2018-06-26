@@ -820,7 +820,7 @@ img[data-mztp]{
 }
 
 //search result
-.mz-searchresults {
+.mz-searchresults { 
 	.mz-l-pagecontent {
 		h1 {
 			&.mz-pagetitle {
@@ -833,7 +833,7 @@ img[data-mztp]{
 }
 
 /**** Print Order Page ****/ 
-.mz-printorder{
+.mz-printorder, .mz-checkout{    
 	.mz-sticky-header{
 		display: none;  
 	}
@@ -841,11 +841,12 @@ img[data-mztp]{
 		margin-top: 0; 
 	}
 }
-.mz-print-header{
+.mz-logo-header{ 
 	float: left;
 	width: 100%;
 	padding-bottom: 20px;
 	border-bottom: 1px solid @defaultBorderColor;
+	margin-bottom: 25px; 
 	.phone-no{
 		a{
 			color: @textColor;	
@@ -878,6 +879,10 @@ img[data-mztp]{
 			margin: 40px 0;
 			font-size: 16px;
             font-weight: 600;
+            .mz-title{
+            	text-transform: uppercase;
+            	text-align: left; 
+            }
 		}
 		.mz-wishlist-itemlisting{
 			.mz-itemlisting{

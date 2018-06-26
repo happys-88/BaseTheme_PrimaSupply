@@ -32,10 +32,10 @@
 		</div>
 		<div class="col-xs-12">
 			<div class="mz-print-list">
-				<div class="mz-carttable-header col-xs-12">
-					<div class="col-sm-8 text-left">{{ labels.printOrderItem }}</div> 
-					<div class="mz-title col-sm-2 text-left">{{ labels.qty }}</div>
-					<div class="mz-title col-sm-2 text-left">{{ labels.cartPrice }}</div>
+				<div class="mz-carttable-header col-xs-12"> 
+					<div class="mz-title col-sm-8">{{ labels.printOrderItem }}</div> 
+					<div class="mz-title col-sm-2">{{ labels.qty }}</div>
+					<div class="mz-title col-sm-2">{{ labels.cartPrice }}</div> 
 				</div>
 				
 				{% for item in model.items %}

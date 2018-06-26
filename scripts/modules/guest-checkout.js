@@ -20,10 +20,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
 
 	var GuestCheckoutView = Backbone.MozuView.extend({
 		templateName: 'modules/checkout/checkout-as-guest',
-		additionalEvents: {
-			"change [data-mz-value=usShipping]":"poupulateShipping"
-		},
-		initialize: function () {
+		initialize: function () { 
 			model = new SignUpModel();
 			 Backbone.Validation.bind(this);
 		},
@@ -52,4 +49,14 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
 		el: $('#guestForm')
 	});
 	view.render();
+
+	$(document).ready(function() {
+		$("#guestEmail").keypress(function(e) {
+			if(e.which == 13) {
+		        event.preventDefault();
+		        $("#checkoutAsGuestBtn").click();     
+		    }  
+		});
+	});
+
 });

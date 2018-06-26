@@ -495,6 +495,10 @@ define([
               
         // }
 
-    return CartView;
-    
+    $("#continueShoppingCartButton").on('click', function(event){   
+        window.history.back();  
+    });      
+        
+    return CartView; 
+
 });

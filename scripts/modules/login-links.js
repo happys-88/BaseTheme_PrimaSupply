@@ -154,6 +154,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         },
         handleEnterKey: function (e) {
             if (e.which === 13) {
+                alert("Enter Pressed");  
                 var $parentForm = $(e.currentTarget).parents('[data-mz-role]');
                 switch ($parentForm.data('mz-role')) {
                     case "login-form":
