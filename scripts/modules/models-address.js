@@ -47,6 +47,7 @@
                     msg: Hypr.getLabel("stateProvMissing")
                 },
                 postalOrZipCode: {
+                    minLength: 5,
                     fn: "requiresStateAndZip",
                     msg: Hypr.getLabel("postalCodeMissing")
                 }
