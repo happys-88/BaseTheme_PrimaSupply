@@ -17,7 +17,7 @@
                     minLength: 10,
                     maxLength: 10,
                     required: true,
-                    msg: Hypr.getLabel("phoneMissing")
+                    msg: Hypr.getLabel("phoneIncorrect")
                 }
             }
         }),
@@ -51,7 +51,7 @@
                 postalOrZipCode: {
                     minLength: 5,
                     fn: "requiresStateAndZip",
-                    msg: Hypr.getLabel("postalCodeMissing")
+                    msg: Hypr.getLabel("postalCodeIncorrect")
                 }
             },
             requiresStateAndZip: function(value, attr) {
