@@ -135,7 +135,7 @@
     <div class="mz-productdetail-conversion-buttons">
       {% with model|get_product_attribute("tenant~login-for-price") as loginForPrice %}
        {% if loginForPrice.values|first|prop("value") === true %}
-         {% if user.isAuthenticated and not user.isAnonymous %}
+         {% if not user.isAnonymous %}
             
             {# start code modification #}
             {% comment %} when track stock level is disable {% endcomment %}

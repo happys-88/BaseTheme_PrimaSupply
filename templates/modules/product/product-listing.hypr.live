@@ -64,7 +64,7 @@
        
         {% with model|get_product_attribute("tenant~login-for-price") as loginForPrice %}
          {% if loginForPrice.values|first|prop("value") === true %}
-           {% if user.isAuthenticated and not user.isAnonymous %}
+           {% if not user.isAnonymous %}
              {% include "modules/product/product-add-to-cart" %}
              <button class="mz-quick-view" data-mz-productcode-quickview="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button>
            {% else %}
