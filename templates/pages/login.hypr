@@ -7,7 +7,6 @@
 <div class="mz-l-container">
     <h1 class="mz-pagetitle">{{ labels.logIn2 }}</h1>
     {% include "modules/common/message-bar" with model=model.messages %}
-    {% dump model %}
     <form method="post" class="mz-login-page" name="mz-loginform">
        <input type="hidden" name="returnUrl" value="{{ model.returnUrl }}" />
         <h3 class="mz-pagetitle">{{ labels.logIn2 }}</h3>
