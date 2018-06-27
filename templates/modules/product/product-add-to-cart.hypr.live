@@ -7,8 +7,9 @@
         {% set_var options=true %}
     {% endif %}
 {% endfor %}
+-- {{ hasStock }} --
 {% if options === true %}
-    <button class="mz-button mz-option-add-to-cart" {% if hasStock == false %} disabled="disabled" {% endif %} data-mz-productcode="{{model.productCode}}"  data-toggle="modal" data-target="#optionModal"> {{ labels.addToCart }} </button>
+    <button class="mz-button mz-option-add-to-cart" {% if hasStock == 0 %} disabled="disabled" {% endif %} data-mz-productcode="{{model.productCode}}"  data-toggle="modal" data-target="#optionModal"> {{ labels.addToCart }} </button>
 {% else %}
-    <button class="mz-button mz-addon-add-to-cart" {% if hasStock == false %} disabled="disabled" {% endif %}  data-mz-productcode="{{model.productCode}}"  data-toggle="modal" data-target="#addonModal"> {{ labels.addToCart }} </button>
+    <button class="mz-button mz-addon-add-to-cart" {% if hasStock == 0 %} disabled="disabled" {% endif %}  data-mz-productcode="{{model.productCode}}"  data-toggle="modal" data-target="#addonModal"> {{ labels.addToCart }} </button>
 {% endif %}

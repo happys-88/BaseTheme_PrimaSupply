@@ -17,9 +17,7 @@
   <div class="col-md-6">
     <div class="row">
       <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section">
-        {% include "modules/product/price-show-stack" with priceForProductDetail=model.productCode 
-        viewOnCart=model.viewOnCart 
-        hasStock=model.totalCount %} 
+        {% include "modules/product/price-show-stack" with hasStock=model.totalCount %} 
       </div>
     </div>
   </div>
@@ -137,7 +135,7 @@
     <div class="mz-productdetail-conversion-buttons">
       {% with model|get_product_attribute("tenant~login-for-price") as loginForPrice %}
        {% if loginForPrice.values|first|prop("value") === true %}
-         {% if user.isAuthenticated %}
+         {% if user.isAuthenticated and not user.isAnonymous %}
             
             {# start code modification #}
             {% comment %} when track stock level is disable {% endcomment %}

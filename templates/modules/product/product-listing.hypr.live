@@ -1,14 +1,14 @@
 ﻿{% require_script "pages/stock-message" %}
-{% set_var hasStock=false %}
+{% set_var hasStock=0 %}
 {% if model.variations %}
     {% for variation in model.variations %}
         {% if variation.inventoryInfo.onlineStockAvailable > 0 %}
-            {% set_var hasStock=true %}
+            {% set_var hasStock=variation.inventoryInfo.onlineStockAvailable %}
         {% endif %}
     {% endfor %}
 {% else %}
     {% if model.inventoryInfo.onlineStockAvailable > 0 %}
-        {% set_var hasStock=true %}
+        {% set_var hasStock=model.inventoryInfo.onlineStockAvailable %}
     {% endif %}
 {% endif %}
 <div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
@@ -44,7 +44,7 @@
         {% endblock product-code %}
 
         <div class="mz-price-in-cart">
-            {% include "modules/product/price-show-stack" with hide=model.productCode %}
+            {% include "modules/product/price-show-stack" %}
         </div>
 
         {% block product-extrainfo %}
@@ -64,17 +64,17 @@
        
         {% with model|get_product_attribute("tenant~login-for-price") as loginForPrice %}
          {% if loginForPrice.values|first|prop("value") === true %}
-           {% if user.isAuthenticated %}
+           {% if user.isAuthenticated and not user.isAnonymous %}
              {% include "modules/product/product-add-to-cart" %}
+             <button class="mz-quick-view" data-mz-productcode-quickview="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button>
            {% else %}
              <a class="mz-button login-for-lowprice" href="javascript:void(0);" data-toggle="modal" data-target="#loginPopup" data-productcode="{{model.productCode}}">{{ labels.viewOnLogin }}</a>
            {% endif %} 
            {% else %}
              {% include "modules/product/product-add-to-cart" %}
+             <button class="mz-quick-view" data-mz-productcode-quickview="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button>
          {% endif %} 
        {% endwith %}
-
-        <button class="mz-quick-view" data-mz-productcode-quickview="{{ model.productCode }}" data-toggle="modal" data-target="#quickViewModal">{{ labels.quickShop }}</button>
         
         <div class="mz-product-msg">
             <div class="stock-messages" id="stock-messages-{{ model.productCode }}">
@@ -92,7 +92,7 @@
             {% if not model.inventoryInfo.onlineStockAvailable and not model.variations %}
                 <div class="mz-product-notpurchasable">{{ labels.outOfStock }}</div>
             {% endif %}
-            {% if hasStock == true %}
+            {% if hasStock > 0 %}
                 <div class="shipping-messages">
                     {% for propShipping in model.properties %}
                         {% if propShipping.attributeFQN == "tenant~availability" %}

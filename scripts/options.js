@@ -15,7 +15,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             });
             optionView.render();
             $('#optionModal').on('hidden.bs.modal', function (e) {
-                $(".modal-dialog").remove();
+                $(".modal-dialog-options").remove();
                 product.clear();    
             });
         }); 
@@ -38,7 +38,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             addonView.addToCart();
             //addonView.render();
             $('#addonModal').on('hidden.bs.modal', function (e) {
-                $(".modal-dialog").remove();
+                $(".modal-dialog-addons").remove();
                 product.clear();    
             });
         }); 
@@ -80,6 +80,29 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
         render: function () {
             Backbone.MozuView.prototype.render.call(this);
         },
+        refreshOptions: function() {
+            var options = JSON.parse(JSON.stringify(this.model.get('options')));
+
+            for (var i = 0; i < options.length; i++) {
+                var count = 0;
+                count = parseInt(count, 10);
+                var option = options[i];
+                if(option.attributeDetail.dataType == 'ProductCode') {
+                    var optionValues = option.values;
+                    for (var j = 0; j < optionValues.length; j++) {
+                        var optionValue = optionValues[j];
+                        if (optionValue.bundledProduct.inventoryInfo.onlineStockAvailable > 0) {
+                            count++;
+                            break;
+                        }
+                    }
+                }
+                console.log('count : '+count);
+                option.stockCount = count;
+                options[i] = option;
+            }
+            this.model.set('optionArr',options);
+        },
         onQuantityChange: _.debounce(function (e) {
             var $qField = $(e.currentTarget),
               newQuantity = parseInt($qField.val(), 10);
@@ -88,6 +111,8 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             }
         },500),
         onOptionChange: function (e) {
+            
+            console.log(JSON.stringify(this.model));
             this.model.set('addToCartErr', '');
             var $optionEl = $(e.currentTarget);
             var productCode = $optionEl.val();
@@ -135,6 +160,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             } else {
                 this.model.set('addToCartButton','');
             }
+            this.refreshOptions();
         },
         quantityMinus: function() {
             var _qtyObj = $('[data-mz-validationmessage-for="quantity"]'),
@@ -233,7 +259,8 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             }
         },
         addToCart: function (event) {
-
+            var count = 0;
+            count = parseInt(count, 10);
             this.model.addToCart();
             var optionModel = this.model;
             var me = this;
@@ -247,13 +274,30 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                 optionModel.set('oldPrice', price.price);
                 optionModel.set('oldSalePrice', price.salePrice);
                 var options = JSON.parse(JSON.stringify(optionModel.get('options')));
+
                 for (var i = 0; i < options.length; i++) {
+                    var count = 0;
+                    count = parseInt(count, 10);
                     var option = options[i];
                     if(option.attributeDetail.dataType == 'ProductCode') {
-                        optionModel.set('hasAddon', true);
-                        break;
+                        if (optionModel.get('hasAddon') === false) {
+                            optionModel.set('hasAddon', true);
+                        }
+                        var optionValues = option.values;
+                        for (var j = 0; j < optionValues.length; j++) {
+                            var optionValue = optionValues[j];
+                            if (optionValue.bundledProduct.inventoryInfo.onlineStockAvailable > 0) {
+                                count++;
+                                break;
+                            }
+                        }
                     }
+                    console.log('count : '+count);
+                    option.stockCount = count;
+                    options[i] = option;
                 }
+                optionModel.set('options',options);
+
                 optionModel.set('addToCartButton','disabled');
                 me.render();
                 if (cartitem && cartitem.prop('id')) {
@@ -307,6 +351,29 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
         render: function () {
             Backbone.MozuView.prototype.render.call(this);
         },
+        refreshOptions: function() {
+            var options = JSON.parse(JSON.stringify(this.model.get('options')));
+
+            for (var i = 0; i < options.length; i++) {
+                var count = 0;
+                count = parseInt(count, 10);
+                var option = options[i];
+                if(option.attributeDetail.dataType == 'ProductCode') {
+                    var optionValues = option.values;
+                    for (var j = 0; j < optionValues.length; j++) {
+                        var optionValue = optionValues[j];
+                        if (optionValue.bundledProduct.inventoryInfo.onlineStockAvailable > 0) {
+                            count++;
+                            break;
+                        }
+                    }
+                }
+                console.log('count : '+count);
+                option.stockCount = count;
+                options[i] = option;
+            }
+            this.model.set('optionArr',options);
+        },
         onQuantityChange: _.debounce(function (e) {
             var $qField = $(e.currentTarget),
               newQuantity = parseInt($qField.val(), 10);
@@ -357,6 +424,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             } else {
                 this.model.set('addToCartButton','');
             }
+            this.refreshOptions();
         },
         quantityMinus: function() {
             var _qtyObj = $('[data-mz-validationmessage-for="quantity"]'),
@@ -455,6 +523,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             }
         },
         addToCart: function (event) {
+            
             this.model.addToCart();
             this.model.set('addonsPopup', true);
             var optionModel = this.model;
@@ -475,13 +544,29 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                     optionModel.set('oldSalePrice', price.salePrice);
                 }
                 var options = JSON.parse(JSON.stringify(optionModel.get('options')));
+
                 for (var i = 0; i < options.length; i++) {
+                    var count = 0;
+                    count = parseInt(count, 10);
                     var option = options[i];
                     if(option.attributeDetail.dataType == 'ProductCode') {
-                        optionModel.set('hasAddon', true);
-                        break;
+                        if (optionModel.get('hasAddon') === false) {
+                            optionModel.set('hasAddon', true);
+                        }
+                        var optionValues = option.values;
+                        for (var j = 0; j < optionValues.length; j++) {
+                            var optionValue = optionValues[j];
+                            if (optionValue.bundledProduct.inventoryInfo.onlineStockAvailable > 0) {
+                                count++;
+                                break;
+                            }
+                        }
                     }
+                    console.log('count : '+count);
+                    option.stockCount = count;
+                    options[i] = option;
                 }
+                optionModel.set('options',options);
                 optionModel.set('addToCartButton','disabled');
                 me.render();
                 if (cartitem && cartitem.prop('id')) {
