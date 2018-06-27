@@ -14,6 +14,8 @@
         var PhoneNumbers = Backbone.MozuModel.extend({
             validation: {
                 home: {
+                    minLength: 10,
+                    maxLength: 10,
                     required: true,
                     msg: Hypr.getLabel("phoneMissing")
                 }

@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "d1b63cfa9a9998b9ecf1cc792bcf21902178c2d9"
+      "commit": "4e046f500b1ed181a96174d7380839cf83180189"
     },
     "baseThemeChannel": "stable"
   },
@@ -495,6 +495,26 @@
     "bannerImageEnabled": false,
     "bannerImageRepeat": "repeat-x",
     "bodyBackgroundColor": "#FFFFFF",
+    "gcLength": 50,
+    "fullNameLength": 80,
+    "firstNameLength": 40,
+    "lastNameLength": 40,
+    "emailLength": 80,
+    "passwordMinLength": 8,
+    "passwordMaxLength": 80,
+    "phoneNumberLength": 10,
+    "addressLength": 80,
+    "cityNameLength": 40,
+    "stateNameLength": 40,
+    "zipcodeLength": 9,
+    "creditCardNumberLength": 16,
+    "paymentSecurityCodeLength": 4,
+    "giftCardLength": 20,
+    "couponCodeLength": 20,
+    "checkoutCommentsLength": 200,
+    "orderNumberLength": 80,
+    "orderVerificationCodeLength": 80,
+    "productQuantityLength": 5,
     "cmsTextStyles": [
       {
         "className": "mz-style-1",
@@ -569,7 +589,7 @@
     "showProductDetailShortDesc": true,
     "showProductDetailUPC": true,
     "textColor": "#444444",
-    "categoryEntityName": "categoryAttributes@ng", 
+    "categoryEntityName": "categoryAttributes@ng",
     "columnBreaker": "~",
     "liftGatePrice": 59,
     "snapengaeWidgetId": "d93fa82a-6087-44f8-bd79-3df50a1c3130",
@@ -828,15 +848,15 @@
     "rviNumberCookie": 10,
     "rviExpirationDuration": 21,
     "yotpoApiKey": "4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD",
-    "yotpoBaseUrl": "https://api.yotpo.com/v1/widget", 
+    "yotpoBaseUrl": "https://api.yotpo.com/v1/widget",
     "yotpoBottomlineBaseUrl": "https://api.yotpo.com/products",
     "yotpoQuestionBaseUrl": "https://api.yotpo.com/products",
     "products": "products",
     "reviews": "reviews",
     "bottomline": "bottomline",
-    "questions": "questions",  
+    "questions": "questions",
     "showYotpoGallery": true,
-    "instagramFollowUsLink": "https://www.instagram.com/prima.supply/?hl=en"      
+    "instagramFollowUsLink": "https://www.instagram.com/prima.supply/?hl=en"
   },
   "layoutWidgets": [
     {
