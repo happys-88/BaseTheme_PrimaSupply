@@ -35,7 +35,6 @@
 
                 if($('.learningCenterInput').is(':focus') && name==='Pages') { 
                     var valArray = filterCatsArray();
-                     console.log("valArray : "+valArray);
                     var result = _.filter(thisGroup.suggestions, function(someThing) {
                         var boolVal = false;
                         return someThing.suggestion.productType === 'content';
@@ -57,7 +56,6 @@
                     return result;
                 } else if($('#globalSearch').is(':focus') && name==='Pages') {
                     var valArrayGlobal = filterCatsArray();
-                    console.log("valArrayGlobal : "+valArrayGlobal);
                     var resultGlobal = _.filter(thisGroup.suggestions, function(someThing) {
                     var boolVal = false;
                     return someThing.suggestion.productType !== 'content';
@@ -81,7 +79,7 @@
                             return true;
                         }*/
                     });
-                    console.log("resultGlobal : "+JSON.stringify(resultGlobal));
+                    
                     return resultGlobal;
                 }            
                 return thisGroup.suggestions;
@@ -89,8 +87,8 @@
         },
         filterCatsArray= function(){
             var categories = HyprLiveContext.locals.themeSettings.searchSuggestionFilter;
-            console.log("Hyper Vals : "+categories);
-             var arrayCats = categories.split(',');          
+            
+            var arrayCats = categories.split(',');          
             var categoryArray = [];
             for(var i = 0; i < arrayCats.length; i++) {
                 if(arrayCats[i] !== '') {

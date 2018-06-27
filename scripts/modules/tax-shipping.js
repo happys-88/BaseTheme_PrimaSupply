@@ -8,10 +8,8 @@ define(['modules/jquery-mozu', 'underscore', 'modules/backbone-mozu', 'hyprlive'
 		var cartModel = require.mozuData("cart");
 		var total;	
 		api.get("cart").then(function(body){
-			console.log(JSON.stringify(body.data));
-         	total = body.data.total;
-         	alert("INNER TOTAL : "+total);
-		});
+			total = body.data.total;
+        }); 
 
 		var stateData = new CartModels.Cart(states); 
 		var TaxView = Backbone.MozuView.extend({

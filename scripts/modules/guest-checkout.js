@@ -12,7 +12,6 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
 	    },
 		validate: function(attrs) {
 	        var invalid=[];
-	        console.log("Email : "+attrs.email);
 	        if (attrs.email!=="abcd@gmail.com") invalid.push("Invalid Email");
 	        if (invalid.length>0) return invalid;
 	    }

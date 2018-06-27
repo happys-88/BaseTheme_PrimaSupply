@@ -2,7 +2,7 @@
 <div class="global-cart-dropdown {% if model.isEmpty==true %} cart-empty {% endif %}">
     {% if model.isEmpty==true %}
         <p class="no-cart-item">{{ labels.cartEmpty }}</p> 
-        <a class="mz-button mz-button-large continue-btn" href="/" role="button">{{ labels.continueShopping }}</a>
+        <a class="mz-button mz-button-large continue-btn" href="javascript:void(0);" role="button" id="continueShoppingGlobalCart">{{ labels.continueShopping }}</a>    
     {% else %}
         <div class="mz-l-container">
             <form method="post" action="{{ siteContext.secureHost }}{{siteContext.siteSubdirectory}}/cart/checkout" id="cartform">

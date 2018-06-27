@@ -46,7 +46,6 @@ define([
 		$("#accordion div").removeClass("in").removeClass("active");
 		$("a").attr( "href" );
 		var href="a[href="+"'"+ hash +"'"+"]";
-		console.log(href);
 		$(href).parent(".mz-scrollnav-item").addClass("active");
 		$(hash).addClass("in").addClass("active");
 	}
@@ -246,6 +245,12 @@ define([
 				$(this).toggleClass("active");       
 			}); 
 		}
+
+		// Global Cart Continue btn
+		$("#continueShoppingGlobalCart").on('click', function(){    
+	        alert("hello");  
+	        window.history.back();  
+	    });   
 
 	});
 }); 
