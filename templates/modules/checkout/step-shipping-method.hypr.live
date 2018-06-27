@@ -1,4 +1,4 @@
-<h3 class="mz-formstep-header mz-checkoutform-header">{{ labels.shippingMethod }}<a href="javascript:;" class="mz-formstep-edit" data-mz-action="edit">{{ labels.change }}</a></h3>
+<h3 class="mz-formstep-header mz-checkoutform-header">{{ labels.shippingMethod }}<a href="javascript:;" class="mz-formstep-edit" data-mz-action="edit">{{ labels.edit }}</a></h3>
 <div class="mz-formstep-body mz-checkoutform">
     {% if model.requiresFulfillmentInfo %}
         {% if model.availableShippingMethods.length %}
