@@ -6,7 +6,7 @@
   </div>
 {% endif %}
 {% endcomment %}
-{% dump model.productCode %}
+
 <div class="mz-productdetail-fulldesc mz-l-stack-section">
   {{ model.content.productFullDescription|safe }} 
 </div>
