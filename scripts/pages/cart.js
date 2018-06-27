@@ -114,7 +114,7 @@ define([
                     }
                     
                 }).then(function (response){
-                   console.log("RESPONSE : "+JSON.stringify(response.rates[0]));
+                   
                    _.defer(function() {
                         var shippingRates = response.rates[0].shippingRates;
                     localStorage.setItem("shippingData", JSON.stringify(shippingRates));
@@ -183,7 +183,6 @@ define([
             });
             //recently added
             var productcod=localStorage.getItem("lastAddedItemToCart");
-            console.log(productcod);
             var id="#"+productcod;
             $(id).prependTo(".mz-carttable-items-global"); 
             $(id).addClass("recently-added");

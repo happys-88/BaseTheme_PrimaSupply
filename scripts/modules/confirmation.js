@@ -44,8 +44,7 @@ require(["modules/jquery-mozu", "underscore", 'modules/api', "hyprlive", "module
                     password: $('#passwordSignup').val()
                 };
             if (this.validate(payload)) {   
-            	console.log("Inside validate");
-                //var user = api.createSync('user', payload);
+            	//var user = api.createSync('user', payload);
                 // this.setLoading(true);
                 return api.action('customer', 'createStorefront', payload).then(function () {
                     $('#createAccountSignUp').hide();

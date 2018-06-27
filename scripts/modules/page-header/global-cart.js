@@ -20,10 +20,8 @@ function ($, Hypr, Backbone, CartMonitor, api, cartModel, cart, sessionManagemen
         update: function(redirect_to_cart) {
             api.get("cart").then(function(body){
                 body.data.cartItems = body.data.items;
-                console.log(body.data.cartItems);   
                 if (globalCartHidePopover === true && body.data.cartItems.length === 0) { 
-                    console.log("hide");   
-                    $("#global-cart").hide();    
+                    $("#global-cart").hide();     
                 }
 
                 var globalCartView = cart.extend({
@@ -49,5 +47,6 @@ function ($, Hypr, Backbone, CartMonitor, api, cartModel, cart, sessionManagemen
         }
     };
     GlobalCart.update();
+
     return GlobalCart;
 }); 

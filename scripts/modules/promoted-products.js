@@ -3,8 +3,8 @@
 	alert("Hello");
 	// var prdCode=$thisElem.attr("data-mz-productcode");
 	var url = "https://api.yotpo.com/v1/widget/4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD/products/promoted_products";
-		$.get(url, function(data, status){
-			         console.log("Data Promoted Product: " + JSON.stringify(data) + "\nStatus: " + status);
+		$.get(url, function(data, status){ 
+			         //console.log("Data Promoted Product: " + JSON.stringify(data) + "\nStatus: " + status);
 			
 		_.defer( function() {
 			// var data = response;
@@ -21,7 +21,7 @@
 
 			var view = new ReviewsView({
 				model: product,
-				el: $('#promotedProds')
+				el: $('#promotedProds') 
 			});
 			view.render();
 		});
