@@ -31,7 +31,9 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
 			var pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
    			if(pattern.test(email)) {
    				// console.log("Session Storage : "+email);
-   				var url = HyprLiveContext.locals.pageContext.url + '/checkout';
+   				var url = HyprLiveContext.locals.pageContext.url;
+   				var domain = url.split('?')[0];
+   				url = domain + '/checkout';
    				sessionStorage.setItem("guestEmail", email);
    	   			window.location = url;
    			} else {
