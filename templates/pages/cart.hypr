@@ -41,8 +41,6 @@
 
 	<!-- Cart Dropzone -->
 	{% dropzone "cart-advertising" scope="template" %}  
-
-	<div id="upsell"></div> 
 </div>
 
 {% endblock body-content %} 

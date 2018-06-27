@@ -1,5 +1,5 @@
 {% if model.checktbybProductExist=="true" %}
-	<h3 class="mz-formstep-header mz-checkoutform-header">{{ labels.tbybHeader }}<a href="javascript:;" class="mz-formstep-edit" data-mz-action="edit">{{ labels.change }}</a></h3>
+	<h3 class="mz-formstep-header mz-checkoutform-header">{{ labels.tbybHeader }}<a href="javascript:;" class="mz-formstep-edit" data-mz-action="edit">{{ labels.edit }}</a></h3>
     <div class="mz-formstep-body mz-checkoutform mz-formstep-next" id="tybyRadio">
     	<div class="row">
 	       	<div class="col-sm-2 mz-msg-img">
