@@ -20,6 +20,8 @@ function ($, _, Hypr, Backbone, HyprLiveContext, api) {
          	window.print();   
         });
 
+        $(".mz-printorder .mz-checkout-footer").show();  
+
 	}); 
 });  
  

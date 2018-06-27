@@ -834,11 +834,13 @@ img[data-mztp]{
 
 /**** Print Order Page ****/ 
 .mz-printorder, .mz-checkout{    
-	.mz-sticky-header{
-		display: none;  
+	.mz-sticky-header, .mz-back-to-top-btn, #designstudio-button{ 
+		display: none !important;   
 	}
 	.fixed-header{
-		margin-top: 0; 
+		margin-top: 0;
+		margin-bottom: 0;
+		padding-bottom: 0;  
 	}
 }
 .mz-logo-header{ 
@@ -852,6 +854,13 @@ img[data-mztp]{
 			color: @textColor;	
 		}
 	}     
+}
+.mz-checkout-footer{
+	float: left;
+	width: 100%;
+	padding: 25px 15px;
+	background: @siteBaseColor;
+	color: #fff;    
 }
 #print-order{
 	.container{
@@ -867,7 +876,7 @@ img[data-mztp]{
 		}
 	}
 	#bill-address{
-		padding-left: 150px;
+		padding-left: 100px; 
 		.bill-address{
 			p {
 				margin: 5px 0;

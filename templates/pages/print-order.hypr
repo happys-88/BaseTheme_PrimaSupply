@@ -24,6 +24,17 @@
 	    </div>	 		
 	</div>    
 
-	<div id="print-order"></div>  
+	<div id="print-order"></div>
+
+	{% block page-footer %} {% endblock %}  
+
+	<div class="mz-checkout-footer" style="display: none;">    
+        <div class="mz-pagefooter-copyright" id="copyright">
+            <span class="mz-pagefooter-copyrighttext">
+                {{ labels.copyRight }} {% now Y %} {{ siteContext.generalSettings.websiteName }}.
+            </span>
+        </div>      
+    </div>  
+
 {% endblock body-content %}    
 
