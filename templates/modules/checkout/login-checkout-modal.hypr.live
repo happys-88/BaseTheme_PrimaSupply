@@ -4,7 +4,6 @@
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
             <div class="modal-body clearfix">
                 <div class="col-xs-12">
-                    {% include "modules/common/message-bar" with model=model.messages %}
                     <h3 class="mz-pagetitle">{{ labels.signInCheckout }}</h3>
                     <p>{{ labels.signInCheckoutMsg }}</p>
                     <form method="post" class="mz-loginform mz-loginform-page" name="mz-loginform" action="">

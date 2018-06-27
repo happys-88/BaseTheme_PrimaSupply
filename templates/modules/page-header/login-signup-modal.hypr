@@ -5,7 +5,6 @@
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
             <div class="modal-body clearfix">
                 <div class="pull-left">
-                    {% include "modules/common/message-bar" with model=model.messages %}
                     <h3 class="mz-pagetitle">{{ labels.logIn }}</h3>
                     <p>{{ labels.logInMsg }}.</p>
                     <form method="post" class="mz-loginform mz-loginform-page" name="mz-loginform">
@@ -34,7 +33,6 @@
                     <h3 class="mz-pagetitle">{{ labels.signUp }}</h3>
                     <p>{{ labels.signUpMsg }}.</p>
                     <form method="post" class="mz-signupform mz-signup-page" name="mz-signupform">
-                       {% include "modules/common/message-bar" with model=model.messages %}
                        <input type="hidden" name="returnUrl" value="{{ model.returnUrl }}" />
                        <div class="mz-l-formfieldgroup">
                             <div class="input-group">
