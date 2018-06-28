@@ -1520,9 +1520,9 @@
                 this.dropdown.open();
             },
             _onBlurred: function onBlurred() {
-                // this.isActivated = false;
-                // this.dropdown.empty();
-                // this.dropdown.close();
+                this.isActivated = false;
+                this.dropdown.empty();
+                this.dropdown.close(); 
             },
             _onEnterKeyed: function onEnterKeyed(type, $e) {
                 var cursorDatum, topSuggestionDatum;
