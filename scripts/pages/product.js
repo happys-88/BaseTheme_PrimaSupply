@@ -80,6 +80,8 @@
             this.model.on('addedtocarterror', function (error) {
                 if (error.message.indexOf('Validation Error: The following items have limited quantity or are out of stock') > -1) {
                     $('.mz-errors').find('.mz-message-item').html(Hypr.getLabel('outOfStockError'));
+                } else if(error.message.indexOf('Missing or invalid parameter: variationProductCode Product is configurable. Variation code must be specified') > -1) {
+                    $('.mz-errors').find('.mz-message-item').html(Hypr.getLabel('variationError'));
                 }
             });
         },
