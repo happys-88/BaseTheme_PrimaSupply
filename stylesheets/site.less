@@ -851,9 +851,12 @@ img[data-mztp]{
 	float: left;
 	width: 100%;
 	padding-bottom: 20px;
-	border-bottom: 1px solid @defaultBorderColor;
+	border-bottom: 1px solid @defaultBorderColor; 
 	margin-bottom: 25px; 
 	.phone-no{
+		font-size: 16px;
+		font-weight: bold;
+		margin-top: 20px;    
 		a{
 			color: @textColor;	
 		}
@@ -867,66 +870,82 @@ img[data-mztp]{
 	color: #fff;
 	margin-top: 20px;      
 }
-#print-order{
-	.container{
-		max-width:1048px;
-		font-size: 16px;
-	#shipping-address{
-		border-right: 1px solid;
-		padding-left: 180px;
-		.shipping-address{
-			p {
-				margin: 5px 0;
-			}
-		}
+#print-order{ 
+	font-size: 16px; 
+	h2{
+		margin: 0 0 @gutter;   
 	}
-	#bill-address{
+	.container{
+		max-width: 1048px;
+	} 
+	#shipping-address{
+		border-right: 1px solid @defaultBorderColor; 
+		padding-left: 180px;
+	} 
+	#billing-address{ 
 		padding-left: 100px; 
-		.bill-address{
-			p {
-				margin: 5px 0;
-			}
-		}
+	}
+	.address-col{
+		p {
+			margin: 5px 0; 
+		}	
 	}
 	.mz-print-list{
+		float: left;
+		width: 100%;  
 		.mz-carttable-header{
-			margin: 40px 0;
+			margin: 40px 0 10px;
 			font-size: 16px;
             font-weight: 600;
+            border-bottom: 1px solid @defaultBorderColor;
+            padding: 10px 0;  
             .mz-title{
             	text-transform: uppercase;
             	text-align: left; 
             }
 		}
-		.mz-wishlist-itemlisting{
-			.mz-itemlisting{
-				.mz-itemlisting-details{
-					width: 100%;
-					border-bottom: 1px solid #ccc;
-					.mz-itemlisting-thumb{
+		
+		.mz-itemlisting{ 
+			float: left;
+			width: 100%;
+			padding: 15px 0;
+			border-bottom: 1px solid @defaultBorderColor;  
+			.mz-itemlisting-details{
+				width: 100%;
+				margin: 0; 
+				.mz-itemlisting-thumb{
+					width: auto;
+					margin-right: 15px;  
+					.mz-itemlisting-thumb-img{ 
 						border: 1px solid #e0e0e0;
 						width: 120px;
 						height: 120px;
 						padding: 15px;
-						.mz-itemlisting-thumb-img{
+						img{
 							width: auto;
 							max-width: 100%;
 						}
 					}
-					.mz-product-code {
-						float: left;
-						width: 100%;
-					}
+				}
+				.mz-product-info{
+					float: left;
+					width: auto; 
+				}
+				.mz-product-code {
+					float: left;
+					width: 100%;
 				}
 			}
 		}
+		
 	 }
-	 .merchandise-subtotal {
-		 font-weight: 700;
-		 span {
+	.merchandise-subtotal {
+		font-weight: bold;
+		margin-top: 15px; 
+		span {
 			width: 90px;
 			display: inline-block;
-		 }
+		}
 	 }
 	 .print-in-voice {
 		float: right;
@@ -939,5 +958,4 @@ img[data-mztp]{
 			}    
 		}
 	 }
-   }
-}
+} 

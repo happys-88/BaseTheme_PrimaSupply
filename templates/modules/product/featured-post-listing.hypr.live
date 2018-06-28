@@ -28,12 +28,11 @@
    
     <!-- AddThis Button BEGIN -->
     <div class="mz-product-social-sharing"> 
-        <a class="addthis_button_youtube"><i class="fa fa-youtube"></i></a>
-        <a class="addthis_button_twitter"><i class="fa fa-twitter"></i></a>
-        <a class="addthis_button_facebook"><i class="fa fa-facebook"></i></a>
-        <a class="addthis_button_linkedin"><i class="fa fa-linkedin-square"></i></a>
+        <a class="addthis_button_youtube" addthis:url='{{ siteContext.siteSubdirectory }}{{ model.url }}'><i class="fa fa-youtube"></i></a>
+        <a class="addthis_button_twitter" addthis:url='{{ siteContext.siteSubdirectory }}{{ model.url }}'><i class="fa fa-twitter"></i></a>
+        <a class="addthis_button_facebook" addthis:url='{{ siteContext.siteSubdirectory }}{{ model.url }}'><i class="fa fa-facebook"></i></a>
+        <a class="addthis_button_linkedin" addthis:url='{{ siteContext.siteSubdirectory }}{{ model.url }}'><i class="fa fa-linkedin-square"></i></a> 
     </div>
-    <script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-5b0d3a4f80720906"></script>  
     <!-- AddThis Button END -->
 
 </div>  
