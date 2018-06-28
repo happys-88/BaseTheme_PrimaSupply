@@ -54,6 +54,24 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         finishEdit: function() {
             var self = this;
 
+            $('.mz-validationmessage').text('');
+            if (!self.model.apiModel.data.firstName) {
+                $('[data-mz-validationmessage-for="firstName"]').text(Hypr.getLabel("firstNameMissing"));
+                return false;
+            }
+            if (!self.model.apiModel.data.lastName) {
+                $('[data-mz-validationmessage-for="lastName"]').text(Hypr.getLabel("lastNameMissing"));
+                return false;
+            }
+            if (!self.model.apiModel.data.emailAddress) {
+                $('[data-mz-validationmessage-for="emailAddress"]').text(Hypr.getLabel("emailMissing"));
+                return false;
+            }
+            if (!(self.model.apiModel.data.emailAddress).match(Backbone.Validation.patterns.email)) {
+                $('[data-mz-validationmessage-for="emailAddress"]').text(Hypr.getLabel("emailwrongpattern"));
+                return false;
+            }
+
             this.doModelAction('apiUpdate').then(function() {
                 self.editing = false;
             }).otherwise(function() {
@@ -135,6 +153,24 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         },
         finishEdit: function() {
             var self = this;
+
+            $('.mz-validationmessage').text('');
+            if (!self.model.apiModel.data.firstName) {
+                $('[data-mz-validationmessage-for="firstName"]').text(Hypr.getLabel("firstNameMissing"));
+                return false;
+            }
+            if (!self.model.apiModel.data.lastName) {
+                $('[data-mz-validationmessage-for="lastName"]').text(Hypr.getLabel("lastNameMissing"));
+                return false;
+            }
+            if (!self.model.apiModel.data.emailAddress) {
+                $('[data-mz-validationmessage-for="emailAddress"]').text(Hypr.getLabel("emailMissing"));
+                return false;
+            }
+            if (!(self.model.apiModel.data.emailAddress).match(Backbone.Validation.patterns.email)) {
+                $('[data-mz-validationmessage-for="emailAddress"]').text(Hypr.getLabel("emailwrongpattern"));
+                return false;
+            }
 
             this.doModelAction('apiUpdate').then(function() {
                 self.editing = false;

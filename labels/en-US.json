@@ -633,6 +633,8 @@
   "select"                                : "Select" ,
   "outOfStockError"                       : "The following items have limited quantity or are out of stock.",
   "printOrderItem": "Item" ,
-  "printInvoice" : "Print Invoice"  
+  "printInvoice" : "Print Invoice"  ,
+  "variationError" : "Product is configurable. Variations must be specified.",
+  "emailwrongpattern": "Email does not appear to be a valid e-mail address. Please use the format name@domain.xxx."
  
 }

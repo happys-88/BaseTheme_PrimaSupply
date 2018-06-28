@@ -9,11 +9,9 @@
             {% include "modules/my-account/order-history-list" %}
         </div>
         {% if showPaging %}            
-            {% if model.items.length > 5 %}
-               <div data-mz-pagenumbers class="mz-pagenumbers">
-                    {% include "modules/common/page-numbers" %}
-                </div>
-            {% endif %}
+            <div data-mz-pagenumbers class="mz-pagenumbers">
+                {% include "modules/common/page-numbers" %}
+            </div>
             {% comment %}
             <div data-mz-pagingcontrols class="mz-pagingcontrols">
                 {% include "modules/common/order-history-paging-controls" %}         
@@ -23,7 +21,7 @@
     {% else %}
         <p>{{ labels.accountNoOrders }}</p>
         <div class="mz-order-history-dropzone">
-            {% dropzone "order-history" scope="page" %} 
+            {% dropzone "order-history" scope="template" %} 
         </div>
     {% endif %}
 </div>

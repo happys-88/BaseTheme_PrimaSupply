@@ -248,8 +248,7 @@ define([
 
 		// Global Cart Continue btn
 		$("#continueShoppingGlobalCart").on('click', function(){    
-	        alert("hello");  
-	        window.history.back();  
+	        window.history.back();   
 	    });   
 
 	});

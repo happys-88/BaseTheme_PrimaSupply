@@ -17,9 +17,7 @@
   <div class="col-md-6">
     <div class="row">
       <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section">
-        {% include "modules/product/price-show-stack" with priceForProductDetail=model.productCode 
-        viewOnCart=model.viewOnCart 
-        hasStock=model.totalCount %} 
+        {% include "modules/product/price-show-stack" with hasStock=model.totalCount %} 
       </div>
     </div>
   </div>
@@ -137,7 +135,7 @@
     <div class="mz-productdetail-conversion-buttons">
       {% with model|get_product_attribute("tenant~login-for-price") as loginForPrice %}
        {% if loginForPrice.values|first|prop("value") === true %}
-         {% if user.isAuthenticated %}
+         {% if not user.isAnonymous %}
             
             {# start code modification #}
             {% comment %} when track stock level is disable {% endcomment %}
@@ -172,7 +170,7 @@
               </button>
             {% else %}
                 {% comment %} when quantity is zero {% endcomment %}
-                {% if model.totalCount === 0 or model.inventoryInfo.onlineStockAvailable === 0 %}
+                {% if not model.inventoryInfo.onlineStockAvailable %}
                   <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart">
                   {{ labels.addToCart }}
                   </button>
