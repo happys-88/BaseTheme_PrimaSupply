@@ -493,14 +493,13 @@ define([
 
         $("#continueShoppingCartButton").on('click', function(event){ 
             var lasturl=document.referrer; 
-           if(lasturl.lastIndexOf("/checkout")==-1){ 
-            window.history.back();
+            if(lasturl.lastIndexOf("/checkout")==-1){ 
+                window.history.back();
             }
             else{
-            window.location = "/";
-           }
-           
-        });      
+                window.location = "/";
+            }
+        });       
         
     return CartView;  
 

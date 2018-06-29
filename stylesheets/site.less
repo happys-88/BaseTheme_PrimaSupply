@@ -122,9 +122,10 @@ img[data-mztp]{
 		border-color: @buttonBgColor;	
 		text-decoration: none; 
 	}
-	&:visited{
+	&:visited, &:focus{
 		background: @buttonBgColor;	
 		color: @textColorWhite;
+		outline: none; 
 	}
 	&[disabled]{
 		&:hover{
