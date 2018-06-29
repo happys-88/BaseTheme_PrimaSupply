@@ -29,7 +29,9 @@
                                 {% if property.name == 'Free liftgate' %}
                                     {% for v in property.values %}
                                         {% if v.stringValue == true or v.value == true %}
-                                            <div class="lift-gate-msg" style="display: none;"><i class="fa fa-exclamation-triangle"></i>{{ labels.liftGateMsg }}</div>
+                                            {% if model.liftGateMsg %}
+                                                <div class="lift-gate-msg"><i class="fa fa-exclamation-triangle"></i>{{ model.liftGateMsg }}</div>
+                                            {% endif %}
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}
@@ -91,20 +93,18 @@
             {% endif %}
         {% endfor %}
 
-        {% if model.dutyTotal > 0 %}
-            <div class="mz-ordersummary-tax">
-                <span class="mz-ordersummary-totalname">{{ labels.taxDuty }}:</span>
-                <span class="mz-ordersummary-totalvalue">{% filter currency %} {{ model.dutyTotal|add(model.taxTotal)}} {% endfilter %}</span>
+        {% if model.dutyAmount > 0 %}
+            <div class="mz-ordersummary-duty">
+                <span class="mz-ordersummary-totalname">{{ labels.labelOversized }}:</span>
+                <span class="mz-ordersummary-totalvalue">{{ model.dutyAmount|currency }}</span>
             </div>
-        {% else %}
-            {% if model.taxTotal %}
-                <div class="mz-ordersummary-tax">
-                    <span class="mz-ordersummary-totalname">{{ labels.tax }}:</span>
-                    <span class="mz-ordersummary-totalvalue">{{ model.taxTotal|currency }}</span>
-                </div>
-            {% endif %}
         {% endif %}
-
+        {% if model.taxTotal %}
+            <div class="mz-ordersummary-tax">
+                <span class="mz-ordersummary-totalname">{{ labels.tax }}:</span>
+                <span class="mz-ordersummary-totalvalue">{{ model.taxTotal|currency }}</span>
+            </div>
+        {% endif %}
         <div class="mz-ordersummary-shippingtotal">
             <span class="mz-ordersummary-totalname">{{ labels.shippingHandling }}:</span>
             <span class="mz-ordersummary-totalvalue">{{ model.shippingSubTotal|currency }}</span>
