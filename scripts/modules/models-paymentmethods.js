@@ -93,7 +93,7 @@
             thisMonth = new Date();
             thisMonth.setDate(1);
             thisMonth.setHours(0, 0, 0, 0);
-            
+
             isValid = exp >= thisMonth;
             if (!isValid) return Hypr.getLabel('cardExpInvalid');
         },
@@ -339,7 +339,7 @@
                         return Hypr.getLabel('purchaseOrderPaymentTermMissing');
                     }
 
-                    return;
+                    return; 
                 }
             }
         },

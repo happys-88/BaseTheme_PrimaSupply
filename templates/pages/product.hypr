@@ -27,10 +27,7 @@
             {% include "modules/product/product-images" with model=prodMod %}
         </div> 
         <div class="col-md-6 mz-productdetail-wrap">
-            {% include "modules/common/message-bar" with model=prodMod %}
-            <div class="mz-product-social-sharing hide">
-                {% dropzone "social-sharing" scope="template" %}     
-            </div>
+            {% include "modules/common/message-bar" with model=prodMod %} 
             <div id="product-detail" class="mz-productdetail mz-l-stack">
                 {% include "modules/product/product-detail" with model=prodMod %}
             </div>

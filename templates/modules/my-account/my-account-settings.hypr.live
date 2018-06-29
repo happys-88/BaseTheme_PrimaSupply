@@ -1,10 +1,6 @@
 ﻿<h3 class="mz-l-stack-sectiontitle">
     {{ labels.myAccount }}
-    {% if model.firstName %}
-        {% if not editing %}
-            <a href class="mz-link-edit-accountsettings" data-mz-action="startEdit">{{ labels.edit }}</a>
-        {% endif %}
-    {% endif %}
+    
 </h3>
 {% if model.firstName %}
     <div class="mz-accountsettings-section mz-accountsettings-name {% if editing %} is-editing {% endif %}">
@@ -25,6 +21,7 @@
             </div>
         {% else %}
             <div class="mz-accountsettings-displayname" id="account-settings-name">{{ model.firstName }} {{ model.lastName }}</div>
+            <a href class="mz-link-edit-accountsettings" data-mz-action="startEdit">{{ labels.edit }}</a> 
         {% endif %}
     </div>
     <div class="mz-accountsettings-section mz-accountsettings-email">
