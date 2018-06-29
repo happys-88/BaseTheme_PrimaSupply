@@ -5,7 +5,6 @@
 {% block breadcrumbs %}{% endblock breadcrumbs %}
 {% block body-content %}
     {% preload_json model "order" %}
-
     {% set_var siteId=model.siteId %}
     {% set_var email=model.fulfillmentinfo.fulfillmentContact.email %}
     {% set_var name=model.fulfillmentinfo.fulfillmentContact.firstName %}
@@ -32,26 +31,8 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-9">
-                        <div class="mz-signup-other-email">
-                            <form method="" name="">
-                                <h4>{{ labels.signUpEmailMsg }}</h4>
-                                <div class="mz-signup-email">
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">{{ labels.primaDeals }}</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">{{ labels.primaDigest }}</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">{{ labels.primaLearningCenter }}</label>
-                                    </div>
-                                    <button class="mz-button" data-mz-action="">{{ labels.save }}</button>
-                                </div>
-                                <div class="mz-look-email">
-                                    <span>{{ labels.saved }}</span>
-                                    <p>{{ labels.savedMsg }}</p>
-                                </div>
-                            </form>
+                        <div class="mz-signup-other-email" id="confirmationDeals">
+                            
                         </div>
                     </div>
                     <div class="col-sm-3">

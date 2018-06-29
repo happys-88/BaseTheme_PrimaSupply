@@ -87,7 +87,7 @@
                 thisMonth,
                 isValid;
             
-            if (isNaN(expMonth) || isNaN(expYear) || expMonth == 0 || expYear == 0) return Hypr.getLabel('cardExpInvalid');
+            if (isNaN(expMonth) || isNaN(expYear) || expMonth === 0 || expYear === 0) return Hypr.getLabel('cardExpInvalid');
 
             exp = new Date(expYear, expMonth - 1, 1, 0, 0, 0, 0);
             thisMonth = new Date();

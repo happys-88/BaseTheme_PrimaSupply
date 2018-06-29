@@ -28,7 +28,7 @@
         {% for externalPayment in siteContext.checkoutSettings.externalPaymentWorkflowSettings %}
             {% if externalPayment.name=="PayPalExpress2" and externalPayment.isEnabled %} 
                 <div class="{% if model.savedPaymentMethods %} col-md-3 col-sm-12{% else %}  col-md-4 col-sm-12{% endif %}"> 
-                    <input data-mz-value="paymentType" id="paymentType-check-{{ labels.payPalBillingInfo }}" name="paymentType" type="radio" class="mz-paymenttype-input" value="paypal" {% if model.paymentType == "paypal" %}checked="checked"{% endif %} />
+                    <input data-mz-value="paymentType" id="paymentType-check-{{ labels.payPalBillingInfo }}" name="paymentType" type="radio" class="mz-paymenttype-input" value="PayPalExpress2" {% if model.paymentType == "PayPalExpress2" %}checked="checked"{% endif %} />
                     <label class="mz-paymentselector-label mz-paymentselector-label-check mz-checkoutform-radio" for="paymentType-check-{{ labels.payPalBillingInfo }}">{{ labels.payPalBillingInfo }}</label>
                 </div>
             {% endif %} 
@@ -117,9 +117,9 @@
         </div>
     {% endif %}
     
-    <div class="mz-l-formfieldgroup-row mz-paymentselector-option mz-paymentselector-externalworkflows mz-checkoutform {% if model.paymentType == "paypal" %}mz-checkoutform-active{% endif %}"> 
+    <div class="mz-l-formfieldgroup-row mz-paymentselector-option mz-paymentselector-externalworkflows mz-checkoutform {% if model.paymentType == "PayPalExpress2" %}mz-checkoutform-active{% endif %}"> 
         {% with siteContext.checkoutSettings.externalPaymentWorkflowSettings|findwhere("isEnabled", true) as externalPaymentWorkflowsEnabled %} 
-            {% if externalPaymentWorkflowsEnabled and model.paymentType == "paypal" %}
+            {% if externalPaymentWorkflowsEnabled and model.paymentType == "PayPalExpress2" %}
                 {% comment %}
                 <div class="mz-l-formfieldgroup-row">
                     <div class="mz-paymentselector-label-separator">&ndash; {{ labels.or }} &ndash;</div>
@@ -137,6 +137,11 @@
                                 {% endif %}
                                 {% if name == "paypalexpress2" %}
                                     <img id="btn_xpressPaypal" class="p-button" alt="Check Out With PayPal" role="button" src="{% make_url "cdn" "/cms/files/paypal-btn.png" %}" /> 
+                                        <div class="mz-l-stack-section">
+                                            <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+                                            {% include "modules/checkout/billing-address-selector" %}
+                                        </div>
+                                    
                                 {% endif %}
                             </div> 
                         {% endwith %}  

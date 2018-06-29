@@ -54,15 +54,39 @@ require(["modules/jquery-mozu", "underscore", 'modules/api', "hyprlive", "module
         } 
 		});
 
+    var DealsView = Backbone.MozuView.extend({
+            templateName: "modules/checkout/subscribe-deals",
+            subscribeDeals: function(){
+                var deals = $('#PSDeals').is(':checked') ? $('#PSDeals').val() : '';
+                deals = $('#PSDigest').is(':checked') ? deals+","+$('#PSDigest').val() : deals+","+'';
+                deals = $('#PSBlogs').is(':checked') ? deals+","+$('#PSBlogs').val() : deals+","+'';
+                var email = $('#emailId').val();
+                console.log("Deals : "+deals);
+                if(deals !== '') {
+                    $.get("/mailchimp", {accountId:email, deals:deals},  function(res){ 
+                       console.log("Response : "+res);   
+                    }).fail(function(err) {
+                        console.log("Failure "+JSON.stringify(err));   
+                    });
+                }
+            }
+        });
+
     $(document).ready(function () {
 		var orderData = require.mozuData('order');
 		var orderModel = Backbone.Model.extend(); 
 		var order = new orderModel(orderData);
-				
+		console.log("Contact : "+JSON.stringify(orderData));
 		var view = new SignupGuest({
 			model: order,
 			el: $('#guestUserSignUp')
 		});
 		view.render();
+        var emailOrder = new orderModel(orderData);
+        var dealsView = new DealsView({
+            model: order,
+            el: $('#confirmationDeals')
+        });
+        dealsView.render();  
     });
 });

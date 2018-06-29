@@ -705,6 +705,7 @@
             validatePaymentType: function(value, attr) {
                 var order = this.getOrder();
                 var payment = order.apiModel.getCurrentPayment();
+                console.log("Payment Type : "+JSON.stringify(payment));
                 var errorMessage = Hypr.getLabel('paymentTypeMissing');
                 if (!value) return errorMessage;
                 if ((value === "StoreCredit" || value === "GiftCard") && this.nonStoreCreditTotal() > 0 && !payment) return errorMessage;
