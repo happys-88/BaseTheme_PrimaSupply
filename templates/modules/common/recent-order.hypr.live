@@ -59,11 +59,12 @@
                             <dd>{{ model.fulfillmentInfo.fulfillmentContact.firstName }} {{ model.fulfillmentInfo.fulfillmentContact.lastNameOrSurname }}</dd>
                         {% endblock order-shipped-to %}
                     </dl>
-                    <a class="print-order" href="/print#{{ model.id }}">Print Order</a> 
+                     
                 </li>
             {% endif %}
 
         </ul>
+        <a class="print-order" href="/print#{{ model.id }}">Print Order</a> 
     {% block attributes %}
         {% for attribute in model.attributes %}
         {% with model.orderAttributeDefinitions|findwhere('attributeFQN', attribute.fullyQualifiedName) as attDef %}

@@ -5,8 +5,12 @@
                 <div class="mz-ordersummary-line mz-ordersummary-line-item {% if item.discountTotal > 0 %}is-discounted{% endif %} clearfix">
                     <div class="mz-ordersummary-item-product">
                         <div class="mz-order-product-image">
-                            <img src="{{ item.product.imageUrl}}" alt="{{ item.product.name }}" width="100" />
-                        </div>
+                            {% if item.product.imageUrl %}
+                                <img src="{{ item.product.imageUrl }}" alt="{{ item.product.name }}" width="100" />
+                            {% else %}
+                                <span class="noimage-placeholder"><span class="noimage-text">{{ labels.productImagePlaceholder }}</span></span>
+                            {% endif %}  
+                        </div> 
                         <div class="mz-order-product-info"> 
                             <h3 class="mz-product-name">{{ item.product.name }}</h3>
 
@@ -23,7 +27,7 @@
                                         <span>{{ bundledProduct.name }} ({{ bundledProduct.quantity }})</span>
                                     {% endfor %}
                                 </div>
-                            {% endif %}
+                            {% endif %} 
 
                             {% for property in item.product.properties %}
                                 {% if property.name == 'Free liftgate' %}
