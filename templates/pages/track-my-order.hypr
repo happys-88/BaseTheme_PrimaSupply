@@ -1,7 +1,7 @@
 {% extends "page" %}
 
 {% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  - {% parent %}{% endblock title-tag-content %}
-{% block body-tag-classes %} track-my-order {% endblock body-tag-classes %}
+{% block body-tag-classes %}mz-track-my-order {% endblock body-tag-classes %} 
 {% block breadcrumbs %}
     {% include "modules/customer-service-breadcumb" %}
 {% endblock breadcrumbs %}
@@ -9,7 +9,7 @@
 <div class="mz-customer-service-page">
     <div class="mz-l-container">
         <div class="row"> 
-            <div class="col-sm-9 col-lg-10 mz-customer-service-panels pull-right">
+            <div class="col-xs-12 col-sm-9 pull-right">
                 <h3 class="mz-l-stack-sectiontitle">{{ labels.trackMyOrder }}</h3>
                 <p>{{ labels.trackMyOrderMsg }}</p>
                 <div class="mz-track-order-form">
@@ -48,9 +48,9 @@
                     </form>
                 </div>
             </div>
-            <div class="col-sm-3 col-lg-2 mz-customer-service-nav">     
+            <div class="col-xs-12 col-sm-3 mz-content-left-nav">       
                 <div class="mz-l-sidebar">
-                    {% include "modules/customer-service/service-nav" %}
+                    {% include "pages/content-left-nav" %} 
                 </div>
             </div>
         </div>

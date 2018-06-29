@@ -2,17 +2,14 @@
 {% if model.properties.page_type_definition=="customer-service" or pageContext.cmsContext.template.path=="track-my-order" or pageContext.cmsContext.template.path=="contact-us" %}     
     <h3 class="mz-l-stack-sectiontitle">Customer Service</h3> 
     <nav class="mz-scrollnav"> 
-        <ul class="mz-scrollnav-list nav">
-            <li class="mz-scrollnav-item {% if pageContext.metaTitle=="Customer Service" %}active {% endif %}">
-                <a class="mz-scrollnav-link" href="/customer-service">{{ labels.customerService }}</a>
-            </li>
+        <ul class="mz-scrollnav-list nav"> 
             <li class="mz-scrollnav-item {% if pageContext.metaTitle=="Track My Order" %}active {% endif %}">
                 <a class="mz-scrollnav-link" href="/track-my-order">{{ labels.trackMyOrder }}</a>
             </li>
             <li class="mz-scrollnav-item {% if pageContext.metaTitle=="Shipping Info" %}active {% endif %}">
                 <a class="mz-scrollnav-link" href="/shipping-info">{{ labels.shippingInfo }}</a>
             </li>
-            <li class="mz-scrollnav-item {% if pageContext.metaTitle=="Returns & Exchange" %}active {% endif %}">
+            <li class="mz-scrollnav-item {% if pageContext.metaTitle=="Returns & Exchanges" %}active {% endif %}"> 
                 <a class="mz-scrollnav-link" href="/returns-exchange">{{ labels.returnAndExchange }}</a>
             </li>
             <li class="mz-scrollnav-item {% if pageContext.metaTitle=="Price Match Request" %}active {% endif %}">

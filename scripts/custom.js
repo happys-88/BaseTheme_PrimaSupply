@@ -247,9 +247,9 @@ define([
 		}
 
 		// Global Cart Continue btn
-		$("#continueShoppingGlobalCart").on('click', function(){    
-	        window.history.back();   
-	    });   
+		$(document).on('click','#continueShoppingGlobalCart', function(){   
+		    window.history.back();    
+	    });    
 
 	});
 }); 

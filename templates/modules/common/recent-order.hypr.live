@@ -59,6 +59,7 @@
                             <dd>{{ model.fulfillmentInfo.fulfillmentContact.firstName }} {{ model.fulfillmentInfo.fulfillmentContact.lastNameOrSurname }}</dd>
                         {% endblock order-shipped-to %}
                     </dl>
+                    <a class="print-order" href="/print#{{ model.id }}">Print Order</a> 
                 </li>
             {% endif %}
 
