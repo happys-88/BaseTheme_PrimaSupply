@@ -269,6 +269,9 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             return true;
         },
         signup: function () {
+            var deals = this.$parent.find('[data-mz-prima-deals]').is(':checked') ? this.$parent.find('[data-mz-prima-deals]').val() : '';
+            deals = this.$parent.find('[data-mz-prima-newsletter]').is(':checked') ? deals+","+this.$parent.find('[data-mz-prima-newsletter]').val() : deals+","+'';
+            deals = this.$parent.find('[data-mz-prima-lc]').is(':checked') ? deals+","+this.$parent.find('[data-mz-prima-lc]').val() : deals+","+'';
             var self = this,
                 email = this.$parent.find('[data-mz-signup-emailaddress]').val(),
                 firstName = this.$parent.find('[data-mz-signup-firstname]').val(),
@@ -290,7 +293,15 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             if (this.validate(payload)) {   
                 //var user = api.createSync('user', payload);
                 this.setLoading(true);
-                return api.action('customer', 'createStorefront', payload).then(function () {
+                return api.action('customer', 'createStorefront', payload).then(function (resp) {
+                    var email = resp.data.customerAccount.emailAddress;
+                    if(deals !== '') {
+                        $.get("/mailchimp", {accountId:email, deals:deals},  function(res){ 
+                           console.log("Response : "+res);   
+                        }).fail(function(err) {
+                            console.log("Failure "+JSON.stringify(err));   
+                        });
+                    }
                     if (self.redirectTemplate) {
                         window.location.pathname = self.redirectTemplate;
                     }

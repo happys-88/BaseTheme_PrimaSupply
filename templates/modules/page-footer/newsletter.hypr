@@ -4,11 +4,15 @@
 	<form>
 		<div class="form-group">
 			<div class="input-group">					  	
-				<input type="email" class="form-control" placeholder="{{ labels.enterEmailAddress }}">
+				<input type="email" class="form-control" placeholder="{{ labels.enterEmailAddress }}" id="newsletterEmail">
 				<span class="input-group-btn">
-					<button class="btn btn-default" type="submit" >{{ labels.join }}</button>
+					<button class="btn btn-default" id="newsletter" type="button" >{{ labels.join }}</button>
 				</span>
 			</div>
+			<div class="input-group .mz-pagefooter">
+				<span id="errorEmail" hidden="true">Please enter correct email</span>
+				<span id="thanksMsg" hidden="true">Thanks for Subscribing!!</span>
+			<div>
 		</div>						
 	</form>
 </div>

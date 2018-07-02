@@ -607,7 +607,7 @@
                         }                    
                     }
 
-                    // If selected Tbyb order attribute doesn't exist in line items then set code = NONE
+                    // If selected Tbyb order attribute doesn't exist in line items then set 'code' = NONE
                     if(selectedTbybExists){
                         code  = obj.values[0];
                     } else {

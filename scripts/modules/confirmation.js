@@ -58,13 +58,12 @@ require(["modules/jquery-mozu", "underscore", 'modules/api', "hyprlive", "module
             templateName: "modules/checkout/subscribe-deals",
             subscribeDeals: function(){
                 var deals = $('#PSDeals').is(':checked') ? $('#PSDeals').val() : '';
-                deals = $('#PSDigest').is(':checked') ? deals+","+$('#PSDigest').val() : deals+","+'';
+                deals = $('#PSNewsLetter').is(':checked') ? deals+","+$('#PSNewsLetter').val() : deals+","+'';
                 deals = $('#PSBlogs').is(':checked') ? deals+","+$('#PSBlogs').val() : deals+","+'';
                 var email = $('#emailId').val();
-                console.log("Deals : "+deals);
                 if(deals !== '') {
                     $.get("/mailchimp", {accountId:email, deals:deals},  function(res){ 
-                       console.log("Response : "+res);   
+                       console.log("Success!!");   
                     }).fail(function(err) {
                         console.log("Failure "+JSON.stringify(err));   
                     });

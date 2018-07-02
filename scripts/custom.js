@@ -2,7 +2,7 @@ define([
 	"modules/jquery-mozu",
 	"bxslider" 
 ], function( $, bxslider) { 
-
+	
 	//home slider
 	$('#mz-home-slider .slider').bxSlider({
 		auto: false,
@@ -51,6 +51,23 @@ define([
 	}
 	
 	$(document).ready(function(){ 
+
+		$("#newsletter").click(function(e){
+			var email = $("#newsletterEmail").val();
+			var pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+   			if(pattern.test(email)) {
+   				$("#errorEmail").hide();
+   				$("#newsletterEmail").val('');
+   				$("#thanksMsg").show().delay(2000).fadeOut();
+   				$.get("/mailchimp", {accountId:email, deals:"PSNewsLetter"},  function(res){ 
+                   console.log("Response : "+res);   
+                }).fail(function(err) {
+                    console.log("Failure "+JSON.stringify(err));   
+                });
+   			} else {
+   				$("#errorEmail").show();
+   			}
+		});
 
 		// Check if sitenav-item has dropdown
 		$(".mz-sitenav-list .mz-sitenav-item").each(function(){

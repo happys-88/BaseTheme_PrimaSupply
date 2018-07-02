@@ -154,6 +154,7 @@
     $(document).ready(function () {
 
         var product = ProductModels.Product.fromCurrent();
+        console.log(product);
         var currentProductCode = product.attributes.productCode;
         if(typeof product.attributes.categories !== "undefined"){
             $.each(product.attributes.categories, function( index, value ) {

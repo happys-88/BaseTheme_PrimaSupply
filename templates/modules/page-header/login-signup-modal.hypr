@@ -49,15 +49,16 @@
                             </div>
                             <p>{{ labels.signUpEmailMsg }}</p>
                             <div class="checkbox">
-                                <label><input type="checkbox" value="">{{ labels.primaDeals }}</label>
+                                <label><input type="checkbox" id="PSDeals" value="PSDeals" data-mz-prima-deals>{{ labels.primaDeals }}</label>
                             </div>
                             <div class="checkbox">
-                                <label><input type="checkbox" value="">{{ labels.primaDigest }}</label>
+                                <label><input type="checkbox" id="PSNewsLetter" value="PSNewsLetter" data-mz-prima-newsletter>{{ labels.primaDigest }}</label>
                             </div>
                             <div class="checkbox">
-                                <label><input type="checkbox" value="">{{ labels.primaLearningCenter }}</label>
-                            </div>
-
+                                <label><input type="checkbox" id="PSBlogs" value="PSBlogs" data-mz-prima-lc>{{ labels.primaLearningCenter }}</label>
+                            </div>        
+                                <input type="hidden" id="emailId" value="{{ model.fulfillmentInfo.fulfillmentContact.email }}">
+                            
                             <button class="mz-button mz-button-large mz-sign-up-page-button" data-mz-action="signuppage-submit">{{ labels.createNewAccount }}</button>
                 
                             <section data-mz-role="popover-message" class="mz-popover-message"></section>

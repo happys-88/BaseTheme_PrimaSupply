@@ -53,7 +53,10 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         },
         finishEdit: function() {
             var self = this;
-
+            var deals = $('#PrimaDeals').is(':checked') ? $('#PrimaDeals').val() : '';
+            deals = $('#PSNewsLetter').is(':checked') ? deals+","+$('#PSNewsLetter').val() : deals+","+'';
+            deals = $('#PSBlogs').is(':checked') ? deals+","+$('#PSBlogs').val() : deals+","+'';
+            
             $('.mz-validationmessage').text('');
             if (!self.model.apiModel.data.firstName) {
                 $('[data-mz-validationmessage-for="firstName"]').text(Hypr.getLabel("firstNameMissing"));
@@ -72,7 +75,16 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                 return false;
             }
 
-            this.doModelAction('apiUpdate').then(function() {
+            this.doModelAction('apiUpdate').then(function(resp) {
+                var email = resp.data.emailAddress;
+                
+                if(deals !== '') {
+                    $.get("/mailchimp", {accountId:email, deals:deals},  function(res){ 
+                       console.log("Response : "+res);   
+                    }).fail(function(err) {
+                        console.log("Failure "+JSON.stringify(err));   
+                    });
+                }
                 self.editing = false;
             }).otherwise(function() {
                 self.editing = true;
