@@ -681,6 +681,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                     self.editing.card = true;
                 });
                 this.editing.card = false;
+                 $('.mz-messagebar').fadeOut(500);
             }
         },
         cancelEditCard: function() {
