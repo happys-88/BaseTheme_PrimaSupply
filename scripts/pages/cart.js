@@ -491,9 +491,15 @@ define([
         paypal.loadScript(); 
         
 
-    $("#continueShoppingCartButton").on('click', function(event){   
-        window.history.back();  
-    });      
+        $("#continueShoppingCartButton").on('click', function(event){ 
+            var lasturl=document.referrer; 
+            if(lasturl.lastIndexOf("/checkout")==-1){ 
+                window.history.back();
+            }
+            else{
+                window.location = "/";
+            }
+        });       
         
     return CartView;  
 

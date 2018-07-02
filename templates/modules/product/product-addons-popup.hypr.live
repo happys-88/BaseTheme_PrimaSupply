@@ -18,7 +18,11 @@
                         <div class="product-detail">
                             <div class="mz-product-image">
                                 {% with model.mainImage as image %}
-                                    <img class="mz-itemlisting-thumb-img" src="{% make_url "image" image with max=120 as_parameters %}" {% if image.altText %}alt="{{ image.altText }}"{% endif %} />
+                                    {% if image %}
+                                        <img class="mz-itemlisting-thumb-img" src="{% make_url "image" image with max=120 as_parameters %}" {% if image.altText %}alt="{{ image.altText }}"{% endif %} />
+                                    {% else %}
+                                         <span class="noimage-placeholder"><span class="noimage-text">{{ labels.productImagePlaceholder }}</span></span>
+                                    {% endif %}
                                 {% endwith %}
                             </div>
                             <div class="mz-product-info">

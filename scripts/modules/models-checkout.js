@@ -382,10 +382,11 @@
                         });
                     }];
                 this.set('liftGateVal',liftGateVal);
+                this.set('liftGateMsg','');
+                var dutyAmount = 0;
                 if(liftGateVal == 'true'){
-                    this.set('liftGateTotal',HyprLiveContext.locals.themeSettings.liftGatePrice);
-                } else {
-                    this.set('liftGateTotal','');
+                    dutyAmount = parseFloat(HyprLiveContext.locals.themeSettings.liftGatePrice);
+                   this.set('liftGateMsg', Hypr.getLabel('liftGateMsg'));
                 }
                 var updateAttrs = [];
                 updateAttrs.push({
@@ -395,6 +396,7 @@
                 if(updateAttrs.length > 0){
                     order.apiUpdateAttributes(updateAttrs);
                 }
+                order.apiModel.update(_.extend(order.toJSON(), {dutyAmount: dutyAmount }));
             },
             updateFreightShipment: function (freightShipmentVal) {
                 this.set('freightShipmentVal',freightShipmentVal);

@@ -67,10 +67,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
 
         initialize: function () {
            this.listenTo(this.model.get('billingInfo'), 'orderPayment', this.onOrderCreditChanged, this);
-           
-        },
-        render: function() {
-            var pageContext = require.mozuData('checkout');
+           var pageContext = require.mozuData('checkout');
             var attribs = this.model.attributes.attributes;
             // $('.tbyb-msg').hide();
             _.each(attribs, function(obj){
@@ -83,6 +80,9 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
                 }  
             });
         },
+        renderOnChange: [
+            'dutyAmount'
+        ],
         editCart: function () {
             window.location =  (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/cart";
         },
@@ -137,22 +137,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
         },
         updateLiftGateOption: function (e) {
             this.model.updateLiftGateOption(this.$('[data-mz-lift-gate-option]:checked').val());
-            var liftGateShow = this.$('[data-mz-lift-gate-option]:checked').val();
-            this.$('[data-mz-shipping-method]:not(:checked)').attr('checked', true).trigger('change');
-            var self = this;
-            setTimeout(function(){
-             self.$('[data-mz-shipping-method]:not(:checked)').attr('checked', true).trigger('change'); 
-             setTimeout(function(){
-                    if(liftGateShow == 'true'){
-                        $('.lift-gate-msg').show();
-                    } else {
-                        $('.lift-gate-msg').hide();
-                    }
-                }, 2000);
-            }, 2000);
-            
-            console.log(liftGateShow);
-            
+                        
         },
         updateFreightShipment: function (e) {
             this.model.updateFreightShipment(this.$('[data-mz-freight-shipment]:checked').val());
