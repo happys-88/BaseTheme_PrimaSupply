@@ -47,7 +47,8 @@ define([
 		}
 	});
 
-	var sell = require.mozuData("productCrossSell");
+	var getProduct = require.mozuData("productCrossSell"); 
+	var sell = getProduct[0].prodModel; 
 	var cartModels = cartModel.Cart.fromCurrent();
 	var indexcartnewproduct;
 	var prodCodeCrossSell = [];

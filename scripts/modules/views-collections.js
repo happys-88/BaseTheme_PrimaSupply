@@ -10,9 +10,8 @@ define([
     'modules/intent-emitter',
     'modules/get-partial-view',
     'modules/facet-clear',
-    'modules/block-ui',
-    'yotpo'  
-], function(Backbone, _, UrlDispatcher, IntentEmitter, getPartialView, makeClearUrl, blockUiLoader, yotpo) { 
+    'modules/block-ui'
+], function(Backbone, _, UrlDispatcher, IntentEmitter, getPartialView, makeClearUrl, blockUiLoader) {   
 
     function factory(conf) {
         var _$body = conf.$body;
@@ -25,8 +24,7 @@ define([
             if (url) _dispatcher.replace(url);
             _$body.removeClass('mz-loading');
             blockUiLoader.unblockUi();  
-            yotpo.update();
-        }
+        } 
 
         function showError(error) {
             // if (error.message === ROUTE_NOT_FOUND) {

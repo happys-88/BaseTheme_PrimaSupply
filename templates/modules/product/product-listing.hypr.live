@@ -39,8 +39,17 @@
             {% if themeSettings.listProductCode %}
                 <div class="mz-productlisting-productcode">{{model.productCode}}</div> 
             {% endif %}
-            {% comment %} Custom code by category.js {% endcomment %}
-            <div id="product-rating"></div>
+            
+            <!-- Yotpo Ratings -->
+            <div id="product-rating">
+                <p></p>
+                <div class="yotpo bottomline">
+                    <div class="yotpo-bottomline pull-left star-clickable">
+                        <span class="yotpo-stars"></span> 
+                    </div>
+                </div> 
+            </div>
+
         {% endblock product-code %}
 
         <div class="mz-price-in-cart">
