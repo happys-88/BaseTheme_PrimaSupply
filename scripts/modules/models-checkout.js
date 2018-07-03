@@ -320,14 +320,19 @@
 
                 var order = this.getOrder();
                 var liftGateSelected = false;
+                var freightShipmentSelected = false;
                 _.each(order.attributes.attributes, function(attributes) {
                     if (attributes.fullyQualifiedName === 'tenant~lift-gate') {
                         if (attributes.values[0] === 'True') {
                             liftGateSelected = true; 
                         } 
-                    } 
+                    } else if(attributes.fullyQualifiedName === 'tenant~freight-shipment') {
+                        if (attributes.values[0] === 'True') {
+                            freightShipmentSelected = true; 
+                        } 
+                    }
                 });
-                lineItems.push({primaShip:primaShipProds, distShip:distributorShipProds, liftGate: liftGateSelected});
+                lineItems.push({primaShip:primaShipProds, distShip:distributorShipProds, liftGate: liftGateSelected, freightShipment: freightShipmentSelected});
                 return lineItems;
             },
             refreshShippingMethods: function (methods) {
@@ -400,6 +405,21 @@
             },
             updateFreightShipment: function (freightShipmentVal) {
                 this.set('freightShipmentVal',freightShipmentVal);
+                var order = this.getOrder(),
+                    process = [function() {
+                        return order.update({
+                            ipAddress: order.get('ipAddress'),
+                            shopperNotes: order.get('shopperNotes').toJSON()
+                        });
+                    }];
+                var updateAttrs = [];
+                updateAttrs.push({
+                    'fullyQualifiedName': 'tenant~freight-shipment',
+                    'values': [ freightShipmentVal ]
+                });
+                if(updateAttrs.length > 0){
+                    order.apiUpdateAttributes(updateAttrs);
+                }
             },
             applyShipping: function(resetMessage) {
                 if (this.validate()) return false;

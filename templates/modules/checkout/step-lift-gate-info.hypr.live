@@ -1,4 +1,5 @@
 {% with modelItems|findwhere("liftGate", true) as liftGateSelected %}
+{% with modelItems|findwhere("freightShipment", true) as freightShipmentSelected %}
 <div class="mz-lightgate-section mz-checkoutattributes-attributes clearfix">
     {% for attribute in model %}
         {% if attribute.attributeCode == 'lift-gate' or attribute.attributeCode == 'freight-shipment' %}
@@ -16,7 +17,7 @@
                         <div class="col-sm-12 col-md-8">
                             <label>
                                 <input id="checkout-attribute-{{ attribute.attribute.FQN }}" type="radio" name="checkout-attribute-{{ attribute.attributeFQN }}" value="true"
-                                data-mz-attribute="{{ attribute.attributeFQN }}" data-mz-value="orderAttribute-{{attribute.attributeFQN}}" {% if attribute.attributeCode == 'lift-gate' %} data-mz-lift-gate-option {% if liftGateSelected.liftGate === true %}checked="checked"{% endif %} {% else %} data-mz-freight-shipment {% endif %} /> 
+                                data-mz-attribute="{{ attribute.attributeFQN }}" data-mz-value="orderAttribute-{{attribute.attributeFQN}}" {% if attribute.attributeCode == 'lift-gate' %} data-mz-lift-gate-option {% if liftGateSelected.liftGate === true %}checked="checked"{% endif %} {% else %} data-mz-freight-shipment {% if freightShipmentSelected.freightShipment === true %}checked="checked"{% endif %} {% endif %} /> 
                                 {% if attribute.attributeCode == 'lift-gate' %}
                                     {{ labels.liftGateAddY }} {{ liftGatePrice|currency }}
                                 {% else %}
@@ -25,7 +26,7 @@
                             </label>
                             <label>
                                 <input id="checkout-attribute-{{ attribute.attribute.FQN }}" type="radio" name="checkout-attribute-{{ attribute.attributeFQN }}" value="false"
-                                data-mz-attribute="{{ attribute.attributeFQN }}" data-mz-value="orderAttribute-{{attribute.attributeFQN}}" {% if attribute.attributeCode == 'lift-gate' %} data-mz-lift-gate-option {% if liftGateSelected.liftGate !== true %}checked="checked"{% endif %} {% else %} data-mz-freight-shipment {% endif %}  /> 
+                                data-mz-attribute="{{ attribute.attributeFQN }}" data-mz-value="orderAttribute-{{attribute.attributeFQN}}" {% if attribute.attributeCode == 'lift-gate' %} data-mz-lift-gate-option {% if liftGateSelected.liftGate !== true %}checked="checked"{% endif %} {% else %} data-mz-freight-shipment {% if freightShipmentSelected.freightShipment !== true %}checked="checked"{% endif %} {% endif %}  /> 
                                 {% if attribute.attributeCode == 'lift-gate' %}
                                     {{ labels.liftGateAddN }}
                                 {% else %}
@@ -40,4 +41,5 @@
         {% endif %}
     {% endfor %}
 </div>
+{% endwith %}
 {% endwith %}
