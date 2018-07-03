@@ -67,26 +67,10 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
 
         initialize: function () {
            this.listenTo(this.model.get('billingInfo'), 'orderPayment', this.onOrderCreditChanged, this);
-           var pageContext = require.mozuData('checkout');
-            var attribs = this.model.attributes.attributes;
-            // $('.tbyb-msg').hide();
-            _.each(attribs, function(obj){
-                   // console.log("attrib : "+JSON.stringify(obj));
-                if(obj.fullyQualifiedName === 'tenant~trybeforebuy') {
-                    // Check if the TBYB attribute code is present in the line items or not
-                    var elementId = "#tbyb_"+obj.values[0];
-                    console.log("elementId : "+elementId);
-                    $(elementId).show(); 
-                }  
-            });
         },
-        renderOnChange: [
-            'dutyAmount'
-        ],
         editCart: function () {
             window.location =  (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/cart";
         },
-        
         onOrderCreditChanged: function (order, scope) {
             this.render();
         },
@@ -154,13 +138,6 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
         },
         updateTbyb: function (e) {
            this.model.updateTbyb(e);
-           var elm = e.target;
-           var code = elm.getAttribute('data-mz-tbyb-code');
-           var tbybId = '#tbyb_'+code;
-           // console.log("tbybId : "+tbybId);
-           // $('.tbyb-msg').hide();
-           $(tbybId).show();    
-           $('.tbyb-msg').not(tbybId).hide();       
         }
 
     });
