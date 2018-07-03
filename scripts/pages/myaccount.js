@@ -1,4 +1,15 @@
-define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', 'modules/jquery-mozu', 'underscore', 'modules/models-customer', 'modules/views-paging', 'modules/editable-view'], function(Backbone, Api, Hypr, HyprLiveContext, $, _, CustomerModels, PagingViews, EditableView) {
+define([
+    'modules/backbone-mozu',
+    "modules/api",
+    'hyprlive',
+    'hyprlivecontext',
+    'modules/jquery-mozu',
+    'underscore',
+    'modules/models-customer',
+    'modules/views-paging',
+    'modules/editable-view',
+    "modules/page-header/global-cart"
+], function(Backbone, Api, Hypr, HyprLiveContext, $, _, CustomerModels, PagingViews, EditableView, GlobalCart) {  
 
     var AccountSettingsView = EditableView.extend({
         templateName: 'modules/my-account/my-account-settings',
@@ -248,6 +259,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                 id = $target.data('mzItemId');
             if (id) {
                 this.editing.added = id;
+                GlobalCart.update(); 
                 return this.doModelAction('addItemToCart', id);
             }
         },

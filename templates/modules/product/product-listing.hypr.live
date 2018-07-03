@@ -39,19 +39,18 @@
             {% if themeSettings.listProductCode %}
                 <div class="mz-productlisting-productcode">{{model.productCode}}</div> 
             {% endif %}
-            
-            <!-- Yotpo Ratings -->
+        {% endblock product-code %}
+
+        {% block product-rating %}     
             <div id="product-rating">
-                <p></p>
                 <div class="yotpo bottomline">
                     <div class="yotpo-bottomline pull-left star-clickable">
                         <span class="yotpo-stars"></span> 
                     </div>
                 </div> 
             </div>
-
-        {% endblock product-code %}
-
+        {% endblock product-rating %}    
+        
         <div class="mz-price-in-cart">
             {% include "modules/product/price-show-stack" %}
         </div>
