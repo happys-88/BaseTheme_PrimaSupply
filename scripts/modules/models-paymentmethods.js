@@ -36,6 +36,7 @@
                 msg: Hypr.getLabel('cardTypeMissing')
             },
             cardNumberPartOrMask: {
+                minLength:8,
                 fn: "present",
                 msg: Hypr.getLabel('cardNumberMissing')
             },
@@ -100,7 +101,7 @@
         // the toJSON method should omit the CVV so it is not sent to the wrong API
         toJSON: function (options) {
             var j = PaymentMethod.prototype.toJSON.apply(this);
-            _.each(twoWayCardShapeMapping, function (k, v) {
+           _.each(twoWayCardShapeMapping, function (k, v) {
                 if (!(k in j) && (v in j)) j[k] = j[v];
                 if (!(v in j) && (k in j)) j[v] = j[k];
             });
