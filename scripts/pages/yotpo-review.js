@@ -35,21 +35,9 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
     var reviewUrl=""+yotpoBaseUrl+"/"+yotpoApiKey+"/"+products+"/"+getProductCode+"/"+reviews+"";
 
 	$.get(reviewUrl, function(data, status){
-	//	$("#totalReview").attr("value", data.response.bottomline.total_review);
+	//	$("#totalReview").attr("value", data.response.bottomline.total_review); 
 		
-		var ProductReviewView = Backbone.MozuView.extend({  
-			templateName: 'modules/product/yotpo-review'
-		});
-	  	
-	  	var product = new ProductModel.Product(data.response);
-		var productReviewView = new ProductReviewView({
-			model:product,
-			el:$('.custom-yotpo-review')
-		});
-
-		productReviewView.render();	
-
-    });
+	});
 	
 	var yotpoQuestionBaseUrl = HyprLiveContext.locals.themeSettings.yotpoQuestionBaseUrl;
 	var questions = HyprLiveContext.locals.themeSettings.questions;

@@ -9,10 +9,10 @@
 					<button class="btn btn-default" id="newsletter" type="button" >{{ labels.join }}</button>
 				</span>
 			</div>
-			<div class="input-group .mz-pagefooter">
+			<div class="input-group">   
 				<span id="errorEmail" hidden="true">Please enter correct email</span>
 				<span id="thanksMsg" hidden="true">Thanks for Subscribing!!</span>
-			<div>
+			</div>
 		</div>						
 	</form>
 </div>

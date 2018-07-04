@@ -520,6 +520,7 @@
   "freightShipmentY"                       :   "I understand how to inspect freight shipment",
   "freightShipmentN"                       :   "I don't understand. Please have someone contact me after I place my order.",
   "liftGateMsg"                            :   "Liftgate Service Added",
+  "tbybProductCode"                        :   "{0}_{1}",
   "tbybHeader"                             :   "Try Before You Buy",
   "tbybMsg"                                :   "TRY IT BEFORE YOU BUY IT!",
   "tbybContent"                            :   "<strong>Congratulations!</strong> Products from your order qualify for our Try Before You Buy beta program. Any product you select below will be sent to you completely free of charge for 14 days from the date of shipment!*",
@@ -635,6 +636,7 @@
   "printOrderItem": "Item" ,
   "printInvoice" : "Print Invoice"  ,
   "variationError" : "Product is configurable. Variations must be specified.",
-  "emailwrongpattern": "Email does not appear to be a valid e-mail address. Please use the format name@domain.xxx."
+  "emailwrongpattern": "Email does not appear to be a valid e-mail address. Please use the format name@domain.xxx.",
+  "sortByNewArrivals" : "New Arrivals"  
  
 }

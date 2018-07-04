@@ -47,47 +47,46 @@ define([
 		}
 	});
 
-	 var sell = require.mozuData("productCrossSell");
-	 var cartModels = cartModel.Cart.fromCurrent();
-	 console.log(cartModels);
-
-	 var indexcartnewproduct=-1; 
-	 var newaddedproductcode;
-	 var length = sell.changeMessages.length-1;
-	 if(sell.isEmpty!==true){
-	 for(var index = length; index >= 0; index--) {
-		if(sell.changeMessages[index].verb !== "Merged"){
-			newaddedproductcode = sell.changeMessages[index].metadata[0].productCode;
-		  	break;
-		}
-	 }
-	 // newaddedproductcode=localStorage.getItem("lastAddedItemToCart");
+	var sell = require.mozuData("productCrossSell");   
+	var cartModels = cartModel.Cart.fromCurrent();
+	var indexcartnewproduct=-1; 
+	var newaddedproductcode;
+	var length = sell.changeMessages.length-1;
+	if(sell.isEmpty!==true){
+		for(var index = length; index >= 0; index--) {
+			if(sell.changeMessages[index].verb !== "Merged"){
+				newaddedproductcode = sell.changeMessages[index].metadata[0].productCode;
+		  		break;
+			}
+	 	}
+	 	
+	 	// newaddedproductcode=localStorage.getItem("lastAddedItemToCart");
 	
 		$.each(sell.items, function( index, value ) {
-			if(value.product.productCode==newaddedproductcode){
-				indexcartnewproduct=index;
-			}
-	 });
+				if(value.product.productCode==newaddedproductcode){
+					indexcartnewproduct=index;
+				}
+		 });
 	 
-	 var prodCodeUpSell = [];
-	 var variantion=[];
-	 if(indexcartnewproduct!=-1){
-		$.each(sell.items[indexcartnewproduct].product.properties, function( index, value ) {
-			if(value.attributeFQN == "tenant~product-upsell"){
-				$.each(value.values, function( index, value ){
-	
-					prodCodeUpSell.push(value.value);
-					if(value.value.lastIndexOf("-")!=-1){
-						variantion.push(value.value.slice(0,value.value.lastIndexOf("-")));
-					}else{
-						variantion.push(value.value);
+		var prodCodeUpSell = [];
+		var variantion=[];
+			if(indexcartnewproduct!=-1){
+				$.each(sell.items[indexcartnewproduct].product.properties, function( index, value ) {
+					if(value.attributeFQN == "tenant~product-upsell"){
+						$.each(value.values, function( index, value ){
+			
+							prodCodeUpSell.push(value.value);
+							if(value.value.lastIndexOf("-")!=-1){
+								variantion.push(value.value.slice(0,value.value.lastIndexOf("-")));
+							}else{
+								variantion.push(value.value);
+							}
+						});
 					}
 				});
-			}
-	});
- }
+		 	}
  
-	   if(prodCodeUpSell.length>0){
+	   if(prodCodeUpSell.length>0){ 
 				var Upsellurl = "";
 				var upselgenerateURL = "";
 				var items=[];

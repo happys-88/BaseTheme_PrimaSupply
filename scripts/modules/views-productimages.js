@@ -8,11 +8,10 @@
             
         },
         //.mz-productimages-thumbimage
-        initialize: function () {
-            this.corousel();
-            var zoomConfig = { zoomType: "inner", cursor: "crosshair", zoomWindowFadeIn: 300, zoomWindowFadeOut: 300 };
-            var zoomImage = $('.mz-productimages-mainimage');
-            zoomImage.elevateZoom(zoomConfig);
+        initialize: function () { 
+            this.productThumbSlider();
+            $('.zoomContainer').remove();
+            this.elevatezoom(event);   
             // preload images
             var imageCache = this.imageCache = {},
                 cacheKey = Hypr.engine.options.locals.siteContext.generalSettings.cdnCacheBustKey;
@@ -27,21 +26,25 @@
         },
         elevatezoom: function (event) {
             var zoomConfig = { zoomType: "inner", cursor: "crosshair", zoomWindowFadeIn: 600, zoomWindowFadeOut: 600 };       
-            var zoomImage = $('.mz-productimages-mainimage');    
-            var image = $('.mz-productimages-thumbs a img');
-            zoomImage.elevateZoom(zoomConfig);
-            var elm=$(event.currentTarget);
+            var zoomImage = $('.mz-productimages-mainimage');
+            var elm = $(event.currentTarget);  
             $('.zoomContainer').remove();
             zoomImage.removeData('elevateZoom'); 
             zoomImage.data('zoom-image', elm.data('zoom-image'));
             zoomImage.elevateZoom(zoomConfig);
           },
-          corousel: function () {
+          elevateZoomAfter: function (src) {
+            var zoomConfig = { zoomType: "inner", cursor: "crosshair", zoomWindowFadeIn: 600, zoomWindowFadeOut: 600 };       
+            var zoomImage = $('.mz-productimages-mainimage');    
+            $('.zoomContainer').remove();
+            zoomImage.removeData('elevateZoom'); 
+            zoomImage.data('zoom-image', src);
+            zoomImage.elevateZoom(zoomConfig);
+          },
+          productThumbSlider: function () {
             $('.bxslider').bxSlider({ 
                 minSlides: 1,
                 maxSlides: 1,
-                //slideWidth: 600,
-                //slideMargin: 10,
                 auto: false,
                 pager:false,
                 useCSS: false,
@@ -51,25 +54,38 @@
               });  
           },
         switchImage: function (e) {
+            $('.zoomContainer').remove();
             var $thumb = $(e.currentTarget);
             this.selectedImageIx = $thumb.data('mz-productimage-thumb');
+           var switchSrc = $thumb.attr("href");
             $(".mz-productimages-thumb").removeClass("active-thumb");    
             $thumb.addClass("active-thumb");   
-            this.updateMainImage();
-            return false;
+            this.updateMainImage(switchSrc);
+            return false; 
         },
-        updateMainImage: function () {
-            if (this.imageCache[this.selectedImageIx]) {
-                this.$('[data-mz-productimage-main]')
-                    .prop('src', this.imageCache[this.selectedImageIx].src)
-                    .prop('alt', this.imageCache[this.selectedImageIx].alt);
+        updateMainImage: function (switchSrc) { 
+           $('.zoomContainer').remove();
+           var src = this.model.get("mainImage").imageUrl;
+            if (switchSrc) {
+               $('.zoomContainer').remove();
+               this.$('[data-mz-productimage-main]').prop('src', switchSrc).prop('alt', switchSrc);   
+            }
+            
+               if(typeof switchSrc === "undefined"){
+                if(this.model.get("showColorIcon")){
+                    $('.zoomContainer').remove();
+                    this.elevateZoomAfter(src);
+                   }else{
+                    $('.zoomContainer').remove();
+                    this.elevateZoomAfter(src); 
+                   }
+
             }
         },
-
         render: function () {
             Backbone.MozuView.prototype.render.apply(this, arguments);
             this.updateMainImage();
-            this.corousel();
+            this.productThumbSlider();
         }
     });
     return {

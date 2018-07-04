@@ -8,8 +8,8 @@
             defaultSort = Hypr.getThemeSetting('defaultSort'),
             sorts = [
             {
-                "text": Hypr.getLabel('default'),
-                "value": defaultSort
+                "text": Hypr.getLabel('newArrivals'),   
+                "value": defaultSort  
             },
             {
                 "text": Hypr.getLabel('sortByPriceAsc'),
@@ -30,11 +30,7 @@
             {
                 "text": Hypr.getLabel('sortByDateDesc'),
                 "value": "createDate desc"
-            },
-            {
-                "text": Hypr.getLabel('sortByDateAsc'),
-                "value": "createDate asc"
-            }
+            } 
         ];
 
         var PagedCollection = Backbone.MozuPagedCollection = Backbone.MozuModel.extend({

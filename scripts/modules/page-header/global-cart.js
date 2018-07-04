@@ -15,14 +15,14 @@ function ($, Hypr, Backbone, CartMonitor, api, cartModel, cart, sessionManagemen
             window.location.href = '/logout';
         });
     }
-    var globalCartHidePopover = Hypr.getThemeSetting('globalCartHidePopover');  
-    var GlobalCart = {
-        update: function(redirect_to_cart) {
+    var GlobalCart = { 
+        update: function(redirect_to_cart) { 
             api.get("cart").then(function(body){
+                var globalCartHidePopover = Hypr.getThemeSetting('globalCartHidePopover');
                 body.data.cartItems = body.data.items;
-                if (globalCartHidePopover === true && body.data.cartItems.length === 0) { 
+                /*if (globalCartHidePopover === true && body.data.cartItems.length === 0) { 
                     $("#global-cart").hide();     
-                }
+                }*/ 
 
                 var globalCartView = cart.extend({
                   templateName: 'modules/page-header/global-cart-dropdown' 

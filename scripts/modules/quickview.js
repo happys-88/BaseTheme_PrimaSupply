@@ -16,6 +16,7 @@ define([
 $(document).on('click', '.mz-quick-view', function (event) {
     var $Elem = $(event.currentTarget);
     var prdCode = $Elem.attr("data-mz-productcode-quickview");
+    var slider; 
     api.request("GET", "/api/commerce/catalog/storefront/products/" + prdCode).then(function (body) {
         var quickview = Backbone.MozuView.extend({
             templateName: 'modules/product/quickview',
@@ -32,6 +33,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
 
             },
             initialize: function() {
+                this.productThumbSlider();
                 if(typeof this.model.get('variations') !== "undefined" ) {
                    var variations = this.model.get('variations');
                     var sum = 0;
@@ -65,21 +67,21 @@ $(document).on('click', '.mz-quick-view', function (event) {
             },
             render: function () {
                 Backbone.MozuView.prototype.render.call(this);
-                this.corousel();
-                return this;
+                this.productThumbSlider();
+               // return this;
             },
-            corousel: function () {
+            productThumbSlider: function () {
                 if( this.model.get("content").get("productImages").length > 1 || this.model.attributes.dataurl){
-                    $('#quick-slider').bxSlider({
+                    slider = $('#quick-slider').bxSlider({
                         minSlides: 1,
                         maxSlides: 1,
                         slideWidth: 600,
                         pager:false
                     });
                 }
-               
 
-            },
+                window.slider = slider; 
+            }, 
             onQuantityChange: _.debounce(function (e) {
                 var $qField = $(e.currentTarget),
                     newQuantity = parseInt($qField.val(), 10);
@@ -155,12 +157,18 @@ $(document).on('click', '.mz-quick-view', function (event) {
             },
             quantityMinus: function () {
                 if(typeof this.model.get('productCode') !== 'undefined') {
+                    if(!this.model.get('purchasableState').isPurchasable) {
+                        return;
+                    }
                 var _qtyObj = $('[data-mz-validationmessage-for="quantity"]'),
                     _qtyCountObj = $('.mz-productdetail-qty');
                 _qtyObj.text('');
 
                 var value = parseInt(_qtyCountObj.val(), 10);
-
+                if (typeof this.model.attributes.inventoryInfo.onlineStockAvailable !== 'undefined') {
+                    if (this.model.attributes.inventoryInfo.onlineStockAvailable >= value)
+                        $(".mz-productdetail-addtocart").removeClass("is-disabled");
+                }
                 if (value == 1) {
                     _qtyObj.text("Quantity can't be zero.");
                     return;
@@ -169,35 +177,28 @@ $(document).on('click', '.mz-quick-view', function (event) {
 
                 this.model.updateQuantity(value);
                 _qtyCountObj.val(value);
-                if (typeof this.model.attributes.inventoryInfo.onlineStockAvailable !== 'undefined') {
-                    if (this.model.attributes.inventoryInfo.onlineStockAvailable >= value)
-                        $(".mz-productdetail-addtocart").removeClass("is-disabled");
-                    if (this.model.attributes.inventoryInfo.onlineStockAvailable < value && this.model.attributes.inventoryInfo.onlineStockAvailable > 0)
-                        $('[data-mz-validationmessage-for="quantity"]').text("*Only " + this.model.attributes.inventoryInfo.onlineStockAvailable + " left in stock.");
-                }
+               
               }
             },
             quantityPlus: function () {
                 if(typeof this.model.get('productCode') !== 'undefined'){
+                    if(!this.model.get('purchasableState').isPurchasable) {
+                        return;
+                    }
                     var _qtyObj = $('[data-mz-validationmessage-for="quantity"]'),
                     _qtyCountObj = $('.mz-productdetail-qty');
                 _qtyObj.text('');
                 var value = parseInt(_qtyCountObj.val(), 10);
-
-
-                if (value == 99) {
-                    _qtyObj.text("Quantity can't be greater than 99.");
-                    return;
-                }
                 value++;
-                this.model.updateQuantity(value);
-                
-                _qtyCountObj.val(value);
                 if (typeof this.model.attributes.inventoryInfo.onlineStockAvailable !== 'undefined' && this.model.attributes.inventoryInfo.onlineStockAvailable < value) {
                     $(".mz-productdetail-addtocart").addClass("is-disabled");
                     if (this.model.attributes.inventoryInfo.onlineStockAvailable > 0)
+                    $(".mz-productdetail-addtocart").removeClass("is-disabled");
                         $('[data-mz-validationmessage-for="quantity"]').text("*Only " + this.model.attributes.inventoryInfo.onlineStockAvailable + " left in stock.");
-                }
+                        return;
+                } 
+                this.model.updateQuantity(value);        
+                _qtyCountObj.val(value);
 
                 }
                
@@ -234,8 +235,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
                 var sitecontext = HyprLiveContext.locals.siteContext;
                 var cdn = sitecontext.cdnPrefix;
                 var siteID = cdn.substring(cdn.lastIndexOf('-') + 1);
-                var imagefilepath = cdn + '/cms/' + siteID + '/files/' + productcode + '-' + colorcode + '.jpg';
-                
+                var imagefilepath = cdn + '/cms/' + siteID + '/files/' + productcode + '_' + colorcode +'_v1' +'.jpg';
                 this.model.set({
                     "dataurl": imagefilepath
                 });
@@ -243,12 +243,15 @@ $(document).on('click', '.mz-quick-view', function (event) {
             },
             clickOnNextOrprevious: function(){
                 if(typeof this.model.get('productCode') !== 'undefined'){
-                 $('[src="http://southasia.oneworld.net/ImageCatalog/no-image-icon/image_preview').parent().remove();
-                 if($(".bx-pager-item").length > imagecount){
-                    $(".bx-pager-item").eq(2).remove();
-                 }
-             }
-            }
+                    $('[src="http://southasia.oneworld.net/ImageCatalog/no-image-icon/image_preview').parent().remove();
+                    if($(".bx-pager-item").length > imagecount){
+                        $(".bx-pager-item").eq(2).remove();
+                    }
+                    if(this.model.get("content").get("productImages").length === 0){ 
+                        slider.destroySlider();
+                    }
+                }
+            } 
         });
        
         var product = new ProductModels.Product(body);
