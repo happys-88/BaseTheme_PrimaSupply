@@ -257,10 +257,12 @@ define([
             var self = this,
                 $target = $(e.currentTarget),
                 id = $target.data('mzItemId');
-            if (id) {
+            if (id) { 
                 this.editing.added = id;
-                GlobalCart.update(id);   
-                return this.doModelAction('addItemToCart', id);
+                this.doModelAction('addItemToCart', id).then(function(response){
+                    GlobalCart.update(id);
+                    return response;
+                });  
             }
         },
         doNotRemove: function() {
