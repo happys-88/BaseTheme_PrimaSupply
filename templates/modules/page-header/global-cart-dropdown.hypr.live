@@ -111,10 +111,6 @@
                           <div class="mz-carttable-total-label mz-coupon-discount" >
                               {{ discount.discount.name }}: {{ discount.impact|currency }}
                           </div>
-                          
-                          <div class="mz-carttable-total-wrap">
-                            <span class="mz-carttable-rowtotal">- {{ discount.impact|currency }}</span>
-                          </div>
                         </div>
                       {% endif %}
                     {% endfor %}
@@ -125,7 +121,7 @@
                     <div class="mz-carttable-total-wrap col-xs-12">
                       {{ labels.subtotal }}:
                       <span id="mz-carttable-total" class="mz-carttable-total">
-                        <strong>{{ model.total|currency }}</strong>
+                        <strong>{{ model.subtotal|currency }}</strong>
                       </span>
                     </div>
                   {% endif %}  
