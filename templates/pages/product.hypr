@@ -7,7 +7,7 @@
 {% block body-content %}
 
 {% require_script "pages/product" %} 
-
+ 
 {% if model.length==2 %}
     {% for vals in model %}
         {% if forloop.first %}
@@ -16,11 +16,13 @@
             {% set_var reviews=vals.review %}
         {% endif %}   
     {% endfor %}
+    {% preload_json prodMod "product" %} 
 {% else %}
     {% set_var prodMod=model %}
+    {% preload_json prodMod "product" %} 
 {% endif %}
 
-{% preload_json prodMod "product" %} 
+{% dump prodModel %}
 
 <div itemscope itemtype="http://schema.org/Product" class="mz-l-container">
     <div class="row">
