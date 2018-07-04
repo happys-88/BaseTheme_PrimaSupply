@@ -106,6 +106,11 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         },
         displayMessage: function (msg) {
             this.setLoading(false);
+            if(msg.toLowerCase().indexOf('missing') > -1 ) {
+                var val = msg.split(':');
+                msg = val[1].trim();
+                msg = msg.substr(msg.indexOf(' ')+1, msg.length);
+            }
             this.$parent.find('[data-mz-role="popover-message"]').html('<span class="mz-validationmessage">' + msg + '</span>');
         },
         init: function (el) {
@@ -269,6 +274,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             return true;
         },
         signup: function () {
+            alert("OK");
             var deals = this.$parent.find('[data-mz-prima-deals]').is(':checked') ? this.$parent.find('[data-mz-prima-deals]').val() : '';
             deals = this.$parent.find('[data-mz-prima-newsletter]').is(':checked') ? deals+","+this.$parent.find('[data-mz-prima-newsletter]').val() : deals+","+'';
             deals = this.$parent.find('[data-mz-prima-lc]').is(':checked') ? deals+","+this.$parent.find('[data-mz-prima-lc]').val() : deals+","+'';
@@ -294,6 +300,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 //var user = api.createSync('user', payload);
                 this.setLoading(true);
                 return api.action('customer', 'createStorefront', payload).then(function (resp) {
+                    console.log("Resp : "+JSON.stringify(resp));
                     var email = resp.data.customerAccount.emailAddress;
                     if(deals !== '') {
                         $.get("/mailchimp", {accountId:email, deals:deals},  function(res){ 
