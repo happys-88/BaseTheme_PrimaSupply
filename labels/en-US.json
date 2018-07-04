@@ -379,7 +379,7 @@
   "selectASavedCard"                      : "Please select a saved card",
   "cardTypeMissing"                       : "Please select your card type",
   "cardNameMissing"                       : "Please enter the name printed on your card",
-  "cardNumberMissing"                     : "Please enter your card number",
+  "cardNumberMissing"                     : "Card number is incorrect or missing",
   "cardExpInvalid"                        : "Please enter an expiration date in the future",
   "securityCodeMissing"                   : "Please enter your card's security code",
   "reenterCVV"                            : "Please verify your card's security code",
