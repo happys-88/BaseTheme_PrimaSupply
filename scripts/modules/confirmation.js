@@ -62,6 +62,11 @@ require(["modules/jquery-mozu", "underscore", 'modules/api', "hyprlive", "module
                 deals = $('#PSBlogs').is(':checked') ? deals+","+$('#PSBlogs').val() : deals+","+'';
                 var email = $('#emailId').val();
                 if(deals !== '') {
+                    /*api.request("GET", "/mailchimp", {accountId:email, deals:deals}).then(function (response){
+                       console.log("Response 22 : "+JSON.stringify(response));    
+                    }, function(err) {
+                        console.log("Failure : "+JSON.stringify(err));
+                    });*/
                     $.get("/mailchimp", {accountId:email, deals:deals},  function(res){ 
                        console.log("Success!!");   
                     }).fail(function(err) {
@@ -75,7 +80,6 @@ require(["modules/jquery-mozu", "underscore", 'modules/api', "hyprlive", "module
 		var orderData = require.mozuData('order');
 		var orderModel = Backbone.Model.extend(); 
 		var order = new orderModel(orderData);
-		console.log("Contact : "+JSON.stringify(orderData));
 		var view = new SignupGuest({
 			model: order,
 			el: $('#guestUserSignUp')

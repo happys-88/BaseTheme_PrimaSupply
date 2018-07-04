@@ -63,11 +63,17 @@ define([
             var productCode = this.model.get("items").models[0].get('product').get('productCode');
             var shipping = localStorage.getItem("selectedShipping");
 
-            $.get("/taxEstimation", function(res){ 
+            /*api.request("GET", "/testroute").then(function (response){
+               console.log("Response 11 : "+JSON.stringify(response));    
+            }, function(err) {
+                console.log("Failure : "+JSON.stringify(err));
+            });*/
+
+           /* $.get("/testroute", function(res){ 
                console.log("Response 11 : "+res);   
-            }).fail(function() {
-                console.log("Failure ");   
-            });
+            }).fail(function(err) {
+                console.log("Failure "+JSON.stringify(err));   
+            });*/
             
             // console.log("Shipping storage : "+shipping);
             if(typeof shipping === 'undefined' || shipping === null) {
@@ -174,8 +180,9 @@ define([
             }
         }),
         render: function() {
-            // console.log("render");
-            if(this.model.get("items").length!==0){
+            // console.log("render : "+this.$el.context.location.pathname);
+            var cartEmpty = this.model.get("isEmpty");
+            if(this.$el.context.location.pathname === '/cart' && !cartEmpty && typeof cartEmpty !== "undefined"){
                 this.beforeRender(); 
             }
             CartMonitor.update();
