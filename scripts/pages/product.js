@@ -8,7 +8,8 @@
     "modules/product/recently-viewed-products", 
     "hyprlivecontext",
     "modules/api",
-    "modules/page-header/global-cart"], function ($, _, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, RVIModel, HyprLiveContext, api, GlobalCart) {
+    "modules/page-header/global-cart" 
+], function ($, _, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, RVIModel, HyprLiveContext, api, GlobalCart) {
 
     var ProductView = Backbone.MozuView.extend({
         templateName: 'modules/product/product-detail',
@@ -154,7 +155,6 @@
     $(document).ready(function () {
 
         var product = ProductModels.Product.fromCurrent();
-        console.log(product);
         var currentProductCode = product.attributes.productCode;
         if(typeof product.attributes.categories !== "undefined"){
             $.each(product.attributes.categories, function( index, value ) {
@@ -204,7 +204,24 @@
                     });
                 });
         }
-
+       
+        $(document).on('click','[name=Color]', function(event){  
+          
+            var $thisElem = $(event.currentTarget);
+            event.stopImmediatePropagation();
+            var colorcode = $thisElem.attr("data-mz-option");
+            var productcode = product.get("productCode");
+            var sitecontext = HyprLiveContext.locals.siteContext;
+            var cdn = sitecontext.cdnPrefix;
+            var siteID = cdn.substring(cdn.lastIndexOf('-') + 1);
+            var imagefilepath = cdn + '/cms/' + siteID + '/files/' + productcode + '_' + colorcode +'_v1'+'.jpg';
+            product.get("mainImage").imageUrl=imagefilepath;
+            product.get("mainImage").src=imagefilepath;
+            product.get("content").get("productImages")[0].imageUrl=imagefilepath;
+            product.get("content").get("productImages")[0].src=imagefilepath;
+       
+        });  
+       
         product.on('addedtocart', function (cartitem) {
             if (cartitem && cartitem.prop('id')) {
                 //product.isLoading(true);

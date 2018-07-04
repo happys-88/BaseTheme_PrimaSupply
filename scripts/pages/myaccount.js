@@ -259,7 +259,7 @@ define([
                 id = $target.data('mzItemId');
             if (id) {
                 this.editing.added = id;
-                GlobalCart.update(); 
+                GlobalCart.update(id);   
                 return this.doModelAction('addItemToCart', id);
             }
         },
