@@ -36,7 +36,7 @@
                 msg: Hypr.getLabel('cardTypeMissing')
             },
             cardNumberPartOrMask: {
-                minLength:8,
+                minLength:14,
                 fn: "present",
                 msg: Hypr.getLabel('cardNumberMissing')
             },

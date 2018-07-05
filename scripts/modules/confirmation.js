@@ -13,13 +13,18 @@ require(["modules/jquery-mozu", "underscore", 'modules/api', "hyprlive", "module
 	            if (payload.password !== $('#confirmPasswordSignUp').val()) return this.displayMessage(Hypr.getLabel('passwordsDoNotMatch')), false;
 	            return true;
 	        },
-	        displayMessage: function (msg) {
-	            // this.setLoading(false);
+            displayMessage: function (msg) {
+	            // this.setLoading("false");
                 $('#errorMessageSignUp').html('<span class="mz-validationmessage">' + msg + '</span>');
 	        },
             displayApiMessage: function (xhr) {
                 if(typeof xhr.message !== 'undefined' && xhr.message !== '') {
                     var errorMsg = xhr.message;
+                    if(errorMsg.toLowerCase().indexOf('missing') > -1 ) {
+                        var val = errorMsg.split(':');
+                        errorMsg = val[1].trim();
+                        errorMsg = errorMsg.substr(errorMsg.indexOf(' ')+1, errorMsg.length);
+                    }
                     $('#errorMessageSignUp').html('<span class="mz-validationmessage">' + errorMsg + '</span>');
                 }
             },
