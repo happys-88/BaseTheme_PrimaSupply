@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "6983734c0398477feb38901f8c93fa23dc1f7130"
+      "commit": "02e06258e38f7815c5e831474e44fce55b565b5a"
     },
     "baseThemeChannel": "stable"
   },
@@ -839,8 +839,7 @@
     "globalCartMaxItemCount": 3,
     "globalCartEnableSaveCart": "true",
     "globalCartHidePopover": "",
-    "globalCartShowSubtotal": false,
-    "globalCartItemImageMaxWidth": 105,
+    "globalCartItemImageMaxWidth": 105, 
     "globalCartEmptyBasketKickerLink": "",
     "globalCartRelatedProducts": "true",
     "rviEnable": true,
