@@ -159,7 +159,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         },
         handleEnterKey: function (e) {
             if (e.which === 13) {
-                alert("Enter Pressed");  
+                
                 var $parentForm = $(e.currentTarget).parents('[data-mz-role]');
                 switch ($parentForm.data('mz-role')) {
                     case "login-form":
@@ -274,7 +274,6 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             return true;
         },
         signup: function () {
-            alert("OK");
             var deals = this.$parent.find('[data-mz-prima-deals]').is(':checked') ? this.$parent.find('[data-mz-prima-deals]').val() : '';
             deals = this.$parent.find('[data-mz-prima-newsletter]').is(':checked') ? deals+","+this.$parent.find('[data-mz-prima-newsletter]').val() : deals+","+'';
             deals = this.$parent.find('[data-mz-prima-lc]').is(':checked') ? deals+","+this.$parent.find('[data-mz-prima-lc]').val() : deals+","+'';

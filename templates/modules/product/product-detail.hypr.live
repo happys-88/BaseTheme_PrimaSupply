@@ -268,10 +268,12 @@
     <dd itemprop="weight" itemscope itemtype="http://schema.org/QuantitativeValue">
         <span itemprop="value">{{ model.measurements.packageWeight.value }}</span> <span itemprop="unitCode">{{ model.measurements.packageWeight.unit }}</span>
     </dd>
-    <dt>{{ labels.length }}</dt>
-      <dd itemprop="length" itemscope itemtype="http://schema.org/QuantitativeValue">
-        <span itemprop="value">{{ model.measurements.packageLength.value }}</span> <span itemprop="unitCode">{{ model.measurements.packageLength.unit }}</span>
+    <span type="hidden" itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+    <dt itemprop="name" value="length">Length</dt>
+      <dd>
+       <span itemprop="value">{{ model.measurements.packageLength.value }}</span> <span itemprop="unitCode">{{ model.measurements.packageLength.unit }}</span>
     </dd>
+    </span>
     <dt>{{ labels.width }}</dt>
       <dd itemprop="width" itemscope itemtype="http://schema.org/QuantitativeValue">
         <span itemprop="value">{{ model.measurements.packageWidth.value }}</span> <span itemprop="unitCode">{{ model.measurements.packageWidth.unit }}</span>
