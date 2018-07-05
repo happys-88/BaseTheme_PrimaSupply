@@ -35,11 +35,15 @@
                 fn: "present",
                 msg: Hypr.getLabel('cardTypeMissing')
             },
-            cardNumberPartOrMask: {
-                minLength:14,
+            cardNumberPartOrMask: [{                
                 fn: "present",
                 msg: Hypr.getLabel('cardNumberMissing')
             },
+            {
+                minLength:13,
+                pattern: 'number',
+                msg: Hypr.getLabel('cardNumberInvalid')  
+            }],
             expireMonth: {
                 fn: 'expirationDateInPast'
             },

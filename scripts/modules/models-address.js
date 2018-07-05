@@ -13,12 +13,14 @@
 
         var PhoneNumbers = Backbone.MozuModel.extend({
             validation: {
-                home: {
+                home: [{
                     minLength: 10,
                     maxLength: 10,
+                    msg: Hypr.getLabel("phoneIncomplete")
+                },{
                     required: true,
                     msg: Hypr.getLabel("phoneIncorrect")
-                }
+                }]
             }
         }),
 
@@ -48,11 +50,14 @@
                     fn: "requiresStateAndZip",
                     msg: Hypr.getLabel("stateProvMissing")
                 },
-                postalOrZipCode: {
-                    minLength: 5,
+                postalOrZipCode: [{
                     fn: "requiresStateAndZip",
                     msg: Hypr.getLabel("postalCodeIncorrect")
-                }
+                },
+                {
+                    minLength: 5,
+                    msg: Hypr.getLabel("postalCodeIncomplete")  
+                }]
             },
             requiresStateAndZip: function(value, attr) {
                 if ((this.get('countryCode') in countriesRequiringStateAndZip) && !value) return this.validation[attr.split('.').pop()].msg;
