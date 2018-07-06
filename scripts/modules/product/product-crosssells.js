@@ -47,15 +47,14 @@ define([
 		}
 	});
 
-	//var getProduct = require.mozuData("productCrossSell"); 
-	var sell = require.mozuData("productCrossSell");    
+	var getProduct = require.mozuData("product");       
 	var cartModels = cartModel.Cart.fromCurrent();
 	var indexcartnewproduct;
 	var prodCodeCrossSell = [];
 	var variantion=[]; 
 	
-	if(typeof sell.properties!= "undefined"){
-		$.each(sell.properties, function( index, value ) {
+	if(typeof getProduct.properties!= "undefined"){
+		$.each(getProduct.properties, function( index, value ) {
 			if(value.attributeFQN == "tenant~product-crosssell"){
 				$.each(value.values, function( index, value ){
 					prodCodeCrossSell.push(value.value);
@@ -82,7 +81,7 @@ define([
 			});
 
 			CrosssellgenerateURL = CrosssellgenerateURL.slice(0, -3);
-			var upsellUrl= "/api/commerce/catalog/storefront/products/?filter=(" + CrosssellgenerateURL + ")";
+			var upsellUrl= "/api/commerce/catalog/storefront/products/?filter=(" + CrosssellgenerateURL + ")"; 
 			var crosssellview;
 			var crosssell={
 				crosssellcall:function(){
