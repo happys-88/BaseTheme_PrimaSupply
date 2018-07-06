@@ -31,7 +31,10 @@
 					<p>{{ model.billingInfo.paymentType }} </p>
                     <strong>Coupon Code:</strong> <br>  
 					{% for key, value  in model.discount %}
-					<p class="mz-discount"><span> {{ key }} </span>  for  <span>{{ value|currency }}</span></p>  
+						<p class="mz-discount"><span> {{ key }} </span>  for  <span>{{ value|currency }}</span></p>  
+					{% endfor %}
+					{% for shippingDiscount in model.shippingDiscounts %}
+						<p class="mz-discount"><span> {{ shippingDiscount.discount.couponCode }} </span>  for  <span>{{ shippingDiscount.discount.impact|currency }}</span></p>	 
 					{% endfor %}
 				</div>
 			</div>

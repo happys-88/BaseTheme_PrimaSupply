@@ -1,6 +1,5 @@
 ﻿{% if item.productDiscounts.length>0 and item.discountedTotal < item.subtotal %}    
-	<span class="mz-item-rowtotal is-crossedout" {% block crossedout-inline-style %}{% endblock crossedout-inline-style %}>	{{ item.subtotal|currency }}</span> 
-	<span class="mz-item-rowtotal {% if item.unitPrice.saleAmount %}is-saleprice{% endif %}">{{ item.discountedTotal|currency }}</span>
-{% else %}
+	<span class="mz-item-rowtotal">	{{ item.subtotal|currency }}</span>  
+{% else %} 
 	<span class="mz-item-rowtotal {% if item.unitPrice.saleAmount %}is-saleprice{% endif %}">{{ item.subtotal|currency }}</span>
 {% endif %}   
