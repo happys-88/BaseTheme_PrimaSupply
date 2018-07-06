@@ -235,6 +235,10 @@ define([
 		    $("#step-shipping-address").addClass("address-updated");
 		});
 
+		$(document).on('click','#addressEdit', function(){
+		    $("#step-shipping-method .mz-button").css('display', 'none');
+		});
+
 		// Featured Products Slider in blog detail
 		if(windowWidth <= 767){ 
 			//var sliderElement = $(".mz-blog-content-detail .featured-products").find(".mz-productlist-list");
