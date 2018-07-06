@@ -2,6 +2,7 @@
 <div class="container"> 
 	<div class="row">
 		<div class="col-xs-12">
+		
 			<h2 class="text-center">Order Invoice #{{ model.orderNumber }}</h2> 
 			<div class="address-col col-xs-6" id="shipping-address">
 				<p class="mz-heading">SHIP TO</p>  
@@ -27,16 +28,11 @@
 					<p>{{ model.billingInfo.billingContact.address.cityOrTown }} </p>
 					<p>{{ model.billingInfo.billingContact.email }} </p>
 					<p class="mz-heading">Payment Method</p>   
-                    <p>{{ model.billingInfo.paymentType }} </p>
-                    
-                    {% for item in model.items %}
-                    	{% if item.productDiscounts.length>0 or item.shippingDiscounts.length>0 or model.orderDiscounts.length>0 %}   
-                    		{% if model.couponCodes.length>0 %}  
-                    			<p class="mz-discount"><strong>Coupon Code:</strong> {{ model.couponCodes }}</p>  
-                    		{% endif %}
-                    	{% endif %}
-                    {% endfor %}   
-                     
+					<p>{{ model.billingInfo.paymentType }} </p>
+                    <strong>Coupon Code:</strong> <br>  
+					{% for key, value  in model.discount %}
+					<p class="mz-discount"><span> {{ key }} </span>  for  <span>{{ value }}</span></p> 
+					{% endfor %}
 				</div>
 			</div>
 		</div>
@@ -47,7 +43,6 @@
 					<div class="col-sm-2 mz-title qty-col">{{ labels.qty }}</div>
 					<div class="col-sm-2 mz-title price-col">{{ labels.cartPrice }}</div>    
 				</div>
-				
 				{% for item in model.items %}
 					<div class="mz-itemlisting"> 
 						<div class="mz-itemlisting-details">
@@ -86,7 +81,7 @@
 		</div>
 		<div class="col-xs-12" >
 			<div class="merchandise-subtotal text-right">
-				<div>{{ labels.merchandiseSubtotal }}:<span>{{ model.discountedSubtotal|currency }}</span></div>
+				<div>{{ labels.merchandiseSubtotal }}:<span>{{ model.subtotal|currency }}</span></div>
 				<div>Tax:<span>{{ model.taxTotal|currency }}</span></div>
 				<div>Shipping:<span> {{ model.shippingTotal|currency }}</span></div>
 				<div>Total:<span>{{ model.total|currency }}</span></div>

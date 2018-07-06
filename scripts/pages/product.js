@@ -204,23 +204,47 @@
                     });
                 });
         }
-       
-        $(document).on('click','[name=Color]', function(event){  
+       var incr=0;
+        $(document).on('click','[name=Color]', function(event){ 
+            incr=0;
+            if(product.get("mainImage")!==null){
+                product.set({"color":true});
+                var $thisElem = $(event.currentTarget);
+                event.stopImmediatePropagation();
+                var colorcode = $thisElem.attr("data-mz-option");
+                var productcode = product.get("productCode");
+                var sitecontext = HyprLiveContext.locals.siteContext;
+                var cdn = sitecontext.cdnPrefix;
+                var siteID = cdn.substring(cdn.lastIndexOf('-') + 1);
+                var imagefilepath = cdn + '/cms/' + siteID + '/files/' + productcode + '_' + colorcode +'_v1'+'.jpg';
+                product.get("mainImage").imageUrl=imagefilepath;
+                product.get("mainImage").src=imagefilepath;
+                $.each(product.get("content").get("productImages"), function(i, item) {
+                    var j=i+1;
+                    var ver="_v"+j;
+                    imagefilepath = cdn + '/cms/' + siteID + '/files/' + productcode + '_' + colorcode + ver+'.jpg';
+                    item.color = false;
+                    console.log( item.color);
+                    checkImage(imagefilepath, function(response) {
+                        if (response) {
+                            incr++;
+                        }
+                    });
+                });
+          }
           
-            var $thisElem = $(event.currentTarget);
-            event.stopImmediatePropagation();
-            var colorcode = $thisElem.attr("data-mz-option");
-            var productcode = product.get("productCode");
-            var sitecontext = HyprLiveContext.locals.siteContext;
-            var cdn = sitecontext.cdnPrefix;
-            var siteID = cdn.substring(cdn.lastIndexOf('-') + 1);
-            var imagefilepath = cdn + '/cms/' + siteID + '/files/' + productcode + '_' + colorcode +'_v1'+'.jpg';
-            product.get("mainImage").imageUrl=imagefilepath;
-            product.get("mainImage").src=imagefilepath;
-            product.get("content").get("productImages")[0].imageUrl=imagefilepath;
-            product.get("content").get("productImages")[0].src=imagefilepath;
-       
-        });  
+    }); 
+     function checkImage(imagefilepath, callback) {
+        $.get(imagefilepath).done(function() {
+            product.get("content").get("productImages")[incr].src=imagefilepath;
+            product.get("content").get("productImages")[incr].imageUrl=imagefilepath;
+            product.get("content").get("productImages")[incr].color = true;
+            callback(true);
+        }).error(function() {
+            callback(false);
+        });
+
+    }
        
         product.on('addedtocart', function (cartitem) {
             if (cartitem && cartitem.prop('id')) {
