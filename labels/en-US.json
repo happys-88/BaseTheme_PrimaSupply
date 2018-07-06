@@ -611,13 +611,14 @@
   "signUpForSpecialOffers"                 :   "Sign Up For Special Offers & Information",
   "myCart"                                 :   "My cart",
   "summaryOfCharges"                       :   "Summary of charges",
-  "yourSaved"                              :   "Your Saved",
+  "youSaved"                              :   "You Saved",
   "yourOrderEmailText"                     :   "Look for a summary of your order at",
   "questionconnectWithUs"                  :   "Question? connect with us!",
   "saved"                                  :   "Saved",
   "savedMsg"                               :   "Look for email arriving very soon",
   "accountCreated"                         :   "Account Created !!",
-  "orWith"                                 :   "or checkout with", 
+  "orWith"                                 :   "or checkout with",
+  "shipping"                               : "Shipping",  
 
   // directory modal popup
   "optionsPopup"                          : "Almost there.. first tell us what to find for you.",

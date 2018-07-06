@@ -88,7 +88,7 @@
 				<div>Tax:<span>{{ model.taxTotal|currency }}</span></div>
 				<div>Shipping:<span> {{ model.shippingTotal|currency }}</span></div>
 				<div>Total:<span>{{ model.total|currency }}</span></div>
-				<div>You Saved:<span>{{ model.discountTotal|currency }}</span></div>
+				<div>{{ labels.youSaved }}:<span>{{ model.discountTotal|currency }}</span></div> 
 			</div>
 		</div>
 		<div class="col-xs-12">
