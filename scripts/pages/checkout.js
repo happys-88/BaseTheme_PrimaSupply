@@ -227,17 +227,23 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             if (e.target !== $('[data-mz-saved-credit-card]')[0]) {
                 $("[name='savedPaymentMethods']").val('0');
             }
+
             this.model.clear();
             this.model.resetAddressDefaults();
             if(HyprLiveContext.locals.siteContext.checkoutSettings.purchaseOrder.isEnabled) {
                 this.model.resetPOInfo();
+            }
+            if($(e.currentTarget).val() === 'PayPalExpress2') {
+                $('#btn_xpressPaypal').show();
+            } else {
+                $('#btn_xpressPaypal').hide();
             }
         },
         updatePurchaseOrderPaymentTerm: function(e) {
             this.model.setPurchaseOrderPaymentTerm(e.target.value);
         },
         render: function() {
-            preserveElements(this, ['.v-button'], function() {
+            preserveElements(this, ['.v-button', '.p-button'], function() {
                 CheckoutStepView.prototype.render.apply(this, arguments);
             });
             var status = this.model.stepStatus();
@@ -246,6 +252,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
                 require([pageContext.visaCheckoutJavaScriptSdkUrl]);
                 this.visaCheckoutInitialized = true;
             }
+
             if (this.$(".p-button").length > 0) {
               paypal.loadScript();
             }
@@ -513,7 +520,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             this.model.on('userexists', function (user) {
                 me.$('[data-mz-validationmessage-for="emailAddress"]').html(Hypr.getLabel("customerAlreadyExists", user, encodeURIComponent(window.location.pathname)));
             });
-            console.log("INIT");
+            
         },
         submit: function () {
             var self = this;

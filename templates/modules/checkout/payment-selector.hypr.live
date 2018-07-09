@@ -25,6 +25,7 @@
             <input data-mz-value="paymentType" data-mz-new-credit-card data-mz-payment-type id="paymentType-newcreditcard-{{ paymentId }}" name="paymentType" type="radio" class="mz-paymenttype-input" value="CreditCard" {% if model.paymentType == "CreditCard" and not model.usingSavedCard %}checked="true"{% endif %} />
             <label class="mz-paymentselector-label mz-paymentselector-label-newcreditcard mz-checkoutform-radio" for="paymentType-newcreditcard-{{ paymentId }}">{% if model.savedPaymentMethods %}{{ labels.newCreditCard }}{% else %}{{ labels.creditCard }}{% endif %}</label>
         </div>
+        
         {% for externalPayment in siteContext.checkoutSettings.externalPaymentWorkflowSettings %}
             {% if externalPayment.name=="PayPalExpress2" and externalPayment.isEnabled %}  
                 <div class="{% if externalPayment.name=="PayPalExpress2" %}col-md-3 col-sm-12{% else %}col-md-4 col-sm-12{% endif %}">     
@@ -119,12 +120,7 @@
     
     <div class="mz-l-formfieldgroup-row mz-paymentselector-option mz-paymentselector-externalworkflows mz-checkoutform {% if model.paymentType == "PayPalExpress2" %}mz-checkoutform-active{% endif %}"> 
         {% with siteContext.checkoutSettings.externalPaymentWorkflowSettings|findwhere("isEnabled", true) as externalPaymentWorkflowsEnabled %} 
-            {% if externalPaymentWorkflowsEnabled and model.paymentType == "PayPalExpress2" %}
-                {% comment %}
-                <div class="mz-l-formfieldgroup-row">
-                    <div class="mz-paymentselector-label-separator">&ndash; {{ labels.or }} &ndash;</div>
-                </div>
-                {% endcomment %}   
+           
                 {% for externalPayment in siteContext.checkoutSettings.externalPaymentWorkflowSettings %}
                     {% if externalPayment.isEnabled %}
                         {% with externalPayment.name|lower as name %}
@@ -136,7 +132,7 @@
                                     </div>
                                 {% endif %}
                                 {% if name == "paypalexpress2" %}
-                                    <img id="btn_xpressPaypal" class="p-button" alt="Check Out With PayPal" role="button" src="{% make_url "cdn" "/cms/files/paypal-btn.png" %}" /> 
+                                    <img id="btn_xpressPaypal" style="display:none;" class="p-button" alt="Check Out With PayPal" role="button" src="{% make_url "cdn" "/cms/files/paypal-btn.png" %}" /> 
                                         <div class="mz-l-stack-section">
                                             <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
                                             {% include "modules/checkout/billing-address-selector" %}
@@ -147,7 +143,7 @@
                         {% endwith %}  
                     {% endif %}
                 {% endfor %}
-            {% endif %}
+            
         {% endwith %}
     </div>
 

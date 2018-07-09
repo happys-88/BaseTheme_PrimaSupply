@@ -4,9 +4,15 @@
 </div>
 <div class="mz-discount-row">
   <span class="mz-left-col">{{ labels.estimatedTax }}:</span>
-  <span class="mz-right-col">$X.XX</span>
+  <span class="mz-right-col">
+  {% if model.taxTotal > 0 %}	
+  	${{ model.taxTotal }} 
+  {% else %}
+  	$0.00
+  {% endif %}
+  </span>
 </div>
 <div class="mz-discount-row">
   <span class="mz-left-col">{{ labels.estimatedShipping }}:</span>
-  <span class="mz-right-col">$X.XX</span>
+  <span class="mz-right-col">{{ model.shippingTotal }}</span>
 </div>

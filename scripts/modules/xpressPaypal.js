@@ -33,11 +33,13 @@ function($, Api, CartModels, hyprlivecontext, _) {
 
                     //Load the minibrowser with the redirection url in the success handler
                     success: function (token) {
+                      
                         var url = window.paypal.checkout.urlPrefix + token.token;
                         //Loading Mini browser with redirect url, true for async AJAX calls
                         window.paypal.checkout.startFlow(url);
                     },
                     error: function (responseData, textStatus, errorThrown) {
+                      
                         console.log("Error in ajax post " + JSON.stringify(responseData));
                         //Gracefully Close the minibrowser in case of AJAX errors
                         window.paypal.checkout.closeFlow();
@@ -54,7 +56,7 @@ function($, Api, CartModels, hyprlivecontext, _) {
        if (this.scriptLoaded) return;
         this.scriptLoaded = true;
       $.getScript("//www.paypalobjects.com/api/checkout.js").done(function(scrit, textStatus){
-        console.log("Status : "+JSON.stringify(textStatus));
+        console.log("Status Paypal : "+JSON.stringify(textStatus));
 
       }).fail(function(jqxhr, settings, exception) {
         console.log(jqxhr);

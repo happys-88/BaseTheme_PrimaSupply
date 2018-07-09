@@ -19,7 +19,7 @@ define([
                 /*"change [data-mz-value=usShipping]":"populateShipping",
                 "change [data-mz-value=usStates]":"populateShipping"*/
                 "change [data-mz-value=usShipping]":"populateDropDowns",
-                "change [data-mz-value=usStates]":"populateDropDowns",
+                "change [data-mz-value=usStates]":"populateTax",
                 "click [data-mz-qty=minus]": "quantityMinus", 
                 "click [data-mz-qty=plus]": "quantityPlus",
                 "keyup [data-mz-value=quantity]":"updateQuantity"
@@ -29,6 +29,7 @@ define([
             var me = this;
            
             //setup coupon code text box enter.
+            this.listenTo(this.model, "change:taxTotal", this.render);
             this.listenTo(this.model, 'change:couponCode', this.onEnterCouponCode, this);
             this.codeEntered = !!this.model.get('couponCode');
             this.$el.on('keypress', 'input', function (e) {
@@ -49,10 +50,11 @@ define([
                 require([pageContext.visaCheckoutJavaScriptSdkUrl], initVisaCheckout);
             }
             this.listenTo(this.model, 'sync', this.render);
+
             var Ships = localStorage.getItem("shippingData");
             var ratesParse = JSON.parse(Ships);
             this.model.set("shippingDetail", ratesParse);
-            // console.log("SHippingDetail : "+JSON.stringify(this.model));
+            
             if(localStorage.getItem('selectedShipping') && localStorage.getItem('selectedState')) {
                this.model.set({'selectedShipping': localStorage.getItem('selectedShipping')});
                this.model.set({'selectedState': localStorage.getItem('selectedState')}) ;
@@ -62,13 +64,11 @@ define([
            var cart = this.model;
             var productCode = this.model.get("items").models[0].get('product').get('productCode');
             var shipping = localStorage.getItem("selectedShipping");
-
-            /*api.request("GET", "/testroute").then(function (response){
-               console.log("Response 11 : "+JSON.stringify(response));    
-            }, function(err) {
-                console.log("Failure : "+JSON.stringify(err));
-            });*/
-
+            var stateData = $('#usStates :selected').val();
+            if(this.model.get("selectedState")) {
+                stateData = this.model.get("selectedState");
+            }
+            
            /* $.get("/testroute", function(res){ 
                console.log("Response 11 : "+res);   
             }).fail(function(err) {
@@ -76,6 +76,10 @@ define([
             });*/
             
             // console.log("Shipping storage : "+shipping);
+            if(typeof stateData !== 'undefined' || stateData !== null) {
+                this.model.set({'selectedState': stateData});
+                this.calculateTax(stateData);
+            }
             if(typeof shipping === 'undefined' || shipping === null) {
                 var url = "api/commerce/catalog/storefront/shipping/request-rates";
                 api.request("POST", url, {
@@ -123,7 +127,7 @@ define([
                 }).then(function (response){
                    
                    _.defer(function() {
-                        var shippingRates = response.rates[0].shippingRates;
+                    var shippingRates = response.rates[0].shippingRates;
                     localStorage.setItem("shippingData", JSON.stringify(shippingRates));
                     var Ships = localStorage.getItem("shippingData");
                     var ratesParse = JSON.parse(Ships);
@@ -158,7 +162,7 @@ define([
                 });
             } else {
                 // this.render();
-                // console.log("ELSE");
+                console.log("ELSE");
                 var shippingDetailObj = this.model.get("shippingDetail");
                 var selectedShipping = this.model.get("selectedShipping");
                 var selectedMethod = _.find(shippingDetailObj, function(obj) {
@@ -180,7 +184,6 @@ define([
             }
         }),
         render: function() {
-            // console.log("render : "+this.$el.context.location.pathname);
             var cartEmpty = this.model.get("isEmpty");
             if(this.$el.context.location.pathname === '/cart' && !cartEmpty && typeof cartEmpty !== "undefined"){
                 this.beforeRender(); 
@@ -227,7 +230,47 @@ define([
             // this.render();
 
         },
-       populateShipping: function(){
+        calculateTax: function(stateSel){
+            var cart = this.model;
+            if(typeof stateSel !== 'undefined') {
+                localStorage.setItem('selectedState',stateSel); 
+                this.model.set({'selectedState': localStorage.getItem('selectedState')});
+            } else {
+
+            }
+            api.request("POST", "/taxEstimation", {'state':stateSel}).then(function (response){
+                if(response.statusCode == 200) {
+                    var resp = JSON.parse(response.body);
+                    var total = cart.get('discountedTotal');
+                    var tax = total*Number(resp.totalRate);
+                    tax = tax.toPrecision(3);
+                    cart.set({'taxTotal':tax});
+
+                    /*var shippingDetailObj = this.model.get("shippingDetail");
+                    var selectedShipping = this.model.get("selectedShipping");
+                    var selectedMethod = _.find(shippingDetailObj, function(obj) {
+                      if(obj.content.name === selectedShipping){ 
+                          shippingAmount = obj.amount;
+
+                        }
+                    });*/
+                    var shippingAmount = $('#shippingOption :selected').attr("price");
+                    cart.set({'shippingTotal': shippingAmount});
+                    this.populateShipping();
+                } else {
+                    cart.set({'taxTotal':0});
+                }
+            }, function(err) {
+                console.log("Failure : "+JSON.stringify(err));
+            });
+        },
+        populateTax: function(){
+            var stateSel = $('#usStates :selected').val();
+            this.calculateTax(stateSel);            
+        },
+        populateShipping: function(){
+            
+                console.log("selectedState : "+this.model.get("selectedState"));
                 // console.log("Populate Shipping"+JSON.stringify(this.model));
                 var stateSel = $('#usStates :selected').val();
                 var shippingSel = $('#shippingOption :selected').val();
@@ -250,11 +293,11 @@ define([
                 
                 var tot = cart.get('shippingTotal');
                 cart.set({'shippingTotal': shippingAmount});
-                tot = cart.get('shippingTotal');
+                /*tot = cart.get('shippingTotal');
                 var total = cart.get('discountedTotal');
                 var newTotal = Number(tot)+Number(total);
                 // console.log("TOTAL :  ::  "+newTotal);
-                cart.set({'total':newTotal});
+                cart.set({'total':newTotal});*/
                 this.render();
                 
                 
@@ -495,6 +538,7 @@ define([
         
         CartMonitor.setCount(cartModel.count());
 
+        console.log("CART LOADSCRIPT");
         paypal.loadScript(); 
         
 

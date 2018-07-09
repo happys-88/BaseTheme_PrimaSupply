@@ -72,7 +72,6 @@
             //return this.get("Items").reduce(function(total, item) { return item.get('Quantity') + total; },0);
         },
         toOrder: function() {
-            alert("ToOrder");
             var me = this;
             me.apiCheckout().then(function(order) {
                 me.trigger('ordercreated', order);

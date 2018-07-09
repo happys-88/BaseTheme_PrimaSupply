@@ -727,7 +727,6 @@
             validatePaymentType: function(value, attr) {
                 var order = this.getOrder();
                 var payment = order.apiModel.getCurrentPayment();
-                console.log("Payment Type : "+JSON.stringify(payment));
                 var errorMessage = Hypr.getLabel('paymentTypeMissing');
                 if (!value) return errorMessage;
                 if ((value === "StoreCredit" || value === "GiftCard") && this.nonStoreCreditTotal() > 0 && !payment) return errorMessage;
@@ -1513,11 +1512,18 @@
             },
             submit: function () {
                 var order = this.getOrder();
+               /* $.post("/omxXmlConverter", order.toJSON(), function(response) { 
+                   console.log(JSON.stringify(response)+'-------');
+                   order.apiModel.update(_.extend(order.toJSON()));
+                }).fail(function() {
+                    console.log("Failure ");   
+                });*/
                 // just can't sync these emails right
                 order.syncBillingAndCustomerEmail();
                 // This needs to be ahead of validation so we can check if visa checkout is being used.
+                
                 var currentPayment = order.apiModel.getCurrentPayment();
-
+                
                 // the card needs to know if this is a saved card or not.
                 this.get('card').set('isSavedCard', order.get('billingInfo.usingSavedCard'));
                 // the card needs to know if this is Visa checkout (or Amazon? TBD)
@@ -2222,7 +2228,7 @@
                 this.setFulfillmentContactEmail();
 
                 // skip payment validation, if there are no payments, but run the attributes and accept terms validation.
-                var radioVal = $('input[name=paymentType]:checked').val();                
+                var radioVal = $('input[name=paymentType]:checked').val(); 
                 if(radioVal !== 'Check') {
                 if (nonStoreCreditTotal > 0 && this.validate() && ( !this.isNonMozuCheckout() || this.validate().agreeToTerms)) {
                     this.isSubmitting = false;
