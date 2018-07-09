@@ -902,8 +902,7 @@ img[data-mztp]{
             padding: 10px 0;  
             .mz-title{
             	text-transform: uppercase;
-            	text-align: left; 
-            }
+            } 
 		}
 		
 		.mz-itemlisting{ 
@@ -930,8 +929,7 @@ img[data-mztp]{
 				}
 				.mz-product-info{
 					float: left;
-					width: auto; 
-				}
+				}  
 				.mz-product-code {
 					float: left;
 					width: 100%;
@@ -941,12 +939,16 @@ img[data-mztp]{
 		
 	 }
 	.merchandise-subtotal {
-		font-weight: bold;
-		margin-top: 15px; 
+		margin-top: 15px;  
 		span {
-			width: 90px;
 			display: inline-block;
+			&:last-child{
+				width: 90px; 
+			}
 		}
+	 }
+	 .mz-order-total{
+	 	margin-top: 10px;  
 	 }
 	 .print-in-voice {
 		float: right;
