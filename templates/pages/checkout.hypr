@@ -44,6 +44,9 @@
                 <div class="mz-formstep mz-checkoutform-ordersummary" id="order-summary">
                     {% include "modules/checkout/checkout-order-summary" %}
                 </div>
+                <div class="mz-checkoutform-couponcode clearfix" id="coupon-code-field">
+                    {% include "modules/checkout/coupon-code-field" %}
+                </div>  
             </div>
 
             <div class="mz-l-column">

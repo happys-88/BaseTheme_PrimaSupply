@@ -105,10 +105,6 @@
         {% endfor %}
     </div>
 
-    <div class="mz-checkoutform-couponcode clearfix" id="coupon-code-field">
-        {% include "modules/checkout/coupon-code-field" %}
-    </div>
-
     <h3 class="mz-formstep-header mz-checkoutform-header">{{ labels.summaryOfCharges }}</h3>
 
     <div class="mz-ordersummary-price-container">
