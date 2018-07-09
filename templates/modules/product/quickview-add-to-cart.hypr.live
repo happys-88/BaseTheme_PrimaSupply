@@ -1,10 +1,10 @@
 <!-- Add to cart button -->
 <div class="row"> 
     <div class="mz-productdetail-conversion-controls col-sm-3">
-        <div class="qty-block clearfix">
+        <div class="qty-block clearfix {% if not model.inventoryInfo.onlineStockAvailable %}qty-disabled{% endif %}">
                 <span class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="mz-icon arrow-up" aria-hidden="true"></i></span>
                 <span class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="mz-icon arrow-down"  aria-hidden="true"></i></span>
-                <input id="qty-field" class="mz-productdetail-qty text-center mz-carttable-qty-field" readonly type="text" data-mz-cart-item="{{ model.productTypeId }}" min="1" value="1" data-mz-value='quantity' title="Quantity">
+                <input id="qty-field" class="mz-productdetail-qty text-center mz-carttable-qty-field {% if not model.inventoryInfo.onlineStockAvailable %}qty-disabled{% endif %}" readonly type="text" data-mz-cart-item="{{ model.productTypeId }}" min="1" value="1" data-mz-value='quantity' title="Quantity">
             
         </div>
     </div>

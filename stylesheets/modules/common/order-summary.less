@@ -28,21 +28,19 @@
         display: inline-block;
         padding-right: @gutter;
     }
-    .mz-ordersummary-grandtotal {
+
+    .mz-ordersummary-subtotal, .mz-ordersummary-grandtotal { 
         border-top: 1px solid #fff;
-        font-size: @fontSizeLarge;
+        font-size: 16px;
+        font-weight: bold; 
     }
-    .mz-ordersummary-totalvalue, .mz-ordersummary-itemtotal {
-        font-weight: bold;
+    .mz-ordersummary-subtotal{ 
+        border: none; 
     }
-
-        .mz-item-discount {
-        font-weight: bold;
-
-        .mz-item-discountamt {
-            color: #900;
-        }
+    .mz-discount-row{
+        color: @linkColor;      
     }
+    
 }
 
 .mz-ordersummary-checkout {
