@@ -31,9 +31,7 @@
             {% include "modules/common/message-bar" with model=prodMod %} 
             <div id="product-detail" class="mz-productdetail mz-l-stack">
                 {% include "modules/product/product-detail" with model=prodMod %}
-                {% block yotpo-reviews-questions %}
-                    {% include "modules/product/yotpo-review-and-qa" with model=prodMod reviewData=reviews %}
-                {% endblock yotpo-reviews-questions %}
+                
             </div>
         </div>
         <div class="mz-product-prop">
@@ -41,6 +39,10 @@
         </div>
     </div>
 </div>
+
+{% block yotpo-reviews-questions %} 
+    {% include "modules/product/yotpo-review-and-qa" with model=prodMod reviewData=reviews %}
+{% endblock yotpo-reviews-questions %}
 
 {% dropzone "productDropzone" scope="page" %}
 

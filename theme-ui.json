@@ -60,9 +60,14 @@
                     "fieldLabel": "Show product short description in product lists"
                 },
                 {
-                    "xtype": "mz-input-checkbox",
+                    "xtype": "mz-input-checkbox", 
                     "name": "listVolumePricing",
-                    "fieldLabel": "Show volume pricing bands in product lists"
+                    "fieldLabel": "Show volume pricing bands in product lists" 
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "showMSRP", 
+                    "fieldLabel": "Show MSRP"   
                 }
             ]
         },
