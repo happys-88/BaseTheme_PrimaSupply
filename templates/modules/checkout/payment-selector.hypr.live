@@ -132,11 +132,13 @@
                                     </div>
                                 {% endif %}
                                 {% if name == "paypalexpress2" %}
-                                    <img id="btn_xpressPaypal" style="display:none;" class="p-button" alt="Check Out With PayPal" role="button" src="{% make_url "cdn" "/cms/files/paypal-btn.png" %}" /> 
+                                    <img id="btn_xpressPaypal" style="display:none;" class="p-button" alt="Check Out With PayPal" role="button" src="{% make_url "cdn" "/cms/files/paypal-btn.png" %}" />
+                                    {% if externalPaymentWorkflowsEnabled and model.paymentType == "PayPalExpress2" %} 
                                         <div class="mz-l-stack-section">
                                             <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
                                             {% include "modules/checkout/billing-address-selector" %}
                                         </div>
+                                    {% endif %}
                                     
                                 {% endif %}
                             </div> 
