@@ -69,13 +69,13 @@
             if(this.model.get("mainImage")!==null){
                 $('.zoomContainer').remove();
                 var src = this.model.get("mainImage").imageUrl;
-                 //console.log(src);
                 if (switchSrc) {
                 $('.zoomContainer').remove();
                 this.$('[data-mz-productimage-main]').prop('src', switchSrc).prop('alt', switchSrc);   
                 }
                 
                 if(typeof switchSrc === "undefined"){
+                   // 
                     if(this.model.get("showColorIcon")){
                         $('.zoomContainer').remove();
                         this.elevateZoomAfter(src);

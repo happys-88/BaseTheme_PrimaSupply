@@ -207,6 +207,7 @@
        var incr=0;
         $(document).on('click','[name=Color]', function(event){ 
             incr=0;
+           
             if(product.get("mainImage")!==null){
                 product.set({"color":true});
                 var $thisElem = $(event.currentTarget);
@@ -217,20 +218,28 @@
                 var cdn = sitecontext.cdnPrefix;
                 var siteID = cdn.substring(cdn.lastIndexOf('-') + 1);
                 var imagefilepath = cdn + '/cms/' + siteID + '/files/' + productcode + '_' + colorcode +'_v1'+'.jpg';
+                console.log(imagefilepath);
                 product.get("mainImage").imageUrl=imagefilepath;
                 product.get("mainImage").src=imagefilepath;
+                product.get("content").get("productImages")[0].src=imagefilepath;
+                product.get("content").get("productImages")[0].imageUrl=imagefilepath;
                 $.each(product.get("content").get("productImages"), function(i, item) {
                     var j=i+1;
                     var ver="_v"+j;
                     imagefilepath = cdn + '/cms/' + siteID + '/files/' + productcode + '_' + colorcode + ver+'.jpg';
                     item.color = false;
-                    console.log( item.color);
                     checkImage(imagefilepath, function(response) {
                         if (response) {
                             incr++;
                         }
                     });
                 });
+                if(incr===0){
+                    product.get("content").get("productImages")[0].src=imagefilepath;
+                    product.get("content").get("productImages")[0].imageUrl=imagefilepath;
+                    product.get("content").get("productImages")[0].color = true;
+                }
+                
           }
           
     }); 
