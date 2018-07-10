@@ -99,8 +99,7 @@
                 var contacts = this.getOrder().get('customer').get('contacts').toJSON();
                 return contacts && contacts.length > 0 && contacts;
             },
-            initialize: function () {
-               
+            initialize: function () {               
                 var self = this;
                 this.on('change:contactId', function (model, newContactId) {
                     if (!newContactId || newContactId === 'new') {
@@ -109,6 +108,7 @@
                         model.unset('id');
                         model.unset('firstName');
                         model.unset('lastNameOrSurname');
+                        this.stepStatus('incomplete');
                     } else {
                         model.set(model.getOrder().get('customer').get('contacts').get(newContactId).toJSON(), {silent: true});
                     }
@@ -1531,10 +1531,10 @@
                     this.get('card').set('isVisaCheckout', currentPayment.paymentWorkflow.toLowerCase() === 'visacheckout');
                 }
 
-                var radioVal = $('input[name=paymentType]:checked').val();                
+                var radioVal = $('input[name=paymentType]:checked').val(); 
+                console.log("Selected : "+radioVal);
                 var val = this.validate();
-                
-                if(radioVal !== 'Check') {
+                if(radioVal !== 'Check' && radioVal !== 'PayPalExpress2') {
                     if (this.nonStoreCreditTotal() > 0 && val) {
                         // display errors:
                         var error = {"items":[]};
@@ -1552,6 +1552,7 @@
                         return false;
                     }
                 } else {
+                    console.log("Val : "+JSON.stringify(val));
                     if(_.has(val, "billingContact.email")) {
                        if (this.nonStoreCreditTotal() > 0 && val) {
                             // display errors:
@@ -2230,6 +2231,7 @@
                 // skip payment validation, if there are no payments, but run the attributes and accept terms validation.
                 var radioVal = $('input[name=paymentType]:checked').val(); 
                 if(radioVal !== 'Check') {
+                // console.log("INside : "+JSON.stringify(this.validate()));
                 if (nonStoreCreditTotal > 0 && this.validate() && ( !this.isNonMozuCheckout() || this.validate().agreeToTerms)) {
                     this.isSubmitting = false;
                     return false;

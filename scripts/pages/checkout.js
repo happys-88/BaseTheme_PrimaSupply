@@ -207,9 +207,9 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             "change [data-mz-digital-credit-amount]": "applyDigitalCredit",
             "change [data-mz-digital-add-remainder-to-customer]": "addRemainderToCustomer",
             "change [name='paymentType']": "resetPaymentData",
+            "input  [name='security-code'],[name='credit-card-number'],[name='shippingphone']": "allowDigit",
             "change [data-mz-purchase-order-payment-term]": "updatePurchaseOrderPaymentTerm"
         },
-
         initialize: function () {
             // this.addPOCustomFieldAutoUpdate();
             this.listenTo(this.model, 'change:digitalCreditCode', this.onEnterDigitalCreditCode, this);
@@ -223,7 +223,10 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             this.codeEntered = !!this.model.get('digitalCreditCode');
 
         },
-        resetPaymentData: function (e) {
+        allowDigit: function(e) {
+            e.target.value = e.target.value.replace(/[^\d]/g, '');
+        },
+        resetPaymentData: function(e) {
             if (e.target !== $('[data-mz-saved-credit-card]')[0]) {
                 $("[name='savedPaymentMethods']").val('0');
             }

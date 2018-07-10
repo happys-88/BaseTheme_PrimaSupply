@@ -67,16 +67,16 @@ require(["modules/jquery-mozu", "underscore", 'modules/api', "hyprlive", "module
                 deals = $('#PSBlogs').is(':checked') ? deals+","+$('#PSBlogs').val() : deals+","+'';
                 var email = $('#emailId').val();
                 if(deals !== '') {
-                    /*api.request("GET", "/mailchimp", {accountId:email, deals:deals}).then(function (response){
+                    api.request("POST", "/mailchimp", {'accountId':email, 'deals':deals}).then(function (response){
                        console.log("Response 22 : "+JSON.stringify(response));    
                     }, function(err) {
                         console.log("Failure : "+JSON.stringify(err));
-                    });*/
-                    $.get("/mailchimp", {accountId:email, deals:deals},  function(res){ 
+                    });
+                    /*$.get("/mailchimp", {accountId:email, deals:deals},  function(res){ 
                        console.log("Success!!");   
                     }).fail(function(err) {
                         console.log("Failure "+JSON.stringify(err));   
-                    });
+                    });*/
                 }
             }
         });

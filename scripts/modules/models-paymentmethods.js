@@ -41,7 +41,6 @@
             },
             {
                 minLength:13,
-                pattern: 'number',
                 msg: Hypr.getLabel('cardNumberInvalid')  
             }],
             expireMonth: {

@@ -162,7 +162,6 @@ define([
                 });
             } else {
                 // this.render();
-                console.log("ELSE");
                 var shippingDetailObj = this.model.get("shippingDetail");
                 var selectedShipping = this.model.get("selectedShipping");
                 var selectedMethod = _.find(shippingDetailObj, function(obj) {
@@ -239,6 +238,7 @@ define([
 
             }
             api.request("POST", "/taxEstimation", {'state':stateSel}).then(function (response){
+                // console.log("Tax Estimation : "+JSON.stringify(response));
                 if(response.statusCode == 200) {
                     var resp = JSON.parse(response.body);
                     var total = cart.get('discountedTotal');
@@ -269,8 +269,6 @@ define([
             this.calculateTax(stateSel);            
         },
         populateShipping: function(){
-            
-                console.log("selectedState : "+this.model.get("selectedState"));
                 // console.log("Populate Shipping"+JSON.stringify(this.model));
                 var stateSel = $('#usStates :selected').val();
                 var shippingSel = $('#shippingOption :selected').val();
@@ -420,7 +418,6 @@ define([
         removeCoupon: function() {
             var self = this;
             var getCouponCode = this.$el.find('.mz-coupon-detail .mz-coupon-code').attr('id');
-            console.log(getCouponCode);  
 
             var apiData = require.mozuData('apicontext');  
             blockUiLoader.globalLoader();
@@ -537,8 +534,6 @@ define([
         window.cartView = cartViews;
         
         CartMonitor.setCount(cartModel.count());
-
-        console.log("CART LOADSCRIPT");
         paypal.loadScript(); 
         
 
