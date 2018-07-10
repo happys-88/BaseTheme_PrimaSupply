@@ -50,7 +50,7 @@
         	                				{{v.value}}
         			                    {% endfor %}
         	                		{% endif %}
-        	                		{% if property.name === 'Free liftgate' %}
+        	                		{% if property.name === 'Free Liftgate' %}
         	                			{% for v in property.values %}
         			                        {% if v.stringValue === true or v.value === true %}
         				                      	{% if itemArray.liftGate === true %}
@@ -80,7 +80,7 @@
         	            	</div>
         	                <div class="col-md-6 col-sm-12">
         	                	{% for property in item.product.properties %}
-        	                		{% if property.name === 'Free liftgate' %}
+        	                		{% if property.name === 'Free Liftgate' %}
         	                			{% for v in property.values %}
         	                				String valiue : {{ v.stringValue }}
         			                        {% if v.stringValue === true or v.value === true %}

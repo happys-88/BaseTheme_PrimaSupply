@@ -39,7 +39,7 @@
 
                                 {% with labels.tbybProductCode|string_format(prodCode, item.id) as tbybItem %}
                                     {% for property in item.product.properties %}
-                                        {% if property.name == 'Free liftgate' %}
+                                        {% if property.name == 'Free Liftgate' %}
                                             {% for v in property.values %}
                                                 {% if v.stringValue == true or v.value == true %}
                                                     {% if liftGateMsgShow == 'True' %}
