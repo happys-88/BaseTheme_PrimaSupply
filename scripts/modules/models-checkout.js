@@ -263,9 +263,6 @@
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     this.set('orderAttributes', storefrontOrderAttributes);
                 }
-                this.set('liftGateTotal','');
-                this.set('liftGateVal','false');
-                this.set('freightShipmentVal','false');
                 var liftGateProducts = [];
                 var items = require.mozuData('checkout').items;
                 var i = 0;
@@ -278,7 +275,7 @@
                     
                     for(var propindex in properties){
                         var property = properties[propindex];
-                        if(property.name === 'Free liftgate' && property.values[0].value === true ){
+                        if(property.name === 'Free Liftgate' && property.values[0].value === true ){
                             this.set('liftGateProduct',true);
                             this.set('liftGatePrice', HyprLiveContext.locals.themeSettings.liftGatePrice);
                             liftGateProducts[i] = item;
@@ -299,7 +296,7 @@
                     msg: Hypr.getLabel('chooseShippingMethod')
                 }
             },
-            helpers: ['modelItems'],
+            helpers: ['modelItems', 'liftGateSelected', 'freightShipmentSelected'],
             modelItems: function() {
                 var items = this.getOrder().get('items');
                 
@@ -334,6 +331,30 @@
                 });
                 lineItems.push({primaShip:primaShipProds, distShip:distributorShipProds, liftGate: liftGateSelected, freightShipment: freightShipmentSelected});
                 return lineItems;
+            },
+            liftGateSelected: function() {
+                var order = this.getOrder();
+                var liftGateSelected = false;
+                _.each(order.attributes.attributes, function(attributes) {
+                    if (attributes.fullyQualifiedName === 'tenant~lift-gate') {
+                        if (attributes.values[0] === 'True') {
+                            liftGateSelected = true; 
+                        } 
+                    }
+                });
+                return liftGateSelected;
+            },
+            freightShipmentSelected: function() {
+                var order = this.getOrder();
+                var freightShipmentSelected = false;
+                _.each(order.attributes.attributes, function(attributes) {
+                    if(attributes.fullyQualifiedName === 'tenant~freight-shipment') {
+                        if (attributes.values[0] === 'True') {
+                            freightShipmentSelected = true; 
+                        } 
+                    }
+                });
+                return freightShipmentSelected;
             },
             refreshShippingMethods: function (methods) {
                 this.set({
@@ -377,6 +398,12 @@
                     this.set(newMethod);
                     this.applyShipping(resetMessage);
                 }
+                var order = this.getOrder();
+                var dutyAmount = 0;
+                if(this.liftGateSelected() === true){
+                    dutyAmount = parseFloat(HyprLiveContext.locals.themeSettings.liftGatePrice);
+                }
+                order.apiModel.update(_.extend(order.toJSON(), {dutyAmount: dutyAmount }));
             },
             updateLiftGateOption: function (liftGateVal) {
               var order = this.getOrder(),
@@ -386,12 +413,10 @@
                             shopperNotes: order.get('shopperNotes').toJSON()
                         });
                     }];
-                this.set('liftGateVal',liftGateVal);
-                this.set('liftGateMsg','');
+                
                 var dutyAmount = 0;
                 if(liftGateVal == 'true'){
                     dutyAmount = parseFloat(HyprLiveContext.locals.themeSettings.liftGatePrice);
-                   this.set('liftGateMsg', Hypr.getLabel('liftGateMsg'));
                 }
                 var updateAttrs = [];
                 updateAttrs.push({
@@ -404,7 +429,6 @@
                 order.apiModel.update(_.extend(order.toJSON(), {dutyAmount: dutyAmount }));
             },
             updateFreightShipment: function (freightShipmentVal) {
-                this.set('freightShipmentVal',freightShipmentVal);
                 var order = this.getOrder(),
                     process = [function() {
                         return order.update({
@@ -2172,8 +2196,18 @@
                     billingContact.set("address", null);
                 }
 
-                var liftGateVal = this.get('fulfillmentInfo').get('liftGateVal');
-                var freightShipmentVal = this.get('fulfillmentInfo').get('freightShipmentVal');
+                var liftGateVal;
+                var freightShipmentVal;
+                if (this.get('fulfillmentInfo').liftGateSelected() === true) {
+                    liftGateVal = 'true';
+                } else {
+                    liftGateVal = 'false';
+                }
+                if (this.get('fulfillmentInfo').freightShipmentSelected() === true) {
+                    freightShipmentVal = 'true';
+                } else {
+                    freightShipmentVal = 'false';
+                }
                 var tbybVal = this.get('tenant~trybeforebuy');
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {

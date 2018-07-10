@@ -212,6 +212,8 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
         },
         initialize: function () {
             // this.addPOCustomFieldAutoUpdate();
+            this.model.clear();
+            this.model.resetAddressDefaults();
             this.listenTo(this.model, 'change:digitalCreditCode', this.onEnterDigitalCreditCode, this);
             this.listenTo(this.model, 'orderPayment', function (order, scope) {
                     this.render();

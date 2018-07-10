@@ -42,19 +42,20 @@
   	
   	.mz-title{
   		float: left;
-  		padding: 0 15px; 
+  		padding: 0 10px; 
+      font-size: 14px;  
   		&.item-col{
-  			width: 450px;            
+  			width: 400px;             
   		}
-  		&.qty-col, &.price-col{   
-  			width: 100px;         
+  		&.qty-col, &.price-each-col, &.price-col{    
+  			width: 105px;            
   		}
   	}
   	.mz-itemlisting{
   		.mz-itemlisting-details{
   			.mz-itemlisting-thumb-sku{
 				float: left; 
-				width: 450px;   
+				width: 400px;      
 				padding: 0;  
 				.mz-itemlisting-thumb{
 					float: left;
@@ -68,13 +69,14 @@
 				}
 				.mz-product-info{
 					float: left; 
-					width: 290px !important;       
+					width: 280px !important;        
 				} 	
 			}
 
-			.mz-itemlisting-quantity, .mz-itemlisting-price{  
+			.mz-itemlisting-quantity, .mz-itemlisting-price-each, .mz-itemlisting-price{   
 				float: left; 
-				width: 100px;        
+				width: 105px; 
+        text-align: right;           
 			}  
   			
   		}

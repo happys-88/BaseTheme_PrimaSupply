@@ -1,4 +1,4 @@
-<div class="yotpo-review-ques-ansr">
+<div class="col-xs-12 yotpo-review-ques-ansr"> 
   <ul class="nav nav-tabs">
     <li class="active"><a href="#tab1" data-toggle="tab">{{ labels.reviews }}</a></li>  
     <li><a href="#tab2" data-toggle="tab">{{ labels.questions }}</a></li>
