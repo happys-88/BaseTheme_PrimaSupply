@@ -97,7 +97,6 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                         }
                     }
                 }
-                console.log('count : '+count);
                 option.stockCount = count;
                 options[i] = option;
             }
@@ -112,7 +111,6 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
         },500),
         onOptionChange: function (e) {
             
-            console.log(JSON.stringify(this.model));
             this.model.set('addToCartErr', '');
             var $optionEl = $(e.currentTarget);
             var productCode = $optionEl.val();
@@ -128,7 +126,6 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                 optionEl = $optionEl[0],
                 isPicked = (optionEl.type !== "checkbox" && optionEl.type !== "radio") || optionEl.checked,
                 option = this.model.get('options').get(id);
-                
             if (option) {
                 if (option.get('attributeDetail').inputType === "YesNo") {
                     option.set("value", isPicked);
@@ -292,7 +289,6 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                             }
                         }
                     }
-                    console.log('count : '+count);
                     option.stockCount = count;
                     options[i] = option;
                 }
@@ -368,7 +364,6 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                         }
                     }
                 }
-                console.log('count : '+count);
                 option.stockCount = count;
                 options[i] = option;
             }
@@ -392,7 +387,6 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                 optionEl = $optionEl[0],
                 isPicked = (optionEl.type !== "checkbox" && optionEl.type !== "radio") || optionEl.checked,
                 option = this.model.get('options').get(id);
-                
             if (option) {
                 if (option.get('attributeDetail').inputType === "YesNo") {
                     option.set("value", isPicked);
@@ -562,7 +556,6 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                             }
                         }
                     }
-                    console.log('count : '+count);
                     option.stockCount = count;
                     options[i] = option;
                 }

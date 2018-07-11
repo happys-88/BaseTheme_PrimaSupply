@@ -14,7 +14,7 @@
     var ProductView = Backbone.MozuView.extend({
         templateName: 'modules/product/product-detail',
         additionalEvents: {
-            "change [data-mz-product-option]": "onOptionChange",
+            "click [data-mz-product-option]": "onOptionChange",
             "blur [data-mz-product-option]": "onOptionChange",
             "change [data-mz-value='quantity']": "onQuantityChange",
             "keyup input[data-mz-value='quantity']": "onQuantityChange",
@@ -62,16 +62,83 @@
                 optionEl = $optionEl[0],
                 isPicked = (optionEl.type !== "checkbox" && optionEl.type !== "radio") || optionEl.checked,
                 option = this.model.get('options').get(id);
+
+                var newValArr = [];
+                var n = 0;
+                n = parseInt(n, 10);
+                if (option.get('attributeDetail').dataType == "ProductCode") {
+                    if (!isPicked) {
+                        var oldVal = option.get('value');
+                        if (oldVal !== undefined && oldVal.length > 0) {
+                            var no = 0;
+                            no = parseInt(no, 10);
+
+                            var c = 0;
+                            c = parseInt(c, 10);
+
+                            var length = oldVal.length;
+                            var valIndex = oldVal.indexOf(newValue);
+                            while(no < length) {
+                                if (no !== valIndex) {
+                                    newValArr[c] = oldVal[no];
+                                    c++;
+                                }
+                                no++; 
+                            }
+                            if (newValArr.length > 0) {
+                                newValue = [];
+                                newValue = newValArr;                                
+                            } else {
+                                newValue = 'null';
+                            }
+                        }
+                        isPicked = true;
+                        n++;
+                    }
+                }
             if (option) {
                 if (option.get('attributeDetail').inputType === "YesNo") {
                     option.set("value", isPicked);
                 } else if (isPicked) {
-                    oldValue = option.get('value');
+                    if (n === 0) {
+                        oldValue = option.get('value');
+                        if (option.get('attributeDetail').dataType == "ProductCode") {
+                            var val = newValue;
+                            if (oldValue !== undefined && oldValue.length > 0) {
+                                newValue = [];
+                                for (var i = 0; i < oldValue.length; i++) {
+                                    newValue[i] = oldValue[i];
+                                }
+                                newValue[oldValue.length] = val;
+                            } else {
+                                newValue = [];
+                                newValue[0] = val;
+                            }
+                        }
+                    } else {
+                        oldValue = option.get('value');
+                    }
                     if (oldValue !== newValue && !(oldValue === undefined && newValue === '')) {
                         option.set('value', newValue);
                     }
                 }
             }
+            var options = JSON.parse(JSON.stringify(this.model.get('options')));
+            var addons = this.model.get('addons');
+            for (var k = 0; k < options.length; k++) {
+                var addonValues = addons[k].values;
+                var optionValues = options[k].values;
+                for (var j = 0; j < optionValues.length; j++) {
+                    var addonValue = addonValues[j];
+                    var optionValue = optionValues[j];
+                    optionValue.productUrl = addonValue.productUrl;
+                    optionValue.imageFilePath = addonValue.imageFilePath;
+                    optionValue.imageData = addonValue.imageData;
+                    optionValues[j] = optionValue;
+                }
+                options[k].values = optionValues;
+            }
+            this.model.set('addons', options);
         },
         addToCart: function () {
             this.model.addToCart();
@@ -122,6 +189,11 @@
                     }
                 }
             });
+            var hasOptions = false;
+            var c = 0;
+            c = parseInt(c, 10);
+            var prodModel = this.model;
+            var productCodes = [];
             var options = JSON.parse(JSON.stringify(this.model.get('options')));
             var count = 0;
             count = parseInt(count, 10);
@@ -129,29 +201,100 @@
                 var option = options[j];
                 if (option.attributeFQN == "tenant~size" || option.attributeFQN == "tenant~color" || option.attributeDetail.dataType == "ProductCode") {
                     count++;
+                    if (option.attributeDetail.dataType == "ProductCode") {
+                        var optionValues = option.values;
+                        for (var k = 0; k < optionValues.length; k++) {
+                            var optionValue = optionValues[k];
+                            var productCode;
+                            if(optionValue.stringValue.indexOf(':') !== -1) {
+                                productCode = optionValue.value.slice(0,optionValue.value.lastIndexOf("-"));
+                            } else {
+                                productCode = optionValue.value;
+                            } 
+                            if (!(_.contains(productCodes, productCode))) {
+                                productCodes[c] = productCode;
+                                c++;
+                            }
+                            
+                        }
+                        
+                    }
                 } 
+                if (!hasOptions && option.attributeDetail.dataType != "ProductCode") {
+                    hasOptions = true;
+                }
             }
+            if (productCodes.length > 0) {
+                var str = "";
+                for (var i = 0; i < productCodes.length; i++) {
+                    if (i == productCodes.length-1) {
+                        str += "productCode eq "+ "'" + productCodes[i] + "'";
+                    } else {
+                        str += "productCode eq "+ "'" + productCodes[i] + "'"+ " or ";
+                    }
+                }
+                api.request("GET", "/api/commerce/catalog/storefront/products/?filter=(" + str + ")" ).then(function(response){
+                    var items = response.items;
+                    for (var j = 0; j < options.length; j++) {
+                        var option = options[j];
+                        if (option.attributeDetail.dataType == "ProductCode") {
+                            var optionValues = option.values;
+                            for (var k = 0; k < optionValues.length; k++) {
+                                var optionValue = optionValues[k];
+                                var productCode;
+                                var colorCode;
+                                if(optionValue.stringValue.indexOf(':') !== -1) {
+                                    productCode = optionValue.value.slice(0,optionValue.value.lastIndexOf("-"));
+                                    if (optionValue.stringValue.indexOf('color') !== -1) {
+                                        var colorStr = optionValue.stringValue.slice(optionValue.stringValue.indexOf('color'));
+                                        if (colorStr.indexOf(',') !== -1) {
+                                            colorCode = ((colorStr.split(':')[1]).split(',')[0]).trim();
+                                        } else if (colorStr.indexOf(')') !== -1) {
+                                            colorCode = ((colorStr.split(':')[1]).split(')')[0]).trim();
+                                        }
+                                        var sitecontext = HyprLiveContext.locals.siteContext;
+                                        var cdn = sitecontext.cdnPrefix;
+                                        var siteID = cdn.substring(cdn.lastIndexOf('-') + 1);
+                                        optionValue.imageFilePath = cdn + '/cms/' + siteID + '/files/' + productCode + '_' + colorCode +'_v1'+'.jpg';
+
+                                    } 
+                                } else {
+                                    productCode = optionValue.value;
+                                } 
+                                
+                                var product = findElement(items, productCode);
+                                var productImages = product.content.productImages;
+                                if (productImages.length > 0) {
+                                    optionValue.imageData = productImages[0];
+                                }
+
+                                optionValue.productUrl = "/"+productCode+"/p/"+productCode;
+                                optionValues[k] = optionValue;
+                            }
+                            option.values = optionValues;
+                            options[j] = option;
+                        }
+                    
+                    }
+                    prodModel.set('addons', options);
+                    prodModel.set('hasOptions', hasOptions);
+                    me.render();
+                });
+            }
+            
             if (count == options.length) {
                 this.model.set('showColorIcon', true);
             }
-            var productModel = this.model;
-            api.request("GET", "/api/commerce/carts/current/items").then(function(response) {
-                var items = response.items;
-                productModel.set('viewOnCart', true);
-                for (var k = 0; k < items.length; k++) {
-                    var item = items[k];
-                    if (item.product.productCode == productModel.get('productCode')) {
-                        productModel.set('viewOnCart', false);
-                        me.render();
-                        break;
-                    }
-                }
-            });
         }
     });
 
     RVIModel.renderRVI('#rvi-container');
-
+    function findElement(arr, element) {
+        var product = arr.find(function(el) {
+          return el.productCode == element;
+        });
+        return product;
+    }
     $(document).ready(function () {
 
         var product = ProductModels.Product.fromCurrent();

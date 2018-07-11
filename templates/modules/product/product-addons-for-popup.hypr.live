@@ -7,7 +7,7 @@
                     <div class="mz-productoptions-optioncontainer">
                         <div class="mz-productoptions-valuecontainer">
                             <select class="mz-productoptions-option form-control" data-mz-product-option="{{ option.attributeFQN }}">
-                                {% if not option.isMultiValue %}<option>{{ labels.select }} {{ option.attributeDetail.name }}</option>{% endif %}
+                                <option>{{ labels.select }} {{ option.attributeDetail.name }}</option>
                                 {% for value in option.values %}
                                     {% if value.bundledProduct.inventoryInfo.onlineStockAvailable > 0 %}
                                         <option {% if not value.isEnabled %} class="is-disabled" {% endif %} {% if value.isSelected %}selected="true"{% endif %} value="{{value.value}}">{{value.stringValue|default(value.value)}}
@@ -32,7 +32,7 @@
                     <div class="mz-productoptions-optioncontainer">
                         <div class="mz-productoptions-valuecontainer">
                             <select class="mz-productoptions-option form-control" data-mz-product-option="{{ option.attributeFQN }}">
-                                {% if not option.isMultiValue %}<option>{{ labels.select }} {{ option.attributeDetail.name }}</option>{% endif %}
+                                <option>{{ labels.select }} {{ option.attributeDetail.name }}</option>
                                 {% for value in option.values %}
                                     {% if value.bundledProduct.inventoryInfo.onlineStockAvailable > 0 %}
                                         <option {% if not value.isEnabled %} class="is-disabled" {% endif %} {% if value.isSelected %}selected="true"{% endif %} value="{{value.value}}">{{value.stringValue|default(value.value)}}
