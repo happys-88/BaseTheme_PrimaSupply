@@ -217,7 +217,6 @@
 </div>
 
 <div class="mz-options-section">
-  {{ model.hasOptions }}
   {% if model.options and model.options.length > 0 and model.hasOptions === true %}
     <h4 class="mz-l-stack-sectiontitle">{{ labels.options }}</h4>
     <div class="col-md-8">
