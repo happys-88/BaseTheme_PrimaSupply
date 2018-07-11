@@ -222,7 +222,8 @@ $(document).on('click', '.mz-quick-view', function (event) {
                 });
             },
             closeQuickviewModal: function() {
-                $('#quickViewModal').modal('hide');
+                //$('#quickViewModal').modal('hide');
+                $('.modal.in').modal().hide();
             },
             colorswatch: function (event) {
                 if(typeof this.model.get('productCode') !== 'undefined') {

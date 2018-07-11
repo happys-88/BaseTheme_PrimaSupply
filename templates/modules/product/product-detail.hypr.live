@@ -217,7 +217,7 @@
 </div>
 
 <div class="mz-options-section">
-  {% if model.options and model.options.length > 0 %}
+  {% if model.options and model.options.length > 0 and model.hasOptions === true %}
     <h4 class="mz-l-stack-sectiontitle">{{ labels.options }}</h4>
     <div class="col-md-8">
       <div class="mz-productdetail-options mz-l-stack-section">
@@ -229,6 +229,18 @@
     <p>Warranty: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     <p>Warranty: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
   </div>
+  {% if model.addons and model.addons.length > 0 %}
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="mz-l-stack-sectiontitle">{{ labels.addons }}</h4>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="mz-productdetail-options mz-l-stack-section">
+        {% include "modules/product/product-addons" %}
+      </div>
+    </div>
+  {% endif %}
 </div>
 
 {% if model.content.productShortDescription and themeSettings.showProductDetailShortDesc %}
