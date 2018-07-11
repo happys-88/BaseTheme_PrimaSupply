@@ -388,6 +388,7 @@
                 
             },
             updateShippingMethod: function (code, resetMessage) {
+                var me = this;
                 var available = this.get('availableShippingMethods'),
                     newMethod = _.findWhere(available, { shippingMethodCode: code }),
                     lowestValue = _.min(available, function(ob) { return ob.price; }); // Returns Infinity if no items in collection.
@@ -403,7 +404,13 @@
                 if(this.liftGateSelected() === true){
                     dutyAmount = parseFloat(HyprLiveContext.locals.themeSettings.liftGatePrice);
                 }
-                order.apiModel.update(_.extend(order.toJSON(), {dutyAmount: dutyAmount }));
+                // order.apiModel.update(_.extend(order.toJSON(), {dutyAmount: dutyAmount }));
+                 order.apiModel.update(_.extend(order.toJSON(), {dutyAmount: dutyAmount }))
+                        .ensure(function(err) {
+                            if(resetMessage) {
+                                me.parent.messages.reset(me.parent.get('messages'));
+                            }
+                        });
             },
             updateLiftGateOption: function (liftGateVal) {
               var order = this.getOrder(),
@@ -427,6 +434,7 @@
                     order.apiUpdateAttributes(updateAttrs);
                 }
                 order.apiModel.update(_.extend(order.toJSON(), {dutyAmount: dutyAmount }));
+               
             },
             updateFreightShipment: function (freightShipmentVal) {
                 var order = this.getOrder(),
@@ -751,7 +759,9 @@
             validatePaymentType: function(value, attr) {
                 var order = this.getOrder();
                 var payment = order.apiModel.getCurrentPayment();
+                // console.log("Payment : "+JSON.stringify(payment));
                 var errorMessage = Hypr.getLabel('paymentTypeMissing');
+                // console.log("Payment Error : "+JSON.stringify(errorMessage));
                 if (!value) return errorMessage;
                 if ((value === "StoreCredit" || value === "GiftCard") && this.nonStoreCreditTotal() > 0 && !payment) return errorMessage;
 
@@ -1556,7 +1566,7 @@
                 }
 
                 var radioVal = $('input[name=paymentType]:checked').val(); 
-                console.log("Selected : "+radioVal);
+                // console.log("Selected : "+radioVal);
                 var val = this.validate();
                 if(radioVal !== 'Check' && radioVal !== 'PayPalExpress2') {
                     if (this.nonStoreCreditTotal() > 0 && val) {
@@ -1576,7 +1586,8 @@
                         return false;
                     }
                 } else {
-                    console.log("Val : "+JSON.stringify(val));
+                    // console.log("Val : "+JSON.stringify(val));
+                    // console.log("Has : "+_.has(val, "billingContact.email"));
                     if(_.has(val, "billingContact.email")) {
                        if (this.nonStoreCreditTotal() > 0 && val) {
                             // display errors:
@@ -1602,14 +1613,18 @@
                 if(this.get('paymentType').toLowerCase() === "purchaseorder") {
                     this.get('purchaseOrder').inflateCustomFields();
                 }
-
+                // console.log("currentPayment : "+JSON.stringify(currentPayment));
                 if (!currentPayment) {
+                    // console.log("111");
                     return this.applyPayment();
                 } else if (this.hasPaymentChanged(currentPayment)) {
+                    // console.log("222");
                     return order.apiVoidPayment(currentPayment.id).then(this.applyPayment);
                 } else if (card.get('cvv') && card.get('paymentServiceCardId')) {
+                    // console.log("333");
                     return card.apiSave().then(this.markComplete, order.onCheckoutError);
                 } else {
+                    // console.log("444");
                    this.markComplete();
                 }
                 
@@ -1997,6 +2012,17 @@
                 }, function (error) {
                     self.customerCreated = false;
                     self.isSubmitting = false;
+                    if(error.name == 'ADD_CUSTOMER_FAILED') {
+                        var msg = error.message;
+                        if(msg.toLowerCase().indexOf('missing') > -1 ) {
+                            var val = msg.substr(msg.indexOf('Missing'), msg.length);
+                            val = val.split(':');
+                            msg = val[1].trim();
+                            msg = msg.substr(msg.indexOf(' ')+1, msg.length);
+                        }
+                        // error.push('message', "Email Already Exist");
+                        error.message = msg;
+                    }
                     throw error;
                 });
             },

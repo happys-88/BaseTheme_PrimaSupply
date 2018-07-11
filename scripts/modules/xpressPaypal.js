@@ -56,7 +56,6 @@ function($, Api, CartModels, hyprlivecontext, _) {
        if (this.scriptLoaded) return;
         this.scriptLoaded = true;
       $.getScript("//www.paypalobjects.com/api/checkout.js").done(function(scrit, textStatus){
-        console.log("Status Paypal : "+JSON.stringify(textStatus));
 
       }).fail(function(jqxhr, settings, exception) {
         console.log(jqxhr);
