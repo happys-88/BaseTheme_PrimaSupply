@@ -147,14 +147,8 @@
               <label for="shippingTo">Shipping To</label>
           </div>
           <div class="mz-l-formfieldgroup-cell">
-            <select data-mz-value="usStates" id="usStates" class="mz-pagingcontrols-pagesize-dropdown" autocomplete="off">
-
-                    {% block states-dropdown %}
-                      {% for size in themeSettings.usStates %}
-                        <option {% if size.abbreviation == model.selectedState %}selected="selected"{% endif %} value="{{ size.abbreviation }}">{{size.name}}</option>
-                      {% endfor %}
-                    {% endblock states-dropdown %}
-                 </select>
+            <input type="text" id="usStates" value="" placeholder="Enter ZipCode" data-mz-value="usStates">
+      <button type="button" id="usStatesSubmit" class="mz-button" data-mz-action="usStates">{{ labels.submit }}</button>
           </div>
         </div> 
         <div class="mz-l-formfieldgroup-row">
