@@ -51,14 +51,25 @@
             text-align: center;
         }
         .mz-carttable-qty-field{
-            padding: 8px 5px 8px 15px;  
-            width: 40px; 
+            padding: 8px;   
+            width: 100%;  
             border-color: @defaultBorderColor;
-            text-align: left; 
-            float: left;
+            float: left; 
             border: none; 
             margin: 0; 
         }
+        .qty-block{
+            .qty-counter{
+                .mz-icon{
+                    &.arrow-up{ 
+                        top: 2px; 
+                    }
+                    &.arrow-down{
+                        bottom: 2px;  
+                    }          
+                }      
+            }
+        } 
         .mz-carttable-item-remove{
             display: block;
             text-transform: uppercase;
@@ -263,16 +274,16 @@
             position: absolute; 
             width: 0;
             height: 0;
-            right: -25px;
-            border-left: 9px solid transparent;
-            border-right: 9px solid transparent;
+            right: -32px;  
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
             &.arrow-up {
-                border-bottom: 9px solid #495363;
-                top: 3px; 
+                border-bottom: 12px solid #495363;
+                top: 5px; 
             } 
             &.arrow-down {
-                border-top: 9px solid #495363;
-                bottom: 3px;    
+                border-top: 12px solid #495363; 
+                bottom: 5px;     
             }
         }
     } 
