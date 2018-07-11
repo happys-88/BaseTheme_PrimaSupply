@@ -47,12 +47,13 @@ define([
 		}
 	});
 
-	var sell = require.mozuData("productCrossSell");   
+	var sell = require.mozuData("product");   
 	var cartModels = cartModel.Cart.fromCurrent();
 	var indexcartnewproduct=-1; 
 	var newaddedproductcode;
-	var length = sell.changeMessages.length-1;
+	
 	if(sell.isEmpty!==true){
+		var length = sell.changeMessages.length-1;
 		for(var index = length; index >= 0; index--) {
 			if(sell.changeMessages[index].verb !== "Merged"){
 				newaddedproductcode = sell.changeMessages[index].metadata[0].productCode;
