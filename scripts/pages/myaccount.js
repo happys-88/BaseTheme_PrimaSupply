@@ -734,10 +734,25 @@ define([
         ],
         renderOnChange: [
             'editingContact.address.countryCode',
+            'editingContact.address.candidateValidatedAddresses',
             'editingContact.isBillingContact',
             'editingContact.isShippingContact'
         ],
-        beginAddContact: function() {
+         choose: function (e) {
+            var self = this;
+            var idx = parseInt($(e.currentTarget).val(), 10);
+            var addr = self.model.get('editingContact.address');
+            if (idx !== -1) {
+                var valAddr = addr.get('candidateValidatedAddresses')[idx];
+                for (var k in valAddr) {
+                    addr.set(k, valAddr[k]);
+                }
+            }
+            addr.set('candidateValidatedAddresses', null);
+            addr.set('isValidated', true);
+            this.render();
+        },
+        beginAddContact: function () {
             this.editing.contact = "new";
             this.render();
         },
@@ -750,8 +765,7 @@ define([
             var self = this,
                 isAddressValidationEnabled = HyprLiveContext.locals.siteContext.generalSettings.isAddressValidationEnabled;
             var operation = this.doModelAction('saveContact', {
-                forceIsValid: isAddressValidationEnabled
-            }); // hack in advance of doing real validation in the myaccount page, tells the model to add isValidated: true
+                forceIsValid: isAddressValidationEnabled, editingView: self }); // hack in advance of doing real validation in the myaccount page, tells the model to add isValidated: true
             if (operation) {
                 operation.otherwise(function() {
                     self.editing.contact = true;
