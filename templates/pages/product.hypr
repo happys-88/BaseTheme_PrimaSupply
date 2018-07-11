@@ -28,7 +28,7 @@
             {% include "modules/product/product-images" with model=prodMod %}
         </div> 
         <div class="col-xs-12 col-sm-6 mz-productdetail-wrap">
-            {% include "modules/common/message-bar" with model=prodMod %} 
+            {% include "modules/common/message-bar" with model=prodMod %}  
             <div id="product-detail" class="mz-productdetail mz-l-stack">
                 {% include "modules/product/product-detail" with model=prodMod %}
             </div> 

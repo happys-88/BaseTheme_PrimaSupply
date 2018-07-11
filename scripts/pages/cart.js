@@ -320,7 +320,7 @@ define([
             var _qtyCountObj = $qField.find(".mz-carttable-qty-field");  
             value = parseInt(qFieldValue, 10);   
             value--;
-            var errormsg = this.$('[data-mz-message-bar]');
+            var errormsg = this.$('[data-mz-message]'); 
             if(value===0){
                 errormsg.text("Quantity cannot be zero");   
             }

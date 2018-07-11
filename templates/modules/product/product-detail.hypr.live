@@ -51,16 +51,16 @@
               {% endif %} 
         {% endif %}
         {% if model|get_product_attribute_value("tenant~field_display_oos1") === 1 %}
-                      {% if model.inventoryInfo.onlineStockAvailable === 0 %}
-                         <p>{{ labels.outOfStock }}</p>
-                        {% else %}
-                            {% if model.inventoryInfo.onlineStockAvailable < 10 %}
-                                {{ labels.numberInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}
-                            {% endif %}
-                            {% if model.inventoryInfo.onlineStockAvailable >= 10 %}
-                                {{labels.inStock}}
-                            {% endif %}
-                      {% endif %} 
+          {% if model.inventoryInfo.onlineStockAvailable === 0 %}
+             <p>{{ labels.outOfStock }}</p>
+            {% else %}
+                {% if model.inventoryInfo.onlineStockAvailable < 10 %}
+                    {{ labels.numberInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}
+                {% endif %}
+                {% if model.inventoryInfo.onlineStockAvailable >= 10 %}
+                    {{labels.inStock}}
+                {% endif %}
+          {% endif %}  
         {% endif %}
         {% if model|get_product_attribute_value("tenant~field_display_oos1") === 2 %}
               {% if model.inventoryInfo.onlineStockAvailable < 10 %}
@@ -196,20 +196,7 @@
       {% endif %}
     </div>
   </div>
-  {% comment %}
-  <div class="col-md-4"> 
-    <div class="mz-productdetail-conversion-buttons">
-      {% if siteContext.supportsInStorePickup %}
-      <form class="mz-instorepickup" method="POST" data-mz-localstoresform action="/location/product">
-        <button type="submit" {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable or not model.supportsInStorePickup %} disabled="disabled" {% endif %} class="mz-button mz-instorepickuplink-button {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable or not model.supportsInStorePickup %}is-disabled{% endif %}" data-mz-action="checkLocalStores">{{ labels.checkLocalStores }}</button>
-        <input type="hidden" data-mz-localstoresform-input name="item" value="{% json_attribute model %}" />
-      </form>
-      {% endif %}
-    </div>
-  </div>
-  {% endcomment %}
-
-
+ 
 </section>
 
 <div class="mz-brand-certifications">
@@ -244,14 +231,14 @@
 </div>
 
 {% if model.content.productShortDescription and themeSettings.showProductDetailShortDesc %}
-<div class="mz-productdetail-shortdesc mz-l-stack-section">
-  <h4 class="mz-l-stack-sectiontitle">{{ labels.shortDesc }}</h4>
-  <span itemscope="description">{{ model.content.productShortDescription|safe }}</span>
-</div>
-{% endif %}
+  <div class="mz-productdetail-shortdesc mz-l-stack-section">
+    <h4 class="mz-l-stack-sectiontitle">{{ labels.shortDesc }}</h4>
+    <span itemscope="description">{{ model.content.productShortDescription|safe }}</span>
+  </div>
+{% endif %} 
 
 <div class="mz-productdetail-fulldesc mz-l-stack-section">
-  <h4 class="mz-l-stack-sectiontitle">{{ labels.fullDesc }}</h4>
+  <h4 class="mz-l-stack-sectiontitle">Overview</h4>  
   {{ model.content.productFullDescription|safe }}
 </div>
 
@@ -273,7 +260,7 @@
 {% endif %}
 
 {% if model.measurements and themeSettings.showProductDetailMeasurements and not model.bundledProducts %}
-<div class="mz-productdetail-measurements mz-l-stack-section">
+<div class="mz-productdetail-measurements mz-l-stack-section hide"> 
   <h4 class="mz-l-stack-sectiontitle">{{ labels.measurements }}</h4>
   <dl class="mz-propertylist mz-propertylist-justified">
     <dt>{{ labels.weight }}</dt>
@@ -298,35 +285,4 @@
 </div>
 {% endif %}
 
-{% if themeSettings.showProductDetailMeasurements and model.bundledProducts %}
-<div class="mz-productdetail-measurements mz-l-stack-section">
-  <h4 class="mz-l-stack-sectiontitle">{{ labels.measurements }}</h4>
-  {% for product in model.bundledProducts %}
-    {% if product.measurements %}
-    <div class="mz-productbundle-measurements-product">
-      <span class="mz-productbundle-measurements-productname">{{ product.content.productName }}</span>
-      <span> x {{ product.quantity }}</span>
-    </div>
-    <dl class="mz-propertylist mz-propertylist-justified mz-propertylist-inline">
-      <dt>{{ labels.weight }}</dt>
-      <dd itemprop="weight" itemscope itemtype="http://schema.org/QuantitativeValue">
-        <span itemprop="value">{{ product.measurements.packageWeight.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageWeight.unit }}</span>
-      </dd>
-      <dt>{{ labels.length }}</dt>
-      <dd itemprop="length" itemscope itemtype="http://schema.org/QuantitativeValue">
-        <span itemprop="value">{{ product.measurements.packageLength.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageLength.unit }}</span>
-      </dd>
-      <dt>{{ labels.width }}</dt>
-      <dd itemprop="width" itemscope itemtype="http://schema.org/QuantitativeValue">
-        <span itemprop="value">{{ product.measurements.packageWidth.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageWidth.unit }}</span>
-      </dd>
-      <dt>{{ labels.height }}</dt>
-      <dd itemprop="height" itemscope itemtype="http://schema.org/QuantitativeValue">
-        <span itemprop="value">{{ product.measurements.packageHeight.value }}</span> <span itemprop="unitCode">{{ product.measurements.packageHeight.unit }}</span>
-      </dd>
-    </dl>
-    {% endif %}
-  {% endfor %}
-</div>
-{% endif %} 
 

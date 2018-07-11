@@ -1,39 +1,26 @@
-<ul>    
-  {% for property in model.properties %} 
-    {% if property.attributeFQN == "tenant~field_pre_brands" %}
-      
-      <li class="col-md-4 col-xs-6 product-brand"> 
-         
-        {% for propValue in property.values %}
-        <span class="brand-name"><strong>Brand:</strong> {{ propValue.stringValue|safe}}</span> 
-          {% for categoryObject in categories.all %}   
-            {% if categoryObject.content.name == "Brands" %} 
-              <div class="brand-logo-img">   
-                {% for brandSubCat in categoryObject.childrenCategories %} 
-                  {% if brandSubCat.content.name == propValue.stringValue %}
-                      {% if brandSubCat.content.categoryImages.length>0 %} 
-                        {% for brandLogoImage in brandSubCat.content.categoryImages %}
-                          <a href="{{ brandSubCat.url }}">
-                            <img src="{{ brandLogoImage.imageUrl }}" alt="{{ brandLogoImage.altText }}">    
-                          </a> 
-                        {% endfor %} 
-                      {% else %} 
-                        <a href="{{ brandSubCat.url }}"> 
-                          <span class="noimage-placeholder"><span class="noimage-text">{{ labels.productImagePlaceholder }}</span></span>
-                        </a>  
-                      {% endif %}    
-                    
-                  {% endif %}  
-                {% endfor %}
-              </div> 
-                
-            {% endif %}
-          {% endfor %}
-        
-        {% endfor %} 
-      </li>
-    {% endif %}
-  {% endfor %} 
+<ul>     
+  {% if (model|get_product_attribute_value("tenant~field_pre_brands")) %} 
+    <li class="col-md-4 col-xs-6 product-brand"> 
+      {% for brandCat in model.categories %} 
+        {% if brandCat.content.name == model|get_product_attribute_value("tenant~field_pre_brands") %} 
+          {% with brandCat.content.categoryImages|first as brandImage %} 
+            <div class="brand-logo-img">
+              {% if brandImage.imageUrl %}
+                <a href="{{ brandCat.url }}">
+                  <img src="{{ brandImage.imageUrl }}" alt="{{ brandImage.altText }}">    
+                </a> 
+              {% else %} 
+                <a href="{{ brandCat.url }}"> 
+                  <span class="noimage-placeholder"><span class="noimage-text">{{ labels.productImagePlaceholder }}</span></span> 
+                </a>  
+              {% endif %}
+            </div> 
+          {% endwith %} 
+
+        {% endif %} 
+      {% endfor %}    
+    </li>     
+  {% endif %}   
     
   {% for property in model.properties %}
     {% if property.attributeFQN == "tenant~field_certifications" %}  
