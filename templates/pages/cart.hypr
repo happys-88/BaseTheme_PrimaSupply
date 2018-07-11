@@ -14,7 +14,7 @@
 {% block body-content %}
 
 {% require_script "pages/cart" %}
-{% require_script "pages/product-upsell" %}  
+{% require_script "pages/product-upsells" %}   
 
 {% preload_json model "cart" %}
 

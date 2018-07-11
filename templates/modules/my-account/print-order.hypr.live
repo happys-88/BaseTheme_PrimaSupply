@@ -1,4 +1,4 @@
-<div class="container"> 
+<div class="container">   
 	<div class="row">
 		<div class="col-xs-12">
 			<h2 class="text-center">Order Invoice #{{ model.orderNumber }}</h2> 
@@ -26,7 +26,7 @@
 					<p>{{ model.billingInfo.billingContact.address.cityOrTown }} </p>
 					<p>{{ model.billingInfo.billingContact.email }} </p>
 					<p class="mz-heading">Payment Method</p>   
-					<p>{{ model.billingInfo.paymentType }} </p>
+					<p>{{ model.billingInfo.paymentType }} for {{ model.total|currency }} </p> 
                     <strong>Coupon Code:</strong> <br>  
 					{% for key, value  in model.discount %}
 						<p class="mz-discount"><span> {{ key }} </span>  for  <span>{{ value|currency }}</span></p>  
@@ -34,6 +34,9 @@
 					{% for shippingDiscount in model.shippingDiscounts %}
 						<p class="mz-discount"><span> {{ shippingDiscount.discount.couponCode }} </span>  for  <span>{{ shippingDiscount.discount.impact|currency }}</span></p>	 
 					{% endfor %}
+					{% for orderDiscount in model.orderDiscounts %}  
+						<p class="mz-discount"><span> {{ orderDiscount.couponCode }} </span>  for  <span>{{ orderDiscount.impact|currency }}</span></p>	  
+					{% endfor %} 
 				</div>
 			</div>
 		</div>
@@ -116,14 +119,21 @@
 						</div>
 					{% endif %} 
 				{% endfor %}
+				
+				<div>Tax:<span>{{ model.taxTotal|currency }}</span></div>
+				<div>Shipping:<span> {{ model.shippingSubTotal|currency }}</span></div> 
 				{% for shippingDiscount in model.shippingDiscounts %}
 					<div class="mz-ordersummary-shippingdiscount">
 						<span class="mz-ordersummary-totalname">{{ shippingDiscount.discount.discount.name }}:</span>
 						<span class="mz-ordersummary-totalvalue">-{{ shippingDiscount.discount.impact|currency }}</span>
 					</div>
-				{% endfor %}
-				<div>Tax:<span>{{ model.taxTotal|currency }}</span></div>
-				<div>Shipping:<span> {{ model.shippingTotal|currency }}</span></div>
+				{% endfor %}  
+				{% if model.dutyAmount >= 0 %} 
+		            <div class="mz-ordersummary-duty">
+		                <span class="mz-ordersummary-totalname">{{ labels.labelOversized }}:</span>
+		                <span class="mz-ordersummary-totalvalue">{{ model.dutyAmount|currency }}</span>
+		            </div>
+		        {% endif %} 
 				<div class="mz-order-total"><strong>Total:<span>{{ model.total|currency }}</span></strong></div>  
 				<div><strong>{{ labels.youSaved }}:<span>{{ model.discountTotal|currency }}</span></strong></div>   
 			</div>

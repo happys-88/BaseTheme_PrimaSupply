@@ -47,7 +47,7 @@ define([
 		}
 	});
 
-	var sell = require.mozuData("product");   
+	var sell = require.mozuData("cart");    
 	var cartModels = cartModel.Cart.fromCurrent();
 	var indexcartnewproduct=-1; 
 	var newaddedproductcode;
@@ -61,12 +61,10 @@ define([
 			}
 	 	}
 	 	
-	 	// newaddedproductcode=localStorage.getItem("lastAddedItemToCart");
-	
 		$.each(sell.items, function( index, value ) {
-				if(value.product.productCode==newaddedproductcode){
-					indexcartnewproduct=index;
-				}
+			if(value.product.productCode==newaddedproductcode){
+				indexcartnewproduct=index;
+			} 
 		 });
 	 
 		var prodCodeUpSell = [];

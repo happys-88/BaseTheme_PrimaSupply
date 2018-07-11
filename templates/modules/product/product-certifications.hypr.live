@@ -1,7 +1,13 @@
-<ul>    
+
+
+<ul>     
   {% for property in model.properties %} 
     {% if property.attributeFQN == "tenant~field_pre_brands" %}
-      
+      {% for brandCat in model.categories %} 
+        {% if brandCat.content.name == propValue.stringValue %}
+        {% endif %} 
+      {% endfor %} 
+
       <li class="col-md-4 col-xs-6 product-brand"> 
          
         {% for propValue in property.values %}
