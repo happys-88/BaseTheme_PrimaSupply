@@ -7,6 +7,7 @@
 {% block body-tag-classes %}mz-category{% endblock body-tag-classes %}
 {% block body-content %}
 	{% require_script "pages/category" %}
+	{% require_script "options" %}
 	<div data-mz-category="{{model.categoryId}}" class="mz-l-container">
 	    {% include "pages/category-interior" %}
 	</div>

@@ -16,6 +16,7 @@
             {% if hasStock > 0 %}
                 <div class="orange-text">{{ labels.mapPrice }}</div>
             {% endif %}
+            <div class="orange-text see-price-in-cart" style="display: none;">{{ labels.mapPrice }}</div>
         {% endif %}
     </span>
 {% else %}
@@ -29,6 +30,7 @@
             {% if hasStock > 0 %}
                 <div class="orange-text">{{ labels.mapPrice }}</div>
             {% endif %}
+            <div class="orange-text see-price-in-cart" style="display: none;">{{ labels.mapPrice }}</div>
         {% endif %} 
      </span>
 {% endif %}

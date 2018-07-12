@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "da3770ba35ea4c0947ec45f9b7499d47d73ed32e"
+      "commit": "6983734c0398477feb38901f8c93fa23dc1f7130"
     },
     "baseThemeChannel": "stable"
   },
@@ -243,8 +243,8 @@
       "entityType": "category",
       "id": "Brands",
       "template": "brand-gateway",
-      "title": "Brand Gateway", 
-      "userCreatable": false 
+      "title": "Brand Gateway",
+      "userCreatable": false
     },
     {
       "documentType": "web_page",
@@ -481,7 +481,7 @@
     }
   ],
   "settings": {
-    "allProductsCategoryId": "",   
+    "allProductsCategoryId": "",
     "sessionTimeout": "18000",
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",
     "extendedPropertiesEnabled": false,

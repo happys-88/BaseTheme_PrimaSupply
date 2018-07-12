@@ -1,14 +1,1 @@
-{% set_var addons=false %}
-{% set_var options=false %}
-{% for option in model.options %}
-    {% if option.attributeDetail.dataType == 'ProductCode' %}
-        {% set_var addons=true %}
-    {% else %}
-        {% set_var options=true %}
-    {% endif %}
-{% endfor %}
-{% if options === true %}
-    <button class="mz-button mz-option-add-to-cart" {% if hasStock == 0 %} disabled="disabled" {% endif %} data-mz-productcode="{{model.productCode}}"  data-toggle="modal" data-target="#optionModal"> {{ labels.addToCart }} </button>
-{% else %}
-    <button class="mz-button mz-addon-add-to-cart" {% if hasStock == 0 %} disabled="disabled" {% endif %}  data-mz-productcode="{{model.productCode}}"  data-toggle="modal" data-target="#addonModal"> {{ labels.addToCart }} </button>
-{% endif %}
+<button class="mz-button" disabled="disabled" data-mz-productcode="{{model.productCode}}" data-toggle="modal"> {{ labels.addToCart }} </button>

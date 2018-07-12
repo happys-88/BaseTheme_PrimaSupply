@@ -1,16 +1,4 @@
 ﻿{% require_script "pages/stock-message" %}
-{% set_var hasStock=0 %}
-{% if model.variations %}
-    {% for variation in model.variations %}
-        {% if variation.inventoryInfo.onlineStockAvailable > 0 %}
-            {% set_var hasStock=variation.inventoryInfo.onlineStockAvailable %}
-        {% endif %}
-    {% endfor %}
-{% else %}
-    {% if model.inventoryInfo.onlineStockAvailable > 0 %}
-        {% set_var hasStock=model.inventoryInfo.onlineStockAvailable %}
-    {% endif %}
-{% endif %}
 <div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
     <div class="mz-productlisting-image">
         {% block product-image %}
@@ -100,17 +88,15 @@
             {% if not model.inventoryInfo.onlineStockAvailable and not model.variations %}
                 <div class="mz-product-notpurchasable">{{ labels.outOfStock }}</div>
             {% endif %}
-            {% if hasStock > 0 %}
-                <div class="shipping-messages">
-                    {% for propShipping in model.properties %}
-                        {% if propShipping.attributeFQN == "tenant~availability" %}
-                            {% for shippingValue in propShipping.values  %}
-                                {{ shippingValue.stringValue }}
-                            {% endfor %}
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            {% endif %}
+            <div class="shipping-messages" style="display: none;">
+                {% for propShipping in model.properties %}
+                    {% if propShipping.attributeFQN == "tenant~availability" %}
+                        {% for shippingValue in propShipping.values  %}
+                            {{ shippingValue.stringValue }}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
 
         {% with model|get_product_attribute("tenant~new-arrival") as newArrival %}
