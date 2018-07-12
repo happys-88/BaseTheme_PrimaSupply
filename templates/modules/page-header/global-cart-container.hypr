@@ -4,10 +4,9 @@
 	    <span class="mz-cartmonitor" data-mz-role="cartcount">0</span>
 	    
 	</a>
-	<div id="global-cart"> 
-	    <div id="global-cart-listing">
-		</div>
-		{% dropzone "global-cart" scope "site" %}  
+	<div id="global-cart" {% if pageContext.isEditMode and pageContext.cmsContext.template.path=="" %} style="display:block;"{% endif %}> 
+	    <div id="global-cart-listing"></div>
+		        
 	</div>
 </li> 
 
