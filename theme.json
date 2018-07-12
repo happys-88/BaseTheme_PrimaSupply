@@ -481,7 +481,7 @@
     }
   ],
   "settings": {
-    "allProductsCategoryId": "549",
+    "allProductsCategoryId": "",   
     "sessionTimeout": "18000",
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",
     "extendedPropertiesEnabled": false,

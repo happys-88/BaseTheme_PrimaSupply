@@ -7,6 +7,7 @@
 	<div id="global-cart"> 
 	    <div id="global-cart-listing">
 		</div>
+		{% dropzone "global-cart" scope "site" %}  
 	</div>
 </li> 
 

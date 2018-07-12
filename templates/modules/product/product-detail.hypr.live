@@ -1,5 +1,3 @@
-<h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName }}</h1> 
-
 <dl class="mz-productcodes mz-propertylist mz-pagetitle-note mz-l-stack-section">
   <dt class="mz-productcodes-productcode-label">{{ labels.productCode }}</dt>
   <dd class="mz-productcodes-productcode" itemprop="sku">{{ model.variationProductCode|default(model.productCode) }}</dd>
@@ -21,22 +19,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="row">
-      <!-- Yotpo Rating -->
-      {% block star-rating %}
-        <div class="yotpo bottomLine" data-product-id="{{model.productCode}}"></div>
-        <div id="product-star-rating"></div>
-      {% endblock star-rating %}
-
-      {% block question-answer %}
-          <div class='yotpo QABottomLine'
-              data-appkey='4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD'
-             data-product-id='{{ model.productCode }}'></div>
-      {% endblock question-answer %}
-      <!-- Yotpo Rating -->
-    </div>
-  </div>
+  
 </div>
 
 <div class="mz-stock-availability">

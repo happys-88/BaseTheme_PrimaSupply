@@ -23,28 +23,33 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
 	   	// Instagram Feed for learning center 
 	   	var galleryThumbnailsLC = 4; 
 	   	$(".yotpo-single-image-container").addClass("hidden-thumbnails");
-	    $('.yotpo-single-image-container:lt('+galleryThumbnailsLC+')').removeClass("hidden-thumbnails");  
-	});
+	    $('.yotpo-single-image-container:lt('+galleryThumbnailsLC+')').removeClass("hidden-thumbnails");
 
-	// Get product ratings using Yotpo				 
-	var getProductCode = $("#customProductCode").val();
-	var yotpoApiKey = HyprLiveContext.locals.themeSettings.yotpoApiKey;
-	var yotpoBaseUrl = HyprLiveContext.locals.themeSettings.yotpoBaseUrl;
-	var products = HyprLiveContext.locals.themeSettings.products;
-	var reviews = HyprLiveContext.locals.themeSettings.reviews;
-    var reviewUrl=""+yotpoBaseUrl+"/"+yotpoApiKey+"/"+products+"/"+getProductCode+"/"+reviews+"";
+	    // Show yotpo review & question count 
+	    var getProductCode = $("#customProductCode").val(); 
+		var yotpoApiKey = HyprLiveContext.locals.themeSettings.yotpoApiKey;
+		var yotpoBaseUrl = HyprLiveContext.locals.themeSettings.yotpoBaseUrl;
+		var reviewUrl=""+yotpoBaseUrl+"/"+yotpoApiKey+"/products/"+getProductCode+"/reviews"+"";  
 
-	$.get(reviewUrl, function(data, status){
-	//	$("#totalReview").attr("value", data.response.bottomline.total_review); 
+		$.get(reviewUrl, function(data, status){
+			var totalReviewCount = data.response.bottomline.total_review;
+			$(".yotpo-review-ques-ansr").find("#review-count").text("("+totalReviewCount+")");  
+		}); 
 		
-	});
-	
-	var yotpoQuestionBaseUrl = HyprLiveContext.locals.themeSettings.yotpoQuestionBaseUrl;
-	var questions = HyprLiveContext.locals.themeSettings.questions;
-	var questionUrl = ""+yotpoQuestionBaseUrl+"/"+yotpoApiKey+"/"+getProductCode+"/"+questions+"";
+		var yotpoQuestionBaseUrl = HyprLiveContext.locals.themeSettings.yotpoQuestionBaseUrl;
+		var questionUrl = ""+yotpoQuestionBaseUrl+"/"+yotpoApiKey+"/"+getProductCode+"/questions"+""; 
 
-	/*$.get(questionUrl, function(data, status){
-		//$("#totalQuestion").attr("value", data.response.total_questions);
-    });*/
-});
+		$.get(questionUrl, function(data, status){
+			var totalReviewCount = data.response.total_questions; 
+			$(".yotpo-review-ques-ansr").find("#ques-count").text("("+totalReviewCount+")");    
+	    });
+
+	    var askQuestionLink = $(".QABottomLine").find(".yotpo-bottomline");
+	    var targetElement = $(".yotpo-review-ques-ansr").find("#askqa-li");  
+	    $(document).on('click',askQuestionLink, function(){
+	    	//targetElement.addClass("active");  
+	    });   
+	});  
+
+}); 
  

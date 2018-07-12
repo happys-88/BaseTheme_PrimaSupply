@@ -146,7 +146,7 @@
                   
               </div>
        </form>
-       {% dropzone "global-cart" scope "site" %}   
-        </div> 
+          
+       </div> 
     </div>
      
