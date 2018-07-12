@@ -655,13 +655,14 @@
 				.mz-carttable-item-qty {
 					padding-left: calc(~"30% + 15px");  
 					text-align: left; 
+					margin-bottom: 10px;
 					.qty-block {
 						.qty-counter{
 							.mz-icon{
 								right: auto;
-								left: 70px;
+								left: 58px;
 								&.arrow-down{
-									bottom: 12px; 
+									bottom: 0; 
 								}  
 							}
 						}	 
@@ -1441,6 +1442,14 @@
 			.mz-checkoutform-couponcode {
 				label {
 				    text-align: left;
+				}
+			}
+			.mz-checkout-payment {
+				.mz-checkout-current-payment {
+					&.pull-left,
+					&.pull-right {
+						width: 100%;
+					}
 				}
 			}
 		}
