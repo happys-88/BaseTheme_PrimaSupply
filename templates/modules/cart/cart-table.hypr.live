@@ -147,8 +147,10 @@
               <label for="shippingTo">Shipping To</label>
           </div>
           <div class="mz-l-formfieldgroup-cell">
-            <input type="text" id="usStates" value="" placeholder="Enter ZipCode" data-mz-value="usStates">
-      <button type="button" id="usStatesSubmit" class="mz-button" data-mz-action="usStates">{{ labels.submit }}</button>
+            <input type="text" id="usStates" maxlength="5" value="" {% if model.selectedState !== 'null' %}placeholder="{{ model.selectedState}}" {% else %} placeholder="{{labels.zipCode}}" {% endif %} data-mz-value="usStates">
+
+      <button type="button" id="zipCodeButton" class="mz-button" disabled data-mz-action="populateTax">{{ labels.submit }}</button>
+      <span data-mz-validation-message="zipCode" style="display: none;">{{ labels.wrongZipCode }}</span>
           </div>
         </div> 
         <div class="mz-l-formfieldgroup-row">

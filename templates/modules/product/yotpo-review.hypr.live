@@ -1,4 +1,4 @@
-<div class="isDisabled" style="display: none;">
+<div class="isDisabled" id="indexreviews">
     {% if reviews.bottomline.total_review && reviews.bottomline.average_score %}
         <span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
             <span itemprop="ratingValue">{{reviews.bottomline.average_score}}</span> stars, based on

@@ -543,6 +543,8 @@
   "estimatedShipping"                      :   "Estimated Shipping",
   "estimateYourTaxShipping"                :   "Estimate your tax and shipping",
   "merchandiseSubtotal"                    :   "Merchandise Subtotal",
+  "zipCode"                                :   "Enter ZipCode", 
+  "wrongZipCode"                           :   "Please enter correct Zip Code",
 
 // YotPo Reviews
   "reviews"                                :   "reviews",

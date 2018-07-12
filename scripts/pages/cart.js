@@ -19,17 +19,16 @@ define([
                 /*"change [data-mz-value=usShipping]":"populateShipping",
                 "change [data-mz-value=usStates]":"populateShipping"*/
                 "change [data-mz-value=usShipping]":"populateDropDowns",
-                "change [data-mz-value=usStates]":"populateTax",
                 "click [data-mz-qty=minus]": "quantityMinus", 
                 "click [data-mz-qty=plus]": "quantityPlus",
-                "keyup [data-mz-value=quantity]":"updateQuantity"
-
+                "keyup [data-mz-value=quantity]":"updateQuantity",
+                "keyup  [data-mz-value='usStates']": "allowDigit"
         },
         initialize: function () {
             var me = this;
-           
             //setup coupon code text box enter.
             this.listenTo(this.model, "change:taxTotal", this.render);
+            this.listenTo(this.model, "change:shippingTotal", this.render);
             this.listenTo(this.model, 'change:couponCode', this.onEnterCouponCode, this);
             this.codeEntered = !!this.model.get('couponCode');
             this.$el.on('keypress', 'input', function (e) {
@@ -64,18 +63,14 @@ define([
            var cart = this.model;
             var productCode = this.model.get("items").models[0].get('product').get('productCode');
             var shipping = localStorage.getItem("selectedShipping");
-            var stateData = $('#usStates :selected').val();
+            var stateData = this.model.get("selectedState");
             if(this.model.get("selectedState")) {
                 stateData = this.model.get("selectedState");
+            } else {
+                stateData = localStorage.getItem('selectedState');
             }
             
-           /* $.get("/testroute", function(res){ 
-               console.log("Response 11 : "+res);   
-            }).fail(function(err) {
-                console.log("Failure "+JSON.stringify(err));   
-            });*/
-            
-            // console.log("Shipping storage : "+shipping);
+           // console.log("Shipping storage : "+shipping);
             if(typeof stateData !== 'undefined' || stateData !== null) {
                 this.model.set({'selectedState': stateData});
                 this.calculateTax(stateData);
@@ -132,10 +127,13 @@ define([
                     var Ships = localStorage.getItem("shippingData");
                     var ratesParse = JSON.parse(Ships);
                     cart.set("shippingDetail", ratesParse);
+                    var shipPrice = _.filter(shippingRates, 
+                        function(rates) { return (rates.amount === 0);   });
 
-                    
+                    cart.set('selectedShipping', shipPrice[0].content.name);
+                    cart.set('shippingTotal', shipPrice[0].amount);
                     // console.log("Mode : "+cart.selectedShipping);
-                    var shipping = cart.selectedShipping;
+                    var shipping = cart.get('selectedShipping');
                     if(typeof shipping !== 'undefined') {
                         var shippingDetailObj = cart.get("shippingDetail");
                         var selectedShipping = cart.get("selectedShipping");
@@ -154,9 +152,8 @@ define([
                         // console.log("tot : "+tot + ": "+total);
                         var newTotal = Number(tot)+Number(total);
                         // console.log("TOTAL :  ::  "+newTotal);
-                        cart.set({'total':newTotal});
+                        // cart.set({'total':newTotal});
                     }
-                    
                    });
                    
                 });
@@ -164,6 +161,7 @@ define([
                 // this.render();
                 var shippingDetailObj = this.model.get("shippingDetail");
                 var selectedShipping = this.model.get("selectedShipping");
+
                 var selectedMethod = _.find(shippingDetailObj, function(obj) {
                   if(obj.content.name === selectedShipping){ 
                       return obj;
@@ -178,7 +176,7 @@ define([
                 // console.log("tot : "+tot + ": "+total);
                 var newTotal = Number(tot)+Number(total);
                 // console.log("TOTAL :  ::  "+newTotal);
-                cart.set({'total':newTotal});
+                // cart.set({'total':newTotal});
                 
             }
         }),
@@ -197,6 +195,17 @@ define([
             $(id).prependTo(".mz-carttable-items-global"); 
             $(id).addClass("recently-added");
         },
+        allowDigit: function(e) {
+            e.target.value = e.target.value.replace(/[^\d]/g, '');
+            if(e.target.value.length === 0) {
+               $('[data-mz-validation-message="zipCode"]').hide();  
+            }
+            if(e.target.value.length >= 5)
+                $('#zipCodeButton').attr('disabled', false);            
+            else
+                $('#zipCodeButton').attr('disabled',true);
+            
+        },
         getShippingMethodsDetail: function() {
            /* console.log("DATA");
             var responseData = '';*/
@@ -212,10 +221,10 @@ define([
                 var defaultShippingMethod = shippingDetailObj[0].content.name;
                 
                 // console.log("detail : "+JSON.stringify(shippingDetailObj[0].amount));
-                localStorage.setItem('selectedState',stateSel);    
+                // localStorage.setItem('selectedState',stateSel);    
                 localStorage.setItem('selectedShipping',defaultShippingMethod);
             } else {
-                localStorage.setItem('selectedState',stateSel);    
+                // localStorage.setItem('selectedState',stateSel);    
                 localStorage.setItem('selectedShipping',shippingSel);
             }
 
@@ -230,6 +239,7 @@ define([
 
         },
         calculateTax: function(stateSel){
+            $('[data-mz-validation-message="zipCode"]').hide();
             var cart = this.model;
             if(typeof stateSel !== 'undefined') {
                 localStorage.setItem('selectedState',stateSel); 
@@ -240,6 +250,7 @@ define([
             api.request("POST", "/taxEstimation", {'state':stateSel}).then(function (response){
                 // console.log("Tax Estimation : "+JSON.stringify(response));
                 if(response.statusCode == 200) {
+
                     var resp = JSON.parse(response.body);
                     var total = cart.get('discountedTotal');
                     var tax = total*Number(resp.totalRate);
@@ -258,15 +269,17 @@ define([
                     cart.set({'shippingTotal': shippingAmount});
                     this.populateShipping();
                 } else {
+
                     cart.set({'taxTotal':0});
                 }
             }, function(err) {
-                console.log("Failure : "+JSON.stringify(err));
+                $('[data-mz-validation-message="zipCode"]').show();
+                // console.log("Failure : "+JSON.stringify(err));
             });
         },
-        populateTax: function(){
-            var stateSel = $('#usStates :selected').val();
-            this.calculateTax(stateSel);            
+        populateTax: function(e){
+            var stateSel = $('#usStates').val();
+            this.calculateTax(stateSel);
         },
         populateShipping: function(){
                 // console.log("Populate Shipping"+JSON.stringify(this.model));

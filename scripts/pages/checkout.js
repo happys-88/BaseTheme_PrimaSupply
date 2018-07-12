@@ -238,7 +238,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             if(HyprLiveContext.locals.siteContext.checkoutSettings.purchaseOrder.isEnabled) {
                 this.model.resetPOInfo();
             }
-            if($(e.currentTarget).val() === 'PayPalExpress2') {
+            if(e.target.value === 'PayPalExpress2') {
                 $('#btn_xpressPaypal').show();
             } else {
                 $('#btn_xpressPaypal').hide();
