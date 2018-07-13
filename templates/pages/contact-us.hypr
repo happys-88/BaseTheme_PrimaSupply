@@ -6,70 +6,29 @@
     {% include "modules/customer-service-breadcumb" %}
 {% endblock breadcrumbs %}
 {% block body-content %}
+{% preload_json selectTopic "selectTopic" %}
+{% require_script "pages/contactus" %}
 <div class="mz-customer-service-page">
-    <div class="mz-l-container">
-        <div class="row"> 
-            <div class="col-xs-12 col-sm-9 pull-right">
-                <h3 class="mz-l-stack-sectiontitle">{{ labels.contactUs }}</h3>
-                <div class="row">
-                    <div class="col-md-6 col-xs-12 mz-contact-form">
-                        <form method="" name="">
-                            <div class="form-group">
-                                <label class="col-sm-4 col-xs-12" for="{{ labels.firstName }}">{{ labels.firstName }}</label>
-                                <div class="col-sm-8 col-xs-12">
-                                    <input type="text" class="form-control" id="{{ labels.firstName }}" name="" value="">
-                                    <span class="mz-validationmessage"></span>
-                                </div>
+    <div id="contactus-container">
+        <div class="mz-l-container">
+            <div class="row"> 
+                <div class="col-xs-12 col-sm-9 pull-right">
+                    <h3 class="mz-l-stack-sectiontitle">{{ labels.contactUs }}</h3>
+                    <div class="row">
+                        <div class="contact">
+                            {% include "modules/contact-us/contact" with model=model %}
+                        </div>
+                        <div class="col-md-6 col-xs-12 text-center">
+                            <div class="mz-dropzone">
+                                {% dropzone "contact" scope="page" %}
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 col-xs-12" for="{{ labels.lastName }}">{{ labels.lastName }}</label>
-                                <div class="col-sm-8 col-xs-12">
-                                    <input type="text" class="form-control" id="{{ labels.lastName }}" name="" value="">
-                                    <span class="mz-validationmessage"></span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 col-xs-12" for="{{ labels.email }}">{{ labels.email }}<span class="is-required"> *</span></label>
-                                <div class="col-sm-8 col-xs-12">
-                                    <input type="email" class="form-control" id="{{ labels.email }}" name="" value="">
-                                    <span class="mz-validationmessage"></span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 col-xs-12" for="{{ labels.subject }}">{{ labels.subject }}<span class="is-required"> *</span></label>
-                                <div class="col-sm-8 col-xs-12">
-                                    <select class="form-control" id="{{ labels.subject }}">
-                                        <option value="">Coffee shop equipment list with price</option>
-                                        <option value="">Coffee shop equipment list with price</option>
-                                        <option value="">Coffee shop equipment list with price</option>
-                                        <option value="">Coffee shop equipment list with price</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 col-xs-12" for="{{ labels.message }}">{{ labels.message }}<span class="is-required"> *</span></label>
-                                <div class="col-sm-8 col-xs-12">
-                                    <textarea class="form-control" id="{{ labels.message }}" name="" value=""></textarea>
-                                    <span class="mz-validationmessage"></span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-8 col-sm-offset-4 col-xs-12">
-                                    <button class="mz-button">{{ labels.submit }}</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-6 col-xs-12 text-center">
-                        <div class="mz-dropzone">
-                            {% dropzone "contact" scope="page" %}
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 mz-content-left-nav">       
-                <div class="mz-l-sidebar">
-                    {% include "pages/content-left-nav" %} 
+                <div class="col-xs-12 col-sm-3 mz-content-left-nav">       
+                    <div class="mz-l-sidebar">
+                        {% include "pages/content-left-nav" %} 
+                    </div>
                 </div>
             </div>
         </div>
