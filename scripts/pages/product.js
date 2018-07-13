@@ -224,6 +224,9 @@
                     hasOptions = true;
                 }
             }
+            if (count == options.length) {
+                this.model.set('showColorIcon', true);
+            }
             if (productCodes.length > 0) {
                 var str = "";
                 for (var i = 0; i < productCodes.length; i++) {
@@ -233,7 +236,7 @@
                         str += "productCode eq "+ "'" + productCodes[i] + "'"+ " or ";
                     }
                 }
-                api.request("GET", "/api/commerce/catalog/storefront/products/?filter=(" + str + ")" ).then(function(response){
+                api.request("GET", "/api/commerce/catalog/storefront/products/?filter=(" + str + ")&pageSize="+productCodes.length ).then(function(response){
                     var items = response.items;
                     for (var j = 0; j < options.length; j++) {
                         var option = options[j];
@@ -280,11 +283,12 @@
                     prodModel.set('hasOptions', hasOptions);
                     me.render();
                 });
+            } else {
+                this.model.set('hasOptions', hasOptions);
+                // this.render();
             }
             
-            if (count == options.length) {
-                this.model.set('showColorIcon', true);
-            }
+            
         }
     });
 

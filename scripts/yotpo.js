@@ -94,7 +94,6 @@ function ($, Hypr, Backbone, HyprLiveContext, api) {
                     }
                     productData[i] = {productCode:item.productCode,hasOptions:hasOptions,hasStock:hasStock};
                 }
-                // console.log(productData);
                 $(".mz-productlist-list .mz-productlist-item").each(function(index, value) {
                     var currentProduct = $(this);
                     var shippingMessage = $(currentProduct).find(".shipping-messages");

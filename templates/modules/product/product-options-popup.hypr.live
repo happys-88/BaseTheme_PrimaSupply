@@ -14,6 +14,7 @@
         <div class="modal-body">
                 {% if model.addonsPopup %}
                     <div class="mz-product-addons">
+                        <span class="mz-validationmessage">{{ model.addToCartErr }}</span>
                         <h4 class="mz-l-stack-sectiontitle">
                             <a class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName}}</a>
                         </h4>
@@ -28,7 +29,7 @@
                                 {% endwith %}  
                             </div>
                             <div class="mz-product-info">
-                                {% include "modules/product/price-show-stack" with prodPrice=model.prodPrice %}
+                                {% include "modules/product/price-show-stack" with hasStock=model.options.length %}
                                 {% if model.options and model.options.length > 0 %}
                                     <div class="mz-productdetail-options mz-l-stack-section selected-option">
                                         {% include "modules/product/product-selected-options-view" %}
@@ -58,7 +59,7 @@
                         {% endif %}
                         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price">
                             <div class="pull-left"><label>{{ labels.itemSubtotal }}:</label></div>
-                            <div class="pull-left">{% include "modules/product/price-show-stack" %}</div>
+                            <div class="pull-left">{% include "modules/product/price-show-stack" with hasStock=model.options.length %}</div>
                         </div >
                         <div class="cart-cont-shop clearfix">
                             <button type="button" class="pull-left continue-shopping mz-button mz-button-large" data-dismiss="modal">{{ labels.continueShopping }}</button>
@@ -84,9 +85,7 @@
                             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price">
                                 <div class="pull-left"><label>{{ labels.itemSubtotal }}:</label></div>
                                 <div class="pull-left">
-                                    {% with "no" as priceText %}
-                                        {% include "modules/product/price-show-stack" %}
-                                    {% endwith %}
+                                    {% include "modules/product/price-show-stack" with hasStock=model.options.length %}
                                 </div>
                             </div>
                              <div class="mz-productdetail-conversion-controls">

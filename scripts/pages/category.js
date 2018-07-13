@@ -12,6 +12,5 @@ require([
             $body: $('[data-mz-category]'),
             template: "category-interior"
         });
-        // yotpo.update();
     });  
 });  

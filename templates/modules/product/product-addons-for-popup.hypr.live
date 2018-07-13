@@ -6,8 +6,8 @@
                 {% if option.attributeDetail.dataType == "ProductCode" and option.stockCount > 0 %}
                     <div class="mz-productoptions-optioncontainer">
                         <div class="mz-productoptions-valuecontainer">
-                            <select class="mz-productoptions-option form-control" data-mz-product-option="{{ option.attributeFQN }}">
-                                <option>{{ labels.select }} {{ option.attributeDetail.name }}</option>
+                            <select {% if option.isMultiValue %}multiple{% endif %} class="mz-productoptions-option form-control" data-mz-product-option="{{ option.attributeFQN }}">
+                                {% if not option.isMultiValue %}<option>{{ labels.select }} {{ option.attributeDetail.name }}</option>{% endif %}
                                 {% for value in option.values %}
                                     {% if value.bundledProduct.inventoryInfo.onlineStockAvailable > 0 %}
                                         <option {% if not value.isEnabled %} class="is-disabled" {% endif %} {% if value.isSelected %}selected="true"{% endif %} value="{{value.value}}">{{value.stringValue|default(value.value)}}
@@ -31,8 +31,8 @@
                 {% if option.attributeDetail.dataType == "ProductCode" and option.stockCount > 0 %}
                     <div class="mz-productoptions-optioncontainer">
                         <div class="mz-productoptions-valuecontainer">
-                            <select class="mz-productoptions-option form-control" data-mz-product-option="{{ option.attributeFQN }}">
-                                <option>{{ labels.select }} {{ option.attributeDetail.name }}</option>
+                            <select {% if option.isMultiValue %}multiple{% endif %} class="mz-productoptions-option form-control" data-mz-product-option="{{ option.attributeFQN }}">
+                                {% if not option.isMultiValue %}<option>{{ labels.select }} {{ option.attributeDetail.name }}</option>{% endif %}
                                 {% for value in option.values %}
                                     {% if value.bundledProduct.inventoryInfo.onlineStockAvailable > 0 %}
                                         <option {% if not value.isEnabled %} class="is-disabled" {% endif %} {% if value.isSelected %}selected="true"{% endif %} value="{{value.value}}">{{value.stringValue|default(value.value)}}

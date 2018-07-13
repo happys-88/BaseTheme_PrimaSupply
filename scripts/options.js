@@ -267,7 +267,21 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             totalQuant = parseInt(totalQuant, 10);
             newQuant = parseInt(newQuant, 10);
             var prevQuant = parseInt(totalQuant - newQuant, 10);
-
+            var options = JSON.parse(JSON.stringify(me.get('options')));
+            for (var i = 0; i < options.length; i++) {
+                var option = options[i];
+                if (option.attributeDetail.dataType == 'ProductCode') {
+                   var optionValues = option.values;
+                    for (var j = 0; j < optionValues.length; j++) {
+                        if (optionValues[j].isSelected === true) {
+                            if (optionValues[j].bundledProduct.inventoryInfo.onlineStockAvailable < newQuant ) {
+                                me.set('addToCartErr', Hypr.getLabel('outOfStockError'));
+                                return this.render();
+                            }
+                        }
+                    } 
+                }
+            }
             var method;
             var url;
             if(prevQuant > 0){
@@ -280,6 +294,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
 
             if(method) {
                api.request( method, url ).then(function () {
+                    me.set('addToCartErr', '');
                     me.addToCart();
                     me.on('addedtocart', function (cartitem) {
                         GlobalCart.update('redirect_to_cart');
@@ -542,7 +557,21 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             totalQuant = parseInt(totalQuant, 10);
             newQuant = parseInt(newQuant, 10);
             var prevQuant = parseInt(totalQuant - newQuant, 10);
-
+            var options = JSON.parse(JSON.stringify(me.get('options')));
+            for (var i = 0; i < options.length; i++) {
+                var option = options[i];
+                if (option.attributeDetail.dataType == 'ProductCode') {
+                   var optionValues = option.values;
+                    for (var j = 0; j < optionValues.length; j++) {
+                        if (optionValues[j].isSelected === true) {
+                            if (optionValues[j].bundledProduct.inventoryInfo.onlineStockAvailable < newQuant ) {
+                                me.set('addToCartErrr', Hypr.getLabel('outOfStockError'));
+                                return this.render();
+                            }
+                        }
+                    } 
+                }
+            }
             var method;
             var url;
             if(prevQuant > 0){
