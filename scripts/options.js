@@ -76,6 +76,24 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                 }
             }
         });
+
+        if(typeof this.model.get('variations') !== "undefined" ) {
+                   var variations = this.model.get('variations');
+                    var sum = 0;
+                    if(variations.length !== 0) { 
+                        var stockArray = [];
+                        for(var i=0; i<variations.length; i++) {
+                            stockArray.push(variations[i].inventoryInfo.onlineStockAvailable);
+                            sum += variations[i].inventoryInfo.onlineStockAvailable;
+                        }
+                        this.model.set({'totalCount': sum});
+                        var inStock =_.contains(stockArray, 0);
+                        this.model.set({'containsZero': inStock});
+                    }                    
+                } else {
+                    this.model.set({'totalCount': this.model.attributes.inventoryInfo.onlineStockAvailable});
+                }
+
         },
         render: function () {
             Backbone.MozuView.prototype.render.call(this);

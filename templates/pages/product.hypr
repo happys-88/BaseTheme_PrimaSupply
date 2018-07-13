@@ -41,11 +41,11 @@
             <div class="yotpo-review-section-pdp">   
               <!-- Yotpo Rating -->
               {% block star-rating %}
-                <div class="yotpo bottomLine" data-product-id="{{prodMod.productCode}}"></div>
+                <div class="yotpo bottomLine" data-product-id="{{prodMod.productCode}}" id="reviewLink"></div>  
               {% endblock star-rating %} 
 
               {% block question-answer %}
-                  <div class='yotpo QABottomLine' data-appkey='4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD' data-product-id='{{ prodMod.productCode }}'></div>
+                  <div class='yotpo QABottomLine' data-appkey='4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD' data-product-id='{{ prodMod.productCode }}' id="askQuestionLink"></div> 
               {% endblock question-answer %}
               <!-- Yotpo Rating --> 
             </div> 

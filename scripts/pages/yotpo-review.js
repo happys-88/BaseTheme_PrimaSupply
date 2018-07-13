@@ -44,11 +44,26 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
 			$(".yotpo-review-ques-ansr").find("#ques-count").text("("+totalReviewCount+")");    
 	    });
 
-	    var askQuestionLink = $(".QABottomLine").find(".yotpo-bottomline");
-	    var targetElement = $(".yotpo-review-ques-ansr").find("#askqa-li");  
-	    $(document).on('click',askQuestionLink, function(){
-	    	//targetElement.addClass("active");  
-	    });   
+	    var headerHeight = $(".mz-sticky-header").height();
+
+	    $(document).on('click', '#reviewLink', function(){  
+	    	$('#yotpoReviewTabs a[href="#reviewTab"]').tab('show'); 
+	    	$('body,html').animate({ 
+		    	scrollTop : $("#yotpoReviewTabs").offset().top-headerHeight                      
+		    }, 800);         
+	    });
+
+	    $(document).on('click', '#askQuestionLink', function(){ 
+	    	$('#yotpoReviewTabs a[href="#questionTab"]').tab('show');
+	    	$('body,html').animate({ 
+		    	scrollTop : $("#yotpoReviewTabs").offset().top-headerHeight                      
+		    }, 800);         
+	    });
+
+	    $('#yotpoReviewTabs a').click(function (e) { 
+		  e.preventDefault();
+		  $(this).tab('show');   
+		});    
 	});  
 
 }); 

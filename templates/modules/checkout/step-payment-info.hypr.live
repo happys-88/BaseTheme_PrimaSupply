@@ -4,7 +4,6 @@
         <a href="javascript:void(0);" class="mz-formstep-edit" data-mz-action="edit">{{ labels.edit }}</a>
     {% endif %}
 </h3>
-
 <div class="mz-formstep-body">
     <div class="mz-formstep-summary mz-l-stack">
         {% for payment in model.activePayments %}
@@ -25,6 +24,18 @@
                         </div>
                     </div>
                     -->
+                    <div>Coupon Code:</div>
+                    {% for orderlevel in model.couponDetails %}
+                        {% for orddisc in orderlevel.OrderDiscounts %}
+                        <div class="coupon-code"><p> {{orddisc.discount.name}} for {{orddisc.impact}}</p></div>
+                        {% endfor %} 
+                        {% for key, value  in orderlevel.itemDiscount %}
+                            <p class="mz-discount"><span> {{ key }} </span>  for  <span>{{ value|currency }}</span></p>  
+                        {% endfor %}
+                        {% for orderDiscount in orderlevel.shippingDiscount %}  
+                        <p class="mz-discount"><span> {{ orderDiscount.couponCode }} </span>  for  <span>{{ orderDiscount.impact|currency }}</span></p>	  
+                    {% endfor %}
+                    {% endfor %}
                 </div>
             {% endif %}
             
@@ -35,7 +46,12 @@
                             <span><img alt="This Payment Using Visa Checkout" src="{{pageContext.visaCheckoutButtonUrl}}?size=154&amp;color=neutral&amp;cardBrands={{ payment.card.paymentOrCardType }}"/></span>
                         </div>
                     {% endif %}
-                    <div class="mz-l-stack-section mz-checkout-current-payment">
+                    <div class="mz-l-stack-section mz-checkout-current-payment mz-checkout-saved-billingaddress pull-left">
+                            <div class="mz-addresssummary">
+                                {% include "modules/common/address-summary" with model=model.billingContact %}
+                            </div>
+                    </div>
+                    <div class="mz-l-stack-section mz-checkout-current-payment pull-right">
                         <p>{{ model.card.paymentOrCardType }} {{ model.card.cardNumberPartOrMask }} 
                         {% for payments in model.activePayments %}
                             {% if payments.paymentType === 'CreditCard' %}
@@ -43,13 +59,20 @@
                             {% endif %}
                         {% endfor %}
                         <br/>{{ labels.expires }} {{ model.card.expireMonth }}/{{ model.card.expireYear }}</p>
+                        <div>Coupon Code:</div>
+                        {% for orderlevel in model.couponDetails %}
+                            {% for orddisc in orderlevel.OrderDiscounts %}
+                            <div class="coupon-code"><p> {{orddisc.discount.name}} for {{orddisc.impact}}</p></div>
+                            {% endfor %} 
+                            {% for key, value  in orderlevel.itemDiscount %}
+                                <p class="mz-discount"><span> {{ key }} </span>  for  <span>{{ value|currency }}</span></p>  
+                            {% endfor %}
+                            {% for orderDiscount in orderlevel.shippingDiscount %}  
+                            <p class="mz-discount"><span> {{ orderDiscount.couponCode }} </span>  for  <span>{{ orderDiscount.impact|currency }}</span></p>	  
+                        {% endfor %}
+                        {% endfor %}
                     </div>
-                    <div class="mz-l-stack-section mz-checkout-current-payment mz-checkout-saved-billingaddress">
-                        <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
-                        <div class="mz-addresssummary">
-                            {% include "modules/common/address-summary" with model=model.billingContact %}
-                        </div>
-                    </div>
+                    
                 </div>
             {% endif %}
 
@@ -80,6 +103,18 @@
                                     <span>{{ field.label }}: </span><span id="mz-payment-purchase-order-custom-field-{{ field.code }}">{{ field.value }}</span>
                                 </div>
                             </div>
+                        {% endfor %}
+                        <div>Coupon Code:</div>
+                        {% for orderlevel in model.couponDetails %}
+                            {% for orddisc in orderlevel.OrderDiscounts %}
+                            <div class="coupon-code"><p> {{orddisc.discount.name}} for {{orddisc.impact}}</p></div>
+                            {% endfor %} 
+                            {% for key, value  in orderlevel.itemDiscount %}
+                                <p class="mz-discount"><span> {{ key }} </span>  for  <span>{{ value|currency }}</span></p>  
+                            {% endfor %}
+                            {% for orderDiscount in orderlevel.shippingDiscount %}  
+                            <p class="mz-discount"><span> {{ orderDiscount.couponCode }} </span>  for  <span>{{ orderDiscount.impact|currency }}</span></p>	  
+                        {% endfor %}
                         {% endfor %}
                     </div>
                     <div class="mz-l-stack-section mz-checkout-current-payment mz-checkout-saved-billingaddress">

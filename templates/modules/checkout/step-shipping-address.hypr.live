@@ -36,7 +36,7 @@
                         <span>{{ labels.suggestionNum|string_format(forloop.index) }}</span>
                     </div>
                     <div class="mz-l-formfieldgroup-cell">
-                        <input data-mz-action="choose" name="candidateValidatedAddresses" type="radio" value="{{forloop.index0}}" checked="checked"/>
+                        <input data-mz-action="choose" id="candidateValidatedAddresses" name="candidateValidatedAddresses" type="radio" value="{{forloop.index0}}" checked="checked" />
                     </div>
                     <div class="mz-l-formfieldgroup-cell">
                         {{addr.address1}}<br />
@@ -51,7 +51,7 @@
                         <span>Original</span>
                     </div>
                     <div class="mz-l-formfieldgroup-cell">
-                        <input data-mz-action="choose" name="candidateValidatedAddresses" type="radio" value="1"/>
+                        <input data-mz-action="choose" id="candidateValidatedAddresses" name="candidateValidatedAddresses" type="radio" value="1"/>
                     </div>
                     <div class="mz-l-formfieldgroup-cell">
                         {{model.address.address1}}<br />

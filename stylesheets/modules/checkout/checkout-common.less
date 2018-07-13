@@ -587,6 +587,13 @@
 				}
 			}
 		}
+		.mz-checkout-payment{
+			padding-bottom: 15px;
+			.mz-checkout-current-payment {
+				clear: initial;
+			}
+		}
+		
 	}
 }
 
@@ -828,7 +835,14 @@
 						margin-left: 0;
 					}
 				}
-
+			}
+			.mz-checkout-payment {
+				.mz-checkout-current-payment {
+					&.pull-left,
+					&.pull-right {
+						width: 100%;
+					}
+				}
 			}
 		}
 	}
