@@ -248,6 +248,8 @@
             initialize: function () {
                 var me = this;
                 this.stepStatus('incomplete');
+                
+
                 this.on('change:availableShippingMethods', function (me, value) {
                     me.updateShippingMethod(me.get('shippingMethodCode'), true);
                 });
@@ -759,12 +761,12 @@
             validatePaymentType: function(value, attr) {
                 var order = this.getOrder();
                 var payment = order.apiModel.getCurrentPayment();
-                // console.log("Payment : "+JSON.stringify(payment));
+/*                console.log("Vlaue : "+value);
+                console.log("validatePaymentType : "+JSON.stringify(payment));*/
                 var errorMessage = Hypr.getLabel('paymentTypeMissing');
-                // console.log("Payment Error : "+JSON.stringify(errorMessage));
                 if (!value) return errorMessage;
                 if ((value === "StoreCredit" || value === "GiftCard") && this.nonStoreCreditTotal() > 0 && !payment) return errorMessage;
-
+                // console.log("errorMessage : "+JSON.stringify(errorMessage));
             },
             validateSavedPaymentMethodId: function (value, attr, computedState) {
                 if (this.get('usingSavedCard')) {
@@ -1493,8 +1495,7 @@
                 if (paymentTypeIsCard && !Hypr.getThemeSetting('isCvvSuppressed')) return this.stepStatus('incomplete'); // initial state for CVV entry
 
                 if (!fulfillmentComplete) return this.stepStatus('new');
-
-                if (thereAreActivePayments && (balanceNotPositive || (this.get('paymentType') === 'PaypalExpress' && window.location.href.indexOf('PaypalExpress=complete') !== -1))) return this.stepStatus('complete');
+                if (thereAreActivePayments && (balanceNotPositive || (this.get('paymentType') === 'PaypalExpress2' && window.location.href.indexOf('PaypalExpress2=complete') !== -1))) return this.stepStatus('complete');
                 return this.stepStatus('incomplete');
 
             },
@@ -1566,7 +1567,7 @@
                 }
 
                 var radioVal = $('input[name=paymentType]:checked').val(); 
-                // console.log("Selected : "+radioVal);
+                
                 var val = this.validate();
                 if(radioVal !== 'Check' && radioVal !== 'PayPalExpress2') {
                     if (this.nonStoreCreditTotal() > 0 && val) {
@@ -1586,8 +1587,8 @@
                         return false;
                     }
                 } else {
-                    // console.log("Val : "+JSON.stringify(val));
-                    // console.log("Has : "+_.has(val, "billingContact.email"));
+                   /* console.log("Val : "+JSON.stringify(val));
+                    console.log("Has : "+_.has(val, "billingContact.email"));*/
                     if(_.has(val, "billingContact.email")) {
                        if (this.nonStoreCreditTotal() > 0 && val) {
                             // display errors:
@@ -1614,7 +1615,9 @@
                     this.get('purchaseOrder').inflateCustomFields();
                 }
                 // console.log("currentPayment : "+JSON.stringify(currentPayment));
-                if (!currentPayment) {
+                /*if (radioVal === 'PayPalExpress2') {
+                    this.markComplete();
+                } else*/ if (!currentPayment) {
                     // console.log("111");
                     return this.applyPayment();
                 } else if (this.hasPaymentChanged(currentPayment)) {
@@ -1624,7 +1627,6 @@
                     // console.log("333");
                     return card.apiSave().then(this.markComplete, order.onCheckoutError);
                 } else {
-                    // console.log("444");
                    this.markComplete();
                 }
                 
@@ -1633,7 +1635,10 @@
                 var self = this, order = this.getOrder();
                 this.syncApiModel();
                 if (this.nonStoreCreditTotal() > 0) {
-                    return order.apiAddPayment().then(function() {
+                    var payment = order.apiModel.getCurrentPayment();
+                    order.messages.reset();
+                   return order.apiAddPayment().then(function(o) {
+                        // console.log("Success : "+JSON.stringify(o));
                         var payment = order.apiModel.getCurrentPayment();
                         var modelCard, modelCvv;
                         var activePayments = order.apiModel.getActivePayments();
@@ -1660,12 +1665,16 @@
                                     self.markComplete();
                             }
                         }
+                    })
+                    .ensure(function(err){
+                        order.messages.reset();
+                        console.log("Error: "+JSON.stringify(err));
+                        self.parent.messages.reset(self.parent.get('messages'));
                     });
                 } else {
                     this.markComplete();
                 }
             },
-
             markComplete: function () {
                 this.stepStatus('complete');
                 this.isLoading(false);

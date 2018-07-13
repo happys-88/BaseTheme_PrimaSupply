@@ -273,7 +273,8 @@ define([
                     cart.set({'taxTotal':0});
                 }
             }, function(err) {
-                $('[data-mz-validation-message="zipCode"]').show();
+                if(stateSel)
+                    $('[data-mz-validation-message="zipCode"]').show();
                 // console.log("Failure : "+JSON.stringify(err));
             });
         },

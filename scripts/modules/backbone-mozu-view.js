@@ -63,12 +63,12 @@
             Backbone.Validation.bind(this);
             Backbone.MozuView.trigger('create', this);
             
-            var cartEmpty = this.model.get("isEmpty");
-            if(this.$el.context.location){
+            if(typeof this.$el.context !=="undefined"){
+                var cartEmpty = this.model.get("isEmpty");
                 if(this.$el.context.location.pathname === '/cart' && !cartEmpty && typeof cartEmpty !== "undefined"){
                     this.render();
                 }
-            } 
+            }
         },
             enqueueRender: function () {
             this.renderQueued = true;

@@ -108,6 +108,18 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
 
     var ShippingInfoView = CheckoutStepView.extend({
         templateName: 'modules/checkout/step-shipping-method',
+        initialize: function() {
+            // console.log("JSON : "+JSON.stringify(this.model));
+            var shippings = this.model.get('availableShippingMethods');
+            var selectedShipping = localStorage.getItem('selectedShipping');
+            console.log("value : "+selectedShipping);
+            if(selectedShipping && selectedShipping !== 'null') {
+                var code = _.find(shippings, function(arr){
+                    return arr.shippingMethodName === selectedShipping;
+                }).shippingMethodCode;
+                this.model.updateShippingMethod(code);
+            }
+        },
         renderOnChange: [
             'availableShippingMethods'
         ],
@@ -117,6 +129,12 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             "change [data-mz-freight-shipment]": "updateFreightShipment"
         },
         updateShippingMethod: function (e) {
+            var code = this.$('[data-mz-shipping-method]:checked').val();
+            var shippings = this.model.get('availableShippingMethods');
+            var shippingName = _.find(shippings, function(arr){
+                return arr.shippingMethodCode === code;
+            }).shippingMethodName;
+            localStorage.setItem('selectedShipping', shippingName);
             this.model.updateShippingMethod(this.$('[data-mz-shipping-method]:checked').val());
         },
         updateLiftGateOption: function (e) {
@@ -512,7 +530,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
         ],
         initialize: function () {
             var me = this;
-            console.log(this.model);
+            
             this.$el.on('keypress', 'input', function (e) {
                 if (e.which === 13) {
                     me.handleEnterKey();
