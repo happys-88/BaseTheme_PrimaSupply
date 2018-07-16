@@ -30,6 +30,9 @@
                         {% endif %}
                     </div>
                     <div id="myInformation" class="tab-pane fade">
+                        <div id="account-messages">
+                            {% include "modules/common/message-bar" with model=model.messages %}
+                        </div>
                         <div class="mz-l-stack-section mz-accountsettings" id="my-account-information">
                             {% include "modules/my-account/my-account-information" %}
                         </div>
