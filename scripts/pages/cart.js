@@ -373,6 +373,7 @@ define([
         onQuantityUpdateFailed: function(model, oldQuantity) {
             var field = this.$('[data-mz-cart-item=' + model.get('id') + ']');
             var errormsg = this.$('[data-mz-message]');
+            $('.mz-productdetail-wrap').find('.mz-errors').remove();
             if (field) {
                 field.val(oldQuantity);
                 if(value>1){
