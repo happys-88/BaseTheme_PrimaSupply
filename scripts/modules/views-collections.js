@@ -5,14 +5,16 @@
 
 define([
     'backbone',
+    'modules/jquery-mozu',
     'underscore',
     'modules/url-dispatcher',
     'modules/intent-emitter',
     'modules/get-partial-view',
     'modules/facet-clear',
     'modules/block-ui',
-    'yotpo'
-], function(Backbone, _, UrlDispatcher, IntentEmitter, getPartialView, makeClearUrl, blockUiLoader, yotpo) {   
+    'yotpo',
+    'modules/category/infinite-scroller'
+], function(Backbone, $, _, UrlDispatcher, IntentEmitter, getPartialView, makeClearUrl, blockUiLoader, yotpo, InfiniteScroller) {   
 
     function factory(conf) {
         var _$body = conf.$body;
@@ -24,6 +26,9 @@ define([
             _$body.html(response.body); 
             if (url) _dispatcher.replace(url);
             _$body.removeClass('mz-loading');
+            if ($(".view-all.selected").length) {
+                InfiniteScroller.update();
+            }
             blockUiLoader.unblockUi();  
             yotpo.update();
         } 
@@ -92,6 +97,9 @@ define([
         _dispatcher.onChange(function(url) {
             getPartialView(url, conf.template).then(updateUi, showError); 
         });
+        if ($(".view-all.selected").length) {
+            InfiniteScroller.update();
+        }
 
     }
 

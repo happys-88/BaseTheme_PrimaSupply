@@ -8,6 +8,7 @@
 {% block body-content %}
 	{% require_script "pages/category" %}
 	{% require_script "options" %}
+	{% require_script "modules/quickview" %} 
 	<div data-mz-category="{{model.categoryId}}" class="mz-l-container">
 	    {% include "pages/category-interior" %}
 	</div>

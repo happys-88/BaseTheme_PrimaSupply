@@ -1,37 +1,22 @@
 <section class="mz-facetingform">
     <h2 {% if pageContext.isMobile or pageContext.isTablet %}class="mz-facets-dropdown"{% endif %}>Filter By:</h2> 
-    {% block clear-facets %}
-        {% if model.hasValueFacets %}
-            {% if model.hasValueFacets %}
-                {% for facet in model.facets %}
+    {% if pageContext.search.facets %}
+    <div class="mz-clear-all">
+        <button class="mz-button mz-facetingform-clearall" data-mz-action="clearFacets" data-mz-url="{% make_url "facet" "clear" %}">{{ labels.clearAllFilters }}<i class="fa fa-times-circle"></i></button>
+        {% if model.hasValueFacets %}   
+            {% for facet in model.facets %}
+                {% if facet.values and facet.facetType != "Hierarchy" %}
                     {% for fval in facet.values %}
-                        {% if facet.values and facet.facetType != "Hierarchy" %}
-                            {% if fval.isApplied %}
-                                {% set_var clearbool=true %}
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}    
-                {% endfor %}
-            {% endif %}
-            
-            {% if clearbool %}
-                <div class="mz-clear-all">  
-                    <button class="mz-button mz-facetingform-clearall" data-mz-action="clearFacets" data-mz-url="{% make_url "facet" "clear"  %}">{{ labels.clearAllFilters }}<i class="fa fa-times-circle"></i></button>
-                    
-                    {% for facet in model.facets %}
-                        {% if facet.values and facet.facetType != "Hierarchy" %}
-                            {% for fval in facet.values %}
-                                {% if fval.isApplied %}
-                                    <input type="checkbox" id="{{facet.field|slugify }}_{{ fval.value|slugify }}" class="mz-facetingform-value" {% if fval.isApplied %}checked="checked"{% endif %} data-mz-facet="{{ facet.field }}" data-mz-facet-value="{{ fval.value }}" data-mz-url="{% make_url "facet" fval %}">
-                                    <label class="mz-facetingform-valuelabel" for="{{facet.field|slugify }}_{{ fval.value|slugify }}" {% if facet.label == 'Color' %}style="background: {{ fval.value }}"{% endif %} >{{ fval.label }} <i class="fa fa-times-circle"></i></label> 
-                                {% endif %}
-                            {% endfor %}
+                        {% if fval.isApplied %}
+                            <input type="checkbox" id="{{facet.field|slugify }}_{{ fval.value|slugify }}" class="mz-facetingform-value" {% if fval.isApplied %}checked="checked"{% endif %} data-mz-facet="{{ facet.field }}" data-mz-facet-value="{{ fval.value }}" data-mz-url="{% make_url "facet" fval %}">
+                            <label class="mz-facetingform-valuelabel" for="{{facet.field|slugify }}_{{ fval.value|slugify }}" {% if facet.label == 'Color' %}style="background: {{ fval.value }}"{% endif %} ><i class="fa fa-times-circle"></i>{{ fval.label }}</label>
                         {% endif %}
                     {% endfor %}
-                </div>
-            {% endif %}
-        {% endif %}
-    {% endblock clear-facets %}
+                {% endif %}
+            {% endfor %}
+         {% endif %}
+    </div>
+{% endif %}
 
     <div class="mz-faceting-section" id="lcBlogFacets"> 
         {% for facet in model.facets %} 
