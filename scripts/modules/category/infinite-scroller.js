@@ -9,8 +9,8 @@ define([
     "modules/get-partial-view",
     "modules/block-ui"
 ], function(Backbone, $, Hypr, _, HyprLiveContext, api, getPartialView, blockUiLoader) {
-    var items = require.mozuData('facetedproducts') ? require.mozuData('facetedproducts').items : [];
-    
+   if(HyprLiveContext.locals.pageContext.pageType==="category"){
+    var items = require.mozuData('facetedproducts') ? require.mozuData('facetedproducts').items : []; 
     var sitecontext = HyprLiveContext.locals.siteContext;
     var cdn = sitecontext.cdnPrefix;
     var isLoadMore = true;
@@ -106,4 +106,6 @@ define([
             productsListView.render();
         }
     };
+   }
+ 
 });
