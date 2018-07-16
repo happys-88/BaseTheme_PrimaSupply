@@ -43,12 +43,21 @@ $(document).on('click', '.mz-quick-view', function (event) {
                             stockArray.push(variations[i].inventoryInfo.onlineStockAvailable);
                             sum += variations[i].inventoryInfo.onlineStockAvailable;
                         }
+                        if (isNaN(sum)) {
+                            sum = 0;
+                        }
                         this.model.set({'totalCount': sum});
                         var inStock =_.contains(stockArray, 0);
                         this.model.set({'containsZero': inStock});
                     }                    
                 } else {
-                    this.model.set({'totalCount': this.model.attributes.inventoryInfo.onlineStockAvailable});
+                    console.log(this.model.attributes.inventoryInfo.onlineStockAvailable);
+                    if (this.model.attributes.inventoryInfo.onlineStockAvailable) {
+                        this.model.set({'totalCount': this.model.attributes.inventoryInfo.onlineStockAvailable});
+                    } else {
+                        this.model.set({'totalCount': 0});
+                    }
+                    
                 }
                 var options = JSON.parse(JSON.stringify(this.model.get('options')));
                 var count = 0;
