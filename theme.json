@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "6983734c0398477feb38901f8c93fa23dc1f7130"
+      "commit": "977a6df4b4d2b356c6b66e4efd0de55a21ccf556"
     },
     "baseThemeChannel": "stable"
   },
@@ -557,6 +557,7 @@
       64
     ],
     "viewAllPageSize": 48,
+    "productInfinitySize": 48,
     "pageSizeOptionsDirectoryLC": [
       9,
       15
