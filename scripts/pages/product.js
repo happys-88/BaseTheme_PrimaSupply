@@ -24,10 +24,52 @@
         render: function () {
             var me = this;
             Backbone.MozuView.prototype.render.apply(this);
+            this.productCarousel();
             this.$('[data-mz-is-datepicker]').each(function (ix, dp) {
                 $(dp).dateinput().css('color', Hypr.getThemeSetting('textColor')).on('change  blur', _.bind(me.onOptionChange, me));
             });
         },
+        productCarousel: function () {
+           
+			var minSlides,
+				maxSlides,
+				slideWidth,
+                slideMargin,
+                page,
+                controls,
+                windowWidth=$( window ).width();
+                console.log(windowWidth);
+			if(windowWidth<=767){
+				 minSlides=2;
+				 maxSlides=2;
+				 slideMargin= 5;
+                 slideWidth= 333;
+                 page=true;
+                 controls=false;
+			}else{
+				 minSlides=4;
+				 maxSlides=12;
+				 slideWidth= 333;
+                 slideMargin=15;
+                 page=false;
+                 controls=true;
+			}
+	        $('#addonslider').bxSlider({ 
+		        minSlides: minSlides,
+                maxSlides: maxSlides,
+                moveSlides: 1,
+                slideWidth: slideWidth,
+                slideMargin: slideMargin,
+                responsive: true,
+                pager: page,
+                controls:controls,
+                speed: 1000,
+                infiniteLoop: false,
+		        onSliderLoad: function() {
+		            $(".slider").css("visibility", "visible");
+		        }  
+			});
+		},
         onOptionChange: function (e) {
             return this.configure($(e.currentTarget));
         },
@@ -436,8 +478,11 @@
         });
 
         window.productView = productView;
-
         productView.render();
+      //  productView.productCarousel();
+        $(window).resize(function(){
+            productView.render();
+        }); 
 
     });
 

@@ -24,7 +24,9 @@
                         </div>
                     </div>
                     -->
+                    {% if  model.couponDetails.length>0 %}
                     <div>Coupon Code:</div>
+                    {% endif %}
                     {% for orderlevel in model.couponDetails %}
                         {% for orddisc in orderlevel.OrderDiscounts %}
                         <div class="coupon-code"><p> {{orddisc.discount.name}} for {{orddisc.impact}}</p></div>
@@ -58,8 +60,11 @@
                                 {{ 'FOR'|lower }} {{ payments.amountRequested|currency }}
                             {% endif %}
                         {% endfor %}
-                        <br/>{{ labels.expires }} {{ model.card.expireMonth }}/{{ model.card.expireYear }}</p>
-                        <div>Coupon Code:</div>
+                        </p>
+                        {% if  model.couponDetails.length>0 %}
+                         <div>Coupon Code:</div>
+                        {% endif %}
+                       
                         {% for orderlevel in model.couponDetails %}
                             {% for orddisc in orderlevel.OrderDiscounts %}
                             <div class="coupon-code"><p> {{orddisc.discount.name}} for {{orddisc.impact}}</p></div>
@@ -104,7 +109,9 @@
                                 </div>
                             </div>
                         {% endfor %}
+                        {% if  model.couponDetails.length>0 %}
                         <div>Coupon Code:</div>
+                        {% endif %}
                         {% for orderlevel in model.couponDetails %}
                             {% for orddisc in orderlevel.OrderDiscounts %}
                             <div class="coupon-code"><p> {{orddisc.discount.name}} for {{orddisc.impact}}</p></div>

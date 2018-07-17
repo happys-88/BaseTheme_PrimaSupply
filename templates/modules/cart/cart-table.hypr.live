@@ -132,15 +132,15 @@
     {% endcomment %} 
 
     <div class="mz-carttable-total-row row">
-        <div class="col-sm-4 col-xs-12 mz-carttable-checkout-couponcode" id="coupon-code-field" >
+        <div class="col-sm-6 col-md-4 col-xs-12 mz-carttable-checkout-couponcode" id="coupon-code-field" >
           {% include "modules/cart/apply-coupon-code" %}
         </div>
-        <div class="col-sm-8 col-xs-12 text-right hidden-xs">
+        <div class="col-sm-6 col-md-8 col-xs-12 text-right hidden-xs">
           {% include "modules/cart/cart-merchandise-total" %}   
         </div>
     </div>
     <div class="mz-carttable-total-row row">
-      <div class="col-sm-4 col-xs-12 estimated-tax-shipping">
+      <div class="col-sm-6 col-md-4 col-xs-12 estimated-tax-shipping">
         <span class="mz-heading">{{ labels.estimateYourTaxShipping }}</span> 
         <div class="mz-l-formfieldgroup-row">
           <div class="mz-l-formfieldgroup-cell">
@@ -148,9 +148,8 @@
           </div>
           <div class="mz-l-formfieldgroup-cell">
             <input type="text" id="usStates" maxlength="5" value="" {% if model.selectedState !== 'null' %}placeholder="{{ model.selectedState}}" {% else %} placeholder="{{labels.zipCode}}" {% endif %} data-mz-value="usStates">
-
-      <button type="button" id="zipCodeButton" class="mz-button" disabled data-mz-action="populateTax">{{ labels.submit }}</button>
-      <span data-mz-validation-message="zipCode" style="display: none;">{{ labels.wrongZipCode }}</span>
+            <button type="button" id="zipCodeButton" class="mz-button" disabled data-mz-action="populateTax">{{ labels.submit }}</button>
+            <span class="mz-validationmessage" data-mz-validation-message="zipCode" style="display: none;">{{ labels.wrongZipCode }}</span>  
           </div>
         </div> 
         <div class="mz-l-formfieldgroup-row">
@@ -168,16 +167,16 @@
             </div>
         </div>     
       </div>
-      <div class="col-sm-8 col-xs-12 text-right visible-xs">
+      <div class="col-sm-6 col-md-8 col-xs-12 text-right visible-xs"> 
         {% include "modules/cart/cart-merchandise-total" %}   
       </div>
 
-      <div class="col-sm-8 col-xs-12 text-right">
+      <div class="col-sm-6 col-md-8 col-xs-12 text-right"> 
         {% include "modules/cart/cart-total" %}
       </div>
     </div>
 
-    <div class="mz-carttable-checkout-row row">
+    <div class="mz-carttable-checkout-row row"> 
       {% include "modules/cart/cart-buttons" %}
     </div>
 
