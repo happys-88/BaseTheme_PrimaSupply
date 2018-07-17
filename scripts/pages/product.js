@@ -300,7 +300,7 @@
         return product;
     }
     $(document).ready(function () {
-
+        $('#disqus_comments_noscript').hide();
         var product = ProductModels.Product.fromCurrent();
         var currentProductCode = product.attributes.productCode;
         if(typeof product.attributes.categories !== "undefined"){

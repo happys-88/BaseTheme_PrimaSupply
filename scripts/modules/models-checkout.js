@@ -810,7 +810,7 @@
               var comp1 =_.compact(couponwithimpact);
               var comp2 =_.compact(couponwithCode);
               discountarray =_.object(comp1,comp2);
-              console.log(discountarray);
+              // console.log(discountarray);
               discountsArray.push({
                   OrderDiscounts:  order.get('orderDiscounts')
               });
@@ -820,7 +820,7 @@
               discountsArray.push({
                   shippingDiscount:  order.get('shippingDiscounts')
               });
-              console.log(discountsArray);
+              // console.log(discountsArray);
               
               return discountsArray;
           },
@@ -1683,9 +1683,9 @@
                 this.syncApiModel();
                 if (this.nonStoreCreditTotal() > 0) {
                     var payment = order.apiModel.getCurrentPayment();
-                    order.messages.reset();
-                   return order.apiAddPayment().then(function(o) {
-                        // console.log("Success : "+JSON.stringify(o));
+                    console.log("Payment : "+JSON.stringify(payment));
+                    return order.apiAddPayment().then(function(o) {
+                        console.log(o);
                         var payment = order.apiModel.getCurrentPayment();
                         var modelCard, modelCvv;
                         var activePayments = order.apiModel.getActivePayments();
@@ -2063,6 +2063,14 @@
                     },
                     password: this.get('password')
                 }).then(function (customer) {
+                    var deals = $('#PSNewsLetter').is(':checked') ? "PSNewsLetter" : '';
+                    if(deals !== '') {
+                        api.request("POST", "/mailchimp", {'accountId':email, 'deals':deals}).then(function (response){
+                           console.log("Response : "+JSON.stringify(response));    
+                        }, function(err) {
+                            console.log("MailChimp");
+                        });
+                    }
                     self.customerCreated = true;
                     return customer;
                 }, function (error) {

@@ -28,7 +28,34 @@
 	<span class="next-post"><a id="next-url">{{ labels.nextPage }}</a><i class="fa fa-angle-right"></i></span>   
 </div>
 
+
+
 {% block disqus-section %}
+	<div id="disqus_comments_noscript">
+		<h2 id="comments-title">Disqus - noscript</h2>
+		{% for disqusArr in disqusData %}
+			{% if disqusArr.statusCode %} 
+				{{ labels.disqusComments }}
+			{% else %}
+				{% for commentData in disqusArr %}
+					<div class="comment approved clear-block">
+						<div class="comment-inner clear-block">
+							<div class="submitted">
+							{% if commentData.author.url %}
+								Submitted by <a href="{{ commentData.author.url }}" {% if commentData.author.username != 'primacoffee' %} rel="nofollow" {% endif %}>{{commentData.author.name}}</a> on {{ commentData.createdAt|date("D, m/d/Y - H:i") }}   
+						    {% else %}
+						      	Submitted by {{ commentData.author.name }} on {{ commentData.createdAt|date("D, m/d/Y - H:i") }}  
+						    {% endif %}
+						  	</div>				  
+							<div class="content">
+								<p>{{commentData.raw_message}}</p>  
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			{% endif %}
+		{% endfor %}
+	</div>
 	<div id="disqus_thread"></div>
 
 <script>
@@ -52,8 +79,6 @@ var disqus_config = function () {
 	this.page.identifier = 'node/29106'; // Product Code is important */
 	
 };
-
-
 
 (function() { // DON'T EDIT BELOW THIS LINE
 

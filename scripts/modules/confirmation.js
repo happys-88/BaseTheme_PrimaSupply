@@ -72,11 +72,6 @@ require(["modules/jquery-mozu", "underscore", 'modules/api', "hyprlive", "module
                     }, function(err) {
                         console.log("Failure : "+JSON.stringify(err));
                     });
-                    /*$.get("/mailchimp", {accountId:email, deals:deals},  function(res){ 
-                       console.log("Success!!");   
-                    }).fail(function(err) {
-                        console.log("Failure "+JSON.stringify(err));   
-                    });*/
                 }
             }
         });
