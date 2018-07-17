@@ -73,7 +73,7 @@ define([
            // console.log("Shipping storage : "+shipping);
             if(typeof stateData !== 'undefined' || stateData !== null) {
                 this.model.set({'selectedState': stateData});
-                this.calculateTax(stateData);
+                this.calculateTax(stateData, false);
             }
             if(typeof shipping === 'undefined' || shipping === null) {
                 var url = "api/commerce/catalog/storefront/shipping/request-rates";
@@ -238,7 +238,7 @@ define([
             // this.render();
 
         },
-        calculateTax: function(stateSel){
+        calculateTax: function(stateSel, bool){
             $('[data-mz-validation-message="zipCode"]').hide();
             var cart = this.model;
             if(typeof stateSel !== 'undefined') {
@@ -273,14 +273,15 @@ define([
                     cart.set({'taxTotal':0});
                 }
             }, function(err) {
-                if(stateSel)
+                if(stateSel && bool)
                     $('[data-mz-validation-message="zipCode"]').show();
+
                 // console.log("Failure : "+JSON.stringify(err));
             });
         },
         populateTax: function(e){
             var stateSel = $('#usStates').val();
-            this.calculateTax(stateSel);
+            this.calculateTax(stateSel, true);
         },
         populateShipping: function(){
                 // console.log("Populate Shipping"+JSON.stringify(this.model));

@@ -64,7 +64,7 @@ define([
         },
         finishEdit: function() {
             var self = this;
-            var deals = $('#PrimaDeals').is(':checked') ? $('#PrimaDeals').val() : '';
+            var deals = $('#PSDeals').is(':checked') ? $('#PSDeals').val() : '';
             deals = $('#PSNewsLetter').is(':checked') ? deals+","+$('#PSNewsLetter').val() : deals+","+'';
             deals = $('#PSBlogs').is(':checked') ? deals+","+$('#PSBlogs').val() : deals+","+'';
             
