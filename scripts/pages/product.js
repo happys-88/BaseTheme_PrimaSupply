@@ -38,8 +38,7 @@
                 page,
                 controls,
                 windowWidth=$( window ).width();
-                console.log(windowWidth);
-			if(windowWidth<=767){
+            if(windowWidth<=767){ 
 				 minSlides=2;
 				 maxSlides=2;
 				 slideMargin= 5;
@@ -54,7 +53,7 @@
                  page=false;
                  controls=true;
 			}
-	        $('#addonslider').bxSlider({ 
+	        $('#addonslider').bxSlider({  
 		        minSlides: minSlides,
                 maxSlides: maxSlides,
                 moveSlides: 1,
@@ -342,7 +341,7 @@
         return product;
     }
     $(document).ready(function () {
-        $('#disqus_comments_noscript').hide();
+        $('#disqus-comments-noscript').hide(); 
         var product = ProductModels.Product.fromCurrent();
         var currentProductCode = product.attributes.productCode;
         if(typeof product.attributes.categories !== "undefined"){
