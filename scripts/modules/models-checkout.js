@@ -781,36 +781,22 @@
           couponDetails: function() {
               var order = this.getOrder();
               var discountsArray = [];
-              var impact = 0; 
-              var m = 0;
-              var discountarray;
-              var couponwithimpact=[];
-              var couponwithCode=[];
-              
-              $.each(order.get('couponCodes'), function(i, item) {
-                  $.each(order.get('items'), function(j, disc) {	
-                      $.each(disc.productDiscounts, function(k, item) {
-                          if(k>0){
-                              if(item.couponCode == order.get('couponCodes')[i]){
-                                  impact = impact+item.impact;
-                                  couponwithimpact[m] = item.couponCode;
-                                  couponwithCode[m] = impact;
-                                  }
-                          }else{
-                              if(item.couponCode == order.get('couponCodes')[i]){
-                                  impact = impact+item.impact;
-                                  couponwithimpact[m] = item.couponCode;
-                                  couponwithCode[m] = impact;								
-                              }
-                          }
-                      });
-                  });
-                  m = m+1;
-              });
-              var comp1 =_.compact(couponwithimpact);
-              var comp2 =_.compact(couponwithCode);
-              discountarray =_.object(comp1,comp2);
-              console.log(discountarray);
+              var dataitems=_.pluck(order.get('items'), 'productDiscounts');
+              var coupon= _.pluck(_.flatten(dataitems),'couponCode');
+              var impact=_.pluck(_.flatten(dataitems),'impact');
+              var unqimpact=[];
+              var impactsum=0;
+              var unqcoupon=_.uniq(coupon);
+               for(var i=0;i<unqcoupon.length; i++){
+                 impactsum=0;
+                 for(var j=0;j<coupon.length; j++){
+                    if(unqcoupon[i]==coupon[j]){
+                      impactsum=impactsum+impact[j];
+                    }
+                 }
+                 unqimpact.push(impactsum);
+               }              
+               var discountarray= _.object(unqcoupon,unqimpact);
               discountsArray.push({
                   OrderDiscounts:  order.get('orderDiscounts')
               });
@@ -820,7 +806,6 @@
               discountsArray.push({
                   shippingDiscount:  order.get('shippingDiscounts')
               });
-              console.log(discountsArray);
               
               return discountsArray;
           },

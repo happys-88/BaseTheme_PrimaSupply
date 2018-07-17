@@ -26,8 +26,10 @@
 					<p>{{ model.billingInfo.billingContact.address.cityOrTown }} </p>
 					<p>{{ model.billingInfo.billingContact.email }} </p>
 					<p class="mz-heading">Payment Method</p>   
-					<p>{{ model.billingInfo.paymentType }} for {{ model.total|currency }} </p> 
-                    <strong>Coupon Code:</strong> <br>  
+					<p>{{ model.billingInfo.paymentType }} for {{ model.total|currency }} </p>
+					{% if model.discount.lenght>0 or model.shippingDiscounts.length>0 or model.orderDiscounts.length>0  %} 
+					<strong>Coupon Code:</strong> <br>  
+					{% endif %}
 					{% for key, value  in model.discount %}
 						<p class="mz-discount"><span> {{ key }} </span>  for  <span>{{ value|currency }}</span></p>  
 					{% endfor %}
