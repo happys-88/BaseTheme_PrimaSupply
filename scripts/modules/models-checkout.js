@@ -806,8 +806,12 @@
               discountsArray.push({
                   shippingDiscount:  order.get('shippingDiscounts')
               });
-              
-              return discountsArray;
+              var orderDiscounts = order.get('orderDiscounts');
+              var shippingDiscounts = order.get('shippingDiscounts');
+              if((orderDiscounts && orderDiscounts.length > 0) || (discountarray && discountarray.length) || (shippingDiscounts && shippingDiscounts.length > 0)) {
+
+                return discountsArray;
+              }
           },
             acceptsMarketing: function () {
                 return this.getOrder().get('acceptsMarketing');

@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     -->
-                    {% if  model.couponDetails.length>0 %}
+                    {% if  model.couponDetails %}
                     <div>Coupon Code:</div>
                     {% endif %}
                     {% for orderlevel in model.couponDetails %}
@@ -61,7 +61,7 @@
                             {% endif %}
                         {% endfor %}
                         </p>
-                        {% if  model.couponDetails.length>0 %}
+                        {% if  model.couponDetails %}
                          <div>Coupon Code:</div>
                         {% endif %}
                        
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
                         {% endfor %}
-                        {% if  model.couponDetails.length>0 %}
+                        {% if  model.couponDetails %}
                         <div>Coupon Code:</div>
                         {% endif %}
                         {% for orderlevel in model.couponDetails %}
