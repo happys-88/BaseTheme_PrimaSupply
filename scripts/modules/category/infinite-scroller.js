@@ -9,7 +9,7 @@ define([
     "modules/get-partial-view",
     "modules/block-ui"
 ], function(Backbone, $, Hypr, _, HyprLiveContext, api, getPartialView, blockUiLoader) {
-   if(HyprLiveContext.locals.pageContext.pageType==="category"){
+   if(HyprLiveContext.locals.pageContext.pageType==="category" && typeof require.mozuData('facetedproducts')!=="undefined"){ 
     var items = require.mozuData('facetedproducts') ? require.mozuData('facetedproducts').items : []; 
     var sitecontext = HyprLiveContext.locals.siteContext;
     var cdn = sitecontext.cdnPrefix;

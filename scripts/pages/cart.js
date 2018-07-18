@@ -371,25 +371,29 @@ define([
             }         
            
     },400),
-        onQuantityUpdateFailed: function(model, oldQuantity) {
-            var field = this.$('[data-mz-cart-item=' + model.get('id') + ']');
-            var errormsg = this.$('[data-mz-message]');
-            $('.mz-productdetail-wrap').find('.mz-errors').remove();
-            if (field) {
-                field.val(oldQuantity);
-                if(value>1){
-                    if(model.get('product').get('variationProductCode')){
-                        errormsg.text(model.get('product').get('variationProductCode') +" is limited in stock");        
-                    }
-                    else{
-                        errormsg.text(model.get('product').get('productCode') +" is limited in stock");                       
-                    }  
+    onQuantityUpdateFailed: function(model, oldQuantity) {
+        var field = this.$('[data-mz-cart-item=' + model.get('id') + ']');
+        var errormsg = this.$('[data-mz-message]');
+        var message = model.messages.models[0].attributes.message;
+        var prodCode; 
+        if (message.indexOf('Validation Error: The following items have limited quantity or are out of stock') > -1) {
+            prodCode = message.replace('Validation Error: The following items have limited quantity or are out of stock:','');      
+        }
+       
+      //  $('.mz-productdetail-wrap').find('.mz-errors').remove();
+        if (field) {
+            field.val(oldQuantity);
+            if(value>1){
+                if(prodCode) {
+                    errormsg.text(prodCode +" is limited in stock"); 
                 }
             }
-            else {
-                this.render();
-            }
-        },
+        }
+        else {
+            this.render();
+        }
+        $('.mz-productdetail-wrap').find('.mz-errors').remove();
+    },
         removeItem: function(e) {
             if(require.mozuData('pagecontext').isEditMode) {
                 // 65954
