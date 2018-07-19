@@ -2,7 +2,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title" {% if model.addToCartErr %} style="color: red;" {% endif %}>
+            <h4 class="modal-title" {% if model.addToCartErr %} style="color: #b94a48;" {% endif %}>
                 {% if model.addToCartErr %}
                     {{ model.addToCartErr }}
                 {% else %}
