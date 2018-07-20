@@ -341,6 +341,7 @@
         return product;
     }
     $(document).ready(function () {
+        $('#indexreviews').hide();  
         $('#disqus-comments-noscript').hide(); 
         var product = ProductModels.Product.fromCurrent();
         var currentProductCode = product.attributes.productCode;

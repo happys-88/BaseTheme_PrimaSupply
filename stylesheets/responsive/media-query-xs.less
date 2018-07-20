@@ -1,6 +1,7 @@
 /**** Site Changes for small screens ****/
 
 @media @mz-xs-media-query {
+	
 	.no-padding-mobile{
 		padding: 0;  
 	}
@@ -53,11 +54,11 @@
 		}
 		.mz-utilitynav {
 			position: absolute;
-			right: 30px;
+			right: 15px; 
 			top: 0; 
 			.mz-utilitynav-item {
 				margin-left: 15px;
-			}
+			} 
 			.mz-utilitynav-link, .login-icon {
 				.fa{
 					font-size: 24px;  	
@@ -65,6 +66,47 @@
 				
 			}
 		}
+	}
+
+	.mz-sticky-header{
+		position: fixed;
+		top: 0;
+		z-index: 99;
+		background: #fff;  
+	}
+	.fixed{
+		.mz-header-top {
+			display: block; 
+		}
+		.mz-header-bottom{
+			.mz-utilitynav{
+				margin: 0;  
+				.mz-utilitynav-item{
+					&.live-chat{
+						display: none; 
+					}
+					.mz-utilitynav-link .fa{
+						font-size: 24px;  
+					}
+				}			
+			}
+			.mz-searchbox{
+				margin-top: 10px; 
+				top: auto;  
+			}
+		}
+	} 
+
+	#page-content{
+		margin-top: 154px; 
+	}
+	.mz-homepage{
+		.mz-breadcrumbs{
+			display: none !important; 
+		}
+	}
+	#designstudio-button{
+		right: 0 !important; 
 	}
 	
 	/*** Common top page heading ***/ 
@@ -81,7 +123,8 @@
 	/**** Mobile Navigation ****/ 
 	#mz-mobilenav-container {
 		width: 100%;
-		top: 111px; 
+		top: 154px; 
+		border-top: 1px solid #cbcbcb;   
 	}
 	.mz-homepage {
 		.home-heading1 { 
@@ -518,6 +561,7 @@
 					img {
 						padding: 0;
 						max-width: 115px;
+						min-height: 115px; 
 					}
 					.mz-productimages-main {
 						min-height: 210px;
@@ -535,10 +579,17 @@
 			li.mz-recentproductlist-item {
 				text-align: center;
 				min-height: 238px;
+				padding: 0 15px;  
 			}
 			.bx-controls-direction {
 				a {
-					margin-top: -39px;
+					margin-top: -70px; 
+					&.bx-prev{
+						left: -10px; 
+					}
+					&.bx-next{
+						right: -10px;  
+					}
 				}
 			}
 		}
@@ -558,6 +609,12 @@
 				.bx-controls-direction {
 					a {
 						margin-top: -43px;
+						&.bx-prev{
+							left: -10px; 
+						}
+						&.bx-next{
+							right: -10px;  
+						} 
 					}
 				}
 			}
@@ -619,6 +676,26 @@
 			}
 		}
 	}
+
+	/**** Yotpo Reviews ****/
+	.yotpo-review-ques-ansr{
+		.yotpo.yotpo-main-widget{
+			.yotpo-reviews{
+				.yotpo-review{
+					&.yotpo-regular-box{
+						width: 100%; 
+						padding: 0 !important; 
+					}	
+				}	
+			}	
+		}
+	} 
+	.mz-product{
+		.mz-l-sidebar{
+			margin-top: 14px; 
+		} 	
+	}
+	 
 
 	/*** Cart ***/
 	#global-cart{
@@ -830,15 +907,15 @@
 		}
 	}
 
-	#back-to-top{
+	#back-to-top{ 
 		width: 45px;
 		height: 45px; 
 		font-size: 23px;
-		bottom: 25px;
+		bottom: 70px; 
 		right: 15px;
 	}
 
-	.mz-promo-banner{
+	.mz-promo-banner{ 
 		margin-bottom: 25px; 
 	}
 
