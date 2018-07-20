@@ -23,6 +23,9 @@
         {% set_var avail=true %}     
       {% endif %}
     {% endfor %}
+    {% if navigation.breadcrumbs.length == 1 %}
+        <a href="{{siteContext.siteSubdirectory}}/" class="mz-breadcrumb-link">Home</a>
+    {% endif %}
     {% if  avail == true %}
         {% if not crumb.isHidden %}
             <a href="{{url}}" class="mz-breadcrumb-link{% if forloop.first %} is-first{% endif %}"><i class="fa fa-angle-left"></i> {{name|replace(themeSettings.columnBreaker, "")|safe|lower }}</a>
