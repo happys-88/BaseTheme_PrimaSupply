@@ -32,16 +32,20 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
 		var reviewUrl=""+yotpoBaseUrl+"/"+yotpoApiKey+"/products/"+getProductCode+"/reviews"+"";  
 
 		$.get(reviewUrl, function(data, status){
-			var totalReviewCount = data.response.bottomline.total_review;
-			$(".yotpo-review-ques-ansr").find("#review-count").text("("+totalReviewCount+")");  
+			if(data.status.code == 200){
+				var totalReviewCount = data.response.bottomline.total_review;
+				$(".yotpo-review-ques-ansr").find("#review-count").text("("+totalReviewCount+")");  
+			}
 		}); 
 		
 		var yotpoQuestionBaseUrl = HyprLiveContext.locals.themeSettings.yotpoQuestionBaseUrl;
 		var questionUrl = ""+yotpoQuestionBaseUrl+"/"+yotpoApiKey+"/"+getProductCode+"/questions"+""; 
 
 		$.get(questionUrl, function(data, status){
-			var totalReviewCount = data.response.total_questions; 
-			$(".yotpo-review-ques-ansr").find("#ques-count").text("("+totalReviewCount+")");    
+			if(data.status.code == 200){
+				var totalReviewCount = data.response.total_questions; 
+				$(".yotpo-review-ques-ansr").find("#ques-count").text("("+totalReviewCount+")"); 
+			}   
 	    });
 
 	    var headerHeight = $(".mz-sticky-header").height();
