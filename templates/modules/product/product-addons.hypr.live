@@ -1,5 +1,4 @@
-{% if  model.addons %}
-<div class="row">
+{% if model.addons %} 
     <div class="popular-addons">
         <ul id="addonslider">
             {% for addon in model.addons %}
@@ -36,5 +35,4 @@
             {% endfor %}
         </ul> 
     </div>
-</div>
 {% endif %}

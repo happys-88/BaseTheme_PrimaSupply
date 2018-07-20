@@ -30,8 +30,7 @@
             });
         },
         productCarousel: function () {
-           
-			var minSlides,
+            var minSlides, 
 				maxSlides,
 				slideWidth,
                 slideMargin,
@@ -39,19 +38,19 @@
                 controls,
                 windowWidth=$( window ).width();
             if(windowWidth<=767){ 
-				 minSlides=2;
-				 maxSlides=2;
-				 slideMargin= 5;
-                 slideWidth= 333;
-                 page=true;
-                 controls=false;
+				 minSlides = 2;
+				 maxSlides = 2;
+				 slideMargin = 5;
+                 slideWidth = 333;
+                 page = true;
+                 controls = false;
 			}else{
-				 minSlides=4;
-				 maxSlides=12;
-				 slideWidth= 333;
-                 slideMargin=15;
-                 page=false;
-                 controls=true;
+				 minSlides = 4;
+				 maxSlides = 12;
+				 slideWidth = 100; 
+                 slideMargin = 50;   
+                 page = false;
+                 controls = true; 
 			}
 	        $('#addonslider').bxSlider({  
 		        minSlides: minSlides,

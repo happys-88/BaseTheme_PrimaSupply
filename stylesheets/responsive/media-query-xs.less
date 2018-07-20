@@ -786,22 +786,48 @@
 						}	
 					}
 				}
+				.mz-carttable-item-price {
+                    span {
+                        font-weight: normal;
+                    }
+                }                                                                                   
 				
 			}
+			.mz-carttable-item-price {
+                .cart-each-price {
+                    &.visible-xs {
+                        margin: 0;
+                        float: left;
+                        width: 50%;
+                    }
+                }
+            }
+            .mz-carttable-item-total {
+                .cart-table-total {
+                    &.visible-xs {
+                        margin: 0;
+                        float: left;
+                        width: 50%;
+                    }
+                }
+            }
 			.mz-carttable-total-row{
 				padding: 10px 0;
 				border-bottom: none; 
 				.col-xs-12{
 					padding: 0; 
 				}
-				.mz-carttable-checkout-couponcode{
-					button{
-					    margin-left: 12px;  
-					}
-				}
+				.mz-carttable-checkout-couponcode {
+                    .mz-button {
+                        padding: 8px 16px; 
+                    }
+                }
 				.estimated-tax-shipping{    
 					border-bottom: 1px solid #dbdbda;
-					margin-bottom: 10px;  
+					margin-bottom: 10px;
+					.mz-button {
+                        padding: 8px 10px;  
+                    }   
 				}
 				.estimated-tax-shipping + .col-xs-12{
 					padding-bottom: 10px;
@@ -1460,6 +1486,9 @@
 
 	/*** Checkour ***/
 	.mz-checkout {
+		#page-content{
+			margin-top: 0; 
+		}
 		.mz-l-2column-right {
 			.mz-l-column {
 			    padding-left: 0;
@@ -1495,6 +1524,11 @@
 				}
 			}
 			.mz-ordersummary {
+				.mz-ordersummary-price-container {
+                    span:nth-child(odd) {
+                        padding: 0;
+                    }
+                } 
 				.mz-ordersummary-product-lists {
 					.mz-ordersummary-lineitems {
 						.mz-ordersummary-item-product {
@@ -1539,6 +1573,12 @@
 				}
 			}
 			.mz-checkoutform-couponcode {
+				padding: 0;
+				.form-group{
+					.col-xs-12{
+						padding: 0; 
+					}
+				} 
 				label {
 				    text-align: left;
 				}
@@ -1551,6 +1591,11 @@
 					}
 				}
 			}
+			.mz-paymentselector-separator {
+                label {
+                    text-align: left;
+                }
+            } 
 		}
 	}
 	.mz-confirmation {
