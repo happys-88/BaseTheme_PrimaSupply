@@ -399,6 +399,18 @@
                     "name": "instagramFollowUsLink" 
                 }
             ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Third Party key details",     
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "AddThis Pubid", 
+                    "xtype": "mz-input-text",
+                    "name": "addThisPubId"  
+                }
+            ]
         }
     ]
 }

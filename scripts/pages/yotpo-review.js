@@ -20,6 +20,29 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
 	    	$(".yotpo-single-image-container").removeClass("hidden-thumbnails");
 	   	});
 
+	    api.request("POST", "/commonRoute",{"requestFor":"popularArticles", "pubId":HyprLiveContext.locals.themeSettings.addThisPubId}).then(function (response){
+            // console.log("Test Route : "+JSON.stringify(response.statusCode));
+            var artContent = '';
+            if(response.statusCode === 200) {   
+            	if(response.body.length > 0) {         	
+	            	_.each(response.body, function(article) {
+	            		artContent = artContent +'<li><a href='+article.url+'>'+article.title+'</a></li>';	
+	            	});            	
+            	} else {
+            		artContent = "Articles not found";	
+            	}
+            } else {
+            	artContent = "Articles not found";
+            }
+            $('#popular-articles').html(artContent);
+        }, function(err) {
+            console.log("Failure : "+JSON.stringify(err));
+        });
+	    /*$.get(questionUrl, function(data, status){
+			var totalReviewCount = data.response.total_questions; 
+			$(".yotpo-review-ques-ansr").find("#ques-count").text("("+totalReviewCount+")");    
+	    });*/
+
 	   	// Instagram Feed for learning center 
 	   	var galleryThumbnailsLC = 4; 
 	   	$(".yotpo-single-image-container").addClass("hidden-thumbnails");
