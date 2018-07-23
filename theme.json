@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "6983734c0398477feb38901f8c93fa23dc1f7130"
+      "commit": "52c9c65f602fb48aea945df400dee287a61251fb"
     },
     "baseThemeChannel": "stable"
   },
@@ -856,7 +856,8 @@
     "questions": "questions",
     "showYotpoGallery": true,
     "instagramFollowUsLink": "https://www.instagram.com/prima.supply/?hl=en",
-    "addThisPubId": "ra-519bb90e58f9bf27"
+    "addThisPubId": "ra-519bb90e58f9bf27",
+    "addThisPubIdBlogSharing": "ra-519bb90e58f9bf27"
   },
   "layoutWidgets": [
     {
