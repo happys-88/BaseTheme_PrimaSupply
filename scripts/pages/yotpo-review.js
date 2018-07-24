@@ -62,10 +62,6 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
 		var questionUrl = ""+yotpoQuestionBaseUrl+"/"+yotpoApiKey+"/"+getProductCode+"/questions"+""; 
 
 		$.get(questionUrl, function(data, status){
-			console.log(data);
-			console.log(status);
-			alert(data.response.questions.length);
-
 			if(data.status.code == 200 || (typeof data.response.questions !== 'undefined' && data.response.questions.length > 0)){
 				var totalReviewCount = data.response.total_questions; 
 				$(".yotpo-review-ques-ansr").find("#ques-count").text("("+totalReviewCount+")"); 
