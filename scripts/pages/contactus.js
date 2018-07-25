@@ -61,18 +61,21 @@ define(['modules/api',
         });
 
         var validationfields = {
-            'email': {
+            'email': [{
                 required: true,
+                msg: Hypr.getLabel('genericRequired')
+            },
+            {
                 pattern: 'email',
                 msg: Hypr.getLabel('emailMissing')
-            },
+            }],
             'selectedTopic': {
                 required: true,
-                msg: Hypr.getLabel('selectedMissing')
+                msg: Hypr.getLabel('genericRequired')
             },
             'message': {
                 required: true,
-                msg: Hypr.getLabel('contactUsMessageMissing')
+                msg: Hypr.getLabel('genericRequired')
             }
         };
         if (HyprLiveContext.locals.themeSettings.enableCaptcha) {
