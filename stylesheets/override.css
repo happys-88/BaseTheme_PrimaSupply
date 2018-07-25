@@ -1,0 +1,111 @@
+/**
+ * Responsive Tables
+ */
+.scroll-table {
+  display: block;
+  border: 0;
+}
+.scroll-table .scroll-table-head,
+.scroll-table thead {
+  display: block;
+  float: left;
+}
+.scroll-table .scroll-table-head .scroll-table-column,
+.scroll-table .scroll-table-head tr,
+.scroll-table thead .scroll-table-column,
+.scroll-table thead tr {
+  display: block;
+}
+.scroll-table .scroll-table-head .scroll-table-cell,
+.scroll-table .scroll-table-head th,
+.scroll-table .scroll-table-head td,
+.scroll-table thead .scroll-table-cell,
+.scroll-table thead th,
+.scroll-table thead td {
+  background-color: #415165;
+  color: #f9f9f9;
+}
+.scroll-table .scroll-table-body,
+.scroll-table tbody {
+  display: block;
+  width: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  font-size: 0;
+  line-height: 0;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(to right, #f9f9f9 30%, rgba(255, 255, 255, 0)), linear-gradient(to right, rgba(255, 255, 255, 0), #f9f9f9 70%) 100% 0, radial-gradient(farthest-side at 0 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 100% 0;
+  background: linear-gradient(to right, #f9f9f9 30%, rgba(255, 255, 255, 0)), linear-gradient(to right, rgba(255, 255, 255, 0), #f9f9f9 70%) 100% 0, radial-gradient(farthest-side at 0 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 100% 0;
+  background-repeat: no-repeat;
+  background-color: #f9f9f9;
+  background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+  /* Opera doesn't support this in the shorthand */
+  background-attachment: local, local, scroll, scroll;
+}
+.scroll-table .scroll-table-column,
+.scroll-table tr {
+  display: inline-block;
+  font-size: 17px;
+  line-height: 1.5;
+}
+.scroll-table .scroll-table-column:last-child:before,
+.scroll-table tr:last-child:before {
+  content: '';
+  position: absolute;
+  display: block;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+}
+.scroll-table .scroll-table-column:last-child .scroll-table-cell:after,
+.scroll-table .scroll-table-column:last-child td:after,
+.scroll-table tr:last-child .scroll-table-cell:after,
+.scroll-table tr:last-child td:after {
+  content: '';
+  position: absolute;
+  display: block;
+  right: 0;
+  width: 100%;
+  margin-top: .25em;
+  z-index: -1;
+}
+.scroll-table .scroll-table-column:nth-child(2n+0),
+.scroll-table tr:nth-child(2n+0) {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.scroll-table .scroll-table-column:hover,
+.scroll-table tr:hover {
+  background-color: #919eae;
+}
+.scroll-table .scroll-table-cell,
+.scroll-table th,
+.scroll-table td {
+  display: block;
+  padding: 0.5em 1em;
+}
+.scroll-table .scroll-table-cell.in-row,
+.scroll-table th.in-row,
+.scroll-table td.in-row {
+  background-color: #919eae;
+}
+.scroll-table .scroll-table-cell:hover,
+.scroll-table th:hover,
+.scroll-table td:hover {
+  background-color: #738499;
+}
+
+.lt-ie10 table.scroll-table thead {
+  float: none;
+}
+.lt-ie10 table.scroll-table tr:last-child:before {
+  content: '';
+  display: none;
+}
+.lt-ie10 table.scroll-table tr:last-child td:after {
+  content: '';
+  display: none;
+}

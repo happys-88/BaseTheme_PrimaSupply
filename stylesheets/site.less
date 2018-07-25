@@ -545,13 +545,15 @@ img[data-mztp]{
 		&.mz-productlist-tiled {
 			.mz-productlist-item {
 				.mz-pricestack {
+					span[class^="mz-pricestack-price"]{
+						display: block;  
+					}
 					.mz-price {
-					    font-size: 20px;
-					    line-height: 30px;
+					    font-size: 16px;
+					    line-height: 24px;   
 					    font-weight: normal; 
 					    &.is-crossedout{
-					    	font-size: 19px; 
-					    	color: #9a9fa8;  
+					    	color: #9a9fa8;   
 					    } 
 					}
 				}
