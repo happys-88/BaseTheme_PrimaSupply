@@ -646,5 +646,7 @@
   "sortByNewArrivals" : "New Arrivals",
   "addons"                                : "POPULAR ADD-ONS",
   "viewAll"                               : "View All", 
-  "disqusComments"                        : "There was trouble loading the comments." 
+  "disqusComments"                        : "There was trouble loading the comments.", 
+
+  "emailMessage"                          : "We have received your request! We will get back with you shortly!"
 }

@@ -22,7 +22,8 @@ define(['modules/api',
                 this.model.set('isLoading', false);
                 this.trigger('error', { message: msg || 'Something went wrong!! Please try after sometime!' });
             },
-            contactUsSubmit: function() {
+            contactUsSubmit: function(event) {
+                alert("contact");
                 var self = this;
                 var firstName = self.model.get('firstname');
                 var lastName = self.model.get('lastname');
@@ -31,35 +32,24 @@ define(['modules/api',
                 var message = self.model.get('message');
                 console.log(self.model);
                 if (!self.model.validate()) {
-                    var brontoUrl = HyprLiveContext.locals.themeSettings.brontoUrl;
-                    if (brontoUrl !== '') {
-                        //Call APIs
-                        $.ajax({
-                                "method": 'POST',
-                                "url": '/email/send',
-                                "data": {
-                                    "firstName": firstName,
-                                    "lastName": lastName,
-                                    "usageType": "1",
-                                    "email": email,
-                                    "topic": selectedTopic,
-                                    "message": message
-                                }
-                            })
-                            .success(function(response) {
-                                self.model.set('isLoading', false);
-                                self.trigger('success', { message: 'We have received your request! We will get back with you shortly!' });
-                                window.console.log(response);
-                                window.setTimeout(function() {
-                                    self.render();
-                                }, 5000);
-                            })
-                            .error(function(response) {
-                                self.setError();
-                            });
-                    } else {
+                    api.request("POST", "/commonRoute",
+                    {
+                        requestFor:'contactUsMail',
+                        firstname:firstName,
+                        lastname:lastName,
+                        email:email,
+                        selectedTopic: selectedTopic,
+                        message: message
+                    }).then(function (response){
+                        console.log("Success");
+                        $('#contactUsForm').each(function(){
+                            this.reset();
+                        });
+                        $("#successMsg").show().delay(4000).fadeOut();
+                    }, function(err) {
+                        console.log("Failure : "+JSON.stringify(err));
                         self.setError();
-                    }
+                    });
                 } else {
                     self.setError("Invalid form submission");
                 }

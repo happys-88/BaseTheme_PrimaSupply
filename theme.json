@@ -610,6 +610,8 @@
         "AncapNewsLetter":"c10e06d63a"
     },
     "disqusKey": "xwz7Y6arEhFabaZPhXkP5wOPSxV0HY7N563plnadW0ro2VQx0CplOW5eppJZGh0Z",
+    "sendGridKey": "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",
+    "merchantEmail": "vsingh@stegtechnologies.com",
     "usStates": [
       {
         "abbreviation": "AL",
