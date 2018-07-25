@@ -20,8 +20,8 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
 	    	$(".yotpo-single-image-container").removeClass("hidden-thumbnails");
 	   	});
 
+	    // Popular Articles  
 	    api.request("POST", "/commonRoute",{"requestFor":"popularArticles", "pubId":HyprLiveContext.locals.themeSettings.addThisPubId}).then(function (response){
-            // console.log("Test Route : "+JSON.stringify(response.statusCode));
             var artContent = '';
             if(response.statusCode === 200) {   
             	if(response.body.length > 0) {         	
@@ -37,11 +37,8 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
             $('#popular-articles').html(artContent);
         }, function(err) {
             console.log("Failure : "+JSON.stringify(err));
-        });
-	    /*$.get(questionUrl, function(data, status){
-			var totalReviewCount = data.response.total_questions; 
-			$(".yotpo-review-ques-ansr").find("#ques-count").text("("+totalReviewCount+")");    
-	    });*/
+        }); 
+	   
 
 	   	// Instagram Feed for learning center 
 	   	var galleryThumbnailsLC = 4; 
@@ -65,10 +62,10 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
 		var questionUrl = ""+yotpoQuestionBaseUrl+"/"+yotpoApiKey+"/"+getProductCode+"/questions"+""; 
 
 		$.get(questionUrl, function(data, status){
-			if(data.status.code == 200){
+			if(data.status.code == 200 || (typeof data.response.questions !== 'undefined' && data.response.questions.length > 0)){
 				var totalReviewCount = data.response.total_questions; 
 				$(".yotpo-review-ques-ansr").find("#ques-count").text("("+totalReviewCount+")"); 
-			}   
+			}  
 	    });
 
 	    var headerHeight = $(".mz-sticky-header").height();

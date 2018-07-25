@@ -1,7 +1,5 @@
 <div class="mz-productoptions add-on">
-    
-    {% for option in model.options %}
-
+    {% for option in model.options %} 
         {% if option.attributeDetail.inputType == "List" %}
             {% if option.attributeDetail.dataType == "ProductCode" and option.stockCount > 0 %}
                 <div class="mz-productoptions-optioncontainer">

@@ -1,10 +1,10 @@
-{% if  model.addons %}
-<div class="row">
+{% if model.addons %} 
     <div class="popular-addons">
         <ul id="addonslider">
             {% for addon in model.addons %}
                 {% if addon.attributeDetail.inputType == "List" and addon.attributeDetail.dataType == "ProductCode" %}
                     {% for value in addon.values %}
+                        {% if value.bundledProduct.inventoryInfo.onlineStockAvailable > 0 %}
                         <li class="addon-product"> 
                             <label class="add-it">
                                 <input type="checkbox" class="mz-productoptions-option" data-mz-product-option="{{ addon.attributeFQN }}" {% if value.isSelected %}checked="checked"{% endif %} value="{{value.value}}"/> ADD IT
@@ -29,10 +29,10 @@
                                 <div class="mz-price">{% if value.deltaPrice and value.deltaPrice > 0 %}{{ value.deltaPrice|currency }}{% endif %}</div>
                             </div> 
                         </li> 
+                        {% endif %}
                     {% endfor %}
                 {% endif %}
             {% endfor %}
         </ul> 
     </div>
-</div>
 {% endif %}
