@@ -46,9 +46,10 @@
         <meta name="description" content="{{ PageContext.MetaDescription }}">
         <meta name="keywords" content="{{ PageContext.MetaKeywords }}">
         <meta name="correlationId" content="{{ pageContext.correlationId }}">
+        
         {% if not user.isAnonymous and not user.isAuthenticated and user.email !== "" %}
-        <meta http-equiv="refresh" content="0;url=/logout">
-       {% endif %}
+            <meta http-equiv="refresh" content="0;url=/logout">
+        {% endif %} 
 
         {% endblock meta-tags %}
 
@@ -81,6 +82,8 @@
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900">
             <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/slider/bxslider.css" %}" title="default" />
             <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/storefront.less" %}" title="default" />
+            <link rel="stylesheet" href="{% make_url "cdn" "/cms/files/override.css" %}" />  
+            
         {% endblock stylesheets %}
         
         {% block head-tag-scripts %}
