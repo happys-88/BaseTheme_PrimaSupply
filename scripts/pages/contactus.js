@@ -31,7 +31,7 @@ define(['modules/api',
                 var message = self.model.get('message');
                 console.log(self.model);
                 if (!self.model.validate()) {
-                    api.request("POST", "/commonRout",
+                    api.request("POST", "/commonRoute",
                     {
                         requestFor:'contactUsMail',
                         firstname:firstName,
