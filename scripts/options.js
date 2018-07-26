@@ -76,7 +76,13 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                     }
                 }
             });
-
+            var prodPrice = this.model.get('price');
+            if (prodPrice.attributes) {
+                var priceType = prodPrice.attributes.priceType;
+                if (priceType == 'MAP') {
+                    this.model.set('mapPrice', prodPrice.attributes.price);
+                }  
+            }
             if(typeof this.model.get('variations') !== "undefined" ) {
                 var variations = this.model.get('variations');
                 var sum = 0;
@@ -351,25 +357,32 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             "click .addtocartaddon":"addToCartUpdate"
         },
         initialize: function () {
-        // handle preset selects, etc
-        var me = this;
-        this.$('[data-mz-product-option]').each(function () {
-            var $this = $(this), isChecked, wasChecked;
-            if ($this.val()) {
-                switch ($this.attr('type')) {
-                    case "checkbox":
-                    case "radio":
-                        isChecked = $this.prop('checked');
-                        wasChecked = !!$this.attr('checked');
-                        if ((isChecked && !wasChecked) || (wasChecked && !isChecked)) {
+            // handle preset selects, etc
+            var me = this;
+            this.$('[data-mz-product-option]').each(function () {
+                var $this = $(this), isChecked, wasChecked;
+                if ($this.val()) {
+                    switch ($this.attr('type')) {
+                        case "checkbox":
+                        case "radio":
+                            isChecked = $this.prop('checked');
+                            wasChecked = !!$this.attr('checked');
+                            if ((isChecked && !wasChecked) || (wasChecked && !isChecked)) {
+                                me.configure($this);
+                            }
+                            break;
+                        default:
                             me.configure($this);
-                        }
-                        break;
-                    default:
-                        me.configure($this);
+                    }
                 }
+            });
+            var prodPrice = this.model.get('price');
+            if (prodPrice.attributes) {
+                var priceType = prodPrice.attributes.priceType;
+                if (priceType == 'MAP') {
+                    this.model.set('mapPrice', prodPrice.attributes.price);
+                }  
             }
-        });
         },
         render: function () {
             this.refreshOptions();
