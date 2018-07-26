@@ -41,7 +41,7 @@
                                     <span class="mz-validationmessage" data-mz-validationmessage-for="message"></span>
                                     </div>
                                 </div>
-                                <span id="successMsg" hidden="true">{{labels.emailMessage}}</span>
+                                <span id="submitMsg" hidden="true">{{labels.emailMessage}}</span>
                                 <div class="form-group">
                                     <div class="col-sm-8 col-sm-offset-4 col-xs-12">
                                         <button class="mz-button" type="button" data-mz-action="contactUsSubmit">{{ labels.submit }}</button>

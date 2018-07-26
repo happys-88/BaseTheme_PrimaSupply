@@ -23,7 +23,6 @@ define(['modules/api',
                 this.trigger('error', { message: msg || 'Something went wrong!! Please try after sometime!' });
             },
             contactUsSubmit: function(event) {
-                alert("contact");
                 var self = this;
                 var firstName = self.model.get('firstname');
                 var lastName = self.model.get('lastname');
@@ -32,7 +31,7 @@ define(['modules/api',
                 var message = self.model.get('message');
                 console.log(self.model);
                 if (!self.model.validate()) {
-                    api.request("POST", "/commonRoute",
+                    api.request("POST", "/commonRout",
                     {
                         requestFor:'contactUsMail',
                         firstname:firstName,
@@ -41,13 +40,22 @@ define(['modules/api',
                         selectedTopic: selectedTopic,
                         message: message
                     }).then(function (response){
-                        console.log("Success");
-                        $('#contactUsForm').each(function(){
-                            this.reset();
-                        });
-                        $("#successMsg").show().delay(4000).fadeOut();
+                        var labels = HyprLiveContext.locals.labels;
+                        console.log("Success : "+JSON.stringify(response.body));
+                        if(response.statusCode === 202 || response.statusCode === 200) {
+                            $('#contactUsForm').each(function(){
+                                this.reset();
+                            });
+                            $("#submitMsg").html(labels.emailMessage);
+                            $("#submitMsg").show();    
+                        } else {
+                            $("#submitMsg").html("Error: "+response.body.errors[0].message);
+                            $("#submitMsg").show();    
+                        }
                     }, function(err) {
                         console.log("Failure : "+JSON.stringify(err));
+                        $("#submitMsg").html("Error: "+err.message);
+                        $("#submitMsg").show();
                         self.setError();
                     });
                 } else {

@@ -481,6 +481,7 @@
     }
   ],
   "settings": {
+    "siteName": "primasupply",
     "allProductsCategoryId": "",
     "sessionTimeout": "120",
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",

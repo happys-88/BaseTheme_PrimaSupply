@@ -1,5 +1,4 @@
 {
-
   "dateFormat"                            : "F j, Y",  
 
   "logOut"                                : "Log Out",
@@ -648,5 +647,6 @@
   "viewAll"                               : "View All", 
   "disqusComments"                        : "There was trouble loading the comments.", 
 
-  "emailMessage"                          : "We have received your request! We will get back with you shortly!"
+  "emailMessage"                         : "We have received your request! We will get back with you shortly!",
+  "mailError"                            : "Some problem occured in sending mail"
 }
