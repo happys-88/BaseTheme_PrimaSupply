@@ -10,7 +10,7 @@
 				</span>
 			</div>
 			<div class="input-group">   
-				<span id="errorEmail" hidden="true">Please enter correct email</span>
+				<span id="errorEmail" hidden="true">Please enter correct email</span>  
 				<span id="thanksMsg" hidden="true">Thanks for Subscribing!!</span>
 			</div>
 		</div>						
