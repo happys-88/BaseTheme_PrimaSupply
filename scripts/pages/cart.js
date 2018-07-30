@@ -23,6 +23,7 @@ define([
                 "click [data-mz-qty=plus]": "quantityPlus",
                 "keyup [data-mz-value=quantity]":"updateQuantity",
                 "keyup  [data-mz-value='usStates']": "allowDigit"
+                /*"click [data-mz-value=callRoute]": "callCustomRoute"*/
         },
         initialize: function () {
             var me = this;
@@ -70,7 +71,7 @@ define([
                 stateData = localStorage.getItem('selectedState');
             }
             
-           // console.log("Shipping storage : "+shipping);
+            // console.log("Shipping storage : "+shipping);
             if(typeof stateData !== 'undefined' || stateData !== null) {
                 this.model.set({'selectedState': stateData});
                 this.calculateTax(stateData, false);
@@ -195,6 +196,21 @@ define([
             $(id).prependTo(".mz-carttable-items-global"); 
             $(id).addClass("recently-added");
         },
+        /*callCustomRoute : function(e) {
+            console.log("called");
+            this.off();
+            api.request("POST", "/TaxExtimation").then(function (response){
+                // console.log("Tax Estimation : "+JSON.stringify(response));
+                if(response.statusCode == 200) {
+
+                } else {
+
+                }
+            }, function(err) {
+                console.log("Failure : "+JSON.stringify(err));
+            });
+            
+        },*/
         allowDigit: function(e) {
             e.target.value = e.target.value.replace(/[^\d]/g, '');
             if(e.target.value.length === 0) {
