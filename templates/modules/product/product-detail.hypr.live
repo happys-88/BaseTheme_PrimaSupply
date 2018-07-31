@@ -21,7 +21,7 @@
   </div>
   
 </div>
-<button type="button" class="mz-button" data-mz-value="callRoute" >Call Route</button>
+
 <div class="mz-stock-availability">
   <div class="mz-stock">
     {% if model|get_product_attribute("tenant~field_display_oos1") and model.inventoryInfo.onlineStockAvailable and model.inventoryInfo.manageStock === true %} 

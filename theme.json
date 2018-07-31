@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "4e046f500b1ed181a96174d7380839cf83180189"
+      "commit": "362148532a928d8456bde7babda8900ee7d3d51e"
     },
     "baseThemeChannel": "stable"
   },
@@ -600,15 +600,14 @@
     "avalaraToken": "MjAwMDA4NDgwMzpFQUQyM0JBQzMzNzRBN0I3",
     "avalaraCompanyCode": "PRIMALLC",
     "mailChimpKey": "1afe25343b7a71ed977589911f618df7-us7",
-    "mailchimpDeals":
-    {
-        "PSDeals":"88b2cc28b8", 
-        "PSNewsLetter":"0d98f9240b",
-        "PSBlogs":"116cb2b7b8", 
-        "PCDeals":"88b2cc28b8", 
-        "PCNewsLetter":"3b44fc04cf", 
-        "PCBlogs":"e767709c3f", 
-        "AncapNewsLetter":"c10e06d63a"
+    "mailchimpDeals": {
+      "PSDeals": "88b2cc28b8",
+      "PSNewsLetter": "0d98f9240b",
+      "PSBlogs": "116cb2b7b8",
+      "PCDeals": "88b2cc28b8",
+      "PCNewsLetter": "3b44fc04cf",
+      "PCBlogs": "e767709c3f",
+      "AncapNewsLetter": "c10e06d63a"
     },
     "disqusKey": "xwz7Y6arEhFabaZPhXkP5wOPSxV0HY7N563plnadW0ro2VQx0CplOW5eppJZGh0Z",
     "sendGridKey": "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",
@@ -874,7 +873,12 @@
     "bottomline": "bottomline",
     "questions": "questions",
     "showYotpoGallery": true,
-    "instagramFollowUsLink": "https://www.instagram.com/prima.supply/?hl=en"
+    "instagramFollowUsLink": "https://www.instagram.com/prima.supply/?hl=en",
+    "showProductTooltip": true,
+    "noHasstleReturnTooltip": "",
+    "tryBeforeYouBuyTooltip": "",
+    "priceMatchGuaranteeTooltip": "",
+    "freeShippingTooltip": ""
   },
   "layoutWidgets": [
     {
