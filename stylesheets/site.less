@@ -546,7 +546,7 @@ img[data-mztp]{
 			.mz-productlist-item {
 				.mz-pricestack {
 					span[class^="mz-pricestack-price"]{
-						display: block;  
+						display: inline-block;   
 					}
 					.mz-price {
 					    font-size: 16px;
@@ -555,6 +555,12 @@ img[data-mztp]{
 					    &.is-crossedout{
 					    	color: #9a9fa8;   
 					    } 
+					}
+					.mz-price-discountname{
+						font-weight: bold;
+						text-transform: uppercase;
+						font-size: 14px;
+						.multiLineEllipsis(16px, 2);    
 					}
 				}
 			}
