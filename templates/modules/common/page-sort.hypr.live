@@ -11,7 +11,12 @@
       {% block sort-types %}
         {% for sort in model.sorts %} 
           {% with sort.value|default(themeSettings.defaultSort) as sortValue %}
-            <option data-mz-url="{% make_url "sorting" model with sortBy=sortValue %}" value="{{ sortValue }}"{% if model.currentSort == sortValue %} selected="selected"{% endif %}>{{ sort.text }}</option>
+          {% if sort.text == 'Default' %}
+              <option data-mz-url="{% make_url "sorting" model with sortBy=productName asc %}" value="productName asc"{% if model.currentSort == 'productName asc' %} selected="selected"{% endif %}>{{ labels.newArrivals }}</option>
+          {% else %}
+              <option data-mz-url="{% make_url "sorting" model with sortBy=sortValue %}" value="{{ sortValue }}"{% if model.currentSort == sortValue %} selected="selected"{% endif %}>{{ sort.text }}</option>
+          {% endif %}
+          
           {% endwith %} 
         {% endfor %}
       {% endblock sort-types %}

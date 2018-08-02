@@ -647,7 +647,8 @@
   "viewAll"                               : "View All", 
   "disqusComments"                        : "There was trouble loading the comments.", 
 
-  "emailMessage"                         : "We have received your request! We will get back with you shortly!",
-  "mailError"                            : "Some problem occured in sending mail",
-  "addonSelectMsg"                        : "Press ctrl to select multiple addons" 
+  "emailMessage"                          : "We have received your request! We will get back with you shortly!",
+  "mailError"                             : "Some problem occured in sending mail",
+  "addonSelectMsg"                        : "Press ctrl to select multiple addons",
+  "newArrivals"                           : "New Arrivals"
 }
