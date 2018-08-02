@@ -1,14 +1,14 @@
-define(["modules/jquery-mozu", 
-	"underscore", "hyprlive", 
+define([
+	"modules/jquery-mozu", 
+	"underscore",
+	"hyprlive",  
 	"modules/backbone-mozu", 
-	"modules/cart-monitor", 
-	"modules/views-productimages",  
 	"hyprlivecontext",
-	"modules/views-collections",
 	"modules/models-product", 
-	"modules/models-price", 
-	"modules/api"], 
-function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext, CollectionViewFactory, ProductModel, ProductPrice, api) {
+	"modules/api",
+	"yotpo"
+], 
+function ($, _, Hypr, Backbone, HyprLiveContext, ProductModel, api, yotpo) {  
 
 	$(document).ready(function(){
 		var singleImgContainer = $(".yotpo-single-image-container");
@@ -92,7 +92,10 @@ function ($, _, Hypr, Backbone, CartMonitor, ProductImageViews, HyprLiveContext,
 	    $('#yotpoReviewTabs a').click(function (e) { 
 		  e.preventDefault();
 		  $(this).tab('show');   
-		});    
+		});
+
+		// Show yotpo ratings for featured products
+		yotpo.showYotpoRatingStars(".mz-productlist-item");      
 	});  
 
 }); 
