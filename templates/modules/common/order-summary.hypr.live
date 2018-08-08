@@ -22,7 +22,7 @@
 
                             <div class="mz-product-options">
                                 {% for optionlist in item.product.options %}
-                                    <div><span>{{ optionlist.name }}:</span> {{ optionlist.value }}</div>
+                                    <div><span>{{ optionlist.name }}:</span>{% if optionlist.value %} {{ optionlist.value }} {% else %} {{ optionlist.shopperEnteredValue }} {% endif %} </div>
                                 {% endfor %}
                              </div>
                             {% comment %}

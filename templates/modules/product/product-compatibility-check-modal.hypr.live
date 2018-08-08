@@ -1,0 +1,31 @@
+<div class="modal-dialog modal-dialog-compatibility" role="document">
+    <div class="modal-content modal-content-compatibility">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">
+            	<b>{{ labels.compatibilityCheck }}</b>
+            </h4>
+        </div>
+        <div class="modal-body">
+        	<div class="mz-product-compatibility-check">
+        		<div>{{ labels.compatibilityCheckContent }}</div><br>
+        		{% for option in model.options %}
+        			{% if option.attributeFQN == 'tenant~cabinet-model' or option.attributeFQN == 'tenant~cabinet-serial-number' %}
+        				<div>
+        					<strong>{{ option.attributeDetail.name }}</strong>
+        				</div>
+        				<div>
+        					<input type="text" data-mz-cproduct-option="{{ option.attributeFQN }}">
+        				</div>
+        			{% endif %}
+        		{% endfor %}
+        		<div>{{ labels.compatibilityCheckMsg }}</div>
+        		<div>
+                    <button class="continue-to-cart mz-button-large">
+                        {{ labels.continueToCart }}
+                    </button>
+                </div>
+        	</div>
+        </div>
+    </div>
+</div>
