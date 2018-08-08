@@ -181,17 +181,20 @@
             this.model.set('addons', options);
         },
         addToCart: function () {
-            this.model.addToCart();
-            this.model.on('addedtocart', function (cartitem) {
-                $('.mz-errors').remove();
-            });
-            this.model.on('addedtocarterror', function (error) {
-                if (error.message.indexOf('Validation Error: The following items have limited quantity or are out of stock') > -1) {
-                    $('.mz-errors').find('.mz-message-item').html(Hypr.getLabel('outOfStockError'));
-                } else if(error.message.indexOf('Missing or invalid parameter: variationProductCode Product is configurable. Variation code must be specified') > -1) {
-                    $('.mz-errors').find('.mz-message-item').html(Hypr.getLabel('variationError'));
+            var prodModel = this.model;
+            if (this.model.get('compatibilityCheck') === true) {
+                if (this.model.get('continueToCart') === true) {
+                    this.model.addToCart(); 
+                } else {
+                    var compatibilityModalView = new CompatibilityModalView({
+                        model: prodModel,
+                        el: $('#compatibilityModal')
+                    });
+                    compatibilityModalView.render();
                 }
-            });
+            } else {
+               this.model.addToCart(); 
+            }
         },
         addToWishlist: function () {
             this.model.addToWishlist();
@@ -237,6 +240,8 @@
                 }  
             }
             var hasOptions = false;
+            var cabinetModel = false;
+            var cabinetSerialNo = false;
             var c = 0;
             c = parseInt(c, 10);
             var prodModel = this.model;
@@ -244,6 +249,7 @@
             var options = JSON.parse(JSON.stringify(this.model.get('options')));
             var count = 0;
             count = parseInt(count, 10);
+            var prodTypeOptions = _.filter(options, function(option){ return option.attributeDetail.dataType == "ProductCode"; });
             for (var j = 0; j < options.length; j++) {
                 var option = options[j];
                 if (option.attributeFQN == "tenant~size" || option.attributeFQN == "tenant~color" || option.attributeDetail.dataType == "ProductCode") {
@@ -267,9 +273,18 @@
                         
                     }
                 } 
+                if (option.attributeFQN == "tenant~cabinet-model") {
+                    cabinetModel = true;
+                }
+                if (option.attributeFQN == "tenant~cabinet-serial-number") {
+                    cabinetSerialNo = true;
+                }
                 if (!hasOptions && option.attributeDetail.dataType != "ProductCode") {
                     hasOptions = true;
                 }
+            }
+            if (cabinetModel && cabinetSerialNo && ((options.length - prodTypeOptions.length) === 2)) {
+                hasOptions = false;
             }
             if (count == options.length) {
                 this.model.set('showColorIcon', true);
@@ -328,17 +343,41 @@
                     }
                     prodModel.set('addons', options);
                     prodModel.set('hasOptions', hasOptions);
+                    if (cabinetModel && cabinetSerialNo) {
+                        prodModel.set('compatibilityCheck', true);
+                    }
                     me.render();
                 });
             } else {
                 this.model.set('hasOptions', hasOptions);
-                // this.render();
+                if (cabinetModel && cabinetSerialNo) {
+                    this.model.set('compatibilityCheck', true);
+                }
             }
-            
-            
         }
     });
-
+    var CompatibilityModalView = Backbone.MozuView.extend({
+        templateName: 'modules/product/product-compatibility-check-modal',
+        additionalEvents: {
+            'click .continue-to-cart' : 'continueToCart'
+        },
+        continueToCart: function(){
+            $('#compatibilityModal').modal('hide');
+            var me = this;
+            var prodModel = this.model;
+            this.$('[data-mz-cproduct-option]').each(function () {
+                var $this = $(this);
+                if ($this.val()) {
+                    var newValue = $this.val(),
+                    id = $this.data('mz-cproduct-option'),
+                    option = prodModel.get('options').get(id);
+                    option.set('value', newValue);
+                }
+            });
+            this.model.set('continueToCart', true);
+            this.model.addToCart();
+        }
+    });
     RVIModel.renderRVI('#rvi-container');
     function findElement(arr, element) {
         var product = arr.find(function(el) {
@@ -413,7 +452,6 @@
                 var cdn = sitecontext.cdnPrefix;
                 var siteID = cdn.substring(cdn.lastIndexOf('-') + 1);
                 var imagefilepath = cdn + '/cms/' + siteID + '/files/' + productcode + '_' + colorcode +'_v1'+'.jpg';
-                console.log(imagefilepath);
                 product.get("mainImage").imageUrl=imagefilepath;
                 product.get("mainImage").src=imagefilepath;
                 product.get("content").get("productImages")[0].src=imagefilepath;
@@ -452,6 +490,7 @@
        
         product.on('addedtocart', function (cartitem) {
             if (cartitem && cartitem.prop('id')) {
+                $('.mz-errors').remove();
                 //product.isLoading(true);
                 CartMonitor.addToCount(product.get('quantity'));
                 $('html,body').animate({
@@ -459,15 +498,26 @@
                 }, 1000);
                 GlobalCart.update();
                 //product.set('quantity', 1);
-                $("#global-cart").show().delay(3000).hide(0,function() { 
-                    $(this).css("display", "");
-                  });
+                if (product.get('continueToCart') === true) {
+                   window.location = "/cart"; 
+                } else {
+                    $("#global-cart").show().delay(3000).hide(0,function() { 
+                        $(this).css("display", "");
+                    });
+                }
                 //window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/cart"; 
             } else {
                 product.trigger("error", { message: Hypr.getLabel('unexpectedError') });
             }
         });
-
+        product.on('addedtocarterror', function (error) {
+            product.set('continueToCart', false);
+            if (error.message.indexOf('Validation Error: The following items have limited quantity or are out of stock') > -1) {
+                $('.mz-errors').find('.mz-message-item').html(Hypr.getLabel('outOfStockError'));
+            } else if(error.message.indexOf('Missing or invalid parameter: variationProductCode Product is configurable. Variation code must be specified') > -1) {
+                $('.mz-errors').find('.mz-message-item').html(Hypr.getLabel('variationError'));
+            }
+        });
         product.on('addedtowishlist', function (cartitem) {
             $('#add-to-wishlist').prop('disabled', 'disabled').text(Hypr.getLabel('addedToWishlist'));
         });
