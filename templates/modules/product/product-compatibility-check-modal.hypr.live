@@ -1,29 +1,23 @@
 <div class="modal-dialog modal-dialog-compatibility" role="document">
-    <div class="modal-content modal-content-compatibility">
+    <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">
-            	<b>{{ labels.compatibilityCheck }}</b>
-            </h4>
+            <h4 class="modal-title">{{ labels.compatibilityCheck }}</h4>
         </div>
         <div class="modal-body">
         	<div class="mz-product-compatibility-check">
-        		<div>{{ labels.compatibilityCheckContent }}</div><br>
+        		<p>{{ labels.compatibilityCheckContent }}</p>
         		{% for option in model.options %}
         			{% if option.attributeFQN == 'tenant~cabinet-model' or option.attributeFQN == 'tenant~cabinet-serial-number' %}
-        				<div>
-        					<strong>{{ option.attributeDetail.name }}</strong>
-        				</div>
-        				<div>
-        					<input type="text" data-mz-cproduct-option="{{ option.attributeFQN }}">
+                        <div class="form-group">
+            				<label>{{ option.attributeDetail.name }}</label>
+            				<input type="text" class="form-control" data-mz-cproduct-option="{{ option.attributeFQN }}">
         				</div>
         			{% endif %}
         		{% endfor %}
-        		<div>{{ labels.compatibilityCheckMsg }}</div>
+        		<p>{{ labels.compatibilityCheckMsg }}</p>
         		<div>
-                    <button class="continue-to-cart mz-button-large">
-                        {{ labels.continueToCart }}
-                    </button>
+                    <button class="continue-to-cart mz-button">{{ labels.continueToCart }}</button>
                 </div>
         	</div>
         </div>
