@@ -11,12 +11,13 @@
 	    </div>
 	    <div class="step-tbyb-products-name">
 	    	<h5>{{ labels.selectProductEnroll }}</h5>
+
 	   		{% for prods in model.requireOrderModel %}
 		   		{% with prods.varCode|default(prods.prodCode) as pCode %}
 			   		{% with prods.prodId as pId %}
 				   		{% with prods.selCode as selectionCode %}
 				   			<label class="clearfix">
-					   			<input class="tbyb" type="radio" value="{{pCode}}_{{pId}}" data-mz-tbyb data-mz-tyby-name="{{prods.prodName}}" data-mz-tbyb-code="{{pCode}}_{{pId}}" {% if model.tbybSelectedProd !== 'NONE' && model.tbybSelectedProd === selectionCode %}checked="checked"{% endif %} /> {{ prods.prodFullName }}
+					   			<input class="tbyb" type="radio" value="{{ selectionCode }}" data-mz-tbyb data-mz-tyby-name="{{prods.prodName}}" data-mz-tbyb-code="{{ selectionCode }}" {% if model.tbybSelectedProd !== 'NONE' && model.tbybSelectedProd === selectionCode %}checked="checked"{% endif %} /> {{ prods.prodFullName }}
 					        </label>
 				        {% endwith %}
 		   		    {% endwith %}

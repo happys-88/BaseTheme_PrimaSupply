@@ -537,13 +537,16 @@
                         if(propertytwo.name === 'Try Before You Buy' && propertytwo.values[0].value === true ){
                             var itemOptions = item.product.options;
                             var optionsVals = '';
+                            var optionsCodes = '';
                             var prodFullName = item.product.name;
                             if(itemOptions.length > 0) {                                
                                 for(var optionindex in itemOptions){
                                     var option = itemOptions[optionindex];
-                                    optionsVals = optionsVals.concat(option.value);
+                                    optionsVals = optionsVals.concat(option.stringValue);
+                                    optionsCodes = optionsCodes.concat(option.value);
                                     if(optionindex < itemOptions.length-1) {
                                         optionsVals = optionsVals.concat(",");
+                                        optionsCodes = optionsCodes.concat("_");
                                     }  
                                 }
                                
@@ -551,8 +554,16 @@
                             }
                             
                             var pCode = item.product.variationProductCode ? item.product.variationProductCode : item.product.productCode;
-                            var selectionCode = pCode+"_"+item.id;
-                            prodVals.push({prodName:item.product.name, prodFullName:prodFullName, prodCode: item.product.productCode, varCode:item.product.variationProductCode, prodId:item.id, selCode: selectionCode});
+                            // var selectionCode = pCode+"_"+item.id;
+                            var selectionCode = '';
+                            if(optionsCodes !== ''){
+                                selectionCode = pCode+"_"+optionsCodes;
+                            } else {
+                                selectionCode = pCode;
+                            }
+                            
+                            var prod_match = pCode+"_"+item.id;
+                            prodVals.push({prodName:item.product.name, prodFullName:prodFullName, prodMatch:prod_match, prodCode: item.product.productCode, varCode:item.product.variationProductCode, prodId:item.id, selCode: selectionCode});
                             break;
                         }
                     }
@@ -653,12 +664,34 @@
                     for(var prodindex in tbybProducts ){
                         var itemVal = tbybProducts[prodindex].product.productCode;
                         var itemVarVal = tbybProducts[prodindex].product.variationProductCode;
-                        var itemCode = '';
-                        if(typeof itemVarVal !== 'undefined') {
-                            itemCode = itemVarVal+"_"+tbybProducts[prodindex].id;
-                        } else {
-                            itemCode = itemVal+"_"+tbybProducts[prodindex].id;    
+                        // var optionCodes = this.productOptionsCodes(tbybProducts[prodindex]);
+                        var item = tbybProducts[prodindex];
+                        var properties = item.product.properties; 
+                        var property = _.filter(properties, 
+                        function(attr) { return attr.name === 'Try Before You Buy' && attr.values[0].value === true ; });
+
+                        var optionsCodes = '';
+                        if(property.length > 0) {
+                            var itemOptions = item.product.options;
+                            
+                            if(itemOptions.length > 0) {                                
+                                for(var optionindex in itemOptions){
+                                    var option = itemOptions[optionindex];
+                                    optionsCodes = optionsCodes.concat(option.value);
+                                    if(optionindex < itemOptions.length-1) {
+                                        optionsCodes = optionsCodes.concat("_");
+                                    }  
+                                }
+                            }  
                         }
+                        var pCode = item.product.variationProductCode ? item.product.variationProductCode : item.product.productCode;
+                        var itemCode = '';
+                        if(optionsCodes !== '') {
+                            itemCode = pCode+"_"+optionsCodes;
+                        } else {
+                            itemCode = pCode;
+                        }
+                        
                         if(itemCode === obj.values[0]) {
                             selectedTbybExists = true;
                         }                    
