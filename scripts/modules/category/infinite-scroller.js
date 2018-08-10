@@ -1,4 +1,4 @@
-
+/*
 define([
     'modules/backbone-mozu',
     'modules/jquery-mozu',
@@ -89,7 +89,7 @@ define([
                     startIndex += pageSize;
                 }, function(error) { 
                    $("#loaderIcon").hide();
-                    blockUiLoader.unblockUi();
+                    blockUiLoader.unblockUi(); 
                     isLoadMore = true;
                 });
             }
@@ -108,4 +108,4 @@ define([
     };
    }
  
-});
+});*/

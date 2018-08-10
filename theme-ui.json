@@ -21,11 +21,16 @@
                     "fieldLabel": "Enable Breadcrumb"
                 },
                 {
+                    "xtype": "mz-input-number",
+                    "name": "sessionTimeout",
+                    "fieldLabel": "Session Timeout Interval in Secs."
+                },
+                {
                     "xtype": "mz-input-text",
                     "name": "categoryEntityName",
                     "fieldLabel": "Category Entity Name"   
                 }
-            ]
+            ] 
         },
         {
             "xtype": "panel",
@@ -219,7 +224,8 @@
                     "forceSelection": true,
                     "store": [
                         32,
-                        64
+                        64,
+                        100
                     ]
                 },
                 {

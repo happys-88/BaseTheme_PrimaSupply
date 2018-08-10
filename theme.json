@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "362148532a928d8456bde7babda8900ee7d3d51e"
+      "commit": "6f0ab217d71f945bc142c10d276530b87c904f42"
     },
     "baseThemeChannel": "stable"
   },
@@ -483,7 +483,7 @@
   "settings": {
     "siteName": "primasupply",
     "allProductsCategoryId": "",
-    "sessionTimeout": "30",
+    "sessionTimeout": "1800", 
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",
     "extendedPropertiesEnabled": false,
     "extendedPropertyParameters": "",
@@ -555,7 +555,8 @@
     "maxTopLevelNavLabelLength": 20,
     "pageSizeOptions": [
       32,
-      64
+      64,
+      100 
     ],
     "viewAllPageSize": 48,
     "productInfinitySize": 48,
