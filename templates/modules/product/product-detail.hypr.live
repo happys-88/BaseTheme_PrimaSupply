@@ -21,7 +21,7 @@
   </div>
   
 </div>
-
+<div class="modal fade" id="compatibilityModal" role="dialog"></div>
 <div class="mz-stock-availability">
   <div class="mz-stock">
     {% if model|get_product_attribute("tenant~field_display_oos1") and model.inventoryInfo.onlineStockAvailable and model.inventoryInfo.manageStock === true %} 
@@ -133,7 +133,7 @@
                   {{ labels.addToCart }}
                   </button>
                 {% else %}
-                  <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large" data-mz-action="addToCart" >
+                  <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large" data-mz-action="addToCart" {% if model.compatibilityCheck === true %} data-target="#compatibilityModal" data-toggle="modal" {% endif %}>
                       {{ labels.addToCart }}
                   </button>
                 {% endif %}
@@ -158,7 +158,7 @@
                   {{ labels.addToCart }}
                   </button>
                 {% else %}
-                  <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large" data-mz-action="addToCart" >
+                  <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large" data-mz-action="addToCart" {% if model.compatibilityCheck === true %} data-target="#compatibilityModal" data-toggle="modal" {% endif %}>
                       {{ labels.addToCart }}
                   </button>
                 {% endif %}
