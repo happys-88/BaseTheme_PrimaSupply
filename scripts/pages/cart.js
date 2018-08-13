@@ -212,6 +212,7 @@ define([
             
         },*/
         allowDigit: function(e) {
+            e.stopImmediatePropagation();
             e.target.value = e.target.value.replace(/[^\d]/g, '');
             if(e.target.value.length === 0) {
                $('[data-mz-validation-message="zipCode"]').hide();  
@@ -221,6 +222,11 @@ define([
             else
                 $('#zipCodeButton').attr('disabled',true);
             
+            if (e.which === 13) {
+                if(!$('#zipCodeButton').prop('disabled'))
+                    $('#zipCodeButton').click();
+                return false;
+            }
         },
         getShippingMethodsDetail: function() {
            /* console.log("DATA");
@@ -255,6 +261,7 @@ define([
 
         },
         calculateTax: function(stateSel, bool){
+            console.log("Twice");
             $('[data-mz-validation-message="zipCode"]').hide();
             var cart = this.model;
             if(typeof stateSel !== 'undefined') {
@@ -273,15 +280,7 @@ define([
                     tax = tax.toPrecision(3);
                     cart.set({'taxTotal':tax});
 
-                    /*var shippingDetailObj = this.model.get("shippingDetail");
-                    var selectedShipping = this.model.get("selectedShipping");
-                    var selectedMethod = _.find(shippingDetailObj, function(obj) {
-                      if(obj.content.name === selectedShipping){ 
-                          shippingAmount = obj.amount;
-
-                        }
-                    });*/
-                    var shippingAmount = $('#shippingOption :selected').attr("price");
+                   var shippingAmount = $('#shippingOption :selected').attr("price");
                     cart.set({'shippingTotal': shippingAmount});
                     this.populateShipping();
                 } else {
@@ -296,6 +295,7 @@ define([
             });
         },
         populateTax: function(e){
+            e.stopImmediatePropagation();
             var stateSel = $('#usStates').val();
             this.calculateTax(stateSel, true);
         },
@@ -486,7 +486,7 @@ define([
             this.addCoupon();
         }
     });
-
+    
     /* begin visa checkout */
     function initVisaCheckout (model, subtotal) {
         var delay = 500;
