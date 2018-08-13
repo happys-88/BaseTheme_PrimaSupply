@@ -6,11 +6,11 @@
     "isDesktop": true,
     "isMobile": true,
     "isTablet": true,
-    "name": "BaseTheme_PrimaSupply",
+    "name": "MasterTheme_PrimaSupply", 
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "4e046f500b1ed181a96174d7380839cf83180189"
+      "commit": "c60128e83917bf4af23a1afd2a8d78f19efd2451"
     },
     "baseThemeChannel": "stable"
   },
@@ -483,7 +483,7 @@
   "settings": {
     "siteName": "primasupply",
     "allProductsCategoryId": "",
-    "sessionTimeout": "1800", 
+    "sessionTimeout": "1800",
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",
     "extendedPropertiesEnabled": false,
     "extendedPropertyParameters": "",
@@ -556,7 +556,7 @@
     "pageSizeOptions": [
       32,
       64,
-      100 
+      100
     ],
     "viewAllPageSize": 48,
     "productInfinitySize": 48,
@@ -601,15 +601,14 @@
     "avalaraToken": "MjAwMDA4NDgwMzpFQUQyM0JBQzMzNzRBN0I3",
     "avalaraCompanyCode": "PRIMALLC",
     "mailChimpKey": "1afe25343b7a71ed977589911f618df7-us7",
-    "mailchimpDeals":
-    {
-        "PSDeals":"88b2cc28b8", 
-        "PSNewsLetter":"0d98f9240b",
-        "PSBlogs":"116cb2b7b8", 
-        "PCDeals":"88b2cc28b8", 
-        "PCNewsLetter":"3b44fc04cf", 
-        "PCBlogs":"e767709c3f", 
-        "AncapNewsLetter":"c10e06d63a"
+    "mailchimpDeals": {
+      "PSDeals": "88b2cc28b8",
+      "PSNewsLetter": "0d98f9240b",
+      "PSBlogs": "116cb2b7b8",
+      "PCDeals": "88b2cc28b8",
+      "PCNewsLetter": "3b44fc04cf",
+      "PCBlogs": "e767709c3f",
+      "AncapNewsLetter": "c10e06d63a"
     },
     "disqusKey": "xwz7Y6arEhFabaZPhXkP5wOPSxV0HY7N563plnadW0ro2VQx0CplOW5eppJZGh0Z",
     "sendGridKey": "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",
