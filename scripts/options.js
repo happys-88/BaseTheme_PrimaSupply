@@ -54,7 +54,8 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             "click [data-mz-qty-minus]": "quantityMinus",
             "click [data-mz-qty-plus]": "quantityPlus",
             "click [data-mz-removeItem]":"removeItem",
-            "click .addtocartaddon":"addToCartUpdate"
+            "click .addtocartaddon":"addToCartUpdate",
+            "click .continue-to-cart":"continueToCart"
         },
         initialize: function () {
             // handle preset selects, etc
@@ -83,6 +84,12 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                     this.model.set('mapPrice', prodPrice.attributes.price);
                 }  
             }
+            var options = JSON.parse(JSON.stringify(this.model.get('options')));
+            var optionss = _.filter(options, function(option){ return option.attributeFQN == "tenant~cabinet-model" || option.attributeFQN == "tenant~cabinet-serial-number"; });
+            if (optionss.length === 2) {
+                this.model.set('compatibilityCheck', true);
+            }
+            console.log('cgghb'+optionss.length);
             if(typeof this.model.get('variations') !== "undefined" ) {
                 var variations = this.model.get('variations');
                 var sum = 0;
@@ -281,6 +288,25 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                     me.addToCart();
                 }); 
             }
+        },
+        continueToCart: function() {
+            $('.continue-to-cart').prop('disabled', true);
+            var me = this;
+            var prodModel = this.model;
+            this.$('[data-mz-cproduct-option]').each(function () {
+                var $this = $(this);
+                if ($this.val()) {
+                    var newValue = $this.val(),
+                    id = $this.data('mz-cproduct-option'),
+                    option = prodModel.get('options').get(id);
+                    option.set('value', newValue);
+                }
+            });
+            this.model.set('addonsPopup', true);
+            this.model.addToCart();
+            this.model.on('addedtocart', function (cartitem) {
+                GlobalCart.update('redirect_to_cart');
+            });
         },
         addToCart: function (event) {
             var count = 0;

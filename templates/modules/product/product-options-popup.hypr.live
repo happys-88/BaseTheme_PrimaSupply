@@ -1,4 +1,6 @@
-
+{% if model.compatibilityCheck === true %}
+    {% include "modules/product/product-compatibility-check-modal" %}
+{% else %}
 <div class="modal-dialog modal-dialog-options" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -179,3 +181,4 @@
         </div>
     </div>
 </div>
+{% endif %}
