@@ -391,11 +391,12 @@ define([
         var field = this.$('[data-mz-cart-item=' + model.get('id') + ']');
         var errormsg = this.$('[data-mz-message]');
         var message = model.messages.models[0].attributes.message;
-        var prodCode; 
-        if (message.indexOf('Validation Error: The following items have limited quantity or are out of stock') > -1) {
+        var prodCode = message.split(':')[1]; 
+        /*if (message.indexOf('Validation Error: The following items have limited quantity or are out of stock') > -1) {
             prodCode = message.replace('Validation Error: The following items have limited quantity or are out of stock:','');      
-        }
-       
+        }*/
+       if (prodCode[prodCode.length-1] === ".")
+            prodCode = prodCode.slice(0,-1);
       //  $('.mz-productdetail-wrap').find('.mz-errors').remove();
         if (field) {
             field.val(oldQuantity);

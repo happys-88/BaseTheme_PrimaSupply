@@ -6,11 +6,11 @@
     "isDesktop": true,
     "isMobile": true,
     "isTablet": true,
-    "name": "MasterTheme_PrimaSupply", 
+    "name": "MasterTheme_PrimaSupply",
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "c60128e83917bf4af23a1afd2a8d78f19efd2451"
+      "commit": "4e046f500b1ed181a96174d7380839cf83180189"
     },
     "baseThemeChannel": "stable"
   },
