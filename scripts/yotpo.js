@@ -69,6 +69,9 @@ function ($, Hypr, Backbone, HyprLiveContext, api) {
                     }
                     productData[i] = {productCode:item.productCode,hasOptions:hasOptions,hasVariations:hasVariations,stockCount:stockCount};
                 }
+                var stockThreshold = Hypr.getLabel('stockThreshold');
+                var outOfStock = Hypr.getLabel('outOfStock');
+                var inStock = Hypr.getLabel('inStock');
                 $(".mz-productlist-list .mz-productlist-item").each(function(index, value) {
                     var currentProduct = $(this);
                     var shippingMessage = $(currentProduct).find(".shipping-messages");
@@ -81,22 +84,12 @@ function ($, Hypr, Backbone, HyprLiveContext, api) {
                         shippingMessage.show();
                         seePriceInCart.show();
                     }
-                    if (prod.hasVariations) {
-                        var stockThreshold = Hypr.getLabel('stockThreshold');
-                        var outOfStock = Hypr.getLabel('outOfStock');
-                        var inStock = Hypr.getLabel('inStock');
-                        if(prod.stockCount < 10 && prod.stockCount > 0) {
-                            $(this).find("#"+prodCode+"").show();
-                            $(this).find("#stock-messages-"+prodCode+"").hide();
-                            $(this).find("#"+prodCode+"").html(stockThreshold.replace("{0}", prod.stockCount));
-                        } else if(prod.stockCount === 0) {
-                            $(this).find("#"+prodCode+"").show();
-                            $(this).find("#"+prodCode+"").html(outOfStock);
-                        } else {
-                            $(this).find("#"+prodCode+"").show();
-                            $(this).find("#stock-messages-"+prodCode+"").hide();
-                            $(this).find("#"+prodCode+"").html(inStock);
-                        }
+                    if(prod.stockCount < 10 && prod.stockCount > 0) {
+                        $(this).find(".stock-threshold-message").html(stockThreshold.replace("{0}", prod.stockCount));
+                    } else if(prod.stockCount >= 10) {
+                        $(this).find(".stock-message").html(inStock);
+                    } else {
+                        $(this).find(".mz-product-notpurchasable").html(outOfStock);
                     }
                     if (prod.hasOptions === true) {
                         button.addClass('mz-option-add-to-cart');
