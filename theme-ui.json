@@ -482,6 +482,10 @@
                     "fieldLabel": "SendGrid Key", 
                     "xtype": "mz-input-text",
                     "name": "sendGridKey"  
+                },{
+                    "fieldLabel": "MailChimp Deals", 
+                    "xtype": "mz-input-textarea",
+                    "name": "mailchimpDeals"
                 }
             ]
         }
