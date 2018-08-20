@@ -65,6 +65,11 @@
                     "fieldLabel": "Show product short description in product lists"
                 },
                 {
+                    "xtype": "mz-input-text",
+                    "name": "maxProductSummaryWords",
+                    "fieldLabel": "Maximum Short Description words to show"   
+                },
+                {
                     "xtype": "mz-input-checkbox", 
                     "name": "listVolumePricing",
                     "fieldLabel": "Show volume pricing bands in product lists" 
@@ -375,7 +380,7 @@
             "collapsed": false,
             "items": [
                 {
-                    "fieldLabel": "Show Product Tooltips",  
+                    "fieldLabel": "Show Product Tooltips",   
                     "xtype": "mz-input-checkbox",
                     "name": "showProductTooltip"  
                 },
