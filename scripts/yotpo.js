@@ -102,14 +102,14 @@ function ($, Hypr, Backbone, HyprLiveContext, api) {
             });
         }
     },
-    showYotpoRatingStars: function(listClassName){ 
-        if(listClassName === ".mz-productlist-item"){ 
+    showYotpoRatingStars: function(listClassName){
+        if((listClassName === ".mz-productlist-item") || (listClassName === ".mz-product-quick-view")){  
             listClassName = listClassName; 
         }else{
             listClassName = ".mz-productlist-item-slider";          
         } 
-          
-        $(listClassName).each(function(index, value) {      
+        
+        $(listClassName).each(function(index, value) {       
             var currentProduct = $(this);
             var productCode = $(this).data("mz-product"); 
             var ratingURL = ""+yotpoBottomlineBaseUrl+"/"+yotpoApiKey+"/"+productCode+"/"+bottomline+"";
