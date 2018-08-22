@@ -1,8 +1,7 @@
 {% if not pageContext.query.partial %}
     <script type="text/json" id="data-mz-preload-facetedarticles"> 
     {
-        "items": {% json model.items %}, 
-        "facets": {% json model.facets %}, 
+        "facets": {% json model.facets %},  
         "currentPage": {{ model.currentPage }},
         "firstIndex": {{ model.firstIndex }},
         "hasNextPage": {{ model.hasNextPage|lower }},
