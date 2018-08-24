@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "c577aad91fed3711b975cb24736033ba3bde6963"
+      "commit": "4a8b343d26df8930bf6e131acea33e3c722a48c4"
     },
     "baseThemeChannel": "stable"
   },
@@ -208,10 +208,10 @@
       "id": "category-gateway",
       "template": "category-gateway",
       "title": "Category Gateway",
-      "userCreatable": true 
+      "userCreatable": true
     },
     {
-      "entityType": "category", 
+      "entityType": "category",
       "id": "learning-center",
       "template": "modules/learning-center/landing-page",
       "title": "Learning Center LandingPage",
@@ -240,7 +240,7 @@
       "customEditor": "productContent@mozu"
     },
     {
-      "entityType": "webpage", 
+      "entityType": "webpage",
       "id": "Brands",
       "template": "brand-gateway",
       "title": "Brand Gateway",
