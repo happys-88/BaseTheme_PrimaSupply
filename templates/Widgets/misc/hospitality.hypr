@@ -1,16 +1,47 @@
 <div class="hospitality-container">
     <h2 class="heading-2"><span>{{labels.servingTheFinest}}</span></h2>
     <ul>
-        {% for listvar in model.config %}
-            {% if forloop.counter0|mod(2)==0 and listvar.0 != "" %}
-                <li class="col-sm-2 col-xs-6">
-                    <a class="link" href="{{ listvar.0 }}"> 
-            {% else %}
-                <img src="{% make_url "image" listvar.0.imageUrl %}" alt="{{ listvar.0.altText}}">
-                    </a>
-                </li>
-            {% endif%}
-        {% endfor %}
+        {% if model.config.HospitalityImageOne.imageUrl %}
+            <li class="col-sm-2 col-xs-6">
+                <a class="link" href="{{model.config.input1}}">
+                    <img src='{{model.config.HospitalityImageOne.imageUrl}}'>
+                </a>
+            </li>
+        {% endif %}
+        {% if model.config.HospitalityImageTwo.imageUrl %}
+            <li class="col-sm-2 col-xs-6">
+                <a class="link" href="{{model.config.input2}}">
+                    <img src='{{model.config.HospitalityImageTwo.imageUrl}}'>
+                </a>
+            </li>
+        {% endif %}
+        {% if model.config.HospitalityImageThree.imageUrl %}
+            <li class="col-sm-2 col-xs-6">
+                <a class="link" href="{{model.config.input3}}">
+                    <img src='{{model.config.HospitalityImageThree.imageUrl}}'>
+                </a>
+            </li>
+        {% endif %}
+        {% if model.config.HospitalityImageFour.imageUrl %}
+            <li class="col-sm-2 col-xs-6">
+                <a class="link" href="{{model.config.input4}}">
+                    <img src='{{model.config.HospitalityImageFour.imageUrl}}'>
+                </a>
+            </li>
+        {% endif %}
+        {% if model.config.HospitalityImageFive.imageUrl %}
+            <li class="col-sm-2 col-xs-6">
+                <a class="link" href="{{model.config.input5}}">
+                    <img src='{{model.config.HospitalityImageFive.imageUrl}}'>
+                </a>
+            </li>
+        {% endif %}
+        {% if model.config.HospitalityImageSix.imageUrl %}
+            <li class="col-sm-2 col-xs-6">
+                <a class="link" href="{{model.config.input6}}">
+                    <img src='{{model.config.HospitalityImageSix.imageUrl}}'>
+                </a>
+            </li>
+        {% endif %}
     </ul>
-   
-</div>
+</div> 
