@@ -86,15 +86,15 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                 this.model.set('fieldDisplayOOSProp', false);
             }
             var variationTotalStock = 0;
-            variationTotalStock = parseInt(variationTotalStock);
+            variationTotalStock = parseInt(variationTotalStock, 10);
             var someOptionsInStock = false;
             var productUsage = this.model.get('productUsage');
             if (productUsage == 'Configurable') {
-                var variations = this.model.get('variations');
-                if (variations && variations.length > 0) {
-                    for (var x = 0; x < variations.length; x++) {
-                        var stockAvailable = variations[x].inventoryInfo.onlineStockAvailable;
-                        stockAvailable = parseInt(stockAvailable);
+                var pVariations = this.model.get('variations');
+                if (pVariations && pVariations.length > 0) {
+                    for (var x = 0; x < pVariations.length; x++) {
+                        var stockAvailable = pVariations[x].inventoryInfo.onlineStockAvailable;
+                        stockAvailable = parseInt(stockAvailable, 10);
                         if (stockAvailable > 0) {
                             variationTotalStock += stockAvailable;
                         } else {
@@ -103,6 +103,9 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                             }
                         }
                     }
+                }
+                if (variationTotalStock === 0) {
+                    someOptionsInStock = false;
                 }
                 this.model.set('variationTotalStock', variationTotalStock);
                 this.model.set('someOptionsInStock', someOptionsInStock);

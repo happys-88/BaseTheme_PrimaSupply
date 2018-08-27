@@ -1,11 +1,12 @@
 define([
     "modules/jquery-mozu",
+    "underscore",
     "hyprlive",
     "modules/backbone-mozu",
     "hyprlivecontext",
     "modules/api"
 ], 
-function ($, Hypr, Backbone, HyprLiveContext, api) {
+function ($, _, Hypr, Backbone, HyprLiveContext, api) {
     // Show Yotpo Ratings
     var yotpoApiKey = HyprLiveContext.locals.themeSettings.yotpoApiKey;
     var bottomline = HyprLiveContext.locals.themeSettings.bottomline;
@@ -42,7 +43,7 @@ function ($, Hypr, Backbone, HyprLiveContext, api) {
                     var fieldDisplayOOSProp = false;
                     var fieldDisplayOOSPropVal;
                     var stockCount = 0;
-                    stockCount = parseInt(stockCount);
+                    stockCount = parseInt(stockCount, 10);
                     var item = items[i];
                     var itemOptions = item.options;
                     var itemVariations = item.variations;

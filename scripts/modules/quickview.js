@@ -61,7 +61,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
                 }
                 // code for stock
                 var properties = this.model.get('properties');
-                var prop = _.find(properties, function(property){ return property.attributeFQN == 'tenant~field_display_oos1'; });
+                var prop = _.find(properties, function(property){ return property.attributeFQN == 'tenant~field-display-oos1'; });
                 if (prop) {
                     this.model.set('fieldDisplayOOSProp', true);
                     this.model.set('fieldDisplayOOSPropVal', prop);
@@ -69,15 +69,15 @@ $(document).on('click', '.mz-quick-view', function (event) {
                     this.model.set('fieldDisplayOOSProp', false);
                 }
                 var variationTotalStock = 0;
-                variationTotalStock = parseInt(variationTotalStock);
+                variationTotalStock = parseInt(variationTotalStock, 10);
                 var someOptionsInStock = false;
                 var productUsage = this.model.get('productUsage');
                 if (productUsage == 'Configurable') {
-                    var variations = this.model.get('variations');
-                    if (variations && variations.length > 0) {
-                        for (var x = 0; x < variations.length; x++) {
-                            var stockAvailable = variations[x].inventoryInfo.onlineStockAvailable;
-                            stockAvailable = parseInt(stockAvailable);
+                    var pVariations = this.model.get('variations');
+                    if (pVariations && pVariations.length > 0) {
+                        for (var x = 0; x < pVariations.length; x++) {
+                            var stockAvailable = pVariations[x].inventoryInfo.onlineStockAvailable;
+                            stockAvailable = parseInt(stockAvailable, 10);
                             if (stockAvailable > 0) {
                                 variationTotalStock += stockAvailable;
                             } else {
@@ -86,6 +86,9 @@ $(document).on('click', '.mz-quick-view', function (event) {
                                 }
                             }
                         }
+                    }
+                    if (variationTotalStock === 0) {
+                        someOptionsInStock = false;
                     }
                     this.model.set('variationTotalStock', variationTotalStock);
                     this.model.set('someOptionsInStock', someOptionsInStock);
@@ -120,9 +123,9 @@ $(document).on('click', '.mz-quick-view', function (event) {
                 var itemDiscontinued = false;
                 if (!manageStock) {
                     if (fieldDisplayOOSProp) {
-                        var fieldDisplayOOSPropVal = this.model.get('fieldDisplayOOSPropVal');
-                        var propValue = fieldDisplayOOSPropVal.values[0];
-                        if (propValue.value === '4') {
+                        var fieldDisplayOOSPropValue = this.model.get('fieldDisplayOOSPropVal');
+                        var prValue = fieldDisplayOOSPropValue.values[0];
+                        if (prValue.value === '4') {
                             stockMessage = Hypr.getLabel('itemDiscontinued');
                             itemDiscontinued = true;
                         } else {

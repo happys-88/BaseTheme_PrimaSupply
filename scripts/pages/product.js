@@ -38,9 +38,9 @@
             var itemDiscontinued = false;
             if (!manageStock) {
                 if (fieldDisplayOOSProp) {
-                    var fieldDisplayOOSPropVal = this.model.get('fieldDisplayOOSPropVal');
-                    var propValue = fieldDisplayOOSPropVal.values[0];
-                    if (propValue.value === '4') {
+                    var fieldDisplayOOSPropValue = this.model.get('fieldDisplayOOSPropVal');
+                    var prValue = fieldDisplayOOSPropValue.values[0];
+                    if (prValue.value === '4') {
                         stockMessage = Hypr.getLabel('itemDiscontinued');
                         itemDiscontinued = true;
                     } else {
@@ -391,7 +391,7 @@
                 this.model.set('fieldDisplayOOSProp', false);
             }
             var variationTotalStock = 0;
-            variationTotalStock = parseInt(variationTotalStock);
+            variationTotalStock = parseInt(variationTotalStock, 10);
             var someOptionsInStock = false;
             var productUsage = this.model.get('productUsage');
             if (productUsage == 'Configurable') {
@@ -399,7 +399,7 @@
                 if (variations && variations.length > 0) {
                     for (var x = 0; x < variations.length; x++) {
                         var stockAvailable = variations[x].inventoryInfo.onlineStockAvailable;
-                        stockAvailable = parseInt(stockAvailable);
+                        stockAvailable = parseInt(stockAvailable, 10);
                         if (stockAvailable > 0) {
                             variationTotalStock += stockAvailable;
                         } else {
@@ -408,6 +408,9 @@
                             }
                         }
                     }
+                }
+                if (variationTotalStock === 0) {
+                    someOptionsInStock = false;
                 }
                 this.model.set('variationTotalStock', variationTotalStock);
                 this.model.set('someOptionsInStock', someOptionsInStock);
