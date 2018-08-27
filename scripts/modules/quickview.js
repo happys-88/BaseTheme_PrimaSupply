@@ -61,7 +61,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
                 }
                 // code for stock
                 var properties = this.model.get('properties');
-                var prop = _.find(properties, function(property){ return property.attributeFQN == 'tenant~field-display-oos1'; });
+                var prop = _.find(properties, function(property){ return property.attributeFQN == 'tenant~field_display_oos1'; });
                 if (prop) {
                     this.model.set('fieldDisplayOOSProp', true);
                     this.model.set('fieldDisplayOOSPropVal', prop);
