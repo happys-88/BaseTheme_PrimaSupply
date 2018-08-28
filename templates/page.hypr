@@ -28,17 +28,18 @@
 
     {% block head-tag %}
     <head>
-        {% include "modules/json-required-for-hyprlive" %}
+        
         {% block meta-tags %}
-            {% if not user.isAnonymous and not user.isAuthenticated and user.email !== "" %}
-                <meta http-equiv="refresh" content="0;url=/logout">
-            {% endif %}
-            <meta charset="UTF-8">
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            
+            <meta charset="utf-8">  
             <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
             <meta name="twitter:card" content="summary">
+            {% if not user.isAnonymous and not user.isAuthenticated and user.email !== "" %}
+                <meta http-equiv="refresh" content="0; url=/logout">
+            {% endif %}
+
             <title>{% block title-tag-content %}{{ siteContext.generalSettings.websiteName }}{% endblock title-tag-content %}</title> 
-            {% if PageContext.MetaKeywords %}
+            {% if PageContext.MetaKeywords %} 
                 <meta name="keywords" content='{{ PageContext.MetaKeywords|replace("'","&rsquo;")|replace('"','&rdquo;')|safe }}'> 
             {% endif %}
 
@@ -98,6 +99,8 @@
 		{% if PageContext.CrawlerInfo.NextUrl  %}
             <link rel="next" href="{{PageContext.CrawlerInfo.NextUrl}}">
         {% endif %}
+
+        {% include "modules/json-required-for-hyprlive" %} 
 
         {% block stylesheets %}
             <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/bootstrap/bootstrap.min.css" %}" title="default" />

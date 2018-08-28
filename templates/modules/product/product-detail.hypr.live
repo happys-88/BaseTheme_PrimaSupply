@@ -80,12 +80,12 @@
     </div>
   </div>
   <div class="col-md-4 col-xs-12"> 
-    <div class="mz-productdetail-conversion-buttons text-center">
+    <div class="mz-productdetail-conversion-buttons text-center"> 
       {% if siteContext.generalSettings.isWishlistCreationEnabled and not user.isAnonymous %}
-      <button id="add-to-wishlist" {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable %} disabled="disabled" {% else %} {% if model.inventoryInfo.outOfStockBehavior == 'HideProduct' and not model.inventoryInfo.onlineStockAvailable %} disabled="disabled" {% endif %} {% endif %} class="mz-productdetail-addtowishlist {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" data-mz-action="addToWishlist">
-          {{ labels.addToWishlist }}
+        <button id="add-to-wishlist" {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable %} disabled="disabled" {% else %} {% if model.inventoryInfo.outOfStockBehavior == 'HideProduct' and not model.inventoryInfo.onlineStockAvailable %} disabled="disabled" {% endif %} {% endif %} class="mz-productdetail-addtowishlist {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" data-mz-action="addToWishlist">
+          {{ labels.addToWishlist }} 
       </button>
-      {% endif %}
+      {% endif %} 
     </div>
   </div>
  
