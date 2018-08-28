@@ -31,7 +31,7 @@
                                 {% endwith %}  
                             </div>
                             <div class="mz-product-info">
-                                {% include "modules/product/price-show-stack" with hasStock=model.options.length %}
+                                {% include "modules/product/price-show-stack" %}
                                 {% if model.options and model.options.length > 0 %}
                                     <div class="mz-productdetail-options mz-l-stack-section selected-option">
                                         {% include "modules/product/product-selected-options-view" %}
@@ -61,8 +61,8 @@
                         {% endif %}
                         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price">
                             <div class="pull-left"><label>{{ labels.itemSubtotal }}:</label></div>
-                            <div class="pull-left">{% include "modules/product/price-show-stack" with hasStock=model.options.length %}</div>
-                        </div >
+                            <div class="pull-left">{% include "modules/product/price-show-stack" %}</div>
+                        </div>
                         <div class="cart-cont-shop clearfix">
                             <button type="button" class="pull-left continue-shopping mz-button mz-button-large" data-dismiss="modal">{{ labels.continueShopping }}</button>
                             <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
@@ -87,7 +87,7 @@
                             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price">
                                 <div class="pull-left"><label>{{ labels.itemSubtotal }}:</label></div>
                                 <div class="pull-left">
-                                    {% include "modules/product/price-show-stack" with hasStock=model.options.length %}
+                                    {% include "modules/product/price-show-stack" %}
                                 </div>
                             </div>
                              <div class="mz-productdetail-conversion-controls">
@@ -101,79 +101,32 @@
                                 </div>
                                 <div class="pull-right">
                                     <div class="mz-productdetail-conversion-buttons">
-                                        <button class="addtocart mz-productdetail-addtocart mz-button mz-button-medium" {% if not model.isPurchasable %} disabled="disabled" {% endif %} data-mz-productcode="{{ model.variationProductCode|default(model.productCode) }}">{{ labels.addToCart }}</button>
+                                        <button class="addtocart mz-productdetail-addtocart mz-button mz-button-medium" data-mz-productcode="{{ model.variationProductCode|default(model.productCode) }}">{{ labels.addToCart }}</button>
                                     </div>
                                 </div>
                             </div>
                             <span class="mz-validationmessage">{{ model.addToCartErr }}</span>
                             <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
-                            
-                            {% comment %}
-                                {% if not model.isPurchasable %}
-                                <p class="mz-productdetail-notpurchasable">
-                                    {{ labels.notPurchasable }}:
-                                    {% for message in model.purchasableState.messages %}
-                                    <span>{{ message.message }}</span>
-                                    {% endfor %}
-                                </p>
-                                {% endif %}
-                              {% endcomment %}
                         </div>
                         <div class="mz-stock-availability">
                             <div class="mz-stock">
-                                {% if model|get_product_attribute("tenant~field_display_oos1") and model.inventoryInfo.onlineStockAvailable and model.inventoryInfo.manageStock === true %} 
-                                    {% if model|get_product_attribute_value("tenant~field_display_oos1") === 1 %}
-                                                  {% if model.inventoryInfo.onlineStockAvailable === 0 %}
-                                                     <p>{{ labels.outOfStock }}</p>
-                                                    {% else %}
-                                                        {% if model.inventoryInfo.onlineStockAvailable < 10 %}
-                                                            {{ labels.numberInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}
-                                                        {% endif %}
-                                                        {% if model.inventoryInfo.onlineStockAvailable >= 10 %}
-                                                            {{labels.inStock}}
-                                                        {% endif %}
-                                                  {% endif %} 
-                                    {% endif %}
-                                    
-                                    {% else %}
-                                       {% if model.inventoryInfo.manageStock %}
-                                         {% if model.inventoryInfo.onlineStockAvailable > 0  %}
-                                          <p>{{ labels.inStock }} {{model.inventoryInfo.onlineStockAvailable}}</p>
-                                          {% else %}
-                                            {% if model.totalCount === 0 or model.inventoryInfo.onlineStockAvailable === 0 %}
-                                                <p>{{ labels.outOfStock }} </p>
-                                            {% else %}
-                                                  {% if model|get_product_attribute_value("tenant~field_display_oos1") === 1 %}
-                                                  {% if model.containsZero === true %}
-                                                              {{labels.someOptionInStock}}
-                                                  {% else %}
-                                                  <p>{{ labels.inStock }} {{ model.totalCount }}</p>
-                                                  {% endif %}
-                                                {% else %}
-                                                  <p>{{ labels.inStock }} {{ model.totalCount }}</p>
-                                                {% endif %}
-                                            {% endif %}
-                                          {% endif %}
-                                        {% else %}
-                                        <p>{{ labels.outOfStock }} </p>
-                                        {% endif %}
-                                {% endif %}
+                                {{ model.stockMessage }}
                             </div>
                             <div class="mz-availability">
-                                {% if model.inventoryInfo.manageStock %}
-                                    {% if model.totalCount == 0 or model.inventoryInfo.onlineStockAvailable === 0 %}
+                                {% if model.inventoryInfo.manageStock === false %}
+                                  {% for availability in model|get_product_attribute_values("tenant~availability") %}
+                                    <p>({{ availability }})</p>
+                                  {% endfor %}
+                                {% else %}
+                                    {% if model.totalCount === 0 or model.inventoryInfo.onlineStockAvailable === 0 %}
                                       {% if model|get_product_attribute_value("tenant~expected_ship_date_message") %}
                                         <p>({{ model|get_product_attribute_value("tenant~expected_ship_date_message") }})</p>
-                                        {% endif %}
+                                      {% endif %}
                                     {% else %}
                                       {% for availability in model|get_product_attribute_values("tenant~availability") %}
                                         <p>({{ availability }})</p>
                                       {% endfor %}
                                     {% endif %}
-                                  {% else %}
-                                  {% if model|get_product_attribute_value("tenant~expected_ship_date_message") %}
-                                        <p>({{ model|get_product_attribute_value("tenant~expected_ship_date_message") }})</p>
-                                        {% endif %}
                                 {% endif %}
                             </div>
                         </div>

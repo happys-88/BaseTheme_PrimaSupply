@@ -4,6 +4,8 @@
 {% block breadcrumbs %}{% endblock breadcrumbs %}
 {% block body-content %}
 	{% require_script "pages/search" %}
+	{% require_script "modules/quickview" %}
+	{% require_script "options" %} 
 	<div {% if pageContext.categoryId %}data-mz-category="{{ pageContext.categoryId }}" {% endif %}data-mz-search="{{ pageContext.search.query }}" class="mz-l-container">
 		{% include "pages/search-interior" %}
 	</div>

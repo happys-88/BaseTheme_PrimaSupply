@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "4e046f500b1ed181a96174d7380839cf83180189"
+      "commit": "c577aad91fed3711b975cb24736033ba3bde6963"
     },
     "baseThemeChannel": "stable"
   },
@@ -208,43 +208,43 @@
       "id": "category-gateway",
       "template": "category-gateway",
       "title": "Category Gateway",
-      "userCreatable": false
+      "userCreatable": true
     },
     {
       "entityType": "category",
       "id": "learning-center",
       "template": "modules/learning-center/landing-page",
       "title": "Learning Center LandingPage",
-      "userCreatable": false
+      "userCreatable": true
     },
     {
       "entityType": "category",
       "id": "learning-center-gateway",
       "template": "modules/learning-center/gateway-page",
       "title": "Learning Center GatewayPage",
-      "userCreatable": false
+      "userCreatable": true
     },
     {
       "entityType": "category",
       "id": "learning-center-directory",
       "template": "modules/learning-center/category-lc",
       "title": "Learning Center DirectoryPage",
-      "userCreatable": false
+      "userCreatable": true
     },
     {
       "entityType": "product",
       "id": "blog-article",
       "template": "modules/learning-center/blog-article",
       "title": "Blog Article",
-      "userCreatable": false,
+      "userCreatable": true,
       "customEditor": "productContent@mozu"
     },
     {
-      "entityType": "category",
+      "entityType": "webpage",
       "id": "Brands",
       "template": "brand-gateway",
       "title": "Brand Gateway",
-      "userCreatable": false
+      "userCreatable": true
     },
     {
       "documentType": "web_page",
@@ -596,12 +596,12 @@
     "liftGatePrice": 59,
     "snapengaeWidgetId": "d93fa82a-6087-44f8-bd79-3df50a1c3130",
     "addThisPubId": "ra-519bb90e58f9bf27",
-    "searchSuggestionFilter": "424,425,426,427,428,429,430,431,432",
-    "blogParentCategoryCode": "424",
+    "searchSuggestionFilter": "29,145,817,40,146,199,201,217,510",
+    "blogParentCategoryCode": "3",
     "avalaraToken": "MjAwMDA4NDgwMzpFQUQyM0JBQzMzNzRBN0I3",
     "avalaraCompanyCode": "PRIMALLC",
     "mailChimpKey": "1afe25343b7a71ed977589911f618df7-us7",
-    "mailchimpDeals":"{\"PSNewsLetter\": \"0d98f9240b\",\"PSBlogs\": \"116cb2b7b8\" }",
+    "mailchimpDeals": "{\"PSNewsLetter\": \"0d98f9240b\",\"PSBlogs\": \"116cb2b7b8\" }",
     "disqusKey": "xwz7Y6arEhFabaZPhXkP5wOPSxV0HY7N563plnadW0ro2VQx0CplOW5eppJZGh0Z",
     "sendGridKey": "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",
     "merchantEmail": "sales@primasupply.com",
@@ -866,7 +866,13 @@
     "bottomline": "bottomline",
     "questions": "questions",
     "showYotpoGallery": true,
-    "instagramFollowUsLink": "https://www.instagram.com/prima.supply/?hl=en"
+    "instagramFollowUsLink": "https://www.instagram.com/prima.supply/?hl=en",
+    "showProductTooltip": true,
+    "noHasstleReturnTooltip": "",
+    "tryBeforeYouBuyTooltip": "",
+    "priceMatchGuaranteeTooltip": "",
+    "freeShippingTooltip": "",
+    "defaultStoreImage": "/cms/files/prima-supply-store-image.jpg"
   },
   "layoutWidgets": [
     {
@@ -1637,7 +1643,7 @@
           "anchor": "100%",
           "xtype": "mz-input-text",
           "name": "input1",
-          "fieldLabel": "input1"
+          "fieldLabel": "Add URL" 
         },
         {
           "anchor": "100%",
@@ -1649,7 +1655,7 @@
           "anchor": "100%",
           "xtype": "mz-input-text",
           "name": "input2",
-          "fieldLabel": "input2",
+          "fieldLabel": "Add URL",
           "showIf": "HospitalityImageOne"
         },
         {
@@ -1663,7 +1669,7 @@
           "anchor": "100%",
           "xtype": "mz-input-text",
           "name": "input3",
-          "fieldLabel": "input3",
+          "fieldLabel": "Add URL",
           "showIf": "HospitalityImageTwo"
         },
         {
@@ -1677,7 +1683,7 @@
           "anchor": "100%",
           "xtype": "mz-input-text",
           "name": "input4",
-          "fieldLabel": "input4",
+          "fieldLabel": "Add URL",
           "showIf": "HospitalityImageThree"
         },
         {
@@ -1691,7 +1697,7 @@
           "anchor": "100%",
           "xtype": "mz-input-text",
           "name": "input5",
-          "fieldLabel": "input5",
+          "fieldLabel": "Add URL",
           "showIf": "HospitalityImageFour"
         },
         {
@@ -1705,7 +1711,7 @@
           "anchor": "100%",
           "xtype": "mz-input-text",
           "name": "input6",
-          "fieldLabel": "input6",
+          "fieldLabel": "Add URL",
           "showIf": "HospitalityImageFive"
         },
         {

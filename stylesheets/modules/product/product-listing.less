@@ -31,7 +31,8 @@
         min-height: 56px;
     }
     .mz-productlisting-shortdesc {
-        margin: @gutter/4 @gutter/2 @gutter/4 0;
+        margin: 5px 0;  
+        display: none;  
     }
     .mz-productlisting-productcode {
         font-size: @fontSizeLarge;
@@ -103,11 +104,11 @@
                     text-align: center; 
                 }
                 .mz-productlisting-title {
+                    font-size: 14px;  
                     color: #495363;
-                    font-size: 14px;
                     width: 100%;
-                    min-height: 60px;
                     text-decoration: none;
+                    .multiLineEllipsis(18px, 3);   
                 }
                 .mz-productlisting-productcode {
                     display: none;

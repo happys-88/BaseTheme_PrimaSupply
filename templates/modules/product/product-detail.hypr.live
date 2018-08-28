@@ -15,7 +15,7 @@
   <div class="col-md-6">
     <div class="row">
       <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section">
-        {% include "modules/product/price-show-stack" with hasStock=model.totalCount %} 
+        {% include "modules/product/price-show-stack" %} 
       </div>
     </div>
   </div>
@@ -24,82 +24,23 @@
 <div class="modal fade" id="compatibilityModal" role="dialog"></div>
 <div class="mz-stock-availability">
   <div class="mz-stock">
-    {% if model|get_product_attribute("tenant~field_display_oos1") and model.inventoryInfo.onlineStockAvailable and model.inventoryInfo.manageStock === true %} 
-        {% if model|get_product_attribute_value("tenant~field_display_oos1") === 0 %}
-              {% if model.inventoryInfo.onlineStockAvailable < 10 %}
-                    <dl>{{ labels.numberInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}</dl>
-              {% endif %}
-              {% if model.inventoryInfo.onlineStockAvailable >= 10 %}
-                    <dl>{{ labels.distributorStock }}</dl>
-              {% endif %} 
-        {% endif %}
-        {% if model|get_product_attribute_value("tenant~field_display_oos1") === 1 %}
-          {% if model.inventoryInfo.onlineStockAvailable === 0 %}
-             <p>{{ labels.outOfStock }}</p>
-            {% else %}
-                {% if model.inventoryInfo.onlineStockAvailable < 10 %}
-                    {{ labels.numberInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}
-                {% endif %}
-                {% if model.inventoryInfo.onlineStockAvailable >= 10 %}
-                    {{labels.inStock}}
-                {% endif %}
-          {% endif %}  
-        {% endif %}
-        {% if model|get_product_attribute_value("tenant~field_display_oos1") === 2 %}
-              {% if model.inventoryInfo.onlineStockAvailable < 10 %}
-                   <dl>{{ labels.numberInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}</dl>
-              {% endif %} 
-              {% if model.inventoryInfo.onlineStockAvailable >= 10 %}
-                   <dl>{{ labels.preOrderOnly }}</dl>
-              {% endif %}
-        {% endif %}
-        {% if model|get_product_attribute_value("tenant~field_display_oos1") === 3 %}
-              {% if model.inventoryInfo.onlineStockAvailable < 10 %}
-                  <dl>{{ labels.numberInStock|string_format(model.inventoryInfo.onlineStockAvailable) }}</dl>
-              {% endif %} 
-              {% if model.inventoryInfo.onlineStockAvailable >= 10 %}
-                  <dl>{{ labels.builtToOrder }}</dl>
-              {% endif %} 
-        {% endif %}
-        {% else %}
-           {% if model.inventoryInfo.manageStock %}
-             {% if model.inventoryInfo.onlineStockAvailable > 0  %}
-              <p>{{ labels.inStock }} {{model.inventoryInfo.onlineStockAvailable}}</p>
-              {% else %}
-                {% if model.totalCount === 0 or model.inventoryInfo.onlineStockAvailable === 0 %}
-                    <p>{{ labels.outOfStock }} </p>
-                {% else %}
-                      {% if model|get_product_attribute_value("tenant~field_display_oos1") === 1 %}
-                      {% if model.containsZero === true %}
-                                  {{labels.someOptionInStock}}
-                      {% else %}
-                      <p>{{ labels.inStock }} {{ model.totalCount }}</p>
-                      {% endif %}
-                    {% else %}
-                      <p>{{ labels.inStock }} {{ model.totalCount }}</p>
-                    {% endif %}
-                {% endif %}
-              {% endif %}
-            {% else %}
-            <p>{{ labels.outOfStock }} </p>
-            {% endif %}
-    {% endif %}
+    {{ model.stockMessage }}
   </div>
   <div class="mz-availability">
-    {% if model.inventoryInfo.manageStock %}
-        {% if model.totalCount == 0 or model.inventoryInfo.onlineStockAvailable === 0 %}
+    {% if model.inventoryInfo.manageStock === false %}
+      {% for availability in model|get_product_attribute_values("tenant~availability") %}
+        <p>({{ availability }})</p>
+      {% endfor %}
+    {% else %}
+        {% if model.totalCount === 0 or model.inventoryInfo.onlineStockAvailable === 0 %}
           {% if model|get_product_attribute_value("tenant~expected_ship_date_message") %}
             <p>({{ model|get_product_attribute_value("tenant~expected_ship_date_message") }})</p>
-            {% endif %}
+          {% endif %}
         {% else %}
           {% for availability in model|get_product_attribute_values("tenant~availability") %}
             <p>({{ availability }})</p>
           {% endfor %}
         {% endif %}
-      {% else %}
-      {% if model|get_product_attribute_value("tenant~expected_ship_date_message") %}
-            <p>({{ model|get_product_attribute_value("tenant~expected_ship_date_message") }})</p>
-            {% endif %}
     {% endif %}
   </div>
 </div>
@@ -120,50 +61,18 @@
        {% if loginForPrice.values|first|prop("value") === true %}
          {% if not user.isAnonymous %}
             
-            {# start code modification #}
-            {% comment %} when track stock level is disable {% endcomment %}
-            {% if not model.inventoryInfo.manageStock %}
-              <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large is-disabled"  disabled="disabled" data-mz-action="addToCart" >
+            <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large" data-mz-action="addToCart" {% if model.compatibilityCheck === true %} data-target="#compatibilityModal" data-toggle="modal" {% endif %} {% if model.checkItem === true %} {% else %} disabled="disabled" {% endif %}>
                 {{ labels.addToCart }}
-              </button>
-            {% else %}
-                {% comment %} when quantity is zero {% endcomment %}
-                {% if model.inventoryInfo.onlineStockAvailable == 0 %}
-                  <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart">
-                  {{ labels.addToCart }}
-                  </button>
-                {% else %}
-                  <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large" data-mz-action="addToCart" {% if model.compatibilityCheck === true %} data-target="#compatibilityModal" data-toggle="modal" {% endif %}>
-                      {{ labels.addToCart }}
-                  </button>
-                {% endif %}
-            {% endif %}
-            {# end code modification #}
+            </button>
 
          {% else %}
            <a class="mz-button login-for-lowprice" href="javascript:void(0);" data-toggle="modal" data-target="#loginPopup" data-productcode="{{model.productCode}}">{{ labels.viewOnLogin }}</a>
          {% endif %} 
          {% else %}
            
-            {# start code modification #}
-            {% comment %} when track stock level is disable {% endcomment %}
-             {% if not model.inventoryInfo.manageStock  %}
-              <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large is-disabled"  disabled="disabled" data-mz-action="addToCart" >
+            <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large" data-mz-action="addToCart" {% if model.compatibilityCheck === true %} data-target="#compatibilityModal" data-toggle="modal" {% endif %} {% if model.checkItem === true %} {% else %} disabled="disabled" {% endif %}>
                 {{ labels.addToCart }}
-              </button>
-            {% else %}
-                {% comment %} when quantity is zero {% endcomment %}
-                {% if  model.inventoryInfo.onlineStockAvailable == 0 %}
-                  <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart">
-                  {{ labels.addToCart }}
-                  </button>
-                {% else %}
-                  <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large" data-mz-action="addToCart" {% if model.compatibilityCheck === true %} data-target="#compatibilityModal" data-toggle="modal" {% endif %}>
-                      {{ labels.addToCart }}
-                  </button>
-                {% endif %}
-            {% endif %}
-            {# end code modification #}
+            </button>
 
        {% endif %} 
       {% endwith %}
@@ -171,12 +80,12 @@
     </div>
   </div>
   <div class="col-md-4 col-xs-12"> 
-    <div class="mz-productdetail-conversion-buttons text-center">
+    <div class="mz-productdetail-conversion-buttons text-center"> 
       {% if siteContext.generalSettings.isWishlistCreationEnabled and not user.isAnonymous %}
-      <button id="add-to-wishlist" {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable %} disabled="disabled" {% else %} {% if model.inventoryInfo.outOfStockBehavior == 'HideProduct' and not model.inventoryInfo.onlineStockAvailable %} disabled="disabled" {% endif %} {% endif %} class="mz-productdetail-addtowishlist {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" data-mz-action="addToWishlist">
-          {{ labels.addToWishlist }}
+        <button id="add-to-wishlist" {% if model.notDoneConfiguring or not model.purchasableState.isPurchasable %} disabled="disabled" {% else %} {% if model.inventoryInfo.outOfStockBehavior == 'HideProduct' and not model.inventoryInfo.onlineStockAvailable %} disabled="disabled" {% endif %} {% endif %} class="mz-productdetail-addtowishlist {% if not model.purchasableState.isPurchasable %}is-disabled{% endif %}" data-mz-action="addToWishlist">
+          {{ labels.addToWishlist }} 
       </button>
-      {% endif %}
+      {% endif %} 
     </div>
   </div>
  
@@ -186,7 +95,7 @@
   {% include "modules/product/product-certifications" %}   
 </div>
 
-<div class="mz-options-section">
+<div class="mz-options-section"> 
   {% if model.options and model.options.length > 0 and model.hasOptions === true %}
     <h4 class="mz-l-stack-sectiontitle">{{ labels.options }}</h4>
     <div class="col-md-8">
@@ -195,10 +104,17 @@
       </div>
     </div> 
   {% endif %} 
-  <div class="col-md-4 mz-warranty">
-    <p>Warranty: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    <p>Warranty: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-  </div>
+  <div class="col-md-4 mz-warranty-text">
+    {% if (model|get_product_attribute_value("tenant~product_info_note")) %} 
+      <p>{{ model|get_product_attribute_value("tenant~product_info_note")|safe }}</p> 
+    {% endif %}
+    {% if (model|get_product_attribute_value("tenant~warranty_note")) %} 
+      <p>{{ model|get_product_attribute_value("tenant~warranty_note")|safe }}</p> 
+    {% endif %}
+    {% if (model|get_product_attribute_value("tenant~disclaimer")) %} 
+      <p>{{ model|get_product_attribute_value("tenant~disclaimer")|safe }}</p>  
+    {% endif %} 
+  </div>  
   {% if model.addons and model.addons.length > 0 %}
     <div class="row">
       <div class="col-md-12">
@@ -218,10 +134,12 @@
   </div>
 {% endif %} 
 
-<div class="mz-productdetail-fulldesc mz-l-stack-section">
-  <h4 class="mz-l-stack-sectiontitle">Overview</h4>  
-  {{ model.content.productFullDescription|safe }}
-</div>
+{% if (model|get_product_attribute_value("tenant~product-overview")) %} 
+  <div class="mz-productdetail-fulldesc mz-l-stack-section">
+    <h4 class="mz-l-stack-sectiontitle">Overview</h4>  
+    {{ model|get_product_attribute_value("tenant~product-overview")|safe }} 
+  </div> 
+{% endif %}
 
 {% if model.productUsage == 'Bundle' %}
 <div class="mz-productdetail-bundleitems mz-l-stack-section">

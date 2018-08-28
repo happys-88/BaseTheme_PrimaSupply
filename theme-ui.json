@@ -26,6 +26,11 @@
                     "fieldLabel": "Session Timeout Interval in Secs."
                 },
                 {
+                    "fieldLabel": "Default Store Image",
+                    "xtype": "mz-input-text",
+                    "name": "defaultStoreImage"
+                }, 
+                {
                     "xtype": "mz-input-text",
                     "name": "categoryEntityName",
                     "fieldLabel": "Category Entity Name"   
@@ -63,6 +68,11 @@
                     "xtype": "mz-input-checkbox",
                     "name": "listProductShortDesc",
                     "fieldLabel": "Show product short description in product lists"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "maxProductSummaryWords",
+                    "fieldLabel": "Maximum Short Description words to show"   
                 },
                 {
                     "xtype": "mz-input-checkbox", 
@@ -375,7 +385,7 @@
             "collapsed": false,
             "items": [
                 {
-                    "fieldLabel": "Show Product Tooltips",  
+                    "fieldLabel": "Show Product Tooltips",   
                     "xtype": "mz-input-checkbox",
                     "name": "showProductTooltip"  
                 },

@@ -1,12 +1,7 @@
 require([
 	'modules/jquery-mozu',
-	"modules/views-collections",
-	"modules/api", 
-	"modules/models-product",
-    "hyprlivecontext",
-    "modules/api",
-    "yotpo"
-], function( $, CollectionViewFactory, Api, ProductModel, HyprLiveContext, api, yotpo) { 
+	"modules/views-collections" 
+], function( $, CollectionViewFactory) {  
     $(document).ready(function() {
         window.facetingViews = CollectionViewFactory.createFacetedCollectionViews({
             $body: $('[data-mz-category]'),
