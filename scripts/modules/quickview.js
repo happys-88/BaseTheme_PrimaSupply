@@ -424,7 +424,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
             },
             clickOnNextOrprevious: function(){
                 if(typeof this.model.get('productCode') !== 'undefined'){
-                    $('[src="http://southasia.oneworld.net/ImageCatalog/no-image-icon/image_preview').parent().remove();
+                    $("img[onerror*='this.src']").parent().remove();
                     if($(".bx-pager-item").length > imagecount){
                         $(".bx-pager-item").eq(2).remove();
                     }
