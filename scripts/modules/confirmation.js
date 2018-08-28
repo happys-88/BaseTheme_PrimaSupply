@@ -72,7 +72,6 @@ require(["modules/jquery-mozu", "underscore", 'modules/api', "hyprlive", "module
                        $(".mz-look-email").show().delay(5000).fadeOut();
                     }, function(err) {
                         console.log("Failure : "+JSON.stringify(err));
-
                     });
                 }
             }
