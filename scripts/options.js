@@ -78,6 +78,22 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                 }
             });
             var properties = this.model.get('properties');
+
+            var shippingMessage;
+            var availabilityMessage;
+            var expectedShipMessage;
+            var shippingProps = _.filter(properties, function(property){ return property.attributeFQN == "tenant~availability" || property.attributeFQN == "tenant~expected-ship-date-message"; });
+            if (shippingProps) {
+                for (var y = 0; y < shippingProps.length; y++) {
+                    var shippingProp = shippingProps[y];
+                    if (shippingProp.attributeFQN == "tenant~availability") {
+                        availabilityMessage = shippingProp.values[0].stringValue;
+                    } else if (shippingProp.attributeFQN == "tenant~expected-ship-date-message") {
+                        expectedShipMessage = shippingProp.values[0].stringValue;
+                    }
+                }
+            }
+
             var prop = _.find(properties, function(property){ return property.attributeFQN == 'tenant~field_display_oos1'; });
             if (prop) {
                 this.model.set('fieldDisplayOOSProp', true);
@@ -110,6 +126,18 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                 this.model.set('variationTotalStock', variationTotalStock);
                 this.model.set('someOptionsInStock', someOptionsInStock);
             }
+
+            var inventory = this.model.get('inventoryInfo');
+            if (variationTotalStock === 0 && inventory.onlineStockAvailable) {
+                variationTotalStock = inventory.onlineStockAvailable;
+            }
+            if (variationTotalStock === 0 && prop) {
+                shippingMessage = expectedShipMessage;
+            } else {
+                shippingMessage = availabilityMessage;
+            }
+            this.model.set('shippingMessage',shippingMessage);
+            
             var prodPrice = this.model.get('price');
             if (prodPrice.attributes) {
                 var priceType = prodPrice.attributes.priceType;
@@ -121,22 +149,6 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             var optionss = _.filter(options, function(option){ return option.attributeFQN == "tenant~cabinet-model" || option.attributeFQN == "tenant~cabinet-serial-number"; });
             if (optionss.length === 2) {
                 this.model.set('compatibilityCheck', true);
-            }
-            if(typeof this.model.get('variations') !== "undefined" ) {
-                var variations = this.model.get('variations');
-                var sum = 0;
-                if(variations.length !== 0) { 
-                    var stockArray = [];
-                    for(var i=0; i<variations.length; i++) {
-                        stockArray.push(variations[i].inventoryInfo.onlineStockAvailable);
-                        sum += variations[i].inventoryInfo.onlineStockAvailable;
-                    }
-                    this.model.set({'totalCount': sum});
-                    var inStock =_.contains(stockArray, 0);
-                    this.model.set({'containsZero': inStock});
-                }                    
-            } else {
-                this.model.set({'totalCount': this.model.attributes.inventoryInfo.onlineStockAvailable});
             }
         },
         render: function () {
