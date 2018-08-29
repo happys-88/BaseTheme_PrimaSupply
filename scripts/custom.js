@@ -1,8 +1,9 @@
 define([ 
 	"modules/jquery-mozu",
 	'modules/api',
-	"bxslider" 
-], function( $, api, bxslider) {
+	"bxslider",
+	"hyprlivecontext" 
+], function( $, api, bxslider, HyprLiveContext) {  
 	
 	//home slider
 	$('#mz-home-slider .slider').bxSlider({
@@ -286,6 +287,10 @@ define([
 			$(".mz-mobilenav-lcenter .toggle-btn").click(function(){  
 				$(this).toggleClass("active");       
 			}); 
+		}
+
+		if(!HyprLiveContext.locals.user.isAuthenticated){
+			localStorage.setItem("previousTime", null); 
 		}
 
 		// Global Cart Continue btn
