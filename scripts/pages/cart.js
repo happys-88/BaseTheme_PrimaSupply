@@ -137,6 +137,7 @@ define([
                         cart.set('selectedShipping', shippingRates[0].content.name);
                         cart.set('shippingTotal', shippingRates[0].amount);
                     }
+
                     // console.log("Mode : "+cart.selectedShipping);
                     var shipping = cart.get('selectedShipping');
                     if(typeof shipping !== 'undefined') {
@@ -393,6 +394,17 @@ define([
     },400),
     onQuantityUpdateFailed: function(model, oldQuantity) {
         var field = this.$('[data-mz-cart-item=' + model.get('id') + ']');
+        if (field) {
+            field.val(oldQuantity);
+            if (value > 1) {
+                if (prodCode) {
+                    errormsg.text(prodCode + " is limited in stock");
+                }
+            }
+        }
+        else {
+            this.render();
+        }
         var errormsg = this.$('[data-mz-message]');
         var message = model.messages.models[0].attributes.message;
         var prodCode = message.split(':')[1]; 
@@ -402,17 +414,7 @@ define([
        if (prodCode[prodCode.length-1] === ".")
             prodCode = prodCode.slice(0,-1);
       //  $('.mz-productdetail-wrap').find('.mz-errors').remove();
-        if (field) {
-            field.val(oldQuantity);
-            if(value>1){
-                if(prodCode) {
-                    errormsg.text(prodCode +" is limited in stock"); 
-                }
-            }
-        }
-        else {
-            this.render();
-        }
+    
         $('.mz-productdetail-wrap').find('.mz-errors').remove();
     },
         removeItem: function(e) {
@@ -578,8 +580,9 @@ define([
         paypal.loadScript(); 
         
 
-        $("#continueShoppingCartButton").on('click', function(event){ 
-            var lasturl=document.referrer; 
+        // Redirect user to previous page on click of Continue Shopping 
+        $(document).on('click','#continueShoppingCartButton', function(e){
+            var lasturl=document.referrer;  
             if(lasturl.lastIndexOf("/checkout")==-1){ 
                 window.history.back();
             }

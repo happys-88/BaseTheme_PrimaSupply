@@ -48,9 +48,8 @@ function ($, _, Hypr, Backbone, HyprLiveContext, ProductModel, api, yotpo) {
 	   	$(".yotpo-single-image-container").addClass("hidden-thumbnails");
 	    $('.yotpo-single-image-container:lt('+galleryThumbnailsLC+')').removeClass("hidden-thumbnails");
 
-	    if(prodType !== 'content') {
-	    	console.log("Product");
-		    // Show yotpo review & question count 
+	    if(prodType !== 'content') { 
+	    	// Show yotpo review & question count  
 		    var getProductCode = $("#customProductCode").val(); 
 			var yotpoApiKey = HyprLiveContext.locals.themeSettings.yotpoApiKey;
 			var yotpoBaseUrl = HyprLiveContext.locals.themeSettings.yotpoBaseUrl;
@@ -70,7 +69,10 @@ function ($, _, Hypr, Backbone, HyprLiveContext, ProductModel, api, yotpo) {
 				if(data.status.code == 200 || (typeof data.response.questions !== 'undefined' && data.response.questions.length > 0)){
 					var totalReviewCount = data.response.total_questions; 
 					$(".yotpo-review-ques-ansr").find("#ques-count").text("("+totalReviewCount+")"); 
-				}  
+				} 
+				else if (data.response.total_questions === 0) {
+			    	$(".yotpo-review-ques-ansr").find("#ques-count").text("("+data.response.total_questions+")"); 
+			    }  
 		    });
 		}
 	    var headerHeight = $(".mz-sticky-header").height();

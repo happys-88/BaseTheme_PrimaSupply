@@ -106,7 +106,7 @@ img[data-mztp]{
 
 .mz-button{
 	display: inline-block;
-	background: @buttonBgColor;
+	/*background: @buttonBgColor;*/ 
 	padding: 12px;
 	font-size: 16px;
 	color: @textColorWhite;
@@ -876,12 +876,18 @@ img[data-mztp]{
 	width: 100%;
 	padding-bottom: 20px;
 	border-bottom: 1px solid @defaultBorderColor; 
-	margin-bottom: 25px; 
-	.phone-no{
+	margin-bottom: 25px;
+	.mz-storebranding {
+		a {
+		    max-width: 200px;
+		    display: block;
+		}
+	}
+	.phone-no {
 		font-size: 16px;
 		font-weight: bold;
-		margin-top: 20px;    
-		a{
+		margin-top: 15px;    
+		a {
 			color: @textColor;	
 		}
 	}     

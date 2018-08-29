@@ -36,31 +36,24 @@ $(document).on('click', '.mz-quick-view', function (event) {
             },
             initialize: function() {
                 this.productThumbSlider();
-                if(typeof this.model.get('variations') !== "undefined" ) {
-                   var variations = this.model.get('variations');
-                    var sum = 0;
-                    if(variations.length !== 0) { 
-                        var stockArray = [];
-                        for(var i=0; i<variations.length; i++) {
-                            stockArray.push(variations[i].inventoryInfo.onlineStockAvailable);
-                            sum += variations[i].inventoryInfo.onlineStockAvailable;
-                        }
-                        if (isNaN(sum)) {
-                            sum = 0;
-                        }
-                        this.model.set({'totalCount': sum});
-                        var inStock =_.contains(stockArray, 0);
-                        this.model.set({'containsZero': inStock});
-                    }                    
-                } else {
-                    if (this.model.attributes.inventoryInfo.onlineStockAvailable) {
-                        this.model.set({'totalCount': this.model.attributes.inventoryInfo.onlineStockAvailable});
-                    } else {
-                        this.model.set({'totalCount': 0});
-                    }
-                }
                 // code for stock
                 var properties = this.model.get('properties');
+
+                var shippingMessage;
+                var availabilityMessage;
+                var expectedShipMessage;
+                var shippingProps = _.filter(properties, function(property){ return property.attributeFQN == "tenant~availability" || property.attributeFQN == "tenant~expected-ship-date-message"; });
+                if (shippingProps) {
+                    for (var y = 0; y < shippingProps.length; y++) {
+                        var shippingProp = shippingProps[y];
+                        if (shippingProp.attributeFQN == "tenant~availability") {
+                            availabilityMessage = shippingProp.values[0].stringValue;
+                        } else if (shippingProp.attributeFQN == "tenant~expected-ship-date-message") {
+                            expectedShipMessage = shippingProp.values[0].stringValue;
+                        }
+                    }
+                }
+
                 var prop = _.find(properties, function(property){ return property.attributeFQN == 'tenant~field_display_oos1'; });
                 if (prop) {
                     this.model.set('fieldDisplayOOSProp', true);
@@ -93,6 +86,17 @@ $(document).on('click', '.mz-quick-view', function (event) {
                     this.model.set('variationTotalStock', variationTotalStock);
                     this.model.set('someOptionsInStock', someOptionsInStock);
                 }
+
+                var inventory = this.model.get('inventoryInfo');
+                if (variationTotalStock === 0 && inventory.onlineStockAvailable) {
+                    variationTotalStock = inventory.onlineStockAvailable;
+                }
+                if (variationTotalStock === 0 && prop) {
+                    shippingMessage = expectedShipMessage;
+                } else {
+                    shippingMessage = availabilityMessage;
+                }
+                this.model.set('shippingMessage',shippingMessage);
 
                 var options = JSON.parse(JSON.stringify(this.model.get('options')));
                 var count = 0;
@@ -142,7 +146,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
                         var fieldDisplayOOSPropVal = this.model.get('fieldDisplayOOSPropVal');
                         var propValue = fieldDisplayOOSPropVal.values[0];
                         
-                        if (propValue.value === '1') {
+                        if (propValue.value == '1') {
                             if (productUsage == 'Configurable') {
                                var someOptionsInStock = this.model.get('someOptionsInStock');
                                if (onlineStockAvailable === undefined) {
@@ -190,14 +194,14 @@ $(document).on('click', '.mz-quick-view', function (event) {
                                     
                                 }
                             }
-                        } else if (propValue.value === '0' || propValue.value === '2' || propValue.value === '3') {
+                        } else if (propValue.value == '0' || propValue.value == '2' || propValue.value == '3') {
                             if (productUsage == 'Configurable' && onlineStockAvailable === undefined) {
                                onlineStockAvailable = this.model.get('variationTotalStock');
                             }
                             if (onlineStockAvailable < 10 && onlineStockAvailable > 0) {
                                 stockMessage = Hypr.getLabel('stockThreshold').replace("{0}", onlineStockAvailable);
                             } else if (onlineStockAvailable >= 10) {
-                                if (propValue.value === '0') {
+                                if (propValue.value == '0') {
                                     stockMessage = Hypr.getLabel('distributorStock');
                                 } else {
                                     stockMessage = Hypr.getLabel('inStock');
@@ -210,9 +214,9 @@ $(document).on('click', '.mz-quick-view', function (event) {
                                         stockMessage = Hypr.getLabel('inStock');
                                     }*/
                                 } else {
-                                    if (propValue.value === '2') {
+                                    if (propValue.value == '2') {
                                         stockMessage = Hypr.getLabel('preOrderOnly');
-                                    } else if (propValue.value === '3') {
+                                    } else if (propValue.value == '3') {
                                         stockMessage = Hypr.getLabel('builtToOrder');
                                     } else {
                                         stockMessage = Hypr.getLabel('outOfStock');
@@ -220,7 +224,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
                                     
                                 }
                             }
-                        } else if (propValue.value === '4') {
+                        } else if (propValue.value == '4') {
                             stockMessage = Hypr.getLabel('itemDiscontinued');
                             itemDiscontinued = true;
                         }
@@ -424,7 +428,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
             },
             clickOnNextOrprevious: function(){
                 if(typeof this.model.get('productCode') !== 'undefined'){
-                    $('[src="http://southasia.oneworld.net/ImageCatalog/no-image-icon/image_preview').parent().remove();
+                    $("img[onerror*='this.src']").parent().remove();
                     if($(".bx-pager-item").length > imagecount){
                         $(".bx-pager-item").eq(2).remove();
                     }

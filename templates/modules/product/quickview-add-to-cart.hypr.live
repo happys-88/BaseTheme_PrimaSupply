@@ -22,21 +22,7 @@
                 {{ model.stockMessage }}
             </div>
             <div class="mz-availability">
-                {% if model.inventoryInfo.manageStock === false %}
-                  {% for availability in model|get_product_attribute_values("tenant~availability") %}
-                    <p>({{ availability }})</p>
-                  {% endfor %}
-                {% else %}
-                    {% if model.totalCount === 0 or model.inventoryInfo.onlineStockAvailable === 0 %}
-                      {% if model|get_product_attribute_value("tenant~expected_ship_date_message") %}
-                        <p>({{ model|get_product_attribute_value("tenant~expected_ship_date_message") }})</p>
-                      {% endif %}
-                    {% else %}
-                      {% for availability in model|get_product_attribute_values("tenant~availability") %}
-                        <p>({{ availability }})</p>
-                      {% endfor %}
-                    {% endif %}
-                {% endif %}
+                {% if model.checkItem === true %} {{ model.shippingMessage }} {% endif %}
             </div>
         </div>
         <!--/ Stock msg -->
