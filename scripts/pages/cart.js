@@ -130,9 +130,13 @@ define([
                     cart.set("shippingDetail", ratesParse);
                     var shipPrice = _.filter(shippingRates, 
                         function(rates) { return (rates.amount === 0);   });
-
-                    cart.set('selectedShipping', shipPrice[0].content.name);
-                    cart.set('shippingTotal', shipPrice[0].amount);
+                    if(shipPrice.length > 0) {
+                        cart.set('selectedShipping', shipPrice[0].content.name);
+                        cart.set('shippingTotal', shipPrice[0].amount);
+                    } else {
+                        cart.set('selectedShipping', shippingRates[0].content.name);
+                        cart.set('shippingTotal', shippingRates[0].amount);
+                    }
                     // console.log("Mode : "+cart.selectedShipping);
                     var shipping = cart.get('selectedShipping');
                     if(typeof shipping !== 'undefined') {

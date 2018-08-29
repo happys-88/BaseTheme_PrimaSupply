@@ -60,6 +60,14 @@ define([
 	}
 	
 	$(document).ready(function(){ 
+		console.log("Custom");
+		
+		$('.mz-searchbox-button').click(function(e) {
+			var elm = e.currentTarget;
+			var searchType = elm.getAttribute('data-mz-searchType'); 	
+			localStorage.setItem("searchType", searchType);
+		});
+
 		$("#newsletterEmail").keydown(function(e) {
             if (e.which === 13) {
                 $("#newsletter").trigger("click");

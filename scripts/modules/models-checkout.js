@@ -1564,7 +1564,8 @@
                 if (paymentTypeIsCard && !Hypr.getThemeSetting('isCvvSuppressed')) return this.stepStatus('incomplete'); // initial state for CVV entry
 
                 if (!fulfillmentComplete) return this.stepStatus('new');
-                if (thereAreActivePayments && (balanceNotPositive || (this.get('paymentType') === 'PaypalExpress2' && window.location.href.indexOf('PaypalExpress2=complete') !== -1))) return this.stepStatus('complete');
+
+                if (thereAreActivePayments && (balanceNotPositive || (this.get('paymentType') === 'PaypalExpress' && window.location.href.indexOf('PaypalExpress=complete') !== -1))) return this.stepStatus('complete');
                 return this.stepStatus('incomplete');
 
             },
@@ -1615,19 +1616,14 @@
                 return !_.isEqual(normalizedSavedPaymentInfo, normalizedLiveBillingInfo);
             },
             submit: function () {
+
                 var order = this.getOrder();
-               /* $.post("/omxXmlConverter", order.toJSON(), function(response) { 
-                   console.log(JSON.stringify(response)+'-------');
-                   order.apiModel.update(_.extend(order.toJSON()));
-                }).fail(function() {
-                    console.log("Failure ");   
-                });*/
                 // just can't sync these emails right
                 order.syncBillingAndCustomerEmail();
+
                 // This needs to be ahead of validation so we can check if visa checkout is being used.
-                
                 var currentPayment = order.apiModel.getCurrentPayment();
-                
+
                 // the card needs to know if this is a saved card or not.
                 this.get('card').set('isSavedCard', order.get('billingInfo.usingSavedCard'));
                 // the card needs to know if this is Visa checkout (or Amazon? TBD)

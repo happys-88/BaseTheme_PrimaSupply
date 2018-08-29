@@ -20,6 +20,7 @@ define([
         var ROUTE_NOT_FOUND = 'ROUTE_NOT_FOUND';
 
         function updateUi(response) {
+            console.log("Collections : "+JSON.stringify(conf));
             var url = response.canonicalUrl;
             _$body.html(response.body); 
             if (url) _dispatcher.replace(url);
@@ -40,7 +41,6 @@ define([
 
         function intentToUrl(e) {
             blockUiLoader.globalLoader(); 
-
             var elm = e.target;
             var url;
             if (elm.tagName.toLowerCase() === "select") {
@@ -57,7 +57,12 @@ define([
                 url = pathName+searchName;
                 url = makeClearUrl(url, elm.id);
             } else {
-                url = elm.getAttribute('data-mz-url') || elm.getAttribute('href') || '';    
+                url = elm.getAttribute('data-mz-url') || elm.getAttribute('href') || ''; 
+                var urlType = _$body.context.location.pathname;
+                if(urlType.indexOf("/search") !== -1) {
+                    var searchType = localStorage.getItem("searchType");
+                    url = url+"&searchPage="+searchType;   
+                }
             }
             
             if (url && url[0] != "/") {
@@ -65,6 +70,7 @@ define([
                 parser.href = url;
                 url = window.location.pathname + parser.search;
             }
+            blockUiLoader.unblockUi(); 
             return url;
         }
 
