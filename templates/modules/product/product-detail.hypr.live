@@ -65,7 +65,7 @@
 
     </div>
   </div>
-  <div class="col-md-2 col-xs-12"> 
+  <div class="col-md-3 col-xs-12">  
     <div class="mz-productdetail-conversion-buttons">    
       {% if siteContext.generalSettings.isWishlistCreationEnabled and not user.isAnonymous %}
         <button id="add-to-wishlist" {% if model.checkItem === true %} {% else %} class="mz-productdetail-addtowishlist is-disabled" disabled="disabled" {% endif %} data-mz-action="addToWishlist"> 
