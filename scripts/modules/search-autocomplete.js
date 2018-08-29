@@ -35,10 +35,14 @@
 
                 if($('.learningCenterInput').is(':focus') && name==='Pages') { 
                     var valArray = filterCatsArray();
+                    console.log("Hello");
                     var result = _.filter(thisGroup.suggestions, function(someThing) {
+                        var prodTypeVal = someThing.suggestion.productType;
+                        var contentVal = "content";
+                        return prodTypeVal.toUpperCase() === contentVal.toUpperCase();
+                        /*
                         var boolVal = false;
-                        return someThing.suggestion.productType === 'content';
-                        /*if(someThing.suggestion.categories.length > 0) {
+                        if(someThing.suggestion.categories.length > 0) {
                             $.each(someThing.suggestion.categories, function(index, obj){
                                 if(valArray.indexOf(obj.categoryId) >= 0) {
                                     boolVal = true;
@@ -56,10 +60,14 @@
                     return result;
                 } else if($('#globalSearch').is(':focus') && name==='Pages') {
                     var valArrayGlobal = filterCatsArray();
+                    console.log("Hello");
                     var resultGlobal = _.filter(thisGroup.suggestions, function(someThing) {
-                    var boolVal = false;
-                    return someThing.suggestion.productType !== 'content';
-                        /*if(someThing.suggestion.categories.length > 0) {
+                    var prodTypeVal = someThing.suggestion.productType;
+                    var contentVal = "content";
+                    return prodTypeVal.toUpperCase() !== contentVal.toUpperCase();
+                        /*
+                        var boolVal = false;
+                        if(someThing.suggestion.categories.length > 0) {
                             $.each(someThing.suggestion.categories, function(index, obj){
                                 if(valArrayGlobal.indexOf(obj.categoryId) == -1) {
                                     boolVal = true;
