@@ -44,9 +44,8 @@
             zoomImage.data('zoom-image', src);
             zoomImage.elevateZoom(zoomConfig);
           },
-          productThumbSlider: function () {
-              (console.log(this.model));
-              if (this.model.get("mainImage") !== null && this.model.get("content").get("productImages").length>1){
+          productThumbSlider: function () { 
+            if (this.model.get("mainImage") !== null && this.model.get("content").get("productImages").length>1){
             $('.bxslider').bxSlider({ 
                 minSlides: 1,
                 maxSlides: 1,

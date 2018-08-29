@@ -2,19 +2,21 @@
 {% block item-details %}
     <div class="mz-itemlisting-description">
       {% for option in model.product.options %}
-      	{{ option.name }}: 
-      	{% if option.stringValue %} 
+      	<p><strong>{{ option.name }}:</strong> 
+        	{% if option.stringValue %} 
             {{ option.stringValue }} 
-        {% else %} 
+          {% else %} 
             {% if option.value %} 
-                {{ option.value }} 
+              {{ option.value }} 
             {% else %} 
-                {{ option.shopperEnteredValue }} 
-            {% endif %} 
-        {% endif %}, 
+              {{ option.shopperEnteredValue }} 
+            {% endif %}  
+          {% endif %}
+        </p> 
       {% endfor %}
-      <br>
-      {{ model.product.variationProductCode|default(model.product.productCode) }}{% if model.product.measurements.packageWeight.value %}, {{ model.product.measurements.packageWeight.value }}{{model.measurements.packageWeight.unit }}{% endif %}
+      
+      <p>{{ model.product.variationProductCode|default(model.product.productCode) }}</p> 
+
     </div>
     <div class="mz-itemlisting-price">
      {{labels.orderPackagePrice}} : {%if model.product.price.tenantOverridePrice %} {{ model.product.price.tenantOverridePrice|currency }} {% else %} {%if model.product.price.salePrice %} {{ model.product.price.salePrice|currency }} {% else %} {{ model.product.price.price|currency }} {%endif%}{%endif%}
@@ -26,8 +28,9 @@
 {% block item-listing-actions %}
    
 {% endblock item-listing-actions %}
+
 {% block item-listing-extras %}
-{% if returning == model.id %}
-<p class="mz-itemlisting-prompt is-warning">{{ labels.returnInfo|safe }}</p>
-{% endif %}
+  {% if returning == model.id %}
+    <p class="mz-itemlisting-prompt is-warning">{{ labels.returnInfo|safe }}</p>
+  {% endif %} 
 {% endblock item-listing-extras %}

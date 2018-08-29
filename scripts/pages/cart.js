@@ -580,8 +580,9 @@ define([
         paypal.loadScript(); 
         
 
-        $("#continueShoppingCartButton").on('click', function(event){ 
-            var lasturl=document.referrer; 
+        // Redirect user to previous page on click of Continue Shopping 
+        $(document).on('click','#continueShoppingCartButton', function(e){
+            var lasturl=document.referrer;  
             if(lasturl.lastIndexOf("/checkout")==-1){ 
                 window.history.back();
             }
