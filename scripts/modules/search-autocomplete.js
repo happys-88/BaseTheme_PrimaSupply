@@ -38,8 +38,7 @@
                     console.log("Hello");
                     var result = _.filter(thisGroup.suggestions, function(someThing) {
                         var prodTypeVal = someThing.suggestion.productType;
-                        var contentVal = "content";
-                        return prodTypeVal.toUpperCase() === contentVal.toUpperCase();
+                        return prodTypeVal.toUpperCase() === 'CONTENT';
                         /*
                         var boolVal = false;
                         if(someThing.suggestion.categories.length > 0) {
@@ -63,8 +62,7 @@
                     console.log("Hello");
                     var resultGlobal = _.filter(thisGroup.suggestions, function(someThing) {
                     var prodTypeVal = someThing.suggestion.productType;
-                    var contentVal = "content";
-                    return prodTypeVal.toUpperCase() !== contentVal.toUpperCase();
+                    return prodTypeVal.toUpperCase() !== 'CONTENT';
                         /*
                         var boolVal = false;
                         if(someThing.suggestion.categories.length > 0) {
