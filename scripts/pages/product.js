@@ -226,6 +226,7 @@
             }
         },500),
         quantityMinus: _.debounce(function () {
+            if (this.model.get('checkItem') === false) { return; }
             var _qtyCountObj = $('.mz-productdetail-qty');
             var value = parseInt(_qtyCountObj.val(), 10);
             if (value == 1) {
@@ -236,6 +237,7 @@
             _qtyCountObj.val(value);
         },500),
         quantityPlus: _.debounce(function () {
+            if (this.model.get('checkItem') === false) { return; }
             var _qtyCountObj = $('.mz-productdetail-qty');
             var value = parseInt(_qtyCountObj.val(), 10);
             value++;
