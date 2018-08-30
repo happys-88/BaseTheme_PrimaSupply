@@ -1627,17 +1627,17 @@
                 // the card needs to know if this is a saved card or not.
                 this.get('card').set('isSavedCard', order.get('billingInfo.usingSavedCard')); 
 
-                if ($("#mz-payment-security-code-0").val() === undefined || $("#mz-payment-security-code-0").val() === "" ){
-                    var error1 = {"items":[]};
-                    var errorItem1 = {};
-                    errorItem1.name = "card.cvv";
-                    errorItem1.message = "Please enter your CVV number";
-                    error1.items.push(errorItem1);
-                    if (error1.items.length > 0) {
-                        order.onCheckoutError(error1);
-                    } 
-                    return false;
-                }
+                // if ($("#mz-payment-security-code-0").val() === undefined || $("#mz-payment-security-code-0").val() === "" ){
+                //     var error1 = {"items":[]};
+                //     var errorItem1 = {};
+                //     errorItem1.name = "card.cvv";
+                //     errorItem1.message = "Please enter your CVV number";
+                //     error1.items.push(errorItem1);
+                //     if (error1.items.length > 0) {
+                //         order.onCheckoutError(error1);
+                //     } 
+                //     return false;
+                // }
 
                 // the card needs to know if this is Visa checkout (or Amazon? TBD)
                 if (currentPayment) {
