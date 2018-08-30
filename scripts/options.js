@@ -4,7 +4,8 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
         var productCode = $thisElem.attr("data-mz-productcode");
         openOptionModalPopup(productCode);
     });
-
+    var eventCount = 1;
+    eventCount = parseInt(eventCount, 10);
     function openOptionModalPopup(productCode) {
 
        api.request("GET", "/api/commerce/catalog/storefront/products/"+productCode).then(function(body){
@@ -48,7 +49,6 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
         templateName: 'modules/product/product-options-popup',
         additionalEvents: {
             'click .addtocart': 'addToCart',
-            'click .colorswatch': "colorswatch",
             "change [data-mz-value='quantity']": "onQuantityChange",
             "change .mz-productoptions-option": "onOptionChange",
             "click [data-mz-qty-minus]": "quantityMinus",
@@ -383,6 +383,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             }
         },
         addToCartUpdate: function() {
+            eventCount = 1;
             if(require.mozuData('pagecontext').isEditMode) {
                 return false;
             }
@@ -429,32 +430,37 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             });
         },
         addToCart: function (event) {
-            event.stopImmediatePropagation();
             var count = 0;
             count = parseInt(count, 10);
             this.model.addToCart();
             var optionModel = this.model;
             var me = this;
+            
             this.model.on('addedtocart', function (cartitem) {
-                if (optionModel.get('addonsPopup') === true) {
-                    GlobalCart.update('redirect_to_cart');
-                } else {
-                    optionModel.set('addonsPopup', true);
-                    optionModel.set('cartItemId',cartitem.data.id);
-                    optionModel.set('totalQuant',cartitem.data.quantity);
-                    var selectedOptions = optionModel.get('selectedOptions');
-                    if (selectedOptions && selectedOptions.length > 0) {
-                        for (var i = 0; i < selectedOptions.length; i++) {
-                            var selectedOption = selectedOptions[i];
-                            var option = optionModel.get('options').get(selectedOption.id);
-                            option.set('value', selectedOption.value);
+                var events = optionModel._events.addedtocart;
+                if (eventCount === events.length) {
+                    if (optionModel.get('addonsPopup') === true) {
+                        GlobalCart.update('redirect_to_cart');
+                    } else {
+                        optionModel.set('addonsPopup', true);
+                        optionModel.set('cartItemId',cartitem.data.id);
+                        optionModel.set('totalQuant',cartitem.data.quantity);
+                        var selectedOptions = optionModel.get('selectedOptions');
+                        if (selectedOptions && selectedOptions.length > 0) {
+                            for (var i = 0; i < selectedOptions.length; i++) {
+                                var selectedOption = selectedOptions[i];
+                                var option = optionModel.get('options').get(selectedOption.id);
+                                option.set('value', selectedOption.value);
+                            }
                         }
+                        me.render();
+                        if (cartitem && cartitem.prop('id')) {
+                            CartMonitor.addToCount(optionModel.get('quantity'));
+                            GlobalCart.update();
+                        }    
                     }
-                    me.render();
-                    if (cartitem && cartitem.prop('id')) {
-                        CartMonitor.addToCount(optionModel.get('quantity'));
-                        GlobalCart.update();
-                    }    
+                } else {
+                    eventCount++;
                 }
             });
             this.model.on('addedtocarterror', function (error) {
@@ -495,11 +501,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
         templateName: 'modules/product/product-addons-popup',
         additionalEvents: {
             'click .addtocart': 'addToCart',
-            'click .colorswatch': "colorswatch",
-            "change [data-mz-value='quantity']": "onQuantityChange",
             "change .mz-productoptions-option": "onOptionChange",
-            "click [data-mz-qty-minus]": "quantityMinus",
-            "click [data-mz-qty-plus]": "quantityPlus",
             "click [data-mz-removeItem]":"removeItem",
             "click .addtocartaddon":"addToCartUpdate"
         },
@@ -576,13 +578,6 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
             }
             this.model.set('hasAddon', hasAddon);
         },
-        onQuantityChange: _.debounce(function (e) {
-            var $qField = $(e.currentTarget),
-              newQuantity = parseInt($qField.val(), 10);
-            if (!isNaN(newQuantity)) {
-                this.model.updateQuantity(newQuantity);
-            }
-        },500),
         onOptionChange: function (e) {
             this.model.unset('addToCartErr');
             this.model.unset('addToCartErrr');
@@ -606,58 +601,6 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                         option.set('value', newValue);
                     }
                 }
-            }
-        },
-        quantityMinus: function() {
-            if(typeof this.model.get('productCode') !== 'undefined') {
-                if(!this.model.get('purchasableState').isPurchasable) {
-                    return;
-                }
-                var _qtyObj = $('[data-mz-validationmessage-for="quantity"]'),
-                    _qtyCountObj = $('.mz-productdetail-qty');
-                _qtyObj.text('');
-                var value = parseInt(_qtyCountObj.val(), 10);
-                if (typeof this.model.attributes.inventoryInfo.onlineStockAvailable !== 'undefined') {
-                    if (this.model.attributes.inventoryInfo.onlineStockAvailable >= value)
-                    $(".mz-productdetail-addtocart").removeClass("is-disabled");
-                }
-                if (value == 1) {
-                    _qtyObj.text("Quantity can't be zero.");
-                   // $('.modal-body').animate({ scrollTop: $('.tab_container')[0].scrollHeight }, 'slow');
-                    return;
-                }
-                value--;
-                this.model.updateQuantity(value);
-                _qtyCountObj.val(value);
-            }
-        },
-        quantityPlus: function() {
-            if(typeof this.model.get('productCode') !== 'undefined'){
-                if(!this.model.get('purchasableState').isPurchasable) {
-                    return;
-                }
-                var _qtyObj = $('[data-mz-validationmessage-for="quantity"]'),
-                _qtyCountObj = $('.mz-productdetail-qty');
-            _qtyObj.text('');
-            var value = parseInt(_qtyCountObj.val(), 10);
-
-
-            if (value == 99) {
-                _qtyObj.text("Quantity can't be greater than 99.");
-                return;
-            }
-            value++;
-            if (typeof this.model.attributes.inventoryInfo.onlineStockAvailable !== 'undefined' && this.model.attributes.inventoryInfo.onlineStockAvailable < value) {
-                $(".mz-productdetail-addtocart").addClass("is-disabled");
-                if (this.model.attributes.inventoryInfo.onlineStockAvailable > 0)
-                $(".mz-productdetail-addtocart").removeClass("is-disabled");
-                    $('[data-mz-validationmessage-for="quantity"]').text("*Only " + this.model.attributes.inventoryInfo.onlineStockAvailable + " left in stock.");
-                    return;
-            }
-            
-            this.model.updateQuantity(value);        
-            _qtyCountObj.val(value);
-
             }
         },
         removeItem: function() {
