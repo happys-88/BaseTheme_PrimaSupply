@@ -8,9 +8,10 @@
     "modules/product/recently-viewed-products", 
     "hyprlivecontext",
     "modules/api",
-    "modules/page-header/global-cart" 
-], function ($, _, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, RVIModel, HyprLiveContext, api, GlobalCart) {
-
+    "modules/page-header/global-cart",
+    'modules/block-ui' 
+], function ($, _, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, RVIModel, HyprLiveContext, api, GlobalCart, blockUiLoader) {
+    blockUiLoader.globalLoader();
     var ProductView = Backbone.MozuView.extend({
         templateName: 'modules/product/product-detail',
         additionalEvents: {
@@ -23,6 +24,7 @@
         },
         render: function () {
             this.refreshStock();
+            blockUiLoader.unblockUi();
             var me = this;
             Backbone.MozuView.prototype.render.apply(this);
             this.productCarousel();

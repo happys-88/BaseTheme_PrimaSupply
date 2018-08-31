@@ -27,7 +27,6 @@ define([
             /*if ($(".view-all.selected").length) {
                 InfiniteScroller.update();
             }*/ 
-            blockUiLoader.unblockUi();  
             yotpo.update();
         } 
 
