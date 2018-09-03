@@ -161,7 +161,7 @@ define([
 		});
 
 		// Back To Top
-		$(".mz-back-to-top-btn").click(function(){
+		$(document).on('click','.mz-back-to-top-btn', function(){
 	        scrollToTop(); 
 	    });
 
