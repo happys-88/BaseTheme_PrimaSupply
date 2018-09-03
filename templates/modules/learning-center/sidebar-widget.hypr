@@ -22,7 +22,6 @@
 	{% dropzone "featured-products" scope="page" %}	
 </div>
 <div class="mz-sidebar-content-widget mz-popular-articles">
-	<h2 class="heading-2"><span>Popular Articles</span></h2> 
 	<ul id="popular-articles">
 		
 	</ul>
@@ -30,5 +29,4 @@
 
 <script type="text/javascript">
     (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/{{ themeSettings.yotpoApiKey }}/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})(); 
-</script>  
-
+</script>

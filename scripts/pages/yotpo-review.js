@@ -30,7 +30,7 @@ function ($, _, Hypr, Backbone, HyprLiveContext, ProductModel, api, yotpo) {
 	            if(response.statusCode === 200) {   
 	            	if(response.body.length > 0) {         	
 		            	_.each(response.body, function(article) {
-		            		artContent = artContent +'<li><a href='+article.url+'>'+article.title+'</a></li>';	
+		            		artContent = '<h2 class="heading-2"><span>Popular Articles</span></h2>'+artContent +'<li><a href='+article.url+'>'+article.title+'</a></li>';	
 		            	});            	
 	            	} else {
 	            		artContent = "Articles not found";	
