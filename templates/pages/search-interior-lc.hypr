@@ -1,0 +1,6 @@
+{% partial_cache model.categoryId pageContext.Sorting pageContext.Pagination pageContext.query.sortBy pageContext.search.query %}
+    {% include "modules/product/learning-center/faceted-articles" %}  
+{% endpartial_cache %}
+
+
+

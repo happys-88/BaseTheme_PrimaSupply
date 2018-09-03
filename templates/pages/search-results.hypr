@@ -6,7 +6,11 @@
 	{% require_script "pages/search" %}
 	{% require_script "modules/quickview" %}
 	{% require_script "options" %} 
-	<div {% if pageContext.categoryId %}data-mz-category="{{ pageContext.categoryId }}" {% endif %}data-mz-search="{{ pageContext.search.query }}" class="mz-l-container">
-		{% include "pages/search-interior" %}
-	</div>
+	{% if pageContext.categoryId==1647 %}
+		<div {% if pageContext.categoryId %}data-mz-category="{{ pageContext.categoryId }}" {% endif %}data-mz-search="{{ pageContext.search.query }}" class="mz-l-container">
+			{% include "pages/search-interior" %}
+		</div>
+	{% else %}
+		{% include "pages/search-interior-lc" %}   
+	{% endif %} 
 {% endblock body-content %}
