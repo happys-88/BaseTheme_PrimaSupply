@@ -22,6 +22,7 @@ function ($, _, Hypr, Backbone, HyprLiveContext, ProductModel, api, yotpo) {
 
 	    var product = ProductModel.Product.fromCurrent();
 	    var prodType = product.attributes.productType;
+	    if(typeof product.attributes.productType!=="undefined")
 	    if(typeof prodType !== 'undefined' && prodType.toUpperCase() === 'CONTENT') {
 		    // Popular Articles  
 		    api.request("POST", "/commonRoute",{"requestFor":"popularArticles", "pubId":HyprLiveContext.locals.themeSettings.addThisPubId}).then(function (response){
@@ -48,6 +49,7 @@ function ($, _, Hypr, Backbone, HyprLiveContext, ProductModel, api, yotpo) {
 	   	$(".yotpo-single-image-container").addClass("hidden-thumbnails");
 	    $('.yotpo-single-image-container:lt('+galleryThumbnailsLC+')').removeClass("hidden-thumbnails");
 
+	    if(typeof product.attributes.productType!=="undefined")
 	    if(typeof prodType !== 'undefined' && prodType.toUpperCase() !== 'CONTENT') { 
 	    	// Show yotpo review & question count  
 		    var getProductCode = $("#customProductCode").val(); 
