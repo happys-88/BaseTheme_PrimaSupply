@@ -289,6 +289,7 @@
                     
                 }
                 this.set('liftGateProducts',liftGateProducts);
+                
             },
             relations: {
                 fulfillmentContact: FulfillmentContact
@@ -333,6 +334,11 @@
                     }
                 });
                 lineItems.push({primaShip:primaShipProds, distShip:distributorShipProds, liftGate: liftGateSelected, freightShipment: freightShipmentSelected});
+                if(this.parent.get('tbybInfo').tbybItemExist() && this.stepStatus() === 'incomplete') {
+                    this.parent.get('tbybInfo').stepStatus('incomplete');
+                } else {
+                    this.parent.get('tbybInfo').stepStatus('complete');
+                }
                 return lineItems;
             },
             liftGateSelected: function() {
@@ -487,13 +493,13 @@
                 if(this.parent.get('tbybInfo').tbybItemExist()) {
                     this.parent.get('tbybInfo').stepStatus('incomplete');
                 } else {
-                    this.parent.get('tbybInfo').stepStatus('invalid');
+                    this.parent.get('tbybInfo').stepStatus('complete');
                     this.parent.get('billingInfo').calculateStepStatus();
                 }
             }
         }),
         TbybInfo = CheckoutStep.extend({
-            initialize: function () {                
+            initialize: function () {    
                 var storefrontOrderAttributes = require.mozuData('pagecontext').storefrontOrderAttributes;
                 if(storefrontOrderAttributes && storefrontOrderAttributes.length > 0) {
                     this.set('orderAttributes', storefrontOrderAttributes);
@@ -1692,17 +1698,11 @@
                 if(this.get('paymentType').toLowerCase() === "purchaseorder") {
                     this.get('purchaseOrder').inflateCustomFields();
                 }
-                // console.log("currentPayment : "+JSON.stringify(currentPayment));
-                /*if (radioVal === 'PayPalExpress2') {
-                    this.markComplete();
-                } else*/ if (!currentPayment) {
-                    // console.log("111");
+                if (!currentPayment) {
                     return this.applyPayment();
                 } else if (this.hasPaymentChanged(currentPayment)) {
-                    // console.log("222");
                     return order.apiVoidPayment(currentPayment.id).then(this.applyPayment);
                 } else if (card.get('cvv') && card.get('paymentServiceCardId')) {
-                    // console.log("333");
                     return card.apiSave().then(this.markComplete, order.onCheckoutError);
                 } else {
                    this.markComplete();
@@ -1848,7 +1848,7 @@
                         var paymentWorkflow = latestPayment && latestPayment.paymentWorkflow,
                         visaCheckoutPayment = activePayments && _.findWhere(activePayments, { paymentWorkflow: 'VisaCheckout' }),
                         allStepsComplete = function () {
-                            return _.reduce(steps, function(m, i) { return m + i.stepStatus(); }, '') === 'completecompletecomplete';
+                            return _.reduce(steps, function(m, i) { return m + i.stepStatus(); }, '') === 'completecompletecompletecomplete';
                         },
                         isReady = allStepsComplete();
 
