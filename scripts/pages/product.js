@@ -607,16 +607,15 @@
         var currentProductCode = product.attributes.productCode;
         if(typeof product.attributes.categories !== "undefined"){
             $.each(product.attributes.categories, function( index, value ) {
-            var currentCategoryCode = value.categoryId;
-            $.each(product.attributes.properties, function( index, value ) {
-                
+                if(index === 0) {
+                    var currentCategoryCode = value.categoryId;
+                    $.each(product.attributes.properties, function( index, value ) {                
                         var preUrl;
                         var hostname = window.location.hostname;
                         var flag1 = false;
                         var flag2 = false;
                         var nxtUrl;
                         api.request("GET", "/api/commerce/catalog/storefront/products/?filter=categoryId eq "+currentCategoryCode+"").then(function(body){
-                            
                             $.each(body.items, function(index, item){
                                 var productCode = item.productCode;
                                 var seoFriendlyUrl = item.content.seoFriendlyUrl;
@@ -651,7 +650,9 @@
                             }
                         });
                     });
-                });
+                    return false;
+                }
+            });
         }
        var incr=0;
         $(document).on('click','[name=Color]', function(event){ 
