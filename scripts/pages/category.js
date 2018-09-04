@@ -3,7 +3,7 @@ require([
 	"modules/views-collections",
 	'modules/block-ui' 
 ], function( $, CollectionViewFactory, blockUiLoader) {  
-    blockUiLoader.globalLoader();
+    //blockUiLoader.globalLoader();   
     $(document).ready(function() {
         window.facetingViews = CollectionViewFactory.createFacetedCollectionViews({
             $body: $('[data-mz-category]'),

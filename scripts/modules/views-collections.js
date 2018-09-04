@@ -26,7 +26,8 @@ define([
             _$body.removeClass('mz-loading');
             /*if ($(".view-all.selected").length) {
                 InfiniteScroller.update();
-            }*/ 
+            }*/
+            blockUiLoader.unblockUi();   
             yotpo.update();
         } 
 
