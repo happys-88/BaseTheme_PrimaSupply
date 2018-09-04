@@ -15,13 +15,12 @@
         "currentSort": "{{ model.currentSort }}"
     }
     </script> 
-{% endif %} 
+{% endif %}  
 
 <div class="col-xs-12 faceted-articles">  
     <div class="mz-l-paginatedlist"> 
     <div class="mz-l-paginatedlist-header">
         <h1 class="mz-pagetitle">{{ navigation.currentNode.name|safe }}</h1> 
-        
         {% if model.facets %}
             <div class="col-xs-12 no-padding">   
                 <div data-mz-facets class="mz-l-sidebar">
@@ -29,7 +28,7 @@
                 </div>
             </div>              
         {% endif %}
-        <div class="col-xs-12 col-sm-6 pull-right">
+        <div class="col-xs-12 pull-right">
             <div data-mz-pagenumbers class="mz-pagenumbers">
                 {% include "modules/common/page-numbers" %}
             </div>

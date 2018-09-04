@@ -33,7 +33,6 @@
             
             <meta charset="utf-8">  
             <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
-            <meta name="twitter:card" content="summary"> 
             {% if not user.isAnonymous and not user.isAuthenticated and user.email !== "" %}
                 <meta http-equiv="refresh" content="0; url=/logout">
             {% endif %}
@@ -49,6 +48,10 @@
             {% if PageContext.correlationId %}
                 <meta name="correlationId" content="{{ PageContext.correlationId }}">
             {% endif %}
+
+            <meta name="twitter:card" content="summary_large_image"> 
+            <meta name="twitter:site" content="{{ siteContext.generalSettings.websiteName }}" /> 
+            <meta name="twitter:creator" content="@primasupply" />   
             
             {% if model.content.productName %}
                 <meta property="og:title" content='{% firstof pageContext.metaTitle|replace("'","&rsquo;")|replace('"','&rdquo;')|safe model.content.productName|replace("'","&rsquo;")|replace('"','&rdquo;')|safe %} - {{ siteContext.generalSettings.websiteName }}'>
@@ -154,6 +157,7 @@
             </div>
 
             <div role="main" id="page-content" class="mz-l-pagecontent container">    
+                
                 {% block breadcrumbs %}
                     {% if themeSettings.showBreadcrumbs %}
                         {% include "modules/breadcrumbs" %}
