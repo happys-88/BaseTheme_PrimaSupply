@@ -1,0 +1,2 @@
+
+{% include_products "modules/product/learning-center/article-feed" with sort=createDate asc as_parameter %}

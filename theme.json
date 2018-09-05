@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "c577aad91fed3711b975cb24736033ba3bde6963"
+      "commit": "4e046f500b1ed181a96174d7380839cf83180189"
     },
     "baseThemeChannel": "stable"
   },
@@ -202,6 +202,13 @@
           ]
         }
       ]
+    },
+    {
+      "entityType": "category",
+      "id": "blog-feed",
+      "template": "blog-feed",
+      "title": "Feed",
+      "userCreatable": true
     },
     {
       "entityType": "category",
