@@ -58,7 +58,7 @@
                             <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
                             {% if model.hasAddon === true %}
                                 <div class="mz-productdetail-conversion-buttons">
-                                    <button class="pull-right addtocartaddon mz-productdetail-addtocart mz-button mz-button-medium  {% if not model.inventoryInfo.onlineStockAvailable %} is-disabled {% endif %}" data-mz-productcode="{{model.variationProductCode|default(model.productCode) }}" {{ model.addToCartButton }}>
+                                    <button class="pull-right addtocartaddon mz-productdetail-addtocart mz-button mz-button-medium" data-mz-productcode="{{model.variationProductCode|default(model.productCode) }}">
                                         {{ labels.addToCart }}
                                     </button>
                                 </div>
