@@ -1,6 +1,6 @@
 ﻿{% extends "page" %}
 {% block title-tag-content %}{{ labels.searchTitle|string_format(pageContext.search.query) }}  - {% parent %}{% endblock title-tag-content %}
-{% block body-tag-classes %}mz-searchresults {% if pageContext.categoryId==1647 %}mz-learning-center{% endif %} {% endblock body-tag-classes %}
+{% block body-tag-classes %}mz-searchresults {% if pageContext.categoryId==1648 %}mz-learning-center{% endif %} {% endblock body-tag-classes %}
 {% block breadcrumbs %}{% endblock breadcrumbs %}
 {% block body-content %}
 	{% require_script "pages/search" %}
@@ -15,4 +15,4 @@
 			{% include "pages/search-interior-lc" %}    
 		{% endif %} 
 	</div>
-{% endblock body-content %}
+{% endblock body-content %}  

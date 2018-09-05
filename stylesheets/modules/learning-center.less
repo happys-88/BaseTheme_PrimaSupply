@@ -63,7 +63,7 @@
 
 
 /**** Learning Center Navigation ****/
-.mz-sitenav-lcenter{
+.mz-sitenav-lcenter, .mz-mobilenav-lcenter{ 
 	background: #ebebeb;
 	text-align: center;
 	.mz-sitenav-list{
@@ -236,8 +236,11 @@
 			
 		}
 	}
-	
+
 }
+.mz-mobilenav-lcenter .learning-center-search:before{
+	content: "";  
+} 
 
 /**** Featured Categories ****/
 .mz-content-widget{
@@ -492,7 +495,7 @@
 			padding: 0;	
 		}
 		.mz-pagingcontrols{
-			/*display: none;*/  
+			display: none;   
 		}	
 	}
 
