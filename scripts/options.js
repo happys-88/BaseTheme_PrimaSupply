@@ -14,7 +14,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                 model: product,
                 el: $('#optionModal')
             });
-            // optionView.render();
+            optionView.render();
             $('#optionModal').on('hidden.bs.modal', function (e) {
                 $(".modal-dialog-options").remove();
                 product.clear();    
