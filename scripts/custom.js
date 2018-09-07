@@ -184,13 +184,11 @@ define([
 
 		// Brand Gateway 
 		$(".brand-letter a").on('click', function(e){
-		   var id = $(this).attr("name");
-		   var position = $(id +" .brand-letter").offset().top-$(".mz-sticky-header").outerHeight( true );
-		   console.log(position);
-		      $('body,html').animate({
-		       scrollTop : position                  
-		      }, 500);
-		      
+		    var id = $(this).attr("name");
+		    var position = $(id +" .brand-letter").offset().top-$(".mz-sticky-header").outerHeight( true );
+		   		$('body,html').animate({
+		       		scrollTop : position                  
+		      	}, 500); 
 		});
 
 		// Blog Facets
