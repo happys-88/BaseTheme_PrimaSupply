@@ -219,14 +219,30 @@
                 e.preventDefault();
             }
         });
-        $('[data-mz-form="lcSearchBox"]').on('submit', function(e) { 
-            var searchVal = $('#learningCenter').val().trim(); 
+        /*$('[data-mz-form="lcSearchBox"]').on('submit', function(e) { 
+            var searchVal = $("[data-mz-input='learningCenter']").val().trim();    
             if (searchVal === "") {
                 window.alert(Hypr.getLabel('blankSearchResult'));
                 e.preventDefault();
             } else if (searchVal.length < 3) {
                 window.alert("Your keyword or item number must be at least 3 characters long");
                 e.preventDefault();
+            }
+        });*/
+        $('[data-mz-form="lcSearchBox"]').on('submit', function(e) { 
+            var searchVal = "";
+            var searchvalue = $('[placeholder="Search Learning Center"]');       
+            for(var i=0; i<searchvalue.length; i++){
+                if(searchvalue[i].value!==""){
+                    searchVal = searchvalue[i].value.trim();  
+                }
+            }
+            if (searchVal === "") {
+                window.alert(Hypr.getLabel('blankSearchResult'));
+                e.preventDefault();
+            } else if (searchVal.length < 3) {
+                window.alert("Your keyword or item number must be at least 3 characters long");
+                e.preventDefault(); 
             }
         });
     });
