@@ -1,2 +1,20 @@
+{% block doctype %}
+<!doctype html>
+{% endblock doctype %}
 
+{% block open-html-tag %}
+
+<html>
+<!--<![endif]-->
+{%endblock open-html-tag %}
+
+    {% block head-tag %}
+	    <head>	        
+	        {% block meta-tags %}
+	        	<meta http-equiv="content-type" content="text/xml; charset=UTF-8">
+	        {% endblock meta-tags %}
+	    </head>
+    {% endblock head-tag %}
+    {% block body-tag %}
 {% include_products "modules/product/learning-center/article-feed" with sort=createDate asc as_parameter %}
+{% endblock body-tag %}

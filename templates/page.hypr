@@ -86,7 +86,7 @@
         <title>
             {% block title-tag-content %}{{ siteContext.generalSettings.websiteName }}{% endblock title-tag-content %}
         </title>
-
+        <link rel="alternate" type="application/rss+xml" title="{{ PageContext.Title }}" href="{{ PageContext.FeedUrl }}" />
         {% if PageContext.FeedUrl  %}
             <link rel="alternate" type="application/rss+xml" title="{{ PageContext.Title }}" href="{{ PageContext.FeedUrl }}" />
         {% endif %}
@@ -125,12 +125,11 @@
 
         <!-- Script for custom JS changes -->
         {% require_script "custom" %} 
-        
     </head>
     {% endblock head-tag %}
     
     {% block body-tag %}
-
+    
     {% block open-body-tag %}
         <body class="{% block body-tag-classes %}{% endblock body-tag-classes %}">
     {% endblock open-body-tag %}

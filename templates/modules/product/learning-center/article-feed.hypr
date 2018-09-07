@@ -1,40 +1,37 @@
 <pre style="word-wrap: break-word; white-space: pre-wrap; transition: opacity 0.3s ease 0s; opacity: 1;">
-&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;rss version="2.0" xml:base="{{ pageContext.secureHost }}/blog"
+<?xml version="1.0" encoding="EUC-JP"?><rss version="2.0" xml:base="{{ pageContext.secureHost }}/blog"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	xmlns:atom="http://www.w3.org/2005/Atom"&gt;
-	&lt;channel&gt;
-		&lt;title&gt;Prima Blog &lt;/title&gt;
-		&lt;link&gt;{{ pageContext.secureHost }}/blog&lt;/link&gt;
-		&lt;description&gt;&lt;/description&gt;
-		&lt;language&gt;en&lt;/language&gt;
-		&lt;atom:link href="{{ pageContext.secureHost }}/blog/feed" rel="self" type="application/rss+xml"&gt; &lt;/atom:link&gt;
-{% for item in model.items %}{% if forloop.counter <= 10 %}	&lt;item&gt;
-			&lt;title&gt;
+	xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Prima Blog </title>
+		<link>{{ pageContext.secureHost }}/blog</link>
+		<description></description>
+		<language>en</language>
+		<atom:link href="{{ pageContext.secureHost }}/blog" rel="self" type="application/rss+xml"/>
+		{% for item in model.items %}{% if forloop.counter <= 10 %}	
+		<item>
+			<title>
 				{{ item.content.productName }}
-			&lt;/title&gt;
-			&lt;link&gt;
+			</title>
+			<link>
 				{{ pageContext.secureHost }}{{item.url}}
-			&lt;/link&gt;
-			&lt;description&gt;
-				{{ item.content.productFullDescription }}
-			&lt;/description&gt;
-			&lt;pubDate&gt;
+			</link>			
+			<description>
+				{{ item.content.productShortDescription }}
+			</description>			
+			<pubDate>
 				{{ item.createDate|date("D, j F Y G:i:s") }}
-			&lt;/pubDate&gt;
-			&lt;dc:creator&gt;
+			</pubDate>
+			<dc:creator>
 				{% for property in item.properties %}{% if property.attributeFQN == "tenant~author" %}{% for propValue in property.values %}{{ propValue.value }} {% endfor %}  {% endif %}{% endfor %}
-			&lt;/dc:creator&gt;
-			&lt;guid isPermaLink="false"&gt;
+			</dc:creator>
+			<guid isPermaLink="false">
 				{{ item.productCode|replace("content-") }} at {{ pageContext.secureHost }}
-			&lt;/guid&gt;
-			&lt;comments&gt;
+			</guid> <comments>
 				{{ pageContext.secureHost }}{{item.url}}#comments				
-			&lt;/comments&gt;
-		&lt;/item&gt;
-	{% endif %}
-{% endfor %}
-
-&lt;/channel&gt;
-&lt;/rss&gt;
+			</comments>
+		</item>
+		{% endif %}{% endfor %}
+</channel>
+</rss>
 </pre>
-
