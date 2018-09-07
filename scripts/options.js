@@ -517,6 +517,7 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                         GlobalCart.update('redirect_to_cart');
                     } else {
                         optionModel.set('addonsPopup', true);
+                        optionModel.set('hideOptionsPopup', true);
                         optionModel.set('cartItemId',cartitem.data.id);
                         optionModel.set('totalQuant',cartitem.data.quantity);
                         var selectedOptions = optionModel.get('selectedOptions');
@@ -557,14 +558,14 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                     optionModel.set('selectedOptions', selectedOptions);
                     optionModel.set('addonsPopup', false);
                     optionModel.addToCart();
-                    if (error.message.indexOf('Validation Error: The following items have limited quantity or are out of stock') > -1) {
-                        optionModel.set('addToCartErrr', Hypr.getLabel('outOfStockError'));
+                    if (error.message.indexOf('Validation Error:') > -1) {
+                        optionModel.set('addToCartErrr', error.message.replace('Validation Error:', ''));
                     } else {
                         optionModel.set('addToCartErrr', error.message);
                     }
                 } else {
-                    if (error.message.indexOf('Validation Error: The following items have limited quantity or are out of stock') > -1) {
-                        optionModel.set('addToCartErr', Hypr.getLabel('outOfStockError'));
+                    if (error.message.indexOf('Validation Error:') > -1) {
+                        optionModel.set('addToCartErr', error.message.replace('Validation Error:', ''));
                     } else {
                         optionModel.set('addToCartErr', error.message);
                     }
@@ -856,14 +857,14 @@ define(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu"
                     optionModel.set('selectedOptions', selectedOptions);
                     optionModel.set('addonsPopup', false);
                     optionModel.addToCart();
-                    if (error.message.indexOf('Validation Error: The following items have limited quantity or are out of stock') > -1) {
-                        optionModel.set('addToCartErrr', Hypr.getLabel('outOfStockError'));
+                    if (error.message.indexOf('Validation Error:') > -1) {
+                        optionModel.set('addToCartErrr', error.message.replace('Validation Error:', ''));
                     } else {
                         optionModel.set('addToCartErrr', error.message);
                     }
                 } else {
-                    if (error.message.indexOf('Validation Error: The following items have limited quantity or are out of stock') > -1) {
-                        optionModel.set('addToCartErr', Hypr.getLabel('outOfStockError'));
+                    if (error.message.indexOf('Validation Error:') > -1) {
+                        optionModel.set('addToCartErr', error.message.replace('Validation Error:', ''));
                     } else {
                         optionModel.set('addToCartErr', error.message);
                     }
