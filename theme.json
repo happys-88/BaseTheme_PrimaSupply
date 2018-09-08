@@ -488,6 +488,12 @@
     }
   ],
   "settings": {
+    "ogSiteNameTwitter": "@primasupply",
+    "ogSiteNameFb": "Prima Supply", 
+    "ogImageWidth": "500",
+    "ogImageHeight": "270", 
+    "ogVideoWidth": "500",
+    "ogVideoHeight": "270", 
     "siteName": "primasupply",
     "allProductsCategoryId": "",
     "allProductsCategoryIdLC": "",
