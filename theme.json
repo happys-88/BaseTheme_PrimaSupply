@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "4e046f500b1ed181a96174d7380839cf83180189"
+      "commit": "30765dcebf5b0b2556ec3088d188142f9e785106"
     },
     "baseThemeChannel": "stable"
   },
@@ -489,11 +489,11 @@
   ],
   "settings": {
     "ogSiteNameTwitter": "@primasupply",
-    "ogSiteNameFb": "Prima Supply", 
+    "ogSiteNameFb": "Prima Supply",
     "ogImageWidth": "500",
-    "ogImageHeight": "270", 
+    "ogImageHeight": "270",
     "ogVideoWidth": "500",
-    "ogVideoHeight": "270", 
+    "ogVideoHeight": "270",
     "siteName": "primasupply",
     "allProductsCategoryId": "",
     "allProductsCategoryIdLC": "",
