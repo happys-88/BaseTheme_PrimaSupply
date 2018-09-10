@@ -41,7 +41,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-7 col-xs-8">
+  <div class="col-md-6 col-xs-8">
     <div class="mz-productdetail-conversion-buttons">
       {% with model|get_product_attribute("tenant~login-for-price") as loginForPrice %}
        {% if loginForPrice.values|first|prop("value") === true %}
@@ -65,7 +65,7 @@
 
     </div>
   </div>
-  <div class="col-md-3 col-xs-12">  
+  <div class="col-md-4 col-xs-12">  
     <div class="mz-productdetail-conversion-buttons">    
       {% if siteContext.generalSettings.isWishlistCreationEnabled and not user.isAnonymous %}
         <button id="add-to-wishlist" {% if model.checkItem === true %} {% else %} class="mz-productdetail-addtowishlist is-disabled" disabled="disabled" {% endif %} data-mz-action="addToWishlist"> 
