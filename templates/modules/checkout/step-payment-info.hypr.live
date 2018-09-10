@@ -24,9 +24,13 @@
                         </div>
                     </div>
                     -->
-                    {% if model.couponDetails.couponCodes %}  
-                        <div>Coupon Code:</div>
-                    {% endif %}
+                    
+                    {% for couponCode in model.couponDetails %}  
+                        {% if couponCode.couponCodes %}    
+                            <div>Coupon Code:</div>
+                        {% endif %}
+                    {% endfor %}
+                    
                     {% for orderlevel in model.couponDetails %}
                         {% for orddisc in orderlevel.OrderDiscounts %}
                             {% if orddisc.couponCode %}  
@@ -65,9 +69,11 @@
                             {% endif %}
                         {% endfor %}
                         </p>
-                        {% if model.couponDetails %}
-                            <div>Coupon Code:</div>
-                        {% endif %}
+                        {% for couponCode in model.couponDetails %}  
+                            {% if couponCode.couponCodes %}    
+                                <div>Coupon Code:</div>
+                            {% endif %}
+                        {% endfor %}
                         {% for orderlevel in model.couponDetails %}
                             {% for orddisc in orderlevel.OrderDiscounts %}
                                 {% if orddisc.couponCode %}  
@@ -116,9 +122,11 @@
                                 </div>
                             </div>
                         {% endfor %}
-                        {% if model.couponDetails %}
-                            <div>Coupon Code:</div>
-                        {% endif %}
+                        {% for couponCode in model.couponDetails %}  
+                            {% if couponCode.couponCodes %}    
+                                <div>Coupon Code:</div>
+                            {% endif %}
+                        {% endfor %} 
                         {% for orderlevel in model.couponDetails %}
                             {% for orddisc in orderlevel.OrderDiscounts %}
                                 {% if orddisc.couponCode %}  
