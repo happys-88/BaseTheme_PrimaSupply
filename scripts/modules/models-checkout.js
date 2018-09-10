@@ -840,6 +840,9 @@
                   OrderDiscounts:  order.get('orderDiscounts')
               });
               discountsArray.push({
+                  couponCodes:  coupon  
+              });
+              discountsArray.push({
                   itemDiscount:  discountarray
               });
               discountsArray.push({
