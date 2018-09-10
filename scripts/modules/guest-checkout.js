@@ -24,12 +24,10 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
 			 Backbone.Validation.bind(this);
 		},
 		checkoutAsGuest: function(){
-			 // var data = this.$el.serializeObject();
 			var me = this;
 			var email = $('#guestEmail').val();
 			var pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
    			if(pattern.test(email)) {
-   				// console.log("Session Storage : "+email);
    				var url = HyprLiveContext.locals.pageContext.url;
    				var domain = url.split('?')[0];
    				url = domain + '/checkout';

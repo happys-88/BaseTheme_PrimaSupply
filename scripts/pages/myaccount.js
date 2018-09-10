@@ -91,9 +91,9 @@ define([
                 
                 if(deals !== '') {
                     Api.request("POST", "/mailchimp", {'accountId':email, 'deals':deals}).then(function (response){
-                       console.log("Response : "+JSON.stringify(response));    
+                       console.log("Success : ");     
                     }, function(err) {
-                        console.log("MailChimp");
+                        console.log("Error");
                     });
                 }
                 self.editing = false;

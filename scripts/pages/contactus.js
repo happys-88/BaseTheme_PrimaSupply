@@ -29,7 +29,6 @@ define(['modules/api',
                 var email = self.model.get('email');
                 var selectedTopic = self.model.get('selectedTopic');
                 var message = self.model.get('message');
-                console.log(self.model);
                 if (!self.model.validate()) {
                     api.request("POST", "/commonRoute",
                     {
@@ -41,7 +40,6 @@ define(['modules/api',
                         message: message
                     }).then(function (response){
                         var labels = HyprLiveContext.locals.labels;
-                        console.log("Success : "+JSON.stringify(response.body));
                         if(response.statusCode === 202 || response.statusCode === 200) {
                             $('#contactUsForm').each(function(){
                                 this.reset();

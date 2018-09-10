@@ -308,13 +308,12 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 //var user = api.createSync('user', payload);
                 this.setLoading(true);
                 return api.action('customer', 'createStorefront', payload).then(function (resp) {
-                    console.log("Resp : "+JSON.stringify(resp));
                     var email = resp.data.customerAccount.emailAddress;
                     if(deals !== '') {
                         api.request("POST", "/mailchimp", {'accountId':email, 'deals':deals}).then(function (response){
-                           console.log("Response : "+JSON.stringify(response));    
+                           console.log("Success");    
                         }, function(err) {
-                            console.log("MailChimp");
+                            console.log("Error");
                         });
                     }
                     if (self.redirectTemplate) {
