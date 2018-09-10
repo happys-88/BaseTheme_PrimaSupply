@@ -1632,7 +1632,9 @@
                     } 
                 }
                 // just can't sync these emails right
-                order.syncBillingAndCustomerEmail();
+                if(order.get('billingInfo.billingContact.email') !== '') {
+                    order.syncBillingAndCustomerEmail();
+                }
 
                 // This needs to be ahead of validation so we can check if visa checkout is being used.
                 var currentPayment = order.apiModel.getCurrentPayment();
@@ -2250,7 +2252,7 @@
                var billingEmail = this.get('billingInfo.billingContact.email'),
                     customerEmail = this.get('emailAddress') || require.mozuData('user').email;
                 if (!customerEmail) {
-                   this.set('emailAddress', billingEmail);
+                    this.set('emailAddress', billingEmail);
                 }
                 if (!billingEmail) {
                     this.set('billingInfo.billingContact.email', customerEmail);
