@@ -80,6 +80,7 @@
 {% endif %}
 
 <div class="lc-top-section">
+    {% block breadcrumbs %}{% endblock breadcrumbs %}  
     {% dropzone "blog-name" scope="page" %}            
     {% include "modules/learning-center/lc-top-section" with model=prodMod %}   
 </div>   
