@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "4e046f500b1ed181a96174d7380839cf83180189"
+      "commit": "9a5de56124c765787e97c53c62cee477c4636c9d"
     },
     "baseThemeChannel": "stable"
   },
@@ -611,8 +611,8 @@
     "snapengaeWidgetId": "d93fa82a-6087-44f8-bd79-3df50a1c3130",
     "addThisPubId": "ra-519bb90e58f9bf27",
     "searchSuggestionFilter": "29,145,817,40,146,199,201,217,510",
+    "blogParentCategoryCode": "3", 
     "productTypeId": "120",
-    "blogParentCategoryCode": "3",
     "avalaraToken": "MjAwMDA4NDgwMzpFQUQyM0JBQzMzNzRBN0I3",
     "avalaraCompanyCode": "PRIMALLC",
     "mailChimpKey": "1afe25343b7a71ed977589911f618df7-us7",
@@ -881,7 +881,7 @@
     "bottomline": "bottomline",
     "questions": "questions",
     "showYotpoGallery": true,
-    "instagramFollowUsLink": "https://www.instagram.com/prima.supply/?hl=en",
+    "instagramFollowUsLink": "https://www.instagram.com/prima.supply", 
     "showProductTooltip": true,
     "noHasstleReturnTooltip": "",
     "tryBeforeYouBuyTooltip": "",
