@@ -17,7 +17,9 @@
 				{{ pageContext.secureHost }}{{item.url}}
 			&lt;/link&gt;			
 			&lt;description&gt;
-				{{ item.content.productShortDescription|escape }}
+				{% autoescape on %}
+					{{ item.content.productShortDescription }}
+				{% endautoescape%}
 			&lt;/description&gt;			
 			&lt;pubDate&gt;
 				{{ item.createDate|date("D, j F Y G:i:s") }}
