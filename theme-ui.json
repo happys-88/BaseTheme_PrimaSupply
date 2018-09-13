@@ -457,17 +457,7 @@
                     "fieldLabel": "Add This Profile Id for Social Sharing & Popular Articles", 
                     "xtype": "mz-input-text", 
                     "name": "addThisPubId"  
-                },
-                {
-                    "fieldLabel": "Learning Center Parent Category ID",  
-                    "xtype": "mz-input-text",
-                    "name": "blogParentCategoryCode"
-                },
-                {
-                    "fieldLabel": "Learning Center Categories IDs List(comma separated)",  
-                    "xtype": "mz-input-text",
-                    "name": "searchSuggestionFilter"
-                },
+                }, 
                 {
                     "fieldLabel": "Avalara Token", 
                     "xtype": "mz-input-text",
