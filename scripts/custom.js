@@ -7,17 +7,18 @@ define([
 	
 	//home slider
 	$('#mz-home-slider .slider').bxSlider({
-		auto: false,
+		auto: true,
 		useCSS: false,
 		speed: 1000,  
 		minSlides: 1,
 		maxSlides: 1,
 		moveSlides: 1,
 		slideMargin: 0,
-		infiniteLoop: false,
+		infiniteLoop: true,
 		pager: true,
 		hideControlOnEnd: true,
 		touchEnabled: true,
+                stopAutoOnClick: true,
 		onSliderLoad: function() {
 			$(".slider").css("visibility", "visible");
 		}
@@ -61,7 +62,11 @@ define([
 	}
 	
 	$(document).ready(function(){ 
-		
+		$(document).on('click', '.mz-pagenumbers-number', function () {
+			$("body, html").animate({
+				scrollTop: 0
+			}, 1200);
+		});
 		$('.mz-searchbox-button').click(function(e) {
 			var elm = e.currentTarget;
 			var searchType = elm.getAttribute('data-mz-searchType'); 	
@@ -83,7 +88,7 @@ define([
    				api.request("POST", "/mailchimp", {'accountId':email, 'deals':"PSNewsLetter"}).then(function (response){
                    console.log("Success");    
                 }, function(err) {
-                    console.log("Failure : "+JSON.stringify(err));
+                    console.log("Error : "+JSON.stringify(err));
                 });
    			} else {
    				$("#errorEmail").show();
@@ -168,7 +173,6 @@ define([
 		});
 		
 		var navHeight = $(".mz-sitenav").outerHeight();
-		//alert(navHeight); 
 		$(".mz-sitenav-sub-container").css('top', navHeight);
 			
 		$(window).resize(function(){	
@@ -225,12 +229,14 @@ define([
 		}  
 		
 		// Checkout Changes
+
 		$(document).on('click',"select[data-mz-value='savedPaymentMethodId']", function(){
   			var defaultcardselect = $("[data-mz-value='savedPaymentMethodId']").val();
 	        if(defaultcardselect===""){
 	            var first= $("[data-mz-value='savedPaymentMethodId']").val($("[data-mz-value='savedPaymentMethodId'] option:nth(1)").val());
 	        }
       	});
+
 		setTimeout(function(){ 
 			$("#checkout-form").find("#step-shipping-address.is-complete").addClass("mz-shipping-address-complete");
 		}, 1000);
@@ -259,8 +265,6 @@ define([
 
 		// Featured Products Slider in blog detail
 		if(windowWidth <= 767){ 
-			//var sliderElement = $(".mz-blog-content-detail .featured-products").find(".mz-productlist-list");
-
 			$('#productSliderMobile').bxSlider({      
 		        minSlides: 1,    
 	            moveSlides: 1,
@@ -288,11 +292,5 @@ define([
 		if(!HyprLiveContext.locals.user.isAuthenticated){
 			localStorage.setItem("previousTime", null); 
 		}
-
-		// Global Cart Continue btn
-		// $(document).on('click','#continueShoppingGlobalCart', function(){   
-		//     window.history.back();    
-	    // });    
-
-	});
+	}); 
 }); 
