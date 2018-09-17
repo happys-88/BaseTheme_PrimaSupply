@@ -1,10 +1,10 @@
 {% extends "page" %}  
 
 {% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  - {% parent %}{% endblock title-tag-content %}
-{% block body-tag-classes %} Brands {% endblock body-tag-classes %}
+{% block body-tag-classes %}mz-brand{% endblock body-tag-classes %} 
 
 {% block brand-gateway %} 
-  {% dropzone "Merchandise-drop-zone" scope="page" %}
+  {% dropzone "Merchandise-drop-zone" scope="page" %} 
   {% dropzone "featured-brands" scope="page" %}
 
 <h2 class="heading-2"><span>All Brands</span></h2> 
@@ -12,7 +12,7 @@
   {% if brands.content.name == "Brands" %}
     <ul class="brand-header col-xs-12"> 
       {% for subbrands in brands.childrenCategories|dictsort("name") %}
-        {% with subbrands.name|first as firstLetter %}
+        {% with subbrands.name|upper|first as firstLetter %}
           {% if forloop.counter0==0 %}
             {% if firstLetter=="0" or  firstLetter=="1" or firstLetter=="2" or firstLetter=="3" or firstLetter=="4" or firstLetter=="5" or firstLetter=="6" or firstLetter=="7" or firstLetter=="8" or firstLetter=="9"  %}
               <li class="brand-letter"><span><a href="javascript:void(0);" name="#{{firstLetter}}">0-9</a></span> </li>
@@ -33,8 +33,8 @@
       {% endfor %}
     </ul>
     
-    {% for subbrands in brands.childrenCategories|dictsort("name") %}
-      {% with  subbrands.name|first as firstLetter %}
+    {% for subbrands in brands.childrenCategories|dictsort("name") %} 
+      {% with  subbrands.name|upper|first as firstLetter %}
         {% if forloop.counter0==0 %}
           {% if firstLetter=="0" or  firstLetter=="1" or firstLetter=="2" or firstLetter=="3" or firstLetter=="4" or firstLetter=="5" or firstLetter=="6" or firstLetter=="7" or firstLetter=="8" or firstLetter=="9"  %}
             <div class="brand-section" id="0-9">
