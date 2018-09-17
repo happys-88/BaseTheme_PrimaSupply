@@ -93,7 +93,7 @@ define([
                     Api.request("POST", "/mailchimp", {'accountId':email, 'deals':deals}).then(function (response){
                        console.log("Success : ");     
                     }, function(err) {
-                        console.log("Error");
+                        console.log("Error : "+JSON.stringify(err));
                     });
                 }
                 self.editing = false;
@@ -255,16 +255,9 @@ define([
         templateName: 'modules/my-account/my-account-wishlist',
         addItemToCart: function(e) {
             var self = this,
-                $target = $(e.currentTarget),
-                //id = $target.data('mzItemId');
-            /*if (id) { 
-                this.editing.added = id;
-                this.doModelAction('addItemToCart', id).then(function(response){
-                    GlobalCart.update(id);
-                    return response;
-                });  
-            }*/
+            $target = $(e.currentTarget),
             id = $target.data('mz-item-id');
+            
             if (id) {  
                 this.editing.added = id;
                 this.doModelAction('addItemToCart', id).then(function(response){
@@ -274,6 +267,9 @@ define([
                     var idd="#"+productcod;
                     $(idd).prependTo(".mz-carttable-items-global"); 
                     $(idd).addClass("recently-added");
+                    $("#global-cart").show().delay(3000).hide(0, function () {
+                        $(this).css("display", "");
+                    });
                     return response; 
                 });
             }
