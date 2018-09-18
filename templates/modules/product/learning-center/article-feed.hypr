@@ -17,9 +17,13 @@
 				{{ pageContext.secureHost }}{{item.url}}
 			&lt;/link&gt;			
 			&lt;description&gt;
-				{% autoescape on %}
+				
+				{% comment %}
+					{% autoescape on %}
 					{{ item.content.productShortDescription }}
 				{% endautoescape%}
+					{{ item.content.productShortDescription|escape }}
+				{% endcomment %}
 			&lt;/description&gt;			
 			&lt;pubDate&gt;
 				{{ item.createDate|date("D, j F Y G:i:s") }}
