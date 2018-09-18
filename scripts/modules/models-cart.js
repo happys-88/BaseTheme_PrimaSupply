@@ -41,7 +41,7 @@
             var oldQuantity = this.previous("quantity");
             if (this.hasChanged("quantity")) {
                 this.apiUpdateQuantity(this.get("quantity"))
-                    .then(null, function(res) {
+                    .then(null, function() {
                         var message = self.messages.models[0].attributes.message;
                         var prodCode; 
                         if (message.indexOf('Validation Error:') > -1) {

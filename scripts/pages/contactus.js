@@ -51,7 +51,7 @@ define(['modules/api',
                             $("#submitMsg").show();    
                         }
                     }, function(err) {
-                        console.log("Failure : "+JSON.stringify(err));
+                        console.log("Error : "+JSON.stringify(err));
                         $("#submitMsg").html("Error: "+err.message);
                         $("#submitMsg").show();
                         self.setError();

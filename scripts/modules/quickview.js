@@ -317,24 +317,11 @@ $(document).on('click', '.mz-quick-view', function (event) {
                         _qtyObj.text("Quantity can't be zero.");
                         return;
                     }
-                    if (typeof this.model.attributes.inventoryInfo.onlineStockAvailable !== 'undefined' && this.model.attributes.inventoryInfo.onlineStockAvailable < value) {
-
-                        $(".mz-productdetail-addtocart").addClass("is-disabled");
-                        
-                        if (this.model.attributes.inventoryInfo.onlineStockAvailable > 0){
-                            $('[data-mz-validationmessage-for="quantity"]').text("*Only " + this.model.attributes.inventoryInfo.onlineStockAvailable + " left in stock.");
-                        }
-                           
-                    }else{
-                            if (!isNaN(value)) {
-                            this.model.updateQuantity(value);
-                            $(".mz-productdetail-addtocart").removeClass("is-disabled");
-                        }
-
-                   }
+                    if (!isNaN(value)) {
+                        this.model.updateQuantity(value);
+                        $(".mz-productdetail-addtocart").removeClass("is-disabled");
+                    }
                 }
-                   
-               
             },
             quantityMinus: function () {
                 if(typeof this.model.get('productCode') !== 'undefined') {

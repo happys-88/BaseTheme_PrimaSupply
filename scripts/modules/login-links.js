@@ -313,7 +313,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                         api.request("POST", "/mailchimp", {'accountId':email, 'deals':deals}).then(function (response){
                            console.log("Success");    
                         }, function(err) {
-                            console.log("Error");
+                            console.log("Error : "+JSON.stringify(err));
                         });
                     }
                     if (self.redirectTemplate) {

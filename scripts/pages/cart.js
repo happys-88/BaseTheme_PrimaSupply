@@ -282,18 +282,12 @@ define([
                               return obj;
                             }
                         });
-
                         var selectedMethodAmount = selectedMethod.amount;
                         cart.set({'shippingTotal': selectedMethodAmount});
                     }
-                   /*var shippingAmount = $('#shippingOption :selected').attr("price");
-                   cart.set({'shippingTotal': shippingAmount});*/
-                    // this.populateShipping();
                 } else {
-
                     cart.set({'taxTotal':0});
                 }
-                // this.render();
 
             }, function(err) {
                 if(stateSel && bool)
@@ -310,10 +304,7 @@ define([
                       return obj;
                     }
                 });
-
                 var selectedMethodAmount = selectedMethod.amount;
-                // var cart = this.model;
-                // var tot = cart.get('shippingTotal');
                 cart.set({'shippingTotal': selectedMethodAmount});
             }
         },
@@ -353,7 +344,6 @@ define([
             if (item && !isNaN(newQuantity)) {
                 item.set('quantity', newQuantity);
                 item.saveQuantity();
-                
             }
         },400),
         quantityMinus: _.debounce(function (e) {
@@ -556,8 +546,6 @@ define([
     }
     /* end visa checkout */
 
-        /*var checkoutData = CheckoutModels.CheckoutPage;
-        alert("CHECKOUT DATA : "+JSON.stringify(checkoutData));*/
         var cartModel = CartModels.Cart.fromCurrent();
         
             var cartViews = {

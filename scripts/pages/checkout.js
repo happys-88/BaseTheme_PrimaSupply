@@ -11,10 +11,9 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             _.defer(function () {
                 me.model.next();
             });
-
             var incomplete = $(".is-incomplete");
             var offset = incomplete.offset();
-            $("html, body").animate({ scrollTop: offset.top }, 600);  
+            $("html, body").animate({ scrollTop: offset.top }, 600);
         },
         choose: function () {
             var me = this;
@@ -46,7 +45,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             EditableView.prototype.render.apply(this, arguments);
             this.resize();
         },
-        resize: _.debounce(function () { 
+        resize: _.debounce(function () {
             this.$('.mz-panel-wrap').animate({'height': this.$('.mz-inner-panel').outerHeight() });
         },200)
     });
@@ -60,7 +59,6 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             this.render();
         },
         render: function() {
-            
         }
     });
 
@@ -151,7 +149,6 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             "change [data-mz-tbyb]": "updateTbyb"
         },
         initialize: function() {
-            
         },
         updateTbyb: function (e) {
            this.model.updateTbyb(e);
