@@ -849,13 +849,14 @@
                     shippingDiscount:  order.get('shippingDiscounts')
                 });
                 var orderDiscounts = order.get('orderDiscounts');
-                var shippingDiscounts = order.get('shippingDiscounts');
-                if((orderDiscounts && orderDiscounts.length > 0 && checkOrderDiscount.length > 0) || (discountarray && discountarray.length) || (shippingDiscounts && shippingDiscounts.length > 0 && checkShippingDiscount.length > 0)) {  
+                var shippingDiscounts = order.get('shippingDiscounts'); 
+                
+                if((orderDiscounts && orderDiscounts.length > 0 && typeof checkOrderDiscount[0]!=="undefined") || (discountarray && discountarray.length) || (shippingDiscounts && shippingDiscounts.length > 0 && typeof checkShippingDiscount[0]!=="undefined")) {  
                     return discountsArray; 
                 }
             },
             acceptsMarketing: function () {
-                return this.getOrder().get('acceptsMarketing');
+                return this.getOrder().get('acceptsMarketing');  
             },
             isExternalCheckoutFlowComplete: function () {
                 return this.get('paymentWorkflow') !== "Mozu";
