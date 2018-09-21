@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "9aa2f84f66983cda71af5281ac89a1040dca7e27"
+      "commit": "4a42d28cb7d88f6aa061e23b1654b4ba10b9d7b7"
     },
     "baseThemeChannel": "stable"
   },
@@ -881,11 +881,11 @@
     "showYotpoGallery": true,
     "instagramFollowUsLink": "https://www.instagram.com/prima.supply",
     "showProductTooltip": true,
-    "noHasstleReturnTooltip": "PS: \"This item may be returned under our <a href=\"/returns-exchange\">Prima Returns Policy</a>. Please note there will be a 25% restocking fee on all returned merchandise.\" and PC: \"Returning this product is simple under our <a href=\"/returns-exchange\">No-Hassle Return Policy</a>.\"", 
-    "tryBeforeYouBuyTooltip": "\"Wonder if this product is exactly what you need? Try it out risk free for 14 days from the date of shipment! If you don't like it we will pay to ship it back.<br /><a href=\"/try-before-you-buy\">Read about it here</a>.\"", 
+    "noHasstleReturnTooltip": "PS: \"This item may be returned under our <a href=\"/returns-exchange\">Prima Returns Policy</a>. Please note there will be a 25% restocking fee on all returned merchandise.\" and PC: \"Returning this product is simple under our <a href=\"/returns-exchange\">No-Hassle Return Policy</a>.\"",
+    "tryBeforeYouBuyTooltip": "\"Wonder if this product is exactly what you need? Try it out risk free for 14 days from the date of shipment! If you don't like it we will pay to ship it back.<br /><a href=\"/try-before-you-buy\">Read about it here</a>.\"",
     "priceMatchGuaranteeTooltip": "Found a better price somewhere else? We'll beat it! Call us at <b>[store phone]</b> or <a href=\"/price-match-request\">fill out our price match form</a>.\"",
-    "freeShippingTooltip": "\"Lucky you! This product qualifies for free shipping (contiguous United States only).<br /><a href=\"/prima-advantage\">Click here to see why</a>.\" (PC uses /prima-edge as the link currently.)", 
-    "defaultStoreImage": "/cms/files/prima-supply-store-image.jpg" 
+    "freeShippingTooltip": "\"Lucky you! This product qualifies for free shipping (contiguous United States only).<br /><a href=\"/prima-advantage\">Click here to see why</a>.\" (PC uses /prima-edge as the link currently.)",
+    "defaultStoreImage": "/cms/files/prima-supply-store-image.jpg"
   },
   "layoutWidgets": [
     {
