@@ -129,7 +129,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
                     if (fieldDisplayOOSProp) {
                         var fieldDisplayOOSPropValue = this.model.get('fieldDisplayOOSPropVal');
                         var prValue = fieldDisplayOOSPropValue.values[0];
-                        if (prValue.value === '4') {
+                        if (prValue.value == '4') {
                             stockMessage = Hypr.getLabel('itemDiscontinued');
                             itemDiscontinued = true;
                         } else {
@@ -174,6 +174,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
                                         stockMessage = Hypr.getLabel('inStock');
                                     } else {
                                         if (outOfStockBehavior == 'AllowBackOrder') {
+                                            //If we need to show message in case of AllowBackOrder
                                             // stockMessage = Hypr.getLabel('inStock');
                                         } else {
                                             stockMessage = Hypr.getLabel('outOfStock');
@@ -187,6 +188,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
                                     stockMessage = Hypr.getLabel('inStock');
                                 } else {
                                     if (outOfStockBehavior == 'AllowBackOrder') {
+                                        //If we need to show message in case of AllowBackOrder
                                         // stockMessage = Hypr.getLabel('inStock');
                                     } else {
                                         stockMessage = Hypr.getLabel('outOfStock');
@@ -208,7 +210,8 @@ $(document).on('click', '.mz-quick-view', function (event) {
                                 }
                             } else {
                                 if (outOfStockBehavior == 'AllowBackOrder') {
-                                    /*if (propValue.value === '0') {
+                                    //If we need to show message in case of AllowBackOrder
+                                    /*if (propValue.value == '0') {
                                         stockMessage = Hypr.getLabel('distributorStock');
                                     } else {
                                         stockMessage = Hypr.getLabel('inStock');
@@ -229,13 +232,17 @@ $(document).on('click', '.mz-quick-view', function (event) {
                             itemDiscontinued = true;
                         }
                     } else {
-                        if (outOfStockBehavior == 'AllowBackOrder') {
-                            // stockMessage = Hypr.getLabel('inStock');
+                        if (productUsage == 'Configurable' && onlineStockAvailable === undefined) {
+                           onlineStockAvailable = this.model.get('variationTotalStock');
+                        }
+                        if (onlineStockAvailable < 10 && onlineStockAvailable > 0) {
+                            stockMessage = Hypr.getLabel('stockThreshold').replace("{0}", onlineStockAvailable);
+                        } else if (onlineStockAvailable >= 10) {
+                            stockMessage = Hypr.getLabel('inStock');
                         } else {
-                            if (onlineStockAvailable < 10 && onlineStockAvailable > 0) {
-                                stockMessage = Hypr.getLabel('stockThreshold').replace("{0}", onlineStockAvailable);
-                            } else if (onlineStockAvailable >= 10) {
-                                stockMessage = Hypr.getLabel('inStock');
+                            if (outOfStockBehavior == 'AllowBackOrder') {
+                                //If we need to show message in case of AllowBackOrder
+                                // stockMessage = Hypr.getLabel('inStock');
                             } else {
                                 stockMessage = Hypr.getLabel('outOfStock');
                             }
