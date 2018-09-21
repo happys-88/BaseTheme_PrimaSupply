@@ -1,7 +1,12 @@
 ﻿.mz-productimages {
     .mz-productimages-main {
         display: block;
-        min-height: {{ themeSettings.productImagesContainerWidth }}px; 
+        min-height: {{ themeSettings.productImagesContainerWidth }}px;
+        img{
+            &.mz-productimages-mainimage {
+                max-height: 490px; 
+            }
+        }  
     }
     .mz-productimages-thumbs {
         display: block;
