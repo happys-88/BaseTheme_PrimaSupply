@@ -452,11 +452,10 @@ define([
             });
              
         },
-        removeCoupon: function() {
+        removeCoupon: function(e) {  
             var self = this;
-            var getCouponCode = this.$el.find('.mz-coupon-detail .mz-coupon-code').attr('id');
+            var getCouponCode = e.currentTarget.id; 
 
-            var apiData = require.mozuData('apicontext');  
             blockUiLoader.globalLoader();
             var serviceurl = '/api/commerce/carts/' + this.model.get('id') + '/coupons/' + getCouponCode;
             api.request('DELETE', serviceurl).then(function(response) {

@@ -1,12 +1,12 @@
 <div class="mz-carttable-total-wrap">
   <span class="mz-left-col">{{ labels.orderTotal }}:</span>
-  <span class="mz-right-col">{{ model.discountedTotal|add(model.taxTotal)|add(model.shippingTotal)|currency }}</span>
+  <span class="mz-right-col">{{ model.discountedTotal|currency }}</span>  
 </div>
 <div class="mz-discount-row">
   <span class="mz-left-col">{{ labels.estimatedTax }}:</span>
   <span class="mz-right-col">
   {% if model.taxTotal > 0 %}	
-  	${{ model.taxTotal }} 
+  	{{ model.taxTotal|currency }}    
   {% else %}
   	$0.00
   {% endif %}
@@ -15,4 +15,13 @@
 <div class="mz-discount-row">
   <span class="mz-left-col">{{ labels.estimatedShipping }}:</span>
   <span class="mz-right-col">{{ model.shippingTotal|currency }}</span>
+</div>
+
+<div class="mz-carttable-total-wrap">
+  <span class="mz-left-col">{{ labels.estimatedTotal }}:</span> 
+  <span class="mz-right-col">{{ model.discountedTotal|add(model.taxTotal)|add(model.shippingTotal)|currency }}</span>
+</div>
+<div class="mz-discount-row you-saved">  
+  <span class="mz-left-col"><strong>{{ labels.youSaved }}:</strong></span>  
+  <span class="mz-right-col">{{ model.discountTotal|currency }}</span>     
 </div>
