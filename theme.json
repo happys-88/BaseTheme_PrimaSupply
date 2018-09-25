@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "4a42d28cb7d88f6aa061e23b1654b4ba10b9d7b7"
+      "commit": "36bd2177cceaca57ef0ffe677db405a0e5cd146c"
     },
     "baseThemeChannel": "stable"
   },
@@ -605,7 +605,7 @@
     "showProductDetailShortDesc": true,
     "showProductDetailUPC": true,
     "textColor": "#444444",
-    "categoryEntityName": "categoryattributes@prima", 
+    "categoryEntityName": "categoryattributes@prima",
     "columnBreaker": "~",
     "liftGatePrice": 59,
     "snapengaeWidgetId": "d93fa82a-6087-44f8-bd79-3df50a1c3130",
