@@ -12,6 +12,8 @@
 
 {% if model.tentativeCoupon %}
 	<span id="couponDisclaimer">{{labels.couponDisclaimer|string_format(model.tentativeCoupon)|safe}}</span> 
-{% endif %}
+{% else %}
+	{% include "modules/cart/coupon-detail" %} 
+{% endif %} 
 
-{% include "modules/cart/coupon-detail" %}    
+   

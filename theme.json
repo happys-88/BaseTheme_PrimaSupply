@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "36bd2177cceaca57ef0ffe677db405a0e5cd146c"
+      "commit": "6586f1985c42e785107841ea118372cd99cbda9a"
     },
     "baseThemeChannel": "stable"
   },
@@ -247,7 +247,7 @@
       "customEditor": "productContent@mozu"
     },
     {
-      "entityType": "category", 
+      "entityType": "category",
       "id": "Brands",
       "template": "brand-gateway",
       "title": "Brand Gateway",
