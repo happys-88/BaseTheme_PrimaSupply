@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "4e046f500b1ed181a96174d7380839cf83180189"
+      "commit": "6586f1985c42e785107841ea118372cd99cbda9a"
     },
     "baseThemeChannel": "stable"
   },
@@ -545,7 +545,7 @@
       }
     ],
     "defaultPageSize": 15,
-    "defaultSort": "createDate asc",
+    "defaultSort": "createDate desc", 
     "enablePartialCaching": true,
     "loadGoogleFonts": [
       "Source Sans Pro"
