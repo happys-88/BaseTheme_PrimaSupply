@@ -1,13 +1,11 @@
 ﻿<div class="mz-ordersummary">  
     <div class="mz-ordersummary-product-lists">
-
-        {% with model.attributes|findwhere("fullyQualifiedName", "tenant~trybeforebuy") as selectedTbybItem %}
+        {% with model.attributes|findwhere("fullyQualifiedName", "tenant~trybeforeyoubuy") as selectedTbybItem %}
             {% with model.attributes|findwhere("fullyQualifiedName", "tenant~lift-gate") as liftGate %}
                 {% set liftGateMsgShow=liftGate.values %}
                 {% set selectedTbybItemVal=selectedTbybItem.values %}
             {% endwith %}
         {% endwith %}
-
         {% for item in model.items %}
             <div class="mz-ordersummary-lineitems">
                 <div class="mz-ordersummary-line mz-ordersummary-line-item {% if item.discountTotal > 0 %}is-discounted{% endif %} clearfix">
@@ -62,17 +60,19 @@
                                                     {% endif %}
                                                 {% endfor %}
                                             {% endif %}
-                                            {% if property.name == 'Try Before You Buy' %}
-                                                {% for v in property.values %}
-                                                    {% if v.stringValue == true or v.value == true %}
+                                            {% if selectedTbybItemVal %}
+                                                {% if property.name == 'Try Before You Buy' %}
+                                                    {% for v in property.values %}
+                                                        {% if v.stringValue == true or v.value == true %}
 
-                                                        {% if selectedTbybItemVal == selectedModel.selCode %}
-                                                            <div class="tbyb-msg" id="tbyb_{{ item.product.variationProductCode|default(item.product.productCode) }}_{{item.id}}">
-                                                                {{ labels.tbybMsg }}
-                                                            </div>
+                                                            {% if selectedTbybItemVal == selectedModel.selCode %}
+                                                                <div class="tbyb-msg" id="tbyb_{{ item.product.variationProductCode|default(item.product.productCode) }}_{{item.id}}">
+                                                                    {{ labels.tbybMsg }}
+                                                                </div>
+                                                            {% endif %}
                                                         {% endif %}
-                                                    {% endif %}
-                                                {% endfor %}
+                                                    {% endfor %}
+                                                {% endif %}
                                             {% endif %}
                                         {% endfor %}
                                     {% endwith %}

@@ -67,14 +67,20 @@ require(["modules/jquery-mozu", "underscore", 'modules/api', "hyprlive", "module
                 deals = $('#PSBlogs').is(':checked') ? deals+","+$('#PSBlogs').val() : deals+","+'';
                 var email = $('#emailId').val();
                 if(deals !== '') {
-                    api.request("POST", "/mailchimp", {'accountId':email, 'deals':deals}).then(function (response){
-                       console.log("Success"); 
-                       $('#PSNewsLetter').attr('checked', false);
-                       $('#PSBlogs').attr('checked', false);
-                       $(".mz-look-email").show().delay(5000).fadeOut();
-                    }, function(err) {
-                        console.log("Error : "+JSON.stringify(err));
-                    });
+                    if(deals.replace(/,/g, '') === '') {
+                        var msg = Hypr.getLabel('pleaseSubscribe');
+                        $(".mz-look-email").text(msg);
+                        $(".mz-look-email").show().delay(5000).fadeOut();
+                    } else {
+                        api.request("POST", "/mailchimp", {'accountId':email, 'deals':deals}).then(function (response){
+                           console.log("Success"); 
+                           $('#PSNewsLetter').attr('checked', false);
+                           $('#PSBlogs').attr('checked', false);
+                           $(".mz-look-email").show().delay(5000).fadeOut();
+                        }, function(err) {
+                            console.log("Error : "+JSON.stringify(err));
+                        });
+                    }
                 }
             }
         });
