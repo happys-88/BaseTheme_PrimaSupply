@@ -33,7 +33,6 @@
 <meta property="og:image:height" content="{{themeSettings.ogImageHeight}}" />
 <meta property="og:image:type" content="{{model|get_product_attribute_value("tenant~og-image-type")}}" />  
 
-
 <!-- Used exclusively by Twitter --> 
 <meta name="twitter:card" content="summary_large_image">      
 <meta name="twitter:site" content="{{ themeSettings.ogSiteNameTwitter }}" />   
@@ -55,4 +54,16 @@
 
 {% if (model|get_product_attribute_value("tenant~og-image-url")) %} 
     <meta name="twitter:image:url" content='https:{{model|get_product_attribute_value("tenant~og-image-url")}}'>   
-{% endif %}  
+{% endif %} 
+
+<!-- OG Tags for videos -->
+<meta name="twitter:player" content="{{model|get_product_attribute_value("tenant~twitter=player")}}" />  
+<meta name="twitter:player:width" content="{{themeSettings.twitterPlayerWidth}}" />
+<meta name="twitter:player:height" content="{{themeSettings.twitterPlayerHeight}}" />   
+<meta property="og:video:url" content="{{model|get_product_attribute_value("tenant~og-video-url")}}" />
+<meta property="og:video:secure_url" content="{{model|get_product_attribute_value("tenant~og-secure-video-url")}}" />   
+<meta property="og:video:width" content="{{themeSettings.ogVideoWidth}}" />    
+<meta property="og:video:height" content="{{themeSettings.ogVideoHeight}}" /> 
+<meta property="og:video:type" content="{{model|get_product_attribute_value("tenant~og-video-type")}}" /> 
+
+

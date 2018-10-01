@@ -28,7 +28,6 @@
 
     {% block head-tag %}
     <head>
-        
         {% block meta-tags %}
             <meta charset="utf-8">   
             <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
@@ -46,6 +45,21 @@
             {% if PageContext.correlationId %}
                 <meta name="correlationId" content="{{ PageContext.correlationId }}">
             {% endif %}
+            {% if PageContext.FeedUrl  %}
+                <link rel="alternate" type="application/rss+xml" title="{{ PageContext.Title }}" href="{{ PageContext.FeedUrl }}" />
+            {% endif %}
+
+            {% if PageContext.CrawlerInfo.CanonicalUrl %} 
+                <link rel="canonical" href="{% if PageContext.CrawlerInfo.CanonicalUrl=="/home" %}{{PageContext.secureHost}} {% else %} {{PageContext.secureHost}}{{PageContext.CrawlerInfo.CanonicalUrl}} {% endif %}">
+            {% endif %}
+
+            {% if PageContext.CrawlerInfo.PreviousUrl  %}
+                <link rel="prev" href="{{PageContext.CrawlerInfo.PreviousUrl}}">
+            {% endif %}
+
+            {% if PageContext.CrawlerInfo.NextUrl  %}
+                <link rel="next" href="{{PageContext.CrawlerInfo.NextUrl}}">
+            {% endif %} 
 
             {% block meta-og-tags %}
                 {% set_var prodModelMeta=model.0.prodModel %}   
@@ -56,26 +70,10 @@
         <title>
             {% block title-tag-content %}{{ siteContext.generalSettings.websiteName }}{% endblock title-tag-content %}
         </title>
-        
-        {% if PageContext.FeedUrl  %}
-            <link rel="alternate" type="application/rss+xml" title="{{ PageContext.Title }}" href="{{ PageContext.FeedUrl }}" />
-        {% endif %}
-
-		{% if PageContext.CrawlerInfo.CanonicalUrl %} 
-            <link rel="canonical" href="{% if PageContext.CrawlerInfo.CanonicalUrl=="/home" %}{{PageContext.secureHost}} {% else %} {{PageContext.secureHost}}{{PageContext.CrawlerInfo.CanonicalUrl}} {% endif %}">
-        {% endif %}
-
-		{% if PageContext.CrawlerInfo.PreviousUrl  %}
-            <link rel="prev" href="{{PageContext.CrawlerInfo.PreviousUrl}}">
-        {% endif %}
-
-		{% if PageContext.CrawlerInfo.NextUrl  %}
-            <link rel="next" href="{{PageContext.CrawlerInfo.NextUrl}}">
-        {% endif %}
 
         {% include "modules/json-required-for-hyprlive" %} 
-
-        {% block stylesheets %}
+        
+        {% block stylesheets %} 
             <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/bootstrap/bootstrap.min.css" %}" title="default" />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900">
