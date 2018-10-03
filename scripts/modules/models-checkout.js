@@ -334,13 +334,10 @@
                     }
                 });
                 lineItems.push({primaShip:primaShipProds, distShip:distributorShipProds, liftGate: liftGateSelected, freightShipment: freightShipmentSelected});
-               /* if(this.parent.get('tbybInfo').tbybItemExist() && this.stepStatus() === 'incomplete') {
-                    this.parent.get('tbybInfo').stepStatus('incomplete');
-                } else if (this.parent.get('tbybInfo').tbybItemExist() && this.stepStatus() === 'new') {
-                    this.parent.get('tbybInfo').stepStatus('new');
+                if(this.parent.get('tbybInfo').tbybItemExist() && this.stepStatus() === 'incomplete') {
                 } else {
                     this.parent.get('tbybInfo').stepStatus('complete');
-                }*/
+                }
                 return lineItems;
             },
             liftGateSelected: function() {
@@ -532,6 +529,7 @@
             },
             helpers: ['requireOrderModel', 'tbybSelectedProd','checktbybProductExist'],
             requireOrderModel: function() {
+                console.log("ORDER : "+JSON.stringify(this.getOrder()));
                 var items = this.getOrder().get('items');
                 var selectedTbybExists = false;
                 // var selectedTbybItem = this.tbybSelectedProd();
