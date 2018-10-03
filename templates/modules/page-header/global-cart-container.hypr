@@ -6,7 +6,7 @@
 	</a>
 	<div id="global-cart" {% if pageContext.isEditMode and pageContext.cmsContext.template.path=="" %} style="display:block;"{% endif %}> 
 	    <div id="global-cart-listing"></div>
-		        
+        {% dropzone "gloabl-cart-dropzone" scope="site" %}       
 	</div>
 </li> 
 
