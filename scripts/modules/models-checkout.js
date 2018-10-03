@@ -529,7 +529,6 @@
             },
             helpers: ['requireOrderModel', 'tbybSelectedProd','checktbybProductExist'],
             requireOrderModel: function() {
-                console.log("ORDER : "+JSON.stringify(this.getOrder()));
                 var items = this.getOrder().get('items');
                 var selectedTbybExists = false;
                 // var selectedTbybItem = this.tbybSelectedProd();
