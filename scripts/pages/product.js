@@ -451,13 +451,13 @@
             }
             this.model.set('shippingMessage',shippingMessage);
             
-            var prodPrice = this.model.get('price');
+            /*var prodPrice = this.model.get('price');
             if (prodPrice.attributes) {
                 var priceType = prodPrice.attributes.priceType;
                 if (priceType == 'MAP') {
                     this.model.set('mapPrice', prodPrice.attributes.price);
                 }  
-            }
+            }*/
             var hasOptions = false;
             var cabinetModel = false;
             var cabinetSerialNo = false;
