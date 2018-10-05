@@ -13,7 +13,16 @@
     <div class="mz-productlisting-info"> 
         <h4><a class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName}}</a></h4>
         <div class="mz-blog-metadata">
+            {% comment %}
             <span class="post-date">{{ model.createDate|date("M jS, Y" }}</span>
+            {% endcomment %}
+            <div style="border: 1px solid #b94a48;padding: 5px;margin: 10px 0;">
+                <span class="post-date">Created Date: {{ model.createDate }}</span>
+                <br>
+                <span class="post-date">Updated Date: {{ model.updateDate }}</span>
+                <br>
+                <span class="post-date">Date First Available In Catalog: {{ model.dateFirstAvailableInCatalog }}</span>
+            </div>  
             
             {% for property in model.properties %}   
                 {% if property.attributeFQN == "tenant~author" %}
