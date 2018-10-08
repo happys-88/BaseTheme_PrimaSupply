@@ -35,8 +35,15 @@
         
         {% dropzone "customer-logos" scope="page" %}
         
-        {% dropzone "shop-now-widget" scope="page" %}    
-        
+        <div class="clearfix">
+        {% dropzone "shop-now-widget" scope="page" %}
+        </div>
+        <div class="yotpo-recent-reviews">
+          <script type="text/javascript">
+            (function e() { var e = document.createElement("script"); e.type = "text/javascript"; e.async = true; e.src = "//staticw2.yotpo.com/{{ themeSettings.yotpoApiKey }}/widget.js"; var t = document.getElementsByTagName("script")[0]; t.parentNode.insertBefore(e, t) })();
+          </script>
+            {% dropzone "yotpo-reviews-carousel" scope="page" %}
+        </div>      
     </div>
     
     {% require_script "pages/yotpo-review" %} 
