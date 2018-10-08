@@ -91,7 +91,7 @@
                                     {% include "modules/product/price-show-stack" %}
                                 </div>
                             </div>
-                             <div class="mz-productdetail-conversion-controls">
+                             <div class="mz-productdetail-conversion-controls"> 
                                 <div class="pull-left">
                                     <label class="mz-qty-label text-uppercase" for="qty-field">{{ labels.qty }}</label>
                                     <div class="qty-block">
