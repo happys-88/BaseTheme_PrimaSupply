@@ -31,6 +31,9 @@
 </div>
 
 <section class="mz-l-stack-section mz-productdetail-conversion">
+
+  <span class="mz-validationmessage">{{ model.addToCartErr }}</span>
+  <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
   <div class="col-md-2 col-xs-4">
     <div class="mz-productdetail-conversion-controls"> 
       <div class="qty-block">   

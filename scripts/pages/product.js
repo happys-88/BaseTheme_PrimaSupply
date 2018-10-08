@@ -259,8 +259,11 @@
         quantityMinus: _.debounce(function () {
             if (this.model.get('checkItem') === false) { return; }
             var _qtyCountObj = $('.mz-productdetail-qty');
+            var _qtyObj = $('[data-mz-validationmessage-for="quantity"]');
             var value = parseInt(_qtyCountObj.val(), 10);
+            _qtyObj.text('');
             if (value == 1) {
+                _qtyObj.text("Quantity can't be zero.");
                 return;
             }
             value--;
@@ -270,6 +273,8 @@
         quantityPlus: _.debounce(function () {
             if (this.model.get('checkItem') === false) { return; }
             var _qtyCountObj = $('.mz-productdetail-qty');
+            var _qtyObj = $('[data-mz-validationmessage-for="quantity"]');
+            _qtyObj.text('');
             var value = parseInt(_qtyCountObj.val(), 10);
             value++;
             this.model.updateQuantity(value);

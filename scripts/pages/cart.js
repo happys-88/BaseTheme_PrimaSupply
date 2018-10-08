@@ -393,13 +393,16 @@ define([
             }*/
         },400),
         quantityMinus: _.debounce(function (e) {
-            console.log("minus in cart");
+            
           
             var $qField = $(e.currentTarget).parent(".qty-block"); 
             var qFieldValue = $qField.find(".mz-carttable-qty-field").val();        
             var _qtyCountObj = $qField.find(".mz-carttable-qty-field");  
             value = parseInt(qFieldValue, 10);
+            var _qtyObj = $('[data-mz-validationmessage-for="quantity"]');
+            _qtyObj.text('');
             if (value == 1) {
+                _qtyObj.text("Quantity can't be zero.");
                 return;
             }   
             value--;
@@ -424,7 +427,9 @@ define([
             var $qField = $(e.currentTarget).parent(".qty-block"); 
             var qFieldValue = $qField.find(".mz-carttable-qty-field").val();            
             var _qtyCountObj = $qField.find(".mz-carttable-qty-field");  
-            value = parseInt(qFieldValue, 10);   
+            value = parseInt(qFieldValue, 10);
+            var _qtyObj = $('[data-mz-validationmessage-for="quantity"]');
+            _qtyObj.text('');   
             value++;
             _qtyCountObj.val(value);  
             e.stopImmediatePropagation();
