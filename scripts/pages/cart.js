@@ -340,13 +340,60 @@ define([
                 newQuantity = parseInt($qField.val(), 10),
                 id = $qField.data('mz-cart-item'),
                 item = this.model.get("items").get(id);
+                var textValue = e.currentTarget.value;
+                var reg = /^[A-Za-z]+$/;
+                var lastValue ='';
+                if (textValue !== '' &&  (!isNaN(newQuantity) || reg.test(newQuantity))){              
+                    if(((e.which >= 48 && e.which <= 57) || (e.which >= 96 && e.which <= 105)) && (newQuantity > 0)){
+                        this._isSyncing = true;
+                         item.set('quantity', newQuantity);
+                         item.saveQuantity();   
+                         localStorage.setItem("currentVal", newQuantity);
+                    } else if (newQuantity!== 'NaN'  && (!reg.test(newQuantity))) {
+                          this._isSyncing = true;
+                          if (newQuantity > 0){
+                            $('#mz-carttable-qty-field').val(newQuantity);
+                            $('#global-mz-carttable-qty-field').val(newQuantity);
+                            item.set('quantity', newQuantity);
+                            localStorage.setItem("currentVal", newQuantity);
+                          }
+                          else{
+                            lastValue = localStorage.getItem("currentVal");
+                            $('#mz-carttable-qty-field').val(lastValue);
+                            $('#global-mz-carttable-qty-field').val(lastValue);
+                            item.set('quantity', lastValue);
+                          }
+                          item.saveQuantity();
+                    }else{
+                         
+                         this._isSyncing = true;
+                         if (textValue === '' || reg.test(textValue)){
+                            lastValue = localStorage.getItem("currentVal");
+                            $('#mz-carttable-qty-field').val(lastValue);
+                            $('#global-mz-carttable-qty-field').val(lastValue);
+                            item.set('quantity', lastValue);
+                         }
+                         
+                         item.saveQuantity();   
+                    }
+                }else {
+                    $('#mz-carttable-qty-field').val('1');
+                    $('#global-mz-carttable-qty-field').val('1');
+                    this._isSyncing = true;
+                    item.set('quantity', '1');
+                    item.saveQuantity();
+                }
+
+
+/*
                 this._isSyncing = true;
             if (item && !isNaN(newQuantity)) {
                 item.set('quantity', newQuantity);
                 item.saveQuantity();
-            }
+            }*/
         },400),
         quantityMinus: _.debounce(function (e) {
+            console.log("minus in cart");
           
             var $qField = $(e.currentTarget).parent(".qty-block"); 
             var qFieldValue = $qField.find(".mz-carttable-qty-field").val();        
