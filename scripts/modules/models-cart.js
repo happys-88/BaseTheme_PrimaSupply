@@ -80,7 +80,6 @@
              var orderdisc=_.pluck(this.get('orderDiscounts'), "couponCode");
              var shipdisc=_.pluck(shippingDiscountss, "couponCode") ;
             if(prddic.length>0 || orderdisc.length>0 || shipdisc.length>0){
-                console.log(this);
                  this.set('couponCodeapply', true);
               return this.set('appliedCouponCodes', prddic.concat(orderdisc).concat(shipdisc));
                 
@@ -120,8 +119,7 @@
                 return deferred.promise;
             }
             this.isLoading(true);
-            return this.apiAddCoupon(this.get('couponCode')).then(function (res) {
-                console.log(res);
+            return this.apiAddCoupon(this.get('couponCode')).then(function () {
                 me.set('couponCode', '');
                 var productDiscounts = _.flatten(_.pluck(_.pluck(me.get('items').models, 'attributes'), 'productDiscounts'));
                 var shippingDiscounts = _.flatten(_.pluck(_.pluck(me.get('items').models, 'attributes'), 'shippingDiscounts'));
