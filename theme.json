@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "6586f1985c42e785107841ea118372cd99cbda9a"
+      "commit": "c6c00ae9cd336fa7ad76ca98c11d28bc96978a59"
     },
     "baseThemeChannel": "stable"
   },
@@ -495,7 +495,7 @@
     "ogVideoWidth": "500",
     "ogVideoHeight": "270",
     "twitterPlayerWidth": "435",
-    "twitterPlayerHeight": "245",  
+    "twitterPlayerHeight": "245",
     "siteName": "primasupply",
     "allProductsCategoryId": "",
     "allProductsCategoryIdLC": "",
@@ -547,7 +547,7 @@
       }
     ],
     "defaultPageSize": 15,
-    "defaultSort": "createDate desc", 
+    "defaultSort": "createDate desc",
     "enablePartialCaching": true,
     "loadGoogleFonts": [
       "Source Sans Pro"
@@ -600,7 +600,7 @@
     "showCategoryFacets": true,
     "showChildCategoriesInFaceting": true,
     "showCheckoutCommentsField": true,
-    "showMSRP": false,  
+    "showMSRP": false,
     "showProductDetailMeasurements": true,
     "showProductDetailMfgPartNumber": true,
     "showProductDetailProperties": true,
