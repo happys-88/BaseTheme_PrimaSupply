@@ -873,6 +873,7 @@
     "rviNumberCookie": 10,
     "rviExpirationDuration": 21,
     "yotpoApiKey": "4X91rXasdFWFBX4Rnh5WEr4NnvMwpFpjxzNFLubD",
+    "yotpoSecretKey": "k6KlMhT9qSNgdO9qPaxiUgauXiZmSU3xmawzy4uB",
     "yotpoBaseUrl": "https://api.yotpo.com/v1/widget",
     "yotpoBottomlineBaseUrl": "https://api.yotpo.com/products",
     "yotpoQuestionBaseUrl": "https://api.yotpo.com/products",
