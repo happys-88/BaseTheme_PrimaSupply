@@ -508,7 +508,6 @@ define([
         removeCoupon: function(e) {  
             var self = this;
             var getCouponCode = e.currentTarget.id; 
-
             blockUiLoader.globalLoader();
             var serviceurl = '/api/commerce/carts/' + this.model.get('id') + '/coupons/' + getCouponCode;
             api.request('DELETE', serviceurl).then(function(response) {
