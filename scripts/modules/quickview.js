@@ -344,16 +344,12 @@ $(document).on('click', '.mz-quick-view', function (event) {
                         _qtyCountObj = $('.mz-productdetail-qty');
                     _qtyObj.text('');
                     var value = parseInt(_qtyCountObj.val(), 10);
-                    if (isNaN(value)) {
-                        $(".mz-productdetail-addtocart").addClass("is-disabled");
-                    }
                     if (value === 0) {
                         _qtyObj.text("Quantity can't be zero.");
                         return;
                     }
                     if (!isNaN(value)) {
                         this.model.updateQuantity(value);
-                        $(".mz-productdetail-addtocart").removeClass("is-disabled");
                     }
                 }
             },
