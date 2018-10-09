@@ -131,11 +131,11 @@ define([
                         function(rates) { return (rates.amount === 0);   });
                     if(shipPrice.length > 0) {
                         cart.set('selectedShipping', shipPrice[0].content.name);
-                        cart.set('shippingTotal', shipPrice[0].amount);
+                        // cart.set('shippingTotal', shipPrice[0].amount);
                         localStorage.setItem('selectedShipping',shipPrice[0].content.name);
                     } else {
                         cart.set('selectedShipping', shippingRates[0].content.name);
-                        cart.set('shippingTotal', shippingRates[0].amount);
+                        // cart.set('shippingTotal', shippingRates[0].amount);
                         localStorage.setItem('selectedShipping',shippingRates[0].content.name);
                     }
 
@@ -150,9 +150,7 @@ define([
                         });
 
                         var selectedMethodAmount = selectedMethod.amount;
-                        // var cart = this.model;
-                        // var tot = cart.get('shippingTotal');
-                        cart.set({'shippingTotal': selectedMethodAmount});
+                        // cart.set({'shippingTotal': selectedMethodAmount});
                         var tot = cart.get('shippingTotal');
                         var total = cart.get('discountedTotal');
                         var newTotal = Number(tot)+Number(total);

@@ -660,5 +660,8 @@
   "compatibilityCheckContent"             : "We offer a no cost compatibility check for parts purchased for True, Ice-O-Matic, and Vitamix equipment. If you are purchasing a part for one of the listed brands and fill out the compatibility check we will use the information you provide to verify that the part is correct after you check out. This free service typically adds a 1 day lead time to your order but ensures that you get the correct part.",
   "compatibilityCheckMsg"                 : "If you leave these fields blank, you waive this service & accept responsibility for your part choice. All sales are final if we do not ensure compatibility.",
   "continueToCart"                        : "CONTINUE TO CART",
-  "pleaseSubscribe"                       : "Please select a checkbox"
+  "pleaseSubscribe"                       : "Please select a checkbox",
+  "zipSample"                             : "Example: 93108",
+  "ShippingTo"                            : "Ship-to ZIP Code"
+
 }
