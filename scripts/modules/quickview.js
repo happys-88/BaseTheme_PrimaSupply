@@ -31,7 +31,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
                 "click [data-mz-qty-minus]": "quantityMinus",
                 "click [data-mz-qty-plus]": "quantityPlus",
                 "click .bx-controls-direction a":"clickOnNextOrprevious",
-                "keyup [id=qty-field]":"updateqtyManual",
+                // "keyup [id=qty-field]":"updateqtyManual",
                 "click .login-for-lowprice" : "closeQuickviewModal"
 
             },
@@ -338,7 +338,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
                     }
                 }
             },
-            updateqtyManual: function () {
+            /*updateqtyManual: function () {
                 if(typeof this.model.get('productCode') !== 'undefined') {
                     var _qtyObj = $('[data-mz-validationmessage-for="quantity"]'),
                         _qtyCountObj = $('.mz-productdetail-qty');
@@ -352,7 +352,7 @@ $(document).on('click', '.mz-quick-view', function (event) {
                         this.model.updateQuantity(value);
                     }
                 }
-            },
+            },*/
             quantityMinus: function () {
                 if(typeof this.model.get('productCode') !== 'undefined') {
                     if(this.model.get('checkItem') === false) { return; }
