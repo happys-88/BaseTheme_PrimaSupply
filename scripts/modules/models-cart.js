@@ -71,6 +71,20 @@
         initialize: function() {
             this.get("items").on('sync remove', this.fetch, this)
                              .on('loadingchange', this.isLoading, this);
+            this.applycoupon();
+        },
+        applycoupon: function(){
+             var productDiscountss = _.flatten(_.pluck(_.pluck(this.get('items').models, 'attributes'), 'productDiscounts'));
+             var shippingDiscountss = _.flatten(_.pluck(_.pluck(this.get('items').models, 'attributes'), 'shippingDiscounts'));
+             var prddic=_.pluck(productDiscountss, "couponCode");
+             var orderdisc=_.pluck(this.get('orderDiscounts'), "couponCode");
+             var shipdisc=_.pluck(shippingDiscountss, "couponCode") ;
+            if(prddic.length>0 || orderdisc.length>0 || shipdisc.length>0){
+                console.log(this);
+                 this.set('couponCodeapply', true);
+              return this.set('appliedCouponCodes', prddic.concat(orderdisc).concat(shipdisc));
+                
+            }
         },
         isEmpty: function() {
             return this.get("items").length < 1;
@@ -106,7 +120,8 @@
                 return deferred.promise;
             }
             this.isLoading(true);
-            return this.apiAddCoupon(this.get('couponCode')).then(function () {
+            return this.apiAddCoupon(this.get('couponCode')).then(function (res) {
+                console.log(res);
                 me.set('couponCode', '');
                 var productDiscounts = _.flatten(_.pluck(_.pluck(me.get('items').models, 'attributes'), 'productDiscounts'));
                 var shippingDiscounts = _.flatten(_.pluck(_.pluck(me.get('items').models, 'attributes'), 'shippingDiscounts'));
@@ -131,6 +146,11 @@
                 if(!(couponExists && couponIsNotApplied)) {
                     me.set('codeApplied', true);
                 } 
+                me.applycoupon();
+                var appliedCouponCodes = me.get("appliedCouponCodes");
+                if(!appliedCouponCodes.includes(code)) {
+                    me.set('codeApplied', false);
+                }
                 me.isLoading(false);
             });
         }
