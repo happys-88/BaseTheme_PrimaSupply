@@ -241,7 +241,7 @@ img[data-mztp]{
       
     .mz-sitenav-sub-container{     
     	position: absolute;
-    	width: auto;   
+    	width: 100%;   
         -webkit-box-shadow: 0 6px 12px rgba(0,0,0,0.175);
         box-shadow: 0 6px 12px rgba(0,0,0,0.175);
         left: 0;
@@ -273,6 +273,7 @@ img[data-mztp]{
         	max-width: 100%;
         	text-align: left;
         	margin-bottom: 10px;
+		padding: 0 15px;
         	.mz-sitenav-link {
 	            padding: 2px 0 !important;
 	            color: @textColor;
@@ -333,6 +334,7 @@ img[data-mztp]{
 		float: left;
 		padding: 15px 0;  
 		border-bottom: 1px solid #c0c6cc;
+		width: 100%;
 		.mz-sitenav-item{
 			width: 220px; 
 			padding: 0 15px;
@@ -341,7 +343,6 @@ img[data-mztp]{
 		.mz-category-image, .mz-category-name{
 			float: left;
 			width: 100%;
-			text-align: center;
 			img, .mz-sitenav-link{
 				display: inline-block;
 				font-size: 14px;
@@ -356,6 +357,7 @@ img[data-mztp]{
 		.mz-category-image{
 			font-size: 14px;
 			min-height: 80px;  
+			//text-align: center; 
 			img{
 				max-width: 80px;
 				max-height: 80px;  
@@ -681,6 +683,12 @@ img[data-mztp]{
 	.bx-next{
 		right: 10px;
 	}
+}
+
+#mz-home-slider{
+	.bx-wrapper{
+		padding: 0;
+	}	
 }
 
 /**** Social Sharing ****/
@@ -1104,5 +1112,12 @@ img[data-mztp]{
 		.noimage-text{
 			font-size: 20px; 
 		} 
+	}
+}
+
+/**** PRM-192 ****/ 
+.mz-sitenav-dropzone{
+	img{
+		max-height: 154px;  
 	}
 }
