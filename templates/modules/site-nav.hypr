@@ -24,13 +24,18 @@
                     
                     {% comment %} Top Categories {% endcomment %}
                       <div class="mz-sitenav-top-categories">
-                        <div class="mz-category-heading">
-                          <h3 class="heading-3">Top Categories</h3>  
-                        </div>
-                          
+                          {% if link.name=="Brands" %}
+                            <div class="mz-category-heading">
+                              <h3 class="heading-3">Top Brands</h3>
+                            </div>
+                            {% else %}
+                              <div class="mz-category-heading">
+                                <h3 class="heading-3">Top Categories</h3>
+                              </div>
+                          {% endif %}                       
                         <ul class="mz-sitenav-sub"> 
                           {% for getTopCategory in link.items %}
-                            {% if not getTopCategory.isHidden and not getTopCategory.isEmpty and forloop.counter0 < 5 %}
+                            {% if not getTopCategory.isHidden and forloop.counter0 < 5 %}
                               {% for categoryObject in categories.all %}
                                 {% if categoryObject.categoryId == getTopCategory.originalId %}
                                   <li class="mz-sitenav-item">
@@ -63,18 +68,25 @@
 
                     {% comment %} All Categories {% endcomment %}
                     <div class="mz-sitenav-all-categories">
-                      <div class="mz-category-heading">
-                        <h3 class="heading-3">All Categories</h3>  
-                      </div>
+                      
+                      {% if link.name=="Brands" %}
+                        <div class="mz-category-heading">
+                          <h3 class="heading-3">All Brands</h3>
+                        </div>
+                      {% else %}
+                        <div class="mz-category-heading">
+                          <h3 class="heading-3">All Categories</h3>
+                        </div>
+                      {% endif %}
                       <ul class="mz-sitenav-sub">
                         {% for sublink in link.items %}
-                          {% if not sublink.isHidden and not sublink.isEmpty %}
+                          {% if not sublink.isHidden %}
                             {% with "id eq {0}"|string_format(sublink.originalId) as filter %} 
                               {% include_entities "modules/category-header-attribute" listFQN=themeSettings.categoryEntityName filter=filter %}
                             {% endwith %} 
                             <li data-mz-role="sitemenu-item" class="mz-sitenav-item">
                               <a class="mz-sitenav-link sub-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{sublink.url}}">{{ sublink.name|replace("_", " ")|replace(themeSettings.columnBreaker, "")|safe }}</a>
-                              
+                              {% if link.name !="Brands" %}
                               {% if sublink.items %}
                                 <ul class="mz-sitenav-sub-sub">
                                   {% for subsublink in sublink.items %}
@@ -86,12 +98,20 @@
                                   {% endfor %}
                                 </ul>
                               {% endif %}
+                              {% endif %}
                             </li>
                           {% endif %}
                         {% endfor %}
                       </ul>
                     </div>
                     {% comment %} All Categories End {% endcomment %}
+
+                    {% with link.originalId as navNode %}
+                      <div class="mz-sitenav-dropzone">   
+                        {% dropzone "mega-menu_{0}"|string_format(navNode) scope="site" %} 
+                      </div> 
+                    {% endwith %} 
+
                 </div>
                 {% endif %}
               
