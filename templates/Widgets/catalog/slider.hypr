@@ -1,27 +1,27 @@
 <div id="mz-home-slider">
-  <div class="slider">
-    {% if model.config.slideImageOne %}
-      <div>
-        <a  class="mz-slide" {% if model.config.slideLinkOne %}href="{{ model.config.slideLinkOne }}"{% endif %}>
-          <img src="{{ model.config.slideImageOne.imageUrl }}" >
-        </a>
-      </div>
-    {% endif %}
- 
-    {% if model.config.slideImageTwo %}
-      <div>
-        <a  class="mz-slide" {% if model.config.slideLinkTwo %}href="{{ model.config.slideLinkTwo }}"{% endif %}>
-          <img src="{{ model.config.slideImageTwo.imageUrl }}" >
-        </a>
-      </div>
-    {% endif %}
- 
-    {% if model.config.slideImageThree %}
-      <div>
-        <a  class="mz-slide" {% if model.config.slideLinkThree %}href="{{ model.config.slideLinkThree }}"{% endif %}>
-          <img src="{{ model.config.slideImageThree.imageUrl }}" >
-        </a>
-      </div>
-    {% endif %}
-  </div>
+    <div class="slider">
+        {% if model.config.slideImageOne %}
+            <div>
+                <a class="mz-slide" {% if model.config.slideLinkOne %}href="{{ model.config.slideLinkOne }}"{% endif %}>
+                    <img src="{% make_url "image" model.config.slideImageOne %}" alt="{{ model.config.slideImageOne.altText }}">
+                </a>
+            </div>
+        {% endif %}
+
+        {% if model.config.slideImageTwo %}
+            <div>
+                <a class="mz-slide" {% if model.config.slideLinkTwo %}href="{{ model.config.slideLinkTwo }}"{% endif %}>
+                    <img src="{% make_url "image" model.config.slideImageTwo %}" alt="{{ model.config.slideImageTwo.altText }}">
+                </a>
+            </div>
+        {% endif %}
+
+        {% if model.config.slideImageThree %}
+            <div>
+                <a class="mz-slide" {% if model.config.slideLinkThree %}href="{{ model.config.slideLinkThree }}"{% endif %}>
+                    <img src="{% make_url "image" model.config.slideImageThree %}" alt="{{ model.config.slideImageThree.altText }}">
+                </a>
+            </div>
+        {% endif %}
+    </div>
 </div>
