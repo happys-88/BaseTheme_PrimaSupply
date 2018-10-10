@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "30765dcebf5b0b2556ec3088d188142f9e785106"
+      "commit": "c6c00ae9cd336fa7ad76ca98c11d28bc96978a59"
     },
     "baseThemeChannel": "stable"
   },
@@ -1409,6 +1409,29 @@
       "editView": "taco-dealoftheday-widgeteditor",
       "icon": "/resources/admin/widgets/28_deal_of_the_day.png",
       "id": "deal-of-the-day",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "displayName": "Add Image With Link", 
+      "displayTemplate": "misc/image-with-link", 
+      "editViewFields": [
+        { 
+          "anchor": "50%",
+          "fieldLabel": "Add Image",
+          "name": "getImage", 
+          "xtype": "mz-input-image"
+        },
+        {
+          "anchor": "50%",
+          "fieldLabel": "Add Link/Url",
+          "name": "getImageLink",    
+          "xtype": "mz-input-text"
+        }
+      ],
+      "icon": "/resources/admin/widgets/00_photo.png",  
+      "id": "image-with-link",  
       "validPageTypes": [
         "*"
       ]
