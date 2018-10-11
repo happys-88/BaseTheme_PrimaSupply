@@ -22,6 +22,7 @@
         i,
         nonWordRe = /\W+/,
         makeSuggestionGroupFilter = function(name) {
+            console.log("Hello");
             return function(res) {
                 var suggestionGroups = res.suggestionGroups,
                     thisGroup;
