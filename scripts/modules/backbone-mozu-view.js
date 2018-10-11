@@ -79,7 +79,7 @@
             if (this.renderQueued) {
                 this.render();
                 this.renderQueued = false;
-            }
+            }shop-by-brand
         },
         events: function () {
             var defaults = _.object(_.flatten(_.map(this.$('[data-mz-value]'), function (el) {
