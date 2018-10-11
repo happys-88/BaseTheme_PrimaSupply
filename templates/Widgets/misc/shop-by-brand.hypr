@@ -10,14 +10,13 @@
 									<div class="brand-logo">
 										{% for brandLogoImage in brandSubCat.content.categoryImages %}
 											{% if forloop.first %}
-								   			    <a href="{{ brandSubCat.url }}">
+								   			    <a href="{% make_url "category" brandSubCat %}">
 											    	<img src="{{ brandLogoImage.imageUrl }}" alt="{{ brandLogoImage.altText }}">  
 												</a>
 											{% endif %}
 							   			{% endfor %}	
 									</div>
-								</li>
-						
+								</li>						
 						{% endif %}
 					{% endfor %}
 				{% endif %}
