@@ -273,7 +273,16 @@ img[data-mztp]{
         	max-width: 100%;
         	text-align: left;
         	margin-bottom: 10px;
-		padding: 0 15px;
+			padding: 0;
+			position: relative;
+			&[data-mz-role="sitemenu-item"] a:after {
+			    content: "---";
+			    color: #808b98;
+			    font-size: 16px;
+			    position: absolute;
+			    display: block;
+			    bottom: -10px;
+			} 
         	.mz-sitenav-link {
 	            padding: 2px 0 !important;
 	            color: @textColor;
@@ -310,12 +319,16 @@ img[data-mztp]{
             	opacity: 1;
             }
             .mz-sitenav-sub-sub {
+            	margin-top: 9px;
                 .mz-sitenav-item {
                     display: block;
                     float: none;
                     width: 100%;
                     .mz-sitenav-link {
                         font-weight: normal;
+                        &:after {
+						    display: none;
+						}
                     }
                 }
             }
