@@ -20,7 +20,7 @@
                 </a>
 
                 {% if link.items %}
-                  <div class="mz-sitenav-sub-container"> 
+                  <div class="mz-sitenav-sub-container">     
                     
                     {% comment %} Top Categories {% endcomment %}
                       <div class="mz-sitenav-top-categories">
@@ -89,14 +89,18 @@
                               {% if link.name !="Brands" %}
                               {% if sublink.items %}
                                 <ul class="mz-sitenav-sub-sub">
-                                  {% for subsublink in sublink.items %}
-                                    {% if not subsublink.isHidden and not subsublink.isEmpty %}
-                                      <li class="mz-sitenav-item">
+                                  {% for subsublink in sublink.items %} 
+                                    {% if not subsublink.isHidden and not subsublink.isEmpty %} 
+                                      {% with "id eq {0}"|string_format(sublink.originalId) as filter %} 
+                                        {% include_entities "modules/category-header-attribute-L3" listFQN=themeSettings.categoryEntityName filter=filter %}
+                                      {% endwith %} 
+                                      <li class="mz-sitenav-item"> 
                                         <a class="mz-sitenav-link sub-sub-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{subsublink.url}}">{{ subsublink.name|replace("_", " ")|replace(themeSettings.columnBreaker, "")|safe }}</a>
                                       </li>
+
                                     {% endif %}
                                   {% endfor %}
-                                </ul>
+                                </ul>   
                               {% endif %}
                               {% endif %}
                             </li>
