@@ -139,10 +139,13 @@ define([
 	        $("#scroll-to-top").show();
 	    }
 		// Sticky Nav Header
+		$(".mz-sitenav-sub-container").hover(function () {
+			$("body").toggleClass("activehover");
+			console.log($("body").hasClass("activehover"));
+		});
 		$(window).scroll(function() {    
-		    var scroll = $(window).scrollTop();  
-
-		    if (scroll >= 34) {
+			var scroll = $(window).scrollTop(); 
+			if (scroll >= 34 && ! $("body").hasClass("activehover") ) {
 		        $("body").addClass("header-fixed");
 		        $(".mz-sticky-header").addClass("fixed"); 
 		        $("#page-content").addClass("fixed-header");		        
