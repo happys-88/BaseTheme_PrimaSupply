@@ -26,10 +26,9 @@
                                     <div class="col-sm-8 col-xs-12">
                                         <select id="selectedTopic" name="selectedTopic" data-mz-value="selectedTopic" class="select form-control">
                                             <option value="" selected>Select a Topic</option>
-                                            <option value="Coffee shop equipment list with price">Coffee shop equipment list with price</option>
-                                            <option value="Coffee shop equipment list with price">Coffee shop equipment list with price</option>
-                                            <option value="Coffee shop equipment list with price">Coffee shop equipment list with price</option>
-                                            <option value="Coffee shop equipment list with price">Coffee shop equipment list with price</option>
+                                            <option value="Customer service">Customer service</option>
+                                            <option value="Website suggestion">Website suggestion</option>
+                                            <option value="General question">General question</option>
                                         </select>
                                         <span class="mz-validationmessage" data-mz-validationmessage-for="selectedTopic"></span>
                                     </div>
