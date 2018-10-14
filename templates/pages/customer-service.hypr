@@ -1,10 +1,10 @@
 {% extends "page" %}
 
 {% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  - {% parent %}{% endblock title-tag-content %}
-{% block body-tag-classes %}mz-customer-service {% endblock body-tag-classes %} 
+{% block body-tag-classes %}mz-customer-service {% if pageContext.cmsContext.page.path=="price-match-request" %}price-match-request{% endif %} {% endblock body-tag-classes %} 
 
 {% block body-content %}
-{% require_script "pages/pricerequest" %}
+{% require_script "pages/pricerequest" %} 
 <div class="mz-customer-service-page">
     <div class="mz-l-container">
         <div class="row"> 
@@ -14,12 +14,15 @@
                     {% dropzone "customer-service-dropzone1" scope="page" %}
                     {% dropzone "customer-service-dropzone2" scope="page" %}
                     {% dropzone "customer-service-dropzone3" scope="page" %}
-                    {% dropzone "customer-service-dropzone4" scope="page" %}  
+                    {% dropzone "customer-service-dropzone4" scope="page" %} 
+
+                    {% if pageContext.cmsContext.page.path=="price-match-request" %} 
+                        <div id="requestForm">
+                            {% include "modules/page-footer/footer-forms/price-guarantee-form" %} 
+                        </div>  
+                    {% endif %}  
                 </div>
-            </div>
-            <div id="requestForm">
-                {% include "modules/page-footer/footer-forms/price-guarantee-form" %}
-            </div>
+            </div> 
             <div class="col-xs-12 col-sm-3 mz-content-left-nav">       
                 <div class="mz-l-sidebar">
                     {% include "pages/content-left-nav" %} 
