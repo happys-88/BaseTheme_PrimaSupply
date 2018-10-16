@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-7">
 		    <div class="mz-notification-bar">
-		        <p><strong>Save 10%</strong> on select  table &amp; bar sinks Code: SAVEONSTAINLESS</p>      
+		        {% dropzone "discount" scope="site" %} 
 		    </div>
 		</div>
 		<div class="col-xs-12 col-sm-5 pull-right text-right">  
