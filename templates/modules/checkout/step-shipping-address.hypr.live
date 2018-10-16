@@ -2,6 +2,8 @@
 <div class="mz-formstep-body">
     {% if model.requiresFulfillmentInfo or model.requiresDigitalFulfillmentContact %}
     {% endif %}
+
+
     {% if not model.address.candidateValidatedAddresses %}
         <div class="mz-formstep-summary mz-addresssummary mz-checkoutform">
             {% if model.requiresFulfillmentInfo %}
@@ -10,6 +12,7 @@
                 {{ labels.noFulfillmentInfoRequired }}
             {% endif %}
         </div>
+        ------------------
         {% if model.requiresFulfillmentInfo  %}
             <div class="mz-formstep-fields mz-checkoutform  mz-checkoutform-shipping mz-checkoutform-active">
                 {% if model.contacts %}
@@ -36,7 +39,7 @@
                         <span>{{ labels.suggestionNum|string_format(forloop.index) }}</span>
                     </div>
                     <div class="mz-l-formfieldgroup-cell">
-                        <input data-mz-action="choose" id="candidateValidatedAddresses" name="candidateValidatedAddresses" type="radio" value="{{forloop.index0}}" checked="checked" />
+                        <input data-mz-action="choose" id="candidateValidatedAddresses" name="candidateValidatedAddresses" type="radio" value="{{forloop.index0}}" />
                     </div>
                     <div class="mz-l-formfieldgroup-cell">
                         {{addr.address1}}<br />
