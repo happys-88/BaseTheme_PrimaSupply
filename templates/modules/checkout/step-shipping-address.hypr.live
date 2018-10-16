@@ -12,7 +12,6 @@
                 {{ labels.noFulfillmentInfoRequired }}
             {% endif %}
         </div>
-        ------------------
         {% if model.requiresFulfillmentInfo  %}
             <div class="mz-formstep-fields mz-checkoutform  mz-checkoutform-shipping mz-checkoutform-active">
                 {% if model.contacts %}
