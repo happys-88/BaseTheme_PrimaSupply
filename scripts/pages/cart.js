@@ -255,42 +255,59 @@ define([
             if(typeof stateSel !== 'undefined') {
                 localStorage.setItem('selectedState',stateSel); 
                 this.model.set({'selectedState': localStorage.getItem('selectedState')});
-            } else {
+            } 
 
-            }
-            api.request("POST", "/taxEstimation", {'state':stateSel}).then(function (response){
-                if(response.statusCode == 200) {
-
-                    var resp = JSON.parse(response.body);
-                    var total = cart.get('discountedTotal');
-                    var tax = total*Number(resp.totalRate);
-                    tax = tax.toPrecision(3);
-                    cart.set({'taxTotal':tax});
-
-                   /* var shipping = localStorage.getItem('selectedShipping');
-                    if(typeof shipping !== 'undefined') {
-                        var Ships = localStorage.getItem("shippingData");
-                        var shippingDetailObj = JSON.parse(Ships);
-                        if(cart.shippingDetail !== null)
-                            cart.set("shippingDetail", shippingDetailObj);
-                        var selectedShipping = localStorage.getItem("selectedShipping");
-                        var selectedMethod = _.find(shippingDetailObj, function(obj) {
-                          if(obj.content.name === selectedShipping){ 
-                              cart.set("selectedShipping", selectedShipping) ;
-                              return obj;
-                            }
-                        });
-                        var selectedMethodAmount = selectedMethod.amount;
-                        cart.set({'shippingTotal': selectedMethodAmount});
-                    }*/
-                } else {
-                    cart.set({'taxTotal':0});
+            var codeRanges = HyprLiveContext.locals.themeSettings.zipCodeRanges;
+            var getTax = false;
+            codeRanges = codeRanges.split(",");
+            for(var i=0; i<codeRanges.length; i++) {
+                var range = codeRanges[i].split('-');
+                var state = Number(stateSel);
+                if(range[0] <= state && state <= range[1]) {
+                    getTax = true;
+                    break;
                 }
+            }
+           
+            if(getTax) {
 
-            }, function(err) {
-                if(stateSel && bool)
-                    $('[data-mz-validation-message="zipCode"]').show();
-            });
+                api.request("POST", "/taxEstimation", {'state':stateSel}).then(function (response){
+                    if(response.statusCode == 200) {
+
+                        var resp = JSON.parse(response.body);
+                        var total = cart.get('discountedTotal');
+                        var tax = total*Number(resp.totalRate);
+                        tax = tax.toPrecision(3);
+                        cart.set({'taxTotal':tax});
+
+                       /* var shipping = localStorage.getItem('selectedShipping');
+                        if(typeof shipping !== 'undefined') {
+                            var Ships = localStorage.getItem("shippingData");
+                            var shippingDetailObj = JSON.parse(Ships);
+                            if(cart.shippingDetail !== null)
+                                cart.set("shippingDetail", shippingDetailObj);
+                            var selectedShipping = localStorage.getItem("selectedShipping");
+                            var selectedMethod = _.find(shippingDetailObj, function(obj) {
+                              if(obj.content.name === selectedShipping){ 
+                                  cart.set("selectedShipping", selectedShipping) ;
+                                  return obj;
+                                }
+                            });
+                            var selectedMethodAmount = selectedMethod.amount;
+                            cart.set({'shippingTotal': selectedMethodAmount});
+                        }*/
+                    } else {
+                        cart.set({'taxTotal':0});
+                    }
+
+                }, function(err) {
+                    if(stateSel && bool)
+                        $('[data-mz-validation-message="zipCode"]').show();
+                });
+            } else {
+                this.model.set({'taxTotal':0});
+                this.render();
+            }
         },
         populateShippingMethod: function(cart) {
             var shipping = cart.get('selectedShipping');
