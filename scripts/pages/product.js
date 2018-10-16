@@ -688,7 +688,7 @@
                 $("#blogerrorEmail").hide();
                 $("#blognewsletterEmail").val('');
                 $("#blogthanksMsg").show().delay(2000).fadeOut();
-                api.request("POST", "/mailchimp", {'accountId':email, deals:"PSNewsLetter"}).then(function (response){
+                api.request("POST", "/mailchimp", {'accountId':email, deals:"PSBlogs"}).then(function (response){
                    console.log("Success");    
                 }, function(err) {
                     console.log("Error : "+JSON.stringify(err));

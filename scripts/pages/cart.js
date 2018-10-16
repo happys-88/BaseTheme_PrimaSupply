@@ -261,7 +261,7 @@ define([
             var getTax = false;
             codeRanges = codeRanges.split(",");
             for(var i=0; i<codeRanges.length; i++) {
-                var range = codeRanges[i].split('-');
+                var range = codeRanges[i].trim().split('-');
                 var state = Number(stateSel);
                 if(range[0] <= state && state <= range[1]) {
                     getTax = true;
@@ -324,7 +324,7 @@ define([
             }
         },
         populateTax: function(e){
-            e.stopImmediatePropagation();
+            e.stopPropagation();
             var stateSel = $('#zip').val();
             this.calculateTax(stateSel, true);
             // this.populateShipping(false);
