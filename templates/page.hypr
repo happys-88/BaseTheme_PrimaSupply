@@ -23,11 +23,25 @@
 <!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
 <!--[if (gt IE 9)|(!IE) ]><!--> 
 <html class="no-js" lang="en">
+
+
 <!--<![endif]-->
 {%endblock open-html-tag %}
 
     {% block head-tag %}
     <head>
+         {% block Google-Tag-Manager-script %}
+            <!-- Google Tag Manager -->
+            <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push(
+
+            {'gtm.start': new Date().getTime(),event:'gtm.js'}
+            );var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-XJRB');</script>
+            <!-- End Google Tag Manager -->
+        {% endblock Google-Tag-Manager-script %}
+
         {% block meta-tags %}
             <meta charset="utf-8">   
             <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
@@ -99,8 +113,16 @@
     {% block body-tag %}
     
     {% block open-body-tag %}
-        <body class="{% block body-tag-classes %}{% endblock body-tag-classes %}">
+        <body class="{% block body-tag-classes %}{% endblock body-tag-classes %}">        
     {% endblock open-body-tag %}
+
+
+    {% block Google-Tag-Manager-script %}
+         <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XJRB"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+    {% endblock Google-Tag-Manager-script %}
 
         <div id="page-wrapper" class="mz-l-pagewrapper">
     
