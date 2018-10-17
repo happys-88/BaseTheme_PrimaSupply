@@ -120,13 +120,14 @@
 	#mz-mobilenav-containerLC {  
 		display: none;
 		position: absolute;
-		top: 130px; 
+		top: 122px; 
 		z-index: 9;
 		width: 50%;  
 	}
 	#mz-mobilenav-container.collapse.in,
 	#mz-mobilenav-containerLC.collapse.in {  
 		display: block;
+		z-index: 10;
 	}
 	.mz-sitenav {
 		.panel-group {
@@ -274,6 +275,11 @@
 					-webkit-transform: rotate(-45deg);
 				}
 			}
+		}
+	}
+	.header-fixed {
+		#mz-mobilenav-container {
+    	    top: 84px;
 		}
 	}
 	/**** Mobile Navigation Ends  ****/
