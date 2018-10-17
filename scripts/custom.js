@@ -141,7 +141,6 @@ define([
 		// Sticky Nav Header
 		$(".mz-sitenav-sub-container").hover(function () {
 			$("body").toggleClass("activehover");
-			console.log($("body").hasClass("activehover"));
 		});
 		$(window).scroll(function() {    
 			var scroll = $(window).scrollTop(); 

@@ -33,7 +33,9 @@
     {% endif %}
 
     <div class="{% if model.facets %}col-sm-9 col-lg-10 {% else %}col-xs-12{% endif %}">
-        {% dropzone "category-page-slot-2" scope="page" %}
+        <div class="row category-page-slot-2">
+            {% dropzone "category-page-slot-2" scope="page" %}
+        </div>
         
         <div class="mz-l-paginatedlist">
             <div class="mz-l-paginatedlist-header">
