@@ -1,22 +1,15 @@
 {% dropzone "category-page-top" scope="page" %}
 
-{% if not pageContext.query.partial %}
-    {% if pageContext.search.query != "" and pageContext.search.query != 'undefined' %}
-        <h1 class="mz-pagetitle">{{ labels.foundSearchResults|string_format(model.totalCount, pageContext.search.query) }}</h1>
-    {% else %}
-        {% for categoryObject in categories.all %}
-            {% if categoryObject.categoryCode == navigation.currentNode.categoryCode %}
-                {% if categoryObject.content.pageTitle %}
-                    <h1 class="mz-pagetitle">{{ categoryObject.content.pageTitle|upper|replace("~", "")|safe }}</h1>
-                    {% set_var pageTitle=true %}
-                {% endif %}
-            {% endif %} 
-        {% endfor %}
-        {% if not pageTitle %}
-            <h1 class="mz-pagetitle">{{ navigation.currentNode.name|upper|replace("~", "")|safe }}</h1>
+{% for categoryObject in categories.all %}
+    {% if categoryObject.categoryCode == navigation.currentNode.categoryCode %} 
+        {% if categoryObject.content.pageTitle %}
+            <h1 class="mz-pagetitle">{{ categoryObject.content.pageTitle|upper|replace("~", "")|safe }}</h1>
+            {% set_var pageTitle=true %}
         {% endif %}
-        {% dropzone "category-page-slot-1" scope="page" %}  
     {% endif %}
+{% endfor %}
+{% if not pageTitle %}
+    <h1 class="mz-pagetitle">{{ navigation.currentNode.name|upper|replace("~", "")|safe }}</h1>
 {% endif %} 
 
 {% partial_cache model.categoryId pageContext.Sorting pageContext.Pagination pageContext.query.sortBy pageContext.user.isAnonymous %}

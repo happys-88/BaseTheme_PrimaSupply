@@ -5,7 +5,7 @@
             {% if model.mainImage.imageUrl %} 
                 <img src="{% make_url "image" model.mainImage with max=themeSettings.featuredPostImageSize as_parameter %}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% endif %} />
             {% else %}
-                <span class="mz-productlisting-imageplaceholder"><span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
+                <span class="noimage-placeholder"><span class="noimage-text">No Image</span></span> 
             {% endif %}
         </a>
         {% endblock product-image %}

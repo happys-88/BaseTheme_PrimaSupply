@@ -39,6 +39,13 @@
         
         <div class="mz-l-paginatedlist">
             <div class="mz-l-paginatedlist-header">
+                {% if not pageContext.query.partial %}
+                    {% if pageContext.search.query != "" and pageContext.search.query != 'undefined' %}
+                        <h1 class="mz-pagetitle">{{ labels.foundSearchResults|string_format(model.totalCount, pageContext.search.query) }}</h1>
+                    {% else %}
+                        
+                    {% endif %} 
+                {% endif %} 
                 <div class="col-xs-12 col-md-4">
                     <div class="row">
                         <div data-mz-pagesort class="mz-sortby">
