@@ -40,6 +40,7 @@ function ($, _, Hypr, Backbone, HyprLiveContext, api, blockUiLoader) {
             z = parseInt(z, 10);
             for (var i = 0; i < productCodes.length; i++) {
                 if (i > 67) {
+                    z++;
                     if (i === productCodes.length-1) {
                         strThree += "productCode eq "+ "'" + productCodes[i] + "'";
                     } else {
