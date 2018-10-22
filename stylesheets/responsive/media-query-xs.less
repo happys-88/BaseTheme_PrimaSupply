@@ -155,14 +155,17 @@
 	/***\ Common top page heading ***/
 	
 	/**** Mobile Navigation ****/ 
-	#mz-mobilenav-container {
-		position: fixed;
-		height: 75%;
-		width: 100%;
-		top: 154px; 
-		border-top: 1px solid #cbcbcb;
-		overflow: auto;    
+	.header-fixed {
+		#mz-mobilenav-container {
+			position: fixed;
+			height: 75%;
+			width: 100%;
+			top: 154px; 
+			border-top: 1px solid #cbcbcb;
+			overflow: auto;    
+		}
 	}
+	
 	.mz-homepage {
 		.home-heading1 { 
 			font-size: 30px;
@@ -406,7 +409,7 @@
 			}
 			.mz-facetingform {
 				background: #fff;
-				position: absolute;
+				// position: absolute;
 			    top: 107px;
 			    right: 0;
 			    left: 0;
@@ -555,10 +558,12 @@
 				}
 			}
 		}
-		#mz-drop-zone-category-page-top,
 		#mz-drop-zone-body-bottom {
 		    margin-top: 0;
 		    display: none;
+		}
+		.category-page-slot-2 {
+			margin: 0;
 		}
 	}
 	/**** Learning center search Page ****/
@@ -1017,7 +1022,7 @@
 			}
 			.col-xs-12 {
 				&:nth-of-type(2) {
-					margin-top: 254px;
+					margin-top: 275px;
 				}
 				&:nth-of-type(3) {
 					margin-top: 37px;
@@ -1043,7 +1048,7 @@
 			}
 			.mz-social-icon {
 				position: absolute;
-				top: 316px;
+				top: 336px;
 				right: 0;
 				left: 0;
 			}
