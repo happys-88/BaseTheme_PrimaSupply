@@ -4,7 +4,7 @@
 </div>
 <div class="merchandise-subtotal">
   {% for thresholdMsg in model.discountThresholdMessages %}
-    <span class="mz-left-col">{{ thresholdMsg.message }} </span> 
+    <span class="mz-left-col">{{ thresholdMsg.message|safe }} </span> 
     <span class="mz-right-col"></span>
   {% endfor %}
 </div>
