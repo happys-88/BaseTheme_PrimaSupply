@@ -8,7 +8,8 @@
         {% require_script "modules/login-links" %}
 
         <li class="mz-utilitynav-item live-chat">
-            <a href="javascript:void(0);" class="mz-utilitynav-link" onclick="SnapEngage.startLink();"><i class="fa fa-comments"></i>Live Chat</a>    
+            <a href="javascript:void(0);" class="mz-utilitynav-link" onclick="SnapEngage.startLink();">{% comment %} <i class="fa fa-comments"></i>Live Chat  {% endcomment %}
+            </a>    
         </li>
 
         <li class="mz-utilitynav-item login-link">
