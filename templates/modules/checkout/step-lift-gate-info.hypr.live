@@ -1,7 +1,6 @@
 {% with modelItems|findwhere("liftGate", true) as liftGateSelected %}
 {% with modelItems|findwhere("freightShipment", true) as freightShipmentSelected %}
 <div class="mz-lightgate-section mz-checkoutattributes-attributes clearfix">
-    {% dump model %}
     {% for attribute in model %}
         {% if attribute.attributeCode == 'liftgate' or attribute.attributeCode == 'freight-shipment' %}
             {% if attribute.inputType === "YesNo" %}
