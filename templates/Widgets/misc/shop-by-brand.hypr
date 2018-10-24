@@ -11,7 +11,7 @@
 										{% for brandLogoImage in brandSubCat.content.categoryImages %}
 											{% if forloop.first %}
 								   			    <a href="{% make_url "category" brandSubCat %}">
-											    	<img src="{{ brandLogoImage.imageUrl }}" alt="{{ brandLogoImage.altText }}">  
+											    	<img src='{% make_url "image" brandLogoImage.imageUrl %}' alt="{{ brandLogoImage.altText }}">
 												</a>
 											{% endif %}
 							   			{% endfor %}	

@@ -9,7 +9,7 @@
 				   			<li class="mz-shop-by-categorylist-item">
 							    <a href="{% make_url "category" categoryObject %}">
 							    	<div class="mz-category-image">
-							    		<img src="{{ catImage.imageUrl }}" alt="{{ catImage.altText }}">
+							    		<img src='{% make_url "image" catImage.imageUrl %}' alt="{{ catImage.altText }}">
 							    	</div>
 							     	<div class="mz-categorylisting-info">
 							     		<h3>{{ categoryObject.content.name|safe }}</h3>
@@ -35,7 +35,7 @@
 				   			<li class="mz-shop-by-categorylist-item">
 							    <a href="{% make_url "category" categoryObject %}">
 							    	<div class="mz-category-image">
-							    		<img src="{{ catImage.imageUrl }}" alt="{{ catImage.altText }}">
+							    		<img src='{% make_url "image" catImage.imageUrl %}' alt="{{ catImage.altText }}">
 							    	</div>
 							     	<div class="mz-categorylisting-info">
 							     		<h3>{{ categoryObject.content.name|safe }}</h3>
