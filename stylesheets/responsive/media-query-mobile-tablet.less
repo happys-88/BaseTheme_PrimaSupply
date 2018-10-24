@@ -124,6 +124,11 @@
 		z-index: 9;
 		width: 50%;  
 	}
+	#mz-mobilenav-container {
+		position: fixed;
+		bottom: 0;
+		overflow-y: scroll;
+	}
 	#mz-mobilenav-container.collapse.in,
 	#mz-mobilenav-containerLC.collapse.in {  
 		display: block;
@@ -228,6 +233,12 @@
 			.mz-sitenav-sub-sub {
 				background: #fff;
 				.mz-sitenav-item {
+					display: block;
+					&:hover {
+						.mz-sitenav-link {
+							color: #fff;
+						}
+					}
 					.mz-sitenav-link {
 						color: @textColor;
 						.glyphicon {

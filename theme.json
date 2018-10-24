@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "c6c00ae9cd336fa7ad76ca98c11d28bc96978a59"
+      "commit": "6586f1985c42e785107841ea118372cd99cbda9a"
     },
     "baseThemeChannel": "stable"
   },
@@ -175,7 +175,7 @@
       "id": "site_page",
       "template": "page",
       "title": "Default Site Template"
-    }, 
+    },
     {
       "documentType": "web_page",
       "entityType": "webpage",
@@ -610,7 +610,7 @@
     "categoryEntityName": "categoryattributes@prima",
     "columnBreaker": "~",
     "liftGatePrice": 59,
-    "snapengaeWidgetId": "d93fa82a-6087-44f8-bd79-3df50a1c3130",
+    "snapengaeWidgetId": "beca5306-cde0-4cab-8faa-8af26fdcd865",
     "addThisPubId": "ra-519bb90e58f9bf27",
     "productTypeId": "120",
     "avalaraToken": "MjAwMDA4NDgwMzpFQUQyM0JBQzMzNzRBN0I3",

@@ -242,6 +242,8 @@
             }
         },500),
         onQuantityChange1: _.debounce(function (e) {
+
+            e.target.value = e.target.value.replace(/[^\d]/g, '');
             var $qField = $(e.currentTarget),
               newQuantity = parseInt($qField.val(), 10);
               var Quantity = e.currentTarget.value;
@@ -801,6 +803,7 @@
       //  productView.productCarousel();
         $(window).resize(function(){
             productView.render();
+            productImagesView.render();
         }); 
 
     });
