@@ -3,44 +3,32 @@
     <ul>
         {% if model.config.HospitalityImageOne.imageUrl %}
             <li class="col-sm-2 col-xs-6">
-                <a class="link" href="{{model.config.input1}}">
-                    <img src='{% make_url "image" model.config.HospitalityImageOne.imageUrl %}'>
-                </a>
+                <img src='{% make_url "image" model.config.HospitalityImageOne.imageUrl %}'>
             </li>
         {% endif %}
         {% if model.config.HospitalityImageTwo.imageUrl %}
             <li class="col-sm-2 col-xs-6">
-                <a class="link" href="{{model.config.input2}}">
-                    <img src='{% make_url "image" model.config.HospitalityImageTwo.imageUrl %}'>
-                </a>
+                <img src='{% make_url "image" model.config.HospitalityImageTwo.imageUrl %}'>
             </li>
         {% endif %}
         {% if model.config.HospitalityImageThree.imageUrl %}
             <li class="col-sm-2 col-xs-6">
-                <a class="link" href="{{model.config.input3}}">
-                    <img src='{% make_url "image" model.config.HospitalityImageThree.imageUrl %}'>
-                </a>
+                <img src='{% make_url "image" model.config.HospitalityImageThree.imageUrl %}'>
             </li>
         {% endif %}
         {% if model.config.HospitalityImageFour.imageUrl %}
             <li class="col-sm-2 col-xs-6">
-                <a class="link" href="{{model.config.input4}}">
-                    <img src='{% make_url "image" model.config.HospitalityImageFour.imageUrl %}'>
-                </a>
+                <img src='{% make_url "image" model.config.HospitalityImageFour.imageUrl %}'>
             </li>
         {% endif %}
         {% if model.config.HospitalityImageFive.imageUrl %}
             <li class="col-sm-2 col-xs-6">
-                <a class="link" href="{{model.config.input5}}">
-                    <img src='{% make_url "image" model.config.HospitalityImageFive.imageUrl %}'>
-                </a>
+                <img src='{% make_url "image" model.config.HospitalityImageFive.imageUrl %}'>
             </li>
         {% endif %}
         {% if model.config.HospitalityImageSix.imageUrl %}
             <li class="col-sm-2 col-xs-6">
-                <a class="link" href="{{model.config.input6}}">
-                    <img src='{% make_url "image" model.config.HospitalityImageSix.imageUrl %}'>
-                </a>
+                <img src='{% make_url "image" model.config.HospitalityImageSix.imageUrl %}'>
             </li>
         {% endif %}
     </ul>

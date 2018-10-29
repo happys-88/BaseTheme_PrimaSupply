@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "6586f1985c42e785107841ea118372cd99cbda9a"
+      "commit": "30765dcebf5b0b2556ec3088d188142f9e785106"
     },
     "baseThemeChannel": "stable"
   },
@@ -1627,22 +1627,9 @@
       "editViewFields": [
         {
           "anchor": "100%",
-          "xtype": "mz-input-text",
-          "name": "input1",
-          "fieldLabel": "Add URL"
-        },
-        {
-          "anchor": "100%",
           "fieldLabel": "Add Image for hospitality",
           "name": "HospitalityImageOne",
           "xtype": "mz-input-image"
-        },
-        {
-          "anchor": "100%",
-          "xtype": "mz-input-text",
-          "name": "input2",
-          "fieldLabel": "Add URL",
-          "showIf": "HospitalityImageOne"
         },
         {
           "anchor": "100%",
@@ -1653,24 +1640,10 @@
         },
         {
           "anchor": "100%",
-          "xtype": "mz-input-text",
-          "name": "input3",
-          "fieldLabel": "Add URL",
-          "showIf": "HospitalityImageTwo"
-        },
-        {
-          "anchor": "100%",
           "fieldLabel": "Add Image for hospitality",
           "name": "HospitalityImageThree",
           "xtype": "mz-input-image",
           "showIf": "HospitalityImageTwo"
-        },
-        {
-          "anchor": "100%",
-          "xtype": "mz-input-text",
-          "name": "input4",
-          "fieldLabel": "Add URL",
-          "showIf": "HospitalityImageThree"
         },
         {
           "anchor": "100%",
@@ -1681,24 +1654,10 @@
         },
         {
           "anchor": "100%",
-          "xtype": "mz-input-text",
-          "name": "input5",
-          "fieldLabel": "Add URL",
-          "showIf": "HospitalityImageFour"
-        },
-        {
-          "anchor": "100%",
           "fieldLabel": "Add Image for hospitality",
           "name": "HospitalityImageFive",
           "xtype": "mz-input-image",
           "showIf": "HospitalityImageFour"
-        },
-        {
-          "anchor": "100%",
-          "xtype": "mz-input-text",
-          "name": "input6",
-          "fieldLabel": "Add URL",
-          "showIf": "HospitalityImageFive"
         },
         {
           "anchor": "100%",
