@@ -197,16 +197,16 @@
                     done = true;
                     /* Place your SnapEngage JS API code below */
                     /* SnapEngage.allowChatSound(true); Example JS API: Enable sounds for Visitors. */
-                    SnapEngage.getAgentStatusAsync(function (online) {
+                    SnapEngage.getAgentStatusAsync(function (online) {  
                       var buttonImageSrc;
-                      if (online) {
-                         $(".mz-header-top .container .row .col-xs-12 .live-chat .mz-live-chat-link").html("Live Chat"+ '<i class="fa fa-envelope"></i>');
-                         $(".mz-pageheader .mz-header-bottom .container .mz-utilitynav .mz-utilitynav-list .live-chat .mz-utilitynav-link").html("Live Chat"+ '<i class="fa fa-envelope"></i>');
+                      if (online) { 
+                         $(".mz-header-top .live-chat").find(".mz-live-chat-link").html("Live Chat"+ '<i class="fa fa-envelope"></i>');
+                         $(".mz-utilitynav .live-chat").find(".mz-utilitynav-link").html("Live Chat"+ '<i class="fa fa-envelope"></i>');
                         // IMPORTANT: Replace the link below with your own link to an ONLINE button image!
                         buttonImageSrc = 'https://help.snapengage.com/wp-content/blogs.dir/2/files/2017/01/chat-with-us.png';
                       } else {
-                        $(".mz-header-top .container .row .col-xs-12 .live-chat .mz-live-chat-link").html("Email Us"+ '<i class="fa fa-envelope"></i>');
-                        $(".mz-pageheader .mz-header-bottom .container .mz-utilitynav .mz-utilitynav-list .live-chat .mz-utilitynav-link").html("Email Us"+ '<i class="fa fa-envelope"></i>');
+                        $(".mz-header-top .live-chat").find(".mz-live-chat-link").html("Email Us"+ '<i class="fa fa-envelope"></i>'); 
+                        $(".mz-utilitynav .live-chat").find(".mz-utilitynav-link").html('<i class="fa fa-envelope"></i>'+"Email Us");   
                         // IMPORTANT: Replace the link below with your own link to an OFFLINE button image!
                         buttonImageSrc = 'https://help.snapengage.com/wp-content/blogs.dir/2/files/2017/01/leave-a-message.gif';
                       }
