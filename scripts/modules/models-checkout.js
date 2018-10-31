@@ -275,8 +275,8 @@
                     var item = items[index];
                     var properties = item.product.properties;
                     var itemWeight = item.product.measurements.weight.value;
-                    // if(itemWeight > 149) {
-                    if(i > 0) {
+                    if(itemWeight > 1) {
+                    // if(i > 0) {
                         this.set('liftGateProduct',true);
                         this.set('liftGatePrice', HyprLiveContext.locals.themeSettings.liftGatePrice);
                         liftGateProducts[i] = item;
@@ -419,12 +419,22 @@
                     dutyAmount = parseFloat(HyprLiveContext.locals.themeSettings.liftGatePrice);
                 }
                 // order.apiModel.update(_.extend(order.toJSON(), {dutyAmount: dutyAmount }));
-                 order.apiModel.update(_.extend(order.toJSON(), {dutyAmount: dutyAmount }))
+               /* order.apiModel.update(_.extend(order.toJSON(), {"shippingAdjustment": {
+                  "amount": dutyAmount,
+                  "description": "LiftGate Charges",
+                  "internalComment": "ABC"
+               }})).then(function (o) {
+                    console.log("ORDER : "+JSON.stringify(o));
+               })
+               .ensure(function(err) {
+                   console.log("ERROR : "+JSON.stringify(err));
+               });*/
+                /* order.apiModel.update(_.extend(order.toJSON(), {dutyAmount: dutyAmount }))
                         .ensure(function(err) {
                             if(resetMessage) {
                                 me.parent.messages.reset(me.parent.get('messages'));
                             }
-                        });
+                        });*/
             },
             updateLiftGateOption: function (liftGateVal) {
               var order = this.getOrder(),
@@ -447,7 +457,27 @@
                 if(updateAttrs.length > 0){
                     order.apiUpdateAttributes(updateAttrs);
                 }
-                order.apiModel.update(_.extend(order.toJSON(), {dutyAmount: dutyAmount }));
+
+                /*var me = this;
+                _.defer(function () {
+                    // This adds the price and other metadata off the chosen
+                    // method to the info object itself.
+                    // This can only be called after the order is loaded
+                    // because the order data will impact the shipping costs.
+                    me.updateShippingMethod(me.get('shippingMethodCode'), true);
+                });*/
+
+                // order.apiModel.update(_.extend(order.toJSON(), {dutyAmount: dutyAmount }));
+                /*order.apiModel.update(_.extend(order.toJSON(), {"shippingAdjustment": {
+                  "amount": dutyAmount,
+                  "description": "LiftGate Charges",
+                  "internalComment": "ABC"
+               }})).then(function (o) {
+                    console.log("ORDER : "+JSON.stringify(o));
+               })
+               .ensure(function(err) {
+                   console.log("ERROR : "+JSON.stringify(err));
+               });*/
                
             },
             updateFreightShipment: function (freightShipmentVal) {
@@ -1656,7 +1686,7 @@
 
                 var radioVal = $('input[name=paymentType]:checked').val(); 
                 var val = this.validate();
-                if(radioVal !== 'Check' && radioVal !== 'PayPalExpress2') {
+                if(radioVal !== 'Check' && radioVal !== 'PayPalExpress2' && radioVal !== 'PurchaseOrder') {
                     if (this.nonStoreCreditTotal() > 0 && val) {
                         // display errors:
                         var error = {"items":[]};
@@ -1673,6 +1703,22 @@
                         }
                         return false;
                     }
+                } else if(radioVal === 'PurchaseOrder') { 
+                    var errorsPO = {"items":[]};
+                    for (var keyVal in val) {
+                        if (val.hasOwnProperty(keyVal)) {
+                            if(keyVal.indexOf('purchaseOrder') !== -1 ) {
+                                var errorItems = {};
+                                errorItems.name = keyVal;
+                                errorItems.message = keyVal.substring(0, ".") + val[keyVal];
+                                errorsPO.items.push(errorItems);
+                            }
+                        }
+                    }
+
+                    if (errorsPO.items.length > 0) {
+                        return false;
+                    }                    
                 } else {
                     if(_.has(val, "billingContact.email")) {
                        if (this.nonStoreCreditTotal() > 0 && val) {
@@ -2386,11 +2432,27 @@
 
                 // skip payment validation, if there are no payments, but run the attributes and accept terms validation.
                 var radioVal = $('input[name=paymentType]:checked').val(); 
-                if(radioVal !== 'Check') {
-                if (nonStoreCreditTotal > 0 && this.validate() && ( !this.isNonMozuCheckout() || this.validate().agreeToTerms)) {
-                    this.isSubmitting = false;
-                    return false;
-                } 
+                if(radioVal !== 'Check' && radioVal !== 'PurchaseOrder') {
+                    if (nonStoreCreditTotal > 0 && this.validate() && ( !this.isNonMozuCheckout() || this.validate().agreeToTerms)) {
+                        this.isSubmitting = false;
+                        return false;
+                    } 
+                } else if(radioVal === 'PurchaseOrder') { 
+                    var errorsPO = {"items":[]};
+                    var val = this.validate();
+                    for (var keyVal in val) {
+                        if (val.hasOwnProperty(keyVal)) {
+                            if(keyVal.indexOf('purchaseOrder') !== -1 ) {
+                                var errorItems = {};
+                                errorItems.name = keyVal;
+                                errorItems.message = keyVal.substring(0, ".") + val[keyVal];
+                                errorsPO.items.push(errorItems);
+                            }
+                        }
+                    }
+                    if (errorsPO.items.length > 0) {
+                        return false;
+                    }                    
                 } else {
                     if ((nonStoreCreditTotal > 0 && _.has(this.validate(), "agreeToTerms"))) {
                        this.isSubmitting = false;
