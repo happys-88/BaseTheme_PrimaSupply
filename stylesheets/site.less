@@ -231,7 +231,7 @@ img[data-mztp]{
        
     }
 
-     .mz-sitenav-item:hover > .mz-sitenav-link, .mz-sitenav-link.is-current {
+    .mz-sitenav-item:hover > .mz-sitenav-link, .mz-sitenav-link.is-current {
         background-color: @siteBaseColorDark;   
         color: @textColorWhite;
         &:visited {
@@ -294,12 +294,16 @@ img[data-mztp]{
 	            	text-transform: uppercase;
 	            }
 	        }
-	        &:hover{
-	        	.mz-sitenav-link {
+	        &:hover {    
+	        	.mz-sitenav-link{     
 	        		background: @textColorWhite;
 	        		color: @textColor;
 	        	}
 	        }
+	        .mz-sitenav-link.is-current {      
+        		background: @textColorWhite;
+        		color: @textColor;
+        	}
 
         }
 
