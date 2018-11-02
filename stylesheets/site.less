@@ -104,7 +104,7 @@ img[data-mztp]{
 	background: #00adce;
 }
 
-.mz-button{
+.mz-button, .btn{ 
 	display: inline-block;
 	background: @buttonBgColor;  
 	padding: 12px;
@@ -128,11 +128,16 @@ img[data-mztp]{
 		color: @textColorWhite;
 		outline: none; 
 	}
-	&[disabled]{
+	&[disabled]{ 
 		&:hover{
 			background: @buttonBgColor;
 			color:  @textColorWhite; 
 		}
+	}
+	&.btn-default{
+		font-weight: 400;
+    	line-height: 13px;
+    	margin-top: 0; 
 	}
 	
 }
@@ -790,6 +795,15 @@ img[data-mztp]{
 		a {
 			color: #00adce;
 		}
+		.btn{
+			&.btn-default{
+				color:  @textColorWhite;
+			}
+			&:hover { 
+				background: @textColorWhite;   
+				color:  @buttonBgColor;
+			} 
+		} 
 		ul {
 			list-style: disc;
 			padding-left: 30px;

@@ -71,7 +71,7 @@
             color: #666;
             font-size: 16px;
             font-weight: 500;
-            font-family: 'Lato',sans-serif;
+            font-family: 'Lato',sans-serif; 
         }
     }
     h2 {
@@ -86,9 +86,22 @@
         line-height: 24px;
         text-transform: none;
     }
+    h4{
+        color: #666;
+        margin: 15px 0;
+        font-weight: bold;   
+    } 
     a {
         color: #00adce;
     }
+    .btn{
+        &.btn-default{
+            color:  @textColorWhite;
+        }
+        &:hover { 
+            color:  @buttonBgColor; 
+        } 
+    } 
     center {
         text-align: left;
         font {
@@ -98,7 +111,7 @@
             text-transform: none;
         }
     }
-    ul {
+    ul, ol {
         color: #666;
         list-style: none;
         padding: 0;
