@@ -110,11 +110,11 @@
                             <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
                         </div>
                         <div class="mz-stock-availability">
-                            <div class="mz-stock">
+                            <div class="mz-stock" {% if model.messageColor %} style="color: {{ model.messageColor }}" {% endif %}>
                                 {{ model.stockMessage }}
                             </div>
                             <div class="mz-availability">
-                                {{ model.shippingMessage }}
+                                {{ model.helperMessage }}
                             </div>
                         </div>
                 {% endif %}
