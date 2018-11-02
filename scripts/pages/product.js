@@ -61,7 +61,7 @@
                         if (variationTotalStock > 0 && !someOptionsInStock) {
                             if (variationTotalStock < 15) {
                                 stockMessage = Hypr.getLabel('inStock');
-                                shippingMessage = Hypr.getLabel('stockThreshold').replace("{0}", onlineStockAvailable);
+                                shippingMessage = Hypr.getLabel('stockThreshold').replace("{0}", variationTotalStock);
                             } else {
                                 stockMessage = Hypr.getLabel('inStock');
                                 shippingMessage = Hypr.getLabel('inStockMessage');
