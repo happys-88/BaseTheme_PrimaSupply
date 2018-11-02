@@ -179,7 +179,7 @@ function ($, _, Hypr, Backbone, HyprLiveContext, api, blockUiLoader) {
                     /*$(this).find(".stock-message").html(inStock);
                     shippingMessage.show();*/
                 } else {
-                    if (prod.someOptionsInStock) {
+                    if (prod.someOptionsInStock && prod.stockCount > 0) {
                         $(this).find(".stock-message").html(Hypr.getLabel('someOptionInStock'));
                         $(this).find(".shipping-message").html(Hypr.getLabel('someOptionInStockMessage'));
                     } else {
