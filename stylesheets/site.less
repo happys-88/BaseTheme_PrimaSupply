@@ -134,7 +134,7 @@ img[data-mztp]{
 			color:  @textColorWhite; 
 		}
 	}
-	&.btn-default{
+	&.btn-default, &.btn-primary{  
 		font-weight: 400;
     	line-height: 13px;
     	margin-top: 0; 
@@ -794,9 +794,18 @@ img[data-mztp]{
 		}
 		a {
 			color: #00adce;
+			&.mz-button{
+				color:  @textColorWhite;
+				line-height: 13px;
+				font-weight: normal;   
+				&:hover { 
+					background: @textColorWhite;   
+					color:  @buttonBgColor;
+				}  	
+			}
 		}
 		.btn{
-			&.btn-default{
+			&.btn-default, &.btn-primary{ 
 				color:  @textColorWhite;
 			}
 			&:hover { 
@@ -1203,9 +1212,10 @@ img[data-mztp]{
 	}
 }
 
+/**** PRM-278 ****/  
 .mz-productdetail-fulldesc {
 	.btn {
-		&.btn-primary {
+		&.btn-default, &.btn-primary {  
 			background: #ff7a00;
 			border-color: #ff7a00;
 			color: #fff;
