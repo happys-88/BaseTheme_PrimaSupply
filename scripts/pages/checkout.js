@@ -136,8 +136,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             this.model.updateShippingMethod(this.$('[data-mz-shipping-method]:checked').val());
         },
         updateLiftGateOption: function (e) {
-            this.model.updateLiftGateOption(this.$('[data-mz-lift-gate-option]:checked').val());
-                        
+            this.model.updateLiftGateOption(this.$('[data-mz-lift-gate-option]:checked').val());                        
         },
         updateFreightShipment: function (e) {
             this.model.updateFreightShipment(this.$('[data-mz-freight-shipment]:checked').val());

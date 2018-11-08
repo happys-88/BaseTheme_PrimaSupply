@@ -166,7 +166,7 @@
         
         {% if model.handlingTotal %} 
             <div class="mz-ordersummary-additionalhandling">
-                <span class="mz-ordersummary-totalname">{{ labels.additionalHandling }}
+                <span class="mz-ordersummary-totalname">{{ labels.additionalHandling }}:
                     {% if model.handlingAmount > model.handlingTotal %}
                         <span class="is-crossedout" {% block crossedout-inline-style %}{% endblock crossedout-inline-style %}> ( {{ model.handlingAmount|currency }} )</span>
                     {% endif %}

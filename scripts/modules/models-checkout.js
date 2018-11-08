@@ -275,8 +275,8 @@
                     var item = items[index];
                     var properties = item.product.properties;
                     var itemWeight = item.product.measurements.weight.value;
-                    if(itemWeight > 1) {
-                    // if(i > 0) {
+                    // if(itemWeight > 149) {
+                    if(i > 0) {
                         this.set('liftGateProduct',true);
                         this.set('liftGatePrice', HyprLiveContext.locals.themeSettings.liftGatePrice);
                         liftGateProducts[i] = item;
@@ -344,6 +344,7 @@
                 } else {
                     this.parent.get('tbybInfo').stepStatus('complete');
                 }
+
                 return lineItems;
             },
             liftGateSelected: function() {
@@ -429,12 +430,14 @@
                .ensure(function(err) {
                    console.log("ERROR : "+JSON.stringify(err));
                });*/
-                /* order.apiModel.update(_.extend(order.toJSON(), {dutyAmount: dutyAmount }))
-                        .ensure(function(err) {
-                            if(resetMessage) {
-                                me.parent.messages.reset(me.parent.get('messages'));
-                            }
-                        });*/
+               /* order.apiModel.update(_.extend(order.toJSON(), {handlingTotal : dutyAmount })).then(function (o) {
+                    console.log("ORDER : "+JSON.stringify(o));
+               })
+               .ensure(function(err) {
+                    if(resetMessage) {
+                        me.parent.messages.reset(me.parent.get('messages'));
+                    }
+                });*/
             },
             updateLiftGateOption: function (liftGateVal) {
               var order = this.getOrder(),
@@ -467,7 +470,12 @@
                     me.updateShippingMethod(me.get('shippingMethodCode'), true);
                 });*/
 
-                // order.apiModel.update(_.extend(order.toJSON(), {dutyAmount: dutyAmount }));
+                /*order.apiModel.update(_.extend(order.toJSON(), {handlingTotal : dutyAmount })).then(function (o) {
+                    console.log("ORDER : "+JSON.stringify(o));
+               })
+               .ensure(function(err) {
+                   console.log("ERROR : "+JSON.stringify(err));
+               });*/
                 /*order.apiModel.update(_.extend(order.toJSON(), {"shippingAdjustment": {
                   "amount": dutyAmount,
                   "description": "LiftGate Charges",
