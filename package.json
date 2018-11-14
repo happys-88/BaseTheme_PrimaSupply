@@ -4,7 +4,7 @@
     "name": "Happy",
     "email": "hmasih@stegtechnologies.com"
   },
-  "description": "MasterTheme_PrimaSupply", 
+  "description": "MasterTheme_PrimaSupply",
   "version": "0.1.0",
   "scripts": {
     "clean": "rm -rf compiled",
