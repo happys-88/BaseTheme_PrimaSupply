@@ -2460,6 +2460,7 @@
                         }
                     }
                     if (errorsPO.items.length > 0) {
+                        this.isSubmitting = false;
                         return false;
                     }                    
                 } else {
