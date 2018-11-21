@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "778b53da721524ec35d15f716f4106eb201624aa"
+      "commit": "a6c70caaa00659e8c5b2e301e4a3345314a54d3e"
     },
     "baseThemeChannel": "stable"
   },
