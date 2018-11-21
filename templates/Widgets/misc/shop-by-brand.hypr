@@ -6,7 +6,7 @@
 				{% if categoryObject.content.name == "Brands" %} 
 					{% for brandSubCat in categoryObject.childrenCategories %}
 						{% if brandSubCat.categoryId == getBrandCategoryId %}
-								<li class="col-xs-6 col-sm-3 col-md-2"> 
+								<li class="col-xs-6 col-sm-2">  
 									<div class="brand-logo">
 										{% for brandLogoImage in brandSubCat.content.categoryImages %}
 											{% if forloop.first %}
