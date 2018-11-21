@@ -683,6 +683,7 @@
   "continueToCart"                        : "CONTINUE TO CART",
   "pleaseSubscribe"                       : "Please select a checkbox",
   "zipSample"                             : "Example: 93108",
-  "ShippingTo"                            : "Ship-to ZIP Code"
+  "ShippingTo"                            : "Ship-to ZIP Code",
+  "backInStockEmail"                      : "Email Me When Back In Stock"
 
 }
