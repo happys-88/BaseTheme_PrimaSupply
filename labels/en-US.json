@@ -600,7 +600,7 @@
   "signInCheckoutMsg"                      :   "Welcome Back! Sign in for quickest checkout.",
   "newToPrimaSupply"                       :   "new to prima supply?",
   "newToPrimaSupplyMsg"                    :   "You can start an account with us after your order.",
-  "liftGatePopup"                          :   "Looks like have some large equipment in your cart",
+  "liftGatePopup"                          :   "Looks like you have some large equipment in your cart", 
   "needLiftGate"                           :   "Need lightgate delivery?",
   "needLightGateMsg1"                      :   "Add Lift Gate Delivery",
   "needLightGateMsg2"                      :   "I certify I can remove these items from truck",
