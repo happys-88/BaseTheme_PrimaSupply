@@ -123,9 +123,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             'availableShippingMethods'
         ],
         additionalEvents: {
-            "change [data-mz-shipping-method]": "updateShippingMethod",
-            "change [data-mz-lift-gate-option]": "updateLiftGateOption",
-            "change [data-mz-freight-shipment]": "updateFreightShipment"
+            "change [data-mz-shipping-method]": "updateShippingMethod"
         },
         updateShippingMethod: function (e) {
             var code = this.$('[data-mz-shipping-method]:checked').val();
@@ -135,12 +133,6 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             }).shippingMethodName;
             localStorage.setItem('selectedShipping', shippingName);
             this.model.updateShippingMethod(this.$('[data-mz-shipping-method]:checked').val());
-        },
-        updateLiftGateOption: function (e) {
-            this.model.updateLiftGateOption(this.$('[data-mz-lift-gate-option]:checked').val());                        
-        },
-        updateFreightShipment: function (e) {
-            this.model.updateFreightShipment(this.$('[data-mz-freight-shipment]:checked').val());
         }
     });
     var TbybInfoView = CheckoutStepView.extend({
@@ -578,21 +570,30 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
     var LiftGateModalView = Backbone.MozuView.extend({
         templateName: 'modules/checkout/lift-gate-modal',
         additionalEvents: {
-            'change [data-mz-lift-gate-option]' : 'updateLiftGateOption',
-            'change [data-mz-freight-shipment]' : 'updateFreightShipment'
-            
+            'change [data-mz-lift-gate-option]' : 'validateLiftGate',
+            'change [data-mz-freight-shipment]' : 'validateLiftGate'
         },
-        updateLiftGateOption: function(e) {
+        validateLiftGate: function(e) {
             e.stopImmediatePropagation();
-            // this.model.updateLiftGateOption(e.target.value);
-        },
-        updateFreightShipment: function(e) {
-            e.stopImmediatePropagation();
-            // this.model.updateFreightShipment(e.target.value);
+            var enableContinue = true;
+            var liftGateValue = this.$('[data-mz-lift-gate-option]:checked').val();
+            var freightShipmentValue = this.$('[data-mz-freight-shipment]:checked').val();
+            if (liftGateValue === undefined || freightShipmentValue === undefined) {
+                enableContinue = false;
+            }
+            if (!enableContinue) {
+                $(".submit-lift-gate").prop("disabled", true);
+            } else {
+                $(".submit-lift-gate").prop("disabled", false);
+            }
         },
         submitLiftGate: function(e){
             e.stopImmediatePropagation();
             this.model.updateOrder(this.$('[data-mz-lift-gate-option]:checked').val(), this.$('[data-mz-freight-shipment]:checked').val());
+        },
+        closePopup: function(e) {
+            e.stopImmediatePropagation();
+            this.model.closePopup();
         }
     });
 
@@ -658,9 +659,6 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             el: $('#liftGateModal')
         });
         liftGateModalView.render();
-        $('#liftGateModal').on('hidden.bs.modal', function (e) {
-            /*checkoutModel.updateOrder(false, false);  */
-        });
         
         checkoutModel.on('complete', function() {
             CartMonitor.setCount(0);
