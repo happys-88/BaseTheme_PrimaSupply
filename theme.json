@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "778b53da721524ec35d15f716f4106eb201624aa"
+      "commit": "3c25485d2450b6a9c3d9c762485e2520630c8e7a"
     },
     "baseThemeChannel": "stable"
   },
@@ -488,6 +488,7 @@
     }
   ],
   "settings": {
+    "productUpsellsHeading": "You May Also Like",
     "ogSiteNameTwitter": "@primasupply",
     "ogSiteNameFb": "Prima Supply",
     "ogImageWidth": "500",
