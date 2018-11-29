@@ -277,7 +277,7 @@
                     var properties = item.product.properties;
                     var itemWeight = item.product.measurements.weight.value;
                     // if(itemWeight > 149) {
-                    if(i > 0) {
+                    if(itemWeight > 149) {
                         this.set('liftGateProduct',true);
                         this.set('liftGatePrice', HyprLiveContext.locals.themeSettings.liftGatePrice);
                         liftGateProducts[i] = item;
@@ -307,7 +307,7 @@
                     msg: Hypr.getLabel('chooseShippingMethod')
                 }
             },
-            helpers: ['modelItems', 'liftGateSelected', 'freightShipmentSelected'],
+            helpers: ['modelItems', 'liftGateSelected', 'freightShipmentSelected', 'checkLiftGate', 'checkFreightShipment'],
             modelItems: function() {
                 var items = this.getOrder().get('items');
                 
@@ -371,6 +371,33 @@
                     }
                 });
                 return freightShipmentSelected;
+            },
+            checkLiftGate: function() {
+                var order = this.getOrder();
+                var checkLiftGate = false;
+                /*_.each(order.attributes.attributes, function(attributes) {
+                    if (attributes.fullyQualifiedName === 'tenant~liftgate') {
+                        checkLiftGate = true;
+                    }
+                });*/
+                var liftGateProduct = this.get('liftGateProduct');
+                var liftGateModalShown = this.get('liftGateModalShown');
+                if (!liftGateModalShown && liftGateProduct === true) {
+                    this.set("liftGateModalShown", true);
+                    $("#liftGateModal").modal("show");
+                }
+                // $("#liftGateModal").modal("show");
+                return checkLiftGate;
+            },
+            checkFreightShipment: function() {
+                var order = this.getOrder();
+                var checkFreightShipment = false;
+                _.each(order.attributes.attributes, function(attributes) {
+                    if (attributes.fullyQualifiedName === 'tenant~freight-shipment') {
+                        checkFreightShipment = true;
+                    }
+                });
+                return checkFreightShipment;
             },
             refreshShippingMethods: function (methods) {
                 this.set({
@@ -440,56 +467,8 @@
                     }
                 });*/
             },
-            updateLiftGateOption: function (liftGateVal) {
-              var order = this.getOrder(),
-                    process = [function() {
-                        return order.update({
-                            ipAddress: order.get('ipAddress'),
-                            shopperNotes: order.get('shopperNotes').toJSON()
-                        });
-                    }];
-                
-                var dutyAmount = 0;
-                if(liftGateVal == 'true'){
-                    dutyAmount = parseFloat(HyprLiveContext.locals.themeSettings.liftGatePrice);
-                }
-                var updateAttrs = [];
-                updateAttrs.push({
-                    'fullyQualifiedName': 'tenant~liftgate',
-                    'values': [ liftGateVal ]
-                });
-                if(updateAttrs.length > 0){
-                    order.apiUpdateAttributes(updateAttrs);
-                }
-
-                /*var me = this;
-                _.defer(function () {
-                    // This adds the price and other metadata off the chosen
-                    // method to the info object itself.
-                    // This can only be called after the order is loaded
-                    // because the order data will impact the shipping costs.
-                    me.updateShippingMethod(me.get('shippingMethodCode'), true);
-                });*/
-
-                /*order.apiModel.update(_.extend(order.toJSON(), {handlingTotal : dutyAmount })).then(function (o) {
-                    console.log("ORDER : "+JSON.stringify(o));
-               })
-               .ensure(function(err) {
-                   console.log("ERROR : "+JSON.stringify(err));
-               });*/
-                /*order.apiModel.update(_.extend(order.toJSON(), {"shippingAdjustment": {
-                  "amount": dutyAmount,
-                  "description": "LiftGate Charges",
-                  "internalComment": "ABC"
-               }})).then(function (o) {
-                    console.log("ORDER : "+JSON.stringify(o));
-               })
-               .ensure(function(err) {
-                   console.log("ERROR : "+JSON.stringify(err));
-               });*/
-               
-            },
-            updateFreightShipment: function (freightShipmentVal) {
+            updateOrder: function(liftGateVal, freightShipmentVal) {
+                var me = this;
                 var order = this.getOrder(),
                     process = [function() {
                         return order.update({
@@ -501,10 +480,24 @@
                 updateAttrs.push({
                     'fullyQualifiedName': 'tenant~freight-shipment',
                     'values': [ freightShipmentVal ]
+                }, {
+                    'fullyQualifiedName': 'tenant~liftgate',
+                    'values': [ liftGateVal ]
                 });
                 if(updateAttrs.length > 0){
                     order.apiUpdateAttributes(updateAttrs);
                 }
+                $(".mz-summary-edit").trigger("click");
+                /*this.get('fulfillmentContact').stepStatus('incomplete');
+                this.stepStatus('new');*/
+                this.stepStatus('new');
+                this.parent.get("billingInfo").stepStatus('new');
+                
+                
+                $("#liftGateModal").modal("hide");
+                /*order.apiModel.update().then(function(res){
+                    $("#liftGateModal").modal("hide");
+                });*/
             },
             applyShipping: function(resetMessage) {
                 if (this.validate()) return false;
