@@ -1228,7 +1228,8 @@ img[data-mztp]{
 }
 
 /**** Liftgate Modal Changes ****/
-#liftGateModal{
+#liftGateModal,
+#liftGateRemovedModal{ 
 	.modal-dialog {
         width: 700px; 
     }
@@ -1281,4 +1282,21 @@ img[data-mztp]{
         	min-width: 150px;  
         } 
     }  
+}
+
+#liftGateRemovedModal{
+	.modal-content{
+		min-height: inherit;
+		.modal-title{
+			float: left; 
+		}
+		.modal-body{
+			padding: 15px;  
+			text-align: center;
+			.mz-button{
+				margin: 20px 0 10px; 
+			}  
+		} 
+	}
+		
 }
