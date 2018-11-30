@@ -389,6 +389,32 @@
                     showLiftGatePopup = false;
                     this.set("liftGateModalShown", true);
                     $("#liftGateModal").modal("show");
+                } else if(!liftGateProduct) {
+                    if (this.liftGateSelected() === true && !(this.get('liftGateRemovedModalShown'))) {
+                        this.set("liftGateRemovedModalShown", true);
+                        $("#liftGateRemovedModal").modal("show");
+                    }
+                    /*var me = this;
+                    var order = this.getOrder(),
+                        process = [function() {
+                            return order.update({
+                                ipAddress: order.get('ipAddress'),
+                                shopperNotes: order.get('shopperNotes').toJSON()
+                            });
+                        }];
+                    var updateAttrs = [];
+                    var liftGateVal = false;
+                    var freightShipmentVal = false;
+                    updateAttrs.push({
+                        'fullyQualifiedName': 'tenant~freight-shipment',
+                        'values': [ freightShipmentVal ]
+                    }, {
+                        'fullyQualifiedName': 'tenant~liftgate',
+                        'values': [ liftGateVal ]
+                    });
+                    if(updateAttrs.length > 0){
+                        order.apiUpdateAttributes(updateAttrs);
+                    }*/
                 }
                 return showLiftGatePopup;
             },
@@ -465,6 +491,7 @@
                 this.stepStatus('new');
                 this.parent.get("billingInfo").stepStatus('new');
                 $("#liftGateModal").modal("hide");
+                $("#liftGateRemovedModal").modal("hide");
             },
             closePopup: function() {
                 $(".mz-summary-edit").trigger("click");

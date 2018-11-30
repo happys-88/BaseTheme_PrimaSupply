@@ -596,6 +596,13 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             this.model.closePopup();
         }
     });
+    var LiftGateRemovedModalView = Backbone.MozuView.extend({
+        templateName: 'modules/checkout/lift-gate-removed-modal',
+        closePopup: function(e) {
+            e.stopImmediatePropagation();
+            this.model.updateOrder(false, false);
+        }
+    });
 
     $(document).ready(function () {
 
@@ -659,7 +666,11 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             el: $('#liftGateModal')
         });
         liftGateModalView.render();
-        
+        var liftGateRemovedModalView = new LiftGateRemovedModalView({
+            model: checkoutModel.get('fulfillmentInfo'),
+            el: $('#liftGateRemovedModal')
+        });
+        liftGateRemovedModalView.render();
         checkoutModel.on('complete', function() {
             CartMonitor.setCount(0);
             window.location = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/checkout/" + checkoutModel.get('id') + "/confirmation";

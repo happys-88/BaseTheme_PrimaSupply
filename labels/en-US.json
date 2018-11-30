@@ -601,6 +601,7 @@
   "newToPrimaSupply"                       :   "new to prima supply?",
   "newToPrimaSupplyMsg"                    :   "You can start an account with us after your order.",
   "liftGatePopup"                          :   "Looks like you have some large equipment in your cart", 
+  "liftGateRemoved"                        :   "There is no liftgate item in cart, so lift gate charges would be removed...",
   "needLiftGate"                           :   "Need lightgate delivery?",
   "needLightGateMsg1"                      :   "Add Lift Gate Delivery",
   "needLightGateMsg2"                      :   "I certify I can remove these items from truck",
