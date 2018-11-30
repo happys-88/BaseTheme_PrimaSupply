@@ -273,7 +273,6 @@
                 for(var index in items){
                     var item = items[index];
                     var itemWeight = item.product.measurements.weight.value;
-                    // if(i>0) {
                     if(itemWeight > 149) {
                         this.set('liftGateProduct',true);
                         this.set('liftGatePrice', HyprLiveContext.locals.themeSettings.liftGatePrice);
@@ -460,11 +459,6 @@
                 if (newMethod) {
                     this.set(newMethod);
                     this.applyShipping(resetMessage);
-                }
-                var order = this.getOrder();
-                var dutyAmount = 0;
-                if(this.liftGateSelected() === true){
-                    dutyAmount = parseFloat(HyprLiveContext.locals.themeSettings.liftGatePrice);
                 }
             },
             updateOrder: function(liftGateVal, freightShipmentVal) {
