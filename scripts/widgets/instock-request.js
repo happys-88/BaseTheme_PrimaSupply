@@ -30,6 +30,7 @@ define(['modules/jquery-mozu', 'hyprlive', 'underscore', "modules/api", "modules
                     // this.$el.css('display', (inventoryInfo && ("onlineStockAvailable" in inventoryInfo) && inventoryInfo.onlineStockAvailable === 0) || $('body').hasClass('mz-cms-editing') ? 'inherit' : 'none');
                 },
                 widgetNotifyUserAction: function () {
+                    console.log("Hello");
                     var self = this;
                     this.clearError();
                     var email = this.$('[data-mz-role="email"]').val() || user.email;

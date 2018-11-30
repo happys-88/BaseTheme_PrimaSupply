@@ -273,6 +273,7 @@
                 for(var index in items){
                     var item = items[index];
                     var itemWeight = item.product.measurements.weight.value;
+                    // if(i>0) {
                     if(itemWeight > 149) {
                         this.set('liftGateProduct',true);
                         this.set('liftGatePrice', HyprLiveContext.locals.themeSettings.liftGatePrice);
