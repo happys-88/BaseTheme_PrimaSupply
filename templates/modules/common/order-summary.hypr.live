@@ -60,7 +60,7 @@
                                                 {% for v in property.values %}
                                                     {% if v.stringValue == true or v.value == true %}
                                                         {% if liftGateMsgShow == 'True' %}
-                                                        <div class="lift-gate-msg"><i class="fa fa-exclamation-triangle"></i>{{ labels.liftGateMsg }}</div>
+                                                        
                                                         {% endif %}
                                                     {% endif %}
                                                 {% endfor %}
