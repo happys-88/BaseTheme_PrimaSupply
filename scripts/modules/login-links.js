@@ -332,7 +332,6 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
 
     $(document).ready(function() {
         $docBody = $(document.body);
-
         $('[data-mz-action="login"]').each(function() {
             var popover = new LoginPopover();
             popover.init(this);
@@ -408,6 +407,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             }
             
         });
+        $("#loader").removeClass("mz-track-loader");
     });
 
 });
