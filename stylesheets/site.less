@@ -106,7 +106,7 @@ img[data-mztp]{
 
 .mz-button, .btn{ 
 	display: inline-block;
-	background: @buttonBgColor;  
+	background: @buttonBgColor;   
 	padding: 12px;
 	font-size: 16px;
 	color: @textColorWhite;
@@ -119,18 +119,18 @@ img[data-mztp]{
 	min-width: 80px;   
 	&:hover { 
 		background: @textColorWhite;
-		color: @buttonBgColor; 
-		border-color: @buttonBgColor;	
+		color: @mainCTAColorHover; 
+		border-color: @mainCTAColorHover;	
 		text-decoration: none; 
 	}
 	&:visited, &:focus{
-		background: @buttonBgColor;	
+		background: @mainCTAColorHover;	
 		color: @textColorWhite;
 		outline: none; 
 	}
 	&[disabled]{ 
 		&:hover{
-			background: @buttonBgColor;
+			background: @mainCTAColorHover;
 			color:  @textColorWhite; 
 		}
 	}
@@ -515,8 +515,8 @@ img[data-mztp]{
 					.mz-product-notpurchasable, .items-inStock {
 				       position: static;
 				    }
-					.mz-product-notpurchasable {
-					    color: #d15f2a;
+					.mz-product-notpurchasable { 
+					    color: @mainCTAColor;
 					    font-size: 13px;
 					    margin-top: 5px;
 					}
@@ -800,7 +800,7 @@ img[data-mztp]{
 				font-weight: normal;   
 				&:hover { 
 					background: @textColorWhite;   
-					color:  @buttonBgColor;
+					color:  @mainCTAColorHover;
 				}  	
 			}
 		}
@@ -810,7 +810,7 @@ img[data-mztp]{
 			}
 			&:hover { 
 				background: @textColorWhite;   
-				color:  @buttonBgColor;
+				color:  @mainCTAColorHover;
 			} 
 		} 
 		ul {
@@ -1060,7 +1060,7 @@ img[data-mztp]{
 		&:visited{
 			color: #fff;
 			&:hover{
-				background: @buttonBgColor;  
+				background: @mainCTAColorHover;  
 			}    
 		}
 	 }

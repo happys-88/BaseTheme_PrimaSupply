@@ -7,9 +7,10 @@
     float: left;
     width: 100%;
     .mz-carttable-header{
-        background: #f63;
+        /*background: #f63;*/
+        background: @mainCTAColor;   
         font-size: @fontSizeLarger;
-        line-height: @fontSizeLarger + 4;
+        line-height: @fontSizeLarger + 4; 
         font-weight: 600;
         text-transform: uppercase;
         padding: 10px;
@@ -140,8 +141,8 @@
             margin: 0;
             &:hover{
                 background: #fff; 
-                color: @buttonBgColor;
-                border-color: @buttonBgColor;
+                color: @mainCTAColorHover;
+                border-color: @mainCTAColorHover; 
             }
             &.save-cart{
                 background: @textColorWhite;

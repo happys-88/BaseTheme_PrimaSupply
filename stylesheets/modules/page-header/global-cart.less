@@ -9,7 +9,7 @@
     }
     .recently-added:before {
         content: "Just added !";
-        color: #d05f2a;
+        color: @mainCTAColor;
         font-weight: 700;
         text-transform: uppercase;
         position: absolute;
@@ -34,14 +34,16 @@
         right: 20px;  
         top: -10px; 
         border-left: 10px solid transparent;
-        border-bottom: 10px solid #f63; 
+        /*border-bottom: 10px solid #f63;*/ 
+        border-bottom: 10px solid @mainCTAColor;    
         border-right: 10px solid transparent; 
     } 
     .no-cart-item{
         font-size: 16px; 
         margin: 0 0 15px; 
         padding: 6px 0;
-        background: #f63;
+        /*background: #f63;*/
+        background: @mainCTAColor; 
         color: #fff;  
     } 
     .mz-carttable-item{
@@ -119,5 +121,5 @@
 }
 
 #mz-drop-zone-gloabl-cart-dropzone{
-    margin-top: 15px; 
+    margin-top: 15px;  
 }

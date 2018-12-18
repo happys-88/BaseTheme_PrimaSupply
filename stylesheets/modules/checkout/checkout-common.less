@@ -463,8 +463,8 @@
 			    float: left;
 			}
 			.mz-button {
-				border-color: #d15f2a;
-				background: #d15f2a;
+				border-color: @mainCTAColor;
+				background: @mainCTAColor;
 				float: right;
 				line-height: 8px;
 				margin-top: 0;
@@ -472,15 +472,15 @@
 			    &[disabled] {
 			    	opacity: 0.5;
 			    	&:hover {
-				    	border-color: #d15f2a;
-				    	background: #d15f2a;
+				    	border-color: @mainCTAColor;
+				    	background: @mainCTAColor;
 				    	color: #fff;
 				    }
 			    }
 			    &:hover {
-			    	border-color: #d15f2a;
+			    	border-color: @mainCTAColor;
 			    	background: #fff;
-			    	color: #d15f2a;
+			    	color: @mainCTAColor;
 			    }
 			}
 			.mz-remove-coupon{
@@ -566,7 +566,7 @@
 						font-weight: 400;
 					}
 				    .mz-order-product-save-price {
-				        color: #d15f2a;
+				        color: @mainCTAColor;
 				    }
 				    .mz-carttable-item-discount{
 				    	text-align: right; 
@@ -598,7 +598,7 @@
 		    .mz-item-discount {
 			    word-wrap: break-word;
 			    .mz-item-discountamt {
-				    color: #d15f2a;
+				    color: @mainCTAColor;
 				}
 			}
 		}
@@ -620,7 +620,7 @@
 			.mz-l-stack-section{
 				color: @textColor; 
 			}
-			.mz-checkout-current-payment {
+			.mz-checkout-current-payment { 
 				clear: initial;
 			}
 			.checkout-coupon-codes{
