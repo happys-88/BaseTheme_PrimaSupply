@@ -11,8 +11,9 @@ define([
     'modules/facet-clear',
     'modules/block-ui',
     'yotpo',
+    'modules/formatBlogDate',
     'modules/category/infinite-scroller'
-], function(Backbone, $, _, UrlDispatcher, IntentEmitter, getPartialView, makeClearUrl, blockUiLoader, yotpo, InfiniteScroller) {   
+], function(Backbone, $, _, UrlDispatcher, IntentEmitter, getPartialView, makeClearUrl, blockUiLoader, yotpo, blogDateFormat, InfiniteScroller) {   
 
     function factory(conf) {
         var _$body = conf.$body;
@@ -29,6 +30,7 @@ define([
             }*/
             blockUiLoader.unblockUi();   
             yotpo.update();
+            blogDateFormat.showDate();
         } 
 
         function showError(error) {
