@@ -64,7 +64,10 @@ define([
                 if(urlType.indexOf("/search") !== -1) {
                     var searchType = localStorage.getItem("searchType");
                     url = url+"&searchPage="+searchType;   
-                }   
+                }
+                   if (window.location.pathname == url){
+                        blockUiLoader.unblockUi(); 
+                    }   
             }
             
             if (url && url[0] != "/") {
