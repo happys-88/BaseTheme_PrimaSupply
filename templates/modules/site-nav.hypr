@@ -18,10 +18,8 @@
                   </span>
                   
                 </a>
-
                 {% if link.items %}
-                  <div class="mz-sitenav-sub-container">     
-                    
+                  <div class="mz-sitenav-sub-container">        
                     {% comment %} Top Categories {% endcomment %}
                       <div class="mz-sitenav-top-categories">
                           {% if link.name=="Brands" %}
@@ -33,42 +31,15 @@
                                 <h3 class="heading-3">Top Categories</h3>
                               </div>
                           {% endif %}                       
-                        <ul class="mz-sitenav-sub"> 
-                          {% for getTopCategory in link.items %}
-                            {% if not getTopCategory.isHidden and forloop.counter0 < 5 %}
-                              {% for categoryObject in categories.all %}
-                                {% if categoryObject.categoryId == getTopCategory.originalId %}
-                                  <li class="mz-sitenav-item">
-                                    <div class="mz-category-image">
-                                      {% if categoryObject.content.categoryImages.length>0 %}
-                                        {% for catImage in categoryObject.content.categoryImages %} 
-                                          <a href="{% make_url "category" categoryObject %}"> 
-                                            <img src='{% make_url "image" catImage.imageUrl %}' alt="{{ catImage.altText }}">
-                                          </a> 
-                                        {% endfor %}
-                                      {% else %} 
-                                        <a href="{% make_url "category" categoryObject %}">
-                                          <span class="noimage-placeholder"><span class="noimage-text">{{ labels.productImagePlaceholder }}</span></span>
-                                        </a> 
-                                      {% endif %}  
-                                      
-                                    </div>  
-                                    <div class="mz-category-name">
-                                      <a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{% make_url "category" categoryObject %}">{{ categoryObject.content.name|replace("_", " ")|replace(themeSettings.columnBreaker, "")|safe }}</a>
-                                    </div>
-                                  </li>
-                                {% endif %}
-                              {% endfor %}
-
-                            {% endif %}
-                          {% endfor %}
-                        </ul>
+                          {% with link.originalId as navNodeCatId %} 
+                            <div class="mz-sitenav-dropzone">   
+                              {% dropzone "mega-menu-topCatBrands-{0}"|string_format(navNodeCatId) scope="site" %} 
+                            </div> 
+                         {% endwith %} 
                       </div>
                     {% comment %} Top Categories End {% endcomment %}
-
                     {% comment %} All Categories {% endcomment %}
-                    <div class="mz-sitenav-all-categories">
-                      
+                    <div class="mz-sitenav-all-categories">   
                       {% if link.name=="Brands" %}
                         <div class="mz-category-heading">
                           <h3 class="heading-3">All Brands</h3>
@@ -91,13 +62,11 @@
                                 <ul class="mz-sitenav-sub-sub">
                                   {% for subsublink in sublink.items %} 
                                     {% if not subsublink.isHidden and not subsublink.isEmpty %} 
-                                      {% with "id eq {0}"|string_format(sublink.originalId) as filter %} 
-                                        {% include_entities "modules/category-header-attribute-L3" listFQN=themeSettings.categoryEntityName filter=filter %}
+                                      {% with "id eq {0}"|string_format(sublink.originalId) as filter %} {% include_entities "modules/category-header-attribute-L3" listFQN=themeSettings.categoryEntityName filter=filter %}
                                       {% endwith %} 
                                       <li class="mz-sitenav-item"> 
                                         <a class="mz-sitenav-link sub-sub-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{subsublink.url}}">{{ subsublink.name|replace("_", " ")|replace(themeSettings.columnBreaker, "")|safe }}</a>
                                       </li>
-
                                     {% endif %}
                                   {% endfor %}
                                 </ul>   
@@ -109,16 +78,13 @@
                       </ul>
                     </div>
                     {% comment %} All Categories End {% endcomment %}
-
                     {% with link.originalId as navNode %}
                       <div class="mz-sitenav-dropzone">   
                         {% dropzone "mega-menu_{0}"|string_format(navNode) scope="site" %} 
                       </div> 
                     {% endwith %} 
-
                 </div>
                 {% endif %}
-              
             </li>
             {% endif %}
           {% endfor %}
