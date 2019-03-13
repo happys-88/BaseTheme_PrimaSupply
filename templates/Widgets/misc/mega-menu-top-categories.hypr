@@ -1,0 +1,26 @@
+<ul class="mz-sitenav-sub">  
+    {% for getCategoryId in model.config.megaMenuCategory %}
+      {% if forloop.counter0 < 5 %}
+        {% for categoryObject in categories.all %} 
+            {% if categoryObject.categoryId == getCategoryId %}  
+                {% for catImage in categoryObject.content.categoryImages %}
+                    <li class="mz-sitenav-item">
+                        <div class="mz-category-image">
+                            <a href="{% make_url 'category' categoryObject %}">
+                            {% if catImage.imageUrl %}
+                                <img src='{% make_url "image" catImage.imageUrl %}' alt="{{ catImage.altText }}" onerror="this.src='/cms/files/no-image-ps.jpg'">
+                            {% else %}
+                                <img src='{% make_url "cdn" "/cms/files/no-image-ps.jpg" with max=250 as_parameter %}' alt="{{ catImage.altText }}">
+                            {% endif %}
+                            </a>
+                        </div>
+                        <div class="mz-category-name">
+                            <a class="mz-sitenav-link" href="{% make_url 'category' categoryObject %}">{{ categoryObject.content.name|safe }}</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            {% endif %}   
+        {% endfor %}
+      {% endif %}	
+    {% endfor %}
+</ul>
