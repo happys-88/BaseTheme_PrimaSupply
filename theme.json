@@ -10,7 +10,7 @@
     "allowProduction": true,
     "baseTheme": "https://github.com/happys-88/BaseTheme_PrimaSupply",
     "baseThemeVersion": {
-      "commit": "3c25485d2450b6a9c3d9c762485e2520630c8e7a"
+      "commit": "977a6df4b4d2b356c6b66e4efd0de55a21ccf556"
     },
     "baseThemeChannel": "stable"
   },
@@ -891,7 +891,7 @@
     "priceMatchGuaranteeTooltip": "\"Found a better price somewhere else? We'll beat it! Call us at <b>[1-877-745-8851]</b> or <a href=\"/price-match-request\">fill out our price match form</a>.\"",
     "freeShippingTooltip": "\"Lucky you! This product qualifies for free shipping (contiguous United States only).<br /><a href=\"/prima-advantage\">Click here to see why</a>.\" (PC uses /prima-edge as the link currently.)",
     "liftgateTooltip": "Remember, unless you have a loading dock, forklift, a bunch of strong folks, or are Hercules reincarnated you should make sure to select the \"Add Lift gate delivery\" option.",
-    "freightShipmentTooltip": "Remember when you sign for your shipment you assume ownership of the equipment as is. So…<br>1. Don’t sign until you inspect<br>2. If you see damage then don’t sign for it<br>3. Give us a call so we can help",  
+    "freightShipmentTooltip": "Remember when you sign for your shipment you assume ownership of the equipment as is. So…<br>1. Don’t sign until you inspect<br>2. If you see damage then don’t sign for it<br>3. Give us a call so we can help",
     "defaultStoreImage": "/cms/files/prima-supply-store-image.jpg"
   },
   "layoutWidgets": [
@@ -1453,6 +1453,23 @@
       ],
       "icon": "/resources/admin/widgets/29_shop_by_category.png",
       "id": "shop-by-category",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "displayName": "Mega Menu Top Categories", 
+      "displayTemplate": "misc/mega-menu-top-categories",
+      "editViewFields": [
+        {
+          "anchor": "100%", 
+          "fieldLabel": "Choose Top Categories For Mega Menu",
+          "name": "megaMenuCategory",
+          "xtype": "mz-input-categorymulti"
+        }
+      ],
+      "icon": "/resources/admin/widgets/29_shop_by_category.png",
+      "id": "mega-menu-top-categories",
       "validPageTypes": [
         "*"
       ]
